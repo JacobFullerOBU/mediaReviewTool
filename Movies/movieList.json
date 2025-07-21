@@ -1,2044 +1,722 @@
 [
   {
-    "id": "1",
-    "title": "The Godfather",
-    "description": "Crime saga about power, family, and loyalty. Masterclass in filmmaking.",
-    "year": 1972,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "2",
-    "title": "Citizen Kane",
-    "description": "The rise and fall of a media tycoon. Changed cinema forever.",
-    "year": 1941,
-    "category": "movies",
-    "genre": "Drama / Mystery"
-  },
-  {
-    "id": "3",
-    "title": "Schindler’s List",
-    "description": "A brutal, haunting story of the Holocaust and redemption.",
-    "year": 1993,
-    "category": "movies",
-    "genre": "Biography / Drama"
-  },
-  {
-    "id": "4",
-    "title": "Casablanca",
-    "description": "A WWII love triangle full of iconic lines and moral stakes.",
-    "year": 1942,
-    "category": "movies",
-    "genre": "Romance / Drama"
-  },
-  {
-    "id": "5",
-    "title": "Pulp Fiction",
-    "description": "Violent, funny, nonlinear storytelling that reshaped ‘90s cinema.",
-    "year": 1994,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "6",
-    "title": "2001: A Space Odyssey",
-    "description": "Visually unmatched sci-fi epic. Philosophical and hypnotic.",
-    "year": 1968,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
-  },
-  {
-    "id": "7",
-    "title": "The Shawshank Redemption",
-    "description": "Prison escape drama that hits every emotional beat perfectly.",
-    "year": 1994,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "8",
-    "title": "The Godfather Part II",
-    "description": "A rare sequel that deepens the original. Parallel stories done right.",
-    "year": 1974,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "9",
-    "title": "Star Wars: A New Hope",
-    "description": "The blockbuster that started it all. Space opera meets myth.",
-    "year": 1977,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
-  },
-  {
-    "id": "10",
-    "title": "The Lord of the Rings: ROTK",
-    "description": "Climactic, emotionally massive conclusion to the fantasy trilogy.",
-    "year": 2003,
-    "category": "movies",
-    "genre": "Fantasy / Adventure"
-  },
-  {
-    "id": "11",
-    "title": "Apocalypse Now",
-    "description": "A nightmarish journey into war and human darkness.",
-    "year": 1979,
-    "category": "movies",
-    "genre": "War / Drama"
-  },
-  {
-    "id": "12",
-    "title": "Goodfellas",
-    "description": "Fast-paced, slick, and brutally honest look at mob life.",
-    "year": 1990,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "13",
-    "title": "Chinatown",
-    "description": "Hard-boiled detective story with a bleak, unforgettable ending.",
-    "year": 1974,
-    "category": "movies",
-    "genre": "Mystery / Drama"
+    "title": "Jurassic World Rebirth",
+    "year": "2025",
+    "description": "Dinosaurs get out and go ape shit on some fools",
+    "genre": "",
+    "director": "Gareth Edwards",
+    "actors": "Scarlett Johansson\nMahershala Ali\nJonathan Bailey\nRupert Friend\nManuel Garcia-Rulfo\nEd Skrein",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Jurassic_World_Rebirth_poster.jpg/250px-Jurassic_World_Rebirth_poster.jpg"
+  },
+  {
+    "title": "F1",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Joseph Kosinski",
+    "actors": "Brad Pitt\nDamson Idris\nKerry Condon\nTobias Menzies\nJavier Bardem",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/38/F1_%282025_film%29.png/250px-F1_%282025_film%29.png"
+  },
+  {
+    "title": "Sinners",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Ryan Coogler",
+    "actors": "Michael B. Jordan\nHailee Steinfeld\nMiles Caton\nJack O'Connell\nWunmi Mosaku\nJayme Lawson\nOmar Miller\nDelroy Lindo",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Sinners_%282025_film%29_poster.jpg/250px-Sinners_%282025_film%29_poster.jpg"
+  },
+  {
+    "title": "The Amateur",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "James Hawes",
+    "actors": "Rami Malek\nRachel Brosnahan\nCaitríona Balfe\nMichael Stuhlbarg\nLaurence Fishburne\nJon Bernthal",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/The_Amateur_2025_poster.jpg/250px-The_Amateur_2025_poster.jpg"
+  },
+  {
+    "title": "Brick",
+    "year": "2005",
+    "description": "",
+    "genre": "",
+    "director": "Rian Johnson",
+    "actors": "Joseph Gordon-Levitt\nNora Zehetner\nNoah Fleiss\nMatt O'Leary\nNoah Segan\nMeagan Good\nEmilie de Ravin\nRichard Roundtree\nLukas Haas",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/7/73/Brickmovieposter.jpg"
+  },
+  {
+    "title": "Eddington",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Ari Aster",
+    "actors": "Joaquin Phoenix\nPedro Pascal\nLuke Grimes\nDeirdre O'Connell\nMicheal Ward\nAustin Butler\nEmma Stone",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Eddington_poster.jpg/250px-Eddington_poster.jpg"
+  },
+  {
+    "title": "KPop Demon Hunters (soundtrack)",
+    "year": "2025",
+    "description": "",
+    "genre": "K-pop\nfilm soundtrack",
+    "director": "",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/KPop_Demon_Hunters_%28soundtrack%29.jpg/250px-KPop_Demon_Hunters_%28soundtrack%29.jpg"
+  },
+  {
+    "title": "The Great Wall",
+    "year": "2016",
+    "description": "",
+    "genre": "",
+    "director": "Zhang Yimou",
+    "actors": "Matt Damon\nJing Tian\nPedro Pascal\nWillem Dafoe\nAndy Lau",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/The_Great_Wall_%28film%29.png"
+  },
+  {
+    "title": "Heads of State",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Ilya Naishuller",
+    "actors": "Idris Elba\nJohn Cena\nPriyanka Chopra\nCarla Gugino\nJack Quaid\nStephen Root\nPaddy Considine",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Heads_of_State_poster.jpg/250px-Heads_of_State_poster.jpg"
+  },
+  {
+    "title": "28 Days Later ",
+    "year": "",
+    "description": "The 28 Days Later series consists of post-apocalyptic horror films, based on a concept conceived by Alex Garland. The series includes three released films, with two sequels in various stages of development. The franchise depicts the outbreak of the Rage Virus, a contagious disease that induces homicidal rage in those infected. Following the virus’s accidental release from a laboratory in the United Kingdom, the resulting epidemic causes widespread societal collapse. The films focus on the impact of the outbreak, and the efforts of survivors to endure both the infected and the consequences of a rapidly disintegrating society.",
+    "genre": "",
+    "director": "",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/b/b0/28_Days_Later_official_film_series_logo.jpg"
+  },
+  {
+    "title": "F1",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Joseph Kosinski",
+    "actors": "Brad Pitt\nDamson Idris\nKerry Condon\nTobias Menzies\nJavier Bardem",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/38/F1_%282025_film%29.png/250px-F1_%282025_film%29.png"
+  },
+  {
+    "title": "Ballerina",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Len Wiseman[a]",
+    "actors": "Ana de Armas\nAnjelica Huston\nGabriel Byrne\nLance Reddick\nNorman Reedus\nIan McShane\nKeanu Reeves",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Ballerina_%282025_film%29_poster.jpg/250px-Ballerina_%282025_film%29_poster.jpg"
+  },
+  {
+    "title": "Thunderbolt",
+    "year": "1995",
+    "description": "",
+    "genre": "",
+    "director": "Gordon Chan[1]",
+    "actors": "Jackie ChanAnita YuenMichael WongThorsten Nickel",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/JCThunderbolt_poster.jpg"
+  },
+  {
+    "title": "Mortal Kombat II",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Simon McQuoid",
+    "actors": "Karl Urban\nAdeline Rudolph\nJessica McNamee\nJosh Lawson\nLudi Lin\nMehcad Brooks\nTati Gabrielle\nLewis Tan\nDamon Herriman\nChin Han\nTadanobu Asano\nJoe Taslim\nHiroyuki Sanada",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/7/7b/Mortal_Kombat_II_Teaser_Poster_2025.jpg"
+  },
+  {
+    "title": "Bring It On",
+    "year": "2000",
+    "description": "",
+    "genre": "Pop, hip hop, pop rock, dance pop",
+    "director": "Peyton Reed",
+    "actors": "Kirsten Dunst\nEliza Dushku\nJesse Bradford\nGabrielle Union",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Bringitonmovieposter.jpg/250px-Bringitonmovieposter.jpg"
+  },
+  {
+    "title": "Smurfs",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Chris Miller",
+    "actors": "Rihanna\nJames Corden\nNick Offerman\nJP Karliak\nDaniel Levy\nAmy Sedaris\nNatasha Lyonne\nSandra Oh\nJimmy Kimmel\nOctavia Spencer\nNick Kroll\nHannah Waddingham\nAlex Winter\nMaya Erskine\nKurt Russell\nJohn Goodman",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Smurfs2025Poster.jpg/250px-Smurfs2025Poster.jpg"
+  },
+  {
+    "title": "The Naked Gun",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Akiva Schaffer",
+    "actors": "Liam Neeson\nPamela Anderson\nPaul Walter Hauser\nKevin Durand\nDanny Huston",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/The_Naked_Gun_2025_poster.jpg/250px-The_Naked_Gun_2025_poster.jpg"
+  },
+  {
+    "title": "The Odyssey",
+    "year": "2026",
+    "description": "",
+    "genre": "",
+    "director": "Christopher Nolan",
+    "actors": "Matt Damon\nTom Holland\nAnne Hathaway\nZendaya\nLupita Nyong'o\nRobert Pattinson\nCharlize Theron\nJon Bernthal",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/9/90/The_Odyssey_%282026_film%29_poster.jpg/250px-The_Odyssey_%282026_film%29_poster.jpg"
+  },
+  {
+    "title": "The Old Guard",
+    "year": "2020",
+    "description": "",
+    "genre": "",
+    "director": "Gina Prince-Bythewood",
+    "actors": "Charlize Theron\nKiKi Layne\nMarwan Kenzari\nLuca Marinelli\nHarry Melling\nVeronica Ngo\nMatthias Schoenaerts\nChiwetel Ejiofor",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/0/02/The_Old_Guard_2020_film_poster.png"
+  },
+  {
+    "title": "Happy Gilmore 2",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Kyle Newacheck",
+    "actors": "Adam Sandler\nJulie Bowen\nChristopher McDonald\nBenny Safdie\nBad Bunny\nBen Stiller",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Happy_Gilmore_2_poster.jpg/250px-Happy_Gilmore_2_poster.jpg"
+  },
+  {
+    "title": "The Karate Kid (2010 verion)",
+    "year": "2010",
+    "description": "",
+    "genre": "",
+    "director": "Harald Zwart",
+    "actors": "Jaden Smith\nJackie Chan\nTaraji P. Henson",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d5/Karate_kid_ver2.jpg/250px-Karate_kid_ver2.jpg"
+  },
+  {
+    "title": "Mission: Impossible",
+    "year": "1996",
+    "description": "",
+    "genre": "",
+    "director": "",
+    "actors": "Tom CruiseVing RhamesHenry Czerny (1, 7–8)Simon Pegg (3–8)Rebecca Ferguson (5–7)",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mission_Impossible_-_film_logo.svg/250px-Mission_Impossible_-_film_logo.svg.png"
+  },
+  {
+    "title": "Man of Steel",
+    "year": "2013",
+    "description": "",
+    "genre": "",
+    "director": "Zack Snyder",
+    "actors": "Henry Cavill\nAmy Adams\nMichael Shannon\nKevin Costner\nDiane Lane\nLaurence Fishburne\nAntje Traue\nAyelet Zurer\nChristopher Meloni\nRussell Crowe",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Man_of_Steel_%28film%29_poster.jpg/250px-Man_of_Steel_%28film%29_poster.jpg"
+  },
+  {
+    "title": "Sovereign",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Christian Swegal",
+    "actors": "Nick OffermanJacob TremblayThomas MannNancy TravisMartha PlimptonDennis Quaid",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Sovereign_film_poster.jpg/250px-Sovereign_film_poster.jpg"
+  },
+  {
+    "title": "I Know What You Did Last Summer",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Jennifer Kaytin Robinson",
+    "actors": "Madelyn Cline\nChase Sui Wonders\nJonah Hauer-King\nTyriq Withers\nSarah Pidgeon\nBilly Campbell\nGabbriette Bechtel\nAustin Nichols\nFreddie Prinze Jr.\nJennifer Love Hewitt",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/I_Know_What_You_Did_Last_Summer_Teaser_Poster.jpg/250px-I_Know_What_You_Did_Last_Summer_Teaser_Poster.jpg"
+  },
+  {
+    "title": "Happy Gilmore 2",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Kyle Newacheck",
+    "actors": "Adam Sandler\nJulie Bowen\nChristopher McDonald\nBenny Safdie\nBad Bunny\nBen Stiller",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Happy_Gilmore_2_poster.jpg/250px-Happy_Gilmore_2_poster.jpg"
+  },
+  {
+    "title": "Final Destination Bloodlines",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nZach Lipovsky\nAdam Stein",
+    "actors": "Kaitlyn Santa Juana\nTeo Briones\nRichard Harmon\nOwen Patrick Joyner\nAnna Lore\nBrec Bassinger\nTony Todd",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/ab/Final_Destination_Bloodlines_%282025%29_poster.jpg/250px-Final_Destination_Bloodlines_%282025%29_poster.jpg"
+  },
+  {
+    "title": "Eden",
+    "year": "2024",
+    "description": "Eden is a 2024 American survival thriller film directed by Ron Howard and written by Noah Pink from a story by Pink and Howard.[3] It stars Jude Law, Ana de Armas, Vanessa Kirby, Sydney Sweeney, Daniel Brühl, Felix Kammerer, Toby Wallace and Richard Roxburgh. The film is based on the true story of a few European settlers arriving at Floreana Island, in the Galápagos Islands, Ecuador.[4]",
+    "genre": "",
+    "director": "Ron Howard",
+    "actors": "Jude Law\nAna de Armas\nVanessa Kirby\nSydney Sweeney\nDaniel Brühl\nFelix Kammerer\nToby Wallace\nRichard Roxburgh",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/ab/Eden_%282024_film%29.jpg/250px-Eden_%282024_film%29.jpg"
+  },
+  {
+    "title": "Zombies",
+    "year": "",
+    "description": "",
+    "genre": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nMusical\nZombie",
+    "director": "Paul Hoen",
+    "actors": "Milo Manheim\nMeg Donnelly\nTrevor Tordjman\nKylee Russell\nCarla Jeffery\nJames Godfrey",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/d/de/Zombies_%282018%29_poster.png"
+  },
+  {
+    "title": "Together",
+    "year": "2025",
+    "description": "Together is a 2025 supernatural body horror film written and directed by Michael Shanks, in his directorial debut.[2] The film stars real-life married actors Dave Franco and Alison Brie as a couple who move to the countryside but find themselves encountering a mysterious force that horrifically causes changes in their bodies.[3]",
+    "genre": "",
+    "director": "Michael Shanks",
+    "actors": "Dave Franco\nAlison Brie",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/Together_film_poster.jpg/250px-Together_film_poster.jpg"
+  },
+  {
+    "title": "The Amateur",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "James Hawes",
+    "actors": "Rami Malek\nRachel Brosnahan\nCaitríona Balfe\nMichael Stuhlbarg\nLaurence Fishburne\nJon Bernthal",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/The_Amateur_2025_poster.jpg/250px-The_Amateur_2025_poster.jpg"
+  },
+  {
+    "title": "28 Days Later",
+    "year": "",
+    "description": "The 28 Days Later series consists of post-apocalyptic horror films, based on a concept conceived by Alex Garland. The series includes three released films, with two sequels in various stages of development. The franchise depicts the outbreak of the Rage Virus, a contagious disease that induces homicidal rage in those infected. Following the virus’s accidental release from a laboratory in the United Kingdom, the resulting epidemic causes widespread societal collapse. The films focus on the impact of the outbreak, and the efforts of survivors to endure both the infected and the consequences of a rapidly disintegrating society.",
+    "genre": "",
+    "director": "",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/b/b0/28_Days_Later_official_film_series_logo.jpg"
+  },
+  {
+    "title": "Drop",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Christopher Landon",
+    "actors": "Meghann Fahy\nBrandon Sklenar\nViolett Beane\nJeffery Self",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Drop_Poster.jpg/250px-Drop_Poster.jpg"
+  },
+  {
+    "title": "Lilo & Stitch",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Dean Fleischer Camp",
+    "actors": "Sydney Elizebeth Agudong\nBilly Magnussen\nHannah Waddingham\nChris Sanders\nCourtney B. Vance\nZach Galifianakis\nMaia Kealoha",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Lilo_%26_Stitch_2025_Theatrical_Poster.jpg/250px-Lilo_%26_Stitch_2025_Theatrical_Poster.jpg"
+  },
+  {
+    "title": "Opus ",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Mark Anthony Green",
+    "actors": "Ayo Edebiri\nJohn Malkovich\nJuliette Lewis\nMurray Bartlett\nAmber Midthunder\nTatanka Means\nYoung Mazino\nStephanie Suganami\nTamera Tomakili\nTony Hale",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Opus_poster.jpg/250px-Opus_poster.jpg"
   },
   {
-    "id": "14",
-    "title": "The Dark Knight",
-    "description": "Grounded superhero film that plays like a crime thriller.",
-    "year": 2008,
-    "category": "movies",
-    "genre": "Action / Crime"
-  },
-  {
-    "id": "15",
-    "title": "Fight Club",
-    "description": "Anti-consumerist, chaotic, and endlessly quotable.",
-    "year": 1999,
-    "category": "movies",
-    "genre": "Drama / Thriller"
-  },
-  {
-    "id": "16",
-    "title": "Psycho",
-    "description": "A psychological horror blueprint. Still creepy as hell.",
-    "year": 1960,
-    "category": "movies",
-    "genre": "Horror / Thriller"
-  },
-  {
-    "id": "17",
-    "title": "Spirited Away",
-    "description": "Magical, emotional, and visually stunning. Anime at its peak.",
-    "year": 2001,
-    "category": "movies",
-    "genre": "Animation / Fantasy"
-  },
-  {
-    "id": "18",
-    "title": "The Empire Strikes Back",
-    "description": "Deeper, darker, and better than the original.",
-    "year": 1980,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
-  },
-  {
-    "id": "19",
-    "title": "12 Angry Men",
-    "description": "A single room, one jury, and endless tension. Still hits hard.",
-    "year": 1957,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "20",
-    "title": "La Dolce Vita",
-    "description": "A dreamy, philosophical stroll through modern decadence.",
-    "year": 1960,
-    "category": "movies",
-    "genre": "Drama",
-    "image": "",
-    "director": ""
-  },
-  {
-    "id": "21",
-    "title": "The Matrix",
-    "description": "Reality-bending sci-fi that blew minds and redefined action.",
-    "year": 1999,
-    "category": "movies",
-    "genre": "Sci-Fi / Action"
-  },
-  {
-    "id": "22",
-    "title": "Titanic",
-    "description": "Historical romance meets disaster epic. Massive scale, massive success.",
-    "year": 1997,
-    "category": "movies",
-    "genre": "Romance / Drama"
-  },
-  {
-    "id": "23",
-    "title": "One Flew Over the Cuckoo’s Nest",
-    "description": "Rebellion, control, and insanity in one of Nicholson’s best.",
-    "year": 1975,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "24",
-    "title": "Lawrence of Arabia",
-    "description": "Sweeping epic of desert warfare and identity. Old-school grandeur.",
-    "year": 1962,
-    "category": "movies",
-    "genre": "Adventure / Drama"
-  },
-  {
-    "id": "25",
-    "title": "Taxi Driver",
-    "description": "A slow descent into madness. Gritty, moody, and unforgettable.",
-    "year": 1976,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "26",
-    "title": "Seven Samurai",
-    "description": "Samurai epic that laid the groundwork for modern action films.",
-    "year": 1954,
-    "category": "movies",
-    "genre": "Action / Drama"
-  },
-  {
-    "id": "27",
-    "title": "The Silence of the Lambs",
-    "description": "Serial killer thriller with unforgettable performances.",
-    "year": 1991,
-    "category": "movies",
-    "genre": "Thriller / Crime"
-  },
-  {
-    "id": "28",
-    "title": "Vertigo",
-    "description": "Obsession, illusion, and vertigo — Hitchcock’s most complex film.",
-    "year": 1958,
-    "category": "movies",
-    "genre": "Mystery / Thriller"
-  },
-  {
-    "id": "29",
-    "title": "Back to the Future",
-    "description": "Sci-fi adventure with heart, humor, and one killer DeLorean.",
-    "year": 1985,
-    "category": "movies",
-    "genre": "Sci-Fi / Comedy"
-  },
-  {
-    "id": "30",
-    "title": "Dr. Strangelove",
-    "description": "Satirical, cold war comedy about nuclear annihilation. Still timely.",
-    "year": 1964,
-    "category": "movies",
-    "genre": "Comedy / War"
-  },
-  {
-    "id": "31",
-    "title": "Amadeus",
-    "description": "Wild, operatic story of Mozart’s genius and madness.",
-    "year": 1984,
-    "category": "movies",
-    "genre": "Biography / Drama"
-  },
-  {
-    "id": "32",
-    "title": "The Green Mile",
-    "description": "Death row fantasy-drama with heart-wrenching emotion.",
-    "year": 1999,
-    "category": "movies",
-    "genre": "Drama / Fantasy"
-  },
-  {
-    "id": "33",
-    "title": "Rashomon",
-    "description": "Perspective-shattering story about truth and perception.",
-    "year": 1950,
-    "category": "movies",
-    "genre": "Drama / Mystery"
-  },
-  {
-    "id": "34",
-    "title": "The Pianist",
-    "description": "Survival during the Holocaust told through raw, haunting piano notes.",
-    "year": 2002,
-    "category": "movies",
-    "genre": "Biography / Drama"
-  },
-  {
-    "id": "35",
-    "title": "Whiplash",
-    "description": "Intense, obsessive pursuit of greatness. Painful and electric.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Drama / Music"
-  },
-  {
-    "id": "36",
-    "title": "City of God",
-    "description": "Brazilian crime drama that hits hard and never lets up.",
-    "year": 2002,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "37",
-    "title": "The Departed",
-    "description": "Scorsese’s Boston crime tale. Twists, betrayals, and a stacked cast.",
-    "year": 2006,
-    "category": "movies",
-    "genre": "Crime / Thriller"
-  },
-  {
-    "id": "38",
-    "title": "Inglourious Basterds",
-    "description": "Alt-history revenge fantasy with Tarantino’s sharpest edge.",
-    "year": 2009,
-    "category": "movies",
-    "genre": "War / Drama"
-  },
-  {
-    "id": "39",
-    "title": "Eternal Sunshine of the Spotless Mind",
-    "description": "Love, loss, and memory in one of the most original modern romances.",
-    "year": 2004,
-    "category": "movies",
-    "genre": "Drama / Sci-Fi"
-  },
-  {
-    "id": "40",
-    "title": "Requiem for a Dream",
-    "description": "Addiction spiral filmed like a waking nightmare.",
-    "year": 2000,
-    "category": "movies",
-    "genre": "Drama / Psychological"
-  },
-  {
-    "id": "41",
-    "title": "The Lion King",
-    "description": "Shakespearean tragedy dressed as Disney animation. Iconic soundtrack.",
-    "year": 1994,
-    "category": "movies",
-    "genre": "Animation / Drama"
-  },
-  {
-    "id": "42",
-    "title": "The Shining",
-    "description": "Kubrick + King = slow-burning horror classic with icy tension.",
-    "year": 1980,
-    "category": "movies",
-    "genre": "Horror / Thriller"
-  },
-  {
-    "id": "43",
-    "title": "Toy Story",
-    "description": "First full-length CG film. Smart, emotional, and forever charming.",
-    "year": 1995,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "44",
-    "title": "Alien",
-    "description": "Sci-fi horror with perfect pacing and a monster that defined the genre.",
-    "year": 1979,
-    "category": "movies",
-    "genre": "Horror / Sci-Fi"
-  },
-  {
-    "id": "45",
-    "title": "Pan’s Labyrinth",
-    "description": "Fairy tale meets fascist Spain. Dark, beautiful, and devastating.",
-    "year": 2006,
-    "category": "movies",
-    "genre": "Fantasy / Drama"
-  },
-  {
-    "id": "46",
-    "title": "Oldboy",
-    "description": "Brutal revenge thriller from South Korea. Twisted and stylish.",
-    "year": 2003,
-    "category": "movies",
-    "genre": "Action / Mystery"
-  },
-  {
-    "id": "47",
-    "title": "There Will Be Blood",
-    "description": "Greed, oil, and power in one of the best modern American films.",
-    "year": 2007,
-    "category": "movies",
-    "genre": "Drama / Historical"
-  },
-  {
-    "id": "48",
-    "title": "The Seventh Seal",
-    "description": "A knight plays chess with Death. Existential and haunting.",
-    "year": 1957,
-    "category": "movies",
-    "genre": "Drama / Fantasy"
-  },
-  {
-    "id": "49",
-    "title": "Grave of the Fireflies",
-    "description": "Heartbreaking animated tale of war’s toll on innocence.",
-    "year": 1988,
-    "category": "movies",
-    "genre": "Animation / War"
-  },
-  {
-    "id": "50",
-    "title": "The Grand Budapest Hotel",
-    "description": "A quirky, colorful, bittersweet gem from Wes Anderson.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Comedy / Adventure"
-  },
-  {
-    "id": "51",
-    "title": "Blade Runner",
-    "description": "Neo-noir cyberpunk soaked in mood and philosophical dread.",
-    "year": 1982,
-    "category": "movies",
-    "genre": "Sci-Fi / Thriller"
-  },
-  {
-    "id": "52",
-    "title": "The Social Network",
-    "description": "Facebook’s origin story told like a courtroom thriller.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Biography / Drama"
-  },
-  {
-    "id": "53",
-    "title": "Django Unchained",
-    "description": "Tarantino’s bloody revenge Western with style and bite.",
-    "year": 2012,
-    "category": "movies",
-    "genre": "Western / Drama"
-  },
-  {
-    "id": "54",
-    "title": "Life Is Beautiful",
-    "description": "Holocaust drama that balances heartbreak with humor and hope.",
-    "year": 1997,
-    "category": "movies",
-    "genre": "Drama / War"
-  },
-  {
-    "id": "55",
-    "title": "The Truman Show",
-    "description": "Reality, media, and identity wrapped in a brilliant premise.",
-    "year": 1998,
-    "category": "movies",
-    "genre": "Drama / Sci-Fi"
-  },
-  {
-    "id": "56",
-    "title": "Rocky",
-    "description": "Underdog story with real grit and heart. Iconic training montage included.",
-    "year": 1976,
-    "category": "movies",
-    "genre": "Drama / Sports"
-  },
-  {
-    "id": "57",
-    "title": "Kill Bill: Vol. 1",
-    "description": "Stylized, violent, and slick martial arts revenge thrill ride.",
-    "year": 2003,
-    "category": "movies",
-    "genre": "Action / Thriller"
-  },
-  {
-    "id": "58",
-    "title": "Parasite",
-    "description": "Class warfare thriller that stunned the world — and the Oscars.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Thriller / Drama"
-  },
-  {
-    "id": "59",
-    "title": "The Great Dictator",
-    "description": "Chaplin’s satire of fascism. Still relevant, still bold.",
-    "year": 1940,
-    "category": "movies",
-    "genre": "Comedy / War"
-  },
-  {
-    "id": "60",
-    "title": "Her",
-    "description": "AI love story that’s more human than most human relationships.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Romance / Sci-Fi"
-  },
-  {
-    "id": "61",
-    "title": "The Wolf of Wall Street",
-    "description": "A cocaine-fueled capitalist fever dream. Scorsese’s wildest ride.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Biography / Crime"
-  },
-  {
-    "id": "62",
-    "title": "No Country for Old Men",
-    "description": "Bleak, tense, and nihilistic. Coen brothers at their most ruthless.",
-    "year": 2007,
-    "category": "movies",
-    "genre": "Crime / Thriller"
-  },
-  {
-    "id": "63",
-    "title": "The Big Lebowski",
-    "description": "Weird, hilarious, and endlessly quotable. The Dude abides.",
-    "year": 1998,
-    "category": "movies",
-    "genre": "Comedy / Crime"
-  },
-  {
-    "id": "64",
-    "title": "Prisoners",
-    "description": "Bleak and suspenseful child abduction drama with moral grey zones.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Thriller / Drama"
-  },
-  {
-    "id": "65",
-    "title": "The Thing",
-    "description": "Cold, paranoid, shape-shifting sci-fi horror. Carpenter’s masterpiece.",
-    "year": 1982,
-    "category": "movies",
-    "genre": "Horror / Sci-Fi"
-  },
-  {
-    "id": "66",
-    "title": "Inside Out",
-    "description": "Emotionally intelligent animation that hits adults just as hard.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Animation / Family"
-  },
-  {
-    "id": "67",
-    "title": "A Clockwork Orange",
-    "description": "Violence, free will, and twisted ultraviolent satire.",
-    "year": 1971,
-    "category": "movies",
-    "genre": "Sci-Fi / Crime"
-  },
-  {
-    "id": "68",
-    "title": "The Exorcist",
-    "description": "The gold standard for possession horror. Still scary as hell.",
-    "year": 1973,
-    "category": "movies",
-    "genre": "Horror / Thriller"
-  },
-  {
-    "id": "69",
-    "title": "Heat",
-    "description": "Cops vs. criminals in one of the best shootouts and character face-offs.",
-    "year": 1995,
-    "category": "movies",
-    "genre": "Crime / Thriller"
-  },
-  {
-    "id": "70",
-    "title": "American History X",
-    "description": "Redemption and hate in a brutal, unflinching drama.",
-    "year": 1998,
-    "category": "movies",
-    "genre": "Drama / Crime"
-  },
-  {
-    "id": "71",
-    "title": "WALL·E",
-    "description": "Sci-fi environmentalism with zero dialogue — and total emotional punch.",
-    "year": 2008,
-    "category": "movies",
-    "genre": "Animation / Sci-Fi"
-  },
-  {
-    "id": "72",
-    "title": "The Intouchables",
-    "description": "Feel-good French drama about friendship across class and disability lines.",
-    "year": 2011,
-    "category": "movies",
-    "genre": "Drama / Comedy"
-  },
-  {
-    "id": "73",
-    "title": "The Revenant",
-    "description": "Visceral survival tale. DiCaprio bleeds for that Oscar — literally.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Adventure / Drama"
-  },
-  {
-    "id": "74",
-    "title": "The Sound of Music",
-    "description": "Wholesome AF, but undeniably timeless and tuneful.",
-    "year": 1965,
-    "category": "movies",
-    "genre": "Musical / Drama"
-  },
-  {
-    "id": "75",
-    "title": "Stand by Me",
-    "description": "Nostalgic coming-of-age story that still packs emotional weight.",
-    "year": 1986,
-    "category": "movies",
-    "genre": "Drama / Adventure"
-  },
-  {
-    "id": "76",
-    "title": "The Iron Giant",
-    "description": "Cold War-era animation with surprising heart and soul.",
-    "year": 1999,
-    "category": "movies",
-    "genre": "Animation / Sci-Fi"
-  },
-  {
-    "id": "77",
-    "title": "1917",
-    "description": "WWI shot like a single-take video game mission. Beautiful and tense.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "War / Drama"
-  },
-  {
-    "id": "78",
-    "title": "Fargo",
-    "description": "Small-town crime story, pitch-black humor, and perfect accents.",
-    "year": 1996,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "79",
-    "title": "Arrival",
-    "description": "Language, loss, and time. Cerebral alien story that sticks with you.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Sci-Fi / Drama"
-  },
-  {
-    "id": "80",
-    "title": "Boogie Nights",
-    "description": "The rise and fall of a porn star. Stylish and sleazy in all the right ways.",
-    "year": 1997,
-    "category": "movies",
-    "genre": "Drama / Comedy"
-  },
-  {
-    "id": "81",
-    "title": "Mulholland Drive",
-    "description": "Lynchian mind-warp of identity and Hollywood nightmares.",
-    "year": 2001,
-    "category": "movies",
-    "genre": "Mystery / Thriller"
-  },
-  {
-    "id": "82",
-    "title": "The Princess Bride",
-    "description": "A fairy tale that mocks itself while being sincerely great.",
-    "year": 1987,
-    "category": "movies",
-    "genre": "Adventure / Romance"
-  },
-  {
-    "id": "83",
-    "title": "Slumdog Millionaire",
-    "description": "Destiny, love, and game shows. Bollywood energy with Western polish.",
-    "year": 2008,
-    "category": "movies",
-    "genre": "Drama / Romance"
-  },
-  {
-    "id": "84",
-    "title": "Ghostbusters",
-    "description": "Supernatural comedy that just works. Effortlessly fun.",
-    "year": 1984,
-    "category": "movies",
-    "genre": "Comedy / Fantasy"
-  },
-  {
-    "id": "85",
-    "title": "Children of Men",
-    "description": "Dystopian thriller that feels way too real. Bleak brilliance.",
-    "year": 2006,
-    "category": "movies",
-    "genre": "Sci-Fi / Drama"
-  },
-  {
-    "id": "86",
-    "title": "Donnie Darko",
-    "description": "Time travel, mental illness, and a creepy bunny — cult classic status.",
-    "year": 2001,
-    "category": "movies",
-    "genre": "Drama / Sci-Fi"
-  },
-  {
-    "id": "87",
-    "title": "Gone Girl",
-    "description": "Dark, twisty commentary on marriage, media, and manipulation.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Thriller / Mystery"
-  },
-  {
-    "id": "88",
-    "title": "The Handmaiden",
-    "description": "Erotic thriller wrapped in deception. Korean cinema at its most elegant.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Drama / Romance"
-  },
-  {
-    "id": "89",
-    "title": "The Florida Project",
-    "description": "Childhood on society’s edge. Heartbreaking, beautiful, real.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "90",
-    "title": "Little Miss Sunshine",
-    "description": "Dysfunctional family road trip with laughs and tenderness.",
-    "year": 2006,
-    "category": "movies",
-    "genre": "Comedy / Drama"
-  },
-  {
-    "id": "91",
-    "title": "Monsters, Inc.",
-    "description": "Pixar at its peak: inventive world-building and warm storytelling.",
-    "year": 2001,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "92",
-    "title": "Trainspotting",
-    "description": "Scottish heroin addicts, punk energy, and unforgettable visuals.",
-    "year": 1996,
-    "category": "movies",
-    "genre": "Drama / Crime"
-  },
-  {
-    "id": "93",
-    "title": "A Separation",
-    "description": "Iranian drama about class, religion, and divorce. Simple but masterful.",
-    "year": 2011,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "94",
-    "title": "The Lives of Others",
-    "description": "East German surveillance thriller that hits with real emotional gravity.",
-    "year": 2006,
-    "category": "movies",
-    "genre": "Drama / Thriller"
-  },
-  {
-    "id": "95",
-    "title": "The Secret in Their Eyes",
-    "description": "Argentinian mystery with a knockout long take and a brutal twist.",
-    "year": 2009,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "96",
-    "title": "Barry Lyndon",
-    "description": "Kubrick’s underrated period piece. Cold, calculated, and stunning.",
-    "year": 1975,
-    "category": "movies",
-    "genre": "Drama / Historical"
-  },
-  {
-    "id": "97",
-    "title": "Dead Poets Society",
-    "description": "Seize the day. A tearjerker about inspiration and conformity.",
-    "year": 1989,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "98",
-    "title": "The Last Emperor",
-    "description": "Lavish biopic with stunning scope and an Oscar sweep to back it up.",
-    "year": 1987,
-    "category": "movies",
-    "genre": "Biography / Historical"
-  },
-  {
-    "id": "99",
-    "title": "The Hunt (Jagten)",
-    "description": "Danish drama about moral panic and accusations. Mikkelsen kills it.",
-    "year": 2012,
-    "category": "movies",
-    "genre": "Drama / Thriller"
-  },
-  {
-    "id": "100",
-    "title": "Black Swan",
-    "description": "Psychological ballet nightmare. Aronofsky’s most stylish mindtrip.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Drama / Thriller"
-  },
-  {
-    "id": "101",
-    "title": "The Lobster",
-    "description": "Absurdist dystopia about love and loneliness. Weird and brilliant.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Drama / Sci-Fi"
-  },
-  {
-    "id": "102",
-    "title": "The Farewell",
-    "description": "Family lies meet cultural tension in this emotional slow-burn.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Drama / Comedy"
-  },
-  {
-    "id": "103",
-    "title": "Moonlight",
-    "description": "Powerful triptych about identity, race, and masculinity.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "104",
-    "title": "Before Sunrise",
-    "description": "Strangers meet in Vienna. Talky, romantic, and human.",
-    "year": 1995,
-    "category": "movies",
-    "genre": "Romance / Drama"
-  },
-  {
-    "id": "105",
-    "title": "The Banshees of Inisherin",
-    "description": "Irish civil war as broken friendship. Darkly hilarious and tragic.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Drama / Comedy"
-  },
-  {
-    "id": "106",
-    "title": "The Witch",
-    "description": "A slow descent into paranoia and supernatural terror.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Horror / Thriller"
-  },
-  {
-    "id": "107",
-    "title": "Memento",
-    "description": "Memory loss meets reverse storytelling. Nolan flexes early.",
-    "year": 2000,
-    "category": "movies",
-    "genre": "Thriller / Mystery"
-  },
-  {
-    "id": "108",
-    "title": "Annihilation",
-    "description": "Abstract, beautiful, and terrifying sci-fi.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Sci-Fi / Horror"
-  },
-  {
-    "id": "109",
-    "title": "Dog Day Afternoon",
-    "description": "True-crime bank robbery that turns into a political statement.",
-    "year": 1975,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "110",
-    "title": "The Man Who Shot Liberty Valance",
-    "description": "Western classic that questions heroism and history.",
-    "year": 1962,
-    "category": "movies",
-    "genre": "Western / Drama"
-  },
-  {
-    "id": "111",
-    "title": "A Ghost Story",
-    "description": "Meditation on grief and time, told through a guy in a sheet.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Drama / Fantasy"
-  },
-  {
-    "id": "112",
-    "title": "Ikiru",
-    "description": "Kurosawa’s most quietly devastating film about purpose and mortality.",
-    "year": 1952,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "113",
-    "title": "The Red Shoes",
-    "description": "Dazzling ballet film that blends art, obsession, and tragedy.",
-    "year": 1948,
-    "category": "movies",
-    "genre": "Drama / Musical"
-  },
-  {
-    "id": "114",
-    "title": "The Diving Bell and the Butterfly",
-    "description": "Stunning portrait of a paralyzed mind with full consciousness.",
-    "year": 2007,
-    "category": "movies",
-    "genre": "Biography / Drama"
-  },
-  {
-    "id": "115",
-    "title": "Persepolis",
-    "description": "Iranian graphic novel turned bold, emotional animation.",
-    "year": 2007,
-    "category": "movies",
-    "genre": "Animation / Biography"
-  },
-  {
-    "id": "116",
-    "title": "Run Lola Run",
-    "description": "German time-loop thriller with relentless energy.",
-    "year": 1998,
-    "category": "movies",
-    "genre": "Action / Thriller"
-  },
-  {
-    "id": "117",
-    "title": "My Neighbor Totoro",
-    "description": "Childhood wonder wrapped in fuzzy magic.",
-    "year": 1988,
-    "category": "movies",
-    "genre": "Animation / Fantasy"
-  },
-  {
-    "id": "118",
-    "title": "The Elephant Man",
-    "description": "Lynch’s most humane and heartbreaking film.",
-    "year": 1980,
-    "category": "movies",
-    "genre": "Drama / Biography"
-  },
-  {
-    "id": "119",
-    "title": "All About Eve",
-    "description": "Backstage drama with razor-sharp wit.",
-    "year": 1950,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "120",
-    "title": "The Philadelphia Story",
-    "description": "Cary Grant, Hepburn, and Stewart in peak rom-com form.",
-    "year": 1940,
-    "category": "movies",
-    "genre": "Comedy / Romance"
-  },
-  {
-    "id": "122",
-    "title": "Oppenheimer",
-    "description": "Nolan’s atomic epic — cerebral, explosive, and Oscar-dominant.",
-    "year": 2023,
-    "category": "movies",
-    "genre": "Drama / Historical"
-  },
-  {
-    "id": "123",
-    "title": "Everything Everywhere All at Once",
-    "description": "Absurdist multiverse chaos with real emotional weight.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Sci-Fi / Action"
-  },
-  {
-    "id": "125",
-    "title": "Dune: Part One",
-    "description": "Epic scale sci-fi done right. World-building with gravitas.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
-  },
-  {
-    "id": "126",
-    "title": "Spider-Man: No Way Home",
-    "description": "Multiverse fan service that still manages heart.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Action / Superhero"
-  },
-  {
-    "id": "127",
-    "title": "Barbie",
-    "description": "Subversive, neon-soaked feminist blockbuster.",
-    "year": 2023,
-    "category": "movies",
-    "genre": "Comedy / Fantasy"
-  },
-  {
-    "id": "128",
-    "title": "Top Gun: Maverick",
-    "description": "Nostalgia done right. Actually better than it had any right to be.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Action / Drama"
-  },
-  {
-    "id": "129",
-    "title": "Avengers: Endgame",
-    "description": "The end of an era. Maxed-out fan payoff and box office domination.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Action / Superhero"
-  },
-  {
-    "id": "130",
-    "title": "Joker",
-    "description": "Taxi Driver in clown paint. Divisive, dark, and a cultural lightning rod.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Drama / Crime"
-  },
-  {
-    "id": "131",
-    "title": "Get Out",
-    "description": "Genre-defining social thriller that sparked conversation everywhere.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Horror / Thriller"
-  },
-  {
-    "id": "132",
-    "title": "La La Land",
-    "description": "Musical love letter to dreamers — bittersweet and vibrant.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Musical / Romance"
-  },
-  {
-    "id": "133",
-    "title": "Mad Max: Fury Road",
-    "description": "Pure visual adrenaline. Practical effects god-tier.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Action / Adventure"
-  },
-  {
-    "id": "134",
-    "title": "Interstellar",
-    "description": "Love, time, and space folded into Nolan's most emotional trip.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Sci-Fi / Drama"
-  },
-  {
-    "id": "138",
-    "title": "The Batman",
-    "description": "Noir-style reboot with brooding intensity.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Superhero / Crime"
-  },
-  {
-    "id": "140",
-    "title": "Knives Out",
-    "description": "Whodunnit meets rich people takedown. Clever and endlessly rewatchable.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Mystery / Comedy"
-  },
-  {
-    "id": "141",
-    "title": "Bohemian Rhapsody",
-    "description": "Freddie Mercury biopic that rocked arenas and award shows.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Biography / Music"
-  },
-  {
-    "id": "142",
-    "title": "RRR",
-    "description": "Max-energy Telugu epic. Friendship, fire, dance, and vengeance.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Action / Drama"
-  },
-  {
-    "id": "143",
-    "title": "The Irishman",
-    "description": "Scorsese’s meditative, digital-de-aged gangster elegy.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "144",
-    "title": "Roma",
-    "description": "Intimate black-and-white masterpiece from Cuarón.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "145",
-    "title": "Uncut Gems",
-    "description": "Anxiety in cinematic form. Sandler breaks the mold.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Thriller / Drama"
-  },
-  {
-    "id": "146",
-    "title": "The Whale",
-    "description": "Fraser’s comeback in a raw, intimate character study.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "147",
-    "title": "Palm Springs",
-    "description": "Time-loop rom-com that’s smart, funny, and surprisingly deep.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Comedy / Sci-Fi"
-  },
-  {
-    "id": "149",
-    "title": "Sound of Metal",
-    "description": "A drummer losing his hearing, gaining perspective. Tough and moving.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Drama / Music"
-  },
-  {
-    "id": "150",
-    "title": "Marriage Story",
-    "description": "Brutal, honest portrait of love turned courtroom war.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "151",
-    "title": "The Trial of the Chicago 7",
-    "description": "Sorkin dialogue meets real political fire.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Drama / Historical"
-  },
-  {
-    "id": "152",
-    "title": "A Star Is Born",
-    "description": "Pop star chemistry meets tragic romance. Gaga stuns.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Drama / Music"
-  },
-  {
-    "id": "153",
-    "title": "Tenet",
-    "description": "Time inversion, big explosions, and dense Nolan logic.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Sci-Fi / Action"
-  },
-  {
-    "id": "154",
-    "title": "Dune: Part Two",
-    "description": "More political, more brutal, more sandworm. Epic continuation.",
-    "year": 2024,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
-  },
-  {
-    "id": "155",
-    "title": "Soul",
-    "description": "Pixar goes metaphysical. Jazzy and deep as hell.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Animation / Drama"
-  },
-  {
-    "id": "157",
-    "title": "Minari",
-    "description": "Korean-American family struggles with roots and survival in Arkansas.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "158",
-    "title": "The Power of the Dog",
-    "description": "Subtle, slow-burn psychological Western.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Drama / Western"
-  },
-  {
-    "id": "159",
-    "title": "Don't Look Up",
-    "description": "Climate change satire disguised as a media circus. Divisive but loud.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Comedy / Drama"
-  },
-  {
-    "id": "160",
-    "title": "TÁR",
-    "description": "Cate Blanchett gives a tour de force as a spiraling maestro.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Drama / Psychological"
-  },
-  {
-    "id": "161",
-    "title": "John Wick",
-    "description": "Lean, stylish action reset the genre. Gun-fu perfection.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Action / Thriller"
-  },
-  {
-    "id": "162",
-    "title": "John Wick: Chapter 4",
-    "description": "Bigger, bloodier, operatic and epic. The franchise apex.",
-    "year": 2023,
-    "category": "movies",
-    "genre": "Action / Crime"
-  },
-  {
-    "id": "163",
-    "title": "The Lego Movie",
-    "description": "Shouldn’t have worked, but it did. Smart, meta, and hilarious.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "164",
-    "title": "Encanto",
-    "description": "The Madrigal family saga — catchy songs and colorful chaos.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Animation / Fantasy"
-  },
-  {
-    "id": "165",
-    "title": "Frozen",
-    "description": "Disney musical phenomenon. “Let It Go” never left our heads.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Animation / Musical"
-  },
-  {
-    "id": "166",
-    "title": "The Hunger Games",
-    "description": "YA dystopia done right. Solid worldbuilding and a star-making turn.",
-    "year": 2012,
-    "category": "movies",
-    "genre": "Action / Sci-Fi"
-  },
-  {
-    "id": "167",
-    "title": "Catching Fire",
-    "description": "The rare sequel that improves on the original.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Action / Sci-Fi"
-  },
-  {
-    "id": "169",
-    "title": "Drive",
-    "description": "Ultra-stylized crime story. Minimal dialogue, maximal cool.",
-    "year": 2011,
-    "category": "movies",
-    "genre": "Crime / Drama"
-  },
-  {
-    "id": "170",
-    "title": "The Mitchells vs. The Machines",
-    "description": "Gen Z tech apocalypse animated with chaotic charm.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "177",
-    "title": "Glass Onion",
-    "description": "Stylish, meta murder mystery sequel that kept audiences guessing.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Mystery / Comedy"
-  },
-  {
-    "id": "178",
-    "title": "Extraction",
-    "description": "Brutal, nonstop action with a single-shot sequence that’s pure chaos.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Action / Thriller"
-  },
-  {
-    "id": "179",
-    "title": "The Mitchells vs. the Machines",
-    "description": "Family road trip meets AI apocalypse — smart, hilarious, and heartfelt.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "180",
-    "title": "All Quiet on the Western Front",
-    "description": "Devastating WWI retelling with modern intensity and horror.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "War / Drama"
-  },
-  {
-    "id": "181",
-    "title": "Beasts of No Nation",
-    "description": "Visceral, heartbreaking child soldier story led by Idris Elba.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "War / Drama"
-  },
-  {
-    "id": "182",
-    "title": "Klaus",
-    "description": "Hand-drawn Christmas tale with stunning visuals and heart.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Animation / Family"
-  },
-  {
-    "id": "183",
-    "title": "Ma Rainey’s Black Bottom",
-    "description": "Tense, musical chamber piece powered by powerhouse performances.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Drama / Music"
-  },
-  {
-    "id": "184",
-    "title": "Tick, Tick... Boom!",
-    "description": "Musical biopic about art, urgency, and mortality. Garfield crushes it.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Musical / Biography"
-  },
-  {
-    "id": "186",
-    "title": "I Care a Lot",
-    "description": "Pitch-black comedy about con artistry and capitalism.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Thriller / Comedy"
-  },
-  {
-    "id": "187",
-    "title": "Bird Box",
-    "description": "Apocalyptic survival thriller that went mega-viral.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Horror / Thriller"
-  },
-  {
-    "id": "188",
-    "title": "The Gray Man",
-    "description": "Slick spy thriller — high-budget, high-octane, low-logic.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Action / Thriller"
-  },
-  {
-    "id": "189",
-    "title": "Red Notice",
-    "description": "Star power and heist tropes in a globe-trotting crowd-pleaser.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Action / Comedy"
-  },
-  {
-    "id": "190",
-    "title": "The Sea Beast",
-    "description": "Unexpectedly deep animated adventure about monsters and myths.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Animation / Adventure"
-  },
-  {
-    "id": "191",
-    "title": "To All the Boys I’ve Loved Before",
-    "description": "Teen rom-com with heart and lasting influence.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Romance / Comedy"
-  },
-  {
-    "id": "192",
-    "title": "The Ballad of Buster Scruggs",
-    "description": "Coen Bros’ Western anthology with songs, death, and moral whiplash.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Western / Anthology"
-  },
-  {
-    "id": "193",
-    "title": "The Guilty",
-    "description": "One-man thriller about crisis, guilt, and tension on the line.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Thriller / Drama"
-  },
-  {
-    "id": "194",
-    "title": "The Hand of God",
-    "description": "Nostalgic, semi-autobiographical story of loss and cinema.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Drama"
-  },
-  {
-    "id": "195",
-    "title": "The Adam Project",
-    "description": "Light, time-travel adventure with Reynolds’ signature snark.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Sci-Fi / Comedy"
-  },
-  {
-    "id": "196",
-    "title": "You People",
-    "description": "Culture clash meets rom-com with a sharp, often uncomfortable bite.",
-    "year": 2023,
-    "category": "movies",
-    "genre": "Comedy / Drama"
-  },
-  {
-    "id": "198",
-    "title": "Avatar",
-    "description": "Blue aliens, 3D revolution, and the highest-grossing film (again).",
-    "year": 2009,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
-  },
-  {
-    "id": "201",
-    "title": "Harry Potter and the Sorcerer's Stone",
-    "description": "The beginning of an era. Magic, kids, and worldwide obsession.",
-    "year": 2001,
-    "category": "movies",
-    "genre": "Fantasy / Adventure"
-  },
-  {
-    "id": "204",
     "title": "Jurassic Park",
-    "description": "Dinosaurs done right. Spiel-bergasm of science, suspense, and wonder.",
-    "year": 1993,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
+    "year": "1993",
+    "description": "",
+    "genre": "",
+    "director": "Steven Spielberg",
+    "actors": "Sam Neill\nLaura Dern\nJeff Goldblum\nRichard Attenborough\nBob Peck\nMartin Ferrero\nBD Wong\nSamuel L. Jackson\nWayne Knight\nJoseph Mazzello\nAriana Richards",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg"
   },
   {
-    "id": "206",
-    "title": "Forrest Gump",
-    "description": "“Life is like a box of chocolates” — Oscar-winner and pop culture staple.",
-    "year": 1994,
-    "category": "movies",
-    "genre": "Drama / Romance"
+    "title": "Warfare",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nRay Mendoza\nAlex Garland",
+    "actors": "D'Pharaoh Woon-A-Tai\nWill Poulter\nCosmo Jarvis\nKit Connor\nFinn Bennett\nJoseph Quinn\nCharles Melton",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0d/Warfare_film_poster.jpg/250px-Warfare_film_poster.jpg"
   },
   {
-    "id": "208",
-    "title": "The Lord of the Rings: Return of the King",
-    "description": "Epic fantasy with 11 Oscars to prove it.",
-    "year": 2003,
-    "category": "movies",
-    "genre": "Fantasy / Adventure"
+    "title": "Jaws",
+    "year": "1975",
+    "description": "",
+    "genre": "",
+    "director": "Steven Spielberg",
+    "actors": "Roy Scheider\nRobert Shaw\nRichard Dreyfuss\nLorraine Gary\nMurray Hamilton",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Jaws_movie_poster.jpg/250px-Jaws_movie_poster.jpg"
   },
   {
-    "id": "211",
-    "title": "Minions",
-    "description": "Yellow gibberish gremlins that somehow made billions.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Animation / Comedy"
+    "title": "The Accountant",
+    "year": "2016",
+    "description": "",
+    "genre": "",
+    "director": "Gavin O'Connor",
+    "actors": "Ben Affleck\nAnna Kendrick\nJ. K. Simmons\nJon Bernthal\nCynthia Addai-Robinson\nJeffrey Tambor\nJohn Lithgow",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/The_Accountant_%282016_film%29.png/250px-The_Accountant_%282016_film%29.png"
   },
   {
-    "id": "212",
-    "title": "Beauty and the Beast (animated)",
-    "description": "Disney Renaissance classic. First animated Best Picture nominee.",
-    "year": 1991,
-    "category": "movies",
-    "genre": "Animation / Romance"
+    "title": "Oppenheimer",
+    "year": "2023",
+    "description": "",
+    "genre": "",
+    "director": "Christopher Nolan",
+    "actors": "Cillian Murphy\nEmily Blunt\nMatt Damon\nRobert Downey Jr.\nFlorence Pugh\nJosh Hartnett\nCasey Affleck\nRami Malek\nKenneth Branagh",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Oppenheimer_%28film%29.jpg/250px-Oppenheimer_%28film%29.jpg"
   },
   {
-    "id": "213",
-    "title": "Shrek",
-    "description": "Sarcastic, subversive, and still quotable as hell.",
-    "year": 2001,
-    "category": "movies",
-    "genre": "Animation / Comedy"
+    "title": "Father of the Bride ",
+    "year": "1991",
+    "description": "",
+    "genre": "",
+    "director": "Charles Shyer",
+    "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nSteve Martin\nDiane Keaton\nKimberly Williams\nMartin Short",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/a/a1/Father_of_the_bride_poster.jpg"
   },
   {
-    "id": "215",
-    "title": "Black Panther",
-    "description": "Culture-shifting Marvel moment. Representation finally front and center.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Superhero / Action"
+    "title": "Materialists",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Celine Song",
+    "actors": "Dakota Johnson\nChris Evans\nPedro Pascal",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/Materalists_Poster.jpg/250px-Materalists_Poster.jpg"
   },
   {
-    "id": "216",
-    "title": "Inception",
-    "description": "Dream within a dream within box office gold. Nolan flexes hard.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Sci-Fi / Thriller"
+    "title": "The Old Guard",
+    "year": "2020",
+    "description": "",
+    "genre": "",
+    "director": "Gina Prince-Bythewood",
+    "actors": "Charlize Theron\nKiKi Layne\nMarwan Kenzari\nLuca Marinelli\nHarry Melling\nVeronica Ngo\nMatthias Schoenaerts\nChiwetel Ejiofor",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/0/02/The_Old_Guard_2020_film_poster.png"
   },
   {
-    "id": "217",
-    "title": "E.T. the Extra-Terrestrial",
-    "description": "Spielberg’s heartfelt alien tale that crushed the ‘80s box office.",
-    "year": 1982,
-    "category": "movies",
-    "genre": "Sci-Fi / Family"
+    "title": "My Bloody Valentine",
+    "year": "1981",
+    "description": "",
+    "genre": "",
+    "director": "George Mihalka",
+    "actors": "Paul Kelman\nLori Hallier\nNeil Affleck",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/My_bloody_valentineposter.jpg/250px-My_bloody_valentineposter.jpg"
   },
   {
-    "id": "218",
-    "title": "The Avengers",
-    "description": "MCU’s first mega-crossover. Opened the floodgates.",
-    "year": 2012,
-    "category": "movies",
-    "genre": "Superhero / Action"
+    "title": "Nosferatu",
+    "year": "2024",
+    "description": "",
+    "genre": "",
+    "director": "Robert Eggers",
+    "actors": "Bill Skarsgård\nNicholas Hoult\nLily-Rose Depp\nAaron Taylor-Johnson\nEmma Corrin\nWillem Dafoe",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/48/Nosferatu_IMAX_poster_2024.jpg/250px-Nosferatu_IMAX_poster_2024.jpg"
   },
   {
-    "id": "219",
-    "title": "The Super Mario Bros. Movie",
-    "description": "Animated crowd-pleaser that cashed in on nostalgia and family fun.",
-    "year": 2023,
-    "category": "movies",
-    "genre": "Animation / Adventure"
+    "title": "The Hunt",
+    "year": "2012",
+    "description": "",
+    "genre": "",
+    "director": "Thomas Vinterberg",
+    "actors": "Mads Mikkelsen",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/44/The_Hunt_%282012_film%29.jpg/250px-The_Hunt_%282012_film%29.jpg"
   },
   {
-    "id": "220",
-    "title": "Despicable Me",
-    "description": "Gru + minions = franchise juggernaut.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Animation / Comedy"
+    "title": "Mortal Kombat",
+    "year": "2021",
+    "description": "",
+    "genre": "",
+    "director": "Simon McQuoid",
+    "actors": "Lewis Tan\nJessica McNamee\nJosh Lawson\nTadanobu Asano\nMehcad Brooks\nLudi Lin\nChin Han\nJoe Taslim\nHiroyuki Sanada",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/3/37/Mortal_Kombat_%282021_film%29.png"
   },
   {
-    "id": "222",
-    "title": "Jurassic World",
-    "description": "Dinosaur chaos reignited with blockbuster thrills and nostalgia.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Sci-Fi / Adventure"
+    "title": "Wicked",
+    "year": "2024",
+    "description": "",
+    "genre": "",
+    "director": "Jon M. Chu",
+    "actors": "Cynthia Erivo\nAriana Grande[b]\nJonathan Bailey\nEthan Slater\nBowen Yang\nPeter Dinklage\nMichelle Yeoh\nJeff Goldblum",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Wicked_%282024_film%29_poster.png/250px-Wicked_%282024_film%29_poster.png"
   },
   {
-    "id": "224",
-    "title": "Frozen II",
-    "description": "The sequel that kept the icy magic alive and dominated the box office.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Animation / Musical"
+    "title": "Weapons",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Zach Cregger",
+    "actors": "Josh Brolin\nJulia Garner\nAlden Ehrenreich\nAustin Abrams\nCary Christopher\nBenedict Wong\nAmy Madigan",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/Weapons_film_2025.jpeg/250px-Weapons_film_2025.jpeg"
   },
   {
-    "id": "225",
-    "title": "Beauty and the Beast (2017)",
-    "description": "Live-action Disney remake that captured hearts globally.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Fantasy / Romance"
+    "title": "Deep Cover",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Tom Kingsley",
+    "actors": "Bryce Dallas Howard\nOrlando Bloom\nNick Mohammed\nPaddy Considine\nIan McShane\nSean Bean",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/Deep_Cover_%282025_film%29.jpg/250px-Deep_Cover_%282025_film%29.jpg"
   },
   {
-    "id": "226",
-    "title": "Finding Nemo",
-    "description": "Pixar’s underwater adventure that’s both heartwarming and hilarious.",
-    "year": 2003,
-    "category": "movies",
-    "genre": "Animation / Adventure"
+    "title": "Titanic",
+    "year": "1997",
+    "description": "",
+    "genre": "",
+    "director": "James Cameron",
+    "actors": "Leonardo DiCaprio\nKate Winslet\nBilly Zane\nKathy Bates\nFrances Fisher\nBernard Hill\nJonathan Hyde\nDanny Nucci\nDavid Warner\nBill Paxton",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png"
   },
   {
-    "id": "227",
-    "title": "The Lion King (2019)",
-    "description": "CG remake of the beloved classic that broke streaming and box office records.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Animation / Drama"
+    "title": "Maalik",
+    "year": "2025",
+    "description": "",
+    "genre": "Feature film soundtrack",
+    "director": "Pulkit",
+    "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nRajkummar Rao\nProsenjit Chatterjee\nManushi Chhillar",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Maalik_%282025_film%29.jpg/250px-Maalik_%282025_film%29.jpg"
   },
   {
-    "id": "228",
-    "title": "Harry Potter and the Deathly Hallows – Part 2",
-    "description": "Epic finale to the wizarding saga with huge fanfare.",
-    "year": 2011,
-    "category": "movies",
-    "genre": "Fantasy / Adventure"
+    "title": "12 Angry Men",
+    "year": "1957",
+    "description": "",
+    "genre": "",
+    "director": "Sidney Lumet",
+    "actors": "Henry Fonda\nLee J. Cobb\nEd Begley\nE. G. Marshall\nJack Warden",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/12_Angry_Men_%281957_film_poster%29.jpg/250px-12_Angry_Men_%281957_film_poster%29.jpg"
   },
   {
-    "id": "230",
-    "title": "Star Wars: The Force Awakens",
-    "description": "Revival of the saga with massive fan hype and box office records.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Sci-Fi / Fantasy"
+    "title": "Heretic",
+    "year": "2024",
+    "description": "",
+    "genre": "",
+    "director": "Scott BeckBryan Woods",
+    "actors": "Hugh Grant\nSophie Thatcher\nChloe East",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Heretic_film_poster.jpg/250px-Heretic_film_poster.jpg"
   },
   {
-    "id": "231",
-    "title": "The Incredibles",
-    "description": "Family of superheroes saving the day with Pixar’s signature style.",
-    "year": 2004,
-    "category": "movies",
-    "genre": "Animation / Action"
+    "title": "Supergirl",
+    "year": "1984",
+    "description": "",
+    "genre": "Soundtrack",
+    "director": "Jeannot Szwarc",
+    "actors": "Faye Dunaway\nHelen Slater\nHart Bochner\nPeter Cook\nMia Farrow\nMarc McClure\nMaureen Teefy\nBrenda Vaccaro\nSimon Ward\nPeter O'Toole",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Supergirlposter.jpg/250px-Supergirlposter.jpg"
   },
   {
-    "id": "233",
-    "title": "Toy Story 3",
-    "description": "Emotional Pixar chapter closing a beloved trilogy.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Animation / Family"
+    "title": "Bright Star",
+    "year": "2009",
+    "description": "",
+    "genre": "",
+    "director": "Jane Campion",
+    "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}Ben WhishawAbbie CornishPaul SchneiderKerry FoxThomas SangsterAntonia Campbell-Hughes",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Bright_star.jpg/250px-Bright_star.jpg"
   },
   {
-    "id": "234",
-    "title": "Wonder Woman",
-    "description": "Breakthrough female superhero movie that energized DC fans.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Heretic",
+    "year": "2024",
+    "description": "",
+    "genre": "",
+    "director": "Scott BeckBryan Woods",
+    "actors": "Hugh Grant\nSophie Thatcher\nChloe East",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Heretic_film_poster.jpg/250px-Heretic_film_poster.jpg"
   },
   {
-    "id": "235",
-    "title": "Captain Marvel",
-    "description": "MCU’s cosmic powerhouse introduced with huge hype.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Superhero / Action"
+    "title": "Elio",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Madeline Sharafian\nDomee Shi\nAdrian Molina",
+    "actors": "Yonas Kibreab\nZoe Saldaña\nRemy Edgerly\nBrandon Moon\nBrad Garrett\nJameela Jamil",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/Elio_film_poster.jpg/250px-Elio_film_poster.jpg"
   },
   {
-    "id": "236",
-    "title": "Spider-Man: Far From Home",
-    "description": "Post-Endgame Spidey’s globe-trotting blockbuster.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Superhero / Action"
+    "title": "The Commitments",
+    "year": "1991",
+    "description": "",
+    "genre": "Soul & movie musicalSoul & movie musical",
+    "director": "Alan Parker",
+    "actors": "Robert Arkins\nMichael Aherne\nAngeline Ball\nMaria Doyle\nDave Finnegan\nBronagh Gallagher\nFélim Gormley\nGlen Hansard\nDick Massey\nJohnny Murphy\nKenneth McCluskey\nAndrew Strong",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/The_Commitments_poster.png"
   },
   {
-    "id": "238",
-    "title": "Despicable Me 2",
-    "description": "Follow-up to the minion madness that kept the franchise booming.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Animation / Comedy"
+    "title": "Snow White (2025)",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Marc Webb",
+    "actors": "Rachel Zegler\nAndrew Burnap\nGal Gadot",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1f/Snow_White_%282025_film%29_final_poster.jpg/250px-Snow_White_%282025_film%29_final_poster.jpg"
   },
   {
-    "id": "239",
-    "title": "Finding Dory",
-    "description": "Heartfelt sequel about memory and family underwater.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Animation / Adventure"
+    "title": "Jurassic World Dominion",
+    "year": "2022",
+    "description": "",
+    "genre": "",
+    "director": "Colin Trevorrow",
+    "actors": "Chris Pratt\nBryce Dallas Howard\nLaura Dern\nJeff Goldblum\nSam Neill\nDeWanda Wise\nMamoudou Athie\nBD Wong\nOmar Sy",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/JurassicWorldDominion_Poster.jpeg/250px-JurassicWorldDominion_Poster.jpeg"
   },
   {
-    "id": "240",
-    "title": "Avengers: Infinity War",
-    "description": "The MCU’s high-stakes event movie before Endgame.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Interstellar",
+    "year": "2014",
+    "description": "",
+    "genre": "",
+    "director": "Christopher Nolan",
+    "actors": "Matthew McConaughey\nAnne Hathaway\nJessica Chastain\nBill Irwin\nEllen Burstyn\nMichael Caine",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg"
   },
   {
-    "id": "241",
-    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
-    "description": "Swashbuckling fun with Johnny Depp’s iconic Jack Sparrow.",
-    "year": 2003,
-    "category": "movies",
-    "genre": "Adventure / Fantasy"
-  },
-  {
-    "id": "242",
-    "title": "Shrek 2",
-    "description": "Irreverent fairy tale sequel that was even bigger than the original.",
-    "year": 2004,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "243",
-    "title": "The Twilight Saga: Breaking Dawn – Part 2",
-    "description": "The vampire franchise finale that had millions hooked.",
-    "year": 2012,
-    "category": "movies",
-    "genre": "Fantasy / Romance"
-  },
-  {
-    "id": "244",
-    "title": "The Hunger Games: Catching Fire",
-    "description": "Dystopian thrills with Jennifer Lawrence leading the charge.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Action / Sci-Fi"
-  },
-  {
-    "id": "245",
-    "title": "Aquaman",
-    "description": "Underwater superhero spectacle with Jason Momoa’s charm.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Action / Fantasy"
-  },
-  {
-    "id": "246",
-    "title": "The Dark Knight Rises",
-    "description": "Nolan’s Batman trilogy finale packed with action and emotion.",
-    "year": 2012,
-    "category": "movies",
-    "genre": "Action / Crime"
-  },
-  {
-    "id": "247",
-    "title": "Coco",
-    "description": "Pixar’s vibrant Day of the Dead story with unforgettable music.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Animation / Family"
-  },
-  {
-    "id": "248",
-    "title": "Moana",
-    "description": "Disney’s ocean adventure with a fierce heroine and catchy tunes.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Animation / Musical"
-  },
-  {
-    "id": "249",
-    "title": "Transformers",
-    "description": "Michael Bay’s explosive robot franchise kickoff.",
-    "year": 2007,
-    "category": "movies",
-    "genre": "Action / Sci-Fi"
-  },
-  {
-    "id": "250",
-    "title": "Iron Man",
-    "description": "The film that launched the MCU into pop culture dominance.",
-    "year": 2008,
-    "category": "movies",
-    "genre": "Superhero / Action"
-  },
-  {
-    "id": "251",
-    "title": "The Secret Life of Pets",
-    "description": "Comedy about what pets do when we’re away — family-friendly gold.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "252",
-    "title": "Trolls",
-    "description": "Colorful, musical animated hit with a huge soundtrack.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Animation / Musical"
-  },
-  {
-    "id": "253",
-    "title": "Deadpool",
-    "description": "R-rated superhero comedy that changed the game with its snark.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Action / Comedy"
-  },
-  {
-    "id": "254",
-    "title": "Venom",
-    "description": "Antihero movie that attracted big audiences despite mixed reviews.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Action / Sci-Fi"
-  },
-  {
-    "id": "255",
-    "title": "The Jungle Book (2016)",
-    "description": "Stunning live-action/CGI hybrid remake of the classic Disney tale.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Adventure / Family"
-  },
-  {
-    "id": "256",
-    "title": "Star Wars: Rogue One",
-    "description": "Gritty, fan-favorite standalone Star Wars story.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Sci-Fi / Action"
-  },
-  {
-    "id": "257",
-    "title": "Jumanji: Welcome to the Jungle",
-    "description": "Unexpected hit sequel reboot with Dwayne Johnson.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Action / Comedy"
-  },
-  {
-    "id": "259",
-    "title": "Spider-Man: Homecoming",
-    "description": "Fresh reboot of Spider-Man in the MCU with Tom Holland’s charm.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Superhero / Action"
-  },
-  {
-    "id": "260",
-    "title": "Wonder",
-    "description": "Emotional family drama that hit all the right notes.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Drama / Family"
-  },
-  {
-    "id": "262",
-    "title": "Zootopia",
-    "description": "Disney’s smart, socially aware animal city caper.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Animation / Mystery"
-  },
-  {
-    "id": "264",
-    "title": "Aladdin (2019)",
-    "description": "Live-action remake with Will Smith’s iconic Genie.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Fantasy / Musical"
-  },
-  {
-    "id": "265",
-    "title": "Maleficent",
-    "description": "Dark fairy tale retelling starring Angelina Jolie.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Fantasy / Drama"
-  },
-  {
-    "id": "266",
-    "title": "Kung Fu Panda",
-    "description": "Animated martial arts comedy with heart and style.",
-    "year": 2008,
-    "category": "movies",
-    "genre": "Animation / Comedy"
-  },
-  {
-    "id": "268",
-    "title": "Gravity",
-    "description": "Sci-fi thriller that made space terrifying and beautiful.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Sci-Fi / Thriller"
-  },
-  {
-    "id": "270",
-    "title": "The Martian",
-    "description": "Sci-fi survival story with a comedic and smart edge.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Sci-Fi / Drama"
-  },
-  {
-    "id": "271",
-    "title": "Captain America: Civil War",
-    "description": "MCU’s civil war that divided superheroes and audiences.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Action / Superhero"
-  },
-  {
-    "id": "272",
-    "title": "Rogue One",
-    "description": "Star Wars spinoff with a darker, more mature tone.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Sci-Fi / Action"
-  },
-  {
-    "id": "273",
-    "title": "Pirates of the Caribbean: Dead Man’s Chest",
-    "description": "Follow-up with more action and Jack Sparrow antics.",
-    "year": 2006,
-    "category": "movies",
-    "genre": "Adventure / Fantasy"
-  },
-  {
-    "id": "274",
-    "title": "Batman v Superman: Dawn of Justice",
-    "description": "DC’s biggest superhero showdown with massive hype.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Action / Superhero"
-  },
-  {
-    "id": "275",
-    "title": "Guardians of the Galaxy",
-    "description": "Space crew with humor, music, and heart that kicked off a new MCU vibe.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Action / Superhero"
-  },
-  {
-    "id": "276",
-    "title": "The Twilight Saga: New Moon",
-    "description": "Vampire teen romance fever that had millions hooked.",
-    "year": 2009,
-    "category": "movies",
-    "genre": "Fantasy / Romance"
-  },
-  {
-    "id": "277",
     "title": "How to Train Your Dragon",
-    "description": "Dreamy animation about friendship and dragons.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Animation / Adventure"
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Dean DeBlois",
+    "actors": "Mason Thames\nNico Parker\nGabriel Howell\nJulian Dennison\nBronwyn James\nHarry Trevaldwyn\nPeter Serafinowicz\nNick Frost\nGerard Butler",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/8/80/How_To_Train_Your_Dragon_2025_Poster.jpg"
   },
   {
-    "id": "278",
-    "title": "The Lion King (1994)",
-    "description": "Disney’s legendary animated epic with unforgettable songs.",
-    "year": 1994,
-    "category": "movies",
-    "genre": "Animation / Drama"
+    "title": "Companion",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Drew Hancock",
+    "actors": "Sophie Thatcher\nJack Quaid\nLukas Gage\nMegan Suri\nHarvey Guillén\nRupert Friend",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/48/Companion_film_poster.jpg/250px-Companion_film_poster.jpg"
   },
   {
-    "id": "281",
-    "title": "Batman Begins",
-    "description": "Nolan reboot that revived Batman with grit and style.",
-    "year": 2005,
-    "category": "movies",
-    "genre": "Action / Crime"
+    "title": "Gladiator",
+    "year": "2000",
+    "description": "",
+    "genre": "",
+    "director": "Ridley Scott",
+    "actors": "Russell Crowe\nJoaquin Phoenix\nConnie Nielsen\nOliver Reed\nDerek Jacobi\nDjimon Hounsou\nRichard Harris",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fb/Gladiator_%282000_film_poster%29.png/250px-Gladiator_%282000_film_poster%29.png"
   },
   {
-    "id": "284",
-    "title": "Despicable Me 3",
-    "description": "Continued minion and Gru adventures, big audience draw.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Animation / Comedy"
+    "title": "Friendship ",
+    "year": "2024",
+    "description": "Friendship is a 2024 American black comedy film written and directed by Andrew DeYoung in his directorial debut. The film stars Tim Robinson, Kate Mara, Jack Dylan Grazer, and Paul Rudd. Its plot centers on Craig, a socially awkward marketing executive who obsessively yearns to be friends with his new neighbor Austin, a charismatic but unfulfilled weatherman.",
+    "genre": "",
+    "director": "Andrew DeYoung",
+    "actors": "Tim Robinson\nKate Mara\nJack Dylan Grazer\nPaul Rudd",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Friendship_poster.jpg/250px-Friendship_poster.jpg"
   },
   {
-    "id": "286",
-    "title": "Spider-Man: Into the Spider-Verse",
-    "description": "Animated Spider-Man multiverse masterpiece.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Animation / Action"
+    "title": "28 Days Later",
+    "year": "",
+    "description": "The 28 Days Later series consists of post-apocalyptic horror films, based on a concept conceived by Alex Garland. The series includes three released films, with two sequels in various stages of development. The franchise depicts the outbreak of the Rage Virus, a contagious disease that induces homicidal rage in those infected. Following the virus’s accidental release from a laboratory in the United Kingdom, the resulting epidemic causes widespread societal collapse. The films focus on the impact of the outbreak, and the efforts of survivors to endure both the infected and the consequences of a rapidly disintegrating society.",
+    "genre": "",
+    "director": "",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/b/b0/28_Days_Later_official_film_series_logo.jpg"
   },
   {
-    "id": "287",
-    "title": "Captain America: The Winter Soldier",
-    "description": "Political thriller-style superhero action.",
-    "year": 2014,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Paprika",
+    "year": "2006",
+    "description": "",
+    "genre": "",
+    "director": "Satoshi Kon",
+    "actors": "Megumi Hayashibara\nTōru Emori\nKatsunosuke Hori\nTōru Furuya\nAkio Ōtsuka\nKōichi Yamadera\nHideyuki Tanaka",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/16/Paprikaposter.jpg/250px-Paprikaposter.jpg"
   },
   {
-    "id": "288",
-    "title": "Black Widow",
-    "description": "Natasha Romanoff’s MCU solo outing.",
-    "year": 2021,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Chuck",
+    "year": "2016",
+    "description": "Chuck (released as The Bleeder in the UK and Ireland) is a 2016 American biographical sports drama film directed by Philippe Falardeau and written by Jeff Feuerzeig, Jerry Stahl, Michael Cristofer and Liev Schreiber, who also stars in the title role. The cast includes Elisabeth Moss, Ron Perlman, Naomi Watts, Jim Gaffigan, Michael Rapaport, Pooch Hall, Morgan Spector, Jason Jones and Catherine Corcoran. The film depicts the life of heavyweight boxer Chuck Wepner and his 1975 title fight with the heavyweight champion, Muhammad Ali, which inspired Sylvester Stallone's character and screenplay for the 1976 film Rocky.",
+    "genre": "",
+    "director": "Philippe Falardeau",
+    "actors": "Liev Schreiber\nElisabeth Moss\nRon Perlman\nNaomi Watts\nJim Gaffigan\nMichael Rapaport\nPooch Hall\nMorgan Spector\nJason Jones\nWilliam Hill\nWass Stevens",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Chuck_film_poster.jpg/250px-Chuck_film_poster.jpg"
   },
   {
-    "id": "289",
-    "title": "Incredibles 2",
-    "description": "Long-awaited sequel to the beloved Pixar family superhero film.",
-    "year": 2018,
-    "category": "movies",
-    "genre": "Animation / Action"
+    "title": "Parasite",
+    "year": "2019",
+    "description": "",
+    "genre": "",
+    "director": "Bong Joon Ho",
+    "actors": "Song Kang-ho\nLee Sun-kyun\nCho Yeo-jeong\nChoi Woo-shik\nPark So-dam\nJang Hye-jin",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Parasite_%282019_film%29.png/250px-Parasite_%282019_film%29.png"
   },
   {
-    "id": "290",
-    "title": "Thor: Ragnarok",
-    "description": "Taika Waititi’s hilarious, colorful MCU refresh.",
-    "year": 2017,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "The Batman",
+    "year": "2022",
+    "description": "",
+    "genre": "",
+    "director": "Matt Reeves",
+    "actors": "Robert Pattinson\nZoë Kravitz\nPaul Dano\nJeffrey Wright\nJohn Turturro\nPeter Sarsgaard\nAndy Serkis\nColin Farrell",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg"
   },
   {
-    "id": "291",
-    "title": "Wonder Woman 1984",
-    "description": "Sequel to the breakout DC hit with mixed reception but big views.",
-    "year": 2020,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Gosford Park",
+    "year": "2001",
+    "description": "",
+    "genre": "",
+    "director": "Robert Altman",
+    "actors": "Eileen AtkinsBob BalabanAlan BatesCharles DanceStephen FryMichael GambonRichard E. GrantDerek JacobiKelly MacdonaldHelen MirrenJeremy NorthamClive OwenRyan PhillippeMaggie SmithKristin Scott ThomasEmily Watson",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/e/e3/Gosford_Park_movie.jpg"
   },
   {
-    "id": "292",
-    "title": "Doctor Strange",
-    "description": "MCU’s mystical arts introduction with eye-popping visuals.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Cop",
+    "year": "1988",
+    "description": "",
+    "genre": "",
+    "director": "James B. Harris",
+    "actors": "James Woods\nLesley Ann Warren\nCharles Durning\nCharles Haid\nRaymond J. Barry",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/3/3d/Copsmovieposter.jpg"
   },
   {
-    "id": "293",
-    "title": "The Jungle Book (1967)",
-    "description": "Disney classic that started many childhoods with music and fun.",
-    "year": 1967,
-    "category": "movies",
-    "genre": "Animation / Family"
+    "title": "The Piano Lesson",
+    "year": "2024",
+    "description": "",
+    "genre": "",
+    "director": "Malcolm Washington",
+    "actors": "Samuel L. Jackson\nJohn David Washington\nRay Fisher\nMichael Potts\nErykah Badu\nSkylar Aleece Smith\nDanielle Deadwyler\nCorey Hawkins",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/The_Piano_Lesson_%282024_film%29_poster.jpg/250px-The_Piano_Lesson_%282024_film%29_poster.jpg"
   },
   {
-    "id": "294",
-    "title": "The Avengers: Age of Ultron",
-    "description": "MCU sequel with huge scope and big stakes.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Action / Superhero"
+    "title": "Twisters (2024 Remake)",
+    "year": "2024",
+    "description": "",
+    "genre": "",
+    "director": "Lee Isaac Chung",
+    "actors": "Daisy Edgar-Jones\nGlen Powell\nAnthony Ramos\nBrandon Perea\nMaura Tierney\nSasha Lane",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/2/24/Twisters_Official_US_Theatrical_Poster.jpg"
   },
   {
-    "id": "295",
-    "title": "The Twilight Saga: Eclipse",
-    "description": "Another vampire teen romance blockbuster.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Fantasy / Romance"
+    "title": "Once Upon a Time in Hollywood",
+    "year": "2019",
+    "description": "",
+    "genre": "",
+    "director": "Quentin Tarantino",
+    "actors": "Leonardo DiCaprio\nBrad Pitt\nMargot Robbie\nEmile Hirsch\nMargaret Qualley\nTimothy Olyphant\nAustin Butler\nDakota Fanning\nBruce Dern\nAl Pacino",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Once_Upon_a_Time_in_Hollywood_poster.png/250px-Once_Upon_a_Time_in_Hollywood_poster.png"
   },
   {
-    "id": "296",
-    "title": "Beauty and the Beast (1991)",
-    "description": "The original Disney animated classic that’s timeless.",
-    "year": 1991,
-    "category": "movies",
-    "genre": "Animation / Romance"
+    "title": "Man of Steel",
+    "year": "2013",
+    "description": "",
+    "genre": "",
+    "director": "Zack Snyder",
+    "actors": "Henry Cavill\nAmy Adams\nMichael Shannon\nKevin Costner\nDiane Lane\nLaurence Fishburne\nAntje Traue\nAyelet Zurer\nChristopher Meloni\nRussell Crowe",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Man_of_Steel_%28film%29_poster.jpg/250px-Man_of_Steel_%28film%29_poster.jpg"
+  },
+  {
+    "title": "Drop",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Christopher Landon",
+    "actors": "Meghann Fahy\nBrandon Sklenar\nViolett Beane\nJeffery Self",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Drop_Poster.jpg/250px-Drop_Poster.jpg"
+  },
+  {
+    "title": "The Gorge",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "Scott Derrickson",
+    "actors": "Miles Teller\nAnya Taylor-Joy\nSigourney Weaver",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/The_Gorge_%28film%29_poster.jpg/250px-The_Gorge_%28film%29_poster.jpg"
+  },
+  {
+    "title": "Until Dawn ",
+    "year": "2025",
+    "description": "",
+    "genre": "",
+    "director": "David F. Sandberg",
+    "actors": "Ella Rubin\nMichael Cimino\nOdessa A'zion\nJi-young Yoo\nBelmont Cameli\nMaia Mitchell\nPeter Stormare",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fc/Until_Dawn_%282025%29_poster.jpg/250px-Until_Dawn_%282025%29_poster.jpg"
   }
 ]

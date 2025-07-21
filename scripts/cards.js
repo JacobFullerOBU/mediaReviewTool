@@ -69,7 +69,9 @@ function searchMedia(query) {
     if (query) {
         filteredItems = allItems.filter(item =>
             item.title.toLowerCase().includes(query) ||
-            item.description.toLowerCase().includes(query)
+            item.description.toLowerCase().includes(query) ||
+            (item.director && item.director.toLowerCase().includes(query)) ||
+            (item.actors && item.actors.toLowerCase().includes(query))
         );
     }
     loadCardsWithItems(filteredItems);
@@ -208,18 +210,20 @@ async function renderCards(container, items) {
 // Helper function to generate card HTML
 function createCardHTML(item) {
     return `
-        <div class="media-card" data-id="${item.id}" data-category="${item.category}">
-            <div class="card-image" style="background-image: url('${item.image}')">
-                <div class="card-category">${item.category}</div>
-                <div class="card-rating">★ ${item.rating}</div>
+        <div class="media-card" data-id="${item.id || ''}" data-category="${item.category || 'movie'}">
+            <div class="card-image" style="background-image: url('${item.poster || item.image || ''}')">
+                <div class="card-category">${item.category || 'Movie'}</div>
+                <div class="card-rating">★ ${item.rating || ''}</div>
             </div>
             <div class="card-content">
-                <h3 class="card-title">${item.title}</h3>
-                <p class="card-description">${item.description}</p>
+                <h3 class="card-title">${item.title || ''}</h3>
+                <p class="card-description">${item.description || ''}</p>
                 <div class="card-meta">
-                    <span class="card-year">${item.year}</span>
-                    <span class="card-reviews">${item.reviews} reviews</span>
+                    <span class="card-year">${item.year || ''}</span>
+                    <span class="card-director">${item.director ? 'Director: ' + item.director : ''}</span>
                 </div>
+                <div class="card-actors">${item.actors ? 'Cast: ' + item.actors.replace(/\n/g, ', ') : ''}</div>
+                <div class="card-genre">${item.genre ? 'Genre: ' + item.genre : ''}</div>
                 <div class="card-latest-review" style="margin-top:8px; font-style:italic; color:#555;"></div>
             </div>
         </div>
@@ -230,8 +234,9 @@ function addCardListeners() {
     const cards = document.querySelectorAll('.media-card');
     console.log('[DEBUG] Attaching listeners to cards:', cards.length);
     cards.forEach(card => {
-        const itemId = card.dataset.id;
-        const item = allItems.find(item => item.id == itemId);
+        // Use index as fallback for missing id
+        const itemId = card.dataset.id || card.querySelector('.card-title')?.textContent || '';
+        const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
         // Attach click listeners directly to child elements
         const imageElem = card.querySelector('.card-image');
         const titleElem = card.querySelector('.card-title');
@@ -317,13 +322,13 @@ async function showItemDetails(item) {
             </div>
             <div class="modal-body">
                 <div style="margin-bottom: 20px;">
-                    <p><strong>Category:</strong> ${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
-                    <p><strong>Year:</strong> ${item.year}</p>
+                    <p><strong>Category:</strong> ${(item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Movie')}</p>
+                    <p><strong>Year:</strong> ${item.year || ''}</p>
                     <p><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></p>
                     <p><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</p>
                 </div>
                 <p><strong>Description:</strong></p>
-                <p>${item.description}</p>
+                <p>${item.description || ''}</p>
                 <div style="margin-top: 20px;">
                     <button class="btn btn-primary" id="writeReviewBtn">Write a Review</button>
                     <button class="btn btn-login" style="margin-left: 10px;">Add to Favorites</button>
@@ -379,6 +384,64 @@ async function showItemDetails(item) {
     const reviewFormContainer = modal.querySelector('#reviewFormContainer');
     writeReviewBtn.addEventListener('click', () => {
         reviewFormContainer.style.display = 'block';
+    });
+
+    // Add to Favorites logic
+    const addToFavoritesBtn = modal.querySelector('.btn-login');
+    // Use item.id if available, otherwise use a slugified title as the key
+    const mediaKey = item.id || item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    let isFavorite = false;
+    if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+        const favRef = ref(db, `favorites/${userId}/${mediaKey}`);
+        // Check if already favorited
+        get(favRef).then(snapshot => {
+            if (snapshot.exists()) {
+                isFavorite = true;
+                addToFavoritesBtn.textContent = 'Remove from Favorites';
+            } else {
+                isFavorite = false;
+                addToFavoritesBtn.textContent = 'Add to Favorites';
+            }
+        });
+    }
+    addToFavoritesBtn.addEventListener('click', async () => {
+        if (!auth.currentUser) {
+            alert('You must be logged in to add favorites.');
+            return;
+        }
+        try {
+            const userId = auth.currentUser.uid;
+            const favRef = ref(db, `favorites/${userId}/${mediaKey}`);
+            if (!isFavorite) {
+                // Add to favorites
+                await push(favRef, {
+                    mediaId: mediaKey,
+                    addedAt: new Date().toISOString()
+                });
+                addToFavoritesBtn.textContent = 'Remove from Favorites';
+                isFavorite = true;
+            } else {
+                // Remove from favorites
+                // Remove all entries for this mediaKey (should only be one, but just in case)
+                get(favRef).then(snapshot => {
+                    if (snapshot.exists()) {
+                        const updates = {};
+                        Object.keys(snapshot.val()).forEach(key => {
+                            updates[`${key}`] = null;
+                        });
+                        // Remove from db
+                        import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ update }) => {
+                            update(favRef, updates);
+                        });
+                    }
+                });
+                addToFavoritesBtn.textContent = 'Add to Favorites';
+                isFavorite = false;
+            }
+        } catch (err) {
+            alert('Error updating favorites: ' + (err.message || err));
+        }
     });
 
     // Handle review submission (Realtime Database)

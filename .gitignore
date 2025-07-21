@@ -1,0 +1,5 @@
+# Ignore Excel/Office temp and lock files
+~$*.xlsx
+~$*
+*.tmp
+*.lock
