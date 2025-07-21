@@ -798,5 +798,567 @@
     "year": 2010,
     "category": "movies",
     "genre": "Drama / Thriller"
+  },
+  {
+    "id": "101",
+    "title": "The Lobster",
+    "description": "Absurdist dystopia about love and loneliness. Weird and brilliant.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Drama / Sci-Fi"
+  },
+  {
+    "id": "102",
+    "title": "The Farewell",
+    "description": "Family lies meet cultural tension in this emotional slow-burn.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Drama / Comedy"
+  },
+  {
+    "id": "103",
+    "title": "Moonlight",
+    "description": "Powerful triptych about identity, race, and masculinity.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "104",
+    "title": "Before Sunrise",
+    "description": "Strangers meet in Vienna. Talky, romantic, and human.",
+    "year": 1995,
+    "category": "movies",
+    "genre": "Romance / Drama"
+  },
+  {
+    "id": "105",
+    "title": "The Banshees of Inisherin",
+    "description": "Irish civil war as broken friendship. Darkly hilarious and tragic.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Drama / Comedy"
+  },
+  {
+    "id": "106",
+    "title": "The Witch",
+    "description": "A slow descent into paranoia and supernatural terror.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Horror / Thriller"
+  },
+  {
+    "id": "107",
+    "title": "Memento",
+    "description": "Memory loss meets reverse storytelling. Nolan flexes early.",
+    "year": 2000,
+    "category": "movies",
+    "genre": "Thriller / Mystery"
+  },
+  {
+    "id": "108",
+    "title": "Annihilation",
+    "description": "Abstract, beautiful, and terrifying sci-fi.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Sci-Fi / Horror"
+  },
+  {
+    "id": "109",
+    "title": "Dog Day Afternoon",
+    "description": "True-crime bank robbery that turns into a political statement.",
+    "year": 1975,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "110",
+    "title": "The Man Who Shot Liberty Valance",
+    "description": "Western classic that questions heroism and history.",
+    "year": 1962,
+    "category": "movies",
+    "genre": "Western / Drama"
+  },
+  {
+    "id": "111",
+    "title": "A Ghost Story",
+    "description": "Meditation on grief and time, told through a guy in a sheet.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Drama / Fantasy"
+  },
+  {
+    "id": "112",
+    "title": "Ikiru",
+    "description": "Kurosawa’s most quietly devastating film about purpose and mortality.",
+    "year": 1952,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "113",
+    "title": "The Red Shoes",
+    "description": "Dazzling ballet film that blends art, obsession, and tragedy.",
+    "year": 1948,
+    "category": "movies",
+    "genre": "Drama / Musical"
+  },
+  {
+    "id": "114",
+    "title": "The Diving Bell and the Butterfly",
+    "description": "Stunning portrait of a paralyzed mind with full consciousness.",
+    "year": 2007,
+    "category": "movies",
+    "genre": "Biography / Drama"
+  },
+  {
+    "id": "115",
+    "title": "Persepolis",
+    "description": "Iranian graphic novel turned bold, emotional animation.",
+    "year": 2007,
+    "category": "movies",
+    "genre": "Animation / Biography"
+  },
+  {
+    "id": "116",
+    "title": "Run Lola Run",
+    "description": "German time-loop thriller with relentless energy.",
+    "year": 1998,
+    "category": "movies",
+    "genre": "Action / Thriller"
+  },
+  {
+    "id": "117",
+    "title": "My Neighbor Totoro",
+    "description": "Childhood wonder wrapped in fuzzy magic.",
+    "year": 1988,
+    "category": "movies",
+    "genre": "Animation / Fantasy"
+  },
+  {
+    "id": "118",
+    "title": "The Elephant Man",
+    "description": "Lynch’s most humane and heartbreaking film.",
+    "year": 1980,
+    "category": "movies",
+    "genre": "Drama / Biography"
+  },
+  {
+    "id": "119",
+    "title": "All About Eve",
+    "description": "Backstage drama with razor-sharp wit.",
+    "year": 1950,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "120",
+    "title": "The Philadelphia Story",
+    "description": "Cary Grant, Hepburn, and Stewart in peak rom-com form.",
+    "year": 1940,
+    "category": "movies",
+    "genre": "Comedy / Romance"
+  }
+  ,
+  {
+    "id": "122",
+    "title": "Oppenheimer",
+    "description": "Nolan’s atomic epic — cerebral, explosive, and Oscar-dominant.",
+    "year": 2023,
+    "category": "movies",
+    "genre": "Drama / Historical"
+  },
+  {
+    "id": "123",
+    "title": "Everything Everywhere All at Once",
+    "description": "Absurdist multiverse chaos with real emotional weight.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Sci-Fi / Action"
+  },
+  {
+    "id": "124",
+    "title": "Parasite",
+    "description": "Genre-bending, class-smashing Korean masterpiece.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Thriller / Drama"
+  },
+  {
+    "id": "125",
+    "title": "Dune: Part One",
+    "description": "Epic scale sci-fi done right. World-building with gravitas.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "126",
+    "title": "Spider-Man: No Way Home",
+    "description": "Multiverse fan service that still manages heart.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "127",
+    "title": "Barbie",
+    "description": "Subversive, neon-soaked feminist blockbuster.",
+    "year": 2023,
+    "category": "movies",
+    "genre": "Comedy / Fantasy"
+  },
+  {
+    "id": "128",
+    "title": "Top Gun: Maverick",
+    "description": "Nostalgia done right. Actually better than it had any right to be.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Action / Drama"
+  },
+  {
+    "id": "129",
+    "title": "Avengers: Endgame",
+    "description": "The end of an era. Maxed-out fan payoff and box office domination.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "130",
+    "title": "Joker",
+    "description": "Taxi Driver in clown paint. Divisive, dark, and a cultural lightning rod.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Drama / Crime"
+  },
+  {
+    "id": "131",
+    "title": "Get Out",
+    "description": "Genre-defining social thriller that sparked conversation everywhere.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Horror / Thriller"
+  },
+  {
+    "id": "132",
+    "title": "La La Land",
+    "description": "Musical love letter to dreamers — bittersweet and vibrant.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Musical / Romance"
+  },
+  {
+    "id": "133",
+    "title": "Mad Max: Fury Road",
+    "description": "Pure visual adrenaline. Practical effects god-tier.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Action / Adventure"
+  },
+  {
+    "id": "134",
+    "title": "Interstellar",
+    "description": "Love, time, and space folded into Nolan's most emotional trip.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Sci-Fi / Drama"
+  },
+  {
+    "id": "135",
+    "title": "Her",
+    "description": "AI romance that's as intimate as it is futuristic.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Romance / Sci-Fi"
+  },
+  {
+    "id": "136",
+    "title": "The Social Network",
+    "description": "The origin story of Zuckerberg, told like a Shakespearean legal thriller.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Drama / Biography"
+  },
+  {
+    "id": "137",
+    "title": "1917",
+    "description": "WWI shot to look like a single take. Immersive and masterfully tense.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "War / Drama"
+  },
+  {
+    "id": "138",
+    "title": "The Batman",
+    "description": "Noir-style reboot with brooding intensity.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Superhero / Crime"
+  },
+  {
+    "id": "139",
+    "title": "The Revenant",
+    "description": "DiCaprio crawls through hell for that Oscar. Visceral and brutal.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Adventure / Drama"
+  },
+  {
+    "id": "140",
+    "title": "Knives Out",
+    "description": "Whodunnit meets rich people takedown. Clever and endlessly rewatchable.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Mystery / Comedy"
+  },
+  {
+    "id": "141",
+    "title": "Bohemian Rhapsody",
+    "description": "Freddie Mercury biopic that rocked arenas and award shows.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Biography / Music"
+  }
+  ,
+  {
+    "id": "142",
+    "title": "RRR",
+    "description": "Max-energy Telugu epic. Friendship, fire, dance, and vengeance.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Action / Drama"
+  },
+  {
+    "id": "143",
+    "title": "The Irishman",
+    "description": "Scorsese’s meditative, digital-de-aged gangster elegy.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "144",
+    "title": "Roma",
+    "description": "Intimate black-and-white masterpiece from Cuarón.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "145",
+    "title": "Uncut Gems",
+    "description": "Anxiety in cinematic form. Sandler breaks the mold.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Thriller / Drama"
+  },
+  {
+    "id": "146",
+    "title": "The Whale",
+    "description": "Fraser’s comeback in a raw, intimate character study.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "147",
+    "title": "Palm Springs",
+    "description": "Time-loop rom-com that’s smart, funny, and surprisingly deep.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Comedy / Sci-Fi"
+  },
+  {
+    "id": "148",
+    "title": "The Banshees of Inisherin",
+    "description": "Petty feuds and existential dread on a lonely Irish island.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Drama / Comedy"
+  },
+  {
+    "id": "149",
+    "title": "Sound of Metal",
+    "description": "A drummer losing his hearing, gaining perspective. Tough and moving.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Drama / Music"
+  },
+  {
+    "id": "150",
+    "title": "Marriage Story",
+    "description": "Brutal, honest portrait of love turned courtroom war.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "151",
+    "title": "The Trial of the Chicago 7",
+    "description": "Sorkin dialogue meets real political fire.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Drama / Historical"
+  },
+  {
+    "id": "152",
+    "title": "A Star Is Born",
+    "description": "Pop star chemistry meets tragic romance. Gaga stuns.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Drama / Music"
+  },
+  {
+    "id": "153",
+    "title": "Tenet",
+    "description": "Time inversion, big explosions, and dense Nolan logic.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Sci-Fi / Action"
+  },
+  {
+    "id": "154",
+    "title": "Dune: Part Two",
+    "description": "More political, more brutal, more sandworm. Epic continuation.",
+    "year": 2024,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "155",
+    "title": "Soul",
+    "description": "Pixar goes metaphysical. Jazzy and deep as hell.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Animation / Drama"
+  },
+  {
+    "id": "156",
+    "title": "Inside Out",
+    "description": "Emotions personified in one of Pixar’s most emotionally intelligent stories.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Animation / Family"
+  },
+  {
+    "id": "157",
+    "title": "Minari",
+    "description": "Korean-American family struggles with roots and survival in Arkansas.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "158",
+    "title": "The Power of the Dog",
+    "description": "Subtle, slow-burn psychological Western.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Drama / Western"
+  },
+  {
+    "id": "159",
+    "title": "Don't Look Up",
+    "description": "Climate change satire disguised as a media circus. Divisive but loud.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Comedy / Drama"
+  },
+  {
+    "id": "160",
+    "title": "TÁR",
+    "description": "Cate Blanchett gives a tour de force as a spiraling maestro.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Drama / Psychological"
+  },
+  {
+    "id": "161",
+    "title": "John Wick",
+    "description": "Lean, stylish action reset the genre. Gun-fu perfection.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Action / Thriller"
+  },
+  {
+    "id": "162",
+    "title": "John Wick: Chapter 4",
+    "description": "Bigger, bloodier, operatic and epic. The franchise apex.",
+    "year": 2023,
+    "category": "movies",
+    "genre": "Action / Crime"
+  },
+  {
+    "id": "163",
+    "title": "The Lego Movie",
+    "description": "Shouldn’t have worked, but it did. Smart, meta, and hilarious.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "164",
+    "title": "Encanto",
+    "description": "The Madrigal family saga — catchy songs and colorful chaos.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Animation / Fantasy"
+  },
+  {
+    "id": "165",
+    "title": "Frozen",
+    "description": "Disney musical phenomenon. “Let It Go” never left our heads.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Animation / Musical"
+  },
+  {
+    "id": "166",
+    "title": "The Hunger Games",
+    "description": "YA dystopia done right. Solid worldbuilding and a star-making turn.",
+    "year": 2012,
+    "category": "movies",
+    "genre": "Action / Sci-Fi"
+  },
+  {
+    "id": "167",
+    "title": "Catching Fire",
+    "description": "The rare sequel that improves on the original.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Action / Sci-Fi"
+  },
+  {
+    "id": "168",
+    "title": "Arrival",
+    "description": "Contact with aliens as a metaphor for grief and time.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Sci-Fi / Drama"
+  },
+  {
+    "id": "169",
+    "title": "Drive",
+    "description": "Ultra-stylized crime story. Minimal dialogue, maximal cool.",
+    "year": 2011,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "170",
+    "title": "The Mitchells vs. The Machines",
+    "description": "Gen Z tech apocalypse animated with chaotic charm.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "171",
+    "title": "The Grand Budapest Hotel",
+    "description": "Anderson’s most colorful and bittersweet gem.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Comedy / Adventure"
   }
 ]
