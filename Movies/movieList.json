@@ -1,0 +1,802 @@
+[
+  {
+    "id": "1",
+    "title": "The Godfather",
+    "description": "Crime saga about power, family, and loyalty. Masterclass in filmmaking.",
+    "year": 1972,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "2",
+    "title": "Citizen Kane",
+    "description": "The rise and fall of a media tycoon. Changed cinema forever.",
+    "year": 1941,
+    "category": "movies",
+    "genre": "Drama / Mystery"
+  },
+  {
+    "id": "3",
+    "title": "Schindler’s List",
+    "description": "A brutal, haunting story of the Holocaust and redemption.",
+    "year": 1993,
+    "category": "movies",
+    "genre": "Biography / Drama"
+  },
+  {
+    "id": "4",
+    "title": "Casablanca",
+    "description": "A WWII love triangle full of iconic lines and moral stakes.",
+    "year": 1942,
+    "category": "movies",
+    "genre": "Romance / Drama"
+  },
+  {
+    "id": "5",
+    "title": "Pulp Fiction",
+    "description": "Violent, funny, nonlinear storytelling that reshaped ‘90s cinema.",
+    "year": 1994,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "6",
+    "title": "2001: A Space Odyssey",
+    "description": "Visually unmatched sci-fi epic. Philosophical and hypnotic.",
+    "year": 1968,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "7",
+    "title": "The Shawshank Redemption",
+    "description": "Prison escape drama that hits every emotional beat perfectly.",
+    "year": 1994,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "8",
+    "title": "The Godfather Part II",
+    "description": "A rare sequel that deepens the original. Parallel stories done right.",
+    "year": 1974,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "9",
+    "title": "Star Wars: A New Hope",
+    "description": "The blockbuster that started it all. Space opera meets myth.",
+    "year": 1977,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "10",
+    "title": "The Lord of the Rings: ROTK",
+    "description": "Climactic, emotionally massive conclusion to the fantasy trilogy.",
+    "year": 2003,
+    "category": "movies",
+    "genre": "Fantasy / Adventure"
+  },
+  {
+    "id": "11",
+    "title": "Apocalypse Now",
+    "description": "A nightmarish journey into war and human darkness.",
+    "year": 1979,
+    "category": "movies",
+    "genre": "War / Drama"
+  },
+  {
+    "id": "12",
+    "title": "Goodfellas",
+    "description": "Fast-paced, slick, and brutally honest look at mob life.",
+    "year": 1990,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "13",
+    "title": "Chinatown",
+    "description": "Hard-boiled detective story with a bleak, unforgettable ending.",
+    "year": 1974,
+    "category": "movies",
+    "genre": "Mystery / Drama"
+  },
+  {
+    "id": "14",
+    "title": "The Dark Knight",
+    "description": "Grounded superhero film that plays like a crime thriller.",
+    "year": 2008,
+    "category": "movies",
+    "genre": "Action / Crime"
+  },
+  {
+    "id": "15",
+    "title": "Fight Club",
+    "description": "Anti-consumerist, chaotic, and endlessly quotable.",
+    "year": 1999,
+    "category": "movies",
+    "genre": "Drama / Thriller"
+  },
+  {
+    "id": "16",
+    "title": "Psycho",
+    "description": "A psychological horror blueprint. Still creepy as hell.",
+    "year": 1960,
+    "category": "movies",
+    "genre": "Horror / Thriller"
+  },
+  {
+    "id": "17",
+    "title": "Spirited Away",
+    "description": "Magical, emotional, and visually stunning. Anime at its peak.",
+    "year": 2001,
+    "category": "movies",
+    "genre": "Animation / Fantasy"
+  },
+  {
+    "id": "18",
+    "title": "The Empire Strikes Back",
+    "description": "Deeper, darker, and better than the original.",
+    "year": 1980,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "19",
+    "title": "12 Angry Men",
+    "description": "A single room, one jury, and endless tension. Still hits hard.",
+    "year": 1957,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "20",
+    "title": "La Dolce Vita",
+    "description": "A dreamy, philosophical stroll through modern decadence.",
+    "year": 1960,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "21",
+    "title": "The Matrix",
+    "description": "Reality-bending sci-fi that blew minds and redefined action.",
+    "year": 1999,
+    "category": "movies",
+    "genre": "Sci-Fi / Action"
+  },
+  {
+    "id": "22",
+    "title": "Titanic",
+    "description": "Historical romance meets disaster epic. Massive scale, massive success.",
+    "year": 1997,
+    "category": "movies",
+    "genre": "Romance / Drama"
+  },
+  {
+    "id": "23",
+    "title": "One Flew Over the Cuckoo’s Nest",
+    "description": "Rebellion, control, and insanity in one of Nicholson’s best.",
+    "year": 1975,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "24",
+    "title": "Lawrence of Arabia",
+    "description": "Sweeping epic of desert warfare and identity. Old-school grandeur.",
+    "year": 1962,
+    "category": "movies",
+    "genre": "Adventure / Drama"
+  },
+  {
+    "id": "25",
+    "title": "Taxi Driver",
+    "description": "A slow descent into madness. Gritty, moody, and unforgettable.",
+    "year": 1976,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "26",
+    "title": "Seven Samurai",
+    "description": "Samurai epic that laid the groundwork for modern action films.",
+    "year": 1954,
+    "category": "movies",
+    "genre": "Action / Drama"
+  },
+  {
+    "id": "27",
+    "title": "The Silence of the Lambs",
+    "description": "Serial killer thriller with unforgettable performances.",
+    "year": 1991,
+    "category": "movies",
+    "genre": "Thriller / Crime"
+  },
+  {
+    "id": "28",
+    "title": "Vertigo",
+    "description": "Obsession, illusion, and vertigo — Hitchcock’s most complex film.",
+    "year": 1958,
+    "category": "movies",
+    "genre": "Mystery / Thriller"
+  },
+  {
+    "id": "29",
+    "title": "Back to the Future",
+    "description": "Sci-fi adventure with heart, humor, and one killer DeLorean.",
+    "year": 1985,
+    "category": "movies",
+    "genre": "Sci-Fi / Comedy"
+  },
+  {
+    "id": "30",
+    "title": "Dr. Strangelove",
+    "description": "Satirical, cold war comedy about nuclear annihilation. Still timely.",
+    "year": 1964,
+    "category": "movies",
+    "genre": "Comedy / War"
+  },
+  {
+    "id": "31",
+    "title": "Amadeus",
+    "description": "Wild, operatic story of Mozart’s genius and madness.",
+    "year": 1984,
+    "category": "movies",
+    "genre": "Biography / Drama"
+  },
+  {
+    "id": "32",
+    "title": "The Green Mile",
+    "description": "Death row fantasy-drama with heart-wrenching emotion.",
+    "year": 1999,
+    "category": "movies",
+    "genre": "Drama / Fantasy"
+  },
+  {
+    "id": "33",
+    "title": "Rashomon",
+    "description": "Perspective-shattering story about truth and perception.",
+    "year": 1950,
+    "category": "movies",
+    "genre": "Drama / Mystery"
+  },
+  {
+    "id": "34",
+    "title": "The Pianist",
+    "description": "Survival during the Holocaust told through raw, haunting piano notes.",
+    "year": 2002,
+    "category": "movies",
+    "genre": "Biography / Drama"
+  },
+  {
+    "id": "35",
+    "title": "Whiplash",
+    "description": "Intense, obsessive pursuit of greatness. Painful and electric.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Drama / Music"
+  },
+  {
+    "id": "36",
+    "title": "City of God",
+    "description": "Brazilian crime drama that hits hard and never lets up.",
+    "year": 2002,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "37",
+    "title": "The Departed",
+    "description": "Scorsese’s Boston crime tale. Twists, betrayals, and a stacked cast.",
+    "year": 2006,
+    "category": "movies",
+    "genre": "Crime / Thriller"
+  },
+  {
+    "id": "38",
+    "title": "Inglourious Basterds",
+    "description": "Alt-history revenge fantasy with Tarantino’s sharpest edge.",
+    "year": 2009,
+    "category": "movies",
+    "genre": "War / Drama"
+  },
+  {
+    "id": "39",
+    "title": "Eternal Sunshine of the Spotless Mind",
+    "description": "Love, loss, and memory in one of the most original modern romances.",
+    "year": 2004,
+    "category": "movies",
+    "genre": "Drama / Sci-Fi"
+  },
+  {
+    "id": "40",
+    "title": "Requiem for a Dream",
+    "description": "Addiction spiral filmed like a waking nightmare.",
+    "year": 2000,
+    "category": "movies",
+    "genre": "Drama / Psychological"
+  },
+  {
+    "id": "41",
+    "title": "The Lion King",
+    "description": "Shakespearean tragedy dressed as Disney animation. Iconic soundtrack.",
+    "year": 1994,
+    "category": "movies",
+    "genre": "Animation / Drama"
+  },
+  {
+    "id": "42",
+    "title": "The Shining",
+    "description": "Kubrick + King = slow-burning horror classic with icy tension.",
+    "year": 1980,
+    "category": "movies",
+    "genre": "Horror / Thriller"
+  },
+  {
+    "id": "43",
+    "title": "Toy Story",
+    "description": "First full-length CG film. Smart, emotional, and forever charming.",
+    "year": 1995,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "44",
+    "title": "Alien",
+    "description": "Sci-fi horror with perfect pacing and a monster that defined the genre.",
+    "year": 1979,
+    "category": "movies",
+    "genre": "Horror / Sci-Fi"
+  },
+  {
+    "id": "45",
+    "title": "Pan’s Labyrinth",
+    "description": "Fairy tale meets fascist Spain. Dark, beautiful, and devastating.",
+    "year": 2006,
+    "category": "movies",
+    "genre": "Fantasy / Drama"
+  },
+  {
+    "id": "46",
+    "title": "Oldboy",
+    "description": "Brutal revenge thriller from South Korea. Twisted and stylish.",
+    "year": 2003,
+    "category": "movies",
+    "genre": "Action / Mystery"
+  },
+  {
+    "id": "47",
+    "title": "There Will Be Blood",
+    "description": "Greed, oil, and power in one of the best modern American films.",
+    "year": 2007,
+    "category": "movies",
+    "genre": "Drama / Historical"
+  },
+  {
+    "id": "48",
+    "title": "The Seventh Seal",
+    "description": "A knight plays chess with Death. Existential and haunting.",
+    "year": 1957,
+    "category": "movies",
+    "genre": "Drama / Fantasy"
+  },
+  {
+    "id": "49",
+    "title": "Grave of the Fireflies",
+    "description": "Heartbreaking animated tale of war’s toll on innocence.",
+    "year": 1988,
+    "category": "movies",
+    "genre": "Animation / War"
+  },
+  {
+    "id": "50",
+    "title": "The Grand Budapest Hotel",
+    "description": "A quirky, colorful, bittersweet gem from Wes Anderson.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Comedy / Adventure"
+  },
+  {
+    "id": "51",
+    "title": "Blade Runner",
+    "description": "Neo-noir cyberpunk soaked in mood and philosophical dread.",
+    "year": 1982,
+    "category": "movies",
+    "genre": "Sci-Fi / Thriller"
+  },
+  {
+    "id": "52",
+    "title": "The Social Network",
+    "description": "Facebook’s origin story told like a courtroom thriller.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Biography / Drama"
+  },
+  {
+    "id": "53",
+    "title": "Django Unchained",
+    "description": "Tarantino’s bloody revenge Western with style and bite.",
+    "year": 2012,
+    "category": "movies",
+    "genre": "Western / Drama"
+  },
+  {
+    "id": "54",
+    "title": "Life Is Beautiful",
+    "description": "Holocaust drama that balances heartbreak with humor and hope.",
+    "year": 1997,
+    "category": "movies",
+    "genre": "Drama / War"
+  },
+  {
+    "id": "55",
+    "title": "The Truman Show",
+    "description": "Reality, media, and identity wrapped in a brilliant premise.",
+    "year": 1998,
+    "category": "movies",
+    "genre": "Drama / Sci-Fi"
+  },
+  {
+    "id": "56",
+    "title": "Rocky",
+    "description": "Underdog story with real grit and heart. Iconic training montage included.",
+    "year": 1976,
+    "category": "movies",
+    "genre": "Drama / Sports"
+  },
+  {
+    "id": "57",
+    "title": "Kill Bill: Vol. 1",
+    "description": "Stylized, violent, and slick martial arts revenge thrill ride.",
+    "year": 2003,
+    "category": "movies",
+    "genre": "Action / Thriller"
+  },
+  {
+    "id": "58",
+    "title": "Parasite",
+    "description": "Class warfare thriller that stunned the world — and the Oscars.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Thriller / Drama"
+  },
+  {
+    "id": "59",
+    "title": "The Great Dictator",
+    "description": "Chaplin’s satire of fascism. Still relevant, still bold.",
+    "year": 1940,
+    "category": "movies",
+    "genre": "Comedy / War"
+  },
+  {
+    "id": "60",
+    "title": "Her",
+    "description": "AI love story that’s more human than most human relationships.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Romance / Sci-Fi"
+  },
+  {
+    "id": "61",
+    "title": "The Wolf of Wall Street",
+    "description": "A cocaine-fueled capitalist fever dream. Scorsese’s wildest ride.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Biography / Crime"
+  },
+  {
+    "id": "62",
+    "title": "No Country for Old Men",
+    "description": "Bleak, tense, and nihilistic. Coen brothers at their most ruthless.",
+    "year": 2007,
+    "category": "movies",
+    "genre": "Crime / Thriller"
+  },
+  {
+    "id": "63",
+    "title": "The Big Lebowski",
+    "description": "Weird, hilarious, and endlessly quotable. The Dude abides.",
+    "year": 1998,
+    "category": "movies",
+    "genre": "Comedy / Crime"
+  },
+  {
+    "id": "64",
+    "title": "Prisoners",
+    "description": "Bleak and suspenseful child abduction drama with moral grey zones.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Thriller / Drama"
+  },
+  {
+    "id": "65",
+    "title": "The Thing",
+    "description": "Cold, paranoid, shape-shifting sci-fi horror. Carpenter’s masterpiece.",
+    "year": 1982,
+    "category": "movies",
+    "genre": "Horror / Sci-Fi"
+  },
+  {
+    "id": "66",
+    "title": "Inside Out",
+    "description": "Emotionally intelligent animation that hits adults just as hard.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Animation / Family"
+  },
+  {
+    "id": "67",
+    "title": "A Clockwork Orange",
+    "description": "Violence, free will, and twisted ultraviolent satire.",
+    "year": 1971,
+    "category": "movies",
+    "genre": "Sci-Fi / Crime"
+  },
+  {
+    "id": "68",
+    "title": "The Exorcist",
+    "description": "The gold standard for possession horror. Still scary as hell.",
+    "year": 1973,
+    "category": "movies",
+    "genre": "Horror / Thriller"
+  },
+  {
+    "id": "69",
+    "title": "Heat",
+    "description": "Cops vs. criminals in one of the best shootouts and character face-offs.",
+    "year": 1995,
+    "category": "movies",
+    "genre": "Crime / Thriller"
+  },
+  {
+    "id": "70",
+    "title": "American History X",
+    "description": "Redemption and hate in a brutal, unflinching drama.",
+    "year": 1998,
+    "category": "movies",
+    "genre": "Drama / Crime"
+  },
+  {
+    "id": "71",
+    "title": "WALL·E",
+    "description": "Sci-fi environmentalism with zero dialogue — and total emotional punch.",
+    "year": 2008,
+    "category": "movies",
+    "genre": "Animation / Sci-Fi"
+  },
+  {
+    "id": "72",
+    "title": "The Intouchables",
+    "description": "Feel-good French drama about friendship across class and disability lines.",
+    "year": 2011,
+    "category": "movies",
+    "genre": "Drama / Comedy"
+  },
+  {
+    "id": "73",
+    "title": "The Revenant",
+    "description": "Visceral survival tale. DiCaprio bleeds for that Oscar — literally.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Adventure / Drama"
+  },
+  {
+    "id": "74",
+    "title": "The Sound of Music",
+    "description": "Wholesome AF, but undeniably timeless and tuneful.",
+    "year": 1965,
+    "category": "movies",
+    "genre": "Musical / Drama"
+  },
+  {
+    "id": "75",
+    "title": "Stand by Me",
+    "description": "Nostalgic coming-of-age story that still packs emotional weight.",
+    "year": 1986,
+    "category": "movies",
+    "genre": "Drama / Adventure"
+  },
+  {
+    "id": "76",
+    "title": "The Iron Giant",
+    "description": "Cold War-era animation with surprising heart and soul.",
+    "year": 1999,
+    "category": "movies",
+    "genre": "Animation / Sci-Fi"
+  },
+  {
+    "id": "77",
+    "title": "1917",
+    "description": "WWI shot like a single-take video game mission. Beautiful and tense.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "War / Drama"
+  },
+  {
+    "id": "78",
+    "title": "Fargo",
+    "description": "Small-town crime story, pitch-black humor, and perfect accents.",
+    "year": 1996,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "79",
+    "title": "Arrival",
+    "description": "Language, loss, and time. Cerebral alien story that sticks with you.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Sci-Fi / Drama"
+  },
+  {
+    "id": "80",
+    "title": "Boogie Nights",
+    "description": "The rise and fall of a porn star. Stylish and sleazy in all the right ways.",
+    "year": 1997,
+    "category": "movies",
+    "genre": "Drama / Comedy"
+  },
+  {
+    "id": "81",
+    "title": "Mulholland Drive",
+    "description": "Lynchian mind-warp of identity and Hollywood nightmares.",
+    "year": 2001,
+    "category": "movies",
+    "genre": "Mystery / Thriller"
+  },
+  {
+    "id": "82",
+    "title": "The Princess Bride",
+    "description": "A fairy tale that mocks itself while being sincerely great.",
+    "year": 1987,
+    "category": "movies",
+    "genre": "Adventure / Romance"
+  },
+  {
+    "id": "83",
+    "title": "Slumdog Millionaire",
+    "description": "Destiny, love, and game shows. Bollywood energy with Western polish.",
+    "year": 2008,
+    "category": "movies",
+    "genre": "Drama / Romance"
+  },
+  {
+    "id": "84",
+    "title": "Ghostbusters",
+    "description": "Supernatural comedy that just works. Effortlessly fun.",
+    "year": 1984,
+    "category": "movies",
+    "genre": "Comedy / Fantasy"
+  },
+  {
+    "id": "85",
+    "title": "Children of Men",
+    "description": "Dystopian thriller that feels way too real. Bleak brilliance.",
+    "year": 2006,
+    "category": "movies",
+    "genre": "Sci-Fi / Drama"
+  },
+  {
+    "id": "86",
+    "title": "Donnie Darko",
+    "description": "Time travel, mental illness, and a creepy bunny — cult classic status.",
+    "year": 2001,
+    "category": "movies",
+    "genre": "Drama / Sci-Fi"
+  },
+  {
+    "id": "87",
+    "title": "Gone Girl",
+    "description": "Dark, twisty commentary on marriage, media, and manipulation.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Thriller / Mystery"
+  },
+  {
+    "id": "88",
+    "title": "The Handmaiden",
+    "description": "Erotic thriller wrapped in deception. Korean cinema at its most elegant.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Drama / Romance"
+  },
+  {
+    "id": "89",
+    "title": "The Florida Project",
+    "description": "Childhood on society’s edge. Heartbreaking, beautiful, real.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "90",
+    "title": "Little Miss Sunshine",
+    "description": "Dysfunctional family road trip with laughs and tenderness.",
+    "year": 2006,
+    "category": "movies",
+    "genre": "Comedy / Drama"
+  },
+  {
+    "id": "91",
+    "title": "Monsters, Inc.",
+    "description": "Pixar at its peak: inventive world-building and warm storytelling.",
+    "year": 2001,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "92",
+    "title": "Trainspotting",
+    "description": "Scottish heroin addicts, punk energy, and unforgettable visuals.",
+    "year": 1996,
+    "category": "movies",
+    "genre": "Drama / Crime"
+  },
+  {
+    "id": "93",
+    "title": "A Separation",
+    "description": "Iranian drama about class, religion, and divorce. Simple but masterful.",
+    "year": 2011,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "94",
+    "title": "The Lives of Others",
+    "description": "East German surveillance thriller that hits with real emotional gravity.",
+    "year": 2006,
+    "category": "movies",
+    "genre": "Drama / Thriller"
+  },
+  {
+    "id": "95",
+    "title": "The Secret in Their Eyes",
+    "description": "Argentinian mystery with a knockout long take and a brutal twist.",
+    "year": 2009,
+    "category": "movies",
+    "genre": "Crime / Drama"
+  },
+  {
+    "id": "96",
+    "title": "Barry Lyndon",
+    "description": "Kubrick’s underrated period piece. Cold, calculated, and stunning.",
+    "year": 1975,
+    "category": "movies",
+    "genre": "Drama / Historical"
+  },
+  {
+    "id": "97",
+    "title": "Dead Poets Society",
+    "description": "Seize the day. A tearjerker about inspiration and conformity.",
+    "year": 1989,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "98",
+    "title": "The Last Emperor",
+    "description": "Lavish biopic with stunning scope and an Oscar sweep to back it up.",
+    "year": 1987,
+    "category": "movies",
+    "genre": "Biography / Historical"
+  },
+  {
+    "id": "99",
+    "title": "The Hunt (Jagten)",
+    "description": "Danish drama about moral panic and accusations. Mikkelsen kills it.",
+    "year": 2012,
+    "category": "movies",
+    "genre": "Drama / Thriller"
+  },
+  {
+    "id": "100",
+    "title": "Black Swan",
+    "description": "Psychological ballet nightmare. Aronofsky’s most stylish mindtrip.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Drama / Thriller"
+  }
+]

@@ -2,7 +2,6 @@
 import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
 // Import media arrays from separate files
-import { movies } from "../Movies/movies.js";
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
@@ -37,13 +36,19 @@ async function getAverageRating(mediaId) {
 }
 // Cards functionality for displaying popular content
 
+// Fetch movies from JSON file
+async function fetchMovies() {
+    const response = await fetch("Movies/movieList.json");
+    return await response.json();
+}
+
 let currentFilter = 'all';
 let allItems = [];
 
 console.log('[cards.js] Script loaded');
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('[cards.js] DOMContentLoaded');
-    initCards();
+    await initCards();
     // Debug: log all click events to help trace event propagation
     document.addEventListener('click', function(e) {
         console.log('[DEBUG] Click event:', e.target);
@@ -80,8 +85,10 @@ async function loadCardsWithItems(items) {
     }, 300);
 }
 
-function initCards() {
-    // Combine all media arrays
+async function initCards() {
+    // Fetch movies from JSON
+    const movies = await fetchMovies();
+    // Combine with other media arrays if needed
     allItems = [...movies, ...tv, ...music, ...games, ...books];
 
     // Initialize tab functionality
