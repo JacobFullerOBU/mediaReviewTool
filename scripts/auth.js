@@ -1,3 +1,6 @@
+import { auth } from './firebase.js';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 // Authentication functionality
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -146,58 +149,37 @@ async function handleLogin(e) {
 // Handle registration
 async function handleRegister(e) {
     e.preventDefault();
-    
     const form = e.target;
     const submitBtn = form.querySelector('button[type="submit"]');
     const username = document.getElementById('registerUsername').value;
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    
+
     // Validation
     if (!username || !email || !password || !confirmPassword) {
         showFormError(form, 'Please fill in all fields');
         return;
     }
-    
     if (password !== confirmPassword) {
         showFormError(form, 'Passwords do not match');
         return;
     }
-    
     if (password.length < 6) {
         showFormError(form, 'Password must be at least 6 characters');
         return;
     }
-    
-    // Show loading state
+
     setButtonLoading(submitBtn, true);
-    
+
     try {
-        // Simulate API call
-        await simulateApiCall();
-        
-        // For demo purposes, simulate successful registration
-        const userData = {
-            email: email,
-            username: username,
-            loginTime: new Date().toISOString()
-        };
-        
-        // Store user data
-        localStorage.setItem('userData', JSON.stringify(userData));
-        
-        // Update UI
-        updateAuthUI(userData);
-        
-        // Hide modal
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        updateAuthUI({ username, email: user.email });
         hideModal(document.getElementById('registerModal'));
-        
-        // Show success message
         showNotification('Registration successful!', 'success');
-        
     } catch (error) {
-        showFormError(form, 'Registration failed. Please try again.');
+        showFormError(form, error.message);
     } finally {
         setButtonLoading(submitBtn, false);
     }
