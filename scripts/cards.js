@@ -1,5 +1,6 @@
 // Firebase Firestore for dynamic ratings
-import { collection, query, where, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { collection, query, where, getDocs, getFirestore, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { auth } from "./firebase.js";
 // Use shared Firestore from firebase.js
 const db = getFirestore();
 
@@ -8,6 +9,7 @@ async function getReviewCount(mediaId) {
     const q = query(collection(db, "reviews"), where("mediaId", "==", mediaId));
     const querySnapshot = await getDocs(q);
     return querySnapshot.size;
+}
 
 // Get average rating for a media item
 async function getAverageRating(mediaId) {
@@ -37,7 +39,7 @@ const sampleData = {
             rating: 9.3,
             year: 1994,
             reviews: 142,
-            image: "https://via.placeholder.com/300x200/4a90e2/ffffff?text=Movie"
+            // image removed
         },
         {
             id: 2,
@@ -47,7 +49,7 @@ const sampleData = {
             rating: 9.2,
             year: 1972,
             reviews: 98,
-            image: "https://via.placeholder.com/300x200/4a90e2/ffffff?text=Movie"
+            // image removed
         },
         {
             id: 3,
@@ -57,7 +59,7 @@ const sampleData = {
             rating: 8.9,
             year: 1994,
             reviews: 87,
-            image: "https://via.placeholder.com/300x200/4a90e2/ffffff?text=Movie"
+            // image removed
         }
     ],
     tv: [
@@ -69,7 +71,7 @@ const sampleData = {
             rating: 9.5,
             year: 2008,
             reviews: 203,
-            image: "https://via.placeholder.com/300x200/e74c3c/ffffff?text=TV+Show"
+            // image removed
         },
         {
             id: 5,
@@ -79,7 +81,7 @@ const sampleData = {
             rating: 8.7,
             year: 2011,
             reviews: 156,
-            image: "https://via.placeholder.com/300x200/e74c3c/ffffff?text=TV+Show"
+            // image removed
         },
         {
             id: 6,
@@ -89,7 +91,7 @@ const sampleData = {
             rating: 8.8,
             year: 2016,
             reviews: 134,
-            image: "https://via.placeholder.com/300x200/e74c3c/ffffff?text=TV+Show"
+            // image removed
         }
     ],
     music: [
@@ -101,7 +103,7 @@ const sampleData = {
             rating: 9.1,
             year: 1969,
             reviews: 89,
-            image: "https://via.placeholder.com/300x200/f39c12/ffffff?text=Album"
+            // image removed
         },
         {
             id: 8,
@@ -111,7 +113,7 @@ const sampleData = {
             rating: 9.4,
             year: 1973,
             reviews: 76,
-            image: "https://via.placeholder.com/300x200/f39c12/ffffff?text=Album"
+            // image removed
         },
         {
             id: 9,
@@ -121,7 +123,7 @@ const sampleData = {
             rating: 8.9,
             year: 1982,
             reviews: 112,
-            image: "https://via.placeholder.com/300x200/f39c12/ffffff?text=Album"
+            // image removed
         }
     ],
     games: [
@@ -133,7 +135,7 @@ const sampleData = {
             rating: 9.7,
             year: 2017,
             reviews: 234,
-            image: "https://via.placeholder.com/300x200/9b59b6/ffffff?text=Game"
+            // image removed
         },
         {
             id: 11,
@@ -143,7 +145,7 @@ const sampleData = {
             rating: 9.3,
             year: 2015,
             reviews: 189,
-            image: "https://via.placeholder.com/300x200/9b59b6/ffffff?text=Game"
+            // image removed
         },
         {
             id: 12,
@@ -153,7 +155,7 @@ const sampleData = {
             rating: 9.1,
             year: 2018,
             reviews: 167,
-            image: "https://via.placeholder.com/300x200/9b59b6/ffffff?text=Game"
+            // image removed
         }
     ],
     books: [
@@ -165,7 +167,7 @@ const sampleData = {
             rating: 8.8,
             year: 1960,
             reviews: 145,
-            image: "https://via.placeholder.com/300x200/27ae60/ffffff?text=Book"
+            // image removed
         },
         {
             id: 14,
@@ -175,7 +177,7 @@ const sampleData = {
             rating: 9.0,
             year: 1949,
             reviews: 198,
-            image: "https://via.placeholder.com/300x200/27ae60/ffffff?text=Book"
+            // image removed
         },
         {
             id: 15,
@@ -185,7 +187,7 @@ const sampleData = {
             rating: 8.5,
             year: 1925,
             reviews: 123,
-            image: "https://via.placeholder.com/300x200/27ae60/ffffff?text=Book"
+            // image removed
         }
     ]
 };
@@ -197,6 +199,10 @@ console.log('[cards.js] Script loaded');
 document.addEventListener('DOMContentLoaded', function() {
     console.log('[cards.js] DOMContentLoaded');
     initCards();
+    // Debug: log all click events to help trace event propagation
+    document.addEventListener('click', function(e) {
+        console.log('[DEBUG] Click event:', e.target);
+    });
 });
 
 function initCards() {
@@ -231,6 +237,9 @@ function filterCards(category) {
     currentFilter = category;
     loadCards(category);
 }
+
+// Export function for use by other modules
+window.filterCards = filterCards;
 
 async function loadCards(category) {
     const container = document.getElementById('cardsContainer');
@@ -309,6 +318,8 @@ async function renderCards(container, items) {
     }
 }
 
+// Helper function to generate card HTML
+function createCardHTML(item) {
     return `
         <div class="media-card" data-id="${item.id}" data-category="${item.category}">
             <div class="card-image" style="background-image: url('${item.image}')">
@@ -328,31 +339,47 @@ async function renderCards(container, items) {
     `;
 }
 
+// ...existing code...
 function addCardListeners() {
     const cards = document.querySelectorAll('.media-card');
-    
     cards.forEach(card => {
-        card.addEventListener('click', function() {
-            const itemId = this.dataset.id;
-            const item = allItems.find(item => item.id == itemId);
-            if (item) {
-                showItemDetails(item);
+        const itemId = card.dataset.id;
+        const item = allItems.find(item => item.id == itemId);
+        // Click on image
+        const imageEl = card.querySelector('.card-image');
+        if (imageEl) {
+            imageEl.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (item) showItemDetails(item);
+            });
+        }
+        // Click on title
+        const titleEl = card.querySelector('.card-title');
+        if (titleEl) {
+            titleEl.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (item) showItemDetails(item);
+            });
+        }
+        // Click anywhere else on card
+        card.addEventListener('click', function(e) {
+            // Only open if not clicking a button, image, or title
+            if (!e.target.classList.contains('btn') &&
+                !e.target.classList.contains('card-image') &&
+                !e.target.classList.contains('card-title')) {
+                if (item) showItemDetails(item);
             }
         });
-        
         // Add hover effects
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px)';
         });
-        
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
         });
     });
 }
 
-import { auth } from "./firebase.js";
-import { addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 async function showItemDetails(item) {
     // Fetch dynamic rating and review count
