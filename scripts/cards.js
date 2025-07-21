@@ -1,21 +1,13 @@
 // Firebase Firestore for dynamic ratings
-import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
-  authDomain: "mediareviews-3cf32.firebaseapp.com",
-  // ...other config values from Firebase Console...
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { collection, query, where, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+// Use shared Firestore from firebase.js
+const db = getFirestore();
 
 // Get number of reviews for a media item
 async function getReviewCount(mediaId) {
     const q = query(collection(db, "reviews"), where("mediaId", "==", mediaId));
     const querySnapshot = await getDocs(q);
     return querySnapshot.size;
-}
 
 // Get average rating for a media item
 async function getAverageRating(mediaId) {
@@ -201,7 +193,9 @@ const sampleData = {
 let currentFilter = 'all';
 let allItems = [];
 
+console.log('[cards.js] Script loaded');
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[cards.js] DOMContentLoaded');
     initCards();
 });
 
@@ -238,22 +232,22 @@ function filterCards(category) {
     loadCards(category);
 }
 
-function loadCards(category) {
+async function loadCards(category) {
     const container = document.getElementById('cardsContainer');
     if (!container) return;
-    
+
     // Show loading state
     showLoadingState(container);
-    
+
     // Simulate loading delay
-    setTimeout(() => {
+    setTimeout(async () => {
         let itemsToShow = allItems;
-        
+
         if (category !== 'all') {
             itemsToShow = allItems.filter(item => item.category === category);
         }
-        
-        renderCards(container, itemsToShow);
+
+        await renderCards(container, itemsToShow);
     }, 500);
 }
 
@@ -261,40 +255,60 @@ function showLoadingState(container) {
     container.innerHTML = '<div class="loading">Loading content...</div>';
 }
 
-function renderCards(container, items) {
-    if (items.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <h3>No content found</h3>
-                <p>Try selecting a different category or check back later.</p>
-            </div>
-        `;
-        return;
-    }
+async function renderCards(container, items) {
+    try {
+        if (items.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <h3>No content found</h3>
+                    <p>Try selecting a different category or check back later.</p>
+                </div>
+            `;
+            console.log('[cards.js] No items to render');
+            return;
+        }
 
-    container.innerHTML = items.map(item => createCardHTML(item)).join('');
+        container.innerHTML = items.map(item => createCardHTML(item)).join('');
+        console.log(`[cards.js] Rendered ${items.length} cards`);
 
-    // Dynamically update ratings from Firestore
-    items.forEach(async item => {
-        const card = container.querySelector(`.media-card[data-id='${item.id}']`);
-        if (card) {
-            const ratingElem = card.querySelector('.card-rating');
-            if (ratingElem) {
-                ratingElem.textContent = '★ ' + await getAverageRating(item.id);
-            }
-            const reviewsElem = card.querySelector('.card-reviews');
-            if (reviewsElem) {
-                const count = await getReviewCount(item.id);
-                reviewsElem.textContent = `${count} reviews`;
+        // Dynamically update ratings, review count, and latest review from Firestore
+        for (const item of items) {
+            const card = container.querySelector(`.media-card[data-id='${item.id}']`);
+            if (card) {
+                const ratingElem = card.querySelector('.card-rating');
+                if (ratingElem) {
+                    ratingElem.textContent = '★ ' + await getAverageRating(item.id);
+                }
+                const reviewsElem = card.querySelector('.card-reviews');
+                if (reviewsElem) {
+                    const count = await getReviewCount(item.id);
+                    reviewsElem.textContent = `${count} reviews`;
+                }
+                // Show latest review
+                const latestReviewElem = card.querySelector('.card-latest-review');
+                if (latestReviewElem) {
+                    const q = query(collection(db, "reviews"), where("mediaId", "==", item.id));
+                    const querySnapshot = await getDocs(q);
+                    let latest = null;
+                    querySnapshot.forEach(doc => {
+                        const data = doc.data();
+                        if (!latest || new Date(data.timestamp) > new Date(latest.timestamp)) {
+                            latest = data;
+                        }
+                    });
+                    latestReviewElem.textContent = latest && latest.reviewText ? `"${latest.reviewText}"` : '';
+                }
             }
         }
-    });
 
-    // Add click listeners to cards
-    addCardListeners();
+        // Add click listeners to cards
+        addCardListeners();
+    } catch (err) {
+        container.innerHTML = `<div class="error-state"><h3>Error loading cards</h3><p>${err.message}</p></div>`;
+        console.error('[cards.js] Error rendering cards:', err);
+    }
 }
 
-function createCardHTML(item) {
     return `
         <div class="media-card" data-id="${item.id}" data-category="${item.category}">
             <div class="card-image" style="background-image: url('${item.image}')">
@@ -308,6 +322,7 @@ function createCardHTML(item) {
                     <span class="card-year">${item.year}</span>
                     <span class="card-reviews">${item.reviews} reviews</span>
                 </div>
+                <div class="card-latest-review" style="margin-top:8px; font-style:italic; color:#555;"></div>
             </div>
         </div>
     `;
@@ -336,7 +351,14 @@ function addCardListeners() {
     });
 }
 
-function showItemDetails(item) {
+import { auth } from "./firebase.js";
+import { addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+async function showItemDetails(item) {
+    // Fetch dynamic rating and review count
+    const avgRating = await getAverageRating(item.id);
+    const reviewCount = await getReviewCount(item.id);
+
     // Create a simple modal to show item details
     const modal = document.createElement('div');
     modal.className = 'modal show';
@@ -352,37 +374,47 @@ function showItemDetails(item) {
                     <div>
                         <p><strong>Category:</strong> ${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
                         <p><strong>Year:</strong> ${item.year}</p>
-                        <p><strong>Rating:</strong> ★ ${item.rating}</p>
-                        <p><strong>Reviews:</strong> ${item.reviews}</p>
+                        <p><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></p>
+                        <p><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</p>
                     </div>
                 </div>
                 <p><strong>Description:</strong></p>
                 <p>${item.description}</p>
                 <div style="margin-top: 20px;">
-                    <button class="btn btn-primary">Write a Review</button>
+                    <button class="btn btn-primary" id="writeReviewBtn">Write a Review</button>
                     <button class="btn btn-login" style="margin-left: 10px;">Add to Favorites</button>
+                </div>
+                <div id="reviewFormContainer" style="display:none; margin-top:20px;">
+                    <form id="reviewForm">
+                        <label for="reviewText">Your Review:</label><br>
+                        <textarea id="reviewText" rows="3" style="width:100%;"></textarea><br>
+                        <label for="reviewRating">Rating (1-10):</label>
+                        <input type="number" id="reviewRating" min="1" max="10" required style="width:60px;">
+                        <button type="submit" class="btn btn-primary" style="margin-left:10px;">Submit</button>
+                    </form>
+                    <div id="reviewError" style="color:red; margin-top:8px;"></div>
                 </div>
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
+
     // Add close functionality
     const closeBtn = modal.querySelector('.close');
     closeBtn.addEventListener('click', () => {
         modal.remove();
     });
-    
+
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.remove();
         }
     });
-    
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
-    
+
     // Restore body scroll when modal is removed
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
@@ -396,8 +428,64 @@ function showItemDetails(item) {
             }
         });
     });
-    
     observer.observe(document.body, { childList: true });
+
+    // Review button logic
+    const writeReviewBtn = modal.querySelector('#writeReviewBtn');
+    const reviewFormContainer = modal.querySelector('#reviewFormContainer');
+    writeReviewBtn.addEventListener('click', () => {
+        reviewFormContainer.style.display = 'block';
+    });
+
+    // Handle review submission
+    const reviewForm = modal.querySelector('#reviewForm');
+    reviewForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const reviewText = modal.querySelector('#reviewText').value.trim();
+        const reviewRating = parseInt(modal.querySelector('#reviewRating').value);
+        const reviewError = modal.querySelector('#reviewError');
+        reviewError.textContent = '';
+
+        if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10) {
+            reviewError.textContent = 'Please enter a review and a rating between 1 and 10.';
+            return;
+        }
+
+        // Check if user is logged in
+        const user = auth.currentUser;
+        if (!user) {
+            reviewError.textContent = 'You must be logged in to submit a review.';
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "reviews"), {
+                userId: user.uid,
+                mediaId: item.id,
+                reviewText,
+                rating: reviewRating,
+                timestamp: new Date().toISOString()
+            });
+            reviewError.style.color = 'green';
+            reviewError.textContent = 'Review submitted!';
+
+            // Update modal rating and review count
+            const newAvgRating = await getAverageRating(item.id);
+            const newReviewCount = await getReviewCount(item.id);
+            modal.querySelector('#modalRating').textContent = newAvgRating;
+            modal.querySelector('#modalReviewCount').textContent = newReviewCount;
+
+            // Optionally, clear form
+            reviewForm.reset();
+            setTimeout(() => {
+                reviewError.textContent = '';
+                reviewError.style.color = 'red';
+                reviewFormContainer.style.display = 'none';
+            }, 1200);
+        } catch (err) {
+            reviewError.textContent = 'Error submitting review: ' + (err.message || err);
+        }
+    });
 }
 
 // Export function for use by other modules
