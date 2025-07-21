@@ -1,3 +1,46 @@
+// Firebase Firestore setup and user review functions
+import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
+  authDomain: "mediareviews-3cf32.firebaseapp.com",
+  // ...other config values from Firebase Console...
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Save a review for the current user
+export async function postReview(mediaId, reviewText, rating) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in to post a review.");
+        return;
+    }
+    try {
+        await addDoc(collection(db, "reviews"), {
+            userId: user.uid,
+            mediaId,
+            reviewText,
+            rating,
+            timestamp: new Date().toISOString()
+        });
+        alert("Review posted!");
+    } catch (error) {
+        alert("Failed to post review: " + error.message);
+    }
+}
+
+// Get all reviews for the current user
+export async function getUserReviews() {
+    const user = auth.currentUser;
+    if (!user) return [];
+    const q = query(collection(db, "reviews"), where("userId", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => doc.data());
+}
 // Main JavaScript functionality for the Media Review Tool
 
 document.addEventListener('DOMContentLoaded', function() {

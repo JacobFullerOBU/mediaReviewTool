@@ -1,9 +1,39 @@
-import { auth } from './firebase.js';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+// Initialize Firebase and Auth here for browser compatibility
+const firebaseConfig = {
+  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
+  authDomain: "mediareviews-3cf32.firebaseapp.com",
+  // ...other config values from Firebase Console...
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 // Authentication functionality
 
 document.addEventListener('DOMContentLoaded', function() {
+    // TEST: Confirm script is running and buttons are found
+    console.log('auth.js loaded');
+    const loginBtnTest = document.getElementById('loginBtn');
+    const registerBtnTest = document.getElementById('registerBtn');
+    if (loginBtnTest) {
+        console.log('Login button found');
+        loginBtnTest.addEventListener('click', function() {
+            console.log('Login button clicked');
+        });
+    } else {
+        console.warn('Login button NOT found');
+    }
+    if (registerBtnTest) {
+        console.log('Register button found');
+        registerBtnTest.addEventListener('click', function() {
+            console.log('Register button clicked');
+        });
+    } else {
+        console.warn('Register button NOT found');
+    }
     initAuth();
 });
 
@@ -101,46 +131,33 @@ function initAuthForms() {
 // Handle login
 async function handleLogin(e) {
     e.preventDefault();
-    
     const form = e.target;
     const submitBtn = form.querySelector('button[type="submit"]');
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
-    
+
     // Basic validation
     if (!email || !password) {
         showFormError(form, 'Please fill in all fields');
         return;
     }
-    
-    // Show loading state
+
     setButtonLoading(submitBtn, true);
-    
+
     try {
-        // Simulate API call (replace with actual authentication)
-        await simulateApiCall();
-        
-        // For demo purposes, we'll just simulate a successful login
+        // Use Firebase Auth for login
+        const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
+        const user = userCredential.user;
         const userData = {
-            email: email,
-            username: email.split('@')[0],
+            email: user.email,
+            username: user.email.split('@')[0],
             loginTime: new Date().toISOString()
         };
-        
-        // Store user data (in a real app, use secure token storage)
-        localStorage.setItem('userData', JSON.stringify(userData));
-        
-        // Update UI
         updateAuthUI(userData);
-        
-        // Hide modal
         hideModal(document.getElementById('loginModal'));
-        
-        // Show success message
         showNotification('Login successful!', 'success');
-        
     } catch (error) {
-        showFormError(form, 'Login failed. Please try again.');
+        showFormError(form, error.message || 'Login failed. Please try again.');
     } finally {
         setButtonLoading(submitBtn, false);
     }
