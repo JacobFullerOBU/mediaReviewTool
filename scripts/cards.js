@@ -206,7 +206,37 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         console.log('[DEBUG] Click event:', e.target);
     });
+
+    // Add search functionality
+    const searchInput = document.getElementById('mediaSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            searchMedia(query);
+        });
+    }
 });
+// Search media by title or description
+function searchMedia(query) {
+    let filteredItems = allItems;
+    if (query) {
+        filteredItems = allItems.filter(item =>
+            item.title.toLowerCase().includes(query) ||
+            item.description.toLowerCase().includes(query)
+        );
+    }
+    loadCardsWithItems(filteredItems);
+}
+
+// Helper to load cards with a specific set of items
+async function loadCardsWithItems(items) {
+    const container = document.getElementById('cardsContainer');
+    if (!container) return;
+    showLoadingState(container);
+    setTimeout(async () => {
+        await renderCards(container, items);
+    }, 300);
+}
 
 function initCards() {
     // Flatten all items
