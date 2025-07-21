@@ -157,7 +157,9 @@
     "description": "A dreamy, philosophical stroll through modern decadence.",
     "year": 1960,
     "category": "movies",
-    "genre": "Drama"
+    "genre": "Drama",
+    "image": "",
+    "director": ""
   },
   {
     "id": "21",
@@ -958,8 +960,7 @@
     "year": 1940,
     "category": "movies",
     "genre": "Comedy / Romance"
-  }
-  ,
+  },
   {
     "id": "122",
     "title": "Oppenheimer",
@@ -975,14 +976,6 @@
     "year": 2022,
     "category": "movies",
     "genre": "Sci-Fi / Action"
-  },
-  {
-    "id": "124",
-    "title": "Parasite",
-    "description": "Genre-bending, class-smashing Korean masterpiece.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "Thriller / Drama"
   },
   {
     "id": "125",
@@ -1065,44 +1058,12 @@
     "genre": "Sci-Fi / Drama"
   },
   {
-    "id": "135",
-    "title": "Her",
-    "description": "AI romance that's as intimate as it is futuristic.",
-    "year": 2013,
-    "category": "movies",
-    "genre": "Romance / Sci-Fi"
-  },
-  {
-    "id": "136",
-    "title": "The Social Network",
-    "description": "The origin story of Zuckerberg, told like a Shakespearean legal thriller.",
-    "year": 2010,
-    "category": "movies",
-    "genre": "Drama / Biography"
-  },
-  {
-    "id": "137",
-    "title": "1917",
-    "description": "WWI shot to look like a single take. Immersive and masterfully tense.",
-    "year": 2019,
-    "category": "movies",
-    "genre": "War / Drama"
-  },
-  {
     "id": "138",
     "title": "The Batman",
     "description": "Noir-style reboot with brooding intensity.",
     "year": 2022,
     "category": "movies",
     "genre": "Superhero / Crime"
-  },
-  {
-    "id": "139",
-    "title": "The Revenant",
-    "description": "DiCaprio crawls through hell for that Oscar. Visceral and brutal.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Adventure / Drama"
   },
   {
     "id": "140",
@@ -1119,8 +1080,7 @@
     "year": 2018,
     "category": "movies",
     "genre": "Biography / Music"
-  }
-  ,
+  },
   {
     "id": "142",
     "title": "RRR",
@@ -1168,14 +1128,6 @@
     "year": 2020,
     "category": "movies",
     "genre": "Comedy / Sci-Fi"
-  },
-  {
-    "id": "148",
-    "title": "The Banshees of Inisherin",
-    "description": "Petty feuds and existential dread on a lonely Irish island.",
-    "year": 2022,
-    "category": "movies",
-    "genre": "Drama / Comedy"
   },
   {
     "id": "149",
@@ -1232,14 +1184,6 @@
     "year": 2020,
     "category": "movies",
     "genre": "Animation / Drama"
-  },
-  {
-    "id": "156",
-    "title": "Inside Out",
-    "description": "Emotions personified in one of Pixar’s most emotionally intelligent stories.",
-    "year": 2015,
-    "category": "movies",
-    "genre": "Animation / Family"
   },
   {
     "id": "157",
@@ -1330,14 +1274,6 @@
     "genre": "Action / Sci-Fi"
   },
   {
-    "id": "168",
-    "title": "Arrival",
-    "description": "Contact with aliens as a metaphor for grief and time.",
-    "year": 2016,
-    "category": "movies",
-    "genre": "Sci-Fi / Drama"
-  },
-  {
     "id": "169",
     "title": "Drive",
     "description": "Ultra-stylized crime story. Minimal dialogue, maximal cool.",
@@ -1354,11 +1290,755 @@
     "genre": "Animation / Comedy"
   },
   {
-    "id": "171",
-    "title": "The Grand Budapest Hotel",
-    "description": "Anderson’s most colorful and bittersweet gem.",
+    "id": "177",
+    "title": "Glass Onion",
+    "description": "Stylish, meta murder mystery sequel that kept audiences guessing.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Mystery / Comedy"
+  },
+  {
+    "id": "178",
+    "title": "Extraction",
+    "description": "Brutal, nonstop action with a single-shot sequence that’s pure chaos.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Action / Thriller"
+  },
+  {
+    "id": "179",
+    "title": "The Mitchells vs. the Machines",
+    "description": "Family road trip meets AI apocalypse — smart, hilarious, and heartfelt.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "180",
+    "title": "All Quiet on the Western Front",
+    "description": "Devastating WWI retelling with modern intensity and horror.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "War / Drama"
+  },
+  {
+    "id": "181",
+    "title": "Beasts of No Nation",
+    "description": "Visceral, heartbreaking child soldier story led by Idris Elba.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "War / Drama"
+  },
+  {
+    "id": "182",
+    "title": "Klaus",
+    "description": "Hand-drawn Christmas tale with stunning visuals and heart.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Animation / Family"
+  },
+  {
+    "id": "183",
+    "title": "Ma Rainey’s Black Bottom",
+    "description": "Tense, musical chamber piece powered by powerhouse performances.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Drama / Music"
+  },
+  {
+    "id": "184",
+    "title": "Tick, Tick... Boom!",
+    "description": "Musical biopic about art, urgency, and mortality. Garfield crushes it.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Musical / Biography"
+  },
+  {
+    "id": "186",
+    "title": "I Care a Lot",
+    "description": "Pitch-black comedy about con artistry and capitalism.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Thriller / Comedy"
+  },
+  {
+    "id": "187",
+    "title": "Bird Box",
+    "description": "Apocalyptic survival thriller that went mega-viral.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Horror / Thriller"
+  },
+  {
+    "id": "188",
+    "title": "The Gray Man",
+    "description": "Slick spy thriller — high-budget, high-octane, low-logic.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Action / Thriller"
+  },
+  {
+    "id": "189",
+    "title": "Red Notice",
+    "description": "Star power and heist tropes in a globe-trotting crowd-pleaser.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Action / Comedy"
+  },
+  {
+    "id": "190",
+    "title": "The Sea Beast",
+    "description": "Unexpectedly deep animated adventure about monsters and myths.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Animation / Adventure"
+  },
+  {
+    "id": "191",
+    "title": "To All the Boys I’ve Loved Before",
+    "description": "Teen rom-com with heart and lasting influence.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Romance / Comedy"
+  },
+  {
+    "id": "192",
+    "title": "The Ballad of Buster Scruggs",
+    "description": "Coen Bros’ Western anthology with songs, death, and moral whiplash.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Western / Anthology"
+  },
+  {
+    "id": "193",
+    "title": "The Guilty",
+    "description": "One-man thriller about crisis, guilt, and tension on the line.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Thriller / Drama"
+  },
+  {
+    "id": "194",
+    "title": "The Hand of God",
+    "description": "Nostalgic, semi-autobiographical story of loss and cinema.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Drama"
+  },
+  {
+    "id": "195",
+    "title": "The Adam Project",
+    "description": "Light, time-travel adventure with Reynolds’ signature snark.",
+    "year": 2022,
+    "category": "movies",
+    "genre": "Sci-Fi / Comedy"
+  },
+  {
+    "id": "196",
+    "title": "You People",
+    "description": "Culture clash meets rom-com with a sharp, often uncomfortable bite.",
+    "year": 2023,
+    "category": "movies",
+    "genre": "Comedy / Drama"
+  },
+  {
+    "id": "198",
+    "title": "Avatar",
+    "description": "Blue aliens, 3D revolution, and the highest-grossing film (again).",
+    "year": 2009,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "201",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "description": "The beginning of an era. Magic, kids, and worldwide obsession.",
+    "year": 2001,
+    "category": "movies",
+    "genre": "Fantasy / Adventure"
+  },
+  {
+    "id": "204",
+    "title": "Jurassic Park",
+    "description": "Dinosaurs done right. Spiel-bergasm of science, suspense, and wonder.",
+    "year": 1993,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "206",
+    "title": "Forrest Gump",
+    "description": "“Life is like a box of chocolates” — Oscar-winner and pop culture staple.",
+    "year": 1994,
+    "category": "movies",
+    "genre": "Drama / Romance"
+  },
+  {
+    "id": "208",
+    "title": "The Lord of the Rings: Return of the King",
+    "description": "Epic fantasy with 11 Oscars to prove it.",
+    "year": 2003,
+    "category": "movies",
+    "genre": "Fantasy / Adventure"
+  },
+  {
+    "id": "211",
+    "title": "Minions",
+    "description": "Yellow gibberish gremlins that somehow made billions.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "212",
+    "title": "Beauty and the Beast (animated)",
+    "description": "Disney Renaissance classic. First animated Best Picture nominee.",
+    "year": 1991,
+    "category": "movies",
+    "genre": "Animation / Romance"
+  },
+  {
+    "id": "213",
+    "title": "Shrek",
+    "description": "Sarcastic, subversive, and still quotable as hell.",
+    "year": 2001,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "215",
+    "title": "Black Panther",
+    "description": "Culture-shifting Marvel moment. Representation finally front and center.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Superhero / Action"
+  },
+  {
+    "id": "216",
+    "title": "Inception",
+    "description": "Dream within a dream within box office gold. Nolan flexes hard.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Sci-Fi / Thriller"
+  },
+  {
+    "id": "217",
+    "title": "E.T. the Extra-Terrestrial",
+    "description": "Spielberg’s heartfelt alien tale that crushed the ‘80s box office.",
+    "year": 1982,
+    "category": "movies",
+    "genre": "Sci-Fi / Family"
+  },
+  {
+    "id": "218",
+    "title": "The Avengers",
+    "description": "MCU’s first mega-crossover. Opened the floodgates.",
+    "year": 2012,
+    "category": "movies",
+    "genre": "Superhero / Action"
+  },
+  {
+    "id": "219",
+    "title": "The Super Mario Bros. Movie",
+    "description": "Animated crowd-pleaser that cashed in on nostalgia and family fun.",
+    "year": 2023,
+    "category": "movies",
+    "genre": "Animation / Adventure"
+  },
+  {
+    "id": "220",
+    "title": "Despicable Me",
+    "description": "Gru + minions = franchise juggernaut.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "222",
+    "title": "Jurassic World",
+    "description": "Dinosaur chaos reignited with blockbuster thrills and nostalgia.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Sci-Fi / Adventure"
+  },
+  {
+    "id": "224",
+    "title": "Frozen II",
+    "description": "The sequel that kept the icy magic alive and dominated the box office.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Animation / Musical"
+  },
+  {
+    "id": "225",
+    "title": "Beauty and the Beast (2017)",
+    "description": "Live-action Disney remake that captured hearts globally.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Fantasy / Romance"
+  },
+  {
+    "id": "226",
+    "title": "Finding Nemo",
+    "description": "Pixar’s underwater adventure that’s both heartwarming and hilarious.",
+    "year": 2003,
+    "category": "movies",
+    "genre": "Animation / Adventure"
+  },
+  {
+    "id": "227",
+    "title": "The Lion King (2019)",
+    "description": "CG remake of the beloved classic that broke streaming and box office records.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Animation / Drama"
+  },
+  {
+    "id": "228",
+    "title": "Harry Potter and the Deathly Hallows – Part 2",
+    "description": "Epic finale to the wizarding saga with huge fanfare.",
+    "year": 2011,
+    "category": "movies",
+    "genre": "Fantasy / Adventure"
+  },
+  {
+    "id": "230",
+    "title": "Star Wars: The Force Awakens",
+    "description": "Revival of the saga with massive fan hype and box office records.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Sci-Fi / Fantasy"
+  },
+  {
+    "id": "231",
+    "title": "The Incredibles",
+    "description": "Family of superheroes saving the day with Pixar’s signature style.",
+    "year": 2004,
+    "category": "movies",
+    "genre": "Animation / Action"
+  },
+  {
+    "id": "233",
+    "title": "Toy Story 3",
+    "description": "Emotional Pixar chapter closing a beloved trilogy.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Animation / Family"
+  },
+  {
+    "id": "234",
+    "title": "Wonder Woman",
+    "description": "Breakthrough female superhero movie that energized DC fans.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "235",
+    "title": "Captain Marvel",
+    "description": "MCU’s cosmic powerhouse introduced with huge hype.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Superhero / Action"
+  },
+  {
+    "id": "236",
+    "title": "Spider-Man: Far From Home",
+    "description": "Post-Endgame Spidey’s globe-trotting blockbuster.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Superhero / Action"
+  },
+  {
+    "id": "238",
+    "title": "Despicable Me 2",
+    "description": "Follow-up to the minion madness that kept the franchise booming.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "239",
+    "title": "Finding Dory",
+    "description": "Heartfelt sequel about memory and family underwater.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Animation / Adventure"
+  },
+  {
+    "id": "240",
+    "title": "Avengers: Infinity War",
+    "description": "The MCU’s high-stakes event movie before Endgame.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "241",
+    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "description": "Swashbuckling fun with Johnny Depp’s iconic Jack Sparrow.",
+    "year": 2003,
+    "category": "movies",
+    "genre": "Adventure / Fantasy"
+  },
+  {
+    "id": "242",
+    "title": "Shrek 2",
+    "description": "Irreverent fairy tale sequel that was even bigger than the original.",
+    "year": 2004,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "243",
+    "title": "The Twilight Saga: Breaking Dawn – Part 2",
+    "description": "The vampire franchise finale that had millions hooked.",
+    "year": 2012,
+    "category": "movies",
+    "genre": "Fantasy / Romance"
+  },
+  {
+    "id": "244",
+    "title": "The Hunger Games: Catching Fire",
+    "description": "Dystopian thrills with Jennifer Lawrence leading the charge.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Action / Sci-Fi"
+  },
+  {
+    "id": "245",
+    "title": "Aquaman",
+    "description": "Underwater superhero spectacle with Jason Momoa’s charm.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Action / Fantasy"
+  },
+  {
+    "id": "246",
+    "title": "The Dark Knight Rises",
+    "description": "Nolan’s Batman trilogy finale packed with action and emotion.",
+    "year": 2012,
+    "category": "movies",
+    "genre": "Action / Crime"
+  },
+  {
+    "id": "247",
+    "title": "Coco",
+    "description": "Pixar’s vibrant Day of the Dead story with unforgettable music.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Animation / Family"
+  },
+  {
+    "id": "248",
+    "title": "Moana",
+    "description": "Disney’s ocean adventure with a fierce heroine and catchy tunes.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Animation / Musical"
+  },
+  {
+    "id": "249",
+    "title": "Transformers",
+    "description": "Michael Bay’s explosive robot franchise kickoff.",
+    "year": 2007,
+    "category": "movies",
+    "genre": "Action / Sci-Fi"
+  },
+  {
+    "id": "250",
+    "title": "Iron Man",
+    "description": "The film that launched the MCU into pop culture dominance.",
+    "year": 2008,
+    "category": "movies",
+    "genre": "Superhero / Action"
+  },
+  {
+    "id": "251",
+    "title": "The Secret Life of Pets",
+    "description": "Comedy about what pets do when we’re away — family-friendly gold.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "252",
+    "title": "Trolls",
+    "description": "Colorful, musical animated hit with a huge soundtrack.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Animation / Musical"
+  },
+  {
+    "id": "253",
+    "title": "Deadpool",
+    "description": "R-rated superhero comedy that changed the game with its snark.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Action / Comedy"
+  },
+  {
+    "id": "254",
+    "title": "Venom",
+    "description": "Antihero movie that attracted big audiences despite mixed reviews.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Action / Sci-Fi"
+  },
+  {
+    "id": "255",
+    "title": "The Jungle Book (2016)",
+    "description": "Stunning live-action/CGI hybrid remake of the classic Disney tale.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Adventure / Family"
+  },
+  {
+    "id": "256",
+    "title": "Star Wars: Rogue One",
+    "description": "Gritty, fan-favorite standalone Star Wars story.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Sci-Fi / Action"
+  },
+  {
+    "id": "257",
+    "title": "Jumanji: Welcome to the Jungle",
+    "description": "Unexpected hit sequel reboot with Dwayne Johnson.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Action / Comedy"
+  },
+  {
+    "id": "259",
+    "title": "Spider-Man: Homecoming",
+    "description": "Fresh reboot of Spider-Man in the MCU with Tom Holland’s charm.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Superhero / Action"
+  },
+  {
+    "id": "260",
+    "title": "Wonder",
+    "description": "Emotional family drama that hit all the right notes.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Drama / Family"
+  },
+  {
+    "id": "262",
+    "title": "Zootopia",
+    "description": "Disney’s smart, socially aware animal city caper.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Animation / Mystery"
+  },
+  {
+    "id": "264",
+    "title": "Aladdin (2019)",
+    "description": "Live-action remake with Will Smith’s iconic Genie.",
+    "year": 2019,
+    "category": "movies",
+    "genre": "Fantasy / Musical"
+  },
+  {
+    "id": "265",
+    "title": "Maleficent",
+    "description": "Dark fairy tale retelling starring Angelina Jolie.",
     "year": 2014,
     "category": "movies",
-    "genre": "Comedy / Adventure"
+    "genre": "Fantasy / Drama"
+  },
+  {
+    "id": "266",
+    "title": "Kung Fu Panda",
+    "description": "Animated martial arts comedy with heart and style.",
+    "year": 2008,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "268",
+    "title": "Gravity",
+    "description": "Sci-fi thriller that made space terrifying and beautiful.",
+    "year": 2013,
+    "category": "movies",
+    "genre": "Sci-Fi / Thriller"
+  },
+  {
+    "id": "270",
+    "title": "The Martian",
+    "description": "Sci-fi survival story with a comedic and smart edge.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Sci-Fi / Drama"
+  },
+  {
+    "id": "271",
+    "title": "Captain America: Civil War",
+    "description": "MCU’s civil war that divided superheroes and audiences.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "272",
+    "title": "Rogue One",
+    "description": "Star Wars spinoff with a darker, more mature tone.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Sci-Fi / Action"
+  },
+  {
+    "id": "273",
+    "title": "Pirates of the Caribbean: Dead Man’s Chest",
+    "description": "Follow-up with more action and Jack Sparrow antics.",
+    "year": 2006,
+    "category": "movies",
+    "genre": "Adventure / Fantasy"
+  },
+  {
+    "id": "274",
+    "title": "Batman v Superman: Dawn of Justice",
+    "description": "DC’s biggest superhero showdown with massive hype.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "275",
+    "title": "Guardians of the Galaxy",
+    "description": "Space crew with humor, music, and heart that kicked off a new MCU vibe.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "276",
+    "title": "The Twilight Saga: New Moon",
+    "description": "Vampire teen romance fever that had millions hooked.",
+    "year": 2009,
+    "category": "movies",
+    "genre": "Fantasy / Romance"
+  },
+  {
+    "id": "277",
+    "title": "How to Train Your Dragon",
+    "description": "Dreamy animation about friendship and dragons.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Animation / Adventure"
+  },
+  {
+    "id": "278",
+    "title": "The Lion King (1994)",
+    "description": "Disney’s legendary animated epic with unforgettable songs.",
+    "year": 1994,
+    "category": "movies",
+    "genre": "Animation / Drama"
+  },
+  {
+    "id": "281",
+    "title": "Batman Begins",
+    "description": "Nolan reboot that revived Batman with grit and style.",
+    "year": 2005,
+    "category": "movies",
+    "genre": "Action / Crime"
+  },
+  {
+    "id": "284",
+    "title": "Despicable Me 3",
+    "description": "Continued minion and Gru adventures, big audience draw.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Animation / Comedy"
+  },
+  {
+    "id": "286",
+    "title": "Spider-Man: Into the Spider-Verse",
+    "description": "Animated Spider-Man multiverse masterpiece.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Animation / Action"
+  },
+  {
+    "id": "287",
+    "title": "Captain America: The Winter Soldier",
+    "description": "Political thriller-style superhero action.",
+    "year": 2014,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "288",
+    "title": "Black Widow",
+    "description": "Natasha Romanoff’s MCU solo outing.",
+    "year": 2021,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "289",
+    "title": "Incredibles 2",
+    "description": "Long-awaited sequel to the beloved Pixar family superhero film.",
+    "year": 2018,
+    "category": "movies",
+    "genre": "Animation / Action"
+  },
+  {
+    "id": "290",
+    "title": "Thor: Ragnarok",
+    "description": "Taika Waititi’s hilarious, colorful MCU refresh.",
+    "year": 2017,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "291",
+    "title": "Wonder Woman 1984",
+    "description": "Sequel to the breakout DC hit with mixed reception but big views.",
+    "year": 2020,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "292",
+    "title": "Doctor Strange",
+    "description": "MCU’s mystical arts introduction with eye-popping visuals.",
+    "year": 2016,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "293",
+    "title": "The Jungle Book (1967)",
+    "description": "Disney classic that started many childhoods with music and fun.",
+    "year": 1967,
+    "category": "movies",
+    "genre": "Animation / Family"
+  },
+  {
+    "id": "294",
+    "title": "The Avengers: Age of Ultron",
+    "description": "MCU sequel with huge scope and big stakes.",
+    "year": 2015,
+    "category": "movies",
+    "genre": "Action / Superhero"
+  },
+  {
+    "id": "295",
+    "title": "The Twilight Saga: Eclipse",
+    "description": "Another vampire teen romance blockbuster.",
+    "year": 2010,
+    "category": "movies",
+    "genre": "Fantasy / Romance"
+  },
+  {
+    "id": "296",
+    "title": "Beauty and the Beast (1991)",
+    "description": "The original Disney animated classic that’s timeless.",
+    "year": 1991,
+    "category": "movies",
+    "genre": "Animation / Romance"
   }
 ]
