@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Review Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Music Review Tool</h1>
+        <p>Discover, review, and explore music from all genres and eras</p>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h2>Search Music</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for artist or song..." aria-label="Search for artist or song">
+                <button id="searchBtn" type="button">Search</button>
+            </div>
+        </section>
+
+        <section class="filters-section">
+            <h2>Filters</h2>
+            <div class="filters-container">
+                <div class="filter-group">
+                    <h3>Genres</h3>
+                    <div class="filter-options" id="genreFilters">
+                        <label><input type="checkbox" value="rock"> Rock</label>
+                        <label><input type="checkbox" value="pop"> Pop</label>
+                        <label><input type="checkbox" value="hip-hop"> Hip-Hop</label>
+                        <label><input type="checkbox" value="jazz"> Jazz</label>
+                        <label><input type="checkbox" value="classical"> Classical</label>
+                        <label><input type="checkbox" value="electronic"> Electronic</label>
+                        <label><input type="checkbox" value="country"> Country</label>
+                        <label><input type="checkbox" value="r&b"> R&B</label>
+                        <label><input type="checkbox" value="indie"> Indie</label>
+                        <label><input type="checkbox" value="metal"> Metal</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Eras</h3>
+                    <div class="filter-options" id="eraFilters">
+                        <label><input type="checkbox" value="1960s"> 1960s</label>
+                        <label><input type="checkbox" value="1970s"> 1970s</label>
+                        <label><input type="checkbox" value="1980s"> 1980s</label>
+                        <label><input type="checkbox" value="1990s"> 1990s</label>
+                        <label><input type="checkbox" value="2000s"> 2000s</label>
+                        <label><input type="checkbox" value="2010s"> 2010s</label>
+                        <label><input type="checkbox" value="2020s"> 2020s</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-actions">
+                <button id="applyFilters" type="button">Apply Filters</button>
+                <button id="clearFilters" type="button">Clear All</button>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <h2>Results</h2>
+            <div id="searchResults" class="results-container">
+                <p class="no-results">Search for music or apply filters to see results</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
