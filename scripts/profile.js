@@ -22,9 +22,13 @@ const userFavorites = document.getElementById('userFavorites');
 const profileTitle = document.getElementById('profileTitle');
 const backHomeBtn = document.getElementById('backHomeBtn');
 
-backHomeBtn.addEventListener('click', () => {
-    window.location.href = '../index.html';
-});
+// Fix: Use window.location.replace for Home button to force navigation
+if (backHomeBtn) {
+    backHomeBtn.onclick = function(e) {
+        e.preventDefault();
+        window.location.replace('../index.html');
+    };
+}
 
 function renderProfile(user) {
     profileTitle.textContent = `${user.displayName || user.email}'s Profile`;
@@ -122,14 +126,4 @@ auth.onAuthStateChanged(async (user) => {
     renderProfile(user);
     await renderReviews(user);
     await renderFavorites(user);
-});
-
-document.addEventListener('DOMContentLoaded', async function() {
-    // Home button logic for profile page
-    const backHomeBtn = document.getElementById('backHomeBtn');
-    if (backHomeBtn) {
-        backHomeBtn.addEventListener('click', function() {
-            window.location.href = '../index.html';
-        });
-    }
 });
