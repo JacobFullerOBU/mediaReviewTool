@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Reviewers Leaderboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/cards.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+    <style>
+        .leaderboard-container { max-width: 600px; margin: 40px auto; background: #fff; border: 2px solid #333; border-radius: 8px; padding: 32px; }
+        .leaderboard-title { text-align: center; margin-bottom: 24px; }
+        .leaderboard-list { list-style: none; padding: 0; }
+        .leaderboard-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .leaderboard-rank { font-weight: bold; margin-right: 16px; }
+        .leaderboard-user { font-size: 1.1em; }
+        .leaderboard-count { color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>MediaReview</h1>
+            </div>
+            <a href="../index.html" class="btn btn-primary" style="margin-left:auto;">Home</a>
+        </div>
+    </nav>
+    <div class="leaderboard-container">
+        <h2 class="leaderboard-title">Top Reviewers Leaderboard</h2>
+        <ul class="leaderboard-list" id="leaderboardList">
+            <li>Loading leaderboard...</li>
+        </ul>
+    </div>
+    <script type="module">
+        import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+        import { db } from "../scripts/firebase.js";
+
+        async function loadLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            leaderboardList.innerHTML = '<li>Loading leaderboard...</li>';
+            try {
+                // Fetch all reviews
+                let userCounts = {};
+                let userNames = {};
+                const reviewsRootRef = ref(db, 'reviews');
+                const snapshot = await get(reviewsRootRef);
+                if (snapshot.exists()) {
+                    const allMediaReviews = snapshot.val();
+                    Object.values(allMediaReviews).forEach(mediaReviews => {
+                        Object.values(mediaReviews).forEach(review => {
+                            if (review.userId) {
+                                userCounts[review.userId] = (userCounts[review.userId] || 0) + 1;
+                                if (review.username) userNames[review.userId] = review.username;
+                            }
+                        });
+                    });
+                }
+                // Sort users by review count
+                const sorted = Object.entries(userCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 20);
+                if (sorted.length === 0) {
+                    leaderboardList.innerHTML = '<li>No reviewers yet.</li>';
+                    return;
+                }
+                leaderboardList.innerHTML = '';
+                sorted.forEach(([userId, count], idx) => {
+                    const username = userNames[userId] || userId;
+                    leaderboardList.innerHTML += `
+                        <li>
+                            <span class="leaderboard-rank">#${idx + 1}</span>
+                            <span class="leaderboard-user">${username}</span>
+                            <span class="leaderboard-count">${count} reviews</span>
+                        </li>
+                    `;
+                });
+            } catch (err) {
+                leaderboardList.innerHTML = `<li style="color:red;">Error loading leaderboard.</li>`;
+            }
+        }
+        loadLeaderboard();
+        // Optionally, refresh every 30 seconds
+        setInterval(loadLeaderboard, 30000);
+    </script>
+</body>
+</html>

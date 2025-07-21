@@ -1,6 +1,12 @@
 // Firebase Firestore for dynamic ratings
 import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
+// Import media arrays from separate files
+import { movies } from "../Movies/movies.js";
+import { tv } from "../TV Shows/tv.js";
+import { music } from "../Music/music.js";
+import { games } from "../Video Games/games.js";
+import { books } from "../Books/books.js";
 
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
@@ -30,170 +36,6 @@ async function getAverageRating(mediaId) {
     return count > 0 ? (total / count).toFixed(1) : "N/A";
 }
 // Cards functionality for displaying popular content
-
-// Sample data for popular content
-const sampleData = {
-    movies: [
-        {
-            id: 1,
-            title: "The Shawshank Redemption",
-            description: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-            category: "movies",
-            rating: 9.3,
-            year: 1994,
-            reviews: 142,
-            image: "Card Photos/shawshank.jpg"
-        },
-        {
-            id: 2,
-            title: "The Godfather",
-            description: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-            category: "movies",
-            rating: 9.2,
-            year: 1972,
-            reviews: 98,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 3,
-            title: "Pulp Fiction",
-            description: "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.",
-            category: "movies",
-            rating: 8.9,
-            year: 1994,
-            reviews: 87,
-            image: "cardimage.jpeg"
-        }
-    ],
-    tv: [
-        {
-            id: 4,
-            title: "Breaking Bad",
-            description: "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing drugs.",
-            category: "tv",
-            rating: 9.5,
-            year: 2008,
-            reviews: 203,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 5,
-            title: "Game of Thrones",
-            description: "Nine noble families fight for control over the lands of Westeros while an ancient enemy returns.",
-            category: "tv",
-            rating: 8.7,
-            year: 2011,
-            reviews: 156,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 6,
-            title: "Stranger Things",
-            description: "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces.",
-            category: "tv",
-            rating: 8.8,
-            year: 2016,
-            reviews: 134,
-            image: "cardimage.jpeg"
-        }
-    ],
-    music: [
-        {
-            id: 7,
-            title: "Abbey Road",
-            description: "The Beatles' penultimate studio album, featuring classics like 'Come Together' and 'Here Comes the Sun'.",
-            category: "music",
-            rating: 9.1,
-            year: 1969,
-            reviews: 89,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 8,
-            title: "Dark Side of the Moon",
-            description: "Pink Floyd's conceptual masterpiece exploring themes of conflict, greed, time, and mental illness.",
-            category: "music",
-            rating: 9.4,
-            year: 1973,
-            reviews: 76,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 9,
-            title: "Thriller",
-            description: "Michael Jackson's legendary album that became the best-selling album of all time.",
-            category: "music",
-            rating: 8.9,
-            year: 1982,
-            reviews: 112,
-            image: "cardimage.jpeg"
-        }
-    ],
-    games: [
-        {
-            id: 10,
-            title: "The Legend of Zelda: Breath of the Wild",
-            description: "An open-world adventure that redefines the Zelda franchise with innovative gameplay and stunning visuals.",
-            category: "games",
-            rating: 9.7,
-            year: 2017,
-            reviews: 234,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 11,
-            title: "The Witcher 3: Wild Hunt",
-            description: "A story-driven open world RPG set in a visually stunning fantasy universe full of meaningful choices.",
-            category: "games",
-            rating: 9.3,
-            year: 2015,
-            reviews: 189,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 12,
-            title: "Red Dead Redemption 2",
-            description: "An epic tale of life in America's unforgiving heartland featuring a desperado and the gang he rides with.",
-            category: "games",
-            rating: 9.1,
-            year: 2018,
-            reviews: 167,
-            image: "cardimage.jpeg"
-        }
-    ],
-    books: [
-        {
-            id: 13,
-            title: "To Kill a Mockingbird",
-            description: "A gripping tale of racial injustice and childhood innocence in the American South during the 1930s.",
-            category: "books",
-            rating: 8.8,
-            year: 1960,
-            reviews: 145,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 14,
-            title: "1984",
-            description: "George Orwell's dystopian masterpiece about totalitarianism, surveillance, and the power of truth.",
-            category: "books",
-            rating: 9.0,
-            year: 1949,
-            reviews: 198,
-            image: "cardimage.jpeg"
-        },
-        {
-            id: 15,
-            title: "The Great Gatsby",
-            description: "F. Scott Fitzgerald's classic tale of love, loss, and the American Dream in the Jazz Age.",
-            category: "books",
-            rating: 8.5,
-            year: 1925,
-            reviews: 123,
-            image: "cardimage.jpeg"
-        }
-    ]
-};
 
 let currentFilter = 'all';
 let allItems = [];
@@ -239,27 +81,27 @@ async function loadCardsWithItems(items) {
 }
 
 function initCards() {
-    // Flatten all items
-    allItems = Object.values(sampleData).flat();
-    
+    // Combine all media arrays
+    allItems = [...movies, ...tv, ...music, ...games, ...books];
+
     // Initialize tab functionality
     initTabFunctionality();
-    
+
     // Load initial content
     loadCards('all');
 }
 
 function initTabFunctionality() {
     const tabBtns = document.querySelectorAll('.tab-btn');
-    
+
     tabBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const category = this.dataset.category;
-            
+
             // Update active tab
             tabBtns.forEach(tab => tab.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Filter cards
             filterCards(category);
         });
@@ -377,7 +219,6 @@ function createCardHTML(item) {
     `;
 }
 
-// ...existing code...
 function addCardListeners() {
     const cards = document.querySelectorAll('.media-card');
     console.log('[DEBUG] Attaching listeners to cards:', cards.length);
