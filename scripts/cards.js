@@ -1,29 +1,32 @@
 // Firebase Firestore for dynamic ratings
-import { collection, query, where, getDocs, getFirestore, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { auth } from "./firebase.js";
-// Use shared Firestore from firebase.js
-const db = getFirestore();
+import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { auth, db } from "./firebase.js";
 
-// Get number of reviews for a media item
+// Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
-    const q = query(collection(db, "reviews"), where("mediaId", "==", mediaId));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.size;
+    const reviewsRef = ref(db, `reviews/${mediaId}`);
+    const snapshot = await get(reviewsRef);
+    if (snapshot.exists()) {
+        return Object.keys(snapshot.val()).length;
+    }
+    return 0;
 }
 
-// Get average rating for a media item
+// Get average rating for a media item (Realtime Database)
 async function getAverageRating(mediaId) {
-    const q = query(collection(db, "reviews"), where("mediaId", "==", mediaId));
-    const querySnapshot = await getDocs(q);
+    const reviewsRef = ref(db, `reviews/${mediaId}`);
+    const snapshot = await get(reviewsRef);
     let total = 0;
     let count = 0;
-    querySnapshot.forEach(doc => {
-        const data = doc.data();
-        if (typeof data.rating === "number") {
-            total += data.rating;
-            count++;
-        }
-    });
+    if (snapshot.exists()) {
+        const reviews = snapshot.val();
+        Object.values(reviews).forEach(data => {
+            if (typeof data.rating === "number") {
+                total += data.rating;
+                count++;
+            }
+        });
+    }
     return count > 0 ? (total / count).toFixed(1) : "N/A";
 }
 // Cards functionality for displaying popular content
@@ -39,7 +42,7 @@ const sampleData = {
             rating: 9.3,
             year: 1994,
             reviews: 142,
-            // image removed
+            image: "Card Photos/shawshank.jpg"
         },
         {
             id: 2,
@@ -49,7 +52,7 @@ const sampleData = {
             rating: 9.2,
             year: 1972,
             reviews: 98,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 3,
@@ -59,7 +62,7 @@ const sampleData = {
             rating: 8.9,
             year: 1994,
             reviews: 87,
-            // image removed
+            image: "cardimage.jpeg"
         }
     ],
     tv: [
@@ -71,7 +74,7 @@ const sampleData = {
             rating: 9.5,
             year: 2008,
             reviews: 203,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 5,
@@ -81,7 +84,7 @@ const sampleData = {
             rating: 8.7,
             year: 2011,
             reviews: 156,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 6,
@@ -91,7 +94,7 @@ const sampleData = {
             rating: 8.8,
             year: 2016,
             reviews: 134,
-            // image removed
+            image: "cardimage.jpeg"
         }
     ],
     music: [
@@ -103,7 +106,7 @@ const sampleData = {
             rating: 9.1,
             year: 1969,
             reviews: 89,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 8,
@@ -113,7 +116,7 @@ const sampleData = {
             rating: 9.4,
             year: 1973,
             reviews: 76,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 9,
@@ -123,7 +126,7 @@ const sampleData = {
             rating: 8.9,
             year: 1982,
             reviews: 112,
-            // image removed
+            image: "cardimage.jpeg"
         }
     ],
     games: [
@@ -135,7 +138,7 @@ const sampleData = {
             rating: 9.7,
             year: 2017,
             reviews: 234,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 11,
@@ -145,7 +148,7 @@ const sampleData = {
             rating: 9.3,
             year: 2015,
             reviews: 189,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 12,
@@ -155,7 +158,7 @@ const sampleData = {
             rating: 9.1,
             year: 2018,
             reviews: 167,
-            // image removed
+            image: "cardimage.jpeg"
         }
     ],
     books: [
@@ -167,7 +170,7 @@ const sampleData = {
             rating: 8.8,
             year: 1960,
             reviews: 145,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 14,
@@ -177,7 +180,7 @@ const sampleData = {
             rating: 9.0,
             year: 1949,
             reviews: 198,
-            // image removed
+            image: "cardimage.jpeg"
         },
         {
             id: 15,
@@ -187,7 +190,7 @@ const sampleData = {
             rating: 8.5,
             year: 1925,
             reviews: 123,
-            // image removed
+            image: "cardimage.jpeg"
         }
     ]
 };
@@ -279,6 +282,9 @@ async function renderCards(container, items) {
 
         container.innerHTML = items.map(item => createCardHTML(item)).join('');
         console.log(`[cards.js] Rendered ${items.length} cards`);
+        // Debug: confirm cards exist in DOM
+        const renderedCards = container.querySelectorAll('.media-card');
+        console.log('[DEBUG] Cards in DOM:', renderedCards.length);
 
         // Dynamically update ratings, review count, and latest review from Firestore
         for (const item of items) {
@@ -293,18 +299,20 @@ async function renderCards(container, items) {
                     const count = await getReviewCount(item.id);
                     reviewsElem.textContent = `${count} reviews`;
                 }
-                // Show latest review
+                // Show latest review (Realtime Database)
                 const latestReviewElem = card.querySelector('.card-latest-review');
                 if (latestReviewElem) {
-                    const q = query(collection(db, "reviews"), where("mediaId", "==", item.id));
-                    const querySnapshot = await getDocs(q);
+                    const reviewsRef = ref(db, `reviews/${item.id}`);
+                    const snapshot = await get(reviewsRef);
                     let latest = null;
-                    querySnapshot.forEach(doc => {
-                        const data = doc.data();
-                        if (!latest || new Date(data.timestamp) > new Date(latest.timestamp)) {
-                            latest = data;
-                        }
-                    });
+                    if (snapshot.exists()) {
+                        const reviews = Object.values(snapshot.val());
+                        reviews.forEach(data => {
+                            if (!latest || new Date(data.timestamp) > new Date(latest.timestamp)) {
+                                latest = data;
+                            }
+                        });
+                    }
                     latestReviewElem.textContent = latest && latest.reviewText ? `"${latest.reviewText}"` : '';
                 }
             }
@@ -342,31 +350,31 @@ function createCardHTML(item) {
 // ...existing code...
 function addCardListeners() {
     const cards = document.querySelectorAll('.media-card');
+    console.log('[DEBUG] Attaching listeners to cards:', cards.length);
     cards.forEach(card => {
         const itemId = card.dataset.id;
         const item = allItems.find(item => item.id == itemId);
-        // Click on image
-        const imageEl = card.querySelector('.card-image');
-        if (imageEl) {
-            imageEl.addEventListener('click', function(e) {
+        // Attach click listeners directly to child elements
+        const imageElem = card.querySelector('.card-image');
+        const titleElem = card.querySelector('.card-title');
+        if (imageElem) {
+            imageElem.addEventListener('click', function(e) {
                 e.stopPropagation();
+                console.log('[DEBUG] Card-image clicked:', item);
                 if (item) showItemDetails(item);
             });
         }
-        // Click on title
-        const titleEl = card.querySelector('.card-title');
-        if (titleEl) {
-            titleEl.addEventListener('click', function(e) {
+        if (titleElem) {
+            titleElem.addEventListener('click', function(e) {
                 e.stopPropagation();
+                console.log('[DEBUG] Card-title clicked:', item);
                 if (item) showItemDetails(item);
             });
         }
-        // Click anywhere else on card
+        // Optionally, keep card click for non-button area
         card.addEventListener('click', function(e) {
-            // Only open if not clicking a button, image, or title
-            if (!e.target.classList.contains('btn') &&
-                !e.target.classList.contains('card-image') &&
-                !e.target.classList.contains('card-title')) {
+            if (!e.target.classList.contains('btn')) {
+                console.log('[DEBUG] Card (background) clicked:', item);
                 if (item) showItemDetails(item);
             }
         });
@@ -382,28 +390,59 @@ function addCardListeners() {
 
 
 async function showItemDetails(item) {
+    console.log('[DEBUG] showItemDetails called for:', item);
     // Fetch dynamic rating and review count
     const avgRating = await getAverageRating(item.id);
     const reviewCount = await getReviewCount(item.id);
 
     // Create a simple modal to show item details
+    console.log('[DEBUG] Creating modal for item:', item);
     const modal = document.createElement('div');
     modal.className = 'modal show';
+    // Force modal to be visible for debugging
+    modal.style.zIndex = '9999';
+    modal.style.display = 'block';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.background = 'rgba(255,0,0,0.2)'; // Red tint for debug
+    modal.style.border = '4px solid red';
+    // Fetch all reviews for this media item
+    let reviewsHtml = '';
+    try {
+        const reviewsRef = ref(db, `reviews/${item.id}`);
+        const snapshot = await get(reviewsRef);
+        if (snapshot.exists()) {
+            const reviews = Object.values(snapshot.val());
+            reviewsHtml = `<div style="margin-top:24px;"><h3>All Reviews</h3>`;
+            reviewsHtml += reviews.map(r => `
+                <div class="review-block" style="border-bottom:1px solid #eee; margin-bottom:12px; padding-bottom:8px;">
+                    <div><strong>Rating:</strong> ★ ${r.rating} <span style="color:#888; font-size:0.9em;">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span></div>
+                    <div style="margin-top:4px;"><strong>Review:</strong> ${r.reviewText}</div>
+                </div>
+            `).join('');
+            reviewsHtml += `</div>`;
+        } else {
+            reviewsHtml = `<div style="margin-top:24px; color:#888;">No reviews yet.</div>`;
+        }
+    } catch (err) {
+        reviewsHtml = `<div style="margin-top:24px; color:red;">Error loading reviews.</div>`;
+    }
+
     modal.innerHTML = `
-        <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-content" style="max-width: 600px; margin: 40px auto; background: #fff; border: 2px solid #333;">
             <div class="modal-header">
                 <h2>${item.title}</h2>
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-                    <img src="${item.image}" alt="${item.title}" style="width: 150px; height: 100px; object-fit: cover; border-radius: 8px;">
-                    <div>
-                        <p><strong>Category:</strong> ${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
-                        <p><strong>Year:</strong> ${item.year}</p>
-                        <p><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></p>
-                        <p><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</p>
-                    </div>
+                <div style="margin-bottom: 20px;">
+                    <p><strong>Category:</strong> ${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
+                    <p><strong>Year:</strong> ${item.year}</p>
+                    <p><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></p>
+                    <p><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</p>
                 </div>
                 <p><strong>Description:</strong></p>
                 <p>${item.description}</p>
@@ -421,13 +460,13 @@ async function showItemDetails(item) {
                     </form>
                     <div id="reviewError" style="color:red; margin-top:8px;"></div>
                 </div>
+                ${reviewsHtml}
             </div>
         </div>
     `;
-
     document.body.appendChild(modal);
-
-    // Add close functionality
+    console.log('[DEBUG] Modal appended to body:', modal);
+    // Add close functionality only once
     const closeBtn = modal.querySelector('.close');
     closeBtn.addEventListener('click', () => {
         modal.remove();
@@ -464,7 +503,7 @@ async function showItemDetails(item) {
         reviewFormContainer.style.display = 'block';
     });
 
-    // Handle review submission
+    // Handle review submission (Realtime Database)
     const reviewForm = modal.querySelector('#reviewForm');
     reviewForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -486,7 +525,8 @@ async function showItemDetails(item) {
         }
 
         try {
-            await addDoc(collection(db, "reviews"), {
+            const reviewsRef = ref(db, `reviews/${item.id}`);
+            await push(reviewsRef, {
                 userId: user.uid,
                 mediaId: item.id,
                 reviewText,
