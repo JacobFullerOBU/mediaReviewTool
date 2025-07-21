@@ -1,32 +1,95 @@
-export const movies = [
-    {
-        id: 1,
-        title: "The Shawshank Redemption",
-        description: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-        category: "movies",
-        rating: 9.3,
-        year: 1994,
-        reviews: 142,
-        image: "Movies/Movie Photos/shawshank.jpg"
-    },
-    {
-        id: 2,
-        title: "The Godfather",
-        description: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-        category: "movies",
-        rating: 9.2,
-        year: 1972,
-        reviews: 98,
-        image: "cardimage.jpeg"
-    },
-    {
-        id: 3,
-        title: "Pulp Fiction",
-        description: "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.",
-        category: "movies",
-        rating: 8.9,
-        year: 1994,
-        reviews: 87,
-        image: "cardimage.jpeg"
-    }
-];
+Jurassic World: Rebirth
+F1: The Movie
+Sinners
+The Amateur
+Brick
+Saiyaara
+The Fantastic Four: First Steps
+Eddington
+KPop Demon Hunters
+Wall to Wall
+Heads of State
+28 Years Later
+M3GAN 2.0
+Ballerina
+Thunderbolts
+Mortal Kombat II
+Bring Her Back
+Smurfs
+The Naked Gun
+The Odyssey
+The Old Guard 2
+Happy Gilmore 2
+Karate Kid: Legends
+Mission: Impossible - The Final Reckoning
+Tron: Ares
+Man of Steel
+Sovereign
+I Know What You Did Last Summer
+Happy Gilmore
+Final Destination: Bloodlines
+Eden
+The Phoenician Scheme
+Zombies 4: Dawn of the Vampires
+Together
+A Minecraft Movie
+28 Days Later
+Drop
+Lilo & Stitch
+Opus
+Jurassic Park
+Warfare
+Jaws
+The Accountant 2
+Oppenheimer
+Bride Hard
+Mickey 17
+Materialists
+The Old Guard
+Superman
+The Assessment
+Nosferatu
+After the Hunt
+Madea's Destination Wedding
+Mortal Kombat
+Wicked
+Weapons
+Deep Cover
+Demon Slayer -Kimetsu no Yaiba- The Movie: Infinity Castle
+Titanic
+Maalik
+Juror #2
+Sitaare Zameen Par
+Heretic
+Supergirl
+Inglourious Basterds
+Anora
+Elio
+The Commitments
+Snow White
+Jurassic World: Dominion
+Interstellar
+How to Train Your Dragon
+Companion
+Gladiator II
+The Unholy Trinity
+Friendship
+The Dark Knight
+Nonnas
+28 Weeks Later
+Inception
+Metro in Dino
+Jurassic World
+The Life of Chuck
+Parasite
+The Batman
+Ziam
+Gosford Park
+Almost Cops
+The Substance
+Twisters
+Once Upon a Time... in Hollywood
+Superman Returns
+Black Bag
+The Gorge
+Until Dawn
