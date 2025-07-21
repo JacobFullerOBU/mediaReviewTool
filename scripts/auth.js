@@ -1,15 +1,6 @@
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-// Initialize Firebase and Auth here for browser compatibility
-const firebaseConfig = {
-  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
-  authDomain: "mediareviews-3cf32.firebaseapp.com",
-  // ...other config values from Firebase Console...
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { auth } from "./firebase.js";
 
 // Authentication functionality
 
@@ -146,7 +137,7 @@ async function handleLogin(e) {
 
     try {
         // Use Firebase Auth for login
-        const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         const userData = {
             email: user.email,

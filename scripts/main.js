@@ -1,16 +1,9 @@
 // Firebase Firestore setup and user review functions
-import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { collection, addDoc, query, where, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { auth } from "./firebase.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
-  authDomain: "mediareviews-3cf32.firebaseapp.com",
-  // ...other config values from Firebase Console...
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+// Use the shared Firebase app from firebase.js
+const db = getFirestore();
 
 // Save a review for the current user
 export async function postReview(mediaId, reviewText, rating) {
@@ -43,11 +36,12 @@ export async function getUserReviews() {
 }
 // Main JavaScript functionality for the Media Review Tool
 
+
 document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
+    initAppUI();
 });
 
-function initializeApp() {
+function initAppUI() {
     // Initialize mobile navigation
     initMobileNav();
     
