@@ -51,6 +51,9 @@
         <div class="hero-content">
             <h1>Discover & Review Your Favorite Media</h1>
             <p>Share your thoughts on movies, TV shows, music, games, and books. Join our community of reviewers!</p>
+            <div style="margin-bottom: 18px;">
+                <input type="text" id="mediaSearchInput" placeholder="Search media by title or description..." style="width: 100%; max-width: 400px; padding: 8px; font-size: 1em;">
+            </div>
             <button class="btn btn-primary btn-large" id="exploreBtn">Start Exploring</button>
         </div>
     </section>
@@ -59,6 +62,7 @@
     <section class="popular-content">
         <div class="container">
             <h2>Popular Content</h2>
+            <!-- Search bar moved to hero section above -->
             <div class="category-tabs">
                 <button class="tab-btn active" data-category="all">All</button>
                 <button class="tab-btn" data-category="movies">Movies</button>
@@ -67,7 +71,6 @@
                 <button class="tab-btn" data-category="games">Games</button>
                 <button class="tab-btn" data-category="books">Books</button>
             </div>
-            
             <div class="cards-container" id="cardsContainer">
                 <!-- Cards will be populated by JavaScript -->
             </div>
@@ -133,6 +136,10 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 MediaReview. All rights reserved.</p>
+            <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+                <button class="btn btn-primary" id="contactBtn" style="padding:8px 18px; font-size:1em;">Contact</button>
+                <a href="#leaderboard" id="leaderboardLink" style="color:#007bff; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
+            </div>
         </div>
     </footer>
 
