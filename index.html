@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Review Tool - Games</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Media Review Tool</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Games</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">TV Shows</a></li>
+                <li><a href="#">Books</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Video Game Reviews</h2>
+            <p>Discover, review, and rate your favorite video games</p>
+        </section>
+
+        <section class="search-filters">
+            <div class="search-container">
+                <input type="text" id="gameSearch" placeholder="Search for games..." />
+                <button id="searchBtn">Search</button>
+            </div>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="genreFilter">Genre:</label>
+                    <select id="genreFilter">
+                        <option value="">All Genres</option>
+                        <option value="action">Action</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="rpg">RPG</option>
+                        <option value="strategy">Strategy</option>
+                        <option value="simulation">Simulation</option>
+                        <option value="sports">Sports</option>
+                        <option value="racing">Racing</option>
+                        <option value="puzzle">Puzzle</option>
+                        <option value="fighting">Fighting</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="platformFilter">Platform:</label>
+                    <select id="platformFilter">
+                        <option value="">All Platforms</option>
+                        <option value="pc">PC</option>
+                        <option value="playstation">PlayStation</option>
+                        <option value="xbox">Xbox</option>
+                        <option value="nintendo">Nintendo Switch</option>
+                        <option value="mobile">Mobile</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="ratingFilter">Min Rating:</label>
+                    <select id="ratingFilter">
+                        <option value="">Any Rating</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="3">3+ Stars</option>
+                        <option value="2">2+ Stars</option>
+                        <option value="1">1+ Stars</option>
+                    </select>
+                </div>
+                
+                <button id="clearFilters">Clear Filters</button>
+            </div>
+        </section>
+
+        <section class="games-grid" id="gamesGrid">
+            <!-- Games will be populated by JavaScript -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Media Review Tool. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
