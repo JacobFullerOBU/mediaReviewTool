@@ -1,3 +1,37 @@
+// Firebase Firestore for dynamic ratings
+import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
+  authDomain: "mediareviews-3cf32.firebaseapp.com",
+  // ...other config values from Firebase Console...
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Get number of reviews for a media item
+async function getReviewCount(mediaId) {
+    const q = query(collection(db, "reviews"), where("mediaId", "==", mediaId));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.size;
+}
+
+// Get average rating for a media item
+async function getAverageRating(mediaId) {
+    const q = query(collection(db, "reviews"), where("mediaId", "==", mediaId));
+    const querySnapshot = await getDocs(q);
+    let total = 0;
+    let count = 0;
+    querySnapshot.forEach(doc => {
+        const data = doc.data();
+        if (typeof data.rating === "number") {
+            total += data.rating;
+            count++;
+        }
+    });
+    return count > 0 ? (total / count).toFixed(1) : "N/A";
+}
 // Cards functionality for displaying popular content
 
 // Sample data for popular content
@@ -237,9 +271,25 @@ function renderCards(container, items) {
         `;
         return;
     }
-    
+
     container.innerHTML = items.map(item => createCardHTML(item)).join('');
-    
+
+    // Dynamically update ratings from Firestore
+    items.forEach(async item => {
+        const card = container.querySelector(`.media-card[data-id='${item.id}']`);
+        if (card) {
+            const ratingElem = card.querySelector('.card-rating');
+            if (ratingElem) {
+                ratingElem.textContent = '★ ' + await getAverageRating(item.id);
+            }
+            const reviewsElem = card.querySelector('.card-reviews');
+            if (reviewsElem) {
+                const count = await getReviewCount(item.id);
+                reviewsElem.textContent = `${count} reviews`;
+            }
+        }
+    });
+
     // Add click listeners to cards
     addCardListeners();
 }

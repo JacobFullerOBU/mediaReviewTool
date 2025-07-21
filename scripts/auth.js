@@ -219,11 +219,19 @@ function checkAuthState() {
 function updateAuthUI(userData) {
     const authButtons = document.querySelector('.auth-buttons');
     if (authButtons) {
+        // Show greeting, logout, and profile button
         authButtons.innerHTML = `
             <span class="user-greeting">Hello, ${userData.username}!</span>
+            <button class="btn btn-profile" id="profileBtn">Profile</button>
             <button class="btn btn-logout" id="logoutBtn">Logout</button>
         `;
-        
+        // Add profile navigation
+        const profileBtn = document.getElementById('profileBtn');
+        if (profileBtn) {
+            profileBtn.addEventListener('click', function() {
+                window.location.href = 'profile/index.html';
+            });
+        }
         // Add logout functionality
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
