@@ -1,18 +1,18 @@
 [
-     {
+  {
     "title": "Casablanca",
     "year": "1942",
-    "description": "",
-    "genre": "",
+    "description": "A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco.",
+    "genre": "Drama, Romance, War",
     "director": "Michael Curtiz",
     "actors": "Humphrey Bogart\nIngrid Bergman\nPaul Henreid\nClaude Rains\nConrad Veidt\nSydney Greenstreet\nPeter Lorre",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/CasablancaPoster-Gold.jpg/250px-CasablancaPoster-Gold.jpg"
-  }, 
+  },
   {
     "title": "2001: A Space Odyssey",
     "year": "1968",
-    "description": "",
-    "genre": "",
+    "description": "When a mysterious artifact is uncovered on the Moon, a spacecraft manned by two humans and one supercomputer is sent to Jupiter to find its origins.",
+    "genre": "Adventure, Sci-Fi",
     "director": "Stanley Kubrick",
     "actors": "Keir Dullea\nGary Lockwood",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/2001_A_Space_Odyssey_%281968%29.png/250px-2001_A_Space_Odyssey_%281968%29.png"
@@ -20,8 +20,8 @@
   {
     "title": "The Mist ",
     "year": "2007",
-    "description": "",
-    "genre": "",
+    "description": "After a massive thunderstorm, an eerie, unwavering fog descends upon a Maine community. Locals seek refuge in a grocery store from the monstrous creatures now roaming the countryside killing everyone they encounter.",
+    "genre": "Horror, Sci-Fi, Thriller",
     "director": "Frank Darabont",
     "actors": "Thomas Jane\nMarcia Gay Harden\nLaurie Holden\nAndre Braugher\nToby Jones",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/The_Mist_poster.jpg/250px-The_Mist_poster.jpg"
@@ -29,8 +29,8 @@
   {
     "title": "Casino",
     "year": "1995",
-    "description": "",
-    "genre": "",
+    "description": "In Las Vegas, two best friends--a casino executive and a Mafia enforcer--compete for a gambling empire and a fast-living, fast-loving socialite.",
+    "genre": "Crime, Drama",
     "director": "Martin Scorsese",
     "actors": "Robert De Niro\nSharon Stone\nJoe Pesci\nDon Rickles\nKevin Pollak\nJames Woods",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Casino_%28Martins_Scorsese_film%29.png/250px-Casino_%28Martins_Scorsese_film%29.png"
@@ -38,13 +38,13 @@
   {
     "title": "Chinatown ",
     "year": "1974",
-    "description": "",
+    "description": "A private detective hired to expose an adulterer in 1930s Los Angeles finds himself caught up in a web of deceit, corruption, and murder.",
     "genre": "Jazz, soundtrack",
     "director": "Roman Polanski",
     "actors": "Jack Nicholson\nFaye Dunaway\nJohn Hillerman\nPerry Lopez\nBurt Young\nJohn Huston",
     "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/Chinatownposter1.jpg"
   },
-    {
+  {
     "title": "Psycho",
     "year": "1960",
     "description": "",
@@ -62,10 +62,10 @@
     "actors": "Mark Hamill\nHarrison Ford\nCarrie Fisher\nBilly Dee Williams\nAnthony Daniels\nDavid Prowse\nKenny Baker\nPeter Mayhew\nFrank Oz",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg/250px-The_Empire_Strikes_Back_%281980_film%29.jpg"
   },
-   {
+  {
     "title": "12 Angry Men ",
-    "year": "",
-    "description": "",
+    "year": "1957",
+    "description": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
     "genre": "Drama",
     "director": "William Friedkin",
     "actors": "Courtney B. Vance\nOssie Davis\nGeorge C. Scott\nArmin Mueller-Stahl\nDorian Harewood\nJames Gandolfini\nTony Danza\nJack Lemmon\nHume Cronyn\nMykelti Williamson\nEdward James Olmos\nWilliam Petersen",
@@ -83,8 +83,8 @@
   {
     "title": "The Matrix",
     "year": "1999",
-    "description": "",
-    "genre": "",
+    "description": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+    "genre": "Action, Sci-Fi",
     "director": "The Wachowskis[a]",
     "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nKeanu Reeves\nLaurence Fishburne\nCarrie-Anne Moss\nHugo Weaving\nJoe Pantoliano",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/94/The_Matrix.jpg"
@@ -101,8 +101,8 @@
   {
     "title": "One Flew Over the Cuckoo's Nest",
     "year": "1975",
-    "description": "",
-    "genre": "",
+    "description": "A rebellious convict is sent to a psychiatric hospital for evaluation in 1963 Oregon, and encourages his docile companions to take more control of their lives and defy the tyrannical head nurse.",
+    "genre": "Drama",
     "director": "Miloš Forman",
     "actors": "Jack Nicholson\nLouise Fletcher\nWilliam Redfield",
     "poster": "https://upload.wikimedia.org/wikipedia/en/2/26/One_Flew_Over_the_Cuckoo%27s_Nest_poster.jpg"
@@ -110,13 +110,13 @@
   {
     "title": "Lawrence of Arabia ",
     "year": "1962",
-    "description": "",
-    "genre": "",
+    "description": "The story of T.E. Lawrence, the English officer who successfully united and led the diverse, often warring, Arab tribes during World War I in order to fight the Turks.",
+    "genre": "Adventure, Biography, Drama",
     "director": "David Lean",
     "actors": "Alec Guinness\nAnthony Quinn\nJack Hawkins\nJosé Ferrer\nAnthony Quayle\nClaude Rains\nArthur Kennedy\nOmar Sharif\nPeter O'Toole",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lawrence_of_arabia_ver3_xxlg.jpg/250px-Lawrence_of_arabia_ver3_xxlg.jpg"
   },
-   {
+  {
     "title": "Taxi ",
     "year": "1998",
     "description": "",
@@ -125,16 +125,16 @@
     "actors": "Samy Naceri\nFrédéric Diefenthal\nMarion Cotillard\nManuela Gourary\nEmma Sjöberg\nBernard Farcy",
     "poster": "https://upload.wikimedia.org/wikipedia/en/7/7e/TaxiPoster.jpg"
   },
-   {
+  {
     "title": "The Magnificent Seven",
     "year": "2016",
-    "description": "",
-    "genre": "",
+    "description": "Seven gunmen from a variety of backgrounds are brought together by a vengeful young widow to protect her town from the private army of a destructive industrialist.",
+    "genre": "Action, Adventure, Drama",
     "director": "Antoine Fuqua",
     "actors": "Denzel Washington\nChris Pratt\nEthan Hawke\nVincent D'Onofrio\nByung-hun Lee\nManuel Garcia-Rulfo\nMartin Sensmeier\nPeter Sarsgaard",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Magnificent_Seven_2016.jpg/250px-Magnificent_Seven_2016.jpg"
   },
- {
+  {
     "title": "The Silence of the Lambs",
     "year": "1991",
     "description": "",
@@ -146,8 +146,8 @@
   {
     "title": "Vertigo",
     "year": "1958",
-    "description": "",
-    "genre": "",
+    "description": "A former San Francisco police detective juggles wrestling with his personal demons and becoming obsessed with the hauntingly beautiful woman he has been hired to trail, who may be deeply disturbed.",
+    "genre": "Mystery, Romance, Thriller",
     "director": "Alfred Hitchcock",
     "actors": "James Stewart\nKim Novak\nBarbara Bel Geddes\nTom Helmore\nHenry Jones",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Vertigomovie_restoration.jpg/250px-Vertigomovie_restoration.jpg"
@@ -161,11 +161,11 @@
     "actors": "Michael J. Fox\nChristopher Lloyd\nLea Thompson\nCrispin Glover",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Back_to_the_Future.jpg/250px-Back_to_the_Future.jpg"
   },
-    {
+  {
     "title": "Amadeus",
     "year": "1984",
-    "description": "",
-    "genre": "",
+    "description": "The life and work of Wolfgang Amadeus Mozart seen through the eyes of his contemporary and rival, Antonio Salieri.",
+    "genre": "Biography, Drama, Music",
     "director": "Miloš Forman",
     "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nF. Murray Abraham\nTom Hulce\nElizabeth Berridge\nSimon Callow\nRoy Dotrice\nChristine Ebersole\nJeffrey Jones\nCharles Kay",
     "poster": "https://upload.wikimedia.org/wikipedia/en/2/2f/Amadeusmov.jpg"
@@ -173,8 +173,8 @@
   {
     "title": "The Green Mile",
     "year": "1999",
-    "description": "",
-    "genre": "",
+    "description": "A death row guard learns that a gentle giant in his charge possesses a mysterious gift.",
+    "genre": "Crime, Drama, Fantasy",
     "director": "Frank Darabont",
     "actors": "Tom Hanks\nDavid Morse\nBonnie Hunt\nMichael Clarke Duncan\nJames Cromwell\nMichael Jeter\nGraham Greene\nDoug Hutchison\nSam Rockwell\nBarry Pepper\nJeffrey DeMunn\nPatricia Clarkson\nHarry Dean Stanton",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/The_Green_Mile_%28movie_poster%29.jpg/250px-The_Green_Mile_%28movie_poster%29.jpg"
@@ -209,8 +209,8 @@
   {
     "title": "City of God",
     "year": "2002",
-    "description": "",
-    "genre": "",
+    "description": "In the slums of Rio, two kids' paths diverge as one struggles to become a photographer and the other a kingpin.",
+    "genre": "Crime, Drama",
     "director": "Fernando Meirelles\nKátia Lund",
     "actors": "Alexandre Rodrigues\nLeandro Firmino Da Hora\nJonathan Haagensen\nPhellipe Haagensen\nDouglas Silva\nDaniel Zettel\nSeu Jorge",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/10/CidadedeDeus.jpg/250px-CidadedeDeus.jpg"
@@ -227,13 +227,13 @@
   {
     "title": "Bright Star",
     "year": "2009",
-    "description": "",
-    "genre": "",
+    "description": "Nineteenth-century English poet, John Keats and his dressmaking neighbor, Fanny Brawne, have total disregard for each other. An unlikely romance develops and they fall deeply in love near the end of his life.",
+    "genre": "Biography, Drama, Romance",
     "director": "Jane Campion",
     "actors": "",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Bright_star.jpg/250px-Bright_star.jpg"
   },
-    {
+  {
     "title": "Eternal Sunshine of the Spotless Mind",
     "year": "2004",
     "description": "",
@@ -251,16 +251,16 @@
     "actors": "Ellen Burstyn\nJared Leto\nJennifer Connelly\nMarlon Wayans",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/92/Requiem_for_a_dream.jpg"
   },
-    {
+  {
     "title": "The Lion King",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.",
+    "genre": "Animation, Adventure, Drama",
     "director": "Jon Favreau",
     "actors": "Donald Glover\nSeth Rogen\nChiwetel Ejiofor\nAlfre Woodard\nBilly Eichner\nJohn Kani\nJohn Oliver\nBeyoncé Knowles-Carter\nJames Earl Jones",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/9d/Disney_The_Lion_King_2019.jpg"
   },
-    {
+  {
     "title": "The Shining ",
     "year": "1980",
     "description": "",
@@ -269,16 +269,16 @@
     "actors": "Jack Nicholson\nShelley Duvall\nScatman Crothers\nDanny Lloyd",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/The_Shining_%281980%29_U.K._release_poster_-_The_tide_of_terror_that_swept_America_IS_HERE.jpg/250px-The_Shining_%281980%29_U.K._release_poster_-_The_tide_of_terror_that_swept_America_IS_HERE.jpg"
   },
-    {
+  {
     "title": "Toy Story 5",
     "year": "2026",
-    "description": "",
-    "genre": "",
+    "description": "Buzz, Woody, Jessie are challenged after being introduced to what kids are obsessed with today: electronics.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Andrew Stanton",
     "actors": "Tom Hanks\nTim Allen\nJoan Cusack\nErnie Hudson\nAnna Faris\nConan O'Brien",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Toy_Story_5_logo.jpg/250px-Toy_Story_5_logo.jpg"
   },
-    {
+  {
     "title": "Alien",
     "year": "1979",
     "description": "",
@@ -287,38 +287,38 @@
     "actors": "Tom Skerritt\nSigourney Weaver\nVeronica Cartwright\nHarry Dean Stanton\nJohn Hurt\nIan Holm\nYaphet Kotto",
     "poster": "https://upload.wikimedia.org/wikipedia/en/c/c3/Alien_movie_poster.jpg"
   },
-    {
+  {
     "title": "Labyrinth",
     "year": "1986",
-    "description": "",
-    "genre": "",
+    "description": "Teenage Sarah journeys through a maze to save her baby brother from the Goblin King.",
+    "genre": "Adventure, Family, Fantasy",
     "director": "Jim Henson",
     "actors": "David Bowie\nJennifer Connelly",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Labyrinth_ver2.jpg/250px-Labyrinth_ver2.jpg"
   },
-    {
+  {
     "title": "Oldboy",
     "year": "2003",
-    "description": "",
+    "description": "After being kidnapped and imprisoned for fifteen years, Oh Dae-Su is released, only to find that he must track down his captor in five days.",
     "genre": "Contemporary classical",
     "director": "Park Chan-wook",
     "actors": "Choi Min-sik\nYoo Ji-tae\nKang Hye-jung",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Oldboykoreanposter.jpg/250px-Oldboykoreanposter.jpg"
   },
-    {
+  {
     "title": "Books of Blood",
     "year": "2020",
     "description": "Books of Blood is a 2020 American anthology horror film directed by Brannon Braga and co-written by Braga and Adam Simon. It is based on Books of Blood by Clive Barker and is the second film adaptation after Book of Blood (2009). The film premiered at the 2020 Screamfest Horror Film Festival on October 6, 2020, and was released on Hulu the following day.[1][2] This was the final production by Touchstone Television before being folded into 20th Television.[3]",
-    "genre": "",
+    "genre": "Drama, Horror, Mystery",
     "director": "Brannon Braga",
     "actors": "Britt Robertson\nAnna Friel\nRafi Gavron\nYul Vazquez",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Books_of_blood_xlg.jpg/250px-Books_of_blood_xlg.jpg"
   },
   {
     "title": "Grave of the Fireflies",
-    "year": "",
+    "year": "1988",
     "description": "Grave of the Fireflies (火垂るの墓, Hotaru no Haka) is a live-action TV drama adaptation of Grave of the Fireflies, made by NTV in Japan. It was produced in commemoration of the 60th anniversary of the end of World War II. The drama aired on November 1, 2005. Like the anime, the live-action version of Grave of the Fireflies focuses on two siblings, Seita and Setsuko, struggling to survive the final days of the war in Kobe, Japan. Unlike the animated version, however, it tells the story from the point of view of their cousin (their aunt's daughter) and also deals with the issue of how the war time environment could change a kind lady into a hard-hearted woman. The film stars Nanako Matsushima as the aunt and Mao Inoue in a dual role as the cousin and the cousin's granddaughter.",
-    "genre": "",
+    "genre": "Animation, Drama, War",
     "director": "Tōya Satō [ja]",
     "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}Hōshi IshidaMao SasakiNanako MatsushimaMao InoueTsuyoshi Ihara",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Grave_of_the_Fireflies_live-action.jpg/250px-Grave_of_the_Fireflies_live-action.jpg"
@@ -335,13 +335,13 @@
   {
     "title": "The Godfather",
     "year": "1972",
-    "description": "",
-    "genre": "",
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "genre": "Crime, Drama",
     "director": "Francis Ford Coppola",
     "actors": "",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/The_Godfather.jpg/250px-The_Godfather.jpg"
   },
-    {
+  {
     "title": "The Lord of the Rings",
     "year": "",
     "description": "",
@@ -389,7 +389,7 @@
   {
     "title": "Life Is Beautiful",
     "year": "2012",
-    "description": "",
+    "description": "When an open-minded Jewish waiter and his son become victims of the Holocaust, he uses a perfect mixture of will, humor and imagination to protect his son from the dangers around their camp.",
     "genre": "Film soundtrack",
     "director": "Sekhar Kammula",
     "actors": "Abijeet\nSudhakar Komakula\nKaushik Darbha\nShagun Kaur\nShriya Saran\nZara Shah\nVijay Deverakonda\nNaveen Polishetty\nAnjala Zaveri",
@@ -398,8 +398,8 @@
   {
     "title": "The Truman Show",
     "year": "1998",
-    "description": "",
-    "genre": "",
+    "description": "An insurance salesman begins to suspect that his whole life is actually some sort of reality TV show.",
+    "genre": "Comedy, Drama",
     "director": "Peter Weir",
     "actors": "Jim Carrey\nLaura Linney\nNoah Emmerich\nNatascha McElhone\nHolland Taylor\nEd Harris",
     "poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/Trumanshow.jpg"
@@ -407,8 +407,8 @@
   {
     "title": "Rocky Balboa",
     "year": "2006",
-    "description": "",
-    "genre": "",
+    "description": "Thirty years after the ring of the first bell, Rocky Balboa comes out of retirement and dons his gloves for his final fight against the reigning heavyweight champ Mason 'The Line' Dixon.",
+    "genre": "Drama, Sport",
     "director": "Sylvester Stallone",
     "actors": "Sylvester Stallone\nBurt Young\nAntonio Tarver",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Rocky_Balboa_%282006%29_theatrical_poster.jpg/250px-Rocky_Balboa_%282006%29_theatrical_poster.jpg"
@@ -416,8 +416,8 @@
   {
     "title": "Parasite",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    "genre": "Drama, Thriller",
     "director": "Bong Joon Ho",
     "actors": "Song Kang-ho\nLee Sun-kyun\nCho Yeo-jeong\nChoi Woo-shik\nPark So-dam\nJang Hye-jin",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Parasite_%282019_film%29.png/250px-Parasite_%282019_film%29.png"
@@ -425,8 +425,8 @@
   {
     "title": "The Dictator",
     "year": "2012",
-    "description": "",
-    "genre": "",
+    "description": "The heroic story of a dictator who risked his life to ensure that democracy would never come to the country he so lovingly oppressed.",
+    "genre": "Comedy",
     "director": "Larry Charles",
     "actors": "Sacha Baron Cohen\nAnna Faris\nBen Kingsley",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/The_Dictator_Poster.jpg/250px-The_Dictator_Poster.jpg"
@@ -458,12 +458,11 @@
     "actors": "Jack Lemmon\nWalter Matthau\nAnn-Margret\nKevin Pollak\nOssie Davis\nDaryl Hannah",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Grumpy_Old_Men_.jpg/250px-Grumpy_Old_Men_.jpg"
   },
-
   {
     "title": "Prisoners",
     "year": "2013",
-    "description": "",
-    "genre": "",
+    "description": "A desperate father takes the law into his own hands after police fail to find two kidnapped girls.",
+    "genre": "Crime, Drama, Mystery",
     "director": "Denis Villeneuve",
     "actors": "Hugh Jackman\nJake Gyllenhaal\nViola Davis\nMaria Bello\nTerrence Howard\nMelissa Leo\nPaul Dano",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/63/Prisoners2013Poster.jpg/250px-Prisoners2013Poster.jpg"
@@ -471,7 +470,7 @@
   {
     "title": "The Thing",
     "year": "2011",
-    "description": "",
+    "description": "A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.",
     "genre": "Film score",
     "director": "Matthijs van Heijningen Jr.",
     "actors": "Mary Elizabeth Winstead\nJoel Edgerton\nAdewale Akinnuoye-Agbaje\nUlrich Thomsen\nEric Christian Olsen\nTrond Espen Seim",
@@ -480,8 +479,8 @@
   {
     "title": "Inside Out",
     "year": "2015",
-    "description": "",
-    "genre": "",
+    "description": "After young Riley is uprooted from her Midwest life and moved to San Francisco, her emotions - Joy, Fear, Anger, Disgust and Sadness - conflict on how best to navigate a new city, house, and school.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Pete Docter",
     "actors": "Amy Poehler\nPhyllis Smith\nRichard Kind\nBill Hader\nLewis Black\nMindy Kaling\nKaitlyn Dias\nDiane Lane\nKyle MacLachlan",
     "poster": "https://upload.wikimedia.org/wikipedia/en/0/0a/Inside_Out_%282015_film%29_poster.jpg"
@@ -498,8 +497,8 @@
   {
     "title": "The Heat",
     "year": "2013",
-    "description": "",
-    "genre": "",
+    "description": "An uptight FBI Special Agent is paired with a foul-mouthed Boston cop to take down a ruthless drug lord.",
+    "genre": "Action, Comedy, Crime",
     "director": "Paul Feig",
     "actors": "Sandra Bullock\nMelissa McCarthy\nDemián Bichir\nMarlon Wayans\nMichael Rapaport",
     "poster": "https://upload.wikimedia.org/wikipedia/en/b/bf/The_Heat_poster.jpg"
@@ -543,8 +542,8 @@
   {
     "title": "Stand by Me",
     "year": "1986",
-    "description": "",
-    "genre": "",
+    "description": "A writer recounts a childhood journey with his friends to find the body of a missing boy.",
+    "genre": "Adventure, Comedy, Drama",
     "director": "Rob Reiner",
     "actors": "Wil Wheaton\nRiver Phoenix\nCorey Feldman\nJerry O'Connell\nKiefer Sutherland",
     "poster": "https://upload.wikimedia.org/wikipedia/en/7/74/Stand_By_Me_1986_American_Theatrical_Release_Poster.jpg"
@@ -553,7 +552,7 @@
     "title": "Iron Man",
     "year": "2008",
     "description": "This is an accepted version of this page",
-    "genre": "",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Jon Favreau",
     "actors": "Robert Downey Jr.\nTerrence Howard\nJeff Bridges\nGwyneth Paltrow\nLeslie Bibb\nShaun Toub",
     "poster": "https://upload.wikimedia.org/wikipedia/en/0/02/Iron_Man_%282008_film%29_poster.jpg"
@@ -561,8 +560,8 @@
   {
     "title": "Fargo",
     "year": "1996",
-    "description": "",
-    "genre": "",
+    "description": "Minnesota car salesman Jerry Lundegaard's inept crime falls apart due to his and his henchmen's bungling and the persistent police work of the quite pregnant Marge Gunderson.",
+    "genre": "Crime, Drama, Thriller",
     "director": "Joel Coen[1][2]",
     "actors": "Frances McDormand\nWilliam H. Macy\nSteve Buscemi\nHarve Presnell\nPeter Stormare",
     "poster": "https://upload.wikimedia.org/wikipedia/en/3/33/Fargo_%281996_movie_poster%29.jpg"
@@ -576,7 +575,7 @@
     "actors": "Amy Adams\nJeremy Renner\nForest Whitaker\nMichael Stuhlbarg\nTzi Ma",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/df/Arrival%2C_Movie_Poster.jpg"
   },
-   {
+  {
     "title": "Mulholland Drive",
     "year": "2001",
     "description": "",
@@ -588,8 +587,8 @@
   {
     "title": "The Princess Bride",
     "year": "1987",
-    "description": "",
-    "genre": "",
+    "description": "A bedridden boy's grandfather reads him the story of a farmboy-turned-pirate who encounters numerous obstacles, enemies and allies in his quest to be reunited with his true love.",
+    "genre": "Adventure, Comedy, Family",
     "director": "Rob Reiner",
     "actors": "Cary Elwes\nMandy Patinkin\nChris Sarandon\nChristopher Guest\nWallace Shawn\nAndré the Giant\nRobin Wright\nPeter Falk\nBilly Crystal",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/db/Princess_bride.jpg"
@@ -606,13 +605,13 @@
   {
     "title": "Men, Women & Children",
     "year": "2014",
-    "description": "",
-    "genre": "",
+    "description": "A group of high school teenagers and their parents attempt to navigate the many ways the Internet has changed their relationships, their communications, their self-images, and their love lives.",
+    "genre": "Comedy, Drama",
     "director": "Jason Reitman",
     "actors": "Rosemarie DeWitt  Jennifer Garner  Judy Greer Dean Norris  Adam Sandler",
     "poster": "https://upload.wikimedia.org/wikipedia/en/8/88/Men_Women_%26_Children_poster.jpg"
   },
-   {
+  {
     "title": "Gone Girl",
     "year": "2014",
     "description": "",
@@ -624,8 +623,8 @@
   {
     "title": "The Witch",
     "year": "2015",
-    "description": "",
-    "genre": "",
+    "description": "An isolated Puritan family in 1630s New England comes unraveled by the forces of witchcraft and possession.",
+    "genre": "Drama, Fantasy, Horror",
     "director": "Robert Eggers",
     "actors": "Anya Taylor-Joy\nRalph Ineson\nKate Dickie\nHarvey Scrimshaw\nEllie Grainger\nLucas Dawson",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/The_Witch_poster.png/250px-The_Witch_poster.png"
@@ -633,22 +632,22 @@
   {
     "title": "Project X",
     "year": "2012",
-    "description": "",
-    "genre": "",
+    "description": "Three high-school seniors throw a birthday party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+    "genre": "Comedy",
     "director": "Nima Nourizadeh",
     "actors": "Thomas Mann\nOliver Cooper\nJonathan Daniel Brown\nKirby Bliss Blanton\nDax Flame\nBrady Hender\nNick Nervies\nAlexis Knapp\nMiles Teller",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/Project_X_poster.png/250px-Project_X_poster.png"
   },
-    {
+  {
     "title": "Separation",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "A young girl finds solace in her artist father and the ghost of her dead mother.",
+    "genre": "Drama, Horror, Mystery",
     "director": "William Brent Bell",
     "actors": "Rupert Friend\nMamie Gummer\nMadeline Brewer\nViolet McGraw\nSimon Quarterman\nBrian Cox",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Separation_2021_Film_poster.png/250px-Separation_2021_Film_poster.png"
   },
-   {
+  {
     "title": "Past Lives",
     "year": "2023",
     "description": "",
@@ -660,8 +659,8 @@
   {
     "title": "For Your Eyes Only",
     "year": "1981",
-    "description": "",
-    "genre": "",
+    "description": "Secret service agent James Bond is assigned to find a missing British vessel equipped with a weapons encryption device and prevent it from falling into enemy hands.",
+    "genre": "Action, Adventure, Thriller",
     "director": "John Glen",
     "actors": "Roger Moore\nCarole Bouquet\nChaim Topol\nLynn-Holly Johnson\nJulian Glover",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/For_Your_Eyes_Only_-_UK_cinema_poster.jpg/250px-For_Your_Eyes_Only_-_UK_cinema_poster.jpg"
@@ -678,8 +677,8 @@
   {
     "title": "Dead Poets Society",
     "year": "1989",
-    "description": "",
-    "genre": "",
+    "description": "Maverick teacher John Keating returns in 1959 to the prestigious New England boys' boarding school where he was once a star student, using poetry to embolden his pupils to new heights of self-expression.",
+    "genre": "Comedy, Drama",
     "director": "Peter Weir",
     "actors": "Robin Williams",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/8/86/Dead_poets_society.png/250px-Dead_poets_society.png"
@@ -688,7 +687,7 @@
     "title": "Emperor",
     "year": "2020",
     "description": "Emperor is a 2020 American historical drama film directed by Mark Amin (in his directorial debut) and written by Amin and Pat Charles. The film stars Dayo Okeniyi, James Cromwell, Kat Graham, and Bruce Dern.[1][2] It is based on the true story of Shields Green, an African American slave nicknamed \"Emperor\", who escaped to freedom and participated in abolitionist John Brown's raid on Harpers Ferry.",
-    "genre": "",
+    "genre": "Drama, History, War",
     "director": "Mark Amin",
     "actors": "Dayo OkeniyiBen RobsonJames CromwellKat GrahamKeean JohnsonJames Le GrosHarry LennixNaturi NaughtonMykelti WilliamsonBruce Dern",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Emperor_%282020_film%29.jpg/250px-Emperor_%282020_film%29.jpg"
@@ -705,8 +704,8 @@
   {
     "title": "Black Swan",
     "year": "2010",
-    "description": "",
-    "genre": "",
+    "description": "Nina is a talented but unstable ballerina on the verge of stardom. Pushed to the breaking point by her artistic director and a seductive rival, Nina's grip on reality slips, plunging her into a waking nightmare.",
+    "genre": "Drama, Thriller",
     "director": "Darren Aronofsky",
     "actors": "Natalie Portman\nMila Kunis\nVincent Cassel\nBarbara Hershey\nWinona Ryder",
     "poster": "https://upload.wikimedia.org/wikipedia/en/6/68/Black_Swan_poster.jpg"
@@ -741,8 +740,8 @@
   {
     "title": "Memento",
     "year": "2000",
-    "description": "",
-    "genre": "",
+    "description": "A former insurance investigator who now suffers from anterograde amnesia uses notes and tattoos to hunt down his wife's murderer.",
+    "genre": "Mystery, Thriller",
     "director": "Christopher Nolan",
     "actors": "Guy Pearce\nCarrie-Anne Moss\nJoe Pantoliano",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c7/Memento_poster.jpg/250px-Memento_poster.jpg"
@@ -796,7 +795,7 @@
     "title": "All Hallows' Eve",
     "year": "2013",
     "description": "All Hallows' Eve is a 2013 American horror anthology film written, edited, and directed by Damien Leone. The film is presented as a series of shorts that two children and their babysitter discover on an unmarked videotape on Halloween night, all of which feature a homicidal clown named Art the Clown. The film stars Katie Maguire, Catherine Callahan, Marie Maser, and Kayla Lian, with Mike Giannelli as Art the Clown. It incorporates footage from the 2008 short film The 9th Circle, as well as the 2011 short film Terrifier, both of which were also directed by Leone and featured Art the Clown.",
-    "genre": "",
+    "genre": "Horror, Thriller",
     "director": "Damien Leone",
     "actors": "Katie MaguireCatherine CallahanMarie MaserKayla LianMike Giannelli",
     "poster": "https://upload.wikimedia.org/wikipedia/en/2/29/All_Hallows%27_Eve_2013_film_poster.jpg"
@@ -804,8 +803,8 @@
   {
     "title": "The Philadelphia Story",
     "year": "1940",
-    "description": "",
-    "genre": "",
+    "description": "After a rich woman's ex-husband and a tabloid-type reporter turn up just before her planned remarriage, she begins to learn the truth about herself.",
+    "genre": "Comedy, Romance",
     "director": "George Cukor",
     "actors": "Cary GrantKatharine HepburnJames StewartRuth HusseyJohn HowardRoland YoungJohn HallidayMary NashVirginia Weidler",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/The-Philadelphia-Story-%281940%29.jpg/250px-The-Philadelphia-Story-%281940%29.jpg"
@@ -819,11 +818,11 @@
     "actors": "Cillian Murphy\nEmily Blunt\nMatt Damon\nRobert Downey Jr.\nFlorence Pugh\nJosh Hartnett\nCasey Affleck\nRami Malek\nKenneth Branagh",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Oppenheimer_%28film%29.jpg/250px-Oppenheimer_%28film%29.jpg"
   },
-   {
+  {
     "title": "Dune",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "A Duke's son leads desert warriors against the galactic emperor and his father's evil nemesis to free their desert world from the emperor's rule.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Denis Villeneuve",
     "actors": "Timothée Chalamet\nRebecca Ferguson\nOscar Isaac\nJosh Brolin\nStellan Skarsgård\nDave Bautista\nStephen M. Henderson\nZendaya\nChang Chen\nSharon Duncan-Brewster\nCharlotte Rampling\nJason Momoa\nJavier Bardem",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/250px-Dune_%282021_film%29.jpg"
@@ -831,8 +830,8 @@
   {
     "title": "Barbie",
     "year": "2023",
-    "description": "",
-    "genre": "",
+    "description": "Barbie and Ken are having the time of their lives in the seemingly perfect world of Barbie Land. However, when they get a chance to go to the outside world, they soon discover the joys and perils of living among regular humans.",
+    "genre": "Adventure, Comedy, Fantasy",
     "director": "Greta Gerwig",
     "actors": "Margot Robbie\nRyan Gosling\nAmerica Ferrera\nKate McKinnon\nIssa Rae\nRhea Perlman\nWill Ferrell",
     "poster": "https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg"
@@ -846,7 +845,7 @@
     "actors": "Mel Gibson\nJodie Foster\nJames Garner\nGraham Greene\nJames Coburn\nAlfred Molina",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/9/94/Maverick_movie.jpg/250px-Maverick_movie.jpg"
   },
-   {
+  {
     "title": "Joker",
     "year": "2019",
     "description": "",
@@ -867,8 +866,8 @@
   {
     "title": "L.A. Confidential",
     "year": "1997",
-    "description": "",
-    "genre": "",
+    "description": "As corruption grows in 1950s Los Angeles, three policemen - one strait-laced, one brutal, and one sleazy - investigate a series of murders with their own brand of justice.",
+    "genre": "Crime, Drama, Mystery",
     "director": "Curtis Hanson",
     "actors": "Kevin Spacey\nRussell Crowe\nGuy Pearce\nJames Cromwell\nDavid Strathairn\nKim Basinger\nDanny DeVito",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/d8/La_confidential.jpg"
@@ -885,8 +884,8 @@
   {
     "title": "Interstellar",
     "year": "2014",
-    "description": "",
-    "genre": "",
+    "description": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
+    "genre": "Adventure, Drama, Sci-Fi",
     "director": "Christopher Nolan",
     "actors": "Matthew McConaughey\nAnne Hathaway\nJessica Chastain\nBill Irwin\nEllen Burstyn\nMichael Caine",
     "poster": "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg"
@@ -894,8 +893,8 @@
   {
     "title": "The Batman",
     "year": "2022",
-    "description": "",
-    "genre": "",
+    "description": "When a sadistic serial killer begins murdering key political figures in Gotham, the Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
+    "genre": "Action, Crime, Drama",
     "director": "Matt Reeves",
     "actors": "Robert Pattinson\nZoë Kravitz\nPaul Dano\nJeffrey Wright\nJohn Turturro\nPeter Sarsgaard\nAndy Serkis\nColin Farrell",
     "poster": "https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg"
@@ -921,8 +920,8 @@
   {
     "title": "The Irishman",
     "year": "1978",
-    "description": "",
-    "genre": "",
+    "description": "An illustration of Frank Sheeran's life, from W.W.II veteran to hit-man for the Bufalino crime family and his alleged assassination of his close friend Jimmy Hoffa.",
+    "genre": "Biography, Crime, Drama",
     "director": "Donald Crombie",
     "actors": "Michael CraigSimon BurkeRobyn NevinJohn Clayton",
     "poster": ""
@@ -939,8 +938,8 @@
   {
     "title": "Uncut Gems",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "With his debts mounting and angry collectors closing in, a fast-talking New York City jeweler risks everything in hope of staying afloat and alive.",
+    "genre": "Crime, Drama, Thriller",
     "director": "Josh Safdie Benny Safdie",
     "actors": "Adam Sandler\nLaKeith Stanfield\nJulia Fox\nKevin Garnett\nIdina Menzel\nEric Bogosian",
     "poster": "https://upload.wikimedia.org/wikipedia/en/a/a7/Uncut_Gems_poster.jpg"
@@ -957,13 +956,13 @@
   {
     "title": "Palm Springs",
     "year": "2020",
-    "description": "",
-    "genre": "",
+    "description": "Nyles and Sarah find themselves stuck in a time loop and living the same day over and over again. They are drawn to each other, but certain revelations threaten their budding romance.",
+    "genre": "Comedy, Fantasy, Mystery",
     "director": "Max Barbakow",
     "actors": "Andy Samberg\nCristin Milioti\nJ. K. Simmons",
     "poster": "https://upload.wikimedia.org/wikipedia/en/c/c5/Palm_Springs_poster.jpeg"
   },
-   {
+  {
     "title": "Marriage Story",
     "year": "1992",
     "description": "Marriage Story (Korean: 결혼 이야기) is a 1992 South Korean romantic comedy film directed by Kim Eui-suk[2] and starring Choi Min-soo and Shim Hye-jin. It was the highest-grossing South Korean film of 1992,[3] and became the fourth most highly attended Korean film between 1990 and 1995.[4]",
@@ -975,8 +974,8 @@
   {
     "title": "Chicago",
     "year": "2002",
-    "description": "",
-    "genre": "",
+    "description": "Two death-row murderesses develop a fierce rivalry while competing for publicity, celebrity, and a sleazy lawyer's attention.",
+    "genre": "Comedy, Crime, Musical",
     "director": "Rob Marshall",
     "actors": "Renée Zellweger\nCatherine Zeta-Jones\nRichard Gere\nQueen Latifah\nJohn C. Reilly\nLucy Liu\nColm Feore",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Chicago_%282002_film%29.png/250px-Chicago_%282002_film%29.png"
@@ -1011,8 +1010,8 @@
   {
     "title": "Ammonite",
     "year": "2020",
-    "description": "",
-    "genre": "",
+    "description": "1840s England, acclaimed but overlooked fossil hunter Mary Anning and a young woman sent to convalesce by the sea develop an intense relationship, altering both of their lives forever.",
+    "genre": "Drama, History, Romance",
     "director": "Francis Lee",
     "actors": "Kate Winslet\nSaoirse Ronan\nGemma Jones\nJames McArdle\nAlec Secăreanu\nFiona Shaw",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Ammonite_film_poster.png/250px-Ammonite_film_poster.png"
@@ -1020,17 +1019,17 @@
   {
     "title": "The Power of the Dog",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "Charismatic rancher Phil Burbank inspires fear and awe in those around him. When his brother brings home a new wife and her son, Phil torments them until he finds himself exposed to the possibility of love.",
+    "genre": "Drama, Western",
     "director": "Jane Campion",
     "actors": "Benedict Cumberbatch\nKirsten Dunst\nJesse Plemons\nKodi Smit-McPhee",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/The_Power_of_the_Dog_%28film%29.jpg/250px-The_Power_of_the_Dog_%28film%29.jpg"
   },
-   {
+  {
     "title": "John Wick",
     "year": "2014",
-    "description": "",
-    "genre": "",
+    "description": "John Wick is a former hitman grieving the loss of his true love. When his home is broken into, robbed, and his dog killed, he is forced to return to action to exact revenge.",
+    "genre": "Action, Crime, Thriller",
     "director": "Chad Stahelski[i]",
     "actors": "Keanu Reeves\nMichael Nyqvist\nAlfie Allen\nAdrianne Palicki\nBridget Moynahan\nDean Winters\nIan McShane\nJohn Leguizamo\nWillem Dafoe",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/9/98/John_Wick_TeaserPoster.jpg/250px-John_Wick_TeaserPoster.jpg"
@@ -1038,8 +1037,8 @@
   {
     "title": "The Lego Movie",
     "year": "2014",
-    "description": "",
-    "genre": "",
+    "description": "An ordinary LEGO construction worker, thought to be the prophesied as \"special\", is recruited to join a quest to stop an evil tyrant from gluing the LEGO universe into eternal stasis.",
+    "genre": "Animation, Action, Adventure",
     "director": "Phil LordChristopher Miller",
     "actors": "Chris Pratt\nWill Ferrell\nElizabeth Banks\nWill Arnett\nNick Offerman\nAlison Brie\nCharlie Day\nLiam Neeson\nMorgan Freeman",
     "poster": "https://upload.wikimedia.org/wikipedia/en/1/10/The_Lego_Movie_poster.jpg"
@@ -1047,8 +1046,8 @@
   {
     "title": "Far from the Tree",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "Curiosity gets the better of a young raccoon whose frustrated parent attempts to keep them both safe.",
+    "genre": "Animation, Short, Adventure",
     "director": "Natalie Nourigat",
     "actors": "",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fe/Far_From_the_Tree_%28film%29.jpg/250px-Far_From_the_Tree_%28film%29.jpg"
@@ -1056,8 +1055,8 @@
   {
     "title": "The Hunger Games",
     "year": "2012",
-    "description": "",
-    "genre": "",
+    "description": "Katniss Everdeen voluntarily takes her younger sister's place in the Hunger Games: a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Gary Ross",
     "actors": "Jennifer Lawrence\nJosh Hutcherson\nLiam Hemsworth\nWoody Harrelson\nElizabeth Banks\nLenny Kravitz\nStanley Tucci\nDonald Sutherland",
     "poster": "https://upload.wikimedia.org/wikipedia/en/4/42/HungerGamesPoster.jpg"
@@ -1074,8 +1073,8 @@
   {
     "title": "Drive",
     "year": "2011",
-    "description": "",
-    "genre": "",
+    "description": "A mysterious Hollywood action film stuntman gets in trouble with gangsters when he tries to help his neighbor's husband rob a pawn shop while serving as his getaway driver.",
+    "genre": "Action, Drama",
     "director": "Nicolas Winding Refn",
     "actors": "Ryan Gosling\nCarey Mulligan\nBryan Cranston\nChristina Hendricks\nRon Perlman\nOscar Isaac\nAlbert Brooks",
     "poster": "https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg"
@@ -1084,7 +1083,7 @@
     "title": "Looking Glass",
     "year": "2018",
     "description": "Looking Glass is a 2018 American thriller film directed by Tim Hunter and starring Nicolas Cage and Robin Tunney. It was released in the United States by Momentum Pictures on February 16, 2018.",
-    "genre": "",
+    "genre": "Mystery, Thriller",
     "director": "Tim Hunter",
     "actors": "Nicolas Cage\nRobin Tunney\nMarc Blucas\nErnie Lively\nKassia Conway\nBill Bolender\nBarry Jay Minoff\nJacque Gray\nJason K. Wixom\nPascoalina Dunham\nKimmy Jimenez",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Looking_Glass_%28film%29.jpg/250px-Looking_Glass_%28film%29.jpg"
@@ -1101,8 +1100,8 @@
   {
     "title": "All Quiet on the Western Front",
     "year": "2022",
-    "description": "",
-    "genre": "",
+    "description": "A young German soldier's eagerness to serve his country quickly fades when he witnesses the horrors of combat on the Western Front during World War I.",
+    "genre": "Drama, History, War",
     "director": "Edward Berger",
     "actors": "Felix Kammerer\nAlbrecht Schuch\nDaniel Brühl",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/All_quiet_on_the_western_front_%282022_film%29.jpg/250px-All_quiet_on_the_western_front_%282022_film%29.jpg"
@@ -1119,8 +1118,8 @@
   {
     "title": "Klaus",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "A simple act of kindness always sparks another, even in a frozen, faraway place. When Smeerensburg's new postman, Jesper, befriends toymaker Klaus, their gifts melt an age-old feud and deliver a sleigh full of holiday traditions.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Sergio Pablos",
     "actors": "Jason Schwartzman\nJ. K. Simmons\nRashida Jones\nWill Sasso\nNeda Margrethe Labba\nSergio Pablos\nNorm Macdonald\nJoan Cusack",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/2/26/Klaus_poster.jpeg/250px-Klaus_poster.jpeg"
@@ -1137,8 +1136,8 @@
   {
     "title": "Tick, Tick... Boom!",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "On the brink of turning 30, a promising theater composer navigates love, friendship and the pressure to create something great before time runs out.",
+    "genre": "Biography, Comedy, Drama",
     "director": "Lin-Manuel Miranda",
     "actors": "Andrew Garfield\nAlexandra Shipp\nRobin de Jesús\nJoshua Henry\nJudith Light\nVanessa Hudgens",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/9/91/Tick_Tick_Boom_Movie_poster.jpg/250px-Tick_Tick_Boom_Movie_poster.jpg"
@@ -1164,8 +1163,8 @@
   {
     "title": "The Gray Man",
     "year": "2022",
-    "description": "",
-    "genre": "",
+    "description": "When the CIA's most skilled operative, whose true identity is known to none, accidentally uncovers dark agency secrets, a psychopathic former colleague puts a bounty on his head, setting off a global manhunt by international assas...",
+    "genre": "Action, Mystery, Thriller",
     "director": "Anthony RussoJoe Russo",
     "actors": "Ryan Gosling\nChris Evans\nAna de Armas\nJessica Henwick\nRegé-Jean Page\nWagner Moura\nJulia Butters\nDhanush\nAlfre Woodard\nBilly Bob Thornton",
     "poster": "https://upload.wikimedia.org/wikipedia/en/5/59/The_Gray_Man_poster.png"
@@ -1173,8 +1172,8 @@
   {
     "title": "Red Notice",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "An Interpol agent successfully tracks down the world's most wanted art thief with help from a rival thief. But nothing is as it seems as a series of double-crosses ensues.",
+    "genre": "Action, Comedy, Thriller",
     "director": "Rawson Marshall Thurber",
     "actors": "Dwayne Johnson\nRyan Reynolds\nGal Gadot\nRitu Arya\nChris Diamantopoulos",
     "poster": "https://upload.wikimedia.org/wikipedia/en/0/0c/Red_Notice_-_film_promotional_image.jpg"
@@ -1182,8 +1181,8 @@
   {
     "title": "The Sea Beast",
     "year": "2022",
-    "description": "",
-    "genre": "",
+    "description": "When a young girl stows away on the ship of a legendary sea monster hunter, they launch an epic journey into uncharted waters - and make history to boot.",
+    "genre": "Animation, Action, Adventure",
     "director": "Chris Williams",
     "actors": "Karl Urban\nZaris-Angel Hator\nJared Harris\nMarianne Jean-Baptiste",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/The_Sea_Beast_film_poster.png/250px-The_Sea_Beast_film_poster.png"
@@ -1191,8 +1190,8 @@
   {
     "title": "To All the Boys I've Loved Before",
     "year": "2018",
-    "description": "",
-    "genre": "",
+    "description": "A teenage girl's secret love letters are exposed and wreak havoc on her love life.",
+    "genre": "Comedy, Drama, Romance",
     "director": "Susan Johnson",
     "actors": "Lana Condor\nNoah Centineo\nJanel Parrish\nAnna Cathcart\nAndrew Bachelor\nTrezzo Mahoro\nMadeleine Arthur\nEmilija Baranac\nIsrael Broussard\nJohn Corbett",
     "poster": "https://upload.wikimedia.org/wikipedia/en/b/b8/To_All_the_Boys_I%27ve_Loved_Before_poster.jpg"
@@ -1200,8 +1199,8 @@
   {
     "title": "The Ballad of Buster Scruggs",
     "year": "2018",
-    "description": "",
-    "genre": "",
+    "description": "Six tales of life and violence in the Old West, following a singing gunslinger, a bank robber, a traveling impresario, an elderly prospector, a wagon train and a perverse pair of bounty hunters.",
+    "genre": "Comedy, Drama, Musical",
     "director": "Joel CoenEthan Coen",
     "actors": "Tyne Daly\nJames Franco\nBrendan Gleeson\nBill Heck\nGrainger Hines\nZoe Kazan\nHarry Melling\nLiam Neeson\nTim Blake Nelson\nJonjo O'Neill\nChelcie Ross\nSaul Rubinek\nTom Waits",
     "poster": "https://upload.wikimedia.org/wikipedia/en/1/13/The_Ballad_of_Buster_Scruggs_%282018_poster%29.png"
@@ -1245,8 +1244,8 @@
   {
     "title": "Avatar",
     "year": "2009",
-    "description": "",
-    "genre": "",
+    "description": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "genre": "Action, Adventure, Fantasy",
     "director": "James Cameron",
     "actors": "Sam Worthington\nZoe Saldana\nStephen Lang\nMichelle Rodriguez\nSigourney Weaver",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/d6/Avatar_%282009_film%29_poster.jpg"
@@ -1254,8 +1253,8 @@
   {
     "title": "Jurassic Park",
     "year": "1993",
-    "description": "",
-    "genre": "",
+    "description": "An industrialist invites some experts to visit his theme park of cloned dinosaurs. After a power failure, the creatures run loose, putting everyone's lives, including his grandchildren's, in danger.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Steven Spielberg",
     "actors": "Sam Neill\nLaura Dern\nJeff Goldblum\nRichard Attenborough\nBob Peck\nMartin Ferrero\nBD Wong\nSamuel L. Jackson\nWayne Knight\nJoseph Mazzello\nAriana Richards",
     "poster": "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg"
@@ -1263,8 +1262,8 @@
   {
     "title": "Here",
     "year": "2024",
-    "description": "",
-    "genre": "",
+    "description": "A generational story about families and the special place they inhabit, sharing in love, loss, laughter, and life.",
+    "genre": "Drama",
     "director": "Robert Zemeckis",
     "actors": "Tom Hanks\nRobin Wright\nPaul Bettany\nKelly Reilly",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Here_film_poster.jpg/250px-Here_film_poster.jpg"
@@ -1272,8 +1271,8 @@
   {
     "title": "Black Panther",
     "year": "2018",
-    "description": "",
-    "genre": "",
+    "description": "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Ryan Coogler",
     "actors": "Chadwick Boseman\nMichael B. Jordan\nLupita Nyong'o\nDanai Gurira\nMartin Freeman\nDaniel Kaluuya\nLetitia Wright\nWinston Duke\nSterling K. Brown\nAngela Bassett\nForest Whitaker\nAndy Serkis",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/d6/Black_Panther_%28film%29_poster.jpg"
@@ -1281,8 +1280,8 @@
   {
     "title": "Paprika",
     "year": "2006",
-    "description": "",
-    "genre": "",
+    "description": "When a machine that allows therapists to enter their patients' dreams is stolen, all hell breaks loose. Only a young female therapist, Paprika, can stop it.",
+    "genre": "Animation, Drama, Fantasy",
     "director": "Satoshi Kon",
     "actors": "Megumi Hayashibara\nTōru Emori\nKatsunosuke Hori\nTōru Furuya\nAkio Ōtsuka\nKōichi Yamadera\nHideyuki Tanaka",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/16/Paprikaposter.jpg/250px-Paprikaposter.jpg"
@@ -1290,8 +1289,8 @@
   {
     "title": "E.T. the Extra-Terrestrial",
     "year": "1982",
-    "description": "",
-    "genre": "",
+    "description": "A troubled child summons the courage to help a friendly alien escape from Earth and return to his home planet.",
+    "genre": "Adventure, Family, Sci-Fi",
     "director": "Steven Spielberg",
     "actors": "Dee Wallace\nPeter Coyote\nHenry Thomas",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/E_t_the_extra_terrestrial_ver3.jpg/250px-E_t_the_extra_terrestrial_ver3.jpg"
@@ -1308,7 +1307,7 @@
   {
     "title": "Jurassic World",
     "year": "2015",
-    "description": "",
+    "description": "A new theme park, built on the original site of Jurassic Park, creates a genetically modified hybrid dinosaur, the Indominus Rex, which escapes containment and goes on a killing spree.",
     "genre": "Soundtrack",
     "director": "",
     "actors": "",
@@ -1326,8 +1325,8 @@
   {
     "title": "Beauty and the Beast",
     "year": "2017",
-    "description": "",
-    "genre": "",
+    "description": "A prince cursed to spend his days as a hideous monster sets out to regain his humanity by earning a young woman's love.",
+    "genre": "Animation, Family, Fantasy",
     "director": "Bill Condon",
     "actors": "Emma Watson\nDan Stevens\nLuke Evans\nKevin Kline\nJosh Gad\nEwan McGregor\nStanley Tucci\nAudra McDonald\nGugu Mbatha-Raw\nIan McKellen\nEmma Thompson",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/d6/Beauty_and_the_Beast_2017_poster.jpg"
@@ -1335,8 +1334,8 @@
   {
     "title": "Finding Nemo",
     "year": "2003",
-    "description": "",
-    "genre": "",
+    "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Andrew Stanton",
     "actors": "Albert Brooks\nEllen DeGeneres\nAlexander Gould\nWillem Dafoe\nGeoffrey Rush\nBill Hunter",
     "poster": "https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg"
@@ -1344,8 +1343,8 @@
   {
     "title": "Harry Potter and the Deathly Hallows – Part 2",
     "year": "2011",
-    "description": "",
-    "genre": "",
+    "description": "As the battle between the forces of good and evil in the wizarding world escalates, Harry Potter draws ever closer to his final confrontation with Voldemort.",
+    "genre": "Adventure, Family, Fantasy",
     "director": "David Yates",
     "actors": "Daniel Radcliffe\nRupert Grint\nEmma Watson\nHelena Bonham Carter\nRobbie Coltrane\nWarwick Davis\nRalph Fiennes\nMichael Gambon\nJohn Hurt\nJason Isaacs\nGary Oldman\nAlan Rickman\nMaggie Smith\nDavid Thewlis\nJulie Walters",
     "poster": "https://upload.wikimedia.org/wikipedia/en/d/df/Harry_Potter_and_the_Deathly_Hallows_%E2%80%93_Part_2.jpg"
@@ -1371,7 +1370,7 @@
   {
     "title": "Toy Story 3",
     "year": "2010",
-    "description": "",
+    "description": "The toys are mistakenly delivered to a day-care center instead of the attic right before Andy leaves for college, and it's up to Woody to convince the other toys that they weren't abandoned and to return home.",
     "genre": "Score",
     "director": "Lee Unkrich",
     "actors": "Tom Hanks\nTim Allen\nJoan Cusack\nDon Rickles\nWallace Shawn\nJohn Ratzenberger\nEstelle Harris\nNed Beatty\nMichael Keaton\nJodi Benson\nJohn Morris",
@@ -1380,8 +1379,8 @@
   {
     "title": "Wonder Woman",
     "year": "2017",
-    "description": "",
-    "genre": "",
+    "description": "When a pilot crashes and tells of conflict in the outside world, Diana, an Amazonian warrior in training, leaves home to fight a war, discovering her full powers and true destiny.",
+    "genre": "Action, Adventure, Fantasy",
     "director": "Patty Jenkins",
     "actors": "Gal Gadot\nChris Pine\nRobin Wright\nDanny Huston\nDavid Thewlis\nConnie Nielsen\nElena Anaya",
     "poster": "https://upload.wikimedia.org/wikipedia/en/b/b0/Wonder_Woman_%282017_film%29_poster.jpg"
@@ -1389,8 +1388,8 @@
   {
     "title": "Captain Marvel",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Anna BodenRyan Fleck",
     "actors": "Brie Larson\nSamuel L. Jackson\nBen Mendelsohn\nDjimon Hounsou\nLee Pace\nLashana Lynch\nGemma Chan\nAnnette Bening\nClark Gregg\nJude Law",
     "poster": "https://upload.wikimedia.org/wikipedia/en/4/4e/Captain_Marvel_%28film%29_poster.jpg"
@@ -1407,8 +1406,8 @@
   {
     "title": "Coco",
     "year": "2017",
-    "description": "",
-    "genre": "",
+    "description": "Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer.",
+    "genre": "Animation, Adventure, Drama",
     "director": "Lee Unkrich",
     "actors": "Anthony Gonzalez\nGael García Bernal\nBenjamin Bratt\nAlanna Ubach\nRenée Victor\nAna Ofelia Murguía\nEdward James Olmos",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/98/Coco_%282017_film%29_poster.jpg"
@@ -1416,8 +1415,8 @@
   {
     "title": "Moana",
     "year": "2026",
-    "description": "",
-    "genre": "",
+    "description": "In ancient Polynesia, when a terrible curse incurred by the demigod Maui reaches Moana's island, she answers the Ocean's call to seek out Maui to set things right.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Thomas Kail",
     "actors": "Catherine Laga'aia\nDwayne Johnson\nJohn Tui\nFrankie Adams\nRena Owen",
     "poster": ""
@@ -1425,8 +1424,8 @@
   {
     "title": "The Secret Life of Pets",
     "year": "2016",
-    "description": "",
-    "genre": "",
+    "description": "The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Chris Renaud",
     "actors": "Louis C.K.\nEric Stonestreet\nKevin Hart\nJenny Slate\nEllie Kemper\nLake Bell\nDana Carvey\nHannibal Buress\nBobby Moynihan\nSteve Coogan\nAlbert Brooks",
     "poster": "https://upload.wikimedia.org/wikipedia/en/6/64/The_Secret_Life_of_Pets_poster.jpg"
@@ -1434,7 +1433,7 @@
   {
     "title": "Deadpool",
     "year": "2016",
-    "description": "",
+    "description": "A wisecracking mercenary gets experimented on and becomes immortal yet hideously scarred, and sets out to track down the man who ruined his looks.",
     "genre": "Marvel Entertainment\nKinberg Genre\nThe Donners' Company",
     "director": "Tim Miller",
     "actors": "Ryan Reynolds\nMorena Baccarin\nT.J. Miller\nEd Skrein\nBrianna Hildebrand\nLeslie Uggams\nKaran Soni\nGina Carano\nJed Rees\nStefan Kapičić",
@@ -1443,8 +1442,8 @@
   {
     "title": "Venom",
     "year": "2018",
-    "description": "",
-    "genre": "",
+    "description": "A failed reporter is bonded to an alien entity, one of many symbiotes who have invaded Earth. But the being takes a liking to Earth and decides to protect it.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Ruben Fleischer",
     "actors": "Tom Hardy\nMichelle Williams\nRiz Ahmed\nScott Haze\nReid Scott",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Venom_%282018_film%29_poster.png/250px-Venom_%282018_film%29_poster.png"
@@ -1470,8 +1469,8 @@
   {
     "title": "Aladdin",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "A kind-hearted street urchin and a power-hungry Grand Vizier vie for a magic lamp that has the power to make their deepest wishes come true.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Guy Ritchie",
     "actors": "Will Smith\nMena Massoud\nNaomi Scott\nMarwan Kenzari\nNavid Negahban\nNasim Pedrad\nBilly Magnussen",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/9a/Aladdin_%28Official_2019_Film_Poster%29.png"
@@ -1488,8 +1487,8 @@
   {
     "title": "Gravity",
     "year": "2013",
-    "description": "",
-    "genre": "",
+    "description": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+    "genre": "Drama, Sci-Fi, Thriller",
     "director": "Alfonso Cuarón",
     "actors": "Sandra BullockGeorge Clooney",
     "poster": "https://upload.wikimedia.org/wikipedia/en/f/f6/Gravity_Poster.jpg"
@@ -1497,7 +1496,7 @@
   {
     "title": "The Martian",
     "year": "2015",
-    "description": "",
+    "description": "An astronaut becomes stranded on Mars after his team assumes him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive and can survive until a potential rescue.",
     "genre": "Scott Free Productions\nKinberg Genre",
     "director": "Ridley Scott",
     "actors": "Matt Damon\nJessica Chastain\nKristen Wiig\nJeff Daniels\nMichael Peña\nKate Mara\nSean Bean\nSebastian Stan\nAksel Hennie\nChiwetel Ejiofor",
@@ -1506,8 +1505,8 @@
   {
     "title": "Rogue Trader",
     "year": "1999",
-    "description": "",
-    "genre": "",
+    "description": "The story of Nick Leeson, an ambitious investment broker who singlehandedly bankrupted one of the oldest and most important banks in Britain.",
+    "genre": "Crime, Drama, History",
     "director": "James Dearden",
     "actors": "Ewan McGregorAnna Friel",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/9/91/Rogue-Trader-Video-Poster.jpg/250px-Rogue-Trader-Video-Poster.jpg"
@@ -1533,8 +1532,8 @@
   {
     "title": "Toy Story",
     "year": "1995",
-    "description": "",
-    "genre": "",
+    "description": "A cowboy doll is profoundly jealous when a new spaceman action figure supplants him as the top toy in a boy's bedroom. When circumstances separate them from their owner, the duo have to put aside their differences to return to him.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "John Lasseter",
     "actors": "Tom Hanks\nTim Allen\nDon Rickles\nJim Varney\nWallace Shawn\nJohn Ratzenberger\nAnnie Potts",
     "poster": "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg"
@@ -1542,8 +1541,8 @@
   {
     "title": "Black Widow",
     "year": "2021",
-    "description": "",
-    "genre": "",
+    "description": "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Cate Shortland",
     "actors": "Scarlett Johansson\nFlorence Pugh\nDavid Harbour\nO-T Fagbenle\nOlga Kurylenko\nWilliam Hurt\nRay Winstone\nRachel Weisz",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/Black_Widow_%282021_film%29_poster.jpg/250px-Black_Widow_%282021_film%29_poster.jpg"
@@ -1560,8 +1559,8 @@
   {
     "title": "Doctor Strange",
     "year": "2016",
-    "description": "",
-    "genre": "",
+    "description": "While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.",
+    "genre": "Action, Adventure, Fantasy",
     "director": "Scott Derrickson",
     "actors": "Benedict Cumberbatch\nChiwetel Ejiofor\nRachel McAdams\nBenedict Wong\nMichael Stuhlbarg\nBenjamin Bratt\nScott Adkins\nMads Mikkelsen\nTilda Swinton",
     "poster": "https://upload.wikimedia.org/wikipedia/en/a/a1/Doctor_Strange_%282016_film%29_poster.jpg"
@@ -1596,7 +1595,7 @@
   {
     "title": "Chocolate",
     "year": "2005",
-    "description": "",
+    "description": "An autistic girl with powerful martial art skills looks to settle her ailing mother's debts by seeking out the ruthless gangs that owe her family money.",
     "genre": "Feature Film soundtrack",
     "director": "Vivek Agnihotri",
     "actors": "Anil Kapoor\nSunil Shetty\nIrrfan Khan\nEmraan Hashmi\nArshad Warsi\nTanushree Dutta\nEmma Bunton\nSushma Reddy",
@@ -1614,8 +1613,8 @@
   {
     "title": "Modern Times",
     "year": "1936",
-    "description": "",
-    "genre": "",
+    "description": "The Tramp struggles to live in modern industrial society with the help of a young homeless woman.",
+    "genre": "Comedy, Drama, Romance",
     "director": "Charlie Chaplin",
     "actors": "Charlie Chaplin   Paulette Goddard  Henry Bergman  Tiny Sandford  Chester Conklin",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Modern_Times_poster.jpg/250px-Modern_Times_poster.jpg"
@@ -1650,8 +1649,8 @@
   {
     "title": "Sunset Boulevard",
     "year": "1950",
-    "description": "",
-    "genre": "",
+    "description": "A screenwriter develops a dangerous relationship with a faded film star determined to make a triumphant return.",
+    "genre": "Drama, Film-Noir",
     "director": "Billy Wilder",
     "actors": "William Holden\nGloria Swanson\nErich von Stroheim\nNancy Olson\nFred Clark\nLloyd Gough\nJack Webb",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Sunset_Boulevard_%281950_poster%29.jpg/250px-Sunset_Boulevard_%281950_poster%29.jpg"
@@ -1704,8 +1703,8 @@
   {
     "title": "Full Metal Jacket",
     "year": "1987",
-    "description": "",
-    "genre": "",
+    "description": "A pragmatic U.S. Marine observes the dehumanizing effects the Vietnam War has on his fellow recruits from their brutal boot camp training to the bloody street fighting in Hue.",
+    "genre": "Drama, War",
     "director": "Stanley Kubrick",
     "actors": "Matthew Modine\nAdam Baldwin\nVincent D'Onofrio\nLee Ermey\nDorian Harewood\nArliss Howard\nKevyn Major Howard\nEd O'Ross",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Full_Metal_Jacket_poster.jpg/250px-Full_Metal_Jacket_poster.jpg"
@@ -1749,8 +1748,8 @@
   {
     "title": "Sweet Charity",
     "year": "1969",
-    "description": "",
-    "genre": "",
+    "description": "Taxi dancer Charity continues to have faith in the human race despite endless disappointments at its hands, and hopes to finally meet the man to romance her away from her sleazy life. Just maybe, handsome Oscar will be the one to ...",
+    "genre": "Comedy, Drama, Music",
     "director": "Bob Fosse",
     "actors": "Shirley MacLaine\nJohn McMartin\nChita Rivera\nPaula Kelly\nStubby Kaye\nSammy Davis Jr.\nRicardo Montalbán",
     "poster": "https://upload.wikimedia.org/wikipedia/en/3/33/Poster_of_Sweet_Charity_%28film%29.jpg"
@@ -1758,8 +1757,8 @@
   {
     "title": "Gerry",
     "year": "2002",
-    "description": "",
-    "genre": "",
+    "description": "The friendship between two young men is tested when they go for a hike in the desert but forget to bring any food or water.",
+    "genre": "Adventure, Drama, Mystery",
     "director": "Gus Van Sant",
     "actors": "Matt Damon\nCasey Affleck",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Gerry_%282002_movie_poster%29.jpg/250px-Gerry_%282002_movie_poster%29.jpg"
@@ -1767,7 +1766,7 @@
   {
     "title": "Once Upon a Time in America",
     "year": "1984",
-    "description": "",
+    "description": "A former Prohibition-era Jewish gangster returns to the Lower East Side of Manhattan 35 years later, where he must once again confront the ghosts and regrets of his old life.",
     "genre": "Contemporary classical",
     "director": "Sergio Leone",
     "actors": "Robert De Niro\nJames Woods\nElizabeth McGovern\nJoe Pesci\nBurt Young\nTuesday Weld\nTreat Williams",
@@ -1791,16 +1790,16 @@
     "actors": "Henry Cavill\nAmy Adams\nMichael Shannon\nKevin Costner\nDiane Lane\nLaurence Fishburne\nAntje Traue\nAyelet Zurer\nChristopher Meloni\nRussell Crowe",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Man_of_Steel_%28film%29_poster.jpg/250px-Man_of_Steel_%28film%29_poster.jpg"
   },
-    {
+  {
     "title": "Hearts of Darkness: A Filmmaker's Apocalypse",
     "year": "1991",
-    "description": "",
-    "genre": "",
+    "description": "Documentary that chronicles how Francis Ford Coppola's Apocalypse Now (1979) was plagued by extraordinary script, shooting, budget, and casting problems - nearly destroying the life and career of the celebrated director.",
+    "genre": "Documentary",
     "director": "Fax Bahr\nGeorge Hickenlooper\nDocumentary footage:Eleanor Coppola",
     "actors": "Eleanor Coppola\nFrancis Ford Coppola\nRobert Duvall\nDennis Hopper\nGeorge Lucas\nJohn Milius\nMartin Sheen",
     "poster": "https://upload.wikimedia.org/wikipedia/en/7/71/Hearts_of_Darkness%2C_A_Filmmaker%27s_Apocalypse_Poster.jpeg"
   },
-    {
+  {
     "title": "A Clockwork Orange",
     "year": "1971",
     "description": "",
@@ -1809,16 +1808,16 @@
     "actors": "Malcolm McDowell\nPatrick Magee\nAdrienne Corri\nMiriam Karlin",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/73/A_Clockwork_Orange_%281971%29.png/250px-A_Clockwork_Orange_%281971%29.png"
   },
-    {
+  {
     "title": "Sunshine",
     "year": "2007",
-    "description": "",
-    "genre": "",
+    "description": "A team of international astronauts is sent on a dangerous mission to reignite the dying Sun with a nuclear fission bomb in 2057.",
+    "genre": "Sci-Fi, Thriller",
     "director": "Danny Boyle",
     "actors": "Rose Byrne\nCliff Curtis\nChris Evans\nTroy Garity\nCillian Murphy\nHiroyuki Sanada\nMark Strong\nBenedict Wong\nMichelle Yeoh",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Sunshine_poster.jpg/250px-Sunshine_poster.jpg"
   },
-    {
+  {
     "title": "Trainspotting",
     "year": "1996",
     "description": "",
@@ -1827,7 +1826,7 @@
     "actors": "Ewan McGregor\nEwen Bremner\nJonny Lee Miller\nKevin McKidd\nRobert Carlyle\nKelly Macdonald",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/71/Trainspotting_ver2.jpg/250px-Trainspotting_ver2.jpg"
   },
-    {
+  {
     "title": "Ghost Story",
     "year": "1981",
     "description": "",
@@ -1836,7 +1835,7 @@
     "actors": "Fred Astaire\nMelvyn Douglas\nDouglas Fairbanks Jr.\nJohn Houseman\nCraig Wasson\nPatricia Neal\nAlice Krige",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Ghost_Story.jpg/250px-Ghost_Story.jpg"
   },
-    {
+  {
     "title": "The Red Shoes",
     "year": "1948",
     "description": "",
@@ -1845,7 +1844,7 @@
     "actors": "Anton Walbrook\nMarius Goring\nMoira Shearer\nLéonide Massine\nRobert Helpmann\nAlbert Bassermann\nEsmond Knight\nLudmilla Tchérina",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/The_Red_Shoes_%281948_movie_poster%29.jpg/250px-The_Red_Shoes_%281948_movie_poster%29.jpg"
   },
-    {
+  {
     "title": "The Diving Bell and the Butterfly",
     "year": "2007",
     "description": "",
@@ -1854,16 +1853,16 @@
     "actors": "Mathieu Amalric\nEmmanuelle Seigner\nMarie-Josée Croze\nAnne Consigny\nMax von Sydow",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/DivingBellButterflyMP.jpg/250px-DivingBellButterflyMP.jpg"
   },
-    {
+  {
     "title": "Persepolis",
     "year": "2007",
-    "description": "",
-    "genre": "",
+    "description": "A precocious and outspoken Iranian girl grows up during the Islamic Revolution.",
+    "genre": "Animation, Biography, Drama",
     "director": "Marjane Satrapi\nVincent Paronnaud",
     "actors": "Chiara Mastroianni\nCatherine Deneuve\nDanielle Darrieux\nSimon Abkarian\nGabriele Lopes",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/Persepolis_film.jpg/250px-Persepolis_film.jpg"
   },
-    {
+  {
     "title": "Run Lola Run",
     "year": "1998",
     "description": "",
@@ -1872,16 +1871,16 @@
     "actors": "Franka Potente\nMoritz Bleibtreu\nHerbert Knaup\nNina Petri\nJoachim Król\nArmin Rohde\nHeino Ferch\nSuzanne von Borsody\nSebastian Schipper",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Lola_Rennt_poster.jpg/250px-Lola_Rennt_poster.jpg"
   },
-    {
+  {
     "title": "Avengers: Endgame",
     "year": "2019",
-    "description": "",
-    "genre": "",
+    "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Anthony RussoJoe Russo",
     "actors": "Robert Downey Jr.\nChris Evans\nMark Ruffalo\nChris Hemsworth\nScarlett Johansson\nJeremy Renner\nDon Cheadle\nPaul Rudd\nBrie Larson\nKaren Gillan\nDanai Gurira\nBenedict Wong\nJon Favreau\nBradley Cooper\nGwyneth Paltrow\nJosh Brolin",
     "poster": "https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg"
   },
-    {
+  {
     "title": "Frozen",
     "year": "2013",
     "description": "",
@@ -1890,7 +1889,7 @@
     "actors": "Kristen Bell\nIdina Menzel\nJonathan Groff\nJosh Gad\nSantino Fontana",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Frozen_%282013_film%29_poster.jpg/250px-Frozen_%282013_film%29_poster.jpg"
   },
-    {
+  {
     "title": "Harry Potter and the Philosopher's Stone",
     "year": "2001",
     "description": "",
@@ -1899,11 +1898,11 @@
     "actors": "Daniel Radcliffe\nRupert Grint\nEmma Watson\nJohn Cleese\nRobbie Coltrane\nWarwick Davis\nRichard Griffiths\nRichard Harris\nIan Hart\nJohn Hurt\nAlan Rickman\nFiona Shaw\nMaggie Smith\nJulie Walters",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_banner.jpg/250px-Harry_Potter_and_the_Philosopher%27s_Stone_banner.jpg"
   },
-    {
+  {
     "title": "The Return of the King",
-    "year": "",
-    "description": "",
-    "genre": "",
+    "year": "1980",
+    "description": "Two Hobbits struggle to destroy the Ring in Mount Doom while their friends desperately fight evil Lord Sauron's forces in a final battle.",
+    "genre": "Animation, Adventure, Family",
     "director": "Jules Bass\nArthur Rankin Jr.",
     "actors": "Orson Bean\nJohn Huston\nWilliam Conrad\nRoddy McDowall\nTheodore Bikel",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/b/be/The_Return_of_the_King%2C_1980_film.jpg/250px-The_Return_of_the_King%2C_1980_film.jpg"
@@ -1911,22 +1910,22 @@
   {
     "title": "Minions",
     "year": "2015",
-    "description": "",
-    "genre": "",
+    "description": "Minions Stuart, Kevin, and Bob are recruited by Scarlet Overkill, a supervillain who, alongside her inventor husband Herb, hatches a plot to take over the world.",
+    "genre": "Animation, Adventure, Comedy",
     "director": "Pierre Coffin\nKyle Balda",
     "actors": "Sandra Bullock\nJon Hamm\nMichael Keaton\nAllison Janney\nSteve Coogan\nJennifer Saunders\nGeoffrey Rush",
     "poster": "https://upload.wikimedia.org/wikipedia/en/1/19/Minions_%282015_film%29.jpg"
   },
-    {
+  {
     "title": "Beauty and the Beast",
     "year": "1991",
-    "description": "",
-    "genre": "",
+    "description": "A prince cursed to spend his days as a hideous monster sets out to regain his humanity by earning a young woman's love.",
+    "genre": "Animation, Family, Fantasy",
     "director": "Gary Trousdale\nKirk Wise",
     "actors": "Paige O'Hara\nRobby Benson\nRichard White\nJerry Orbach\nDavid Ogden Stiers\nAngela Lansbury\nRex Everhart\nJesse Corti\nJo Anne Worley",
     "poster": "https://upload.wikimedia.org/wikipedia/en/5/5e/Beauty_and_the_Beast_%281991_film%29_poster.jpg"
   },
-    {
+  {
     "title": "Shrek",
     "year": "2001",
     "description": "",
@@ -1935,7 +1934,7 @@
     "actors": "Mike Myers\nEddie Murphy\nCameron Diaz\nJohn Lithgow",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Shrek_%282001_animated_feature_film%29.jpg/250px-Shrek_%282001_animated_feature_film%29.jpg"
   },
-    {
+  {
     "title": "Despicable Me",
     "year": "2010",
     "description": "",
@@ -1944,7 +1943,7 @@
     "actors": "Steve Carell\nJason Segel\nRussell Brand\nKristen Wiig\nMiranda Cosgrove\nWill Arnett\nDanny McBride\nJack McBrayer\nJulie Andrews",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Despicable_Me_%282010_animated_feature_film%29.jpg/250px-Despicable_Me_%282010_animated_feature_film%29.jpg"
   },
-    {
+  {
     "title": "Avengers: Infinity War",
     "year": "2018",
     "description": "",
@@ -1953,7 +1952,7 @@
     "actors": "Robert Downey Jr.\nChris Hemsworth\nMark Ruffalo\nChris Evans\nScarlett Johansson\nBenedict Cumberbatch\nDon Cheadle\nTom Holland\nChadwick Boseman\nPaul Bettany\nElizabeth Olsen\nAnthony Mackie\nSebastian Stan\nDanai Gurira\nLetitia Wright\nDave Bautista\nZoe Saldaña\nJosh Brolin\nChris Pratt",
     "poster": "https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg"
   },
-    {
+  {
     "title": "Shrek 2",
     "year": "2004",
     "description": "",
@@ -1962,7 +1961,7 @@
     "actors": "Mike Myers\nEddie Murphy\nCameron Diaz\nJulie Andrews\nAntonio Banderas\nJohn Cleese\nRupert Everett\nJennifer Saunders",
     "poster": "https://upload.wikimedia.org/wikipedia/en/b/b9/Shrek_2_poster.jpg"
   },
-    {
+  {
     "title": "The Twilight Saga",
     "year": "",
     "description": "",
@@ -1971,16 +1970,16 @@
     "actors": "Kristen Stewart\nRobert Pattinson\nTaylor Lautner\n(See cast)",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Twilight2.png/250px-Twilight2.png"
   },
-    {
+  {
     "title": "Transformers",
     "year": "2007",
-    "description": "",
-    "genre": "",
+    "description": "An ancient struggle between two Cybertronian races, the heroic Autobots and the evil Decepticons, comes to Earth, with a clue to the ultimate power held by a teenager.",
+    "genre": "Action, Adventure, Sci-Fi",
     "director": "Michael Bay \nTravis Knight \nSteven Caple Jr. ",
     "actors": "",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Logo_of_Transformers.png/250px-Logo_of_Transformers.png"
   },
-    {
+  {
     "title": "Trolls",
     "year": "2016",
     "description": "",
@@ -1989,7 +1988,7 @@
     "actors": "Anna Kendrick\nJustin Timberlake\nZooey Deschanel\nRussell Brand\nJames Corden\nGwen Stefani",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/98/Trolls_%28film%29_poster.png"
   },
-    {
+  {
     "title": "Kung Fu Panda",
     "year": "2008",
     "description": "",
@@ -1998,7 +1997,7 @@
     "actors": "Jack Black",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/76/Kungfupanda.jpg/250px-Kungfupanda.jpg"
   },
-   {
+  {
     "title": "Justice League",
     "year": "2017",
     "description": "",
@@ -2007,34 +2006,34 @@
     "actors": "Ben Affleck\nHenry Cavill\nGal Gadot\nEzra Miller\nJason Momoa\nRay Fisher\nAmy Adams\nJeremy Irons\nDiane Lane\nCiarán Hinds\nConnie Nielsen\nJ. K. Simmons",
     "poster": "https://upload.wikimedia.org/wikipedia/en/6/6b/Justice_League_%28film%29_poster.jpg"
   },
-    {
+  {
     "title": "The Ugly American",
     "year": "1963",
     "description": "The Ugly American is a 1963 American adventure film directed by George Englund, written by Stewart Stern, and starring Marlon Brando, Sandra Church, Eiji Okada, Pat Hingle, Judson Pratt, Reiko Sato, and Arthur Hill. It is based on the 1958 novel The Ugly American by Eugene Burdick and William Lederer. The film was released on April 2, 1963, by Universal Pictures.[2][3][4]",
-    "genre": "",
+    "genre": "Adventure, Drama, Thriller",
     "director": "George Englund",
     "actors": "Marlon Brando\nSandra Church\nEiji Okada\nPat Hingle\nJudson Pratt\nReiko Sato\nArthur Hill",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/The_Ugly_American_poster.jpg/250px-The_Ugly_American_poster.jpg"
   },
-    {
+  {
     "title": "My Wonderful Life",
     "year": "2021",
     "description": "My Wonderful Life (Polish: Moje wspaniale zycie) is a 2021 Polish romantic comedy drama film written and directed by Lukasz Grzegorzek. The film stars Agata Buzek, Jacek Braciak and Adam Woronowicz. The film premiered at the 2021 New Horizons Film Festival and later on Polish Film Festival winning Best Director Award. My Wonderful Life was released in selected theatres on October 29, 2021, in Poland.[2] It premiered internationally on Netflix on February 28, 2022.[3]",
-    "genre": "",
+    "genre": "Comedy, Drama, Romance",
     "director": "Lukasz Grzegorzek",
     "actors": "Agata Buzek\nJacek Braciak\nAdam Woronowicz",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/91/My_Wonderful_Life_%28film%29.jpeg"
   },
-    {
+  {
     "title": "Léon: The Professional",
     "year": "1994",
-    "description": "",
-    "genre": "",
+    "description": "An Italian hit man protects a New York orphan.",
+    "genre": "Action, Crime, Drama",
     "director": "Luc Besson",
     "actors": "Jean Reno\nGary Oldman\nNatalie Portman\nDanny Aiello",
     "poster": "https://upload.wikimedia.org/wikipedia/en/0/03/Leon-poster.jpg"
   },
-    {
+  {
     "title": "Harakiri",
     "year": "1962",
     "description": "",
@@ -2043,7 +2042,7 @@
     "actors": "Tatsuya Nakadai\nRentarō Mikuni\nAkira Ishihama [ja]\nShima Iwashita\nTetsurō Tamba",
     "poster": "https://upload.wikimedia.org/wikipedia/en/f/fd/Harakiri_Poster.jpg"
   },
-    {
+  {
     "title": "To Kill a Mockingbird",
     "year": "1962",
     "description": "",
@@ -2052,11 +2051,11 @@
     "actors": "Gregory Peck\nMary Badham\nPhillip Alford\nRuth White\nPaul Fix\nBrock Peters\nFrank Overton\nJames Anderson",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/To_Kill_a_Mockingbird_%281963_US_theatrical_poster%29.jpg/250px-To_Kill_a_Mockingbird_%281963_US_theatrical_poster%29.jpg"
   },
-    {
+  {
     "title": "Princess Mononoke",
     "year": "1997",
-    "description": "",
-    "genre": "",
+    "description": "While seeking to cure himself of a curse, young warrior Ashitaka stumbles into a conflict between the people of Iron Town and Princess Mononoke, a girl raised by wolves, who will stop at nothing to prevent the destruction of her h...",
+    "genre": "Animation, Adventure, Fantasy",
     "director": "Hayao Miyazaki",
     "actors": "Yōji Matsuda\nYuriko Ishida\nYūko Tanaka\nKaoru Kobayashi\nMasahiko Nishimura\nTsunehiko Kamijō\nAkihiro Miwa\nMitsuko Mori\nHisaya Morishige",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Princess_Mononoke_Japanese_poster.png/250px-Princess_Mononoke_Japanese_poster.png"
