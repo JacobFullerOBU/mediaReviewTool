@@ -453,6 +453,12 @@ async function showItemDetails(item) {
         const reviewError = modal.querySelector('#reviewError');
         reviewError.textContent = '';
 
+        // Guard: Ensure item.id (mediaId) is defined and not empty
+        if (!item.id) {
+            reviewError.textContent = 'Error: Cannot submit review. Media ID is missing.';
+            return;
+        }
+
         if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10) {
             reviewError.textContent = 'Please enter a review and a rating between 1 and 10.';
             return;
