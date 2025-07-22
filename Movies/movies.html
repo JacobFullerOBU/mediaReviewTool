@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies - MediaReview</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/cards.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>MediaReview</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">Movies</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-login" id="loginBtn">Login</button>
+                <button class="btn btn-register" id="registerBtn">Register</button>
+                <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover & Review Movies</h1>
+            <p>Browse, search, and review movies by genre. Find your next favorite film!</p>
+            <div style="margin-bottom: 18px;">
+                <input type="text" id="movieSearchInput" placeholder="Search movies by title, actor, or director..." style="width: 100%; max-width: 400px; padding: 8px; font-size: 1em;">
+            </div>
+            <button class="btn btn-primary btn-large" id="exploreBtn">Explore Movies</button>
+        </div>
+    </section>
+
+    <!-- Movies Content Section -->
+    <section class="popular-content">
+        <div class="container">
+            <h2>Browse by Genre</h2>
+            <div class="genre-tabs" id="genreTabs">
+                <!-- Genre buttons will be populated by JS -->
+            </div>
+            <div class="cards-container" id="movieCardsContainer">
+                <!-- Movie cards will be populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MediaReview. All rights reserved.</p>
+            <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+                <button class="btn btn-primary" id="contactBtn" style="padding:8px 18px; font-size:1em;">Contact</button>
+                <a href="../Top Reviewers/topReviewers.html" id="leaderboardLink" style="color:#007bff; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="movies.js"></script>
+    <script type="module" src="../scripts/auth.js"></script>
+</body>
+</html>
