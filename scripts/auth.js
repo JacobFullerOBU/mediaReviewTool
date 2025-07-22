@@ -1,6 +1,26 @@
+// --- Firebase Auth State UI Sync for Home Page ---
+import { auth } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+function updateAuthUI(user) {
+  const loginBtn = document.getElementById('loginBtn');
+  const registerBtn = document.getElementById('registerBtn');
+  const profileBtn = document.getElementById('profileBtn');
+  if (!loginBtn || !registerBtn || !profileBtn) return;
+  if (user) {
+    profileBtn.style.display = '';
+    loginBtn.style.display = 'none';
+    registerBtn.style.display = 'none';
+  } else {
+    profileBtn.style.display = 'none';
+    loginBtn.style.display = '';
+    registerBtn.style.display = '';
+  }
+}
+
+onAuthStateChanged(auth, updateAuthUI);
 
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import { auth } from "./firebase.js";
 
 // Authentication functionality
 
@@ -91,16 +111,23 @@ function initModals() {
 function initAuthButtons() {
     const loginBtn = document.getElementById('loginBtn');
     const registerBtn = document.getElementById('registerBtn');
-    
+    const profileBtn = document.getElementById('profileBtn');
+
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
             showModal(document.getElementById('loginModal'));
         });
     }
-    
+
     if (registerBtn) {
         registerBtn.addEventListener('click', function() {
             showModal(document.getElementById('registerModal'));
+        });
+    }
+
+    if (profileBtn) {
+        profileBtn.addEventListener('click', function() {
+            window.location.href = 'profile/index.html';
         });
     }
 }
@@ -206,30 +233,6 @@ function checkAuthState() {
     }
 }
 
-// Update authentication UI
-function updateAuthUI(userData) {
-    const authButtons = document.querySelector('.auth-buttons');
-    if (authButtons) {
-        // Show greeting, logout, and profile button
-        authButtons.innerHTML = `
-            <span class="user-greeting">Hello, ${userData.username}!</span>
-            <button class="btn btn-profile" id="profileBtn">Profile</button>
-            <button class="btn btn-logout" id="logoutBtn">Logout</button>
-        `;
-        // Add profile navigation
-        const profileBtn = document.getElementById('profileBtn');
-        if (profileBtn) {
-            profileBtn.addEventListener('click', function() {
-                window.location.href = 'profile/index.html';
-            });
-        }
-        // Add logout functionality
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', handleLogout);
-        }
-    }
-}
 
 // Handle logout
 function handleLogout() {

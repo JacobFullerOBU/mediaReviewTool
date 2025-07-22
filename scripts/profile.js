@@ -1,20 +1,14 @@
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { auth, db as realtimeDb } from "./firebase.js";
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
-  authDomain: "mediareviews-3cf32.firebaseapp.com",
-  // ...other config values from Firebase Console...
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+
+// Use Firestore from the default app
+const db = getFirestore();
 
 const profileInfo = document.getElementById('profileInfo');
 const userReviews = document.getElementById('userReviews');
@@ -26,7 +20,7 @@ const backHomeBtn = document.getElementById('backHomeBtn');
 if (backHomeBtn) {
     backHomeBtn.onclick = function(e) {
         e.preventDefault();
-        window.location.replace('../index.html');
+        window.location.href = '../index.html';
     };
 }
 
