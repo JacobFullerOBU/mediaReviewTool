@@ -10,15 +10,18 @@
     <link rel="stylesheet" href="../styles/auth.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+        <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <h1>MediaReview</h1>
+                <a href="../index.html" class="nav-link"><h1>MediaReview</h1></a>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link active">Movies</a></li>
+                <li class="nav-item"><a href="movies.html" class="nav-link">Movies</a></li>
+                <li class="nav-item"><a href="#tv" class="nav-link" data-category="tv">TV Shows</a></li>
+                <li class="nav-item"><a href="#music" class="nav-link" data-category="music">Music</a></li>
+                <li class="nav-item"><a href="#games" class="nav-link" data-category="games">Games</a></li>
+                <li class="nav-item"><a href="#books" class="nav-link" data-category="books">Books</a></li>
             </ul>
             <div class="auth-buttons">
                 <button class="btn btn-login" id="loginBtn">Login</button>
