@@ -453,8 +453,12 @@ async function showItemDetails(item) {
         const reviewError = modal.querySelector('#reviewError');
         reviewError.textContent = '';
 
-        // Guard: Ensure item.id (mediaId) is defined and not empty
-        if (!item.id) {
+        // Fallback: Use slugified title as mediaId if item.id is missing
+        let mediaId = item.id;
+        if (!mediaId && item.title) {
+            mediaId = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        }
+        if (!mediaId) {
             reviewError.textContent = 'Error: Cannot submit review. Media ID is missing.';
             return;
         }
@@ -472,10 +476,10 @@ async function showItemDetails(item) {
         }
 
         try {
-            const reviewsRef = ref(db, `reviews/${item.id}`);
+            const reviewsRef = ref(db, `reviews/${mediaId}`);
             await push(reviewsRef, {
                 userId: user.uid,
-                mediaId: item.id,
+                mediaId: mediaId,
                 reviewText,
                 rating: reviewRating,
                 timestamp: new Date().toISOString()
