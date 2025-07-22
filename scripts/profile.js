@@ -26,7 +26,19 @@ if (backHomeBtn) {
 
 function renderProfile(user) {
     profileTitle.textContent = `${user.displayName || user.email}'s Profile`;
-    profileInfo.innerHTML = `<strong>Email:</strong> ${user.email}`;
+    // We'll update the review/favorite counts after fetching them
+    profileInfo.innerHTML = `<strong>Email:</strong> ${user.email}<br><span id="profileStats"></span>`;
+}
+
+// Helper to update the stats area
+function updateProfileStats({ reviewCount, favoriteCount }) {
+    const stats = document.getElementById('profileStats');
+    if (stats) {
+        stats.innerHTML = `
+            <strong>Reviews Given:</strong> ${reviewCount} <br>
+            <strong>Media Favorites:</strong> ${favoriteCount}
+        `;
+    }
 }
 
 function showLoading(target) {
@@ -40,14 +52,21 @@ async function renderReviews(user) {
     userReviews.innerHTML = '';
     if (querySnapshot.size === 0) {
         userReviews.innerHTML = '<li>No reviews yet.</li>';
+        // Update stats with 0 reviews (favorites will be updated separately)
+        updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
         return;
     }
+    let reviewCount = 0;
     querySnapshot.forEach(doc => {
         const data = doc.data();
         const li = document.createElement('li');
         li.innerHTML = `<strong>${data.mediaId}</strong>: ${data.reviewText} <span style="color:#888">(Rating: ${data.rating})</span>`;
         userReviews.appendChild(li);
+        reviewCount++;
     });
+    // Save review count globally for stats update
+    window._reviewCount = reviewCount;
+    updateProfileStats({ reviewCount, favoriteCount: window._favoriteCount || 0 });
 }
 
 async function fetchMovies() {
@@ -90,6 +109,9 @@ async function renderFavorites(user) {
     auth.onAuthStateChanged(async user => {
         if (!user) {
             container.innerHTML = '<div>Please log in to see your favorites.</div>';
+            // Update stats with 0 favorites (reviews will be updated separately)
+            window._favoriteCount = 0;
+            updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
             return;
         }
         const userId = user.uid;
@@ -97,12 +119,16 @@ async function renderFavorites(user) {
         const snapshot = await get(favRef);
         if (!snapshot.exists()) {
             container.innerHTML = '<div>No favorites yet.</div>';
+            window._favoriteCount = 0;
+            updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
             return;
         }
         const favKeys = Object.keys(snapshot.val() || {});
         const movies = await fetchMovies();
         const mediaMap = getAllMediaMap(movies, tv, music, games, books);
         const favoriteItems = favKeys.map(key => mediaMap[key]).filter(Boolean);
+        window._favoriteCount = favoriteItems.length;
+        updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: favoriteItems.length });
         if (favoriteItems.length === 0) {
             container.innerHTML = '<div>No favorites found in your media library.</div>';
             return;
