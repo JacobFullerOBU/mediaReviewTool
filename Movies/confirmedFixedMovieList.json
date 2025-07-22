@@ -1,5 +1,5 @@
 [
-     {
+   {
     "title": "Casablanca",
     "year": "1942",
     "description": "",
@@ -1790,7 +1790,7 @@
     "director": "Zack Snyder",
     "actors": "Henry Cavill\nAmy Adams\nMichael Shannon\nKevin Costner\nDiane Lane\nLaurence Fishburne\nAntje Traue\nAyelet Zurer\nChristopher Meloni\nRussell Crowe",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Man_of_Steel_%28film%29_poster.jpg/250px-Man_of_Steel_%28film%29_poster.jpg"
-  },
+  }
     {
     "title": "Hearts of Darkness: A Filmmaker's Apocalypse",
     "year": "1991",
@@ -1908,157 +1908,5 @@
     "actors": "Orson Bean\nJohn Huston\nWilliam Conrad\nRoddy McDowall\nTheodore Bikel",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/b/be/The_Return_of_the_King%2C_1980_film.jpg/250px-The_Return_of_the_King%2C_1980_film.jpg"
   },
-  {
-    "title": "Minions",
-    "year": "2015",
-    "description": "",
-    "genre": "",
-    "director": "Pierre Coffin\nKyle Balda",
-    "actors": "Sandra Bullock\nJon Hamm\nMichael Keaton\nAllison Janney\nSteve Coogan\nJennifer Saunders\nGeoffrey Rush",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/1/19/Minions_%282015_film%29.jpg"
-  },
-    {
-    "title": "Beauty and the Beast",
-    "year": "1991",
-    "description": "",
-    "genre": "",
-    "director": "Gary Trousdale\nKirk Wise",
-    "actors": "Paige O'Hara\nRobby Benson\nRichard White\nJerry Orbach\nDavid Ogden Stiers\nAngela Lansbury\nRex Everhart\nJesse Corti\nJo Anne Worley",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/5/5e/Beauty_and_the_Beast_%281991_film%29_poster.jpg"
-  },
-    {
-    "title": "Shrek",
-    "year": "2001",
-    "description": "",
-    "genre": "",
-    "director": "Andrew Adamson\nVicky Jenson",
-    "actors": "Mike Myers\nEddie Murphy\nCameron Diaz\nJohn Lithgow",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Shrek_%282001_animated_feature_film%29.jpg/250px-Shrek_%282001_animated_feature_film%29.jpg"
-  },
-    {
-    "title": "Despicable Me",
-    "year": "2010",
-    "description": "",
-    "genre": "",
-    "director": "Chris Renaud\nPierre Coffin",
-    "actors": "Steve Carell\nJason Segel\nRussell Brand\nKristen Wiig\nMiranda Cosgrove\nWill Arnett\nDanny McBride\nJack McBrayer\nJulie Andrews",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Despicable_Me_%282010_animated_feature_film%29.jpg/250px-Despicable_Me_%282010_animated_feature_film%29.jpg"
-  },
-    {
-    "title": "Avengers: Infinity War",
-    "year": "2018",
-    "description": "",
-    "genre": "",
-    "director": "Anthony RussoJoe Russo",
-    "actors": "Robert Downey Jr.\nChris Hemsworth\nMark Ruffalo\nChris Evans\nScarlett Johansson\nBenedict Cumberbatch\nDon Cheadle\nTom Holland\nChadwick Boseman\nPaul Bettany\nElizabeth Olsen\nAnthony Mackie\nSebastian Stan\nDanai Gurira\nLetitia Wright\nDave Bautista\nZoe Saldaña\nJosh Brolin\nChris Pratt",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg"
-  },
-    {
-    "title": "Shrek 2",
-    "year": "2004",
-    "description": "",
-    "genre": "",
-    "director": "Andrew Adamson\nKelly Asbury\nConrad Vernon",
-    "actors": "Mike Myers\nEddie Murphy\nCameron Diaz\nJulie Andrews\nAntonio Banderas\nJohn Cleese\nRupert Everett\nJennifer Saunders",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/b/b9/Shrek_2_poster.jpg"
-  },
-    {
-    "title": "The Twilight Saga",
-    "year": "",
-    "description": "",
-    "genre": "",
-    "director": "Catherine Hardwicke (1)\nChris Weitz (2)\nDavid Slade (3)\nBill Condon (4–5)",
-    "actors": "Kristen Stewart\nRobert Pattinson\nTaylor Lautner\n(See cast)",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Twilight2.png/250px-Twilight2.png"
-  },
-    {
-    "title": "Transformers",
-    "year": "2007",
-    "description": "",
-    "genre": "",
-    "director": "Michael Bay \nTravis Knight \nSteven Caple Jr. ",
-    "actors": "",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Logo_of_Transformers.png/250px-Logo_of_Transformers.png"
-  },
-    {
-    "title": "Trolls",
-    "year": "2016",
-    "description": "",
-    "genre": "",
-    "director": "Mike Mitchell",
-    "actors": "Anna Kendrick\nJustin Timberlake\nZooey Deschanel\nRussell Brand\nJames Corden\nGwen Stefani",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/9/98/Trolls_%28film%29_poster.png"
-  },
-    {
-    "title": "Kung Fu Panda",
-    "year": "2008",
-    "description": "",
-    "genre": "",
-    "director": "John Stevenson\nMark Osborne",
-    "actors": "Jack Black",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/76/Kungfupanda.jpg/250px-Kungfupanda.jpg"
-  },
-   {
-    "title": "Justice League",
-    "year": "2017",
-    "description": "",
-    "genre": "",
-    "director": "Zack Snyder",
-    "actors": "Ben Affleck\nHenry Cavill\nGal Gadot\nEzra Miller\nJason Momoa\nRay Fisher\nAmy Adams\nJeremy Irons\nDiane Lane\nCiarán Hinds\nConnie Nielsen\nJ. K. Simmons",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/6/6b/Justice_League_%28film%29_poster.jpg"
-  },
-    {
-    "title": "The Ugly American",
-    "year": "1963",
-    "description": "The Ugly American is a 1963 American adventure film directed by George Englund, written by Stewart Stern, and starring Marlon Brando, Sandra Church, Eiji Okada, Pat Hingle, Judson Pratt, Reiko Sato, and Arthur Hill. It is based on the 1958 novel The Ugly American by Eugene Burdick and William Lederer. The film was released on April 2, 1963, by Universal Pictures.[2][3][4]",
-    "genre": "",
-    "director": "George Englund",
-    "actors": "Marlon Brando\nSandra Church\nEiji Okada\nPat Hingle\nJudson Pratt\nReiko Sato\nArthur Hill",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/The_Ugly_American_poster.jpg/250px-The_Ugly_American_poster.jpg"
-  },
-    {
-    "title": "My Wonderful Life",
-    "year": "2021",
-    "description": "My Wonderful Life (Polish: Moje wspaniale zycie) is a 2021 Polish romantic comedy drama film written and directed by Lukasz Grzegorzek. The film stars Agata Buzek, Jacek Braciak and Adam Woronowicz. The film premiered at the 2021 New Horizons Film Festival and later on Polish Film Festival winning Best Director Award. My Wonderful Life was released in selected theatres on October 29, 2021, in Poland.[2] It premiered internationally on Netflix on February 28, 2022.[3]",
-    "genre": "",
-    "director": "Lukasz Grzegorzek",
-    "actors": "Agata Buzek\nJacek Braciak\nAdam Woronowicz",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/9/91/My_Wonderful_Life_%28film%29.jpeg"
-  },
-    {
-    "title": "Léon: The Professional",
-    "year": "1994",
-    "description": "",
-    "genre": "",
-    "director": "Luc Besson",
-    "actors": "Jean Reno\nGary Oldman\nNatalie Portman\nDanny Aiello",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/0/03/Leon-poster.jpg"
-  },
-    {
-    "title": "Harakiri",
-    "year": "1962",
-    "description": "",
-    "genre": "",
-    "director": "Masaki Kobayashi",
-    "actors": "Tatsuya Nakadai\nRentarō Mikuni\nAkira Ishihama [ja]\nShima Iwashita\nTetsurō Tamba",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/f/fd/Harakiri_Poster.jpg"
-  },
-    {
-    "title": "To Kill a Mockingbird",
-    "year": "1962",
-    "description": "",
-    "genre": "",
-    "director": "Robert Mulligan",
-    "actors": "Gregory Peck\nMary Badham\nPhillip Alford\nRuth White\nPaul Fix\nBrock Peters\nFrank Overton\nJames Anderson",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/To_Kill_a_Mockingbird_%281963_US_theatrical_poster%29.jpg/250px-To_Kill_a_Mockingbird_%281963_US_theatrical_poster%29.jpg"
-  },
-    {
-    "title": "Princess Mononoke",
-    "year": "1997",
-    "description": "",
-    "genre": "",
-    "director": "Hayao Miyazaki",
-    "actors": "Yōji Matsuda\nYuriko Ishida\nYūko Tanaka\nKaoru Kobayashi\nMasahiko Nishimura\nTsunehiko Kamijō\nAkihiro Miwa\nMitsuko Mori\nHisaya Morishige",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Princess_Mononoke_Japanese_poster.png/250px-Princess_Mononoke_Japanese_poster.png"
-  }
+
 ]

@@ -1,95 +1,384 @@
-Jurassic World: Rebirth
-F1: The Movie
-Sinners
-The Amateur
-Brick
-Saiyaara
-The Fantastic Four: First Steps
-Eddington
-KPop Demon Hunters
-Wall to Wall
-Heads of State
-28 Years Later
-M3GAN 2.0
-Ballerina
-Thunderbolts
-Mortal Kombat II
-Bring Her Back
-Smurfs
-The Naked Gun
-The Odyssey
-The Old Guard 2
-Happy Gilmore 2
-Karate Kid: Legends
-Mission: Impossible - The Final Reckoning
-Tron: Ares
-Man of Steel
-Sovereign
-I Know What You Did Last Summer
-Happy Gilmore
-Final Destination: Bloodlines
-Eden
-The Phoenician Scheme
-Zombies 4: Dawn of the Vampires
-Together
-A Minecraft Movie
-28 Days Later
-Drop
-Lilo & Stitch
-Opus
-Jurassic Park
-Warfare
-Jaws
-The Accountant 2
-Oppenheimer
-Bride Hard
-Mickey 17
-Materialists
-The Old Guard
-Superman
-The Assessment
-Nosferatu
-After the Hunt
-Madea's Destination Wedding
-Mortal Kombat
-Wicked
-Weapons
-Deep Cover
-Demon Slayer -Kimetsu no Yaiba- The Movie: Infinity Castle
-Titanic
-Maalik
-Juror #2
-Sitaare Zameen Par
-Heretic
-Supergirl
-Inglourious Basterds
-Anora
-Elio
-The Commitments
-Snow White
-Jurassic World: Dominion
-Interstellar
-How to Train Your Dragon
-Companion
-Gladiator II
-The Unholy Trinity
-Friendship
+The Godfather
+Citizen Kane
+Schindler’s List
+Casablanca
+Pulp Fiction
+2001: A Space Odyssey
+The Shawshank Redemption
+The Godfather Part II
+Star Wars: A New Hope
+The Lord of the Rings: ROTK
+Apocalypse Now
+Goodfellas
+Chinatown
 The Dark Knight
-Nonnas
-28 Weeks Later
-Inception
-Metro in Dino
-Jurassic World
-The Life of Chuck
+Fight Club
+Psycho
+Spirited Away
+The Empire Strikes Back
+12 Angry Men
+La Dolce Vita
+The Matrix
+Titanic
+One Flew Over the Cuckoo’s Nest
+Lawrence of Arabia
+Taxi Driver
+Seven Samurai
+The Silence of the Lambs
+Vertigo
+Back to the Future
+Dr. Strangelove
+Amadeus
+The Green Mile
+Rashomon
+The Pianist
+Whiplash
+City of God
+The Departed
+Inglourious Basterds
+Eternal Sunshine of the Spotless Mind
+Requiem for a Dream
+The Lion King
+The Shining
+Toy Story
+Alien
+Pan’s Labyrinth
+Oldboy
+There Will Be Blood
+The Seventh Seal
+Grave of the Fireflies
+The Grand Budapest Hotel
+Blade Runner
+The Social Network
+Django Unchained
+Life Is Beautiful
+The Truman Show
+Rocky
+Kill Bill: Vol. 1
 Parasite
+The Great Dictator
+Her
+The Wolf of Wall Street
+No Country for Old Men
+The Big Lebowski
+Prisoners
+The Thing
+Inside Out
+A Clockwork Orange
+The Exorcist
+Heat
+American History X
+WALL·E
+The Intouchables
+The Revenant
+The Sound of Music
+Stand by Me
+The Iron Giant
+1917
+Fargo
+Arrival
+Boogie Nights
+Mulholland Drive
+The Princess Bride
+Slumdog Millionaire
+Ghostbusters
+Children of Men
+Donnie Darko
+Gone Girl
+The Handmaiden
+The Florida Project
+Little Miss Sunshine
+Monsters, Inc.
+Trainspotting
+A Separation
+The Lives of Others
+The Secret in Their Eyes
+Barry Lyndon
+Dead Poets Society
+The Last Emperor
+The Hunt (Jagten)
+Black Swan
+The Lobster
+The Farewell
+Moonlight
+Before Sunrise
+The Banshees of Inisherin
+The Witch
+Memento
+Annihilation
+Dog Day Afternoon
+The Man Who Shot Liberty Valance
+A Ghost Story
+Ikiru
+The Red Shoes
+The Diving Bell and the Butterfly
+Persepolis
+Run Lola Run
+My Neighbor Totoro
+The Elephant Man
+All About Eve
+The Philadelphia Story
+Oppenheimer
+Everything Everywhere All at Once
+Parasite
+Dune: Part One
+Spider-Man: No Way Home
+Barbie
+Top Gun: Maverick
+Avengers: Endgame
+Joker
+Get Out
+La La Land
+Mad Max: Fury Road
+Interstellar
+Her
+The Social Network
+1917
 The Batman
-Ziam
-Gosford Park
-Almost Cops
-The Substance
-Twisters
-Once Upon a Time... in Hollywood
-Superman Returns
-Black Bag
-The Gorge
-Until Dawn
+The Revenant
+Knives Out
+Bohemian Rhapsody
+RRR
+The Irishman
+Roma
+Uncut Gems
+The Whale
+Palm Springs
+The Banshees of Inisherin
+Sound of Metal
+Marriage Story
+The Trial of the Chicago 7
+A Star Is Born
+Tenet
+Dune: Part Two
+Soul
+Inside Out
+Minari
+The Power of the Dog
+Don't Look Up
+TÁR
+John Wick
+John Wick: Chapter 4
+The Lego Movie
+Encanto
+Frozen
+The Hunger Games
+Catching Fire
+Arrival
+Drive
+The Mitchells vs. The Machines
+The Grand Budapest Hotel
+Roma
+The Irishman
+Marriage Story
+The Power of the Dog
+Don't Look Up
+Glass Onion
+Extraction
+The Mitchells vs. the Machines
+All Quiet on the Western Front
+Beasts of No Nation
+Klaus
+Ma Rainey’s Black Bottom
+Tick, Tick... Boom!
+The Trial of the Chicago 7
+I Care a Lot
+Bird Box
+The Gray Man
+Red Notice
+The Sea Beast
+To All the Boys I’ve Loved Before
+The Ballad of Buster Scruggs
+The Guilty
+The Hand of God
+The Adam Project
+You People
+Titanic
+Avatar
+Avengers: Endgame
+Star Wars: A New Hope
+Harry Potter and the Sorcerer's Stone
+The Lion King
+Frozen
+Jurassic Park
+The Dark Knight
+Forrest Gump
+Spider-Man: No Way Home
+The Lord of the Rings: Return of the King
+Top Gun: Maverick
+Barbie
+Minions
+Beauty and the Beast (animated)
+Shrek
+The Matrix
+Black Panther
+Inception
+E.T. the Extra-Terrestrial
+The Avengers
+The Super Mario Bros. Movie
+Despicable Me
+The Hunger Games
+Jurassic World
+The Avengers
+Frozen II
+Beauty and the Beast (2017)
+Finding Nemo
+The Lion King (2019)
+Harry Potter and the Deathly Hallows – Part 2
+Black Panther
+Star Wars: The Force Awakens
+The Incredibles
+Minions
+Toy Story 3
+Wonder Woman
+Captain Marvel
+Spider-Man: Far From Home
+Frozen
+Despicable Me 2
+Finding Dory
+Avengers: Infinity War
+Pirates of the Caribbean: The Curse of the Black Pearl
+Shrek 2
+The Twilight Saga: Breaking Dawn – Part 2
+The Hunger Games: Catching Fire
+Aquaman
+The Dark Knight Rises
+Coco
+Moana
+Transformers
+Iron Man
+The Secret Life of Pets
+Trolls
+Deadpool
+Venom
+The Jungle Book (2016)
+Star Wars: Rogue One
+Jumanji: Welcome to the Jungle
+Inside Out
+Spider-Man: Homecoming
+Wonder
+Coco
+Zootopia
+The Lego Movie
+Aladdin (2019)
+Maleficent
+Kung Fu Panda
+Despicable Me
+Gravity
+La La Land
+The Martian
+Captain America: Civil War
+Rogue One
+Pirates of the Caribbean: Dead Man’s Chest
+Batman v Superman: Dawn of Justice
+Guardians of the Galaxy
+The Twilight Saga: New Moon
+How to Train Your Dragon
+The Lion King (1994)
+Finding Nemo
+Inside Out
+Batman Begins
+Frozen
+Toy Story
+Despicable Me 3
+The Hunger Games
+Spider-Man: Into the Spider-Verse
+Captain America: The Winter Soldier
+Black Widow
+Incredibles 2
+Thor: Ragnarok
+Wonder Woman 1984
+Doctor Strange
+The Jungle Book (1967)
+The Avengers: Age of Ultron
+The Twilight Saga: Eclipse
+Beauty and the Beast (1991)
+The Shawshank Redemption
+The Godfather
+The Godfather: Part II
+The Dark Knight
+12 Angry Men
+Schindler’s List
+The Lord of the Rings: The Return of the King
+Pulp Fiction
+The Good, the Bad and the Ugly
+The Lord of the Rings: The Fellowship of the Ring
+Fight Club
+Inception
+Forrest Gump
+The Lord of the Rings: The Two Towers
+One Flew Over the Cuckoo’s Nest
+The Matrix
+Goodfellas
+Star Wars: Episode V – The Empire Strikes Back
+Seven Samurai
+Life is Beautiful
+The Silence of the Lambs
+It’s a Wonderful Life
+Seven
+Star Wars: Episode IV – A New Hope
+City of God
+Spirited Away
+Saving Private Ryan
+Parasite
+Interstellar
+Léon: The Professional
+The Green Mile
+The Usual Suspects
+Harakiri
+The Lion King
+Back to the Future
+Terminator 2: Judgment Day
+American History X
+Modern Times
+Hotaru no haka (Grave of the Fireflies)
+Once Upon a Time in the West
+
+Title
+Back to the Future
+Whiplash
+Gladiator
+Memento
+The Prestige
+The Lion King
+Apocalypse Now
+Alien
+Sunset Boulevard
+Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
+The Great Dictator
+Cinema Paradiso
+The Lives of Others
+Grave of the Fireflies
+Paths of Glory
+Django Unchained
+The Shining
+The Great Dictator
+Paths of Glory
+Amélie
+A Clockwork Orange
+To Kill a Mockingbird
+Memento
+Django Unchained
+The Dark Knight Rises (or variant)
+3 Idiots
+WALL·E
+The Lives of Others
+Oldboy
+Memento (duplicate ranking)
+Princess Mononoke
+Apocalypse Now
+Alien
+The Sting
+Full Metal Jacket
+Rear Window
+My Neighbor Totoro
+Yojimbo
+Three Colors: Red
+Princess Mononoke
+Andrei Rublev
+Nights of Cabiria
+Sátántangó
+Ugetsu
+Once Upon a Time in America
+The General
+The Third Man
