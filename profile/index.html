@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - MediaReview</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/cards.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
     <link rel="stylesheet" href="../styles/auth.css">
 </head>
 <body>
@@ -16,16 +18,39 @@
             <a class="btn" id="backHomeBtn" href="../index.html">Home</a>
         </div>
     </nav>
-    <section class="profile-section">
-        <div class="container">
-            <h2 id="profileTitle">Your Profile</h2>
-            <div id="profileInfo"></div>
-            <h3>Your Reviews</h3>
-            <ul id="userReviews"></ul>
-            <h3>Your Favorites</h3>
-            <ul id="userFavorites"></ul>
+
+    <section class="profile-section" style="background:#f7f8fa; min-height:100vh; padding-top:32px;">
+        <div class="container" style="max-width:900px; margin:auto;">
+            <div class="profile-header-card" style="background:#fff;box-shadow:0 2px 16px #0002;border-radius:16px;padding:32px 32px 24px 32px;margin-bottom:32px;display:flex;align-items:center;gap:32px;">
+                <div style="flex:1;">
+                    <h2 id="profileTitle" style="margin-top:0;margin-bottom:12px;font-size:2.2em;color:#222;">Your Profile</h2>
+                    <div id="profileInfo" style="font-size:1.1em;color:#444;"></div>
+                </div>
+
+            </div>
+
+            <div class="profile-sections" style="display:flex;flex-wrap:wrap;gap:32px;">
+                <div class="profile-reviews" style="flex:1 1 320px;background:#fff;border-radius:12px;box-shadow:0 2px 12px #0001;padding:24px;min-width:320px;">
+                    <h3 style="margin-top:0;margin-bottom:18px;color:#1976d2;">Your Reviews</h3>
+                    <ul id="userReviews" style="list-style:none;padding:0;margin:0;"></ul>
+                </div>
+                <div class="profile-favorites" style="flex:1 1 320px;background:#fff;border-radius:12px;box-shadow:0 2px 12px #0001;padding:24px;min-width:320px;">
+                    <h3 style="margin-top:0;margin-bottom:18px;color:#1976d2;">Your Favorites</h3>
+                    <div id="userFavorites" style="display:flex;flex-wrap:wrap;gap:16px;"></div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <footer class="footer" style="margin-top:48px;">
+        <div class="container">
+            <p>&copy; 2024 MediaReview. All rights reserved.</p>
+            <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+                <a href="../Top Reviewers/topReviewers.html" id="leaderboardLink" style="color:#1976d2; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
+            </div>
+        </div>
+    </footer>
+
     <script type="module" src="../scripts/profile.js"></script>
 </body>
 </html>
