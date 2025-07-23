@@ -66,4 +66,76 @@ async function renderFavorites() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', renderFavorites);
+async function renderProfile() {
+    auth.onAuthStateChanged(async user => {
+        const profileTitle = document.getElementById('profileTitle');
+        const profileInfo = document.getElementById('profileInfo');
+        const userReviews = document.getElementById('userReviews');
+        const userFavorites = document.getElementById('userFavorites');
+        if (!user) {
+            profileTitle.textContent = 'Your Profile';
+            profileInfo.innerHTML = '<div>Please log in to see your profile.</div>';
+            userReviews.innerHTML = '';
+            userFavorites.innerHTML = '';
+            return;
+        }
+        profileTitle.textContent = `${user.displayName || user.email || user.uid}'s Profile`;
+        profileInfo.innerHTML = `<strong>Email:</strong> ${user.email || user.uid}`;
+        // Reviews
+        userReviews.innerHTML = '<li>Loading reviews...</li>';
+        const reviewsRef = ref(db, 'reviews');
+        const reviewsSnap = await get(reviewsRef);
+        let reviewCount = 0;
+        if (reviewsSnap.exists()) {
+            const reviewsData = reviewsSnap.val();
+            const userReviewList = [];
+            Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
+                Object.values(reviewObj).forEach(r => {
+                    if (r.user === user.email || r.user === user.uid || r.user === user.displayName) {
+                        userReviewList.push({ mediaKey, ...r });
+                    }
+                });
+            });
+            if (userReviewList.length > 0) {
+                userReviews.innerHTML = '';
+                userReviewList.forEach(r => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${r.mediaKey}</strong>: ${r.text || r.review || ''}`;
+                    userReviews.appendChild(li);
+                    reviewCount++;
+                });
+            } else {
+                userReviews.innerHTML = '<li>No reviews yet.</li>';
+            }
+        } else {
+            userReviews.innerHTML = '<li>No reviews yet.</li>';
+        }
+        // Favorites
+        userFavorites.innerHTML = '<li>Loading favorites...</li>';
+        const favRef = ref(db, `favorites/${user.uid || user.email || user.displayName}`);
+        const favSnap = await get(favRef);
+        if (favSnap.exists()) {
+            const favKeys = Object.keys(favSnap.val() || {});
+            const movies = await fetchMovies();
+            const mediaMap = getAllMediaMap(movies, tv, music, games, books);
+            const favoriteItems = favKeys.map(key => mediaMap[key]).filter(Boolean);
+            if (favoriteItems.length > 0) {
+                userFavorites.innerHTML = '';
+                favoriteItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${item.title || item.id}</strong>`;
+                    userFavorites.appendChild(li);
+                });
+            } else {
+                userFavorites.innerHTML = '<li>No favorites found in your media library.</li>';
+            }
+        } else {
+            userFavorites.innerHTML = '<li>No favorites yet.</li>';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderFavorites();
+    renderProfile();
+});
