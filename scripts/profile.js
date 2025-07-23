@@ -91,7 +91,7 @@ function getAllMediaMap(movies, tv, music, games, books) {
 
 function createCardHTML(item) {
     return `
-        <div class="media-card" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;">
+        <div class="media-card favorite-card" data-id="${item.id || item.title}" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;cursor:pointer;">
             <div class="card-image" style="background-image: url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;"></div>
             <div class="card-content">
                 <h3 class="card-title">${item.title || ''}</h3>
@@ -131,6 +131,54 @@ async function renderFavorites(user) {
         return;
     }
     container.innerHTML = favoriteItems.map(createCardHTML).join('');
+    // Add click event listeners to each favorite card
+    setTimeout(() => {
+        const cards = container.querySelectorAll('.favorite-card');
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                const id = card.getAttribute('data-id');
+                const item = favoriteItems.find(fav => (fav.id || fav.title) == id);
+                if (item) showFavoriteModal(item);
+            });
+        });
+    }, 0);
+}
+
+// Modal logic for favorite details
+function showFavoriteModal(item) {
+    let modal = document.getElementById('favoriteModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'favoriteModal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.7)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        document.body.appendChild(modal);
+    }
+    modal.innerHTML = `
+        <div style="background:#fff;padding:32px;max-width:400px;border-radius:12px;position:relative;">
+            <button id="closeFavoriteModal" style="position:absolute;top:8px;right:8px;font-size:20px;cursor:pointer;">&times;</button>
+            <div style="text-align:center;">
+                <div style="background-image:url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;margin-bottom:16px;"></div>
+                <h2>${item.title || ''}</h2>
+                <p>${item.description || ''}</p>
+                <div><strong>Year:</strong> ${item.year || ''}</div>
+                <div><strong>Director:</strong> ${item.director || ''}</div>
+                <div><strong>Cast:</strong> ${item.actors || ''}</div>
+                <div><strong>Genre:</strong> ${item.genre || ''}</div>
+            </div>
+        </div>
+    `;
+    document.getElementById('closeFavoriteModal').onclick = () => {
+        modal.remove();
+    };
 }
 
 // On load, check auth and render profile
