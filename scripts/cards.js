@@ -124,6 +124,7 @@ function filterCards(category) {
 
 // Export function for use by other modules
 window.filterCards = filterCards;
+window.showMovieModal = showItemDetails;
 
 async function loadCards(category) {
     const container = document.getElementById('cardsContainer');
