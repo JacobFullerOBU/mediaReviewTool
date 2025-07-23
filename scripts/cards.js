@@ -282,7 +282,11 @@ async function showItemDetails(item) {
     const avgRating = await getAverageRating(item.id);
     const reviewCount = await getReviewCount(item.id);
 
-    // Remove any existing modal
+    // Remove any existing modal and cancel any pending modal creation
+    if (window._modalTimeout) {
+        clearTimeout(window._modalTimeout);
+        window._modalTimeout = null;
+    }
     let modal = document.querySelector('.modal.show');
     if (modal) modal.remove();
     modal = document.createElement('div');
