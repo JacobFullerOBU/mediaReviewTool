@@ -146,39 +146,78 @@ async function renderFavorites(user) {
 
 // Modal logic for favorite details
 function showFavoriteModal(item) {
-    let modal = document.getElementById('favoriteModal');
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'favoriteModal';
-        modal.style.position = 'fixed';
-        modal.style.top = '0';
-        modal.style.left = '0';
-        modal.style.width = '100vw';
-        modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.7)';
-        modal.style.display = 'flex';
-        modal.style.alignItems = 'center';
-        modal.style.justifyContent = 'center';
-        modal.style.zIndex = '9999';
-        document.body.appendChild(modal);
-    }
+    let modal = document.getElementById('movieDetailModal');
+    if (modal) modal.remove();
+    modal = document.createElement('div');
+    modal.id = 'movieDetailModal';
+    modal.className = 'modal';
     modal.innerHTML = `
-        <div style="background:#fff;padding:32px;max-width:400px;border-radius:12px;position:relative;">
-            <button id="closeFavoriteModal" style="position:absolute;top:8px;right:8px;font-size:20px;cursor:pointer;">&times;</button>
-            <div style="text-align:center;">
-                <div style="background-image:url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;margin-bottom:16px;"></div>
-                <h2>${item.title || ''}</h2>
-                <p>${item.description || ''}</p>
-                <div><strong>Year:</strong> ${item.year || ''}</div>
-                <div><strong>Director:</strong> ${item.director || ''}</div>
-                <div><strong>Cast:</strong> ${item.actors || ''}</div>
-                <div><strong>Genre:</strong> ${item.genre || ''}</div>
+        <div class="modal-content" style="max-width:600px;">
+            <span class="close" id="closeMovieModal">&times;</span>
+            <div class="modal-header" style="margin-bottom:12px;">
+                <h2 style="margin-bottom:0;">${item.title || ''}</h2>
+            </div>
+            <div class="modal-body" style="display:flex; gap:18px;">
+                <img src="${item.poster || item.image || ''}" alt="${item.title}" style="max-width:180px; border-radius:8px; box-shadow:0 2px 8px #0002;">
+                <div style="flex:1;">
+                    <p><strong>Year:</strong> ${item.year || ''}</p>
+                    <p><strong>Genre:</strong> ${item.genre || ''}</p>
+                    <p><strong>Director:</strong> ${item.director || ''}</p>
+                    <p><strong>Cast:</strong> ${item.actors || ''}</p>
+                    <p><strong>Description:</strong> ${item.description || ''}</p>
+                </div>
+            </div>
+            <hr style="margin:18px 0;">
+            <div id="reviewsSection" style="margin-top:12px;">
+                <h3 style="margin-bottom:8px;">Reviews</h3>
+                <div id="reviewsList" style="margin-bottom:12px;">Loading reviews...</div>
             </div>
         </div>
     `;
-    document.getElementById('closeFavoriteModal').onclick = () => {
+    document.body.appendChild(modal);
+    modal.style.display = 'block';
+    document.getElementById('closeMovieModal').onclick = function() {
         modal.remove();
     };
+    modal.onclick = function(e) {
+        if (e.target === modal) modal.remove();
+    };
+    // Load reviews for this item
+    loadFavoriteReviews(item);
+}
+
+// Load reviews for favorite modal
+async function loadFavoriteReviews(item) {
+    const reviewsList = document.getElementById('reviewsList');
+    if (!reviewsList) return;
+    reviewsList.innerHTML = 'Loading reviews...';
+    const reviewsRef = ref(db, 'reviews');
+    const snapshot = await get(reviewsRef);
+    if (!snapshot.exists()) {
+        reviewsList.innerHTML = '<div>No reviews yet.</div>';
+        return;
+    }
+    const reviewsData = snapshot.val();
+    let reviewArr = [];
+    // Try to match by id or title
+    const key = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+    if (reviewsData[key]) {
+        reviewArr = Object.values(reviewsData[key]);
+    } else {
+        // Try to match by title if id not found
+        for (const k in reviewsData) {
+            if (k === item.title || k === key) {
+                reviewArr = Object.values(reviewsData[k]);
+                break;
+            }
+        }
+    }
+    if (reviewArr.length === 0) {
+        reviewsList.innerHTML = '<div>No reviews yet.</div>';
+        return;
+    }
+    reviewsList.innerHTML = reviewArr.map(r => `<div style="margin-bottom:8px;"><strong>${r.user || 'Anonymous'}:</strong> ${r.text || r.review || ''}</div>`).join('');
+}
 }
 
 // On load, check auth and render profile
