@@ -45,6 +45,7 @@ async function fetchMovies() {
 
 let currentFilter = 'all';
 let allItems = [];
+window.allItems = allItems;
 
 console.log('[cards.js] Script loaded');
 document.addEventListener('DOMContentLoaded', async function() {
@@ -93,6 +94,7 @@ async function initCards() {
     const movies = await fetchMovies();
     // Combine with other media arrays if needed
     allItems = [...movies, ...tv, ...music, ...games, ...books];
+    window.allItems = allItems;
 
     // Initialize tab functionality
     initTabFunctionality();
