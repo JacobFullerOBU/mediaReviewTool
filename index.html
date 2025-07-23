@@ -150,16 +150,35 @@
             const randomizeBtn = document.getElementById('randomizeBtn');
             if (randomizeBtn) {
                 randomizeBtn.addEventListener('click', async function() {
-                    // Fetch all media
-                    const movies = await fetchMovies();
-                    const mediaMap = getAllMediaMap(movies, tv, music, games, window.books || []);
-                    const allMedia = Object.values(mediaMap);
-                    if (allMedia.length === 0) return;
+                    // Fetch all media arrays
+                    let movies = [];
+                    let booksArr = [];
+                    try {
+                        movies = await fetchMovies();
+                    } catch {}
+                    try {
+                        booksArr = window.books || [];
+                    } catch {}
+                    // Use tv, music, games from cards.js
+                    const allMedia = [...movies, ...tv, ...music, ...games, ...booksArr];
+                    if (allMedia.length === 0) {
+                        alert('No media found to randomize.');
+                        return;
+                    }
                     const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
+                    // Try to use the modal logic from cards.js
                     if (window.showMovieModal) {
                         window.showMovieModal(randomItem);
                     } else {
-                        alert('Random media: ' + (randomItem.title || randomItem.id));
+                        // Fallback: show details in alert
+                        alert('Random media:\n' +
+                            'Title: ' + (randomItem.title || randomItem.id) + '\n' +
+                            (randomItem.year ? 'Year: ' + randomItem.year + '\n' : '') +
+                            (randomItem.genre ? 'Genre: ' + randomItem.genre + '\n' : '') +
+                            (randomItem.director ? 'Director: ' + randomItem.director + '\n' : '') +
+                            (randomItem.actors ? 'Cast: ' + randomItem.actors + '\n' : '') +
+                            (randomItem.description ? 'Description: ' + randomItem.description + '\n' : '')
+                        );
                     }
                 });
             }
