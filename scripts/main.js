@@ -1,3 +1,55 @@
+// Add logic for the Surprise Me! (Randomize) button
+document.addEventListener('DOMContentLoaded', function() {
+    const randomizeBtn = document.getElementById('randomizeBtn');
+    if (randomizeBtn) {
+        randomizeBtn.addEventListener('click', async function() {
+            // Wait for cards.js to finish loading globals
+            function waitForGlobals() {
+                return new Promise(resolve => {
+                    let tries = 0;
+                    function check() {
+                        if (window.showMovieModal && window.books && window.tv && window.music && window.games) {
+                            resolve();
+                        } else if (++tries < 40) {
+                            setTimeout(check, 100);
+                        } else {
+                            resolve();
+                        }
+                    }
+                    check();
+                });
+            }
+            await waitForGlobals();
+            // Fetch all media arrays
+            let movies = [];
+            if (window.fetchMovies) {
+                try { movies = await window.fetchMovies(); } catch {}
+            }
+            const booksArr = window.books || [];
+            const tvArr = window.tv || [];
+            const musicArr = window.music || [];
+            const gamesArr = window.games || [];
+            const allMedia = [...movies, ...tvArr, ...musicArr, ...gamesArr, ...booksArr];
+            if (allMedia.length === 0) {
+                alert('No media found to randomize.');
+                return;
+            }
+            const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
+            if (window.showMovieModal) {
+                window.showMovieModal(randomItem);
+            } else {
+                alert('Random media:\n' +
+                    'Title: ' + (randomItem.title || randomItem.id) + '\n' +
+                    (randomItem.year ? 'Year: ' + randomItem.year + '\n' : '') +
+                    (randomItem.genre ? 'Genre: ' + randomItem.genre + '\n' : '') +
+                    (randomItem.director ? 'Director: ' + randomItem.director + '\n' : '') +
+                    (randomItem.actors ? 'Cast: ' + randomItem.actors + '\n' : '') +
+                    (randomItem.description ? 'Description: ' + randomItem.description + '\n' : '')
+                );
+            }
+        });
+    }
+});
 // Firebase Firestore setup and user review functions
 import { collection, addDoc, query, where, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { auth } from "./firebase.js";
