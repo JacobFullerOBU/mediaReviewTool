@@ -137,5 +137,40 @@
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/auth.js"></script>
     <script type="module" src="scripts/cards.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileBtn = document.getElementById('profileBtn');
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function() {
+                    window.location.href = 'profile/profile.html';
+                });
+            }
+
+            const randomizeBtn = document.getElementById('randomizeBtn');
+            if (randomizeBtn) {
+                randomizeBtn.addEventListener('click', function() {
+                    // Use already loaded allItems from cards.js for instant response
+                    const allMedia = window.allItems || [];
+                    if (!allMedia.length) {
+                        alert('No media found to randomize.');
+                        return;
+                    }
+                    const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
+                    if (window.showMovieModal) {
+                        window.showMovieModal(randomItem);
+                    } else {
+                        alert('Random media:\n' +
+                            'Title: ' + (randomItem.title || randomItem.id) + '\n' +
+                            (randomItem.year ? 'Year: ' + randomItem.year + '\n' : '') +
+                            (randomItem.genre ? 'Genre: ' + randomItem.genre + '\n' : '') +
+                            (randomItem.director ? 'Director: ' + randomItem.director + '\n' : '') +
+                            (randomItem.actors ? 'Cast: ' + randomItem.actors + '\n' : '') +
+                            (randomItem.description ? 'Description: ' + randomItem.description + '\n' : '')
+                        );
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
