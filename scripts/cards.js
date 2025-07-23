@@ -6,6 +6,7 @@ import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
+window.books = books;
 
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
