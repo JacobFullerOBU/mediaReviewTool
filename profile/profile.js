@@ -66,6 +66,7 @@ async function renderFavorites() {
     });
 }
 
+// Remove duplicate renderFavorites and ensure only one profile loader runs
 async function renderProfile() {
     auth.onAuthStateChanged(async user => {
         const profileTitle = document.getElementById('profileTitle');
@@ -135,7 +136,4 @@ async function renderProfile() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderFavorites();
-    renderProfile();
-});
+document.addEventListener('DOMContentLoaded', renderProfile);
