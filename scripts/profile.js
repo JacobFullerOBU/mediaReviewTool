@@ -5,10 +5,6 @@ import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
 
-
-// Use Firestore from the default app
-const db = getFirestore();
-
 const profileInfo = document.getElementById('profileInfo');
 const userReviews = document.getElementById('userReviews');
 const userFavorites = document.getElementById('userFavorites');
