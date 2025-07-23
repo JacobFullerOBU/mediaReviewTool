@@ -1,6 +1,5 @@
-import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { auth, db as realtimeDb } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
@@ -47,24 +46,38 @@ function showLoading(target) {
 
 async function renderReviews(user) {
     showLoading(userReviews);
-    const q = query(collection(db, "reviews"), where("userId", "==", user.uid));
-    const querySnapshot = await getDocs(q);
+    // Find all reviews in the Realtime Database for this user
+    // Reviews are stored under reviews/<mediaKey>/{reviewId: {user, text, ...}}
+    const reviewsRef = ref(db, 'reviews');
+    const snapshot = await get(reviewsRef);
     userReviews.innerHTML = '';
-    if (querySnapshot.size === 0) {
+    let reviewCount = 0;
+    if (!snapshot.exists()) {
         userReviews.innerHTML = '<li>No reviews yet.</li>';
-        // Update stats with 0 reviews (favorites will be updated separately)
         updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
         return;
     }
-    let reviewCount = 0;
-    querySnapshot.forEach(doc => {
-        const data = doc.data();
+    const reviewsData = snapshot.val();
+    // Flatten all reviews and filter by user
+    const userReviewList = [];
+    Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
+        Object.values(reviewObj).forEach(r => {
+            if (r.user === user.email || r.user === user.uid) {
+                userReviewList.push({ mediaKey, ...r });
+            }
+        });
+    });
+    if (userReviewList.length === 0) {
+        userReviews.innerHTML = '<li>No reviews yet.</li>';
+        updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
+        return;
+    }
+    userReviewList.forEach(r => {
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${data.mediaId}</strong>: ${data.reviewText} <span style="color:#888">(Rating: ${data.rating})</span>`;
+        li.innerHTML = `<strong>${r.mediaKey}</strong>: ${r.text || r.review || ''}`;
         userReviews.appendChild(li);
         reviewCount++;
     });
-    // Save review count globally for stats update
     window._reviewCount = reviewCount;
     updateProfileStats({ reviewCount, favoriteCount: window._favoriteCount || 0 });
 }
