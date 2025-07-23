@@ -379,11 +379,9 @@ async function showItemDetails(item) {
             modal.remove();
         }
     });
-
-    // Prevent body scroll
     document.body.style.overflow = 'hidden';
 
-    // Restore body scroll and reset modal flag when modal is removed
+    // nable scrolling again after details closed
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.type === 'childList') {
