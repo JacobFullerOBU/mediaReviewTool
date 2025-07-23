@@ -282,20 +282,22 @@ async function showItemDetails(item) {
     const avgRating = await getAverageRating(item.id);
     const reviewCount = await getReviewCount(item.id);
 
-    // Create a simple modal to show item details
-    console.log('[DEBUG] Creating modal for item:', item);
-    const modal = document.createElement('div');
+    // Remove any existing modal
+    let modal = document.querySelector('.modal.show');
+    if (modal) modal.remove();
+    modal = document.createElement('div');
     modal.className = 'modal show';
-    // Force modal to be visible for debugging
     modal.style.zIndex = '9999';
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     modal.style.position = 'fixed';
     modal.style.top = '0';
     modal.style.left = '0';
     modal.style.width = '100vw';
     modal.style.height = '100vh';
-    modal.style.background = 'rgba(255,0,0,0.2)'; // Red tint for debug
-    modal.style.border = '4px solid red';
+    modal.style.background = 'rgba(0,0,0,0.7)';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.border = 'none';
     // Fetch all reviews for this media item
     let reviewsHtml = '';
     try {
@@ -319,36 +321,39 @@ async function showItemDetails(item) {
     }
 
     modal.innerHTML = `
-        <div class="modal-content" style="max-width: 600px; margin: 40px auto; background: #fff; border: 2px solid #333;">
-            <div class="modal-header">
-                <h2>${item.title}</h2>
-                <span class="close">&times;</span>
+        <div class="modal-content" style="max-width:600px;background:#fff;border-radius:12px;box-shadow:0 2px 16px #0004;position:relative;padding:32px;">
+            <button class="close" style="position:absolute;top:12px;right:16px;font-size:2em;background:none;border:none;cursor:pointer;">&times;</button>
+            <div style="display:flex;gap:24px;align-items:flex-start;">
+                <img src="${item.poster || item.image || ''}" alt="${item.title}" style="max-width:160px;max-height:220px;border-radius:8px;box-shadow:0 2px 8px #0002;background:#eee;object-fit:cover;">
+                <div style="flex:1;">
+                    <h2 style="margin-top:0;">${item.title || ''}</h2>
+                    <div style="margin-bottom:8px;color:#666;font-size:1em;">
+                        <span>${item.year ? `<strong>Year:</strong> ${item.year}` : ''}</span>
+                        ${item.genre ? `<span style='margin-left:12px;'><strong>Genre:</strong> ${item.genre}</span>` : ''}
+                        ${item.director ? `<span style='margin-left:12px;'><strong>Director:</strong> ${item.director}</span>` : ''}
+                    </div>
+                    <div style="margin-bottom:8px;color:#666;font-size:1em;">
+                        ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
+                    </div>
+                    <p style="margin-bottom:12px;">${item.description || ''}</p>
+                    <div style="margin-bottom:8px;"><strong>Category:</strong> ${(item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Movie')}</div>
+                    <div style="margin-bottom:8px;"><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></div>
+                    <div style="margin-bottom:8px;"><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</div>
+                    <button class="btn btn-primary" id="writeReviewBtn" style="margin-top:8px;">Write a Review</button>
+                    <button class="btn btn-login" style="margin-left:10px;">Add to Favorites</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <div style="margin-bottom: 20px;">
-                    <p><strong>Category:</strong> ${(item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Movie')}</p>
-                    <p><strong>Year:</strong> ${item.year || ''}</p>
-                    <p><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></p>
-                    <p><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</p>
-                </div>
-                <p><strong>Description:</strong></p>
-                <p>${item.description || ''}</p>
-                <div style="margin-top: 20px;">
-                    <button class="btn btn-primary" id="writeReviewBtn">Write a Review</button>
-                    <button class="btn btn-login" style="margin-left: 10px;">Add to Favorites</button>
-                </div>
-                <div id="reviewFormContainer" style="display:none; margin-top:20px;">
-                    <form id="reviewForm">
-                        <label for="reviewText">Your Review:</label><br>
-                        <textarea id="reviewText" rows="3" style="width:100%;"></textarea><br>
-                        <label for="reviewRating">Rating (1-10):</label>
-                        <input type="number" id="reviewRating" min="1" max="10" required style="width:60px;">
-                        <button type="submit" class="btn btn-primary" style="margin-left:10px;">Submit</button>
-                    </form>
-                    <div id="reviewError" style="color:red; margin-top:8px;"></div>
-                </div>
-                ${reviewsHtml}
+            <div id="reviewFormContainer" style="display:none; margin-top:20px;">
+                <form id="reviewForm">
+                    <label for="reviewText">Your Review:</label><br>
+                    <textarea id="reviewText" rows="3" style="width:100%;"></textarea><br>
+                    <label for="reviewRating">Rating (1-10):</label>
+                    <input type="number" id="reviewRating" min="1" max="10" required style="width:60px;">
+                    <button type="submit" class="btn btn-primary" style="margin-left:10px;">Submit</button>
+                </form>
+                <div id="reviewError" style="color:red; margin-top:8px;"></div>
             </div>
+            <div style="margin-top:24px;">${reviewsHtml}</div>
         </div>
     `;
     document.body.appendChild(modal);
