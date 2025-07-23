@@ -24,9 +24,8 @@ if (backHomeBtn) {
 }
 
 function renderProfile(user) {
-    profileTitle.textContent = `${user.displayName || user.email}'s Profile`;
-    // We'll update the review/favorite counts after fetching them
-    profileInfo.innerHTML = `<strong>Email:</strong> ${user.email}<br><span id="profileStats"></span>`;
+    profileTitle.textContent = `${user.displayName || user.email || user.uid}'s Profile`;
+    profileInfo.innerHTML = `<strong>Email:</strong> ${user.email || user.uid}<br><span id="profileStats"></span>`;
 }
 
 // Helper to update the stats area
@@ -46,8 +45,6 @@ function showLoading(target) {
 
 async function renderReviews(user) {
     showLoading(userReviews);
-    // Find all reviews in the Realtime Database for this user
-    // Reviews are stored under reviews/<mediaKey>/{reviewId: {user, text, ...}}
     const reviewsRef = ref(db, 'reviews');
     const snapshot = await get(reviewsRef);
     userReviews.innerHTML = '';
@@ -58,11 +55,10 @@ async function renderReviews(user) {
         return;
     }
     const reviewsData = snapshot.val();
-    // Flatten all reviews and filter by user
     const userReviewList = [];
     Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
         Object.values(reviewObj).forEach(r => {
-            if (r.user === user.email || r.user === user.uid) {
+            if (r.user === user.email || r.user === user.uid || r.user === user.displayName) {
                 userReviewList.push({ mediaKey, ...r });
             }
         });
@@ -119,35 +115,26 @@ async function renderFavorites(user) {
     const container = document.getElementById('userFavorites');
     if (!container) return;
     container.innerHTML = '<div>Loading favorites...</div>';
-    auth.onAuthStateChanged(async user => {
-        if (!user) {
-            container.innerHTML = '<div>Please log in to see your favorites.</div>';
-            // Update stats with 0 favorites (reviews will be updated separately)
-            window._favoriteCount = 0;
-            updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
-            return;
-        }
-        const userId = user.uid;
-        const favRef = ref(db, `favorites/${userId}`);
-        const snapshot = await get(favRef);
-        if (!snapshot.exists()) {
-            container.innerHTML = '<div>No favorites yet.</div>';
-            window._favoriteCount = 0;
-            updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
-            return;
-        }
-        const favKeys = Object.keys(snapshot.val() || {});
-        const movies = await fetchMovies();
-        const mediaMap = getAllMediaMap(movies, tv, music, games, books);
-        const favoriteItems = favKeys.map(key => mediaMap[key]).filter(Boolean);
-        window._favoriteCount = favoriteItems.length;
-        updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: favoriteItems.length });
-        if (favoriteItems.length === 0) {
-            container.innerHTML = '<div>No favorites found in your media library.</div>';
-            return;
-        }
-        container.innerHTML = favoriteItems.map(createCardHTML).join('');
-    });
+    const userId = user.uid || user.email || user.displayName;
+    const favRef = ref(db, `favorites/${userId}`);
+    const snapshot = await get(favRef);
+    if (!snapshot.exists()) {
+        container.innerHTML = '<div>No favorites yet.</div>';
+        window._favoriteCount = 0;
+        updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
+        return;
+    }
+    const favKeys = Object.keys(snapshot.val() || {});
+    const movies = await fetchMovies();
+    const mediaMap = getAllMediaMap(movies, tv, music, games, books);
+    const favoriteItems = favKeys.map(key => mediaMap[key]).filter(Boolean);
+    window._favoriteCount = favoriteItems.length;
+    updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: favoriteItems.length });
+    if (favoriteItems.length === 0) {
+        container.innerHTML = '<div>No favorites found in your media library.</div>';
+        return;
+    }
+    container.innerHTML = favoriteItems.map(createCardHTML).join('');
 }
 
 // On load, check auth and render profile
