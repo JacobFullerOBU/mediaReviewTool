@@ -1,5 +1,5 @@
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { auth, db } from "../scripts/firebase.js";
+import { auth } from "../scripts/firebase.js"; // Removed duplicate 'db' import
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
@@ -124,7 +124,7 @@ async function renderProfile() {
                 userFavorites.innerHTML = '';
                 favoriteItems.forEach(item => {
                     const li = document.createElement('li');
-                    li.innerHTML = `<strong>${item.title || item.id}</strong>`;
+                    li.innerHTML = createCardHTML(item);
                     userFavorites.appendChild(li);
                 });
             } else {
