@@ -218,7 +218,6 @@ async function loadFavoriteReviews(item) {
     }
     reviewsList.innerHTML = reviewArr.map(r => `<div style="margin-bottom:8px;"><strong>${r.user || 'Anonymous'}:</strong> ${r.text || r.review || ''}</div>`).join('');
 }
-}
 
 // On load, check auth and render profile
 auth.onAuthStateChanged(async (user) => {
