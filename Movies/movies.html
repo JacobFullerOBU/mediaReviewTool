@@ -73,5 +73,15 @@
 
     <script type="module" src="movies.js"></script>
     <script type="module" src="../scripts/auth.js"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileBtn = document.getElementById('profileBtn');
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function() {
+                    window.location.href = '../profile/profile.html';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
