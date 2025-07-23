@@ -277,6 +277,12 @@ function addCardListeners() {
 
 
 async function showItemDetails(item) {
+    // Prevent double modal: use a global flag
+    if (window._modalOpen) {
+        console.log('[DEBUG] Modal already open, skipping showItemDetails');
+        return;
+    }
+    window._modalOpen = true;
     console.log('[DEBUG] showItemDetails called for:', item);
     // Fetch dynamic rating and review count
     const avgRating = await getAverageRating(item.id);
@@ -377,13 +383,14 @@ async function showItemDetails(item) {
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
 
-    // Restore body scroll when modal is removed
+    // Restore body scroll and reset modal flag when modal is removed
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.type === 'childList') {
                 mutation.removedNodes.forEach((node) => {
                     if (node === modal) {
                         document.body.style.overflow = 'auto';
+                        window._modalOpen = false;
                         observer.disconnect();
                     }
                 });
