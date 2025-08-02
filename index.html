@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,14 +36,14 @@
             </div>
         </div>
     </nav>
-
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Discover & Review Your Favorite Media</h1>
             <p>Share your thoughts on movies, TV shows, music, games, and books. Join our community of reviewers!</p>
             <div style="margin-bottom: 18px;">
-                <input type="text" id="mediaSearchInput" placeholder="Search media by title, actor, or director..." style="width: 100%; max-width: 400px; padding: 8px; font-size: 1em;">
+                <input type="text" id="mediaSearchInput" placeholder="Search media by title, actor, or director..."
+                    style="width: 100%; max-width: 400px; padding: 8px; font-size: 1em;">
             </div>
             <button class="btn btn-primary btn-large" id="exploreBtn">Start Exploring</button>
             <button class="btn btn-secondary btn-large" id="randomizeBtn" style="margin-top:12px;">Surprise Me!</button>
@@ -67,7 +68,6 @@
             </div>
         </div>
     </section>
-
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
@@ -91,7 +91,6 @@
             </div>
         </div>
     </div>
-
     <!-- Register Modal -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
@@ -123,32 +122,31 @@
             </div>
         </div>
     </div>
-
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 MediaReview. All rights reserved.</p>
             <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
-                <button class="btn btn-primary" id="contactBtn" style="padding:8px 18px; font-size:1em;">Contact</button>
-                <a href="./Top Reviewers/topReviewers.html" id="leaderboardLink" style="color:#007bff; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
+                <button class="btn btn-primary" id="contactBtn"
+                    style="padding:8px 18px; font-size:1em;">Contact</button>
+                <a href="./Top Reviewers/topReviewers.html" id="leaderboardLink"
+                    style="color:#007bff; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
             </div>
         </div>
     </footer>
-
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/auth.js"></script>
     <script type="module" src="scripts/cards.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const profileBtn = document.getElementById('profileBtn');
             if (profileBtn) {
-                profileBtn.addEventListener('click', function() {
+                profileBtn.addEventListener('click', function () {
                     window.location.href = './profile/index.html';
                 });
             }
-
             const randomizeBtn = document.getElementById('randomizeBtn');
             if (randomizeBtn) {
-                randomizeBtn.addEventListener('click', function() {
+                randomizeBtn.addEventListener('click', function () {
                     // Use already loaded allItems from cards.js for instant response
                     const allMedia = window.allItems || [];
                     if (!allMedia.length) {
@@ -165,7 +163,8 @@
                             (randomItem.genre ? 'Genre: ' + randomItem.genre + '\n' : '') +
                             (randomItem.director ? 'Director: ' + randomItem.director + '\n' : '') +
                             (randomItem.actors ? 'Cast: ' + randomItem.actors + '\n' : '') +
-                            (randomItem.description ? 'Description: ' + randomItem.description + '\n' : '')
+                            (randomItem.description ? 'Description: ' + randomItem.description +
+                                '\n' : '')
                         );
                     }
                 });
