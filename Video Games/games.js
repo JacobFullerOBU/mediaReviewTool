@@ -1,6 +1,5 @@
 export const games = [
     {
-        id: 10,
         title: "The Legend of Zelda: Breath of the Wild",
         description: "An open-world adventure that redefines the Zelda franchise with innovative gameplay and stunning visuals.",
         category: "games",
@@ -10,7 +9,7 @@ export const games = [
         image: "cardimage.jpeg"
     },
     {
-        id: 11,
+
         title: "The Witcher 3: Wild Hunt",
         description: "A story-driven open world RPG set in a visually stunning fantasy universe full of meaningful choices.",
         category: "games",
@@ -20,7 +19,6 @@ export const games = [
         image: "cardimage.jpeg"
     },
     {
-        id: 12,
         title: "Red Dead Redemption 2",
         description: "An epic tale of life in America's unforgiving heartland featuring a desperado and the gang he rides with.",
         category: "games",
