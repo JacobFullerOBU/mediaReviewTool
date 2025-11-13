@@ -15,7 +15,6 @@
     "description": "When a mysterious artifact is uncovered on the Moon, a spacecraft manned by two humans and one supercomputer is sent to Jupiter to find its origins.",
     "genre": "Adventure, Sci-Fi",
     "director": "Stanley Kubrick",
-    "actors": "Keir Dullea\nGary Lockwood",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/2001_A_Space_Odyssey_%281968%29.png/250px-2001_A_Space_Odyssey_%281968%29.png",
     "category": "movies"
   },
@@ -25,7 +24,6 @@
     "description": "After a massive thunderstorm, an eerie, unwavering fog descends upon a Maine community. Locals seek refuge in a grocery store from the monstrous creatures now roaming the countryside killing everyone they encounter.",
     "genre": "Horror, Sci-Fi, Thriller",
     "director": "Frank Darabont",
-    "actors": "Thomas Jane\nMarcia Gay Harden\nLaurie Holden\nAndre Braugher\nToby Jones",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/The_Mist_poster.jpg/250px-The_Mist_poster.jpg",
     "category": "movies"
   },
@@ -35,7 +33,6 @@
     "description": "In Las Vegas, two best friends--a casino executive and a Mafia enforcer--compete for a gambling empire and a fast-living, fast-loving socialite.",
     "genre": "Crime, Drama",
     "director": "Martin Scorsese",
-    "actors": "Robert De Niro\nSharon Stone\nJoe Pesci\nDon Rickles\nKevin Pollak\nJames Woods",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Casino_%28Martins_Scorsese_film%29.png/250px-Casino_%28Martins_Scorsese_film%29.png",
     "category": "movies"
   },
@@ -45,7 +42,6 @@
     "description": "A private detective hired to expose an adulterer in 1930s Los Angeles finds himself caught up in a web of deceit, corruption, and murder.",
     "genre": "Jazz, soundtrack",
     "director": "Roman Polanski",
-    "actors": "Jack Nicholson\nFaye Dunaway\nJohn Hillerman\nPerry Lopez\nBurt Young\nJohn Huston",
     "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/Chinatownposter1.jpg",
     "category": "movies"
   },
@@ -55,7 +51,6 @@
     "description": "",
     "genre": "",
     "director": "Alfred Hitchcock",
-    "actors": "Anthony Perkins\nVera Miles\nJohn Gavin\nMartin Balsam\nJohn McIntire\nJanet Leigh",
     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg/250px-Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg",
     "category": "movies"
   },
@@ -65,7 +60,6 @@
     "description": "",
     "genre": "",
     "director": "Irvin Kershner",
-    "actors": "Mark Hamill\nHarrison Ford\nCarrie Fisher\nBilly Dee Williams\nAnthony Daniels\nDavid Prowse\nKenny Baker\nPeter Mayhew\nFrank Oz",
     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg/250px-The_Empire_Strikes_Back_%281980_film%29.jpg",
     "category": "movies"
   },
@@ -75,7 +69,6 @@
     "description": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
     "genre": "Drama",
     "director": "William Friedkin",
-    "actors": "Courtney B. Vance\nOssie Davis\nGeorge C. Scott\nArmin Mueller-Stahl\nDorian Harewood\nJames Gandolfini\nTony Danza\nJack Lemmon\nHume Cronyn\nMykelti Williamson\nEdward James Olmos\nWilliam Petersen",
     "poster": "https://upload.wikimedia.org/wikipedia/en/4/44/12_Angry_Men_1997_film_poster.jpg",
     "category": "movies"
   },
@@ -85,7 +78,6 @@
     "description": "",
     "genre": "",
     "director": "Federico Fellini",
-    "actors": "Marcello Mastroianni\nAnita Ekberg\nAnouk Aimée\nYvonne Furneaux\nAlain Cuny\nAnnibale Ninchi\nMagali Noël\nLex Barker\nJacques Sernas\nNadia Gray",
     "poster": "https://upload.wikimedia.org/wikipedia/en/c/c1/La_Dolce_Vita_%281960%29_coverart.jpg",
     "category": "movies"
   },
@@ -95,7 +87,6 @@
     "description": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
     "genre": "Action, Sci-Fi",
     "director": "The Wachowskis[a]",
-    "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nKeanu Reeves\nLaurence Fishburne\nCarrie-Anne Moss\nHugo Weaving\nJoe Pantoliano",
     "poster": "https://upload.wikimedia.org/wikipedia/en/9/94/The_Matrix.jpg",
     "category": "movies"
   },
@@ -116,7 +107,8 @@
     "genre": "Drama",
     "director": "Miloš Forman",
     "actors": "Jack Nicholson\nLouise Fletcher\nWilliam Redfield",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/2/26/One_Flew_Over_the_Cuckoo%27s_Nest_poster.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/2/26/One_Flew_Over_the_Cuckoo%27s_Nest_poster.jpg",
+     "category": "movies"
   },
   {
     "title": "Lawrence of Arabia ",
@@ -125,7 +117,8 @@
     "genre": "Adventure, Biography, Drama",
     "director": "David Lean",
     "actors": "Alec Guinness\nAnthony Quinn\nJack Hawkins\nJosé Ferrer\nAnthony Quayle\nClaude Rains\nArthur Kennedy\nOmar Sharif\nPeter O'Toole",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lawrence_of_arabia_ver3_xxlg.jpg/250px-Lawrence_of_arabia_ver3_xxlg.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lawrence_of_arabia_ver3_xxlg.jpg/250px-Lawrence_of_arabia_ver3_xxlg.jpg",
+     "category": "movies"
   },
   {
     "title": "Taxi ",
@@ -134,7 +127,8 @@
     "genre": "",
     "director": "Gérard Pirès",
     "actors": "Samy Naceri\nFrédéric Diefenthal\nMarion Cotillard\nManuela Gourary\nEmma Sjöberg\nBernard Farcy",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/7/7e/TaxiPoster.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/7/7e/TaxiPoster.jpg",
+     "category": "movies"
   },
   {
     "title": "The Magnificent Seven",
@@ -143,7 +137,8 @@
     "genre": "Action, Adventure, Drama",
     "director": "Antoine Fuqua",
     "actors": "Denzel Washington\nChris Pratt\nEthan Hawke\nVincent D'Onofrio\nByung-hun Lee\nManuel Garcia-Rulfo\nMartin Sensmeier\nPeter Sarsgaard",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Magnificent_Seven_2016.jpg/250px-Magnificent_Seven_2016.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Magnificent_Seven_2016.jpg/250px-Magnificent_Seven_2016.jpg",
+     "category": "movies"
   },
   {
     "title": "The Silence of the Lambs",
@@ -152,7 +147,8 @@
     "genre": "",
     "director": "Jonathan Demme",
     "actors": "Jodie Foster\nAnthony Hopkins\nScott Glenn\nTed Levine",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/8/86/The_Silence_of_the_Lambs_poster.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/8/86/The_Silence_of_the_Lambs_poster.jpg",
+     "category": "movies"
   },
   {
     "title": "Vertigo",
@@ -161,7 +157,8 @@
     "genre": "Mystery, Romance, Thriller",
     "director": "Alfred Hitchcock",
     "actors": "James Stewart\nKim Novak\nBarbara Bel Geddes\nTom Helmore\nHenry Jones",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Vertigomovie_restoration.jpg/250px-Vertigomovie_restoration.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Vertigomovie_restoration.jpg/250px-Vertigomovie_restoration.jpg",
+     "category": "movies"
   },
   {
     "title": "Back to the Future",
@@ -170,7 +167,8 @@
     "genre": "",
     "director": "Robert Zemeckis",
     "actors": "Michael J. Fox\nChristopher Lloyd\nLea Thompson\nCrispin Glover",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Back_to_the_Future.jpg/250px-Back_to_the_Future.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Back_to_the_Future.jpg/250px-Back_to_the_Future.jpg",
+     "category": "movies"
   },
   {
     "title": "Amadeus",
@@ -179,7 +177,8 @@
     "genre": "Biography, Drama, Music",
     "director": "Miloš Forman",
     "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nF. Murray Abraham\nTom Hulce\nElizabeth Berridge\nSimon Callow\nRoy Dotrice\nChristine Ebersole\nJeffrey Jones\nCharles Kay",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/2/2f/Amadeusmov.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/2/2f/Amadeusmov.jpg",
+     "category": "movies"
   },
   {
     "title": "The Green Mile",
@@ -188,7 +187,8 @@
     "genre": "Crime, Drama, Fantasy",
     "director": "Frank Darabont",
     "actors": "Tom Hanks\nDavid Morse\nBonnie Hunt\nMichael Clarke Duncan\nJames Cromwell\nMichael Jeter\nGraham Greene\nDoug Hutchison\nSam Rockwell\nBarry Pepper\nJeffrey DeMunn\nPatricia Clarkson\nHarry Dean Stanton",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/The_Green_Mile_%28movie_poster%29.jpg/250px-The_Green_Mile_%28movie_poster%29.jpg"
+     "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/The_Green_Mile_%28movie_poster%29.jpg/250px-The_Green_Mile_%28movie_poster%29.jpg",
+     "category": "movies"
   },
   {
     "title": "Vantage Point",
