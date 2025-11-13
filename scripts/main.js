@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 // Firebase Firestore setup and user review functions
-import { collection, addDoc, query, orderBy, limit, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { auth } from "./firebase.js";
+import { collection, addDoc, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { auth, firestoreDb } from "./firebase.js";
 
-// Use the shared Firebase app from firebase.js
-const db = getFirestore();
+// Use the shared Firestore instance from firebase.js
+const db = firestoreDb;
 
 // Save a review for the current user
 export async function postReview(mediaId, reviewText, rating) {
