@@ -132,11 +132,29 @@ function showMovieModal(movie) {
     };
     // Load and handle reviews
     loadReviews(movie);
-    document.getElementById('reviewForm').onsubmit = function(e) {
+    document.getElementById('reviewForm').onsubmit = async function(e) {
         e.preventDefault();
         const text = document.getElementById('reviewText').value.trim();
+        // For now, ask for rating as a prompt (can be improved with UI)
+        let rating = 5;
+        if (window.prompt) {
+            const input = window.prompt('Enter your rating (1-10):', '5');
+            const num = parseInt(input);
+            if (!isNaN(num) && num >= 1 && num <= 10) {
+                rating = num;
+            }
+        }
         if (text) {
-            submitReview(movie, text);
+            // Use Firestore-backed review upload
+            try {
+                // Dynamically import postReview from main.js
+                const { postReview } = await import('../scripts/main.js');
+                await postReview(movie.id || (movie.title ? movie.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : ''), text, rating);
+                document.getElementById('reviewText').value = '';
+                loadReviews(movie);
+            } catch (err) {
+                alert('Error posting review: ' + (err.message || err));
+            }
         }
     };
 }
@@ -187,14 +205,15 @@ async function loadReviews(movie) {
     }
 }
 
-async function submitReview(movie, text) {
-    const user = auth.currentUser ? auth.currentUser.email : 'Anonymous';
-    const key = movie.id ? String(movie.id) : (movie.title ? movie.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-    const reviewsRef = ref(db, `reviews/${key}`);
-    await push(reviewsRef, { user, text, timestamp: Date.now() });
-    document.getElementById('reviewText').value = '';
-    loadReviews(movie);
-}
+// Deprecated: Use Firestore-backed review upload from main.js
+// async function submitReview(movie, text) {
+//     const user = auth.currentUser ? auth.currentUser.email : 'Anonymous';
+//     const key = movie.id ? String(movie.id) : (movie.title ? movie.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+//     const reviewsRef = ref(db, `reviews/${key}`);
+//     await push(reviewsRef, { user, text, timestamp: Date.now() });
+//     document.getElementById('reviewText').value = '';
+//     loadReviews(movie);
+// }
 
 // Init
 window.addEventListener('DOMContentLoaded', async () => {
