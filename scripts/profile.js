@@ -75,7 +75,9 @@ async function renderReviews(user) {
     }
     userReviewList.forEach(r => {
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${r.mediaKey}</strong>: ${r.text || r.review || ''}`;
+        // Prefer reviewText, then text, then review
+        const reviewContent = r.reviewText || r.text || r.review || '';
+        li.innerHTML = `<strong>${r.mediaKey}</strong>: ${reviewContent}`;
         userReviews.appendChild(li);
         reviewCount++;
     });
