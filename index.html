@@ -121,6 +121,23 @@
             </div>
         </div>
     </div>
+    <!-- Suggestions Section -->
+    <section class="suggestions-section" style="background:#f9f9f9; padding:32px 0; border-top:1px solid #eee;">
+        <div class="container">
+            <h2>Suggest Something to Add</h2>
+            <form id="suggestionForm" style="max-width:500px; margin:auto;">
+                <div class="form-group">
+                    <label for="suggestionText">Your suggestion (movie, show, music, etc):</label>
+                    <input type="text" id="suggestionText" name="suggestionText" required style="width:100%;padding:8px;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top:12px;">Submit Suggestion</button>
+            </form>
+            <div id="suggestionsList" style="margin-top:32px;">
+                <h3>Recent Suggestions</h3>
+                <ul id="suggestionsUl" style="list-style:disc inside;"></ul>
+            </div>
+        </div>
+    </section>
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 MediaReview. All rights reserved.</p>
