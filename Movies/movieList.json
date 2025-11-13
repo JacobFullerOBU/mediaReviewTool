@@ -6,7 +6,8 @@
     "genre": "Drama, Romance, War",
     "director": "Michael Curtiz",
     "actors": "Humphrey Bogart\nIngrid Bergman\nPaul Henreid\nClaude Rains\nConrad Veidt\nSydney Greenstreet\nPeter Lorre",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/CasablancaPoster-Gold.jpg/250px-CasablancaPoster-Gold.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/CasablancaPoster-Gold.jpg/250px-CasablancaPoster-Gold.jpg",
+    "category": "movies"
   },
   {
     "title": "2001: A Space Odyssey",
@@ -15,7 +16,8 @@
     "genre": "Adventure, Sci-Fi",
     "director": "Stanley Kubrick",
     "actors": "Keir Dullea\nGary Lockwood",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/2001_A_Space_Odyssey_%281968%29.png/250px-2001_A_Space_Odyssey_%281968%29.png"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/2001_A_Space_Odyssey_%281968%29.png/250px-2001_A_Space_Odyssey_%281968%29.png",
+    "category": "movies"
   },
   {
     "title": "The Mist ",
@@ -24,7 +26,8 @@
     "genre": "Horror, Sci-Fi, Thriller",
     "director": "Frank Darabont",
     "actors": "Thomas Jane\nMarcia Gay Harden\nLaurie Holden\nAndre Braugher\nToby Jones",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/The_Mist_poster.jpg/250px-The_Mist_poster.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/The_Mist_poster.jpg/250px-The_Mist_poster.jpg",
+    "category": "movies"
   },
   {
     "title": "Casino",
@@ -33,7 +36,8 @@
     "genre": "Crime, Drama",
     "director": "Martin Scorsese",
     "actors": "Robert De Niro\nSharon Stone\nJoe Pesci\nDon Rickles\nKevin Pollak\nJames Woods",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Casino_%28Martins_Scorsese_film%29.png/250px-Casino_%28Martins_Scorsese_film%29.png"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Casino_%28Martins_Scorsese_film%29.png/250px-Casino_%28Martins_Scorsese_film%29.png",
+    "category": "movies"
   },
   {
     "title": "Chinatown ",
@@ -42,7 +46,8 @@
     "genre": "Jazz, soundtrack",
     "director": "Roman Polanski",
     "actors": "Jack Nicholson\nFaye Dunaway\nJohn Hillerman\nPerry Lopez\nBurt Young\nJohn Huston",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/Chinatownposter1.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/Chinatownposter1.jpg",
+    "category": "movies"
   },
   {
     "title": "Psycho",
@@ -51,7 +56,8 @@
     "genre": "",
     "director": "Alfred Hitchcock",
     "actors": "Anthony Perkins\nVera Miles\nJohn Gavin\nMartin Balsam\nJohn McIntire\nJanet Leigh",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg/250px-Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg/250px-Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg",
+    "category": "movies"
   },
   {
     "title": "The Empire Strikes Back",
@@ -60,7 +66,8 @@
     "genre": "",
     "director": "Irvin Kershner",
     "actors": "Mark Hamill\nHarrison Ford\nCarrie Fisher\nBilly Dee Williams\nAnthony Daniels\nDavid Prowse\nKenny Baker\nPeter Mayhew\nFrank Oz",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg/250px-The_Empire_Strikes_Back_%281980_film%29.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg/250px-The_Empire_Strikes_Back_%281980_film%29.jpg",
+    "category": "movies"
   },
   {
     "title": "12 Angry Men ",
@@ -69,7 +76,8 @@
     "genre": "Drama",
     "director": "William Friedkin",
     "actors": "Courtney B. Vance\nOssie Davis\nGeorge C. Scott\nArmin Mueller-Stahl\nDorian Harewood\nJames Gandolfini\nTony Danza\nJack Lemmon\nHume Cronyn\nMykelti Williamson\nEdward James Olmos\nWilliam Petersen",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/4/44/12_Angry_Men_1997_film_poster.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/4/44/12_Angry_Men_1997_film_poster.jpg",
+    "category": "movies"
   },
   {
     "title": "La Dolce Vita",
@@ -78,7 +86,8 @@
     "genre": "",
     "director": "Federico Fellini",
     "actors": "Marcello Mastroianni\nAnita Ekberg\nAnouk Aimée\nYvonne Furneaux\nAlain Cuny\nAnnibale Ninchi\nMagali Noël\nLex Barker\nJacques Sernas\nNadia Gray",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/c/c1/La_Dolce_Vita_%281960_film%29_coverart.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/c/c1/La_Dolce_Vita_%281960%29_coverart.jpg",
+    "category": "movies"
   },
   {
     "title": "The Matrix",
@@ -87,7 +96,8 @@
     "genre": "Action, Sci-Fi",
     "director": "The Wachowskis[a]",
     "actors": ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}\nKeanu Reeves\nLaurence Fishburne\nCarrie-Anne Moss\nHugo Weaving\nJoe Pantoliano",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/9/94/The_Matrix.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/9/94/The_Matrix.jpg",
+    "category": "movies"
   },
   {
     "title": "Titanic",
@@ -96,7 +106,8 @@
     "genre": "",
     "director": "James Cameron",
     "actors": "Leonardo DiCaprio\nKate Winslet\nBilly Zane\nKathy Bates\nFrances Fisher\nBernard Hill\nJonathan Hyde\nDanny Nucci\nDavid Warner\nBill Paxton",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png"
+    "poster": "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png",
+    "category": "movies"
   },
   {
     "title": "One Flew Over the Cuckoo's Nest",
