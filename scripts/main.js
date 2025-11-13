@@ -123,7 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const value = suggestionText.value.trim();
             if (!value) return;
             try {
-                await addDoc(collection(db, "suggestions"), {
+                // Use Realtime Database for suggestions
+                const { db } = await import('./firebase.js');
+                const { push, ref } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+                await push(ref(db, 'suggestions'), {
                     text: value,
                     timestamp: new Date().toISOString(),
                     userId: auth.currentUser ? auth.currentUser.uid : null
@@ -132,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("Failed to submit suggestion: " + err.message);
                 return;
             }
-            renderSuggestions();
+            // Optionally, update UI (renderSuggestions will need to be updated to read from Realtime DB)
             suggestionText.value = '';
         });
     }
