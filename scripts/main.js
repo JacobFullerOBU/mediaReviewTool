@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 // Firebase Firestore setup and user review functions
-import { collection, addDoc, query, where, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { collection, addDoc, query, orderBy, limit, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { auth } from "./firebase.js";
 
 // Use the shared Firebase app from firebase.js
@@ -92,22 +92,25 @@ export async function getUserReviews() {
 document.addEventListener('DOMContentLoaded', function() {
     initAppUI();
 
-    // Suggestions logic
+    // Suggestions logic (Firestore)
     const suggestionForm = document.getElementById('suggestionForm');
     const suggestionText = document.getElementById('suggestionText');
     const suggestionsUl = document.getElementById('suggestionsUl');
-    let suggestions = [];
+    const db = getFirestore();
 
-    // Load suggestions from localStorage
-    if (window.localStorage) {
-        try {
-            const saved = localStorage.getItem('mediaSuggestions');
-            if (saved) suggestions = JSON.parse(saved);
-        } catch {}
+    async function fetchSuggestions() {
+        const q = query(collection(db, "suggestions"), orderBy("timestamp", "desc"), limit(10));
+        const querySnapshot = await getDocs(q);
+        return querySnapshot.docs.map(doc => doc.data().text);
     }
-    function renderSuggestions() {
+
+    async function renderSuggestions() {
         suggestionsUl.innerHTML = '';
-        suggestions.slice(-10).reverse().forEach(s => {
+        let suggestions = [];
+        try {
+            suggestions = await fetchSuggestions();
+        } catch {}
+        suggestions.forEach(s => {
             const li = document.createElement('li');
             li.textContent = s;
             suggestionsUl.appendChild(li);
@@ -116,15 +119,19 @@ document.addEventListener('DOMContentLoaded', function() {
     renderSuggestions();
 
     if (suggestionForm) {
-        suggestionForm.addEventListener('submit', function(e) {
+        suggestionForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const value = suggestionText.value.trim();
             if (!value) return;
-            suggestions.push(value);
-            if (window.localStorage) {
-                try {
-                    localStorage.setItem('mediaSuggestions', JSON.stringify(suggestions));
-                } catch {}
+            try {
+                await addDoc(collection(db, "suggestions"), {
+                    text: value,
+                    timestamp: new Date().toISOString(),
+                    userId: auth.currentUser ? auth.currentUser.uid : null
+                });
+            } catch (err) {
+                alert("Failed to submit suggestion: " + err.message);
+                return;
             }
             renderSuggestions();
             suggestionText.value = '';
