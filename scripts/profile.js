@@ -48,9 +48,11 @@ async function renderReviews(user) {
     if (!snapshot.exists()) {
         userReviews.innerHTML = '<li>No reviews yet.</li>';
         updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
+        console.log('[Profile] No reviews found in database.');
         return;
     }
     const reviewsData = snapshot.val();
+    console.log('[Profile] All reviews data:', reviewsData);
     const userReviewList = [];
     Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
         Object.values(reviewObj).forEach(r => {
@@ -59,6 +61,8 @@ async function renderReviews(user) {
             }
         });
     });
+    console.log('[Profile] Current user:', user);
+    console.log('[Profile] Matched user reviews:', userReviewList);
     if (userReviewList.length === 0) {
         userReviews.innerHTML = '<li>No reviews yet.</li>';
         updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
