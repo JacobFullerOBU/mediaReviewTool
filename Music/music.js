@@ -7,6 +7,7 @@ export const music = [
         rating: 9.1,
         year: 1969,
         reviews: 89,
+        poster: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
         image: "cardimage.jpeg"
     },
     {
@@ -17,6 +18,7 @@ export const music = [
         rating: 9.4,
         year: 1973,
         reviews: 76,
+        poster: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
         image: "cardimage.jpeg"
     },
     {
@@ -27,6 +29,7 @@ export const music = [
         rating: 8.9,
         year: 1982,
         reviews: 112,
+        poster: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
         image: "cardimage.jpeg"
     }
 ];
