@@ -8,7 +8,7 @@ export const music = [
         year: 1969,
         reviews: 89,
         poster: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
-        image: "cardimage.jpeg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
     },
     {
         id: 8,
@@ -19,7 +19,7 @@ export const music = [
         year: 1973,
         reviews: 76,
         poster: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
-        image: "cardimage.jpeg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
     },
     {
         id: 9,
@@ -30,6 +30,6 @@ export const music = [
         year: 1982,
         reviews: 112,
         poster: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
-        image: "cardimage.jpeg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
     }
 ];
