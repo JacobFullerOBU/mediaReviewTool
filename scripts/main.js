@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const suggestionForm = document.getElementById('suggestionForm');
     const suggestionText = document.getElementById('suggestionText');
     const suggestionsUl = document.getElementById('suggestionsUl');
-    const db = getFirestore();
 
     async function fetchSuggestions() {
         const q = query(collection(db, "suggestions"), orderBy("timestamp", "desc"), limit(10));
