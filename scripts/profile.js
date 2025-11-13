@@ -56,7 +56,12 @@ async function renderReviews(user) {
     const userReviewList = [];
     Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
         Object.values(reviewObj).forEach(r => {
-            if (r.user === user.email || r.user === user.uid || r.user === user.displayName) {
+            if (
+                r.user === user.email ||
+                r.user === user.uid ||
+                r.user === user.displayName ||
+                r.userId === user.uid // Added support for userId field
+            ) {
                 userReviewList.push({ mediaKey, ...r });
             }
         });
