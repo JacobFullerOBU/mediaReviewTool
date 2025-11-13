@@ -91,6 +91,45 @@ export async function getUserReviews() {
 
 document.addEventListener('DOMContentLoaded', function() {
     initAppUI();
+
+    // Suggestions logic
+    const suggestionForm = document.getElementById('suggestionForm');
+    const suggestionText = document.getElementById('suggestionText');
+    const suggestionsUl = document.getElementById('suggestionsUl');
+    let suggestions = [];
+
+    // Load suggestions from localStorage
+    if (window.localStorage) {
+        try {
+            const saved = localStorage.getItem('mediaSuggestions');
+            if (saved) suggestions = JSON.parse(saved);
+        } catch {}
+    }
+    function renderSuggestions() {
+        suggestionsUl.innerHTML = '';
+        suggestions.slice(-10).reverse().forEach(s => {
+            const li = document.createElement('li');
+            li.textContent = s;
+            suggestionsUl.appendChild(li);
+        });
+    }
+    renderSuggestions();
+
+    if (suggestionForm) {
+        suggestionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const value = suggestionText.value.trim();
+            if (!value) return;
+            suggestions.push(value);
+            if (window.localStorage) {
+                try {
+                    localStorage.setItem('mediaSuggestions', JSON.stringify(suggestions));
+                } catch {}
+            }
+            renderSuggestions();
+            suggestionText.value = '';
+        });
+    }
 });
 
 function initAppUI() {
