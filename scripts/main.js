@@ -97,17 +97,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const suggestionText = document.getElementById('suggestionText');
     const suggestionsUl = document.getElementById('suggestionsUl');
 
-    async function fetchSuggestions() {
-        const q = query(collection(db, "suggestions"), orderBy("timestamp", "desc"), limit(10));
-        const querySnapshot = await getDocs(q);
-        return querySnapshot.docs.map(doc => doc.data().text);
+    async function fetchSuggestionsRealtime() {
+        const { db } = await import('./firebase.js');
+        const { ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+        const suggestionsRef = ref(db, 'suggestions');
+        const snapshot = await get(suggestionsRef);
+        if (!snapshot.exists()) return [];
+        // Get last 10 suggestions, sorted by timestamp descending
+        const allSuggestions = Object.values(snapshot.val());
+        return allSuggestions
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .slice(0, 10)
+            .map(s => s.text);
     }
 
     async function renderSuggestions() {
         suggestionsUl.innerHTML = '';
         let suggestions = [];
         try {
-            suggestions = await fetchSuggestions();
+            suggestions = await fetchSuggestionsRealtime();
         } catch {}
         suggestions.forEach(s => {
             const li = document.createElement('li');
