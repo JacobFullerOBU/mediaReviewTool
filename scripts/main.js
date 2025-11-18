@@ -139,12 +139,36 @@ document.addEventListener('DOMContentLoaded', function() {
                     timestamp: new Date().toISOString(),
                     userId: auth.currentUser ? auth.currentUser.uid : null
                 });
+                showPopupMessage('Suggestion submitted successfully!');
             } catch (err) {
                 alert("Failed to submit suggestion: " + err.message);
                 return;
             }
             // Optionally, update UI (renderSuggestions will need to be updated to read from Realtime DB)
             suggestionText.value = '';
+        // Show a temporary popup message
+        function showPopupMessage(msg) {
+            let popup = document.createElement('div');
+            popup.textContent = msg;
+            popup.style.position = 'fixed';
+            popup.style.top = '32px';
+            popup.style.left = '50%';
+            popup.style.transform = 'translateX(-50%)';
+            popup.style.background = 'linear-gradient(90deg, #8ec5fc 0%, #e0c3fc 100%)';
+            popup.style.color = '#333';
+            popup.style.fontWeight = 'bold';
+            popup.style.padding = '16px 32px';
+            popup.style.borderRadius = '12px';
+            popup.style.boxShadow = '0 2px 16px #8ec5fc55';
+            popup.style.zIndex = '9999';
+            popup.style.fontSize = '1.2em';
+            document.body.appendChild(popup);
+            setTimeout(() => {
+                popup.style.transition = 'opacity 0.5s';
+                popup.style.opacity = '0';
+                setTimeout(() => popup.remove(), 500);
+            }, 1800);
+        }
         });
     }
 });
