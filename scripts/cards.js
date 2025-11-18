@@ -91,10 +91,15 @@ async function loadCardsWithItems(items) {
 
 async function initCards() {
     // Fetch movies from JSON
-    const movies = await fetchMovies();
-    // Combine with other media arrays if needed
-    allItems = [...movies, ...tv, ...music, ...games, ...books];
+    const movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
+    // Filter out empty items from other media arrays
+    const validTV = Array.isArray(tv) ? tv.filter(item => typeof item.title === 'string' && item.title) : [];
+    const validMusic = Array.isArray(music) ? music.filter(item => typeof item.title === 'string' && item.title) : [];
+    const validGames = Array.isArray(games) ? games.filter(item => typeof item.title === 'string' && item.title) : [];
+    const validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
+    allItems = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks];
     window.allItems = allItems;
+    console.log('[DEBUG] Loaded media items:', allItems.length, allItems);
 
     // Initialize tab functionality
     initTabFunctionality();
@@ -127,196 +132,11 @@ function filterCards(category) {
 
 // Export function for use by other modules
 window.filterCards = filterCards;
-window.showMovieModal = showItemDetails;
 
-async function loadCards(category) {
-    const container = document.getElementById('cardsContainer');
-    if (!container) return;
-
-    // Show loading state
-    showLoadingState(container);
-
-    // Simulate loading delay
-    setTimeout(async () => {
-        let itemsToShow = allItems;
-
-        if (category !== 'all') {
-            itemsToShow = allItems.filter(item => item.category === category);
-        }
-
-        await renderCards(container, itemsToShow);
-    }, 500);
-}
-
-function showLoadingState(container) {
-    container.innerHTML = '<div class="loading">Loading content...</div>';
-}
-
-async function renderCards(container, items) {
-    try {
-        if (items.length === 0) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    <h3>No content found</h3>
-                    <p>Try selecting a different category or check back later.</p>
-                </div>
-            `;
-            console.log('[cards.js] No items to render');
-            return;
-        }
-
-        container.innerHTML = items.map(item => createCardHTML(item)).join('');
-        console.log(`[cards.js] Rendered ${items.length} cards`);
-        // Debug: confirm cards exist in DOM
-        const renderedCards = container.querySelectorAll('.media-card');
-        console.log('[DEBUG] Cards in DOM:', renderedCards.length);
-
-        // Dynamically update ratings, review count, and latest review from Firestore
-        for (const item of items) {
-            const card = container.querySelector(`.media-card[data-id='${item.id}']`);
-            if (card) {
-                const ratingElem = card.querySelector('.card-rating');
-                if (ratingElem) {
-                    ratingElem.textContent = '★ ' + await getAverageRating(item.id);
-                }
-                const reviewsElem = card.querySelector('.card-reviews');
-                if (reviewsElem) {
-                    const count = await getReviewCount(item.id);
-                    reviewsElem.textContent = `${count} reviews`;
-                }
-                // Show latest review (Realtime Database)
-                const latestReviewElem = card.querySelector('.card-latest-review');
-                if (latestReviewElem) {
-                    const reviewsRef = ref(db, `reviews/${item.id}`);
-                    const snapshot = await get(reviewsRef);
-                    let latest = null;
-                    if (snapshot.exists()) {
-                        const reviews = Object.values(snapshot.val());
-                        reviews.forEach(data => {
-                            if (!latest || new Date(data.timestamp) > new Date(latest.timestamp)) {
-                                latest = data;
-                            }
-                        });
-                    }
-                    latestReviewElem.textContent = latest && latest.reviewText ? `"${latest.reviewText}"` : '';
-                }
-            }
-        }
-
-        // Add click listeners to cards
-        addCardListeners();
-    } catch (err) {
-        container.innerHTML = `<div class="error-state"><h3>Error loading cards</h3><p>${err.message}</p></div>`;
-        console.error('[cards.js] Error rendering cards:', err);
-    }
-}
-
-// Helper function to generate card HTML
-function createCardHTML(item) {
-    return `
-        <div class="media-card" data-id="${item.id || ''}" data-category="${item.category || 'movie'}">
-            <div class="card-image" style="background-image: url('${item.poster || item.image || ''}')">
-                <div class="card-category">${item.category || 'Movie'}</div>
-                <div class="card-rating">★ ${item.rating || ''}</div>
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">${item.title || ''}</h3>
-                <p class="card-description">${item.description || ''}</p>
-                <div class="card-meta">
-                    <span class="card-year">${item.year || ''}</span>
-                    <span class="card-director">${item.director ? 'Director: ' + item.director : ''}</span>
-                </div>
-                <div class="card-actors">${item.actors ? 'Cast: ' + item.actors.replace(/\n/g, ', ') : ''}</div>
-                <div class="card-genre">${item.genre ? 'Genre: ' + item.genre : ''}</div>
-                <div class="card-latest-review" style="margin-top:8px; font-style:italic; color:#555;"></div>
-            </div>
-        </div>
-    `;
-}
-
-function addCardListeners() {
-    const cards = document.querySelectorAll('.media-card');
-    console.log('[DEBUG] Attaching listeners to cards:', cards.length);
-    cards.forEach(card => {
-        // Use index as fallback for missing id
-        const itemId = card.dataset.id || card.querySelector('.card-title')?.textContent || '';
-        const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
-        // Attach click listeners directly to child elements
-        const imageElem = card.querySelector('.card-image');
-        const titleElem = card.querySelector('.card-title');
-        if (imageElem) {
-            imageElem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                console.log('[DEBUG] Card-image clicked:', item);
-                if (item) showItemDetails(item);
-            });
-        }
-        if (titleElem) {
-            titleElem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                console.log('[DEBUG] Card-title clicked:', item);
-                if (item) showItemDetails(item);
-            });
-        }
-                        // Show only first 8 cards, with Show More button if needed
-                        const initialCount = 8;
-                        let collapsed = true;
-                        let itemsToShow = items.slice(0, initialCount);
-                        container.innerHTML = itemsToShow.map(item => createCardHTML(item)).join('');
-                        if (items.length > initialCount) {
-                            const showMoreBtn = document.createElement('button');
-                            showMoreBtn.textContent = 'Show More';
-                            showMoreBtn.className = 'btn btn-secondary show-more-btn';
-                            showMoreBtn.style.display = 'block';
-                            showMoreBtn.style.margin = '24px auto';
-                            showMoreBtn.onclick = () => {
-                                if (collapsed) {
-                                    container.innerHTML = items.map(item => createCardHTML(item)).join('');
-                                    showMoreBtn.textContent = 'Show Less';
-                                    collapsed = false;
-                                } else {
-                                    container.innerHTML = items.slice(0, initialCount).map(item => createCardHTML(item)).join('');
-                                    showMoreBtn.textContent = 'Show More';
-                                    collapsed = true;
-                                }
-                                container.appendChild(showMoreBtn);
-                                // Re-apply dynamic rating/review updates after re-render
-                                updateCardStats(collapsed ? itemsToShow : items);
-                            };
-                            container.appendChild(showMoreBtn);
-                        }
-                        // Initial dynamic rating/review updates
-                        updateCardStats(itemsToShow);
-
-                        function updateCardStats(visibleItems) {
-                            for (const item of visibleItems) {
-                                const card = container.querySelector(\`.media-card[data-id='\${item.id}']\`);
-                                if (card) {
-                                    const ratingElem = card.querySelector('.card-rating');
-                                    if (ratingElem) {
-                                        getAverageRating(item.id).then(avg => ratingElem.textContent = '★ ' + avg);
-                                    }
-                                    const reviewCountElem = card.querySelector('.card-review-count');
-                                    if (reviewCountElem) {
-                                        getReviewCount(item.id).then(cnt => reviewCountElem.textContent = cnt + ' reviews');
-                                    }
-                                }
-                            }
-                        }
-    modal = document.createElement('div');
-    modal.className = 'modal show';
-    modal.style.zIndex = '9999';
-    modal.style.display = 'flex';
-    modal.style.position = 'fixed';
-    modal.style.top = '0';
-    modal.style.left = '0';
-    modal.style.width = '100vw';
-    modal.style.height = '100vh';
-    modal.style.background = 'rgba(0,0,0,0.7)';
-    modal.style.alignItems = 'center';
-    modal.style.justifyContent = 'center';
-    modal.style.border = 'none';
-    // Fetch all reviews for this media item
+// Modal logic moved to a dedicated async function
+async function showItemDetails(item) {
+    let avgRating = await getAverageRating(item.id);
+    let reviewCount = await getReviewCount(item.id);
     let reviewsHtml = '';
     try {
         const reviewsRef = ref(db, `reviews/${item.id}`);
@@ -338,6 +158,19 @@ function addCardListeners() {
         reviewsHtml = `<div style="margin-top:24px; color:red;">Error loading reviews.</div>`;
     }
 
+    let modal = document.createElement('div');
+    modal.className = 'modal show';
+    modal.style.zIndex = '9999';
+    modal.style.display = 'flex';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.background = 'rgba(0,0,0,0.7)';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.border = 'none';
     modal.innerHTML = `
         <div class="modal-content" style="max-width:600px;background:#fff;border-radius:12px;box-shadow:0 2px 16px #0004;position:relative;padding:32px;">
             <button class="close" style="position:absolute;top:12px;right:16px;font-size:2em;background:none;border:none;cursor:pointer;">&times;</button>
@@ -389,7 +222,7 @@ function addCardListeners() {
     });
     document.body.style.overflow = 'hidden';
 
-    // nable scrolling again after details closed
+    // Enable scrolling again after details closed
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.type === 'childList') {
@@ -528,6 +361,34 @@ function addCardListeners() {
             }, 1200);
         } catch (err) {
             reviewError.textContent = 'Error submitting review: ' + (err.message || err);
+        }
+    });
+}
+
+// Attach card listeners outside of showItemDetails
+function addCardListeners() {
+    const cards = document.querySelectorAll('.media-card');
+    console.log('[DEBUG] Attaching listeners to cards:', cards.length);
+    cards.forEach(card => {
+        // Use index as fallback for missing id
+        const itemId = card.dataset.id || card.querySelector('.card-title')?.textContent || '';
+        const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
+        // Attach click listeners directly to child elements
+        const imageElem = card.querySelector('.card-image');
+        const titleElem = card.querySelector('.card-title');
+        if (imageElem) {
+            imageElem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('[DEBUG] Card-image clicked:', item);
+                if (item) showItemDetails(item);
+            });
+        }
+        if (titleElem) {
+            titleElem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('[DEBUG] Card-title clicked:', item);
+                if (item) showItemDetails(item);
+            });
         }
     });
 }
