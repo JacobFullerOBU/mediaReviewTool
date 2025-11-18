@@ -258,43 +258,51 @@ function addCardListeners() {
                 if (item) showItemDetails(item);
             });
         }
-        // Optionally, keep card click for non-button area
-        card.addEventListener('click', function(e) {
-            if (!e.target.classList.contains('btn')) {
-                console.log('[DEBUG] Card (background) clicked:', item);
-                if (item) showItemDetails(item);
-            }
-        });
-        // Add hover effects
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-}
+                        // Show only first 8 cards, with Show More button if needed
+                        const initialCount = 8;
+                        let collapsed = true;
+                        let itemsToShow = items.slice(0, initialCount);
+                        container.innerHTML = itemsToShow.map(item => createCardHTML(item)).join('');
+                        if (items.length > initialCount) {
+                            const showMoreBtn = document.createElement('button');
+                            showMoreBtn.textContent = 'Show More';
+                            showMoreBtn.className = 'btn btn-secondary show-more-btn';
+                            showMoreBtn.style.display = 'block';
+                            showMoreBtn.style.margin = '24px auto';
+                            showMoreBtn.onclick = () => {
+                                if (collapsed) {
+                                    container.innerHTML = items.map(item => createCardHTML(item)).join('');
+                                    showMoreBtn.textContent = 'Show Less';
+                                    collapsed = false;
+                                } else {
+                                    container.innerHTML = items.slice(0, initialCount).map(item => createCardHTML(item)).join('');
+                                    showMoreBtn.textContent = 'Show More';
+                                    collapsed = true;
+                                }
+                                container.appendChild(showMoreBtn);
+                                // Re-apply dynamic rating/review updates after re-render
+                                updateCardStats(collapsed ? itemsToShow : items);
+                            };
+                            container.appendChild(showMoreBtn);
+                        }
+                        // Initial dynamic rating/review updates
+                        updateCardStats(itemsToShow);
 
-
-async function showItemDetails(item) {
-    // Prevent double modal: use a global flag
-    if (window._modalOpen) {
-        console.log('[DEBUG] Modal already open, skipping showItemDetails');
-        return;
-    }
-    window._modalOpen = true;
-    console.log('[DEBUG] showItemDetails called for:', item);
-    // Fetch dynamic rating and review count
-    const avgRating = await getAverageRating(item.id);
-    const reviewCount = await getReviewCount(item.id);
-
-    // Remove any existing modal and cancel any pending modal creation
-    if (window._modalTimeout) {
-        clearTimeout(window._modalTimeout);
-        window._modalTimeout = null;
-    }
-    let modal = document.querySelector('.modal.show');
-    if (modal) modal.remove();
+                        function updateCardStats(visibleItems) {
+                            for (const item of visibleItems) {
+                                const card = container.querySelector(\`.media-card[data-id='\${item.id}']\`);
+                                if (card) {
+                                    const ratingElem = card.querySelector('.card-rating');
+                                    if (ratingElem) {
+                                        getAverageRating(item.id).then(avg => ratingElem.textContent = '★ ' + avg);
+                                    }
+                                    const reviewCountElem = card.querySelector('.card-review-count');
+                                    if (reviewCountElem) {
+                                        getReviewCount(item.id).then(cnt => reviewCountElem.textContent = cnt + ' reviews');
+                                    }
+                                }
+                            }
+                        }
     modal = document.createElement('div');
     modal.className = 'modal show';
     modal.style.zIndex = '9999';
