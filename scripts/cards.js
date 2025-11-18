@@ -395,3 +395,116 @@ function addCardListeners() {
 
 // Export function for use by other modules
 window.filterCards = filterCards;
+// Load cards by category
+function loadCards(category) {
+    const container = document.getElementById('cardsContainer');
+    if (!container) return;
+    showLoadingState(container);
+    let items = allItems;
+    if (category && category !== 'all') {
+        items = allItems.filter(item => {
+            // Accept both string and array category
+            if (typeof item.category === 'string') {
+                return item.category.toLowerCase() === category.toLowerCase();
+            } else if (Array.isArray(item.category)) {
+                return item.category.map(c => c.toLowerCase()).includes(category.toLowerCase());
+            }
+            // Fallback: Movies if no category
+            return category === 'movies' && !item.category;
+        });
+    }
+    setTimeout(async () => {
+        await renderCards(container, items);
+        addCardListeners();
+    }, 300);
+}
+
+// Render cards in the container
+async function renderCards(container, items) {
+    container.innerHTML = '';
+    if (!items || items.length === 0) {
+        container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">No media items found.</div>';
+        return;
+    }
+
+    // Collapse logic: show only first 10 by default
+    let visibleCount = 9;
+    let expanded = false;
+    function renderVisibleCards() {
+        // Add themed background to container
+        container.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
+        container.style.padding = '32px 0';
+        container.style.borderRadius = '18px';
+        container.style.boxShadow = '0 4px 32px #0001';
+        container.innerHTML = '';
+        const toShow = items.slice(0, visibleCount);
+        toShow.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'media-card';
+            card.dataset.id = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            card.style.background = 'linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)';
+            card.style.borderRadius = '16px';
+            card.style.boxShadow = '0 2px 16px #8ec5fc55';
+            card.style.margin = '18px auto';
+            card.style.width = '220px';
+            card.style.height = '340px';
+            card.style.display = 'flex';
+            card.style.flexDirection = 'column';
+            card.style.alignItems = 'center';
+            card.style.justifyContent = 'flex-start';
+            card.style.padding = '18px 12px 16px 12px';
+            card.style.transition = 'transform 0.2s, box-shadow 0.2s';
+            card.style.border = '2px solid #c3cfe2';
+            card.onmouseover = function() {
+                card.style.transform = 'scale(1.04)';
+                card.style.boxShadow = '0 6px 32px #8ec5fc99';
+            };
+            card.onmouseout = function() {
+                card.style.transform = 'scale(1)';
+                card.style.boxShadow = '0 2px 16px #8ec5fc55';
+            };
+            card.innerHTML = `
+                <div style="display:flex;justify-content:center;align-items:center;width:100%;height:180px;">
+                    <img class="card-image" src="${item.poster || item.image || ''}" alt="${item.title || ''}" style="width:120px;height:180px;object-fit:cover;border-radius:8px;background:#eee;box-shadow:0 2px 8px #0002;">
+                </div>
+                <div class="card-title" style="font-weight:bold;margin-top:12px;text-align:center;color:#4b3f72;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.title || ''}</div>
+                <div style="color:#5a5a5a;font-size:0.95em;text-align:center;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.year || ''}</div>
+                <div style="color:#6a89cc;font-size:0.9em;text-align:center;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.genre || ''}</div>
+            `;
+            container.appendChild(card);
+        });
+        // Add Show More/Show Less button if needed
+        if (items.length > visibleCount) {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-primary';
+            btn.style.display = 'block';
+            btn.style.margin = '24px auto 0 auto';
+            btn.textContent = `Show More (${Math.min(9, items.length - visibleCount)} more)`;
+            btn.addEventListener('click', () => {
+                visibleCount += 9;
+                renderVisibleCards();
+                addCardListeners();
+            });
+            container.appendChild(btn);
+        } else if (items.length > 9) {
+            // Show Less button if expanded
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-secondary';
+            btn.style.display = 'block';
+            btn.style.margin = '24px auto 0 auto';
+            btn.textContent = 'Show Less';
+            btn.addEventListener('click', () => {
+                visibleCount = 9;
+                renderVisibleCards();
+                addCardListeners();
+            });
+            container.appendChild(btn);
+        }
+    }
+    renderVisibleCards();
+}
+
+// Show loading state
+function showLoadingState(container) {
+    container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Loading...</div>';
+}
