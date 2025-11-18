@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Media Reviewers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .feed-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #0001;
+            padding: 32px 24px;
+        }
+        h1 {
+            text-align: center;
+            color: #4b3f72;
+            margin-bottom: 32px;
+        }
+        .reviewer-card {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            box-shadow: 0 2px 16px #8ec5fc55;
+            margin-bottom: 24px;
+            padding: 18px 20px;
+            transition: box-shadow 0.2s;
+        }
+        .reviewer-card:hover {
+            box-shadow: 0 6px 32px #8ec5fc99;
+        }
+        .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 24px;
+            background: #eee;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .reviewer-info {
+            flex: 1;
+        }
+        .reviewer-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #4b3f72;
+        }
+        .reviewer-genres {
+            color: #6a89cc;
+            font-size: 1em;
+            margin-top: 6px;
+        }
+        .reviewer-stats {
+            color: #5a5a5a;
+            font-size: 0.95em;
+            margin-top: 8px;
+        }
+        .follow-btn {
+            background: #6a89cc;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-left: 18px;
+            transition: background 0.2s;
+        }
+        .follow-btn:hover {
+            background: #4b3f72;
+        }
+    </style>
+</head>
+<body>
+    <div class="feed-container">
+        <h1>Top Media Reviewers</h1>
+        <!-- Movies Reviewers -->
+        <h2 style="color:#6a89cc;margin-top:32px;">Movies</h2>
+        <div id="moviesReviewers">
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Alex Johnson</div>
+                    <div class="reviewer-genres">Genres: Movies, TV, Music</div>
+                    <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+        </div>
+        <!-- TV Reviewers -->
+        <h2 style="color:#6a89cc;margin-top:32px;">TV</h2>
+        <div id="tvReviewers">
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Chris Patel</div>
+                    <div class="reviewer-genres">Genres: TV, Music, Games</div>
+                    <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+        </div>
+        <!-- Music Reviewers -->
+        <h2 style="color:#6a89cc;margin-top:32px;">Music</h2>
+        <div id="musicReviewers">
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Alex Johnson</div>
+                    <div class="reviewer-genres">Genres: Movies, TV, Music</div>
+                    <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Chris Patel</div>
+                    <div class="reviewer-genres">Genres: TV, Music, Games</div>
+                    <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+        </div>
+        <!-- Books Reviewers -->
+        <h2 style="color:#6a89cc;margin-top:32px;">Books</h2>
+        <div id="booksReviewers">
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Maria Lee</div>
+                    <div class="reviewer-genres">Genres: Books, Movies, Games</div>
+                    <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+        </div>
+        <!-- Games Reviewers -->
+        <h2 style="color:#6a89cc;margin-top:32px;">Games</h2>
+        <div id="gamesReviewers">
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Maria Lee</div>
+                    <div class="reviewer-genres">Genres: Books, Movies, Games</div>
+                    <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            <div class="reviewer-card">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Chris Patel</div>
+                    <div class="reviewer-genres">Genres: TV, Music, Games</div>
+                    <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+        </div>
+    </div>
+    <!-- Future: Add script to dynamically load top reviewers from database -->
+</body>
+</html>
