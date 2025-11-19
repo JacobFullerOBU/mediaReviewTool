@@ -127,6 +127,7 @@
                 <button class="btn btn-login" id="loginBtn">Login</button>
                 <button class="btn btn-register" id="registerBtn">Register</button>
                 <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
+                <button class="btn btn-logout" id="logoutBtn" style="display:none;">Logout</button>
             </div>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -213,6 +214,36 @@
                                                 });
                                                 </script>
                                 <script type="module" src="./scripts/auth.js"></script>
+                                <script type="module">
+                                import { auth } from './scripts/firebase.js';
+                                import { signOut } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const logoutBtn = document.getElementById('logoutBtn');
+                                    const profileBtn = document.getElementById('profileBtn');
+                                    if (logoutBtn) {
+                                        logoutBtn.addEventListener('click', async function () {
+                                            await signOut(auth);
+                                            window.location.reload();
+                                        });
+                                    }
+                                    if (profileBtn) {
+                                        profileBtn.addEventListener('click', function () {
+                                            window.location.href = './profile/index.html';
+                                        });
+                                    }
+                                    import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js').then(({ onAuthStateChanged }) => {
+                                        onAuthStateChanged(auth, function(user) {
+                                            if (user) {
+                                                logoutBtn.style.display = '';
+                                                profileBtn.style.display = '';
+                                            } else {
+                                                logoutBtn.style.display = 'none';
+                                                profileBtn.style.display = 'none';
+                                            }
+                                        });
+                                    });
+                                });
+                                </script>
                 <button id="becomeReviewerBtn" style="padding:12px 32px; background:#6a89cc; color:#fff; border:none; border-radius:8px; font-size:1.1em; cursor:pointer;">Become a Reviewer</button>
                 <script type="module">
                 // Show registration modal when 'Become a Reviewer' is clicked
