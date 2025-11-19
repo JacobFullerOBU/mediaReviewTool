@@ -231,61 +231,98 @@
                 <!-- Dynamic reviewers from Firestore -->
                 <div id="reviewersFeed"></div>
                 <script type="module" src="./scripts/reviewers-follow.js"></script>
-                                    <button id="becomeReviewerBtn" style="padding:12px 32px; background:#6a89cc; color:#fff; border:none; border-radius:8px; font-size:1.1em; cursor:pointer;">Become a Reviewer</button>
-                                    <script>
-                                        // Show registration modal when 'Become a Reviewer' is clicked
-                                        document.getElementById('becomeReviewerBtn').onclick = function() {
-                                            document.getElementById('registrationModal').style.display = 'flex';
-                                        };
-                                        // Hide registration modal when 'Cancel' is clicked
-                                        document.getElementById('closeModalBtn').onclick = function() {
-                                            document.getElementById('registrationModal').style.display = 'none';
-                                        };
-                                        // Handle registration form submission
-                                        document.getElementById('registrationForm').onsubmit = async function(e) {
-                                            e.preventDefault();
-                                            const name = document.getElementById('regName').value;
-                                            const email = document.getElementById('regEmail').value;
-                                            const password = document.getElementById('regPassword').value;
-                                            const genres = document.getElementById('regGenres').value;
-                                            const avatarFile = document.getElementById('regAvatarUpload').files[0];
-                                            let avatarUrl = '';
-                                            if (avatarFile) {
-                                                try {
-                                                    const storageModule = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js');
-                                                    const { getStorage, ref: storageRef, uploadBytes, getDownloadURL } = storageModule;
-                                                    // Use the same Firebase app as initialized in firebase.js
-                                                    const appModule = await import('./scripts/firebase.js');
-                                                    const storageInstance = getStorage(appModule.app);
-                                                    const fileRef = storageRef(storageInstance, 'reviewer_avatars/' + Date.now() + '_' + avatarFile.name);
-                                                    await uploadBytes(fileRef, avatarFile);
-                                                    avatarUrl = await getDownloadURL(fileRef);
-                                                } catch (err) {
-                                                    console.error('Profile picture upload error:', err);
-                                                    alert('Profile picture upload failed: ' + (err && err.message ? err.message : err));
-                                                    return;
-                                                }
-                                            }
-                                            // Register user with Firebase Auth
-                                            try {
-                                                const { getAuth, createUserWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js');
-                                                const authInstance = getAuth();
-                                                const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
-                                                const userId = userCredential.user.uid;
-                                                // Save reviewer profile to Realtime Database
-                                                const { getDatabase, ref, set } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
-                                                const dbInstance = getDatabase();
-                                                await set(ref(dbInstance, 'reviewers/' + userId), {
-                                                    name,
-                                                    email,
-                                                    genres,
-                                                    avatar: avatarUrl,
-                                                    createdAt: new Date().toISOString()
-                                                });
-                                                alert('Reviewer account created!');
-                                                document.getElementById('registrationModal').style.display = 'none';
-                                            } catch (err) {
-                                                alert('Registration failed: ' + err.message);
-                                            }
-                                        };
-                                    </script>
+                <button id="becomeReviewerBtn" style="padding:12px 32px; background:#6a89cc; color:#fff; border:none; border-radius:8px; font-size:1.1em; cursor:pointer;">Become a Reviewer</button>
+                <script type="module">
+                // Show registration modal when 'Become a Reviewer' is clicked
+                document.getElementById('becomeReviewerBtn').onclick = function() {
+                    document.getElementById('registrationModal').style.display = 'flex';
+                };
+                // Hide registration modal when 'Cancel' is clicked
+                document.getElementById('closeModalBtn').onclick = function() {
+                    document.getElementById('registrationModal').style.display = 'none';
+                };
+                // Handle registration form submission
+                document.getElementById('registrationForm').onsubmit = async function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('regName').value;
+                    const email = document.getElementById('regEmail').value;
+                    const password = document.getElementById('regPassword').value;
+                    const genres = document.getElementById('regGenres').value;
+                    const avatarFile = document.getElementById('regAvatarUpload').files[0];
+                    let avatarUrl = '';
+                    if (avatarFile) {
+                        try {
+                            const storageModule = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js');
+                            const { getStorage, ref: storageRef, uploadBytes, getDownloadURL } = storageModule;
+                            const appModule = await import('./scripts/firebase.js');
+                            const storageInstance = getStorage(appModule.app);
+                            const fileRef = storageRef(storageInstance, 'reviewer_avatars/' + Date.now() + '_' + avatarFile.name);
+                            await uploadBytes(fileRef, avatarFile);
+                            avatarUrl = await getDownloadURL(fileRef);
+                        } catch (err) {
+                            console.error('Profile picture upload error:', err);
+                            alert('Profile picture upload failed: ' + (err && err.message ? err.message : err));
+                            return;
+                        }
+                    }
+                    // Register user with Firebase Auth
+                    try {
+                        const { getAuth, createUserWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js');
+                        const authInstance = getAuth();
+                        const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
+                        const userId = userCredential.user.uid;
+                        // Save reviewer profile to Realtime Database
+                        const { getDatabase, ref, set } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+                        const dbInstance = getDatabase();
+                        await set(ref(dbInstance, 'reviewers/' + userId), {
+                            name,
+                            email,
+                            genres,
+                            avatar: avatarUrl,
+                            createdAt: new Date().toISOString()
+                        });
+                        alert('Reviewer account created!');
+                        document.getElementById('registrationModal').style.display = 'none';
+                        // Refresh reviewer feed after registration
+                        await fetchAndRenderReviewers();
+                    } catch (err) {
+                        alert('Registration failed: ' + err.message);
+                    }
+                };
+
+                // Fetch and render reviewers from Firebase Realtime Database
+                async function fetchAndRenderReviewers() {
+                    const reviewersFeed = document.getElementById('reviewersFeed');
+                    reviewersFeed.innerHTML = '<h3 style="color:#6a89cc;margin-top:32px;">Community Reviewers</h3>';
+                    try {
+                        const { getDatabase, ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+                        const appModule = await import('./scripts/firebase.js');
+                        const dbInstance = getDatabase(appModule.app);
+                        const snapshot = await get(ref(dbInstance, 'reviewers'));
+                        if (snapshot.exists()) {
+                            const reviewers = snapshot.val();
+                            Object.values(reviewers).forEach(reviewer => {
+                                const card = document.createElement('div');
+                                card.className = 'reviewer-card';
+                                card.innerHTML = `
+                                    <img class="avatar" src="${reviewer.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="Reviewer Avatar">
+                                    <div class="reviewer-info">
+                                        <div class="reviewer-name">${reviewer.name}</div>
+                                        <div class="reviewer-genres">Genres: ${reviewer.genres}</div>
+                                        <div class="reviewer-stats">Joined: ${new Date(reviewer.createdAt).toLocaleDateString()}</div>
+                                    </div>
+                                `;
+                                reviewersFeed.appendChild(card);
+                            });
+                        } else {
+                            reviewersFeed.innerHTML += '<p>No reviewers have signed up yet.</p>';
+                        }
+                    } catch (err) {
+                        reviewersFeed.innerHTML += '<p>Error loading reviewers.</p>';
+                        console.error('Error fetching reviewers:', err);
+                    }
+                }
+
+                // Initial load of reviewer feed
+                fetchAndRenderReviewers();
+                </script>
