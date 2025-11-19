@@ -367,27 +367,35 @@ async function showItemDetails(item) {
 
 // Attach card listeners outside of showItemDetails
 function addCardListeners() {
-    const cards = document.querySelectorAll('.media-card');
-    console.log('[DEBUG] Attaching listeners to cards:', cards.length);
-    cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            e.stopPropagation();
-            // Find the card element in case a child was clicked
-            let targetCard = e.currentTarget;
-            const itemId = targetCard.dataset.id || targetCard.querySelector('.card-title')?.textContent || '';
-            const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
-            console.log('[DEBUG] Card clicked:', item);
-            if (item) showItemDetails(item);
+    const container = document.getElementById('cardsContainer');
+    if (!container) return;
+    container.onclick = function(e) {
+        // Find the closest .media-card ancestor
+        const card = e.target.closest('.media-card');
+        if (!card || !container.contains(card)) return;
+        // Get item id from card dataset
+        const itemId = card.dataset.id;
+        // Find item by id or title
+        let item = allItems.find(item => {
+            if (item.id && item.id == itemId) return true;
+            // fallback: match normalized title
+            if (!item.id && item.title) {
+                const normTitle = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                return normTitle === itemId;
+            }
+            return false;
         });
-        // Optionally, keep image/title listeners for accessibility
+        if (item) {
+            showItemDetails(item);
+        }
+    };
+    // Optionally, set pointer cursor for accessibility
+    const cards = container.querySelectorAll('.media-card');
+    cards.forEach(card => {
         const imageElem = card.querySelector('.card-image');
         const titleElem = card.querySelector('.card-title');
-        if (imageElem) {
-            imageElem.style.cursor = 'pointer';
-        }
-        if (titleElem) {
-            titleElem.style.cursor = 'pointer';
-        }
+        if (imageElem) imageElem.style.cursor = 'pointer';
+        if (titleElem) titleElem.style.cursor = 'pointer';
     });
 }
 
