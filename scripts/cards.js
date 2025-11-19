@@ -134,7 +134,23 @@ function initTabFunctionality() {
 
 function filterCards(category) {
     currentFilter = category;
-    loadCards(category);
+    let items = allItems;
+    if (category && category !== 'all') {
+        items = allItems.filter(item => {
+            // Accept both string and array category
+            if (typeof item.category === 'string') {
+                return item.category.toLowerCase() === category.toLowerCase();
+            } else if (Array.isArray(item.category)) {
+                return item.category.map(c => c.toLowerCase()).includes(category.toLowerCase());
+            }
+            // Fallback: Movies if no category
+            return category === 'movies' && !item.category;
+        });
+    }
+    // Sort items by selected option
+    const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
+    items = sortItems(items, sortOption);
+    loadCardsWithItems(items);
 }
 
 // Export function for use by other modules
@@ -545,4 +561,40 @@ async function renderCards(container, items) {
 // Show loading state
 function showLoadingState(container) {
     container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Loading...</div>';
+}
+
+// Sorting functionality
+function sortItems(items, sortOption) {
+    if (!items || !Array.isArray(items)) return items;
+    let sorted = [...items];
+    switch (sortOption) {
+        case 'year-desc':
+            sorted.sort((a, b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
+            break;
+        case 'year-asc':
+            sorted.sort((a, b) => (parseInt(a.year) || 0) - (parseInt(b.year) || 0));
+            break;
+        case 'title-asc':
+            sorted.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+            break;
+        case 'title-desc':
+            sorted.sort((a, b) => (b.title || '').localeCompare(a.title || ''));
+            break;
+        case 'rating-desc':
+            sorted.sort((a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0));
+            break;
+        case 'rating-asc':
+            sorted.sort((a, b) => (parseFloat(a.rating) || 0) - (parseFloat(b.rating) || 0));
+            break;
+        default:
+            break;
+    }
+    return sorted;
+}
+
+// Listen for sort apply button
+if (document.getElementById('applySortBtn')) {
+    document.getElementById('applySortBtn').addEventListener('click', function() {
+        filterCards(currentFilter);
+    });
 }

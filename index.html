@@ -55,6 +55,18 @@
     <section class="popular-content">
         <div class="container">
             <h2>Popular Content</h2>
+            <div style="margin-bottom:18px;">
+                <label for="sortSelect" style="font-weight:bold;margin-right:8px;">Sort by:</label>
+                <select id="sortSelect" style="padding:6px 12px;font-size:1em;">
+                    <option value="year-desc">Year (Newest to Oldest)</option>
+                    <option value="year-asc">Year (Oldest to Newest)</option>
+                    <option value="title-asc">Title (A-Z)</option>
+                    <option value="title-desc">Title (Z-A)</option>
+                    <option value="rating-desc">Rating (High to Low)</option>
+                    <option value="rating-asc">Rating (Low to High)</option>
+                </select>
+                <button id="applySortBtn" class="btn btn-primary" style="margin-left:10px;vertical-align:middle;">Apply</button>
+            </div>
             <!-- Search bar moved to hero section above -->
             <div class="category-tabs">
                 <button class="tab-btn active" data-category="all">All</button>
