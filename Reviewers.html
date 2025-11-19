@@ -104,7 +104,7 @@
                     <label>Email<br><input type="email" id="regEmail" required style="width:100%;margin-bottom:12px;"></label><br>
                     <label>Password<br><input type="password" id="regPassword" required style="width:100%;margin-bottom:12px;"></label><br>
                     <label>Genres (comma separated)<br><input type="text" id="regGenres" required style="width:100%;margin-bottom:12px;"></label><br>
-                    <label>Avatar URL (optional)<br><input type="url" id="regAvatar" style="width:100%;margin-bottom:12px;"></label><br>
+                    <label>Profile Picture<br><input type="file" id="regAvatarUpload" accept="image/*" style="width:100%;margin-bottom:12px;"></label><br>
                     <button type="submit" style="width:100%;padding:10px 0;background:#6a89cc;color:#fff;border:none;border-radius:8px;font-size:1em;">Register</button>
                     <button type="button" id="closeModalBtn" style="width:100%;margin-top:8px;padding:8px 0;background:#eee;color:#333;border:none;border-radius:8px;font-size:1em;">Cancel</button>
                 </form>
@@ -242,18 +242,49 @@
                                             document.getElementById('registrationModal').style.display = 'none';
                                         };
                                         // Handle registration form submission
-                                        document.getElementById('registrationForm').onsubmit = function(e) {
+                                        document.getElementById('registrationForm').onsubmit = async function(e) {
                                             e.preventDefault();
-                                            // Collect form data
                                             const name = document.getElementById('regName').value;
                                             const email = document.getElementById('regEmail').value;
                                             const password = document.getElementById('regPassword').value;
                                             const genres = document.getElementById('regGenres').value;
-                                            const avatar = document.getElementById('regAvatar').value;
-                                            // For now, just log the data
-                                            console.log('Register:', { name, email, password, genres, avatar });
-                                            // Hide modal after submit
-                                            document.getElementById('registrationModal').style.display = 'none';
-                                            // TODO: Add Firebase registration logic here
+                                            const avatarFile = document.getElementById('regAvatarUpload').files[0];
+                                            let avatarUrl = '';
+                                            if (avatarFile) {
+                                                try {
+                                                    const storageModule = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js');
+                                                    const { getStorage, ref: storageRef, uploadBytes, getDownloadURL } = storageModule;
+                                                    // Use the same Firebase app as initialized in firebase.js
+                                                    const appModule = await import('./scripts/firebase.js');
+                                                    const storageInstance = getStorage(appModule.app);
+                                                    const fileRef = storageRef(storageInstance, 'reviewer_avatars/' + Date.now() + '_' + avatarFile.name);
+                                                    await uploadBytes(fileRef, avatarFile);
+                                                    avatarUrl = await getDownloadURL(fileRef);
+                                                } catch (err) {
+                                                    alert('Profile picture upload failed.');
+                                                    return;
+                                                }
+                                            }
+                                            // Register user with Firebase Auth
+                                            try {
+                                                const { getAuth, createUserWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js');
+                                                const authInstance = getAuth();
+                                                const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
+                                                const userId = userCredential.user.uid;
+                                                // Save reviewer profile to Realtime Database
+                                                const { getDatabase, ref, set } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+                                                const dbInstance = getDatabase();
+                                                await set(ref(dbInstance, 'reviewers/' + userId), {
+                                                    name,
+                                                    email,
+                                                    genres,
+                                                    avatar: avatarUrl,
+                                                    createdAt: new Date().toISOString()
+                                                });
+                                                alert('Reviewer account created!');
+                                                document.getElementById('registrationModal').style.display = 'none';
+                                            } catch (err) {
+                                                alert('Registration failed: ' + err.message);
+                                            }
                                         };
                                     </script>

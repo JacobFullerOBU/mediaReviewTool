@@ -10,7 +10,7 @@ const firebaseConfig = {
   authDomain: "mediareviews-3cf32.firebaseapp.com",
   databaseURL: "https://mediareviews-3cf32-default-rtdb.firebaseio.com/",
   projectId: "mediareviews-3cf32",
-  storageBucket: "gs://mediareviews-3cf32.firebasestorage.app",
+  storageBucket: "mediareviews-3cf32.appspot.com",
   messagingSenderId: "324432751049",
   appId: "1:324432751049:web:37e669334f3480dfc02018",
   measurementId: "G-6S9Z1797KR"
