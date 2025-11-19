@@ -124,8 +124,9 @@ function getAllMediaMap(movies, tv, music, games, books) {
     const all = [...movies, ...tv, ...music, ...games, ...books];
     const map = {};
     all.forEach(item => {
-        if (item.title) {
-            const key = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            if (item.title) {
+                const normTitle = item.title.trim().toLowerCase();
+                const key = normTitle.replace(/[^a-zA-Z0-9]/g, '_');
             map[key] = item;
         }
     });
@@ -176,7 +177,8 @@ async function renderFavorites(user) {
     container.innerHTML = favoriteItems.map(createCardHTML).join('');
     // Add click event listeners to each favorite card
     setTimeout(() => {
-        const cards = container.querySelectorAll('.favorite-card');
+        const normKey = r.mediaKey.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g, '_');
+        const mediaItem = mediaMap[normKey];
         cards.forEach(card => {
             card.addEventListener('click', function() {
                 const id = card.getAttribute('data-id');
