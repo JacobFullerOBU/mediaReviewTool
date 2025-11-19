@@ -352,6 +352,25 @@ async function showItemDetails(item) {
             modal.querySelector('#modalRating').textContent = newAvgRating;
             modal.querySelector('#modalReviewCount').textContent = newReviewCount;
 
+            // Refresh reviews list in modal
+            const reviewsSnapshot = await get(reviewsRef);
+            let reviewsHtml = '';
+            if (reviewsSnapshot.exists()) {
+                const reviews = Object.values(reviewsSnapshot.val());
+                reviewsHtml = `<div style="margin-top:24px;"><h3>All Reviews</h3>`;
+                reviewsHtml += reviews.map(r => `
+                    <div class="review-block" style="border-bottom:1px solid #eee; margin-bottom:12px; padding-bottom:8px;">
+                        <div><strong>Rating:</strong> ★ ${r.rating} <span style="color:#888; font-size:0.9em;">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span></div>
+                        <div style="margin-top:4px;"><strong>Review:</strong> ${r.reviewText}</div>
+                    </div>
+                `).join('');
+                reviewsHtml += `</div>`;
+            } else {
+                reviewsHtml = `<div style="margin-top:24px; color:#888;">No reviews yet.</div>`;
+            }
+            // Update reviews section in modal
+            modal.querySelector('div[style*="margin-top:24px;"]').outerHTML = reviewsHtml;
+
             // Optionally, clear form
             reviewForm.reset();
             setTimeout(() => {
