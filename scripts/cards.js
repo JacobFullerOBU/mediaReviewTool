@@ -1,3 +1,5 @@
+console.log('[cards.js] Script loaded, window.showItemDetails will be set after showItemDetails definition.');
+
 // Firebase Firestore for dynamic ratings
 import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
@@ -383,8 +385,6 @@ async function showItemDetails(item) {
 
             // Optionally, clear form
             reviewForm.reset();
-                // Ensure showItemDetails is available globally
-                window.showItemDetails = showItemDetails;
             setTimeout(() => {
                 reviewError.textContent = '';
                 reviewError.style.color = 'red';
@@ -395,6 +395,7 @@ async function showItemDetails(item) {
         }
     });
 }
+window.showItemDetails = showItemDetails;
 
 // Attach card listeners outside of showItemDetails
 function addCardListeners() {
