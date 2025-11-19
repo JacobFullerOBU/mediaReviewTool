@@ -73,11 +73,30 @@ async function renderReviews(user) {
         updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
         return;
     }
+    // Build a media map for quick lookup
+    const movies = await fetchMovies();
+    const mediaMap = getAllMediaMap(
+        movies,
+        Array.isArray(tv) ? tv : [],
+        Array.isArray(music) ? music : [],
+        Array.isArray(games) ? games : [],
+        Array.isArray(books) ? books : []
+    );
     userReviewList.forEach(r => {
         const li = document.createElement('li');
-        // Prefer reviewText, then text, then review
         const reviewContent = r.reviewText || r.text || r.review || '';
-        li.innerHTML = `<strong>${r.mediaKey}</strong>: ${reviewContent}`;
+        // Show title if available
+        const mediaItem = mediaMap[r.mediaKey];
+        const title = mediaItem ? mediaItem.title : r.mediaKey;
+        li.innerHTML = `<strong style="color:#1976d2;cursor:pointer;text-decoration:underline;">${title}</strong>: ${reviewContent}`;
+        li.style.cursor = 'pointer';
+        li.onclick = async function() {
+            if (mediaItem && window.showItemDetails) {
+                window.showItemDetails(mediaItem);
+            } else {
+                alert('Media details not found for this review.');
+            }
+        };
         userReviews.appendChild(li);
         reviewCount++;
     });
