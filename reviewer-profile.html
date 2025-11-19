@@ -108,8 +108,8 @@
             const { getFirestore, collection, query, where, getDocs } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js');
             const appModule = await import('./scripts/firebase.js');
             const firestoreDb = getFirestore(appModule.app);
-            // Assumes reviews are stored in a 'reviews' collection with a 'reviewerId' field
-            const q = query(collection(firestoreDb, 'reviews'), where('reviewerId', '==', reviewerId));
+            // Reviews are stored in 'reviews' collection with 'userId' field
+            const q = query(collection(firestoreDb, 'reviews'), where('userId', '==', reviewerId));
             const querySnapshot = await getDocs(q);
             const reviewsList = document.getElementById('reviewsList');
             reviewsList.innerHTML = '';
@@ -117,7 +117,11 @@
                 const review = doc.data();
                 const card = document.createElement('div');
                 card.className = 'review-card';
-                card.innerHTML = `<div class="review-title">${review.title || 'Untitled Review'}</div><div class="review-content">${review.content || ''}</div>`;
+                card.innerHTML = `
+                    <div class="review-title">${review.mediaId ? 'Media: ' + review.mediaId : 'Untitled Review'}</div>
+                    <div class="review-content">${review.reviewText || ''}</div>
+                    <div class="review-rating">Rating: ${review.rating !== undefined ? review.rating : 'N/A'}</div>
+                `;
                 reviewsList.appendChild(card);
             });
             if (reviewsList.innerHTML === '') {
