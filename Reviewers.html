@@ -145,89 +145,6 @@
         <div class="container">
             <div class="feed-container">
                 <h2 style="text-align:center; color:#4b3f72;">Top Media Reviewers</h2>
-                <!-- Movies Reviewers -->
-                <h3 style="color:#6a89cc;margin-top:32px;">Movies</h3>
-                <div id="moviesReviewers">
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Alex Johnson</div>
-                            <div class="reviewer-genres">Genres: Movies, TV, Music</div>
-                            <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="alex_johnson">Follow</button>
-                    </div>
-                </div>
-                <!-- TV Reviewers -->
-                <h3 style="color:#6a89cc;margin-top:32px;">TV</h3>
-                <div id="tvReviewers">
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Chris Patel</div>
-                            <div class="reviewer-genres">Genres: TV, Music, Games</div>
-                            <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="chris_patel">Follow</button>
-                    </div>
-                </div>
-                <!-- Music Reviewers -->
-                <h3 style="color:#6a89cc;margin-top:32px;">Music</h3>
-                <div id="musicReviewers">
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Alex Johnson</div>
-                            <div class="reviewer-genres">Genres: Movies, TV, Music</div>
-                            <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="alex_johnson">Follow</button>
-                    </div>
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Chris Patel</div>
-                            <div class="reviewer-genres">Genres: TV, Music, Games</div>
-                            <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="chris_patel">Follow</button>
-                    </div>
-                </div>
-                <!-- Books Reviewers -->
-                <h3 style="color:#6a89cc;margin-top:32px;">Books</h3>
-                <div id="booksReviewers">
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Maria Lee</div>
-                            <div class="reviewer-genres">Genres: Books, Movies, Games</div>
-                            <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="maria_lee">Follow</button>
-                    </div>
-                </div>
-                <!-- Games Reviewers -->
-                <h3 style="color:#6a89cc;margin-top:32px;">Games</h3>
-                <div id="gamesReviewers">
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Maria Lee</div>
-                            <div class="reviewer-genres">Genres: Books, Movies, Games</div>
-                            <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="maria_lee">Follow</button>
-                    </div>
-                    <div class="reviewer-card">
-                        <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
-                        <div class="reviewer-info">
-                            <div class="reviewer-name">Chris Patel</div>
-                            <div class="reviewer-genres">Genres: TV, Music, Games</div>
-                            <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
-                        </div>
-                        <button class="follow-btn" data-reviewer-id="chris_patel">Follow</button>
-                    </div>
-                </div>
                 <!-- Dynamic reviewers from Firestore -->
                 <div id="reviewersFeed"></div>
                 <script type="module" src="./scripts/reviewers-follow.js"></script>
@@ -285,9 +202,10 @@
                         const snapshot = await get(ref(dbInstance, 'reviewers'));
                         if (snapshot.exists()) {
                             const reviewers = snapshot.val();
-                            Object.values(reviewers).forEach(reviewer => {
+                            Object.entries(reviewers).forEach(([userId, reviewer]) => {
                                 const card = document.createElement('div');
                                 card.className = 'reviewer-card';
+                                card.style.cursor = 'pointer';
                                 card.innerHTML = `
                                     <img class="avatar" src="${reviewer.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="Reviewer Avatar">
                                     <div class="reviewer-info">
@@ -296,6 +214,9 @@
                                         <div class="reviewer-stats">Joined: ${new Date(reviewer.createdAt).toLocaleDateString()}</div>
                                     </div>
                                 `;
+                                card.onclick = () => {
+                                    window.location.href = `reviewer-profile.html?id=${userId}`;
+                                };
                                 reviewersFeed.appendChild(card);
                             });
                         } else {
