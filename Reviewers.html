@@ -333,13 +333,17 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Registration modal button
             const regBtn = document.getElementById('becomeReviewerBtn');
-            if (regBtn) regBtn.addEventListener('click', showRegistrationModal);
+            if (regBtn) regBtn.addEventListener('click', function() {
+                console.log('Become a Reviewer button clicked');
+                showRegistrationModal();
+            });
             const closeRegBtn = document.getElementById('closeModalBtn');
             if (closeRegBtn) closeRegBtn.addEventListener('click', hideRegistrationModal);
 
             // Profile edit modal button
             const editBtn = document.getElementById('editProfileBtn');
             if (editBtn) editBtn.addEventListener('click', async function() {
+                console.log('Edit My Reviewer Profile button clicked');
                 const user = auth.currentUser;
                 if (!user) {
                     alert('You must be logged in to edit your profile.');
