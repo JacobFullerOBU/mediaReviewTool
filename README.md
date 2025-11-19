@@ -1,3 +1,39 @@
+# Media Review Tool
+
+A simple web app for browsing, reviewing, and following top reviewers in Movies, TV Shows, Music, Games, and Books.
+## Main Features
+- Browse top reviewers by category
+- Follow/unfollow reviewers
+- Register as a reviewer (with profile picture URL)
+- Reviewer profiles shown live from Firebase Realtime Database
+- Submit and view reviews (all reviews stored in Firestore)
+
+## How to Register as a Reviewer
+1. Go to the Reviewers page
+2. Click "Become a Reviewer"
+3. Fill out your info and a profile picture URL
+4. Your profile will appear in the Community Reviewers section
+
+## Review Upload
+- All review forms now upload to Firestore
+- Reviews are unified and easy to manage
+
+## Live Demo
+[https://mediareviews-3cf32.web.app/](https://mediareviews-3cf32.web.app/)
+
+## Tech Used
+- HTML, CSS, JavaScript
+- Firebase Authentication
+- Firebase Realtime Database
+- Firebase Firestore
+
+## Getting Started
+1. Clone this repo
+2. Open `index.html` or any page in your browser
+3. Configure Firebase in `scripts/firebase.js` if you want to self-host
+
+---
+For questions or issues, contact the repo owner.
 # mediaReviewTool
 
 A page where you can give and read reviews for any piece of media. Movies, Music, TV, Games, and Books
