@@ -28,6 +28,7 @@
                 <button class="btn btn-login" id="loginBtn">Login</button>
                 <button class="btn btn-register" id="registerBtn">Register</button>
                 <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
+                <button class="btn btn-logout" id="logoutBtn" style="display:none;">Logout</button>
             </div>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -152,6 +153,29 @@
     </footer>
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/auth.js"></script>
+        <script type="module">
+        import { auth } from './scripts/firebase.js';
+        import { signOut } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async function () {
+                    await signOut(auth);
+                    window.location.reload();
+                });
+            }
+            // Show/hide logout button based on auth state
+            import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js').then(({ onAuthStateChanged }) => {
+                onAuthStateChanged(auth, function(user) {
+                    if (user) {
+                        logoutBtn.style.display = '';
+                    } else {
+                        logoutBtn.style.display = 'none';
+                    }
+                });
+            });
+        });
+        </script>
     <script type="module" src="scripts/cards.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
