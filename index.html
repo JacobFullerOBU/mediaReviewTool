@@ -205,7 +205,6 @@
                     // Use already loaded allItems from cards.js for instant response
                     const allMedia = window.allItems || [];
                     if (!allMedia.length) {
-                        alert('No media found to randomize.');
                         return;
                     }
                     const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
