@@ -4,9 +4,10 @@ import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
-import { showItemDetails } from "./cards.js";
-
-window.showItemDetails = showItemDetails;
+// Ensure showItemDetails is available if cards.js is loaded
+if (window.showItemDetails) {
+    window.showItemDetails = window.showItemDetails;
+}
 
 const profileInfo = document.getElementById('profileInfo');
 const userReviews = document.getElementById('userReviews');
