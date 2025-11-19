@@ -19,7 +19,7 @@ A simple web app for browsing, reviewing, and following top reviewers in Movies,
 - Reviews are unified and easy to manage
 
 ## Live Demo
-[https://mediareviews-3cf32.web.app/](https://mediareviews-3cf32.web.app/)
+[https://jacobfullerobu.github.io/mediaReviewTool/index.html](https://jacobfullerobu.github.io/mediaReviewTool/index.html)
 
 ## Tech Used
 - HTML, CSS, JavaScript
