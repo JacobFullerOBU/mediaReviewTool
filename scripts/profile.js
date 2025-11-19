@@ -90,18 +90,24 @@ async function renderReviews(user) {
             // Always format title: remove underscores, proper case
             let rawTitle = mediaItem ? mediaItem.title : r.mediaKey;
             let title = rawTitle.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-            li.innerHTML = `<strong style="color:#1976d2;cursor:pointer;text-decoration:underline;">${title}</strong>: ${reviewContent}`;
-            li.style.cursor = 'pointer';
-            li.onclick = async function() {
+            // Create clickable span for title
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = title;
+            titleSpan.style.color = '#1976d2';
+            titleSpan.style.cursor = 'pointer';
+            titleSpan.style.textDecoration = 'underline';
+            titleSpan.onclick = async function(e) {
+                e.stopPropagation();
                 if (mediaItem && window.showItemDetails) {
                     window.showItemDetails(mediaItem);
                 } else if (window.showItemDetails) {
-                    // Try to build a minimal item for modal
                     window.showItemDetails({ title, id: r.mediaKey });
                 } else {
                     alert('Media details not found for this review.');
                 }
             };
+            li.appendChild(titleSpan);
+            li.appendChild(document.createTextNode(`: ${reviewContent}`));
         userReviews.appendChild(li);
         reviewCount++;
     });
