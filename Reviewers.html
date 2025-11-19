@@ -305,14 +305,13 @@
                         alert('Error updating profile: ' + err.message);
                     }
                 };
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import { app } from './scripts/firebase.js';
 
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Show registration modal
         function showRegistrationModal() {
             document.getElementById('registrationModal').style.display = 'flex';
         }
@@ -330,7 +329,6 @@
             document.getElementById('profileEditModal').style.display = 'none';
         }
 
-        // Attach event listeners after DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             // Registration modal button
             const regBtn = document.getElementById('becomeReviewerBtn');
