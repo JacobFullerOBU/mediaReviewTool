@@ -124,8 +124,10 @@ function getAllMediaMap(movies, tv, music, games, books) {
     const all = [...movies, ...tv, ...music, ...games, ...books];
     const map = {};
     all.forEach(item => {
-        const key = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-        if (key) map[key] = item;
+        if (item.title) {
+            const key = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            map[key] = item;
+        }
     });
     return map;
 }
