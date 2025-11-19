@@ -373,22 +373,20 @@ function addCardListeners() {
         // Use index as fallback for missing id
         const itemId = card.dataset.id || card.querySelector('.card-title')?.textContent || '';
         const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
-        // Attach click listeners directly to child elements
+        // Attach click listener to the whole card
+        card.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('[DEBUG] Card clicked:', item);
+            if (item) showItemDetails(item);
+        });
+        // Optionally, keep image/title listeners for accessibility
         const imageElem = card.querySelector('.card-image');
         const titleElem = card.querySelector('.card-title');
         if (imageElem) {
-            imageElem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                console.log('[DEBUG] Card-image clicked:', item);
-                if (item) showItemDetails(item);
-            });
+            imageElem.style.cursor = 'pointer';
         }
         if (titleElem) {
-            titleElem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                console.log('[DEBUG] Card-title clicked:', item);
-                if (item) showItemDetails(item);
-            });
+            titleElem.style.cursor = 'pointer';
         }
     });
 }
