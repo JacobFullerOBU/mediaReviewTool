@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>Top Media Reviewers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/cards.css">
+    <link rel="stylesheet" href="styles/navigation.css">
+    <link rel="stylesheet" href="styles/auth.css">
     <style>
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -19,11 +22,6 @@
             border-radius: 18px;
             box-shadow: 0 4px 32px #0001;
             padding: 32px 24px;
-        }
-        h1 {
-            text-align: center;
-            color: #4b3f72;
-            margin-bottom: 32px;
         }
         .reviewer-card {
             display: flex;
@@ -82,93 +80,357 @@
     </style>
 </head>
 <body>
-    <div class="feed-container">
-        <h1>Top Media Reviewers</h1>
-        <!-- Movies Reviewers -->
-        <h2 style="color:#6a89cc;margin-top:32px;">Movies</h2>
-        <div id="moviesReviewers">
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Alex Johnson</div>
-                    <div class="reviewer-genres">Genres: Movies, TV, Music</div>
-                    <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
+                <!-- Profile Edit Modal -->
+                <div id="profileEditModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+                    <div style="background:#fff; border-radius:12px; max-width:400px; margin:auto; padding:32px; box-shadow:0 4px 32px #0002;">
+                        <h2 style="margin-bottom:18px;">Edit Reviewer Profile</h2>
+                        <form id="profileEditForm">
+                            <label>Name<br><input type="text" id="editName" required style="width:100%;margin-bottom:12px;"></label><br>
+                            <label>Genres (comma separated)<br><input type="text" id="editGenres" required style="width:100%;margin-bottom:12px;"></label><br>
+                            <label>Avatar URL<br><input type="url" id="editAvatar" style="width:100%;margin-bottom:12px;"></label><br>
+                            <label>Bio<br><textarea id="editBio" style="width:100%;margin-bottom:12px;"></textarea></label><br>
+                            <button type="submit" style="width:100%;padding:10px 0;background:#6a89cc;color:#fff;border:none;border-radius:8px;font-size:1em;">Save Changes</button>
+                            <button type="button" id="closeEditModalBtn" style="width:100%;margin-top:8px;padding:8px 0;background:#eee;color:#333;border:none;border-radius:8px;font-size:1em;">Cancel</button>
+                        </form>
+                    </div>
                 </div>
-                <button class="follow-btn" data-reviewer-id="alex_johnson">Follow</button>
+        <!-- Navigation Bar -->
+        <!-- Registration Modal -->
+        <div id="registrationModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:#fff; border-radius:12px; max-width:400px; margin:auto; padding:32px; box-shadow:0 4px 32px #0002;">
+                <h2 style="margin-bottom:18px;">Create Reviewer Account</h2>
+                <form id="registrationForm">
+                    <label>Name<br><input type="text" id="regName" required style="width:100%;margin-bottom:12px;"></label><br>
+                    <label>Email<br><input type="email" id="regEmail" required style="width:100%;margin-bottom:12px;"></label><br>
+                    <label>Password<br><input type="password" id="regPassword" required style="width:100%;margin-bottom:12px;"></label><br>
+                    <label>Genres (comma separated)<br><input type="text" id="regGenres" required style="width:100%;margin-bottom:12px;"></label><br>
+                    <label>Avatar URL (optional)<br><input type="url" id="regAvatar" style="width:100%;margin-bottom:12px;"></label><br>
+                    <button type="submit" style="width:100%;padding:10px 0;background:#6a89cc;color:#fff;border:none;border-radius:8px;font-size:1em;">Register</button>
+                    <button type="button" id="closeModalBtn" style="width:100%;margin-top:8px;padding:8px 0;background:#eee;color:#333;border:none;border-radius:8px;font-size:1em;">Cancel</button>
+                </form>
             </div>
         </div>
-        <!-- TV Reviewers -->
-        <h2 style="color:#6a89cc;margin-top:32px;">TV</h2>
-        <div id="tvReviewers">
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Chris Patel</div>
-                    <div class="reviewer-genres">Genres: TV, Music, Games</div>
-                    <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
-                </div>
-                <button class="follow-btn">Follow</button>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>MediaReview</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="./Movies/movies.html" class="nav-link">Movies</a></li>
+                <li class="nav-item"><a href="#tv" class="nav-link" data-category="tv">TV Shows</a></li>
+                <li class="nav-item"><a href="#music" class="nav-link" data-category="music">Music</a></li>
+                <li class="nav-item"><a href="#games" class="nav-link" data-category="games">Games</a></li>
+                <li class="nav-item"><a href="#books" class="nav-link" data-category="books">Books</a></li>
+                <li class="nav-item"><a href="./Reviewers.html" class="nav-link">Reviewers</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-login" id="loginBtn">Login</button>
+                <button class="btn btn-register" id="registerBtn">Register</button>
+                <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
-        <!-- Music Reviewers -->
-        <h2 style="color:#6a89cc;margin-top:32px;">Music</h2>
-        <div id="musicReviewers">
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Alex Johnson</div>
-                    <div class="reviewer-genres">Genres: Movies, TV, Music</div>
-                    <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Meet the Top Media Reviewers</h1>
+            <p>Browse and follow the best reviewers in movies, TV, music, games, and books. See what they're recommending!</p>
+        </div>
+    </section>
+    <section class="popular-content">
+        <div class="container">
+            <div class="feed-container">
+                <h2 style="text-align:center; color:#4b3f72;">Top Media Reviewers</h2>
+                <!-- Movies Reviewers -->
+                <h3 style="color:#6a89cc;margin-top:32px;">Movies</h3>
+                <div id="moviesReviewers">
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Alex Johnson</div>
+                            <div class="reviewer-genres">Genres: Movies, TV, Music</div>
+                            <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="alex_johnson">Follow</button>
+                    </div>
                 </div>
-                <button class="follow-btn">Follow</button>
-            </div>
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Chris Patel</div>
-                    <div class="reviewer-genres">Genres: TV, Music, Games</div>
-                    <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                <!-- TV Reviewers -->
+                <h3 style="color:#6a89cc;margin-top:32px;">TV</h3>
+                <div id="tvReviewers">
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Chris Patel</div>
+                            <div class="reviewer-genres">Genres: TV, Music, Games</div>
+                            <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="chris_patel">Follow</button>
+                    </div>
                 </div>
-                <button class="follow-btn">Follow</button>
+                <!-- Music Reviewers -->
+                <h3 style="color:#6a89cc;margin-top:32px;">Music</h3>
+                <div id="musicReviewers">
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Alex Johnson</div>
+                            <div class="reviewer-genres">Genres: Movies, TV, Music</div>
+                            <div class="reviewer-stats">Reviews: 245 | Avg Rating: 8.7</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="alex_johnson">Follow</button>
+                    </div>
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Chris Patel</div>
+                            <div class="reviewer-genres">Genres: TV, Music, Games</div>
+                            <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="chris_patel">Follow</button>
+                    </div>
+                </div>
+                <!-- Books Reviewers -->
+                <h3 style="color:#6a89cc;margin-top:32px;">Books</h3>
+                <div id="booksReviewers">
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Maria Lee</div>
+                            <div class="reviewer-genres">Genres: Books, Movies, Games</div>
+                            <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="maria_lee">Follow</button>
+                    </div>
+                </div>
+                <!-- Games Reviewers -->
+                <h3 style="color:#6a89cc;margin-top:32px;">Games</h3>
+                <div id="gamesReviewers">
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Maria Lee</div>
+                            <div class="reviewer-genres">Genres: Books, Movies, Games</div>
+                            <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="maria_lee">Follow</button>
+                    </div>
+                    <div class="reviewer-card">
+                        <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Chris Patel</div>
+                            <div class="reviewer-genres">Genres: TV, Music, Games</div>
+                            <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="chris_patel">Follow</button>
+                    </div>
+                </div>
+                <!-- Dynamic reviewers from Firestore -->
+                <div id="reviewersFeed"></div>
+                <div style="text-align:center; margin-top:32px;">
+                  <button id="becomeReviewerBtn" style="padding:12px 32px; background:#6a89cc; color:#fff; border:none; border-radius:8px; font-size:1.1em; cursor:pointer;">Become a Reviewer</button>
+                  <button id="editProfileBtn" style="padding:12px 32px; background:#4b3f72; color:#fff; border:none; border-radius:8px; font-size:1.1em; cursor:pointer; margin-left:12px;">Edit My Reviewer Profile</button>
+                </div>
             </div>
         </div>
-        <!-- Books Reviewers -->
-        <h2 style="color:#6a89cc;margin-top:32px;">Books</h2>
-        <div id="booksReviewers">
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Maria Lee</div>
-                    <div class="reviewer-genres">Genres: Books, Movies, Games</div>
-                    <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
-                </div>
-                <button class="follow-btn">Follow</button>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MediaReview. All rights reserved.</p>
+            <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+                <button class="btn btn-primary" id="contactBtn"
+                    style="padding:8px 18px; font-size:1em;">Contact</button>
+                <a href="./Top Reviewers/topReviewers.html" id="leaderboardLink"
+                    style="color:#007bff; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
             </div>
         </div>
-        <!-- Games Reviewers -->
-        <h2 style="color:#6a89cc;margin-top:32px;">Games</h2>
-        <div id="gamesReviewers">
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Maria Lee</div>
-                    <div class="reviewer-genres">Genres: Books, Movies, Games</div>
-                    <div class="reviewer-stats">Reviews: 198 | Avg Rating: 9.1</div>
-                </div>
-                <button class="follow-btn">Follow</button>
-            </div>
-            <div class="reviewer-card">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Reviewer Avatar">
-                <div class="reviewer-info">
-                    <div class="reviewer-name">Chris Patel</div>
-                    <div class="reviewer-genres">Genres: TV, Music, Games</div>
-                    <div class="reviewer-stats">Reviews: 172 | Avg Rating: 8.4</div>
-                </div>
-                <button class="follow-btn">Follow</button>
-            </div>
-        </div>
-    </div>
-    <!-- Future: Add script to dynamically load top reviewers from database -->
-    <script type="module" src="./scripts/reviewers-follow.js"></script>
+    </footer>
+        <script type="module" src="./scripts/reviewers-follow.js"></script>
+        <script type="module">
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+                import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+                // Show profile edit modal
+                function showProfileEditModal(profile) {
+                    document.getElementById('profileEditModal').style.display = 'flex';
+                    document.getElementById('editName').value = profile.name || '';
+                    document.getElementById('editGenres').value = Array.isArray(profile.genres) ? profile.genres.join(', ') : profile.genres || '';
+                    document.getElementById('editAvatar').value = profile.avatar || '';
+                    document.getElementById('editBio').value = profile.bio || '';
+                }
+                document.getElementById('closeEditModalBtn').onclick = function() {
+                    document.getElementById('profileEditModal').style.display = 'none';
+                };
+                // Edit profile button logic
+                document.getElementById('editProfileBtn').onclick = async function() {
+                    const user = auth.currentUser;
+                    if (!user) {
+                        alert('You must be logged in to edit your profile.');
+                        return;
+                    }
+                    const docRef = doc(db, "reviewers", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        showProfileEditModal(docSnap.data());
+                    } else {
+                        alert('No reviewer profile found.');
+                    }
+                };
+                // Profile edit form submit
+                document.getElementById('profileEditForm').onsubmit = async function(e) {
+                    e.preventDefault();
+                    const user = auth.currentUser;
+                    if (!user) {
+                        alert('You must be logged in.');
+                        return;
+                    }
+                    const name = document.getElementById('editName').value;
+                    const genres = document.getElementById('editGenres').value.split(',').map(g => g.trim());
+                    const avatar = document.getElementById('editAvatar').value;
+                    const bio = document.getElementById('editBio').value;
+                    try {
+                        await updateDoc(doc(db, "reviewers", user.uid), {
+                            name,
+                            genres,
+                            avatar,
+                            bio
+                        });
+                        alert('Profile updated!');
+                        document.getElementById('profileEditModal').style.display = 'none';
+                        renderReviewers();
+                    } catch (err) {
+                        alert('Error updating profile: ' + err.message);
+                    }
+                };
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { app } from './scripts/firebase.js';
+
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Show registration modal
+        function showRegistrationModal() {
+            document.getElementById('registrationModal').style.display = 'flex';
+        }
+        function hideRegistrationModal() {
+            document.getElementById('registrationModal').style.display = 'none';
+        }
+        function showProfileEditModal(profile) {
+            document.getElementById('profileEditModal').style.display = 'flex';
+            document.getElementById('editName').value = profile.name || '';
+            document.getElementById('editGenres').value = Array.isArray(profile.genres) ? profile.genres.join(', ') : profile.genres || '';
+            document.getElementById('editAvatar').value = profile.avatar || '';
+            document.getElementById('editBio').value = profile.bio || '';
+        }
+        function hideProfileEditModal() {
+            document.getElementById('profileEditModal').style.display = 'none';
+        }
+
+        // Attach event listeners after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Registration modal button
+            const regBtn = document.getElementById('becomeReviewerBtn');
+            if (regBtn) regBtn.addEventListener('click', showRegistrationModal);
+            const closeRegBtn = document.getElementById('closeModalBtn');
+            if (closeRegBtn) closeRegBtn.addEventListener('click', hideRegistrationModal);
+
+            // Profile edit modal button
+            const editBtn = document.getElementById('editProfileBtn');
+            if (editBtn) editBtn.addEventListener('click', async function() {
+                const user = auth.currentUser;
+                if (!user) {
+                    alert('You must be logged in to edit your profile.');
+                    return;
+                }
+                const docRef = doc(db, "reviewers", user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    showProfileEditModal(docSnap.data());
+                } else {
+                    alert('No reviewer profile found.');
+                }
+            });
+            const closeEditBtn = document.getElementById('closeEditModalBtn');
+            if (closeEditBtn) closeEditBtn.addEventListener('click', hideProfileEditModal);
+
+            // Profile button logic
+            const profileBtn = document.getElementById('profileBtn');
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function () {
+                    window.location.href = './profile/index.html';
+                });
+            }
+            renderReviewers();
+        });
+
+        // Registration form submit
+        document.getElementById('registrationForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const genres = document.getElementById('regGenres').value.split(',').map(g => g.trim());
+            const avatar = document.getElementById('regAvatar').value || "https://randomuser.me/api/portraits/lego/1.jpg";
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                await setDoc(doc(db, "reviewers", user.uid), {
+                    name,
+                    avatar,
+                    genres,
+                    stats: { reviews: 0, avgRating: 0 },
+                    isReviewer: true
+                });
+                alert("Account created! You are now a reviewer.");
+                document.getElementById('registrationModal').style.display = 'none';
+                location.reload();
+            } catch (err) {
+                alert("Error: " + err.message);
+            }
+        };
+
+        // Fetch and render reviewers
+        async function renderReviewers() {
+            const feed = document.getElementById('reviewersFeed');
+            feed.innerHTML = '';
+            const { getDocs, collection } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+            const querySnapshot = await getDocs(collection(db, "reviewers"));
+            let reviewers = [];
+            querySnapshot.forEach(doc => {
+                const r = doc.data();
+                if (r.isReviewer) reviewers.push(r);
+            });
+            if (reviewers.length === 0) {
+                feed.innerHTML = '<p>No reviewers yet. Be the first!</p>';
+                return;
+            }
+            reviewers.forEach(r => {
+                const genres = Array.isArray(r.genres) ? r.genres.join(', ') : r.genres;
+                feed.innerHTML += `
+                    <div class="reviewer-card">
+                        <img class="avatar" src="${r.avatar}" alt="Reviewer Avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">${r.name}</div>
+                            <div class="reviewer-genres">Genres: ${genres}</div>
+                            <div class="reviewer-stats">Reviews: ${r.stats?.reviews ?? 0} | Avg Rating: ${r.stats?.avgRating ?? 0}</div>
+                        </div>
+                        <button class="follow-btn" data-reviewer-id="${r.name}">Follow</button>
+                    </div>
+                `;
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            renderReviewers();
+            const profileBtn = document.getElementById('profileBtn');
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function () {
+                    window.location.href = './profile/index.html';
+                });
+            }
+        });
+        </script>
 </body>
 </html>
