@@ -37,15 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
             if (window.showMovieModal) {
                 window.showMovieModal(randomItem);
-            } else {
-                alert('Random media:\n' +
-                    'Title: ' + (randomItem.title || randomItem.id) + '\n' +
-                    (randomItem.year ? 'Year: ' + randomItem.year + '\n' : '') +
-                    (randomItem.genre ? 'Genre: ' + randomItem.genre + '\n' : '') +
-                    (randomItem.director ? 'Director: ' + randomItem.director + '\n' : '') +
-                    (randomItem.actors ? 'Cast: ' + randomItem.actors + '\n' : '') +
-                    (randomItem.description ? 'Description: ' + randomItem.description + '\n' : '')
-                );
             }
         });
     }
