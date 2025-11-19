@@ -1,4 +1,3 @@
-<script type="module">
 import { auth, db } from './firebase.js';
 import { ref, get, set, remove } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js';
 
@@ -61,4 +60,3 @@ async function setupFollowButtons() {
 
 // Wait for auth state and then setup buttons
 window.addEventListener('DOMContentLoaded', () => setTimeout(setupFollowButtons, 500));
-</script>
