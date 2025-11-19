@@ -135,11 +135,16 @@ window.filterCards = filterCards;
 
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
-    let avgRating = await getAverageRating(item.id);
-    let reviewCount = await getReviewCount(item.id);
+    // Use the same key logic as review submission
+    let mediaId = item.id;
+    if (!mediaId && item.title) {
+        mediaId = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    }
+    let avgRating = await getAverageRating(mediaId);
+    let reviewCount = await getReviewCount(mediaId);
     let reviewsHtml = '';
     try {
-        const reviewsRef = ref(db, `reviews/${item.id}`);
+        const reviewsRef = ref(db, `reviews/${mediaId}`);
         const snapshot = await get(reviewsRef);
         if (snapshot.exists()) {
             const reviews = Object.values(snapshot.val());
