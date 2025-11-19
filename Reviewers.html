@@ -113,7 +113,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <h1>MediaReview</h1>
+                <h1 style="cursor:pointer;color:#4b3f72;" id="homeBrand">MediaReview</h1>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="./Movies/movies.html" class="nav-link">Movies</a></li>
@@ -202,6 +202,16 @@
                 <!-- Dynamic reviewers from Firestore -->
                 <div id="reviewersFeed"></div>
                 <script type="module" src="./scripts/reviewers-follow.js"></script>
+                                                <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    var homeBrand = document.getElementById('homeBrand');
+                                                    if (homeBrand) {
+                                                        homeBrand.onclick = function () {
+                                                            window.location.href = 'index.html';
+                                                        };
+                                                    }
+                                                });
+                                                </script>
                                 <script type="module" src="./scripts/auth.js"></script>
                 <button id="becomeReviewerBtn" style="padding:12px 32px; background:#6a89cc; color:#fff; border:none; border-radius:8px; font-size:1.1em; cursor:pointer;">Become a Reviewer</button>
                 <script type="module">
