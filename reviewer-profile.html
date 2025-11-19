@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviewer Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/cards.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <style>
+        .profile-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #0001;
+            padding: 32px 24px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 32px;
+            background: #eee;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-name {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4b3f72;
+        }
+        .profile-genres {
+            color: #6a89cc;
+            font-size: 1.1em;
+            margin-top: 8px;
+        }
+        .profile-email {
+            color: #888;
+            font-size: 1em;
+            margin-top: 8px;
+        }
+        .reviews-section {
+            margin-top: 32px;
+        }
+        .review-card {
+            background: #f5f7fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+            margin-bottom: 18px;
+            padding: 18px;
+        }
+        .review-title {
+            font-weight: bold;
+            color: #4b3f72;
+        }
+        .review-content {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img id="profileAvatar" class="profile-avatar" src="" alt="Reviewer Avatar">
+            <div class="profile-info">
+                <div id="profileName" class="profile-name"></div>
+                <div id="profileGenres" class="profile-genres"></div>
+                <div id="profileEmail" class="profile-email"></div>
+            </div>
+        </div>
+        <div class="reviews-section">
+            <h2>Reviews</h2>
+            <div id="reviewsList"></div>
+        </div>
+    </div>
+    <script type="module">
+        // Get reviewerId from URL
+        function getReviewerId() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+        const reviewerId = getReviewerId();
+        // Fetch reviewer info from Realtime Database
+        async function fetchReviewerInfo() {
+            const { getDatabase, ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+            const appModule = await import('./scripts/firebase.js');
+            const dbInstance = getDatabase(appModule.app);
+            const snapshot = await get(ref(dbInstance, 'reviewers/' + reviewerId));
+            if (snapshot.exists()) {
+                const reviewer = snapshot.val();
+                document.getElementById('profileAvatar').src = reviewer.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg';
+                document.getElementById('profileName').textContent = reviewer.name;
+                document.getElementById('profileGenres').textContent = 'Genres: ' + reviewer.genres;
+                document.getElementById('profileEmail').textContent = reviewer.email;
+            }
+        }
+        // Fetch reviews from Firestore
+        async function fetchReviewerReviews() {
+            const { getFirestore, collection, query, where, getDocs } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js');
+            const appModule = await import('./scripts/firebase.js');
+            const firestoreDb = getFirestore(appModule.app);
+            // Assumes reviews are stored in a 'reviews' collection with a 'reviewerId' field
+            const q = query(collection(firestoreDb, 'reviews'), where('reviewerId', '==', reviewerId));
+            const querySnapshot = await getDocs(q);
+            const reviewsList = document.getElementById('reviewsList');
+            reviewsList.innerHTML = '';
+            querySnapshot.forEach(doc => {
+                const review = doc.data();
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `<div class="review-title">${review.title || 'Untitled Review'}</div><div class="review-content">${review.content || ''}</div>`;
+                reviewsList.appendChild(card);
+            });
+            if (reviewsList.innerHTML === '') {
+                reviewsList.innerHTML = '<p>No reviews yet.</p>';
+            }
+        }
+        // Initial load
+        if (reviewerId) {
+            fetchReviewerInfo();
+            fetchReviewerReviews();
+        } else {
+            document.querySelector('.profile-container').innerHTML = '<p>Reviewer not found.</p>';
+        }
+    </script>
+</body>
+</html>
