@@ -261,7 +261,8 @@
                                                     await uploadBytes(fileRef, avatarFile);
                                                     avatarUrl = await getDownloadURL(fileRef);
                                                 } catch (err) {
-                                                    alert('Profile picture upload failed.');
+                                                    console.error('Profile picture upload error:', err);
+                                                    alert('Profile picture upload failed: ' + (err && err.message ? err.message : err));
                                                     return;
                                                 }
                                             }
