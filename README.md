@@ -14,10 +14,6 @@ A simple web app for browsing, reviewing, and following top reviewers in Movies,
 3. Fill out your info and a profile picture URL
 4. Your profile will appear in the Community Reviewers section
 
-## Review Upload
-- All review forms now upload to Firestore
-- Reviews are unified and easy to manage
-
 ## Live Demo
 [https://jacobfullerobu.github.io/mediaReviewTool/index.html](https://jacobfullerobu.github.io/mediaReviewTool/index.html)
 
