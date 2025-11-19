@@ -370,12 +370,12 @@ function addCardListeners() {
     const cards = document.querySelectorAll('.media-card');
     console.log('[DEBUG] Attaching listeners to cards:', cards.length);
     cards.forEach(card => {
-        // Use index as fallback for missing id
-        const itemId = card.dataset.id || card.querySelector('.card-title')?.textContent || '';
-        const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
-        // Attach click listener to the whole card
         card.addEventListener('click', function(e) {
             e.stopPropagation();
+            // Find the card element in case a child was clicked
+            let targetCard = e.currentTarget;
+            const itemId = targetCard.dataset.id || targetCard.querySelector('.card-title')?.textContent || '';
+            const item = allItems.find(item => (item.id && item.id == itemId) || (!item.id && item.title === itemId));
             console.log('[DEBUG] Card clicked:', item);
             if (item) showItemDetails(item);
         });
