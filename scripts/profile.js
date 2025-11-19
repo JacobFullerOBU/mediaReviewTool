@@ -87,21 +87,21 @@ async function renderReviews(user) {
         const reviewContent = r.reviewText || r.text || r.review || '';
         // Show title if available
         const mediaItem = mediaMap[r.mediaKey];
-            let title = mediaItem ? mediaItem.title : r.mediaKey;
-            if (!mediaItem) {
-                // Remove underscores and proper case
-                title = r.mediaKey.replace(/_/g, ' ')
-                    .replace(/\b\w/g, c => c.toUpperCase());
-            }
-        li.innerHTML = `<strong style="color:#1976d2;cursor:pointer;text-decoration:underline;">${title}</strong>: ${reviewContent}`;
-        li.style.cursor = 'pointer';
-        li.onclick = async function() {
-            if (mediaItem && window.showItemDetails) {
-                window.showItemDetails(mediaItem);
-            } else {
-                alert('Media details not found for this review.');
-            }
-        };
+            // Always format title: remove underscores, proper case
+            let rawTitle = mediaItem ? mediaItem.title : r.mediaKey;
+            let title = rawTitle.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            li.innerHTML = `<strong style="color:#1976d2;cursor:pointer;text-decoration:underline;">${title}</strong>: ${reviewContent}`;
+            li.style.cursor = 'pointer';
+            li.onclick = async function() {
+                if (mediaItem && window.showItemDetails) {
+                    window.showItemDetails(mediaItem);
+                } else if (window.showItemDetails) {
+                    // Try to build a minimal item for modal
+                    window.showItemDetails({ title, id: r.mediaKey });
+                } else {
+                    alert('Media details not found for this review.');
+                }
+            };
         userReviews.appendChild(li);
         reviewCount++;
     });
