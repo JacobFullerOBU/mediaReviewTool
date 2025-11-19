@@ -4,6 +4,9 @@ import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
+import { showItemDetails } from "./cards.js";
+
+window.showItemDetails = showItemDetails;
 
 const profileInfo = document.getElementById('profileInfo');
 const userReviews = document.getElementById('userReviews');
@@ -82,6 +85,7 @@ async function renderReviews(user) {
         Array.isArray(games) ? games : [],
         Array.isArray(books) ? books : []
     );
+    console.log('[Profile] Media map for "the_empire_strikes_back":', mediaMap['the_empire_strikes_back']);
     userReviewList.forEach(r => {
         const li = document.createElement('li');
         const reviewContent = r.reviewText || r.text || r.review || '';
@@ -98,6 +102,9 @@ async function renderReviews(user) {
             titleSpan.style.textDecoration = 'underline';
             titleSpan.onclick = async function(e) {
                 e.stopPropagation();
+                console.log('[Profile] Clicked review title:', title);
+                console.log('[Profile] mediaItem:', mediaItem);
+                console.log('[Profile] window.showItemDetails:', window.showItemDetails);
                 if (mediaItem && window.showItemDetails) {
                     window.showItemDetails(mediaItem);
                 } else if (window.showItemDetails) {
@@ -178,7 +185,12 @@ async function renderFavorites(user) {
     // Add click event listeners to each favorite card
     setTimeout(() => {
         const normKey = r.mediaKey.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g, '_');
+        // Debug logging
+        console.log('[Profile] Review mediaKey:', r.mediaKey);
+        console.log('[Profile] Normalized key:', normKey);
+        console.log('[Profile] Media map keys:', Object.keys(mediaMap));
         const mediaItem = mediaMap[normKey];
+        console.log('[Profile] Media item found:', mediaItem);
         cards.forEach(card => {
             card.addEventListener('click', function() {
                 const id = card.getAttribute('data-id');

@@ -39,7 +39,12 @@ async function getAverageRating(mediaId) {
 
 // Fetch movies from JSON file
 async function fetchMovies() {
-    const response = await fetch("Movies/movieList.json");
+    // Use correct relative path depending on current location
+    let path = "Movies/movieList.json";
+    if (window.location.pathname.includes("/profile/")) {
+        path = "../Movies/movieList.json";
+    }
+    const response = await fetch(path);
     return await response.json();
 }
 
@@ -378,6 +383,8 @@ async function showItemDetails(item) {
 
             // Optionally, clear form
             reviewForm.reset();
+                // Ensure showItemDetails is available globally
+                window.showItemDetails = showItemDetails;
             setTimeout(() => {
                 reviewError.textContent = '';
                 reviewError.style.color = 'red';
