@@ -1,3 +1,60 @@
+/* Distinct CTA and Secondary Button */
+.btn-primary.btn-large, .btn.btn-primary.btn-large {
+    background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+    color: #fff;
+    font-size: 1.18em;
+    font-weight: 700;
+    box-shadow: 0 4px 16px #007bff33;
+    border-radius: 8px;
+    padding: 14px 36px;
+    letter-spacing: 0.5px;
+    border: none;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.btn-primary.btn-large:hover {
+    background: linear-gradient(90deg, #0056b3 0%, #007bff 100%);
+    box-shadow: 0 8px 24px #007bff44;
+}
+.btn-secondary.btn-large, .btn.btn-secondary.btn-large {
+    background: #f3f6fa;
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    font-size: 1.08em;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px 28px;
+    margin-left: 12px;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-secondary.btn-large:hover {
+    background: #e3eaf7;
+    color: #0056b3;
+}
+
+/* Toolbar for filter/sort controls */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 16px 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px #0001;
+}
+.toolbar .category-tabs {
+    margin-bottom: 0;
+}
+.toolbar label {
+    margin-right: 4px;
+    font-weight: bold;
+}
+
+/* Consistent card grid spacing */
+.cards-container {
+    gap: 32px !important;
+    padding: 24px 0 !important;
+}
 /* Reset and Base Styles */
 * {
     margin: 0;
