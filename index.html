@@ -194,7 +194,7 @@
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/auth.js"></script>
     <script type="module">
-        // This is necessary to initialize lucide icons after they are rendered by other scripts
+        // This is necessary to initialize lucide icons and other dynamic elements
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             
@@ -209,6 +209,25 @@
             const container = document.getElementById('cardsContainer');
             if(container) {
                 observer.observe(container, { childList: true });
+            }
+
+            // Add functionality for the "Surprise Me" button
+            const surpriseBtn = document.getElementById('surprise-button');
+            if (surpriseBtn) {
+                surpriseBtn.addEventListener('click', function () {
+                    // This relies on allItems being populated by cards.js
+                    const allMedia = window.allItems || [];
+                    if (allMedia.length === 0) {
+                        alert("Media items are still loading, please try again in a moment!");
+                        return;
+                    }
+                    const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
+                    if (window.showItemDetails) {
+                        window.showItemDetails(randomItem);
+                    } else {
+                        alert("The details viewer is not ready yet.");
+                    }
+                });
             }
         });
     </script>
