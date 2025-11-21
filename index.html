@@ -4,216 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media Review Tool - Home</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/cards.css">
-    <link rel="stylesheet" href="styles/navigation.css">
-    <link rel="stylesheet" href="styles/auth.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-100 font-sans">
+
     <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <h1>MediaReview</h1>
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                        MediaReview
+                    </span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Movies</a>
+                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">TV Shows</a>
+                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Music</a>
+                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Games</a>
+                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Books</a>
+                    <div class="auth-buttons flex items-center space-x-2">
+                        <button id="loginBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all shadow-lg shadow-indigo-500/20">Login</button>
+                        <button id="registerBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Register</button>
+                        <button id="profileBtn" style="display:none;" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Profile</button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-400 hover:text-white">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="./Movies/movies.html" class="nav-link">Movies</a></li>
-                <li class="nav-item"><a href="#tv" class="nav-link" data-category="tv">TV Shows</a></li>
-                <li class="nav-item"><a href="#music" class="nav-link" data-category="music">Music</a></li>
-                <li class="nav-item"><a href="#games" class="nav-link" data-category="games">Games</a></li>
-                <li class="nav-item"><a href="#books" class="nav-link" data-category="books">Books</a></li>
-                <li class="nav-item"><a href="./Reviewers.html" class="nav-link">Reviewers</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <button class="btn btn-login" id="loginBtn">Login</button>
-                <button class="btn btn-register" id="registerBtn">Register</button>
-                <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
-                <button class="btn btn-logout" id="logoutBtn" style="display:none;">Logout</button>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
+            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">All</a>
+            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Movies</a>
+            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">TV Shows</a>
+            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Music</a>
+            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Games</a>
+            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Books</a>
         </div>
     </nav>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Discover & Review Your Favorite Media</h1>
-            <p>Share your thoughts on movies, TV shows, music, games, and books. Join our community of reviewers!</p>
-            <div style="margin-bottom: 18px;">
-                <input type="text" id="mediaSearchInput" placeholder="Search media by title, actor, or director..."
-                    style="width: 100%; max-width: 400px; padding: 8px; font-size: 1em;">
-            </div>
-            <button class="btn btn-primary btn-large" id="exploreBtn">Start Exploring</button>
-            <button class="btn btn-secondary btn-large" id="randomizeBtn" style="margin-top:12px;">Surprise Me!</button>
-        </div>
-    </section>
 
-    <!-- Popular Content Section -->
-    <section class="popular-content">
-        <div class="container">
-            <h2>Popular Content</h2>
-            <div style="display:flex;align-items:center;gap:24px;margin-bottom:18px;">
-                <div class="category-tabs" style="margin-bottom:0;">
-                    <button class="tab-btn active" data-category="all">All</button>
-                    <button class="tab-btn" data-category="movies">Movies</button>
-                    <button class="tab-btn" data-category="tv">TV</button>
-                    <button class="tab-btn" data-category="music">Music</button>
-                    <button class="tab-btn" data-category="games">Games</button>
-                    <button class="tab-btn" data-category="books">Books</button>
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden bg-slate-900 py-16 sm:py-24">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
+                Discover & Review <br/>
+                <span class="text-indigo-400">Your Favorite Media</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400">
+                Join a community of tastemakers. Rate movies, binge-worthy shows, timeless albums, and epic games.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <button id="explore-button" class="px-8 py-3 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-500/25 transition-all transform hover:scale-105">
+                    Start Exploring
+                </button>
+                <button id="surprise-button" class="px-8 py-3 rounded-full bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold flex items-center gap-2 transition-all">
+                    <i data-lucide="shuffle" class="w-4 h-4"></i> Surprise Me
+                </button>
+            </div>
+        </div>
+        <div class="absolute top-0 left-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="content-grid" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Controls Toolbar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 backdrop-blur-sm">
+            
+            <div class="flex overflow-x-auto pb-2 md:pb-0 gap-2 no-scrollbar">
+                <button class="tab-btn active flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-indigo-600 text-white shadow-md" data-category="all">All</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="movies"><i data-lucide="film" class="w-4 h-4"></i> Movies</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="tv"><i data-lucide="tv" class="w-4 h-4"></i> TV</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="music"><i data-lucide="music" class="w-4 h-4"></i> Music</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="games"><i data-lucide="gamepad-2" class="w-4 h-4"></i> Games</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="books"><i data-lucide="book-open" class="w-4 h-4"></i> Books</button>
+            </div>
+
+            <div class="flex gap-4 items-center">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
+                    <input type="text" id="mediaSearchInput" placeholder="Search titles..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64 text-slate-200 placeholder-slate-500"/>
                 </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <label for="sortSelect" style="font-weight:bold;margin-right:4px;">Sort by:</label>
-                    <select id="sortSelect" style="padding:6px 12px;font-size:1em;">
-                        <option value="year-desc">Year (Newest to Oldest)</option>
-                        <option value="year-asc">Year (Oldest to Newest)</option>
-                        <option value="title-asc">Title (A-Z)</option>
-                        <option value="title-desc">Title (Z-A)</option>
-                        <option value="rating-desc">Rating (High to Low)</option>
-                        <option value="rating-asc">Rating (Low to High)</option>
+                <div class="flex items-center gap-2">
+                    <select id="sortSelect" class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none text-slate-200 cursor-pointer">
+                        <option value="year-desc">Newest First</option>
+                        <option value="year-asc">Oldest First</option>
+                        <option value="title-asc">Alphabetical (A-Z)</option>
+                        <option value="title-desc">Alphabetical (Z-A)</option>
+                        <option value="rating-desc">Highest Rated</option>
+                        <option value="rating-asc">Lowest Rated</option>
                     </select>
-                    <button id="applySortBtn" class="btn btn-primary" style="margin-left:4px;vertical-align:middle;">Apply</button>
+                    <button id="applySortBtn" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-all">Apply</button>
                 </div>
             </div>
-            </div>
-            <div class="cards-container" id="cardsContainer">
-                <!-- Cards will be populated by JavaScript -->
-            </div>
         </div>
-    </section>
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Login</h2>
-                <span class="close" data-modal="loginModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginEmail">Email:</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password:</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Login</button>
-                </form>
-                <p class="auth-switch">Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
-            </div>
+
+        <!-- Grid -->
+        <div id="cardsContainer" class="cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Media cards will be injected here by JavaScript -->
         </div>
-    </div>
-    <!-- Register Modal -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Register</h2>
-                <span class="close" data-modal="registerModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label for="registerUsername">Username:</label>
-                        <input type="text" id="registerUsername" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email:</label>
-                        <input type="email" id="registerEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Password:</label>
-                        <input type="password" id="registerPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Register</button>
-                </form>
-                <p class="auth-switch">Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
-            </div>
-        </div>
-    </div>
-    <!-- Suggestions Section -->
-    <section class="suggestions-section" style="background:#f9f9f9; padding:32px 0; border-top:1px solid #eee;">
-        <div class="container">
-            <h2>Suggest Something to Add</h2>
-            <form id="suggestionForm" style="max-width:500px; margin:auto;">
-                <div class="form-group">
-                    <label for="suggestionText">Your suggestion (movie, show, music, etc):</label>
-                    <input type="text" id="suggestionText" name="suggestionText" required style="width:100%;padding:8px;">
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-top:12px;">Submit Suggestion</button>
-            </form>
-            <div id="suggestionsList" style="margin-top:32px;">
-                <h3>Recent Suggestions</h3>
-                <ul id="suggestionsUl" style="list-style:disc inside;"></ul>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 MediaReview. All rights reserved.</p>
-            <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
-                <button class="btn btn-primary" id="contactBtn"
-                    style="padding:8px 18px; font-size:1em;">Contact</button>
-                <a href="./Top Reviewers/topReviewers.html" id="leaderboardLink"
-                    style="color:#007bff; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>© 2024 MediaReview. All rights reserved.</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="hover:text-indigo-400">Contact</a>
+                <a href="#" class="hover:text-indigo-400">Privacy</a>
+                <a href="#" class="hover:text-indigo-400">Top Reviewers</a>
             </div>
         </div>
     </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal">
+      <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-slate-700 shadow-2xl relative modal-content">
+        <div class="modal-header flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-white">Login</h2>
+            <span class="close text-slate-400 hover:text-white cursor-pointer" data-modal="loginModal"><i data-lucide="x" class="w-5 h-5"></i></span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm" class="space-y-4">
+                <div class="form-group">
+                    <label for="loginEmail" class="block text-xs font-medium text-slate-400 mb-1">Email:</label>
+                    <input type="email" id="loginEmail" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="block text-xs font-medium text-slate-400 mb-1">Password:</label>
+                    <input type="password" id="loginPassword" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Login</button>
+            </form>
+            <p class="auth-switch mt-6 text-center text-sm text-slate-400">Don't have an account? <a href="#" id="switchToRegister" class="text-indigo-400 hover:text-indigo-300 font-medium hover:underline">Register here</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal">
+      <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-slate-700 shadow-2xl relative modal-content">
+        <div class="modal-header flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-white">Register</h2>
+            <span class="close text-slate-400 hover:text-white cursor-pointer" data-modal="registerModal"><i data-lucide="x" class="w-5 h-5"></i></span>
+        </div>
+        <div class="modal-body">
+            <form id="registerForm" class="space-y-4">
+                <div class="form-group">
+                    <label for="registerUsername" class="block text-xs font-medium text-slate-400 mb-1">Username:</label>
+                    <input type="text" id="registerUsername" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail" class="block text-xs font-medium text-slate-400 mb-1">Email:</label>
+                    <input type="email" id="registerEmail" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword" class="block text-xs font-medium text-slate-400 mb-1">Password:</label>
+                    <input type="password" id="registerPassword" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword" class="block text-xs font-medium text-slate-400 mb-1">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Register</button>
+            </form>
+            <p class="auth-switch mt-6 text-center text-sm text-slate-400">Already have an account? <a href="#" id="switchToLogin" class="text-indigo-400 hover:text-indigo-300 font-medium hover:underline">Login here</a></p>
+        </div>
+      </div>
+    </div>
+
+
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/auth.js"></script>
-        <script type="module">
-        import { auth } from './scripts/firebase.js';
-        import { signOut } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
-        document.addEventListener('DOMContentLoaded', function () {
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', async function () {
-                    await signOut(auth);
-                    window.location.reload();
-                });
-            }
-            // Show/hide logout button based on auth state
-            import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js').then(({ onAuthStateChanged }) => {
-                onAuthStateChanged(auth, function(user) {
-                    if (user) {
-                        logoutBtn.style.display = '';
-                    } else {
-                        logoutBtn.style.display = 'none';
+    <script type="module">
+        // This is necessary to initialize lucide icons after they are rendered by other scripts
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            // The original scripts might not call this, so we do it here.
+            const observer = new MutationObserver((mutations) => {
+                for (const mutation of mutations) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        lucide.createIcons();
                     }
-                });
+                }
             });
-        });
-        </script>
-    <script type="module" src="scripts/cards.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const profileBtn = document.getElementById('profileBtn');
-            if (profileBtn) {
-                profileBtn.addEventListener('click', function () {
-                    window.location.href = './profile/index.html';
-                });
-            }
-            const randomizeBtn = document.getElementById('randomizeBtn');
-            if (randomizeBtn) {
-                randomizeBtn.addEventListener('click', function () {
-                    // Use already loaded allItems from cards.js for instant response
-                    const allMedia = window.allItems || [];
-                    if (!allMedia.length) {
-                        return;
-                    }
-                    const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
-                    if (window.showItemDetails) {
-                        window.showItemDetails(randomItem);
-                    }
-                });
+            const container = document.getElementById('cardsContainer');
+            if(container) {
+                observer.observe(container, { childList: true });
             }
         });
     </script>
+    <script type="module" src="scripts/cards.js"></script>
+
 </body>
 </html>

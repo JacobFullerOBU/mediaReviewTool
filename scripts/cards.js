@@ -159,203 +159,172 @@ window.filterCards = filterCards;
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
     // Use the same key logic as review submission
-    let mediaId = item.id;
-    if (!mediaId && item.title) {
-        mediaId = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-    }
+    let mediaId = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
     let avgRating = await getAverageRating(mediaId);
     let reviewCount = await getReviewCount(mediaId);
     let reviewsHtml = '';
+
     try {
         const reviewsRef = ref(db, `reviews/${mediaId}`);
         const snapshot = await get(reviewsRef);
         if (snapshot.exists()) {
-            const reviews = Object.values(snapshot.val());
-            reviewsHtml = `<div style="margin-top:24px;"><h3>All Reviews</h3>`;
+            const reviews = Object.values(snapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            reviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
             reviewsHtml += reviews.map(r => `
-                <div class="review-block" style="border-bottom:1px solid #eee; margin-bottom:12px; padding-bottom:8px;">
-                    <div><strong>Rating:</strong> ★ ${r.rating} <span style="color:#888; font-size:0.9em;">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span></div>
-                    <div style="margin-top:4px;"><strong>Review:</strong> ${r.reviewText}</div>
+                <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2 text-yellow-400 font-bold">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
+                        </div>
+                        <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span>
+                    </div>
+                    <p class="text-slate-300">${r.reviewText}</p>
                 </div>
             `).join('');
             reviewsHtml += `</div>`;
         } else {
-            reviewsHtml = `<div style="margin-top:24px; color:#888;">No reviews yet.</div>`;
+            reviewsHtml = `<div class="mt-8 text-slate-500">No reviews yet.</div>`;
         }
     } catch (err) {
-        reviewsHtml = `<div style="margin-top:24px; color:red;">Error loading reviews.</div>`;
+        reviewsHtml = `<div class="mt-8 text-red-500">Error loading reviews.</div>`;
     }
 
     let modal = document.createElement('div');
-    modal.className = 'modal show';
-    modal.style.zIndex = '9999';
-    modal.style.display = 'flex';
-    modal.style.position = 'fixed';
-    modal.style.top = '0';
-    modal.style.left = '0';
-    modal.style.width = '100vw';
-    modal.style.height = '100vh';
-    modal.style.background = 'rgba(0,0,0,0.7)';
-    modal.style.alignItems = 'center';
-    modal.style.justifyContent = 'center';
-    modal.style.border = 'none';
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width:600px;background:#fff;border-radius:12px;box-shadow:0 2px 16px #0004;position:relative;padding:32px;">
-            <button class="close" style="position:absolute;top:12px;right:16px;font-size:2em;background:none;border:none;cursor:pointer;">&times;</button>
-            <div style="display:flex;gap:24px;align-items:flex-start;">
-                <img src="${item.poster || item.image || ''}" alt="${item.title}" style="max-width:160px;max-height:220px;border-radius:8px;box-shadow:0 2px 8px #0002;background:#eee;object-fit:cover;">
-                <div style="flex:1;">
-                    <h2 style="margin-top:0;">${item.title || ''}</h2>
-                    <div style="margin-bottom:8px;color:#666;font-size:1em;">
-                        <span>${item.year ? `<strong>Year:</strong> ${item.year}` : ''}</span>
-                        ${item.genre ? `<span style='margin-left:12px;'><strong>Genre:</strong> ${item.genre}</span>` : ''}
-                        ${item.director ? `<span style='margin-left:12px;'><strong>Director:</strong> ${item.director}</span>` : ''}
-                    </div>
-                    <div style="margin-bottom:8px;color:#666;font-size:1em;">
-                        ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
-                    </div>
-                    <p style="margin-bottom:12px;">${item.description || ''}</p>
-                    <div style="margin-bottom:8px;"><strong>Category:</strong> ${(item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Movie')}</div>
-                    <div style="margin-bottom:8px;"><strong>Rating:</strong> ★ <span id="modalRating">${avgRating}</span></div>
-                    <div style="margin-bottom:8px;"><strong>Reviews:</strong> <span id="modalReviewCount">${reviewCount}</span> reviews</div>
-                    <button class="btn btn-primary" id="writeReviewBtn" style="margin-top:8px;">Write a Review</button>
-                    <button class="btn btn-login" style="margin-left:10px;">Add to Favorites</button>
-                </div>
-            </div>
-            <div id="reviewFormContainer" style="display:none; margin-top:20px;">
-                <form id="reviewForm">
-                    <label for="reviewText">Your Review:</label><br>
-                    <textarea id="reviewText" rows="3" style="width:100%;"></textarea><br>
-                    <label for="reviewRating">Rating (1-10):</label>
-                    <input type="number" id="reviewRating" min="1" max="10" required style="width:60px;">
-                    <button type="submit" class="btn btn-primary" style="margin-left:10px;">Submit</button>
-                </form>
-                <div id="reviewError" style="color:red; margin-top:8px;"></div>
-            </div>
-            <div style="margin-top:24px;">${reviewsHtml}</div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-    console.log('[DEBUG] Modal appended to body:', modal);
-    // Add close functionality only once
-    const closeBtn = modal.querySelector('.close');
-    closeBtn.addEventListener('click', () => {
-        modal.remove();
-    });
-
+    modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm';
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.remove();
+            document.body.style.overflow = 'auto';
         }
     });
+
+    modal.innerHTML = `
+        <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-2xl border border-slate-700 shadow-2xl relative max-h-[90vh] overflow-y-auto no-scrollbar">
+            <button class="close-btn absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <img src="${item.poster || item.image || ''}" alt="${item.title}" class="w-48 h-auto rounded-lg shadow-lg object-cover flex-shrink-0 mx-auto md:mx-0">
+                <div class="flex-1 text-slate-300">
+                    <h2 class="text-3xl font-bold text-white mb-2">${item.title || ''}</h2>
+                    <div class="flex items-center gap-4 text-sm text-slate-400 mb-4">
+                        <span>${item.year ? `<strong>Year:</strong> ${item.year}` : ''}</span>
+                        ${item.genre ? `<span><strong>Genre:</strong> ${item.genre}</span>` : ''}
+                    </div>
+                    <div class="text-sm text-slate-400 mb-4">
+                        ${item.director ? `<strong>Director:</strong> ${item.director}` : ''}
+                    </div>
+                    <div class="text-sm text-slate-400 mb-4">
+                        ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
+                    </div>
+                    <p class="text-slate-400 mb-6">${item.description || ''}</p>
+                    <div class="flex items-center gap-6 bg-slate-900/50 p-3 rounded-lg mb-6">
+                        <div>
+                            <strong>Avg. Rating:</strong> 
+                            <span id="modalRating" class="font-bold text-yellow-400 ml-1">★ ${avgRating}</span>
+                        </div>
+                        <div>
+                            <strong>Reviews:</strong> 
+                            <span id="modalReviewCount" class="font-bold text-white ml-1">${reviewCount}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors" id="writeReviewBtn">Write a Review</button>
+                        <button class="btn-secondary border border-slate-600 hover:bg-slate-700 text-slate-300 font-bold py-2 px-4 rounded-lg transition-colors" id="addToFavoritesBtn">Add to Favorites</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="reviewFormContainer" class="hidden mt-6 pt-6 border-t border-slate-700">
+                <form id="reviewForm" class="space-y-4">
+                    <div>
+                        <label for="reviewRating" class="block text-sm font-medium text-slate-300 mb-2">Rating (1-10):</label>
+                        <input type="number" id="reviewRating" min="1" max="10" required class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div>
+                        <label for="reviewText" class="block text-sm font-medium text-slate-300 mb-2">Your Review:</label>
+                        <textarea id="reviewText" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">Submit</button>
+                </form>
+                <div id="reviewError" class="text-red-500 mt-4"></div>
+            </div>
+
+            <div id="reviewsSection">${reviewsHtml}</div>
+        </div>
+    `;
+    document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
+    lucide.createIcons();
 
-    // Enable scrolling again after details closed
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.removedNodes.forEach((node) => {
-                    if (node === modal) {
-                        document.body.style.overflow = 'auto';
-                        window._modalOpen = false;
-                        observer.disconnect();
-                    }
-                });
-            }
-        });
-    });
-    observer.observe(document.body, { childList: true });
+    // --- Add Event Listeners to Modal Elements ---
 
-    // Review button logic
-    const writeReviewBtn = modal.querySelector('#writeReviewBtn');
-    const reviewFormContainer = modal.querySelector('#reviewFormContainer');
-    writeReviewBtn.addEventListener('click', () => {
-        reviewFormContainer.style.display = 'block';
+    modal.querySelector('.close-btn').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = 'auto';
     });
 
-    // Add to Favorites logic
-    const addToFavoritesBtn = modal.querySelector('.btn-login');
-    // Use item.id if available, otherwise use a slugified title as the key
+    modal.querySelector('#writeReviewBtn').addEventListener('click', () => {
+        modal.querySelector('#reviewFormContainer').classList.toggle('hidden');
+    });
+
+    // Favorites Logic
+    const addToFavoritesBtn = modal.querySelector('#addToFavoritesBtn');
     const mediaKey = item.id || item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     let isFavorite = false;
     if (auth.currentUser) {
         const userId = auth.currentUser.uid;
         const favRef = ref(db, `favorites/${userId}/${mediaKey}`);
-        // Check if already favorited
         get(favRef).then(snapshot => {
             if (snapshot.exists()) {
                 isFavorite = true;
                 addToFavoritesBtn.textContent = 'Remove from Favorites';
-            } else {
-                isFavorite = false;
-                addToFavoritesBtn.textContent = 'Add to Favorites';
+                addToFavoritesBtn.classList.add('bg-red-600', 'hover:bg-red-700', 'border-red-600');
             }
         });
     }
+    
     addToFavoritesBtn.addEventListener('click', async () => {
         if (!auth.currentUser) {
             alert('You must be logged in to add favorites.');
             return;
         }
-        try {
-            const userId = auth.currentUser.uid;
-            const favRef = ref(db, `favorites/${userId}/${mediaKey}`);
-            if (!isFavorite) {
-                // Add to favorites
-                await push(favRef, {
-                    mediaId: mediaKey,
-                    addedAt: new Date().toISOString()
-                });
-                addToFavoritesBtn.textContent = 'Remove from Favorites';
-                isFavorite = true;
-            } else {
-                // Remove from favorites
-                // Remove all entries for this mediaKey (should only be one, but just in case)
-                get(favRef).then(snapshot => {
-                    if (snapshot.exists()) {
-                        const updates = {};
-                        Object.keys(snapshot.val()).forEach(key => {
-                            updates[`${key}`] = null;
-                        });
-                        // Remove from db
-                        import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ update }) => {
-                            update(favRef, updates);
-                        });
-                    }
-                });
-                addToFavoritesBtn.textContent = 'Add to Favorites';
-                isFavorite = false;
-            }
-        } catch (err) {
-            alert('Error updating favorites: ' + (err.message || err));
+        const userId = auth.currentUser.uid;
+        const favRef = ref(db, `favorites/${userId}/${mediaKey}`);
+        if (!isFavorite) {
+            await push(favRef, { mediaId: mediaKey, addedAt: new Date().toISOString() });
+            addToFavoritesBtn.textContent = 'Remove from Favorites';
+            isFavorite = true;
+            addToFavoritesBtn.classList.add('bg-red-600', 'hover:bg-red-700', 'border-red-600');
+        } else {
+            get(favRef).then(snapshot => {
+                if (snapshot.exists()) {
+                    const updates = {};
+                    Object.keys(snapshot.val()).forEach(key => { updates[`${key}`] = null; });
+                     import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ update }) => {
+                        update(favRef, updates);
+                     });
+                }
+            });
+            addToFavoritesBtn.textContent = 'Add to Favorites';
+            isFavorite = false;
+            addToFavoritesBtn.classList.remove('bg-red-600', 'hover:bg-red-700', 'border-red-600');
         }
     });
 
-    // Handle review submission (Realtime Database)
-    const reviewForm = modal.querySelector('#reviewForm');
-    reviewForm.addEventListener('submit', async function(e) {
+    // Review Submission Logic
+    modal.querySelector('#reviewForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const reviewText = modal.querySelector('#reviewText').value.trim();
         const reviewRating = parseInt(modal.querySelector('#reviewRating').value);
         const reviewError = modal.querySelector('#reviewError');
         reviewError.textContent = '';
 
-        // Fallback: Use slugified title as mediaId if item.id is missing
-        let mediaId = item.id;
-        if (!mediaId && item.title) {
-            mediaId = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-        }
-        if (!mediaId) {
-            reviewError.textContent = 'Error: Cannot submit review. Media ID is missing.';
-            return;
-        }
-
         if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10) {
             reviewError.textContent = 'Please enter a review and a rating between 1 and 10.';
             return;
         }
 
-        // Check if user is logged in
         const user = auth.currentUser;
         if (!user) {
             reviewError.textContent = 'You must be logged in to submit a review.';
@@ -371,41 +340,36 @@ async function showItemDetails(item) {
                 rating: reviewRating,
                 timestamp: new Date().toISOString()
             });
-            reviewError.style.color = 'green';
-            reviewError.textContent = 'Review submitted!';
 
-            // Update modal rating and review count
-            const newAvgRating = await getAverageRating(item.id);
-            const newReviewCount = await getReviewCount(item.id);
-            modal.querySelector('#modalRating').textContent = newAvgRating;
-            modal.querySelector('#modalReviewCount').textContent = newReviewCount;
-
-            // Refresh reviews list in modal
+            // Refresh reviews, rating, and count
+            const newAvgRating = await getAverageRating(mediaId);
+            const newReviewCount = await getReviewCount(mediaId);
             const reviewsSnapshot = await get(reviewsRef);
-            let reviewsHtml = '';
+            let newReviewsHtml = '';
             if (reviewsSnapshot.exists()) {
-                const reviews = Object.values(reviewsSnapshot.val());
-                reviewsHtml = `<div style="margin-top:24px;"><h3>All Reviews</h3>`;
-                reviewsHtml += reviews.map(r => `
-                    <div class="review-block" style="border-bottom:1px solid #eee; margin-bottom:12px; padding-bottom:8px;">
-                        <div><strong>Rating:</strong> ★ ${r.rating} <span style="color:#888; font-size:0.9em;">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span></div>
-                        <div style="margin-top:4px;"><strong>Review:</strong> ${r.reviewText}</div>
+                const reviews = Object.values(reviewsSnapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                 newReviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
+                 newReviewsHtml += reviews.map(r => `
+                    <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2 text-yellow-400 font-bold">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
+                            </div>
+                            <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span>
+                        </div>
+                        <p class="text-slate-300">${r.reviewText}</p>
                     </div>
                 `).join('');
-                reviewsHtml += `</div>`;
-            } else {
-                reviewsHtml = `<div style="margin-top:24px; color:#888;">No reviews yet.</div>`;
+                newReviewsHtml += `</div>`;
             }
-            // Update reviews section in modal
-            modal.querySelector('div[style*="margin-top:24px;"]').outerHTML = reviewsHtml;
+            modal.querySelector('#reviewsSection').innerHTML = newReviewsHtml;
+            modal.querySelector('#modalRating').textContent = `★ ${newAvgRating}`;
+            modal.querySelector('#modalReviewCount').textContent = newReviewCount;
+            lucide.createIcons();
+            
+            modal.querySelector('#reviewForm').reset();
+            modal.querySelector('#reviewFormContainer').classList.add('hidden');
 
-            // Optionally, clear form
-            reviewForm.reset();
-            setTimeout(() => {
-                reviewError.textContent = '';
-                reviewError.style.color = 'red';
-                reviewFormContainer.style.display = 'none';
-            }, 1200);
         } catch (err) {
             reviewError.textContent = 'Error submitting review: ' + (err.message || err);
         }
@@ -486,51 +450,48 @@ async function renderCards(container, items) {
     let expanded = false;
     function renderVisibleCards() {
         // Add themed background to container
-        container.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-        container.style.padding = '32px 0';
-        container.style.borderRadius = '18px';
-        container.style.boxShadow = '0 4px 32px #0001';
-        container.innerHTML = '';
+        container.style.background = 'transparent'; // Let the body background show through
+        container.style.padding = '0';
+        container.style.borderRadius = '0';
+        container.style.boxShadow = 'none';
+        
+        let cardHTML = '';
         const toShow = items.slice(0, visibleCount);
         toShow.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'media-card';
-            card.dataset.id = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-            card.style.background = 'linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)';
-            card.style.borderRadius = '16px';
-            card.style.boxShadow = '0 2px 16px #8ec5fc55';
-            card.style.margin = '18px auto';
-            card.style.width = '220px';
-            card.style.height = '340px';
-            card.style.display = 'flex';
-            card.style.flexDirection = 'column';
-            card.style.alignItems = 'center';
-            card.style.justifyContent = 'flex-start';
-            card.style.padding = '18px 12px 16px 12px';
-            card.style.transition = 'transform 0.2s, box-shadow 0.2s';
-            card.style.border = '2px solid #c3cfe2';
-            card.onmouseover = function() {
-                card.style.transform = 'scale(1.04)';
-                card.style.boxShadow = '0 6px 32px #8ec5fc99';
-            };
-            card.onmouseout = function() {
-                card.style.transform = 'scale(1)';
-                card.style.boxShadow = '0 2px 16px #8ec5fc55';
-            };
-            card.innerHTML = `
-                <div style="display:flex;justify-content:center;align-items:center;width:100%;height:180px;">
-                    <img class="card-image" src="${item.poster || item.image || ''}" alt="${item.title || ''}" style="width:120px;height:180px;object-fit:cover;border-radius:8px;background:#eee;box-shadow:0 2px 8px #0002;">
+            const starRating = item.rating || item.avgRating ? `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${item.rating || item.avgRating}</div>` : '';
+            const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0,1).join('.') : '');
+            
+            cardHTML += `
+                <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '')}">
+                    <div class="relative h-48 overflow-hidden">
+                        <img class="card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform" src="${item.poster || item.image || ''}" alt="${item.title || ''}">
+                        <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1">
+                            ${starRating}
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="card-title text-lg font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">${item.title || ''}</h3>
+                            <span class="text-xs text-slate-500 font-mono mt-1">${item.year || ''}</span>
+                        </div>
+                         <p class="text-slate-400 text-sm mb-4 flex-1 line-clamp-2">
+                            ${reviewSnippet}
+                        </p>
+                        <div class="pt-4 border-t border-slate-700 text-slate-500 text-xs">
+                             <span class="font-medium text-slate-400">${item.genre || ''}</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-title" style="font-weight:bold;margin-top:12px;text-align:center;color:#4b3f72;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.title || ''}</div>
-                <div style="color:#5a5a5a;font-size:0.95em;text-align:center;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.year || ''}</div>
-                <div style="color:#6a89cc;font-size:0.9em;text-align:center;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.genre || ''}</div>
             `;
-            container.appendChild(card);
         });
+
+        container.innerHTML = cardHTML;
+        lucide.createIcons();
+        
         // Add Show More/Show Less button if needed
         if (items.length > visibleCount) {
             const btn = document.createElement('button');
-            btn.className = 'btn btn-primary';
+            btn.className = 'btn btn-primary col-span-full'; // Span full width of the grid
             btn.style.display = 'block';
             btn.style.margin = '24px auto 0 auto';
             btn.textContent = `Show More (${Math.min(9, items.length - visibleCount)} more)`;
@@ -543,7 +504,7 @@ async function renderCards(container, items) {
         } else if (items.length > 9) {
             // Show Less button if expanded
             const btn = document.createElement('button');
-            btn.className = 'btn btn-secondary';
+            btn.className = 'btn btn-secondary col-span-full';
             btn.style.display = 'block';
             btn.style.margin = '24px auto 0 auto';
             btn.textContent = 'Show Less';
