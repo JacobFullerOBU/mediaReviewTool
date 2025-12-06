@@ -2,185 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reviewer Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/cards.css">
-        <link rel="stylesheet" href="styles/navigation.css">
-        <link rel="stylesheet" href="styles/auth.css">
+    <title>Reviewer Profile - MediaReview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-100 font-sans">
     <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <h1>MediaReview</h1>
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                        MediaReview
+                    </span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Explore</a>
+                    <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Browse</a>
+                    <a href="Reviewers.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="index.html" style="display:none;" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">My Feed</a>
+                    <div class="auth-buttons flex items-center space-x-2">
+                        <button id="loginBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all shadow-lg shadow-indigo-500/20">Login</button>
+                        <button id="registerBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Register</button>
+                        <button id="profileBtn" style="display:none;" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Profile</button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-400 hover:text-white">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="./Movies/movies.html" class="nav-link">Movies</a></li>
-                <li class="nav-item"><a href="#tv" class="nav-link" data-category="tv">TV Shows</a></li>
-                <li class="nav-item"><a href="#music" class="nav-link" data-category="music">Music</a></li>
-                <li class="nav-item"><a href="#games" class="nav-link" data-category="games">Games</a></li>
-                <li class="nav-item"><a href="#books" class="nav-link" data-category="books">Books</a></li>
-                <li class="nav-item"><a href="./Reviewers.html" class="nav-link">Reviewers</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <button class="btn btn-login" id="loginBtn">Login</button>
-                <button class="btn btn-register" id="registerBtn">Register</button>
-                <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
-                <button class="btn btn-logout" id="logoutBtn" style="display:none;">Logout</button>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
+            <a href="index.html" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Browse</a>
+            <a href="Reviewers.html" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
+            <a href="index.html" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">My Feed</a>
         </div>
     </nav>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Discover & Review Your Favorite Media</h1>
-            <p>Share your thoughts on movies, TV shows, music, games, and books. Join our community of reviewers!</p>
-        </div>
-    </section>
+
     <!-- Reviewer Profile Section -->
-    <section class="popular-content" style="padding-top:0;">
-        <div class="container" style="max-width:900px; margin:auto;">
-              <h2 style="margin-top:32px;">Reviewer Profile</h2>
-              <div class="profile-container" style="padding-top:90px;">
-            <div class="profile-container">
-        <div class="profile-header">
-            <img id="profileAvatar" class="profile-avatar" src="" alt="Reviewer Avatar">
-            <div class="profile-info">
-                <div id="profileName" class="profile-name"></div>
-                <div id="profileGenres" class="profile-genres"></div>
-                <div id="profileEmail" class="profile-email"></div>
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="profile-container" class="bg-slate-800 rounded-lg p-8 border border-slate-700">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <img id="profileAvatar" class="w-32 h-32 rounded-full border-4 border-slate-700" src="" alt="Reviewer Avatar">
+                <div class="text-center md:text-left">
+                    <h2 id="profileName" class="text-3xl font-bold text-white"></h2>
+                    <p id="profileBio" class="text-slate-400 mt-2"></p>
+                    <p id="profileGenres" class="text-indigo-400 text-sm mt-2"></p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-slate-700">
+                <h3 class="text-2xl font-bold text-white mb-6">Recent Reviews</h3>
+                <div id="userReviews" class="space-y-6">
+                    <!-- Reviews will be injected here -->
+                </div>
             </div>
         </div>
-        <div class="reviews-section">
-            <h2 style="margin-bottom:18px;color:#1976d2;">Reviews</h2>
-            <ul id="userReviews" style="list-style:none;padding:0;margin:0;"></ul>
-        </div>
-    </div>
+    </main>
+
+    <!-- Modals and other elements from index.html can be added here if needed -->
+
     <script type="module" src="scripts/cards.js"></script>
+    <script type="module" src="scripts/feed.js"></script>
     <script type="module">
-            // Import media arrays for lookup
-            import { tv } from "./TV Shows/tv.js";
-            import { music } from "./Music/music.js";
-            import { games } from "./Video Games/games.js";
-            import { books } from "./Books/books.js";
-        // Get reviewerId from URL
-        function getReviewerId() {
+        document.addEventListener('DOMContentLoaded', async () => {
+            lucide.createIcons();
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
             const params = new URLSearchParams(window.location.search);
-            return params.get('id');
-        }
-        const reviewerId = getReviewerId();
-        // Fetch reviewer info from Realtime Database
-        async function fetchReviewerInfo() {
-            const { getDatabase, ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
-            const appModule = await import('./scripts/firebase.js');
-            const dbInstance = getDatabase(appModule.app);
-            const snapshot = await get(ref(dbInstance, 'reviewers/' + reviewerId));
-            if (snapshot.exists()) {
-                const reviewer = snapshot.val();
-                document.getElementById('profileAvatar').src = reviewer.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg';
-                document.getElementById('profileName').textContent = reviewer.name;
-                document.getElementById('profileGenres').textContent = 'Genres: ' + reviewer.genres;
-                document.getElementById('profileEmail').textContent = reviewer.email;
+            const reviewerIdParam = params.get('id');
+
+            if (!reviewerIdParam) {
+                document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer ID not provided.</p>';
+                return;
             }
-        }
-        // Fetch reviews from Firestore
-        async function fetchReviewerReviews() {
-            const { ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
-            const appModule = await import('./scripts/firebase.js');
-            const db = appModule.db;
-            const reviewsRef = ref(db, 'reviews');
-            const snapshot = await get(reviewsRef);
-            const reviewsList = document.getElementById('userReviews');
-            reviewsList.innerHTML = '';
-            let hasReviews = false;
-                if (snapshot.exists()) {
-                    const reviewsData = snapshot.val();
-                    // Build media map for lookup
-                    let movies = [];
-                    try {
-                        movies = await (await fetch('Movies/movieList.json')).json();
-                    } catch {
-                        try {
-                            movies = await (await fetch('../Movies/movieList.json')).json();
-                        } catch {}
-                    }
-                    // Use imported arrays
-                    const tvArr = Array.isArray(tv) ? tv : [];
-                    const musicArr = Array.isArray(music) ? music : [];
-                    const gamesArr = Array.isArray(games) ? games : [];
-                    const booksArr = Array.isArray(books) ? books : [];
-                    function getAllMediaMap(movies, tv, music, games, books) {
-                        const all = [...movies, ...tv, ...music, ...games, ...books];
-                        const map = {};
-                        all.forEach(item => {
-                            if (item.title) {
-                                const normTitle = item.title.trim().toLowerCase();
-                                const key = normTitle.replace(/[^a-zA-Z0-9]/g, '_');
-                                map[key] = item;
-                            }
-                        });
-                        return map;
-                    }
-                    const mediaMap = getAllMediaMap(movies, tvArr, musicArr, gamesArr, booksArr);
-                    Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
-                        Object.values(reviewObj).forEach(review => {
-                            if (review.userId === reviewerId) {
-                                hasReviews = true;
-                                const li = document.createElement('li');
-                                li.className = 'review-card';
-                                li.style.marginBottom = '18px';
-                                // Format title
-                                const mediaItem = mediaMap[mediaKey];
-                                let rawTitle = mediaItem ? mediaItem.title : mediaKey;
-                                let title = rawTitle.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                                // Create clickable span for title
-                                const titleSpan = document.createElement('span');
-                                titleSpan.textContent = title;
-                                titleSpan.style.color = '#1976d2';
-                                titleSpan.style.cursor = 'pointer';
-                                titleSpan.style.textDecoration = 'underline';
-                                titleSpan.onclick = function(e) {
-                                    e.stopPropagation();
-                                    if (mediaItem && window.showItemDetails) {
-                                        window.showItemDetails(mediaItem);
-                                    } else if (window.showItemDetails) {
-                                        window.showItemDetails({ title, id: mediaKey });
-                                    } else {
-                                        alert('Media details not found for this review.');
-                                    }
-                                };
-                                li.appendChild(titleSpan);
-                                li.appendChild(document.createTextNode(`: ${review.reviewText || ''}`));
-                                // Add rating
-                                if (review.rating !== undefined) {
-                                    const ratingSpan = document.createElement('span');
-                                    ratingSpan.textContent = ` (Rating: ${review.rating})`;
-                                    ratingSpan.style.marginLeft = '8px';
-                                    li.appendChild(ratingSpan);
-                                }
-                                reviewsList.appendChild(li);
-                            }
-                        });
-                    });
-                }
-            if (!hasReviews) {
-                reviewsList.innerHTML = '<li>No reviews yet.</li>';
+            const reviewerId = parseInt(reviewerIdParam);
+
+            // We can reuse the fetchAllData from feed.js
+            const { reviews, reviewers, allMedia } = await window.fetchAllData();
+
+            const reviewer = reviewers.find(r => r.id === reviewerId);
+            if (!reviewer) {
+                document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer not found.</p>';
+                return;
             }
-        }
-        // Initial load
-        if (reviewerId) {
-            fetchReviewerInfo();
-            fetchReviewerReviews();
-        } else {
-            document.querySelector('.profile-container').innerHTML = '<p>Reviewer not found.</p>';
-        }
+
+            // Populate profile info
+            document.getElementById('profileAvatar').src = reviewer.avatar;
+            document.getElementById('profileAvatar').alt = reviewer.username;
+            document.getElementById('profileName').textContent = reviewer.username;
+            document.getElementById('profileBio').textContent = reviewer.bio;
+            document.getElementById('profileGenres').textContent = `Following: ${reviewer.following.length} | Followers: ${reviewer.followers.toLocaleString()}`;
+
+            // Populate reviews
+            const userReviewsContainer = document.getElementById('userReviews');
+            const reviewerReviews = reviews.filter(r => r.reviewerId === reviewerId).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            if (reviewerReviews.length > 0) {
+                userReviewsContainer.innerHTML = '';
+                reviewerReviews.forEach(review => {
+                    const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
+                    // createFeedItem is in feed.js, which we've included
+                    if (window.createFeedItem) {
+                        const feedItem = window.createFeedItem(review, reviewer, mediaItem);
+                        userReviewsContainer.appendChild(feedItem);
+                    }
+                });
+            } else {
+                userReviewsContainer.innerHTML = '<p class="text-slate-500 text-center">This reviewer has not posted any reviews yet.</p>';
+            }
+            lucide.createIcons();
+        });
     </script>
 </body>
 </html>

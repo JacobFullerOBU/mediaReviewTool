@@ -28,8 +28,8 @@
 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center space-x-2">
-                    <a href="#" id="home-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Explore</a>
-                    <a href="#" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="#" id="explore-feed-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Explore</a>
+                    <a href="#" id="browse-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Browse</a>
                     <a href="Reviewers.html" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
                     <a href="#" id="feed-nav" style="display:none;" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">My Feed</a>
                     <div class="auth-buttons flex items-center space-x-2">
@@ -50,8 +50,8 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
-            <a href="#" id="mobile-home-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
-            <a href="#" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
+            <a href="#" id="mobile-explore-feed-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
+            <a href="#" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Browse</a>
             <a href="Reviewers.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
             <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">My Feed</a>
         </div>
@@ -80,7 +80,7 @@
     </div>
 
     <!-- Main Content Area -->
-    <main id="content-grid" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main id="browse-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         <!-- Controls Toolbar -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 backdrop-blur-sm">
@@ -119,11 +119,11 @@
         </div>
     </main>
 
-    <!-- Community/Reviewers Page -->
-    <main id="community-page" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 class="text-3xl font-bold text-white mb-8">Community Reviewers</h2>
-        <div id="reviewers-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Reviewer cards will be injected here by community.js -->
+    <!-- Explore Feed Page -->
+    <main id="explore-feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-white mb-8">Explore Feed</h2>
+        <div id="explore-feed-container" class="space-y-6">
+            <!-- Review items will be injected here by feed.js -->
         </div>
     </main>
 

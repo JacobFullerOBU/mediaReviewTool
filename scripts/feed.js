@@ -85,3 +85,32 @@ async function displayFeed() {
 }
 
 window.displayFeed = displayFeed;
+
+// --- NEW FUNCTION for Explore Feed ---
+async function displayExploreFeed() {
+    const exploreFeedContainer = document.getElementById('explore-feed-container');
+    if (!exploreFeedContainer) return;
+
+    exploreFeedContainer.innerHTML = '<div class="text-center text-slate-400 p-8">Loading latest reviews...</div>';
+
+    const { reviews, reviewers, allMedia } = await fetchAllData();
+
+    if (reviews.length === 0) {
+        exploreFeedContainer.innerHTML = `<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">No reviews have been posted yet. Be the first!</div>`;
+        return;
+    }
+
+    const allRecentReviews = reviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    exploreFeedContainer.innerHTML = '';
+    allRecentReviews.forEach(review => {
+        const reviewer = reviewers.find(r => r.id === review.reviewerId);
+        const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
+        if (reviewer) {
+            exploreFeedContainer.appendChild(createFeedItem(review, reviewer, mediaItem));
+        }
+    });
+    lucide.createIcons();
+}
+
+window.displayExploreFeed = displayExploreFeed;
