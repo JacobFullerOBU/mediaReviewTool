@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "username": "CinephileCassie",
+    "avatar": "https://i.pravatar.cc/150?u=cassie",
+    "followers": 1250,
+    "following": [2, 3],
+    "bio": "Just a movie lover sharing my thoughts. From blockbuster hits to indie gems."
+  },
+  {
+    "id": 2,
+    "username": "GamerGreg",
+    "avatar": "https://i.pravatar.cc/150?u=greg",
+    "followers": 850,
+    "following": [1],
+    "bio": "Diving deep into the world of video games. Let's play and discuss!"
+  },
+  {
+    "id": 3,
+    "username": "BookwormBen",
+    "avatar": "https://i.pravatar.cc/150?u=ben",
+    "followers": 2300,
+    "following": [1, 4],
+    "bio": "There's nothing like the smell of a new book. Reviewing fantasy, sci-fi, and classics."
+  },
+  {
+    "id": 4,
+    "username": "MusicMandy",
+    "avatar": "https://i.pravatar.cc/150?u=mandy",
+    "followers": 975,
+    "following": [],
+    "bio": "From vinyl to streaming, I listen to it all. Here for the deep cuts and hot takes."
+  }
+]

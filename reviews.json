@@ -1,0 +1,47 @@
+[
+  {
+    "reviewId": 101,
+    "reviewerId": 1,
+    "mediaTitle": "Casablanca",
+    "mediaCategory": "movies",
+    "rating": 5,
+    "reviewText": "An absolute masterpiece. Bogart and Bergman's chemistry is timeless. A must-watch for any film enthusiast.",
+    "timestamp": "2025-11-28T10:00:00Z"
+  },
+  {
+    "reviewId": 102,
+    "reviewerId": 2,
+    "mediaTitle": "The Witcher 3: Wild Hunt",
+    "mediaCategory": "games",
+    "rating": 5,
+    "reviewText": "Years later, and this game is still a benchmark for open-world RPGs. The storytelling is incredible.",
+    "timestamp": "2025-11-27T18:30:00Z"
+  },
+  {
+    "reviewId": 103,
+    "reviewerId": 3,
+    "mediaTitle": "Dune",
+    "mediaCategory": "books",
+    "rating": 5,
+    "reviewText": "Frank Herbert's world-building is second to none. A dense but incredibly rewarding read that has shaped science fiction for decades.",
+    "timestamp": "2025-11-26T12:00:00Z"
+  },
+  {
+    "reviewId": 104,
+    "reviewerId": 1,
+    "mediaTitle": "Parasite",
+    "rating": 5,
+    "mediaCategory": "movies",
+    "reviewText": "Bong Joon Ho is a genius. This film is a thrilling, hilarious, and devastating look at class struggle. The less you know going in, the better.",
+    "timestamp": "2025-11-25T15:45:00Z"
+  },
+  {
+    "reviewId": 105,
+    "reviewerId": 4,
+    "mediaTitle": "Rumours",
+    "mediaCategory": "music",
+    "rating": 5,
+    "reviewText": "Fleetwood Mac's magnum opus. Every track is a classic. The raw emotion from the band's turmoil is palpable.",
+    "timestamp": "2025-11-24T09:15:00Z"
+  }
+]

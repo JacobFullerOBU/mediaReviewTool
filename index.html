@@ -28,11 +28,10 @@
 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center space-x-2">
-                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Movies</a>
-                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">TV Shows</a>
-                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Music</a>
-                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Games</a>
-                    <a href="#" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Books</a>
+                    <a href="#" id="home-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Explore</a>
+                    <a href="#" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="Reviewers.html" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="#" id="feed-nav" style="display:none;" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">My Feed</a>
                     <div class="auth-buttons flex items-center space-x-2">
                         <button id="loginBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all shadow-lg shadow-indigo-500/20">Login</button>
                         <button id="registerBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Register</button>
@@ -51,12 +50,10 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
-            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">All</a>
-            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Movies</a>
-            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">TV Shows</a>
-            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Music</a>
-            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Games</a>
-            <a href="#" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Books</a>
+            <a href="#" id="mobile-home-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
+            <a href="#" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
+            <a href="Reviewers.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
+            <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">My Feed</a>
         </div>
     </nav>
 
@@ -119,6 +116,22 @@
         <!-- Grid -->
         <div id="cardsContainer" class="cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Media cards will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Community/Reviewers Page -->
+    <main id="community-page" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-white mb-8">Community Reviewers</h2>
+        <div id="reviewers-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Reviewer cards will be injected here by community.js -->
+        </div>
+    </main>
+
+    <!-- My Feed Page -->
+    <main id="feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-white mb-8">My Feed</h2>
+        <div id="feed-container" class="space-y-6">
+            <!-- Review items will be injected here by feed.js -->
         </div>
     </main>
 
@@ -193,6 +206,8 @@
 
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/community.js"></script>
+    <script type="module" src="scripts/feed.js"></script>
     <script type="module">
         // This is necessary to initialize lucide icons and other dynamic elements
         document.addEventListener('DOMContentLoaded', () => {
