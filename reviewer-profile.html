@@ -81,10 +81,21 @@
     <script type="module" src="scripts/cards.js"></script>
     <script type="module" src="scripts/feed.js"></script>
     <script type="module">
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+        import { app } from './scripts/firebase.js';
+        import { tv } from "./TV Shows/tv.js";
+        import { music } from "./Music/music.js";
+        import { games } from "./Video Games/games.js";
+        import { books } from "./Books/books.js";
+
+        async function fetchMovies() {
+            const response = await fetch("Movies/movieList.json");
+            return await response.json();
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             lucide.createIcons();
 
-            // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenuButton && mobileMenu) {
@@ -94,47 +105,80 @@
             }
 
             const params = new URLSearchParams(window.location.search);
-            const reviewerIdParam = params.get('id');
+            const reviewerId = params.get('id');
 
-            if (!reviewerIdParam) {
+            if (!reviewerId) {
                 document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer ID not provided.</p>';
                 return;
             }
-            const reviewerId = parseInt(reviewerIdParam);
 
-            // We can reuse the fetchAllData from feed.js
-            const { reviews, reviewers, allMedia } = await window.fetchAllData();
+            const db = getDatabase(app);
+            const reviewerRef = ref(db, 'reviewers/' + reviewerId);
+            
+            try {
+                const snapshot = await get(reviewerRef);
+                if (!snapshot.exists()) {
+                    document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer not found.</p>';
+                    return;
+                }
 
-            const reviewer = reviewers.find(r => r.id === reviewerId);
-            if (!reviewer) {
-                document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer not found.</p>';
-                return;
-            }
+                const reviewerData = snapshot.val();
+                const reviewerForFeed = {
+                    id: reviewerId,
+                    username: reviewerData.name,
+                    avatar: reviewerData.avatar,
+                    bio: reviewerData.bio,
+                    following: [], // These properties are not in firebase, but the createFeedItem expects them
+                    followers: 0
+                };
 
-            // Populate profile info
-            document.getElementById('profileAvatar').src = reviewer.avatar;
-            document.getElementById('profileAvatar').alt = reviewer.username;
-            document.getElementById('profileName').textContent = reviewer.username;
-            document.getElementById('profileBio').textContent = reviewer.bio;
-            document.getElementById('profileGenres').textContent = `Following: ${reviewer.following.length} | Followers: ${reviewer.followers.toLocaleString()}`;
 
-            // Populate reviews
-            const userReviewsContainer = document.getElementById('userReviews');
-            const reviewerReviews = reviews.filter(r => r.reviewerId === reviewerId).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                // Populate profile info
+                document.getElementById('profileAvatar').src = reviewerData.avatar || 'https://via.placeholder.com/150';
+                document.getElementById('profileAvatar').alt = reviewerData.name;
+                document.getElementById('profileName').textContent = reviewerData.name;
+                document.getElementById('profileBio').textContent = reviewerData.bio || 'No bio provided.';
+                document.getElementById('profileGenres').textContent = `Genres: ${reviewerData.genres}`;
 
-            if (reviewerReviews.length > 0) {
-                userReviewsContainer.innerHTML = '';
-                reviewerReviews.forEach(review => {
-                    const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
-                    // createFeedItem is in feed.js, which we've included
-                    if (window.createFeedItem) {
-                        const feedItem = window.createFeedItem(review, reviewer, mediaItem);
-                        userReviewsContainer.appendChild(feedItem);
+                // Fetch all media
+                const movies = await fetchMovies();
+                const allMedia = [...movies, ...tv, ...music, ...games, ...books];
+                
+                let allReviews = [];
+                for (const media of allMedia) {
+                    const mediaId = media.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                    const reviewsRef = ref(db, `reviews/${mediaId}`);
+                    const reviewsSnapshot = await get(reviewsRef);
+                    if (reviewsSnapshot.exists()) {
+                        const reviews = reviewsSnapshot.val();
+                        Object.values(reviews).forEach(review => {
+                            if (review.userId === reviewerId) {
+                                allReviews.push({ ...review, mediaTitle: media.title });
+                            }
+                        });
                     }
-                });
-            } else {
-                userReviewsContainer.innerHTML = '<p class="text-slate-500 text-center">This reviewer has not posted any reviews yet.</p>';
+                }
+
+                const userReviewsContainer = document.getElementById('userReviews');
+                if (allReviews.length > 0) {
+                    userReviewsContainer.innerHTML = '';
+                    allReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                    allReviews.forEach(review => {
+                        const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
+                        if (window.createFeedItem) {
+                            const feedItem = window.createFeedItem(review, reviewerForFeed, mediaItem);
+                            userReviewsContainer.appendChild(feedItem);
+                        }
+                    });
+                } else {
+                    userReviewsContainer.innerHTML = '<p class="text-slate-500 text-center">This reviewer has not posted any reviews yet.</p>';
+                }
+
+            } catch (error) {
+                console.error("Error fetching reviewer profile:", error);
+                document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Error loading profile.</p>';
             }
+
             lucide.createIcons();
         });
     </script>

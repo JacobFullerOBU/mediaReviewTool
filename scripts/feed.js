@@ -114,3 +114,5 @@ async function displayExploreFeed() {
 }
 
 window.displayExploreFeed = displayExploreFeed;
+window.fetchAllData = fetchAllData;
+window.createFeedItem = createFeedItem;
