@@ -1,8 +1,6 @@
-console.log('[main.js] Script loaded');
 // Main JavaScript functionality for the Media Review Tool
 
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('[main.js] DOMContentLoaded');
     initAppUI();
 
     // Suggestions logic (Firestore)

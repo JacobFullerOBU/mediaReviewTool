@@ -39,24 +39,15 @@ async function getAverageRating(mediaId) {
 
 // Fetch movies from JSON file
 async function fetchMovies() {
-    // Use correct relative path depending on current location
-    let path = "Movies/movieList.json";
-    if (window.location.pathname.includes("/profile/")) {
-        path = "../Movies/movieList.json";
-    }
-    const response = await fetch(path);
+    const response = await fetch("Assets/Movies/movieList.json");
     return await response.json();
 }
 
-console.log('[cards.js] Script loaded');
-
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('[cards.js] DOMContentLoaded');
     await initCards();
 });
 
 async function initCards() {
-    console.log('[cards.js] initCards called');
     // Fetch movies from JSON
     const movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
     // Filter out empty items from other media arrays
@@ -66,7 +57,6 @@ async function initCards() {
     const validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
     allItems = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks];
     window.allItems = allItems;
-    console.log('[cards.js] All items loaded:', allItems);
 
     // Initialize tab functionality
     initTabFunctionality();
