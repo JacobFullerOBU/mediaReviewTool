@@ -54,49 +54,9 @@ let currentFilter = 'all';
 let allItems = [];
 window.allItems = allItems;
 
-console.log('[cards.js] Script loaded');
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log('[cards.js] DOMContentLoaded');
-    await initCards();
-    // Debug: log all click events to help trace event propagation
-    document.addEventListener('click', function(e) {
-        console.log('[DEBUG] Click event:', e.target);
-    });
-
-    // Add search functionality
-    const searchInput = document.getElementById('mediaSearchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const query = this.value.trim().toLowerCase();
-            searchMedia(query);
-        });
-    }
-});
-// Search media by title or description
-function searchMedia(query) {
-    let filteredItems = allItems;
-    if (query) {
-        filteredItems = allItems.filter(item =>
-            item.title.toLowerCase().includes(query) ||
-            item.description.toLowerCase().includes(query) ||
-            (item.director && item.director.toLowerCase().includes(query)) ||
-            (item.actors && item.actors.toLowerCase().includes(query))
-        );
-    }
-    loadCardsWithItems(filteredItems);
-}
-
-// Helper to load cards with a specific set of items
-async function loadCardsWithItems(items) {
-    const container = document.getElementById('cardsContainer');
-    if (!container) return;
-    showLoadingState(container);
-    setTimeout(async () => {
-        await renderCards(container, items);
-    }, 300);
-}
 
 async function initCards() {
+
     // Fetch movies from JSON
     const movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
     // Filter out empty items from other media arrays

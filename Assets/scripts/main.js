@@ -78,9 +78,10 @@ export async function getUserReviews() {
     return querySnapshot.docs.map(doc => doc.data());
 }
 // Main JavaScript functionality for the Media Review Tool
+import { initCards } from './cards.js';
 
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    await initCards();
     initAppUI();
 
     // Suggestions logic (Firestore)
