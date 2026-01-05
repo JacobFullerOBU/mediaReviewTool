@@ -115,7 +115,7 @@
 
         <!-- Grid -->
         <div id="cardsContainer" class="cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Media cards will be injected here by JavaScript -->
+            <!-- Media cards will be added via cards.js -->
         </div>
     </main>
 
@@ -209,11 +209,9 @@
     <script type="module" src="scripts/community.js"></script>
     <script type="module" src="scripts/feed.js"></script>
     <script type="module">
-        // This is necessary to initialize lucide icons and other dynamic elements
+        // Loads icons and elements dynamically 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            
-            // The original scripts might not call this, so we do it here.
             const observer = new MutationObserver((mutations) => {
                 for (const mutation of mutations) {
                     if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
@@ -226,11 +224,10 @@
                 observer.observe(container, { childList: true });
             }
 
-            // Add functionality for the "Surprise Me" button
+            // Surprise Me button functionality
             const surpriseBtn = document.getElementById('surprise-button');
             if (surpriseBtn) {
                 surpriseBtn.addEventListener('click', function () {
-                    // This relies on allItems being populated by cards.js
                     const allMedia = window.allItems || [];
                     if (allMedia.length === 0) {
                         alert("Media items are still loading, please try again in a moment!");
