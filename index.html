@@ -235,7 +235,7 @@
                     const activeBtn = document.querySelector('.tab-btn.active');
                     const currentCategory = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
 
-                    // 2. Filter the list based on that category
+                    // 2. Filter the list based on category
                     let poolOfItems = allMedia;
                     
                     if (currentCategory !== 'all') {
@@ -262,6 +262,7 @@
                     }
                 });
             }
+        });
     </script>
     <script type="module" src="scripts/cards.js"></script>
 
