@@ -226,14 +226,35 @@
 
             // Surprise Me button functionality
             const surpriseBtn = document.getElementById('surprise-button');
+
             if (surpriseBtn) {
                 surpriseBtn.addEventListener('click', function () {
                     const allMedia = window.allItems || [];
-                    if (allMedia.length === 0) {
-                        alert("Media items are still loading, please try again in a moment!");
+                    
+                    // 1. Find the currently active category button
+                    const activeBtn = document.querySelector('.tab-btn.active');
+                    const currentCategory = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
+
+                    // 2. Filter the list based on that category
+                    let poolOfItems = allMedia;
+                    
+                    if (currentCategory !== 'all') {
+                        // NOTE: Check your data! Ensure your items have a property like 'type' or 'category' 
+                        // that matches the values "movies", "tv", "games", etc.
+                        poolOfItems = allMedia.filter(item => 
+                            (item.type === currentCategory) || (item.category === currentCategory)
+                        );
+                    }
+
+                    // 3. Safety check if the category is empty
+                    if (poolOfItems.length === 0) {
+                        alert(`No items found in ${currentCategory} yet!`);
                         return;
                     }
-                    const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
+
+                    // 4. Pick random from the FILTERED pool
+                    const randomItem = poolOfItems[Math.floor(Math.random() * poolOfItems.length)];
+
                     if (window.showItemDetails) {
                         window.showItemDetails(randomItem);
                     } else {
@@ -241,7 +262,6 @@
                     }
                 });
             }
-        });
     </script>
     <script type="module" src="scripts/cards.js"></script>
 
