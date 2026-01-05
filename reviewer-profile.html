@@ -80,11 +80,11 @@
 
     <script type="module">
         import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-        import { app } from './scripts/firebase.js';
-        import { tv } from "./TV Shows/tv.js";
-        import { music } from "./Music/music.js";
-        import { games } from "./Video Games/games.js";
-        import { books } from "./Books/books.js";
+        import { app } from './Assets/scripts/firebase.js';
+        import { tv } from "./Assets/TV Shows/tv.js";
+        import { music } from "./Assets/Music/music.js";
+        import { games } from "./Assets/Video Games/games.js";
+        import { books } from "./Assets/Books/books.js";
 
         function createFeedItem(review, reviewer, mediaItem) {
             const item = document.createElement('div');
@@ -117,7 +117,7 @@
 
         async function fetchMovies() {
             try {
-                const response = await fetch("Movies/movieList.json");
+                const response = await fetch("Assets/Movies/movieList.json");
                 if (!response.ok) {
                     console.error("Failed to fetch movies:", response.statusText);
                     return [];

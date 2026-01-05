@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Top Media Reviewers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/cards.css">
-    <link rel="stylesheet" href="styles/navigation.css">
-    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="Assets/styles/main.css">
+    <link rel="stylesheet" href="Assets/styles/cards.css">
+    <link rel="stylesheet" href="Assets/styles/navigation.css">
+    <link rel="stylesheet" href="Assets/styles/auth.css">
     <style>
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -116,7 +116,7 @@
                 <h1 style="cursor:pointer;color:#4b3f72;" id="homeBrand">MediaReview</h1>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="./Movies/movies.html" class="nav-link">Movies</a></li>
+                <li class="nav-item"><a href="./Assets/Movies/movies.html" class="nav-link">Movies</a></li>
                 <li class="nav-item"><a href="#tv" class="nav-link" data-category="tv">TV Shows</a></li>
                 <li class="nav-item"><a href="#music" class="nav-link" data-category="music">Music</a></li>
                 <li class="nav-item"><a href="#games" class="nav-link" data-category="games">Games</a></li>
@@ -202,7 +202,7 @@
                 <h2 style="text-align:center; color:#4b3f72;">Top Media Reviewers</h2>
                 <!-- Dynamic reviewers from Firestore -->
                 <div id="reviewersFeed"></div>
-                <script type="module" src="./scripts/reviewers-follow.js"></script>
+                <script type="module" src="./Assets/scripts/reviewers-follow.js"></script>
                                                 <script>
                                                 document.addEventListener('DOMContentLoaded', function () {
                                                     var homeBrand = document.getElementById('homeBrand');
@@ -213,9 +213,9 @@
                                                     }
                                                 });
                                                 </script>
-                                <script type="module" src="./scripts/auth.js"></script>
+                                <script type="module" src="./Assets/scripts/auth.js"></script>
                                 <script type="module">
-                                import { auth } from './scripts/firebase.js';
+                                import { auth } from './Assets/scripts/firebase.js';
                                 import { signOut } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
                                 document.addEventListener('DOMContentLoaded', function () {
                                     const logoutBtn = document.getElementById('logoutBtn');
@@ -228,7 +228,7 @@
                                     }
                                     if (profileBtn) {
                                         profileBtn.addEventListener('click', function () {
-                                            window.location.href = './profile/index.html';
+                                            window.location.href = './Assets/profile/index.html';
                                         });
                                     }
                                     import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js').then(({ onAuthStateChanged }) => {
@@ -293,7 +293,7 @@
                     reviewersFeed.innerHTML = '<h3 style="color:#6a89cc;margin-top:32px;">Community Reviewers</h3>';
                     try {
                         const { getDatabase, ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
-                        const appModule = await import('./scripts/firebase.js');
+                        const appModule = await import('./Assets/scripts/firebase.js');
                         const dbInstance = getDatabase(appModule.app);
                         const snapshot = await get(ref(dbInstance, 'reviewers'));
                         if (snapshot.exists()) {
