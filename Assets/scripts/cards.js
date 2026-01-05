@@ -5,10 +5,10 @@ import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebase
 import { auth, db } from "./firebase.js";
 // Import media arrays from separate files
 //tv import
-import { tv } from "../TV Shows/tv.js";
-import { music } from "../Music/music.js";
-import { games } from "../Video Games/games.js";
-import { books } from "../Books/books.js";
+import { tv } from "/Assets/TV Shows/tv.js";
+import { music } from "/Assets/Music/music.js";
+import { games } from "/Assets/Video Games/games.js";
+import { books } from "/Assets/Books/books.js";
 window.books = books;
 
 // Get number of reviews for a media item (Realtime Database)
