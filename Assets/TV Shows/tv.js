@@ -32,8 +32,9 @@ export const tv = [
     {
         id: 7,
         title: "The Sopranos",
-        description: "",
+        description: "The series follows Tony Soprano, a North Jersey-based Italian-American mobster, who tries to balance his family life with his role as the boss of the DiMeo crime family. Tony's career causes him frequent rage and anxiety, and after suffering from a particularly bad panic attack, he reluctantly begins therapy sessions with psychiatrist Jennifer Melfi. In Dr. Melfi's office, Tony slowly begins to open up about his emotional problems, even as his career continually leads him into dangerous and even life-threatening scenarios. He finds himself at odds with his wife Carmela, his uncle Junior, and other ambitious family members, as well as the Lupertazzi crime family of New York. ",
         category: "tv",
+        year: 1999,
         image: "https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Sopranos_titlescreen.png/250px-Sopranos_titlescreen.png"
     },
     {
@@ -41,13 +42,16 @@ export const tv = [
         title: "The Wire",
         description: "",
         category: "tv",
+        genre: "Crime, Drama, Thriller",
+        year: 2002,
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/The_Wire_logo.svg/250px-The_Wire_logo.svg.png"
     },
     {
         id: 9,
         title: "Mad Men",
         description: "",
-        category: "tv",
+        category: "tv", 
+        year: 2007,
         image: "https://upload.wikimedia.org/wikipedia/en/3/33/Mad-men-title-card.jpg"
     },
     {
