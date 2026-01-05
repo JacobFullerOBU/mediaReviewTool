@@ -4,6 +4,7 @@ let currentFilter = 'all';
 import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
 // Import media arrays from separate files
+//tv import
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
