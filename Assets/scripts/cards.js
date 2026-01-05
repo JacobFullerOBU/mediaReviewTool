@@ -75,9 +75,13 @@ function initTabFunctionality() {
         btn.addEventListener('click', function() {
             const category = this.dataset.category;
 
-            // Update active tab
-            tabBtns.forEach(tab => tab.classList.remove('active'));
-            this.classList.add('active');
+            // Update active tab styling
+            tabBtns.forEach(tab => {
+                tab.classList.remove('active', 'bg-indigo-600', 'text-white', 'shadow-md');
+                tab.classList.add('bg-slate-800', 'text-slate-400');
+            });
+            this.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow-md');
+            this.classList.remove('bg-slate-800', 'text-slate-400');
 
             // Filter cards
             filterCards(category);
