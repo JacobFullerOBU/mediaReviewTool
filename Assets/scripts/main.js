@@ -1,82 +1,3 @@
-// Add logic for the Surprise Me! (Randomize) button
-document.addEventListener('DOMContentLoaded', function() {
-    const randomizeBtn = document.getElementById('randomizeBtn');
-    if (randomizeBtn) {
-        randomizeBtn.addEventListener('click', async function() {
-            // Wait for cards.js to finish loading globals
-            function waitForGlobals() {
-                return new Promise(resolve => {
-                    let tries = 0;
-                    function check() {
-                        if (window.showMovieModal && window.books && window.tv && window.music && window.games) {
-                            resolve();
-                        } else if (++tries < 40) {
-                            setTimeout(check, 100);
-                        } else {
-                            resolve();
-                        }
-                    }
-                    check();
-                });
-            }
-            await waitForGlobals();
-            // Fetch all media arrays
-            let movies = [];
-            if (window.fetchMovies) {
-                try { movies = await window.fetchMovies(); } catch {}
-            }
-            const booksArr = window.books || [];
-            const tvArr = window.tv || [];
-            const musicArr = window.music || [];
-            const gamesArr = window.games || [];
-            const allMedia = [...movies, ...tvArr, ...musicArr, ...gamesArr, ...booksArr];
-            if (allMedia.length === 0) {
-                alert('No media found to randomize.');
-                return;
-            }
-            const randomItem = allMedia[Math.floor(Math.random() * allMedia.length)];
-            if (window.showMovieModal) {
-                window.showMovieModal(randomItem);
-            }
-        });
-    }
-});
-// Firebase Firestore setup and user review functions
-import { collection, addDoc, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { auth, firestoreDb } from "./firebase.js";
-
-// Use the shared Firestore instance from firebase.js
-const db = firestoreDb;
-
-// Save a review for the current user
-export async function postReview(mediaId, reviewText, rating) {
-    const user = auth.currentUser;
-    if (!user) {
-        alert("You must be logged in to post a review.");
-        return;
-    }
-    try {
-        await addDoc(collection(db, "reviews"), {
-            userId: user.uid,
-            mediaId,
-            reviewText,
-            rating,
-            timestamp: new Date().toISOString()
-        });
-        alert("Review posted!");
-    } catch (error) {
-        alert("Failed to post review: " + error.message);
-    }
-}
-
-// Get all reviews for the current user
-export async function getUserReviews() {
-    const user = auth.currentUser;
-    if (!user) return [];
-    const q = query(collection(db, "reviews"), where("userId", "==", user.uid));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => doc.data());
-}
 // Main JavaScript functionality for the Media Review Tool
 import { initCards } from './cards.js';
 
@@ -177,9 +98,52 @@ function initAppUI() {
     
     // Initialize category navigation
     initCategoryNavigation();
+
+    // Initialize Surprise Me button
+    initSurpriseMeButton();
     
     console.log('Media Review Tool initialized successfully');
 }
+
+function initSurpriseMeButton() {
+    const surpriseBtn = document.getElementById('surprise-button');
+    if (surpriseBtn) {
+        surpriseBtn.addEventListener('click', function () {
+            const allMedia = window.allItems || [];
+            
+            // 1. Find the currently active category button
+            const activeBtn = document.querySelector('.tab-btn.active');
+            const currentCategory = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
+
+            // 2. Filter the list based on category
+            let poolOfItems = allMedia;
+            
+            if (currentCategory !== 'all') {
+                // NOTE: Check your data! Ensure your items have a property like 'type' or 'category'
+                // that matches the values "movies", "tv", "games", etc.
+                poolOfItems = allMedia.filter(item => 
+                    (item.type === currentCategory) || (item.category === currentCategory)
+                );
+            }
+
+            // 3. Safety check if the category is empty
+            if (poolOfItems.length === 0) {
+                alert(`No items found in ${currentCategory} yet!`);
+                return;
+            }
+
+            // 4. Pick random from the FILTERED pool
+            const randomItem = poolOfItems[Math.floor(Math.random() * poolOfItems.length)];
+
+            if (window.showItemDetails) {
+                window.showItemDetails(randomItem);
+            } else {
+                alert("The details viewer is not ready yet.");
+            }
+        });
+    }
+}
+
 
 // Mobile Navigation
 function initMobileNav() {
