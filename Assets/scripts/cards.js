@@ -1,3 +1,4 @@
+let allItems = [];
 // Firebase Firestore for dynamic ratings
 import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
