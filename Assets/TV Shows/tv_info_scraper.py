@@ -14,6 +14,9 @@ from bs4 import BeautifulSoup
 
 TV_LIST_PATH = 'listOfTVShowsToAdd.txt'
 RESULTS_PATH = 'tvInfoResults.json'
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+}
 
 def get_wikipedia_url(title):
     """
@@ -25,7 +28,7 @@ def get_wikipedia_url(title):
     api_url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={search_query}&format=json&srwhat=text"
     
     try:
-        response = requests.get(api_url)
+        response = requests.get(api_url, headers=HEADERS)
         response.raise_for_status()
         data = response.json()
         search_results = data.get('query', {}).get('search', [])
@@ -34,7 +37,7 @@ def get_wikipedia_url(title):
             # Try a broader search if the first one fails
             search_query = clean_title
             api_url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={search_query}&format=json"
-            response = requests.get(api_url)
+            response = requests.get(api_url, headers=HEADERS)
             response.raise_for_status()
             data = response.json()
             search_results = data.get('query', {}).get('search', [])
@@ -65,7 +68,7 @@ def scrape_tv_info(url):
     Scrape TV show information from a Wikipedia URL.
     """
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=HEADERS)
         response.raise_for_status()
         soup = BeautifulSoup(response.content, 'html.parser')
         
@@ -84,7 +87,7 @@ def scrape_tv_info(url):
         if infobox:
             # Year Aired
             year_header = infobox.find('th', string=lambda t: t and 'original release' in t.lower()) or infobox.find('th', string=lambda t: t and 'first aired' in t.lower())
-            if year_header:
+            if year_header and year_header.find_next_sibling('td'):
                 year_text = year_header.find_next_sibling('td').get_text(strip=True)
                 year_match = re.search(r'(\d{4})', year_text)
                 if year_match:
@@ -92,17 +95,17 @@ def scrape_tv_info(url):
 
             # Genre
             genre_header = infobox.find('th', string='Genre')
-            if genre_header:
+            if genre_header and genre_header.find_next_sibling('td'):
                 info['genre'] = genre_header.find_next_sibling('td').get_text(strip=True)
 
             # Creator
             creator_header = infobox.find('th', string='Created by') or infobox.find('th', string='Developed by')
-            if creator_header:
+            if creator_header and creator_header.find_next_sibling('td'):
                 info['creator'] = creator_header.find_next_sibling('td').get_text(strip=True)
                 
             # Actors
             actors_header = infobox.find('th', string='Starring')
-            if actors_header:
+            if actors_header and actors_header.find_next_sibling('td'):
                 info['actors'] = actors_header.find_next_sibling('td').get_text(strip=True)
 
             # Poster Image
