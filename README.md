@@ -17,7 +17,7 @@ A simple web app for browsing, reviewing, and following top reviewers in Movies,
 ## Live Demo
 [https://jacobfullerobu.github.io/mediaReviewTool/index.html](https://jacobfullerobu.github.io/mediaReviewTool/index.html)
 
-## Tech Used
+## Resources Used
 - HTML, CSS, JavaScript
 - Firebase Authentication
 - Firebase Realtime Database
