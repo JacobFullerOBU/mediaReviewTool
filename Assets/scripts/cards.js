@@ -1,3 +1,53 @@
+// Firebase Firestore for dynamic ratings
+import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { auth, db } from "./firebase.js";
+// Import media arrays from separate files
+import { tv } from "../TV Shows/tv.js";
+import { music } from "../Music/music.js";
+import { games } from "../Video Games/games.js";
+import { books } from "../Books/books.js";
+window.books = books;
+
+// Get number of reviews for a media item (Realtime Database)
+async function getReviewCount(mediaId) {
+    const reviewsRef = ref(db, `reviews/${mediaId}`);
+    const snapshot = await get(reviewsRef);
+    if (snapshot.exists()) {
+        return Object.keys(snapshot.val()).length;
+    }
+    return 0;
+}
+
+// Get average rating for a media item (Realtime Database)
+async function getAverageRating(mediaId) {
+    const reviewsRef = ref(db, `reviews/${mediaId}`);
+    const snapshot = await get(reviewsRef);
+    let total = 0;
+    let count = 0;
+    if (snapshot.exists()) {
+        const reviews = snapshot.val();
+        Object.values(reviews).forEach(data => {
+            if (typeof data.rating === "number") {
+                total += data.rating;
+                count++;
+            }
+        });
+    }
+    return count > 0 ? (total / count).toFixed(1) : "N/A";
+}
+// Cards functionality for displaying popular content
+
+// Fetch movies from JSON file
+async function fetchMovies() {
+    // Use correct relative path depending on current location
+    let path = "Movies/movieList.json";
+    if (window.location.pathname.includes("/profile/")) {
+        path = "../Movies/movieList.json";
+    }
+    const response = await fetch(path);
+    return await response.json();
+}
+
 console.log('[cards.js] Script loaded');
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -24,6 +74,7 @@ async function initCards() {
     // Load initial content
     loadCards('all');
 }
+
 
 function initTabFunctionality() {
     const tabBtns = document.querySelectorAll('.tab-btn');
