@@ -4,7 +4,7 @@ A simple web app for browsing, reviewing, and following top reviewers in Movies,
 ## Main Features
 - Browse top reviewers by category
 - Follow/unfollow reviewers
-- Register as a reviewer (with profile picture URL)
+- Register as a reviewer (profile picture in progress)
 - Reviewer profiles shown live from Firebase Realtime Database
 - Submit and view reviews (all reviews stored in Firestore)
 
