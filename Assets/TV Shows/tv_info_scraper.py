@@ -8,6 +8,7 @@
 
 import json
 import os
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -18,29 +19,45 @@ def get_wikipedia_url(title):
     """
     Use the Wikipedia search API to get the page URL.
     """
-    search_query = f"{title} television series"
-    api_url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={search_query}&format=json"
+    clean_title = re.sub(r'\s*\(.*\)\s*', '', title).strip()
+    
+    search_query = f"{clean_title} TV series"
+    api_url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={search_query}&format=json&srwhat=text"
     
     try:
         response = requests.get(api_url)
-        response.raise_for_status()  # Raise an exception for bad status codes
+        response.raise_for_status()
         data = response.json()
-        
         search_results = data.get('query', {}).get('search', [])
         
-        # Prefer results with 'television series' or 'TV series' in the title
-        page = next((p for p in search_results if 'television series' in p['title'].lower() or 'tv series' in p['title'].lower()), None)
-        
-        if not page and search_results:
-            page = search_results[0]
-            
-        if not page:
+        if not search_results:
+            # Try a broader search if the first one fails
+            search_query = clean_title
+            api_url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={search_query}&format=json"
+            response = requests.get(api_url)
+            response.raise_for_status()
+            data = response.json()
+            search_results = data.get('query', {}).get('search', [])
+
+        if not search_results:
             return None
-            
-        return f"https://en.wikipedia.org/wiki/{page['title'].replace(' ', '_')}"
-        
+
+        # Heuristics to find the best match
+        # 1. Exact match on title (case-insensitive)
+        for p in search_results:
+            if p['title'].lower() == clean_title.lower():
+                return f"https://en.wikipedia.org/wiki/{p['title'].replace(' ', '_')}"
+
+        # 2. Title contains "(TV series)" or "(television series)"
+        for p in search_results:
+            if '(tv series)' in p['title'].lower() or '(television series)' in p['title'].lower():
+                return f"https://en.wikipedia.org/wiki/{p['title'].replace(' ', '_')}"
+
+        # 3. Just return the first result
+        return f"https://en.wikipedia.org/wiki/{search_results[0]['title'].replace(' ', '_')}"
+
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching Wikipedia search results: {e}")
+        print(f"Error fetching Wikipedia search results for '{title}': {e}")
         return None
 
 def scrape_tv_info(url):
@@ -69,7 +86,7 @@ def scrape_tv_info(url):
             year_header = infobox.find('th', string=lambda t: t and 'original release' in t.lower()) or infobox.find('th', string=lambda t: t and 'first aired' in t.lower())
             if year_header:
                 year_text = year_header.find_next_sibling('td').get_text(strip=True)
-                year_match = __import__('re').search(r'(\d{4})', year_text)
+                year_match = re.search(r'(\d{4})', year_text)
                 if year_match:
                     info['year'] = year_match.group(1)
 
