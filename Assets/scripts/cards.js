@@ -83,11 +83,23 @@ function initTabFunctionality() {
             filterCards(category);
         });
     });
+
+    const searchInput = document.getElementById('mediaSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const activeTab = document.querySelector('.tab-btn.active');
+            const category = activeTab ? activeTab.dataset.category : 'all';
+            filterCards(category);
+        });
+    }
 }
 
 function filterCards(category) {
     currentFilter = category;
     let items = allItems;
+    const searchTerm = document.getElementById('mediaSearchInput')?.value.toLowerCase() || '';
+
+    // Filter by category
     if (category && category !== 'all') {
         items = allItems.filter(item => {
             // Accept both string and array category
@@ -100,6 +112,14 @@ function filterCards(category) {
             return category === 'movies' && !item.category;
         });
     }
+
+    // Filter by search term
+    if (searchTerm) {
+        items = items.filter(item => 
+            item.title && item.title.toLowerCase().includes(searchTerm)
+        );
+    }
+
     // Sort items by selected option
     const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
     items = sortItems(items, sortOption);
