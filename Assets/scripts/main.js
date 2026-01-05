@@ -1,8 +1,8 @@
+console.log('[main.js] Script loaded');
 // Main JavaScript functionality for the Media Review Tool
-import { initCards } from './cards.js';
 
 document.addEventListener('DOMContentLoaded', async function() {
-    await initCards();
+    console.log('[main.js] DOMContentLoaded');
     initAppUI();
 
     // Suggestions logic (Firestore)

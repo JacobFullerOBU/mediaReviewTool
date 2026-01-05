@@ -1,62 +1,12 @@
-console.log('[cards.js] Script loaded, window.showItemDetails will be set after showItemDetails definition.');
+console.log('[cards.js] Script loaded');
 
-// Firebase Firestore for dynamic ratings
-import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { auth, db } from "./firebase.js";
-// Import media arrays from separate files
-import { tv } from "../TV Shows/tv.js";
-import { music } from "../Music/music.js";
-import { games } from "../Video Games/games.js";
-import { books } from "../Books/books.js";
-window.books = books;
-
-// Get number of reviews for a media item (Realtime Database)
-async function getReviewCount(mediaId) {
-    const reviewsRef = ref(db, `reviews/${mediaId}`);
-    const snapshot = await get(reviewsRef);
-    if (snapshot.exists()) {
-        return Object.keys(snapshot.val()).length;
-    }
-    return 0;
-}
-
-// Get average rating for a media item (Realtime Database)
-async function getAverageRating(mediaId) {
-    const reviewsRef = ref(db, `reviews/${mediaId}`);
-    const snapshot = await get(reviewsRef);
-    let total = 0;
-    let count = 0;
-    if (snapshot.exists()) {
-        const reviews = snapshot.val();
-        Object.values(reviews).forEach(data => {
-            if (typeof data.rating === "number") {
-                total += data.rating;
-                count++;
-            }
-        });
-    }
-    return count > 0 ? (total / count).toFixed(1) : "N/A";
-}
-// Cards functionality for displaying popular content
-
-// Fetch movies from JSON file
-async function fetchMovies() {
-    // Use correct relative path depending on current location
-    let path = "Movies/movieList.json";
-    if (window.location.pathname.includes("/profile/")) {
-        path = "../Movies/movieList.json";
-    }
-    const response = await fetch(path);
-    return await response.json();
-}
-
-let currentFilter = 'all';
-let allItems = [];
-window.allItems = allItems;
-
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('[cards.js] DOMContentLoaded');
+    await initCards();
+});
 
 async function initCards() {
-
+    console.log('[cards.js] initCards called');
     // Fetch movies from JSON
     const movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
     // Filter out empty items from other media arrays
@@ -66,7 +16,7 @@ async function initCards() {
     const validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
     allItems = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks];
     window.allItems = allItems;
-    console.log('[DEBUG] Loaded media items:', allItems.length, allItems);
+    console.log('[cards.js] All items loaded:', allItems);
 
     // Initialize tab functionality
     initTabFunctionality();
@@ -375,8 +325,12 @@ function addCardListeners() {
 window.filterCards = filterCards;
 // Load cards by category
 function loadCards(category) {
+    console.log('[cards.js] loadCards called with category:', category);
     const container = document.getElementById('cardsContainer');
-    if (!container) return;
+    if (!container) {
+        console.error('[cards.js] cardsContainer not found');
+        return;
+    }
     showLoadingState(container);
     let items = allItems;
     if (category && category !== 'all') {
@@ -399,6 +353,7 @@ function loadCards(category) {
 
 // Render cards in the container
 async function renderCards(container, items) {
+    console.log('[cards.js] renderCards called with items:', items);
     container.innerHTML = '';
     if (!items || items.length === 0) {
         container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">No media items found.</div>';
