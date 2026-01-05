@@ -518,6 +518,17 @@ function sortItems(items, sortOption) {
 // Listen for sort apply button
 if (document.getElementById('applySortBtn')) {
     document.getElementById('applySortBtn').addEventListener('click', function() {
+        const btn = this;
+        // Temporarily change style for feedback
+        btn.classList.remove('bg-indigo-600');
+        btn.classList.add('bg-indigo-800'); // A darker shade for pressed state
+
         filterCards(currentFilter);
+
+        // Revert to original style
+        setTimeout(() => {
+            btn.classList.remove('bg-indigo-800');
+            btn.classList.add('bg-indigo-600');
+        }, 250);
     });
 }
