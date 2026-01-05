@@ -1,1 +1,452 @@
-[]
+[
+  {
+    "title": "Breaking Bad",
+    "year": "",
+    "description": "",
+    "genre": "Crime dramaThriller[1]Neo-Western[2][3]Black comedy[4]Tragedy[5][6]",
+    "creator": "Vince Gilligan",
+    "actors": "Bryan CranstonAnna GunnAaron PaulDean NorrisBetsy BrandtRJ MitteGiancarlo EspositoBob OdenkirkJonathan BanksLaura FraserJesse Plemons",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Breaking_Bad_logo.svg/250px-Breaking_Bad_logo.svg.png"
+  },
+  {
+    "title": "The Sopranos",
+    "year": "",
+    "description": "",
+    "genre": "Crime dramaSerial dramaPsychological dramaBlack comedy[1][2][3]",
+    "creator": "David Chase",
+    "actors": "James GandolfiniLorraine BraccoEdie FalcoMichael ImperioliDominic ChianeseSteven Van ZandtTony SiricoRobert IlerJamie-Lynn Sigler",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Sopranos_titlescreen.png/250px-Sopranos_titlescreen.png"
+  },
+  {
+    "title": "The Wire",
+    "year": "",
+    "description": "",
+    "genre": "Crime dramaPolice proceduralSerial dramaPolitical dramaTragedy[1][2][3]",
+    "creator": "David Simon",
+    "actors": "Dominic WestJohn DomanIdris ElbaFrankie FaisonLawrence Gilliard Jr.Wood HarrisDeirdre LovejoyWendell PierceLance ReddickAndre RoyoSonja SohnChris BauerPaul Ben-VictorClarke PetersAmy RyanAidan GillenJim True-FrostRobert WisdomSeth GilliamDomenick LombardozziJ. D. WilliamsMichael K. WilliamsCorey Parker RobinsonReg E. CatheyChad L. ColemanJamie HectorGlynn TurmanClark JohnsonTom McCarthyGbenga AkinnagbeNeal HuffJermaine CrawfordTristan WildsMichael KostroffMichelle ParessIsiah Whitlock Jr.",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/The_Wire_logo.svg/250px-The_Wire_logo.svg.png"
+  },
+  {
+    "title": "Game of Thrones",
+    "year": "",
+    "description": "",
+    "genre": "ActionAdventureFantasy[1]Serial drama[2]Tragedy[3][4]",
+    "creator": "David BenioffD. B. Weiss",
+    "actors": "seeList ofGame of Thronescharacters",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Game_of_Thrones_title_card.jpg/250px-Game_of_Thrones_title_card.jpg"
+  },
+  {
+    "title": "Mad Men",
+    "year": "",
+    "description": "",
+    "genre": "Period dramaSerial drama",
+    "creator": "Matthew Weiner",
+    "actors": "Jon HammElisabeth MossVincent KartheiserJanuary JonesChristina HendricksBryan BattMichael GladisAaron StatonRich SommerMaggie SiffJohn SlatteryRobert MorseJared HarrisKiernan ShipkaJessica ParéChristopher StanleyJay R. FergusonKevin RahmBen FeldmanMason Vale Cotton",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/3/33/Mad-men-title-card.jpg"
+  },
+  {
+    "title": "Friends",
+    "year": "",
+    "description": "",
+    "genre": "Sitcom",
+    "creator": "David CraneMarta Kauffman",
+    "actors": "Jennifer AnistonCourteney CoxLisa KudrowMatt LeBlancMatthew PerryDavid Schwimmer",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Friends_logo.svg/250px-Friends_logo.svg.png"
+  },
+  {
+    "title": "The Simpsons",
+    "year": "",
+    "description": "",
+    "genre": "Animated sitcomAdult animationSatire",
+    "creator": "Matt Groening",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/The_Simpsons_yellow_logo.svg/250px-The_Simpsons_yellow_logo.svg.png"
+  },
+  {
+    "title": "Seinfeld",
+    "year": "",
+    "description": "",
+    "genre": "SitcomSlice of lifeDark comedy",
+    "creator": "Larry DavidJerry Seinfeld",
+    "actors": "Jerry SeinfeldJulia Louis-DreyfusMichael RichardsJason Alexander",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Seinfeld_logo.svg/250px-Seinfeld_logo.svg.png"
+  },
+  {
+    "title": "Office(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "Comedy",
+    "creator": "",
+    "actors": "Karthik RajShruthi RajVishnuMadhumilaUday Mahesh",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Office_Tamil_serial.jpg/250px-Office_Tamil_serial.jpg"
+  },
+  {
+    "title": "Stranger Things",
+    "year": "",
+    "description": "",
+    "genre": "HorrorScience fictionMysteryDrama",
+    "creator": "The Duffer Brothers",
+    "actors": "Winona RyderDavid HarbourFinn WolfhardMillie Bobby BrownGaten MatarazzoCaleb McLaughlinNatalia DyerCharlie HeatonCara BuonoMatthew ModineNoah SchnappSadie SinkJoe KeeryDacre MontgomerySean AstinPaul ReiserMaya HawkePriah FergusonBrett GelmanLinda HamiltonJamie Campbell BowerNell Fisher",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Stranger_Things_logo.png/250px-Stranger_Things_logo.png"
+  },
+  {
+    "title": "The Twilight Zone",
+    "year": "",
+    "description": "",
+    "genre": "",
+    "creator": "Rod Serling",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Thetwilightzone-logo.svg/250px-Thetwilightzone-logo.svg.png"
+  },
+  {
+    "title": "Succession",
+    "year": "",
+    "description": "Successionis the act or process of following in order or sequence.",
+    "genre": "",
+    "creator": "",
+    "actors": "",
+    "poster": ""
+  },
+  {
+    "title": "Maschinenmensch",
+    "year": "",
+    "description": "TheMaschinenmensch(lit.'machine-human'inGerman) is a fictionalhumanoid robotfeatured inThea von Harbou's novelMetropolisandFritz Lang'sfilm adaption of the novel. In the film, she is played by German actressBrigitte Helmboth as a robot and in human guise. She was created by the scientistRotwangin dedication to his deceased lover, Hel, though in the novel they have no correlation. Maschinenmensch was one of the first fictional robots ever depicted in cinema, and as a result popularized the concept worldwide.",
+    "genre": "",
+    "creator": "Thea von HarbouFritz Lang",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Horst_von_Harbou_-_Metropolis_Maschinenmensch.jpg/250px-Horst_von_Harbou_-_Metropolis_Maschinenmensch.jpg"
+  },
+  {
+    "title": "Better Call Saul",
+    "year": "",
+    "description": "",
+    "genre": "Crime drama[1]Legal drama[2]Black comedy[3]Tragedy[4]Neo-noir[5]",
+    "creator": "Vince GilliganPeter Gould",
+    "actors": "Bob OdenkirkJonathan BanksRhea SeehornPatrick FabianMichael MandoMichael McKeanGiancarlo EspositoTony Dalton",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Better_Call_Saul_logo.svg/250px-Better_Call_Saul_logo.svg.png"
+  },
+  {
+    "title": "The Crown(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "Historical drama",
+    "creator": "Peter Morgan",
+    "actors": "Seasons 1–2Claire FoyMatt SmithVanessa KirbyEileen AtkinsJeremy NorthamVictoria HamiltonBen MilesGreg WiseJared HarrisJohn LithgowAlex JenningsLia WilliamsAnton LesserMatthew GoodeSeasons 3–4Olivia ColmanTobias MenziesHelena Bonham CarterBen DanielsJason WatkinsMarion BaileyErin DohertyCharles DanceJosh O'ConnorEmma CorrinGillian AndersonStephen BoxerEmerald FennellSeasons 5–6Imelda StauntonJonathan PryceLesley ManvilleDominic WestElizabeth DebickiJonny Lee MillerOlivia WilliamsClaudia HarrisonNatascha McElhoneMarcia WarrenSalim DawKhalid AbdallaBertie CarvelEd McVeyLuther FordMeg Bellamy",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/18/The_Crown_Title_Card.jpg/250px-The_Crown_Title_Card.jpg"
+  },
+  {
+    "title": "The West Wing",
+    "year": "",
+    "description": "",
+    "genre": "Serial dramaPolitical drama",
+    "creator": "Aaron Sorkin",
+    "actors": "Rob LoweMoira KellyDulé HillAllison JanneyRichard SchiffJohn SpencerBradley WhitfordMartin SheenJanel MoloneyStockard ChanningJoshua MalinaMary McCormackJimmy SmitsAlan AldaKristin Chenoweth",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/The_West_Wing_%28NBC_TV_series%29_logo.svg/250px-The_West_Wing_%28NBC_TV_series%29_logo.svg.png"
+  },
+  {
+    "title": "Fargo(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "AnthologyCrime dramaNoirThrillerBlack comedy[1][2]",
+    "creator": "Noah Hawley",
+    "actors": "Season 1Billy Bob ThorntonAllison TolmanColin HanksMartin FreemanSeason 2Kirsten DunstPatrick WilsonJesse PlemonsJean SmartTed DansonSeason 3Ewan McGregorCarrie CoonMary Elizabeth WinsteadGoran BogdanDavid ThewlisSeason 4Chris RockJessie BuckleyJason SchwartzmanBen WhishawJack HustonSalvatore EspositoE'myri CrutchfieldSeason 5Juno TempleJennifer Jason LeighDavid RysdahlJoe KeeryLamorne MorrisRicha MoorjaniSam SpruellSienna KingDave FoleyJon Hamm",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Fargo_%28TV_logo%29.svg/250px-Fargo_%28TV_logo%29.svg.png"
+  },
+  {
+    "title": "Curb Your Enthusiasm",
+    "year": "",
+    "description": "",
+    "genre": "SitcomImprovisational comedyCringe comedyBlack comedy",
+    "creator": "Larry David",
+    "actors": "Larry DavidJeff GarlinCheryl HinesSusie EssmanJ. B. Smoove",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Curb_Your_Enthusiasm.png/250px-Curb_Your_Enthusiasm.png"
+  },
+  {
+    "title": "The Mandalorian",
+    "year": "",
+    "description": "",
+    "genre": "Action-adventureSpace Western",
+    "creator": "Jon Favreau",
+    "actors": "Pedro PascalKatee Sackhoff",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/The_Mandalorian.svg/250px-The_Mandalorian.svg.png"
+  },
+  {
+    "title": "Lost",
+    "year": "",
+    "description": "LostorLOSTmay refer togetting lost, or to:",
+    "genre": "",
+    "creator": "",
+    "actors": "",
+    "poster": ""
+  },
+  {
+    "title": "House of the Dragon",
+    "year": "",
+    "description": "",
+    "genre": "Action[1]Adventure[2]Fantasy[3]Serial drama[4]",
+    "creator": "Ryan CondalGeorge R. R. Martin",
+    "actors": "Paddy ConsidineMatt SmithEmma D'ArcyRhys IfansSteve ToussaintEve BestSonoya MizunoFabien FrankelMilly AlcockEmily CareyGraham McTavishMatthew NeedhamJefferson HallOlivia CookeHarry CollettTom Glynn-CarneyEwan MitchellBethany AntoniaPhoebe CampbellPhia SabanKurt EgyiawanKieran BewAbubakar SalimTom TaylorClinton LibertyTom BennettEllora TorchiaFreddie FoxGayle RankinSimon Russell Beale",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/House_of_the_dragon_logo.png/250px-House_of_the_dragon_logo.png"
+  },
+  {
+    "title": "Twin Peaks",
+    "year": "",
+    "description": "",
+    "genre": "Drama[1]MysteryCrimeHorror[2]Surrealism",
+    "creator": "Mark FrostDavid Lynch",
+    "actors": "Kyle MacLachlanMichael OntkeanMädchen AmickDana AshbrookRichard BeymerLara Flynn BoyleSherilyn FennWarren FrostPeggy LiptonJames MarshallEverett McGillJack NanceRay WiseJoan ChenPiper LaurieKimmy RobertsonEric Da ReHarry GoazMichael HorseSheryl LeeRuss Tamblyn",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Twin_Peaks_title.svg/250px-Twin_Peaks_title.svg.png"
+  },
+  {
+    "title": "The X-Files",
+    "year": "",
+    "description": "",
+    "genre": "Science fiction[1]Supernatural fiction[2]Horror[1]Mystery[3]Thriller[4]",
+    "creator": "Chris Carter",
+    "actors": "David DuchovnyGillian AndersonRobert PatrickAnnabeth GishMitch Pileggi",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/The_X-Files_original_title_screen.webp/250px-The_X-Files_original_title_screen.webp.png"
+  },
+  {
+    "title": "Arrested Development",
+    "year": "",
+    "description": "",
+    "genre": "SitcomAbsurdist humor[1]Black comedy[2]Comedy verite[3]Cringe comedy[4]",
+    "creator": "Mitchell Hurwitz",
+    "actors": "Jason BatemanPortia de RossiWill ArnettMichael CeraAlia ShawkatTony HaleDavid CrossJeffrey TamborJessica Walter",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Arrested_Development.svg/250px-Arrested_Development.svg.png"
+  },
+  {
+    "title": "Band of Brothers",
+    "year": "",
+    "description": "Band of Brothersmay refer to:",
+    "genre": "",
+    "creator": "",
+    "actors": "",
+    "poster": ""
+  },
+  {
+    "title": "The Americans",
+    "year": "",
+    "description": "",
+    "genre": "Period dramaSpy thriller",
+    "creator": "Joe Weisberg",
+    "actors": "Keri RussellMatthew RhysMaximiliano HernándezHolly TaylorKeidrich SellatiNoah EmmerichAnnet MahendruSusan MisnerAlison WrightLev GornCosta RoninRichard ThomasDylan BakerBrandon J. DirdenMargo Martindale",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/The_americans_2013_title_logo.svg/250px-The_americans_2013_title_logo.svg.png"
+  },
+  {
+    "title": "True Detective",
+    "year": "",
+    "description": "",
+    "genre": "AnthologyCrime dramaDetectiveMystery-thrillerNeo-noirSouthern Gothic[1]",
+    "creator": "Nic Pizzolatto",
+    "actors": "Season 1Matthew McConaugheyWoody HarrelsonMichelle MonaghanMichael PottsTory KittlesSeason 2Colin FarrellRachel McAdamsTaylor KitschKelly ReillyVince VaughnSeason 3Mahershala AliCarmen EjogoStephen DorffScoot McNairyRay FisherSeason 4Jodie FosterKali ReisFiona ShawFinn BennettIsabella Star LaBlancJohn HawkesChristopher Eccleston",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/5/5a/True_Detective_2014_Intertitle.jpg"
+  },
+  {
+    "title": "Parks and Recreation",
+    "year": "",
+    "description": "",
+    "genre": "SitcomMockumentaryPolitical satireWorkplace comedyCringe comedy[1]",
+    "creator": "Greg DanielsMichael Schur",
+    "actors": "Amy PoehlerRashida JonesPaul SchneiderAziz AnsariNick OffermanAubrey PlazaChris PrattAdam ScottRob LoweJim O'HeirRettaBilly Eichner",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Parks_and_Recreation_%28Universal_Television%29.svg/250px-Parks_and_Recreation_%28Universal_Television%29.svg.png"
+  },
+  {
+    "title": "BoJack Horseman",
+    "year": "",
+    "description": "",
+    "genre": "Adult animation[1]Tragicomedy[2][3][4]Black comedy[5]Surreal humor[6]Psychological drama[7][8]Satire[9]",
+    "creator": "Raphael Bob-Waksberg",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/BoJack_Horseman_Logo.svg/250px-BoJack_Horseman_Logo.svg.png"
+  },
+  {
+    "title": "The Last of Us(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "Post-apocalypticDramaThriller",
+    "creator": "Craig MazinNeil Druckmann",
+    "actors": "Pedro PascalBella RamseyGabriel LunaIsabela MercedYoung MazinoKaitlyn Dever",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/The_Last_of_Us_logo.svg/250px-The_Last_of_Us_logo.svg.png"
+  },
+  {
+    "title": "Ozark(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "Crime dramaSerial drama",
+    "creator": "Bill DubuqueMark Williams",
+    "actors": "Jason BatemanLaura LinneySofia HublitzSkylar GaertnerJulia GarnerJordana SpiroJason Butler HarnerEsai MoralesPeter MullanLisa EmeryCharlie TahanJanet McTeerTom PelphreyJessica Frances DukesFelix SolisDamian YoungAlfonso HerreraAdam Rothenberg",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ozark_TV_series_logo.svg/250px-Ozark_TV_series_logo.svg.png"
+  },
+  {
+    "title": "House(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "Medical dramaBlack comedy",
+    "creator": "David Shore",
+    "actors": "Hugh LaurieLisa EdelsteinOmar EppsRobert Sean LeonardJennifer MorrisonJesse SpencerPeter JacobsonKal PennOlivia WildeAmber TamblynOdette AnnableCharlyne Yi",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/House_logo.svg/250px-House_logo.svg.png"
+  },
+  {
+    "title": "Black Mirror",
+    "year": "",
+    "description": "",
+    "genre": "AnthologySpeculative fictionScience fictionDystopia",
+    "creator": "Charlie Brooker",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Black_Mirror_%28British_TV_series%29_logo.svg/250px-Black_Mirror_%28British_TV_series%29_logo.svg.png"
+  },
+  {
+    "title": "The Boys(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "ActionBlack comedy[1]DramaSatireSuperheroThriller",
+    "creator": "Eric Kripke",
+    "actors": "Karl UrbanJack QuaidAntony StarrErin MoriartyDominique McElligottJessie T. UsherLaz AlonsoChace CrawfordTomer CaponeKaren FukuharaNathan MitchellElisabeth ShueColby MinifieAya CashClaudia DoumitJensen AcklesCameron CrovettiSusan HeywardValorie CurryJeffrey Dean Morgan",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/The_Boys_TV_series_logo.svg/250px-The_Boys_TV_series_logo.svg.png"
+  },
+  {
+    "title": "Sherlock(TV series)",
+    "year": "",
+    "description": "This is an accepted version of this page",
+    "genre": "CrimeMysteryComedy drama",
+    "creator": "Mark GatissSteven Moffat",
+    "actors": "Benedict CumberbatchMartin Freeman",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4d/Sherlock_titlecard.jpg/250px-Sherlock_titlecard.jpg"
+  },
+  {
+    "title": "Saturday Night Live",
+    "year": "",
+    "description": "",
+    "genre": "Political satireSatireSketch comedyStand-up comedyVariety show",
+    "creator": "Lorne Michaels",
+    "actors": "List ofSaturday Night Livecast members",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Saturday_Night_Live_2024.svg/250px-Saturday_Night_Live_2024.svg.png"
+  },
+  {
+    "title": "Downton Abbey",
+    "year": "",
+    "description": "",
+    "genre": "Historical drama",
+    "creator": "Julian Fellowes",
+    "actors": "Hugh BonnevilleJessica Brown FindlayLaura CarmichaelJim CarterBrendan CoyleMichelle DockerySiobhan FinneranJoanne FroggattPhyllis LoganThomas HowesRob James-CollierRose LeslieElizabeth McGovernSophie McSheraLesley NicolMaggie SmithDan StevensPenelope WiltonAmy NuttallKevin DoyleAllen LeechMatt MilneEd SpeleersLily JamesDavid RobbCara TheoboldRaquel CassidyTom CullenJulian OvendenMichael FoxMatthew GoodeHarry Hadden-Paton",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c4/Downton_Abbey_Title_Card.jpg/250px-Downton_Abbey_Title_Card.jpg"
+  },
+  {
+    "title": "Better Things",
+    "year": "",
+    "description": "Better Thingsmay refer to:",
+    "genre": "",
+    "creator": "",
+    "actors": "",
+    "poster": ""
+  },
+  {
+    "title": "Freaks and Geeks",
+    "year": "",
+    "description": "",
+    "genre": "Periodteen dramaComedy drama",
+    "creator": "Paul Feig",
+    "actors": "Linda CardelliniJohn Francis DaleyJames FrancoSamm LevineSeth RogenJason SegelMartin StarrBecky Ann BakerJoe FlahertyBusy Philipps",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/0/06/Freaks_and_Geeks.jpg"
+  },
+  {
+    "title": "Six Feet Under",
+    "year": "",
+    "description": "Six Feet Undermay refer to:",
+    "genre": "",
+    "creator": "",
+    "actors": "",
+    "poster": ""
+  },
+  {
+    "title": "Veep",
+    "year": "",
+    "description": "",
+    "genre": "Political satireCringe comedy[1]",
+    "creator": "Armando Iannucci",
+    "actors": "Julia Louis-DreyfusAnna ChlumskyTony HaleReid ScottTimothy SimonsMatt WalshSufe BradshawKevin DunnGary ColeSam RichardsonSarah SutherlandClea DuVall",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Veep_Logo.svg/250px-Veep_Logo.svg.png"
+  },
+  {
+    "title": "Nathan for You",
+    "year": "",
+    "description": "",
+    "genre": "Docu-realityCringe comedy[1]",
+    "creator": "Nathan FielderMichael Koman",
+    "actors": "Nathan Fielder",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Nathan_For_You_title.png/250px-Nathan_For_You_title.png"
+  },
+  {
+    "title": "The Leftovers(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "DramaSupernatural fictionMysteryMagical realismPsychological thrillerPhilosophical fiction",
+    "creator": "Damon LindelofTom Perrotta",
+    "actors": "Justin TherouxAmy BrennemanChristopher EcclestonLiv TylerChris ZylkaMargaret QualleyCarrie CoonEmily MeadeAmanda WarrenAnn DowdMichael GastonMax CarverCharlie CarverAnnie Q.Janel MoloneyRegina KingKevin CarrollJovan AdepoScott Glenn",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/LeftoversS2Logo.jpg/250px-LeftoversS2Logo.jpg"
+  },
+  {
+    "title": "The Good Place",
+    "year": "",
+    "description": "",
+    "genre": "ComedyPhilosophical fiction[1][2][3]Fantasy[4][5]Utopian and dystopian fiction[6][7]",
+    "creator": "Michael Schur",
+    "actors": "Kristen BellWilliam Jackson HarperJameela JamilD'Arcy CardenManny JacintoTed Danson",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/The_Good_Place_title_card.svg/250px-The_Good_Place_title_card.svg.png"
+  },
+  {
+    "title": "The Haunting of Hill House",
+    "year": "",
+    "description": "",
+    "genre": "Gothic fiction,psychological horror",
+    "creator": "",
+    "actors": "",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/HauntingOfHillHouse.JPG/250px-HauntingOfHillHouse.JPG"
+  },
+  {
+    "title": "Harry Potter(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "Fantasy",
+    "creator": "",
+    "actors": "Dominic McLaughlinAlastair StoutArabella StantonJohn LithgowJanet McTeerPaapa EssieduNick Frost",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Harry_Potter_%28TV_series%29_logo.png/250px-Harry_Potter_%28TV_series%29_logo.png"
+  },
+  {
+    "title": "Barry",
+    "year": "",
+    "description": "Barrymay refer to:",
+    "genre": "",
+    "creator": "",
+    "actors": "",
+    "poster": ""
+  },
+  {
+    "title": "The Big Bang Theory",
+    "year": "",
+    "description": "",
+    "genre": "Sitcom",
+    "creator": "Chuck LorreBill Prady",
+    "actors": "Johnny GaleckiJim ParsonsKaley CuocoSimon HelbergKunal NayyarSara GilbertMayim BialikMelissa RauchKevin SussmanLaura Spencer",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/The_Big_Bang_Theory_%28Official_Title_Card%29.png/250px-The_Big_Bang_Theory_%28Official_Title_Card%29.png"
+  },
+  {
+    "title": "24(TV series)",
+    "year": "",
+    "description": "",
+    "genre": "ActionSerial dramaCrime thrillerPolitical thrillerEspionage",
+    "creator": "Joel SurnowRobert Cochran",
+    "actors": "Kiefer Sutherland(andothers)",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/24-Logo.svg/250px-24-Logo.svg.png"
+  },
+  {
+    "title": "How I Met Your Mother",
+    "year": "",
+    "description": "",
+    "genre": "SitcomRomantic comedyComedy drama",
+    "creator": "Carter BaysCraig Thomas",
+    "actors": "Josh RadnorJason SegelCobie SmuldersNeil Patrick HarrisAlyson HanniganCristin Milioti",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/HowIMetYourMother.svg/250px-HowIMetYourMother.svg.png"
+  }
+]
