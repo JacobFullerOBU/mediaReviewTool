@@ -1,4 +1,5 @@
 let allItems = [];
+let currentFilter = 'all';
 // Firebase Firestore for dynamic ratings
 import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
@@ -103,6 +104,19 @@ function filterCards(category) {
     const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
     items = sortItems(items, sortOption);
     loadCardsWithItems(items);
+}
+
+function loadCardsWithItems(items) {
+    const container = document.getElementById('cardsContainer');
+    if (!container) {
+        console.error('[cards.js] cardsContainer not found');
+        return;
+    }
+    showLoadingState(container);
+    setTimeout(async () => {
+        await renderCards(container, items);
+        addCardListeners();
+    }, 300);
 }
 
 // Export function for use by other modules
@@ -368,12 +382,6 @@ window.filterCards = filterCards;
 // Load cards by category
 function loadCards(category) {
     console.log('[cards.js] loadCards called with category:', category);
-    const container = document.getElementById('cardsContainer');
-    if (!container) {
-        console.error('[cards.js] cardsContainer not found');
-        return;
-    }
-    showLoadingState(container);
     let items = allItems;
     if (category && category !== 'all') {
         items = allItems.filter(item => {
@@ -387,10 +395,7 @@ function loadCards(category) {
             return category === 'movies' && !item.category;
         });
     }
-    setTimeout(async () => {
-        await renderCards(container, items);
-        addCardListeners();
-    }, 300);
+    loadCardsWithItems(items);
 }
 
 // Render cards in the container
