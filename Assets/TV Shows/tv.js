@@ -319,7 +319,7 @@ export const tv = [
         description: "",
         category: "tv",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/HowIMetYourMother.svg/250px-HowIMetYourMother.svg.png"
-    }
+    },
 
     {
         id: 48,
