@@ -1,6 +1,6 @@
 // --- Firebase Auth State UI Sync for Home Page ---
 import { auth } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+// Authentication functionality
 
 function updateAuthUI(user) {
   const loginBtn = document.getElementById('loginBtn');
@@ -18,36 +18,6 @@ function updateAuthUI(user) {
   }
 }
 
-onAuthStateChanged(auth, updateAuthUI);
-
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-// Authentication functionality
-
-document.addEventListener('DOMContentLoaded', function() {
-    // TEST: Confirm script is running and buttons are found
-    console.log('auth.js loaded');
-    const loginBtnTest = document.getElementById('loginBtn');
-    const registerBtnTest = document.getElementById('registerBtn');
-    if (loginBtnTest) {
-        console.log('Login button found');
-        loginBtnTest.addEventListener('click', function() {
-            console.log('Login button clicked');
-        });
-    } else {
-        console.warn('Login button NOT found');
-    }
-    if (registerBtnTest) {
-        console.log('Register button found');
-        registerBtnTest.addEventListener('click', function() {
-            console.log('Register button clicked');
-        });
-    } else {
-        console.warn('Register button NOT found');
-    }
-    initAuth();
-});
-
 function initAuth() {
     // Initialize modal functionality
     initModals();
@@ -58,6 +28,9 @@ function initAuth() {
     // Initialize auth button listeners
     initAuthButtons();
     
+    // Set up auth state listener
+    onAuthStateChanged(auth, updateAuthUI);
+
     // Check if user is already logged in
     checkAuthState();
 }

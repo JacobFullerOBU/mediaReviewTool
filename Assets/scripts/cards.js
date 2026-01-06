@@ -56,7 +56,7 @@ async function getAverageRating(mediaId) {
 // Cards functionality for displaying popular content
 // Fetch movies from JSON file
 async function fetchMovies() {
-    const response = await fetch("../Movies/movieList.json");
+    const response = await fetch("Assets/Movies/movieList.json");
     return await response.json();
 }
 document.addEventListener('DOMContentLoaded', async function () {
@@ -180,7 +180,7 @@ function initTabFunctionality() {
 function filterCards(category) {
     currentFilter = category;
     let items = allItems;
-    const searchTerm = document.getElementById('mediaSearchInput') ? .value.toLowerCase() || '';
+    const searchTerm = document.getElementById('mediaSearchInput')?.value.toLowerCase() || '';
     // Filter by category
     if (category && category !== 'all') {
         items = allItems.filter(item => {
@@ -201,7 +201,7 @@ function filterCards(category) {
         );
     }
     // Sort items by selected option
-    const sortOption = document.getElementById('sortSelect') ? .value || 'year-desc';
+    const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
     items = sortItems(items, sortOption);
     loadCardsWithItems(items);
 }
@@ -506,6 +506,16 @@ function loadCards(category) {
 // Render cards in the container
 async function renderCards(container, items) {
     console.log('[cards.js] renderCards called with items:', items);
+
+    // First, fetch all average ratings for the current items in parallel
+    const ratingPromises = items.map(item => {
+        const mediaId = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+        return getAverageRating(mediaId).then(rating => {
+            item.liveAvgRating = rating; // Add the live rating to the item object
+        });
+    });
+    await Promise.all(ratingPromises); // Wait for all ratings to be fetched
+
     container.innerHTML = '';
     if (!items || items.length === 0) {
         container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">No media items found.</div>';
@@ -526,7 +536,9 @@ async function renderCards(container, items) {
         let cardHTML = '';
         const toShow = items.slice(0, visibleCount);
         toShow.forEach(item => {
-            const starRating = item.rating || item.avgRating ? `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${item.rating || item.avgRating}</div>` : '';
+            // Prioritize live average rating, then fallback to static rating
+            const displayRating = item.liveAvgRating && item.liveAvgRating !== "N/A" ? item.liveAvgRating : (item.rating || item.avgRating);
+            const starRating = displayRating ? `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${displayRating}</div>` : '';
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
 
             cardHTML += `
