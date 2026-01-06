@@ -3,12 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Review Tool - Home</title>
+    <title>Explore Media - MediaReview</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>    <style>
+        .explore-feed-card-header {
+            flex-direction: row; /* Keep items in a row for larger screens */
+            justify-content: flex-start;
+        }
+
+        .explore-feed-avatar {
+            width: 2.5rem; /* w-10 */
+            height: 2.5rem; /* h-10 */
+            max-width: none; /* Remove max-width constraint */
+        }
+
+        @media (max-width: 767px) { /* Apply column layout for mobile screens */
+            .explore-feed-card-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .explore-feed-avatar {
+                width: 4rem; /* Larger avatar for mobile */
+                height: 4rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>    <style>
+        /* Additional styles for the explore feed */
+        .explore-feed-card {
+            background-color: #1e293b; /* slate-800 */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 2rem; /* p-8 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            border: 1px solid #334155; /* border-slate-700 */
+        }
+
+        .explore-feed-card-header {
+            display: flex; flex-direction: column;            flex-direction: column; /* Stack items vertically */
+
+            align-items: center;
+            gap: 0.75rem; /* gap-3 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+
+        .explore-feed-avatar {
+            width: 2.5rem; /* w-10 */
+            height: 2.5rem; /* h-10 */
+            border-radius: 9999px; /* rounded-full */            width: 100%; /* Make avatar full width in column layout */
+            height: auto; /* Adjust height automatically */
+            max-width: 100px; /* Limit max width for better appearance */
+
+            object-fit: cover;
+        }
+
+        .explore-feed-username {
+            font-weight: 600; /* font-semibold */
+            color: #e2e8f0; /* text-slate-200 */
+        }
+
+        .explore-feed-timestamp {
+            font-size: 0.75rem; /* text-xs */
+            color: #94a3b8; /* text-slate-400 */
+        }
+
+        .explore-feed-media-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            color: #e2e8f0; /* text-slate-200 */
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        .explore-feed-media-type {
+            font-size: 0.875rem; /* text-sm */
+            color: #94a3b8; /* text-slate-400 */
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        .explore-feed-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem; /* gap-1 */
+            margin-bottom: 0.75rem; /* mb-3 */
+            color: #facc15; /* text-yellow-400 */
+        }
+
+        .explore-feed-rating .star-filled {
+            fill: currentColor;
+            stroke: currentColor;
+        }
+
+        .explore-feed-rating .star-empty {
+            stroke: currentColor;
+        }
+
+        .explore-feed-review-text {
+            color: #cbd5e1; /* text-slate-300 */
+            margin-bottom: 1rem; /* mb-4 */
+            font-size: 1.125rem; /* text-lg */
+        }
+
+        .explore-feed-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem; /* gap-2 */
+        }
+
+        .explore-feed-action-btn {
+            padding: 0.5rem 1rem; /* px-4 py-2 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            transition: all 0.2s ease-in-out;
+        }
+
+        .explore-feed-action-btn.primary {
+            background-color: #4f46e5; /* bg-indigo-600 */
+            color: #ffffff; /* text-white */
+        }
+
+        .explore-feed-action-btn.primary:hover {
+            background-color: #4338ca; /* hover:bg-indigo-700 */
+        }
+
+        .explore-feed-action-btn.secondary {
+            background-color: #334155; /* bg-slate-700 */
+            color: #e2e8f0; /* text-white */
+        }
+
+        .explore-feed-action-btn.secondary:hover {
+            background-color: #475569; /* hover:bg-slate-600 */
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans">
@@ -17,20 +147,20 @@
     <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2 cursor-pointer">
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer">
                     <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
                         <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
                     </div>
                     <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
                         MediaReview
                     </span>
-                </div>
+                </a>
 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center space-x-2">
-                    <a href="explore.html" id="explore-feed-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Explore</a>
-                    <a href="#" id="browse-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Browse</a>
-                    <a href="Reviewers.html" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="explore.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Explore</a>
+                    <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Browse</a>
+                    <a href="Reviewers.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
                     <a href="#" id="feed-nav" style="display:none;" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">My Feed</a>
                     <div class="auth-buttons flex items-center space-x-2">
                         <button id="loginBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all shadow-lg shadow-indigo-500/20">Login</button>
@@ -50,15 +180,15 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
-            <a href="#" id="mobile-explore-feed-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
-            <a href="#" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Browse</a>
+            <a href="explore.html" id="mobile-explore-feed-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
+            <a href="index.html" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Browse</a>
             <a href="Reviewers.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
             <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">My Feed</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative overflow-hidden bg-slate-900 py-16 sm:py-24">
+    <div class="relative overflow-hidden bg-slate-900 py-16 sm:py-24 hidden">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
             <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
                 Discover & Review <br/>
@@ -80,7 +210,7 @@
     </div>
 
     <!-- Main Content Area -->
-    <main id="browse-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main id="browse-page" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         <!-- Controls Toolbar -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 backdrop-blur-sm">
@@ -120,7 +250,7 @@
     </main>
 
     <!-- Explore Feed Page -->
-    <main id="explore-feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main id="explore-feed-page" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 class="text-3xl font-bold text-white mb-8">Explore Feed</h2>
         <div id="explore-feed-container" class="space-y-6">
             <!-- Review items will be added here -->
@@ -212,6 +342,13 @@
     <script type="module" src="Assets/scripts/auth.js"></script>
     <script type="module" src="Assets/scripts/community.js"></script>
     <script type="module" src="Assets/scripts/feed.js"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.displayExploreFeed) {
+                window.displayExploreFeed();
+            }
+        });
+    </script>
     <script type="module">
         // Loads icons and elements dynamically 
         lucide.createIcons();
