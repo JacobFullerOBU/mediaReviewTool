@@ -12510,5 +12510,2678 @@
         "director": "John Landis",
         "poster": "https://image.tmdb.org/t/p/w500/8YZiA1o264dk0cr1USyMdph6SZl.jpg",
         "category": "movies"
+    },
+    {
+        "title": "Lust, Caution",
+        "year": "2007",
+        "description": "During World War II, a secret agent must seduce and assassinate an official who works for the Japanese puppet government in Shanghai.",
+        "genre": "Action, Drama, Romance, Thriller",
+        "director": "Ang Lee",
+        "poster": "https://image.tmdb.org/t/p/w500/6c1tqfJEBuIyhQC19SLlLQAUAvJ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Angel Has Fallen",
+        "year": "2019",
+        "description": "After a treacherous attack, Secret Service agent Mike Banning is charged with attempting to assassinate President Trumbull. Chased by his own colleagues and the FBI, Banning begins a race against the clock to clear his name.",
+        "genre": "Action, Thriller",
+        "director": "Ric Roman Waugh",
+        "poster": "https://image.tmdb.org/t/p/w500/fapXd3v9qTcNBTm39ZC4KUVQDNf.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Good Dinosaur",
+        "year": "2015",
+        "description": "An epic journey into the world of dinosaurs where an Apatosaurus named Arlo makes an unlikely human friend.",
+        "genre": "Adventure, Animation, Family",
+        "director": "Peter Sohn",
+        "poster": "https://image.tmdb.org/t/p/w500/8RSkxOO80btfKjyiC5ZiTaCHIT8.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ace Ventura: Pet Detective",
+        "year": "1994",
+        "description": "He's Ace Ventura: Pet Detective. Jim Carrey is on the case to find the Miami Dolphins' missing mascot and quarterback Dan Marino. He goes eyeball to eyeball with a man-eating shark, stakes out the Miami Dolphins and woos and wows the ladies. Whether he's undercover, under fire or underwater, he always gets his man… or beast!",
+        "genre": "Comedy, Mystery, Crime",
+        "director": "Tom Shadyac",
+        "poster": "https://image.tmdb.org/t/p/w500/pqiRuETmuSybfnVZ7qyeoXhQyN1.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "American History X",
+        "year": "1998",
+        "description": "Derek Vineyard is paroled after serving 3 years in prison for killing two African-American men. Through his brother, Danny Vineyard's narration, we learn that before going to prison, Derek was a skinhead and the leader of a violent white supremacist gang that committed acts of racial crime throughout L.A. and his actions greatly influenced Danny. Reformed and fresh out of prison, Derek severs contact with the gang and becomes determined to keep Danny from going down the same violent path as he did.",
+        "genre": "Drama",
+        "director": "Tony Kaye",
+        "poster": "https://image.tmdb.org/t/p/w500/x2drgoXYZ8484lqyDj7L1CEVR4T.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "22 Jump Street",
+        "year": "2014",
+        "description": "After making their way through high school (twice), big changes are in store for officers Schmidt and Jenko when they go deep undercover at a local college. But when Jenko meets a kindred spirit on the football team, and Schmidt infiltrates the bohemian art major scene, they begin to question their partnership. Now they don't have to just crack the case - they have to figure out if they can have a mature relationship. If these two overgrown adolescents can grow from freshmen into real men, college might be the best thing that ever happened to them.",
+        "genre": "Crime, Comedy, Action",
+        "director": "Phil Lord",
+        "poster": "https://image.tmdb.org/t/p/w500/850chzYHYbT3IISl6Q7dbBuFP2B.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Virgin Territory",
+        "year": "2007",
+        "description": "In Black Death era Tuscany, as in the Decameron, ten young Florentines take refuge from the plague. But instead of telling stories, they have lusty adventures, bawdy exchanges, romance, swordplay, randy nuns, Saracen pirates, and a sexy cow.",
+        "genre": "Adventure, Action, Comedy, Romance",
+        "director": "David Leland",
+        "poster": "https://image.tmdb.org/t/p/w500/zofWP7ZKhoVTh2VUltaDo4LRQXc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Hell Fest",
+        "year": "2018",
+        "description": "On Halloween night at a horror theme park, a costumed killer begins slaying innocent patrons who believe that it's all part of the festivities.",
+        "genre": "Horror, Thriller",
+        "director": "Gregory Plotkin",
+        "poster": "https://image.tmdb.org/t/p/w500/qgLlnlrUtTKXkdrgMBwUfkyAkya.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Miraculous World: London, At the Edge of Time",
+        "year": "2024",
+        "description": "To save the future from a terrible fate, Marinette becomes Chronobug and teams up with Bunnyx to defeat a mysterious opponent who travels through time.",
+        "genre": "Animation, Adventure, Action, Fantasy",
+        "director": "Thomas Astruc",
+        "poster": "https://image.tmdb.org/t/p/w500/6AtoMpHvs9pxd30KsyK8QmJ9W9M.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Terminal",
+        "year": "2004",
+        "description": "An Eastern European tourist unexpectedly finds himself stranded in JFK airport, and must take up temporary residence there.",
+        "genre": "Comedy, Drama",
+        "director": "Steven Spielberg",
+        "poster": "https://image.tmdb.org/t/p/w500/cPB3ZMM4UdsSAhNdS4c7ps5nypY.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Palmer",
+        "year": "2021",
+        "description": "After 12 years in prison, former high school football star Eddie Palmer returns home to put his life back together—and forms an unlikely bond with Sam, an outcast boy from a troubled home. But Eddie's past threatens to ruin his new life and family.",
+        "genre": "Drama",
+        "director": "Fisher Stevens",
+        "poster": "https://image.tmdb.org/t/p/w500/xSDdRAjxKAGi8fUBLOqSrBhJmF0.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Twelve Monkeys",
+        "year": "1995",
+        "description": "In the year 2035, convict James Cole reluctantly volunteers to be sent back in time to discover the origin of a deadly virus that wiped out nearly all of the earth's population and forced the survivors into underground communities. But when Cole is mistakenly sent to 1990 instead of 1996, he's arrested and locked up in a mental hospital. There he meets psychiatrist Dr. Kathryn Railly and the son of a famous virus expert who may hold the key to the Army of the 12 Monkeys; thought to be responsible for unleashing the killer disease.",
+        "genre": "Science Fiction, Thriller, Mystery",
+        "director": "Terry Gilliam",
+        "poster": "https://image.tmdb.org/t/p/w500/gt3iyguaCIw8DpQZI1LIN5TohM2.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Baywatch",
+        "year": "2017",
+        "description": "Devoted lifeguard Mitch Buchannon butts heads with a brash new recruit. Together, they uncover a local criminal plot that threatens the future of the Bay.",
+        "genre": "Comedy, Action, Crime",
+        "director": "Seth Gordon",
+        "poster": "https://image.tmdb.org/t/p/w500/6HE4xd8zloDqmjMZuhUCCw2UcY1.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Planet of the Apes",
+        "year": "1968",
+        "description": "Astronaut Taylor crash lands on a distant planet ruled by apes who use a primitive race of humans for experimentation and sport. Soon Taylor finds himself among the hunted, his life in the hands of a benevolent chimpanzee scientist.",
+        "genre": "Science Fiction, Adventure, Drama, Action",
+        "director": "Franklin J. Schaffner",
+        "poster": "https://image.tmdb.org/t/p/w500/2r9iKnlSYEk4daQadsXfcjHfIjQ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Northman",
+        "year": "2022",
+        "description": "Prince Amleth is on the verge of becoming a man when his father is brutally murdered by his uncle, who kidnaps the boy's mother. Two decades later, Amleth is now a Viking who's on a mission to save his mother, kill his uncle and avenge his father.",
+        "genre": "Action, Adventure, Fantasy",
+        "director": "Robert Eggers",
+        "poster": "https://image.tmdb.org/t/p/w500/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Death Note Relight 1: Visions of a God",
+        "year": "2009",
+        "description": "When rogue shinigami Ryuk leaves his Death Note in the human world, he has no idea how far the one who finds it will take his new-found power. With the Death Note in hand, brilliant high school student Light Yagami vows to rid the world of evil. A recap of Death Note episodes 1–26, with alternate footage.",
+        "genre": "TV Movie, Crime, Drama, Fantasy, Thriller, Animation",
+        "director": "Tetsuro Araki",
+        "poster": "https://image.tmdb.org/t/p/w500/qDhbGqjZ7yFwa7FMIzuiQTQMfEQ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "10,000 BC",
+        "year": "2008",
+        "description": "A prehistoric epic that follows a young mammoth hunter's journey through uncharted territory to secure the future of his tribe.",
+        "genre": "Adventure, Action, Drama, Fantasy",
+        "director": "Roland Emmerich",
+        "poster": "https://image.tmdb.org/t/p/w500/9I7gV6wRbGnbfI3XOKjHeLMjYEo.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Scream VI",
+        "year": "2023",
+        "description": "Following the latest Ghostface killings, the four survivors leave Woodsboro behind and start a fresh chapter.",
+        "genre": "Horror, Crime, Thriller",
+        "director": "Matt Bettinelli-Olpin",
+        "poster": "https://image.tmdb.org/t/p/w500/wDWwtvkRRlgTiUr6TyLSMX8FCuZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Prince of Egypt",
+        "year": "1998",
+        "description": "The strong bond between two brothers is challenged when their chosen responsibilities set them at odds, with extraordinary consequences.",
+        "genre": "Adventure, Animation, Drama, Family",
+        "director": "Steve Hickner",
+        "poster": "https://image.tmdb.org/t/p/w500/2xUjYwL6Ol7TLJPPKs7sYW5PWLX.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Old Dads",
+        "year": "2023",
+        "description": "A cranky middle-aged dad and his two best friends find themselves out of step in a changing world of millennial CEOs and powerful preschool principals.",
+        "genre": "Comedy",
+        "director": "Bill Burr",
+        "poster": "https://image.tmdb.org/t/p/w500/krA2iXd1PK1vhg4jeWfbSD4fSJi.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Olympus Has Fallen",
+        "year": "2013",
+        "description": "When the White House (Secret Service Code: \"Olympus\") is captured by a terrorist mastermind and the President is kidnapped, disgraced former Presidential guard Mike Banning finds himself trapped within the building. As the national security team scrambles to respond, they are forced to rely on Banning's inside knowledge to help retake the White House, save the President and avert an even bigger disaster.",
+        "genre": "Action, Thriller",
+        "director": "Antoine Fuqua",
+        "poster": "https://image.tmdb.org/t/p/w500/u3GTFGwesNBNd0t1hiLaEk1iqZU.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Secret Millionaire",
+        "year": "2018",
+        "description": "When a bored millionaire (Steve Lund) is mistaken for a parking attendant by a beautiful girl (Siobhan Williams) who is protesting against his family’s intention of closing a local park, he uses the misunderstanding to get to know her better.",
+        "genre": "Romance, TV Movie",
+        "director": "Michael M. Scott",
+        "poster": "https://image.tmdb.org/t/p/w500/aYo2NBTFKySIRjT96fmIGSVmeWU.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Insomnia",
+        "year": "2002",
+        "description": "Two Los Angeles homicide detectives are dispatched to a northern town where the sun doesn't set to investigate the methodical murder of a local teen.",
+        "genre": "Thriller, Crime, Drama",
+        "director": "Christopher Nolan",
+        "poster": "https://image.tmdb.org/t/p/w500/riVXh3EimGO0y5dgQxEWPRy5Itg.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Transporter",
+        "year": "2002",
+        "description": "Former Special Forces officer Frank Martin will deliver anything to anyone for the right price, and his no-questions-asked policy puts him in high demand. But when he realizes his latest cargo is alive, it sets in motion a dangerous chain of events. The bound and gagged Lai is being smuggled to France by a shady American businessman, and Frank works to save her as his own illegal activities are uncovered by a French detective.",
+        "genre": "Action, Crime, Thriller",
+        "director": "Corey Yuen",
+        "poster": "https://image.tmdb.org/t/p/w500/dncJ81z1BahrT3ogLvlxOUC5n4u.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Robin Hood",
+        "year": "2010",
+        "description": "When soldier Robin happens upon the dying Robert of Loxley, he promises to return the man's sword to his family in Nottingham. There, he assumes Robert's identity; romances his widow, Marion; and draws the ire of the town's sheriff and King John's henchman, Godfrey.",
+        "genre": "Action, Adventure, History",
+        "director": "Ridley Scott",
+        "poster": "https://image.tmdb.org/t/p/w500/9NS5QGOfck24yL3bZqWeW06PgPC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bitter Moon",
+        "year": "1992",
+        "description": "A passenger on a cruise ship develops an irresistible infatuation with an eccentric paraplegic's wife.",
+        "genre": "Thriller, Drama, Romance",
+        "director": "Roman Polanski",
+        "poster": "https://image.tmdb.org/t/p/w500/bW7E4cLWh0elRRbp2VCrtXrY1if.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sub Rosa",
+        "year": "2014",
+        "description": "Bullied by his father to grow up, a teen fights between the love of his step-mother over his father's life.",
+        "genre": "Drama, Romance",
+        "director": "Krisstian de Lara",
+        "poster": "https://image.tmdb.org/t/p/w500/yVwt1gPaQxCUV8iC8i1rca6FSji.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Cinema Paradiso",
+        "year": "1988",
+        "description": "A filmmaker recalls his childhood, when he fell in love with the movies at his village's theater and formed a deep friendship with the theater's projectionist.",
+        "genre": "Drama, Romance",
+        "director": "Giuseppe Tornatore",
+        "poster": "https://image.tmdb.org/t/p/w500/gCI2AeMV4IHSewhJkzsur5MEp6R.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "True Lies",
+        "year": "1994",
+        "description": "A fearless, globe-trotting, terrorist-battling secret agent has his life turned upside down when he discovers his wife might be having an affair with a used car salesman while terrorists smuggle nuclear war heads into the United States.",
+        "genre": "Action, Thriller",
+        "director": "James Cameron",
+        "poster": "https://image.tmdb.org/t/p/w500/pweFTnzzTfGK68woSVkiTgjLzWm.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Upgrade",
+        "year": "2018",
+        "description": "A brutal mugging leaves Grey Trace paralyzed in the hospital and his beloved wife dead. A billionaire inventor soon offers Trace a cure — an artificial intelligence implant called STEM that will enhance his body. Now able to walk, Grey finds that he also has superhuman strength and agility — skills he uses to seek revenge against the thugs who destroyed his life.",
+        "genre": "Action, Thriller, Science Fiction",
+        "director": "Leigh Whannell",
+        "poster": "https://image.tmdb.org/t/p/w500/woLGROUdPWdBnLVFKYdGD3kFkPY.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dragon Ball Z: Resurrection 'F'",
+        "year": "2015",
+        "description": "One peaceful day on Earth, two remnants of Frieza's army named Sorbet and Tagoma arrive searching for the Dragon Balls with the aim of reviving Frieza. They succeed, and Frieza subsequently seeks revenge on the Saiyans.",
+        "genre": "Action, Animation, Science Fiction",
+        "director": "Tadayoshi Yamamuro",
+        "poster": "https://image.tmdb.org/t/p/w500/soq3AxjALdBfdPAm8H7yuMmNL5Y.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Godzilla vs. Kong",
+        "year": "2021",
+        "description": "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
+        "genre": "Action, Science Fiction, Adventure",
+        "director": "Adam Wingard",
+        "poster": "https://image.tmdb.org/t/p/w500/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Shape of Water",
+        "year": "2017",
+        "description": "An other-worldly story, set against the backdrop of Cold War era America circa 1962, where a mute janitor working at a lab falls in love with an amphibious man being held captive there and devises a plan to help him escape.",
+        "genre": "Drama, Fantasy, Romance",
+        "director": "Guillermo del Toro",
+        "poster": "https://image.tmdb.org/t/p/w500/9zfwPffUXpBrEP26yp0q1ckXDcj.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Jennifer's Body",
+        "year": "2009",
+        "description": "Jennifer, a gorgeous, seductive cheerleader takes evil to a whole new level after she's possessed by a sinister demon. Now it's up to her best friend to stop Jennifer's reign of terror before it's too late.",
+        "genre": "Horror, Comedy",
+        "director": "Karyn Kusama",
+        "poster": "https://image.tmdb.org/t/p/w500/wrkjsGcFJxcQqR56kJUYAEKKg2T.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bumblebee",
+        "year": "2018",
+        "description": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+        "genre": "Action, Adventure, Science Fiction",
+        "director": "Travis Knight",
+        "poster": "https://image.tmdb.org/t/p/w500/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Batman Returns",
+        "year": "1992",
+        "description": "The monstrous Penguin, who dwells in the sewers beneath Gotham, joins up with corrupt mayoral candidate Max Shreck to topple the Batman once and for all. But when Shreck's timid assistant Selina Kyle finds out, and Shreck tries to kill her, she's transformed into the sexy Catwoman. She teams up with the Penguin and Shreck to destroy Batman, but sparks fly unexpectedly when she confronts the caped crusader.",
+        "genre": "Action, Fantasy",
+        "director": "Tim Burton",
+        "poster": "https://image.tmdb.org/t/p/w500/jKBjeXM7iBBV9UkUcOXx3m7FSHY.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Finch",
+        "year": "2021",
+        "description": "On a post-apocalyptic Earth, a robot, built to protect the life of his dying creator's beloved dog, learns about life, love, friendship, and what it means to be human.",
+        "genre": "Science Fiction, Drama, Adventure",
+        "director": "Miguel Sapochnik",
+        "poster": "https://image.tmdb.org/t/p/w500/eEJtzD1F05xDipFEDY98CTH5yZn.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Twisters",
+        "year": "2024",
+        "description": "As storm season intensifies, the paths of former storm chaser Kate Carter and reckless social-media superstar Tyler Owens collide when terrifying phenomena never seen before are unleashed. The pair and their competing teams find themselves squarely in the paths of multiple storm systems converging over central Oklahoma in the fight of their lives.",
+        "genre": "Action, Thriller",
+        "director": "Lee Isaac Chung",
+        "poster": "https://image.tmdb.org/t/p/w500/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tarot",
+        "year": "2024",
+        "description": "When a group of friends recklessly violate the sacred rule of Tarot readings, they unknowingly unleash an unspeakable evil trapped within the cursed cards. One by one, they come face to face with fate and end up in a race against death.",
+        "genre": "Horror",
+        "director": "Spenser Cohen",
+        "poster": "https://image.tmdb.org/t/p/w500/gAEUXC37vl1SnM7PXsHTF23I2vq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Final Destination 2",
+        "year": "2003",
+        "description": "When Kimberly has a violent premonition of a highway pileup she blocks the freeway, keeping a few others meant to die, safe...Or are they? The survivors mysteriously start dying and it's up to Kimberly to stop it before she's next.",
+        "genre": "Horror, Mystery",
+        "director": "David R. Ellis",
+        "poster": "https://image.tmdb.org/t/p/w500/vnFgxRlLTA9fDNcGXLiHmgwmIEo.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Brothers",
+        "year": "2009",
+        "description": "When his helicopter goes down during his fourth tour of duty in Afghanistan, Marine Sam Cahill is presumed dead. Back home, brother Tommy steps in to look over Sam’s wife, Grace, and two children. Sam’s surprise homecoming triggers domestic mayhem.",
+        "genre": "Drama, Thriller, War",
+        "director": "Jim Sheridan",
+        "poster": "https://image.tmdb.org/t/p/w500/skHqceAFYee0JZuYd9MVk2IQggi.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Rising Sun",
+        "year": "1993",
+        "description": "When a prostitute is found dead in a Los Angeles skyscraper occupied by a large Japanese corporation, detectives John Connor and Web Smith are called in to investigate. Although Connor has previous experience working in Japan, cultural differences make their progress difficult until a security disc showing the murder turns up. Close scrutiny proves the disc has been doctored, and the detectives realize they're dealing with a cover-up as well.",
+        "genre": "Action, Drama, Thriller",
+        "director": "Philip Kaufman",
+        "poster": "https://image.tmdb.org/t/p/w500/jVWEeZ383peKxwE284AdyHqq6GH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Exodus: Gods and Kings",
+        "year": "2014",
+        "description": "The defiant leader Moses rises up against the Egyptian Pharaoh Ramses, setting 400,000 slaves on a monumental journey of escape from Egypt and its terrifying cycle of deadly plagues.",
+        "genre": "Adventure, Drama, Action",
+        "director": "Ridley Scott",
+        "poster": "https://image.tmdb.org/t/p/w500/uaDj37JtvLan9tihxZ18e6qL33b.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Jingle All the Way",
+        "year": "1996",
+        "description": "Howard Langston, a salesman for a mattress company, is constantly kept busy at his job, disappointing his son. After he misses his son's karate exposition, Howard vows to make it up to him by buying an action figure of his son's favorite television hero for Christmas. Unfortunately for Howard, it is Christmas Eve, and every store is sold out of Turbo Man. Now, Howard must travel all over town and compete with everybody else to find a Turbo Man action figure.",
+        "genre": "Family, Comedy, Adventure",
+        "director": "Brian Levant",
+        "poster": "https://image.tmdb.org/t/p/w500/6QLkeLXPIxiihuX5enHHNEuCCzy.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Un/Dressed",
+        "year": "2024",
+        "description": "Elle is a young entrepreneur who wants to lead her grandmother Margot's fashion house into a new era. She is in a relationship with Thilo, the son of an influential Hamburg family. After Elle's grandmother receives anonymous threats, Ben, who has been in prison, is assigned as her bodyguard. Elle is torn between Thilo and Ben. As Elle delves deeper into Ben's world, she learns secrets about Thilo that could jeopardize her grandmother's life's work.",
+        "genre": "Thriller, Romance, Drama",
+        "director": "Tim Trachte",
+        "poster": "https://image.tmdb.org/t/p/w500/xSKuXQb1VAUlyULUE4tkGTDbGdQ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "San Andreas",
+        "year": "2015",
+        "description": "In the aftermath of a massive earthquake in California, a rescue-chopper pilot makes a dangerous journey across the state in order to rescue his estranged daughter.",
+        "genre": "Action, Drama, Thriller",
+        "director": "Brad Peyton",
+        "poster": "https://image.tmdb.org/t/p/w500/2Gfjn962aaFSD6eST6QU3oLDZTo.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Baby Boy",
+        "year": "2001",
+        "description": "The story of Jody, a misguided, 20-year-old African-American who is really just a baby boy finally forced-kicking and screaming to face the commitments of real life. Streetwise and jobless, he has not only fathered two children by two different women-Yvette and Peanut but still lives with his own mother. He can't seem to strike a balance or find direction in his chaotic life.",
+        "genre": "Crime, Drama, Romance, Thriller",
+        "director": "John Singleton",
+        "poster": "https://image.tmdb.org/t/p/w500/d9b5sDAY2q2u2fWFYZPmt0Cl2p7.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Some Like It Hot",
+        "year": "1959",
+        "description": "Two musicians witness a mob hit and need to quickly find a way out of Chicago. Their only opportunity comes in the form of joining an all-girl band as they prepare to leave on a tour. The two disguise themselves as women and struggle to keep their identities secret as the gangsters close in.",
+        "genre": "Comedy, Romance, Crime",
+        "director": "Billy Wilder",
+        "poster": "https://image.tmdb.org/t/p/w500/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Puss in Boots",
+        "year": "2011",
+        "description": "Long before he even met Shrek, the notorious fighter, lover and outlaw Puss in Boots becomes a hero when he sets off on an adventure with the tough and street smart Kitty Softpaws and the mastermind Humpty Dumpty to save his town. This is the true story of The Cat, The Myth, The Legend... The Boots.",
+        "genre": "Animation, Family, Fantasy, Adventure, Comedy, Action",
+        "director": "Chris Miller",
+        "poster": "https://image.tmdb.org/t/p/w500/n4UkIqNYSTr4DPoHCVfLrL8mbre.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Rumble",
+        "year": "2021",
+        "description": "In a world where monster wrestling is a global sport and monsters are superstar athletes, teenage Winnie seeks to follow in her father’s footsteps by coaching a loveable underdog monster into a champion.",
+        "genre": "Animation, Family",
+        "director": "Hamish Grieve",
+        "poster": "https://image.tmdb.org/t/p/w500/3eZRgjfFWTpejRvRKyKe1EKgt9s.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Memoir of a Snail",
+        "year": "2024",
+        "description": "Forcibly separated from her twin brother when they are orphaned, a melancholic misfit learns how to find confidence within herself amid the clutter of misfortunes and everyday life.",
+        "genre": "Animation, Drama, Comedy",
+        "director": "Adam Elliot",
+        "poster": "https://image.tmdb.org/t/p/w500/woaN8CbloH0akyX0E72ayxlJAB4.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Kandahar",
+        "year": "2023",
+        "description": "After his mission is exposed, an undercover CIA operative stuck deep in hostile territory in Afghanistan must fight his way out, alongside his Afghan translator, to an extraction point in Kandahar, all whilst avoiding elite enemy forces and foreign spies tasked with hunting them down.",
+        "genre": "Action, Thriller, War",
+        "director": "Ric Roman Waugh",
+        "poster": "https://image.tmdb.org/t/p/w500/lCanGgsqF4xD2WA5NF8PWeT3IXd.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Contraband",
+        "year": "2012",
+        "description": "When his brother-in-law runs afoul of a drug lord, family man Chris Farraday turns to a skill he abandoned long ago—smuggling—to repay the debt. But the job goes wrong, and Farraday finds himself wanted by cops, crooks and killers alike.",
+        "genre": "Thriller, Action, Drama, Crime",
+        "director": "Baltasar Kormákur",
+        "poster": "https://image.tmdb.org/t/p/w500/dNNjyZQ0zVtmPa74nJE63Kn0xEx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Alien: Covenant",
+        "year": "2017",
+        "description": "The crew of the colony ship Covenant, bound for a remote planet on the far side of the galaxy, discovers what they think is an uncharted paradise but is actually a dark, dangerous world.",
+        "genre": "Horror, Science Fiction, Thriller",
+        "director": "Ridley Scott",
+        "poster": "https://image.tmdb.org/t/p/w500/zecMELPbU5YMQpC81Z8ImaaXuf9.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Fred Claus",
+        "year": "2007",
+        "description": "Fred Claus and Santa Claus have been estranged brothers for many years. Now Fred must reconcile his differences with his brother whom he believes overshadows him. When an efficiency expert assesses the workings at the North Pole and threatens to shut Santa down, Fred must help his brother to save Christmas.",
+        "genre": "Action, Comedy, Drama",
+        "director": "David Dobkin",
+        "poster": "https://image.tmdb.org/t/p/w500/9gATbvoRMxVeoHInwS8nR0KZMVc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Abu Si Raksasa",
+        "year": "2025",
+        "description": "Sofian, who is investigating mysterious disappearances of anglers at a lake in KL, accidentally recorded a gigantic lizard-like monster surfacing briefly. The video was uploaded to YouTube and it caught the attention of Zaara, who believes the monster is her escaped pet gecko named Abu, but she has no idea how it has grown so big. Sofian & Zaara started to investigate, but when the sightings became frequent, they started to cause public commotion and it became a national security issue.",
+        "genre": "Action, Adventure, Science Fiction",
+        "director": "Ramdan Che Hassan",
+        "poster": "https://image.tmdb.org/t/p/w500/oWmuWm1WpL8eQZ7P39gF9rkZraM.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Animal",
+        "year": "2023",
+        "description": "The hardened son of a powerful industrialist returns home after years abroad and vows to take bloody revenge on those threatening his father's life.",
+        "genre": "Action, Crime, Drama",
+        "director": "Sandeep Reddy Vanga",
+        "poster": "https://image.tmdb.org/t/p/w500/hr9rjR3J0xBBKmlJ4n3gHId9ccx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Prey",
+        "year": "2024",
+        "description": "A young couple is compelled to leave their Christian missionary station in the Kalahari Desert after being threatened with death by an extremist militant gang. After crashing their aircraft they must battle man and beast for their lives.",
+        "genre": "Action, Thriller, Horror",
+        "director": "Mukunda Michael Dewil",
+        "poster": "https://image.tmdb.org/t/p/w500/aOsPclgSiOqhndI2Xp2ksz2g9n6.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tooth Fairy",
+        "year": "2010",
+        "description": "When minor-league hockey player Derek Thompson -- who has a penchant for knocking out his opponents' teeth every time he plays -- disillusions a fan, he is sentenced to a stint for one week as a bona fide, tutu-clad, real-life tooth fairy. Soon, Derek is inspired to rekindle his youthful dreams.",
+        "genre": "Comedy, Family, Fantasy",
+        "director": "Michael Lembeck",
+        "poster": "https://image.tmdb.org/t/p/w500/cRZvw3bPomtucIUtMHZ3qPIYtYs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Finding Dory",
+        "year": "2016",
+        "description": "Dory is reunited with her friends Nemo and Marlin in the search for answers about her past. What can she remember? Who are her parents? And where did she learn to speak Whale?",
+        "genre": "Adventure, Animation, Comedy, Family",
+        "director": "Andrew Stanton",
+        "poster": "https://image.tmdb.org/t/p/w500/3UVe8NL1E2ZdUZ9EDlKGJY5UzE.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Law Abiding Citizen",
+        "year": "2009",
+        "description": "A frustrated man decides to take justice into his own hands after a plea bargain sets one of his family's killers free. He targets not only the killer but also the district attorney and others involved in the deal.",
+        "genre": "Drama, Crime, Thriller",
+        "director": "F. Gary Gray",
+        "poster": "https://image.tmdb.org/t/p/w500/fcEXcip7v0O1ndV4VUdFqJSqbOg.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Perfect Blue",
+        "year": "1998",
+        "description": "Rising pop star Mima quits singing to pursue a career as an actress. After she takes up a role on a popular detective show, her handlers and collaborators begin turning up murdered. Harboring feelings of guilt and haunted by visions of her former self, Mima's reality and fantasy meld into a frenzied paranoia.",
+        "genre": "Animation, Thriller",
+        "director": "Satoshi Kon",
+        "poster": "https://image.tmdb.org/t/p/w500/6WTiOCfDPP8XV4jqfloiVWf7KHq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Star Trek Into Darkness",
+        "year": "2013",
+        "description": "When the crew of the Enterprise is called back home, they find an unstoppable force of terror from within their own organization has detonated the fleet and everything it stands for, leaving our world in a state of crisis.  With a personal score to settle, Captain Kirk leads a manhunt to a war-zone world to capture a one man weapon of mass destruction. As our heroes are propelled into an epic chess game of life and death, love will be challenged, friendships will be torn apart, and sacrifices must be made for the only family Kirk has left: his crew.",
+        "genre": "Action, Adventure, Science Fiction",
+        "director": "J.J. Abrams",
+        "poster": "https://image.tmdb.org/t/p/w500/Aim3kVNh1MPIxPEFeJrl9e9Uf1a.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bad Sister",
+        "year": "2015",
+        "description": "As a top student at St. Adeline's Catholic Boarding School, Zoe senses that something is not quite right about the school's new nun-- a sense proven to be true when it is revealed the \"good' nun is an imposter with a fatal attraction to Zoe's brother.",
+        "genre": "Thriller, TV Movie",
+        "director": "Doug Campbell",
+        "poster": "https://image.tmdb.org/t/p/w500/jKrIlgfJPIWNeowaOZPBZuOPmq0.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Brazil",
+        "year": "1985",
+        "description": "Low-level bureaucrat Sam Lowry escapes the monotony of his day-to-day life through a recurring daydream of himself as a virtuous hero saving a beautiful damsel. Investigating a case that led to the wrongful arrest and eventual death of an innocent man instead of wanted terrorist Harry Tuttle, he meets the woman from his daydream, and in trying to help her gets caught in a web of mistaken identities, mindless bureaucracy and lies.",
+        "genre": "Comedy, Science Fiction",
+        "director": "Terry Gilliam",
+        "poster": "https://image.tmdb.org/t/p/w500/aewan59WcFThBimkTVVoNf2o5Vb.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Me, Myself & Irene",
+        "year": "2000",
+        "description": "Rhode Island State Trooper Charlie Baileygates has a multiple personality disorder. One personality is crazy and aggressive, while the other is more friendly and laid back. Both of these personalities fall in love with the same woman named Irene after Charlie loses his medication.",
+        "genre": "Comedy",
+        "director": "Peter Farrelly",
+        "poster": "https://image.tmdb.org/t/p/w500/rvRrcbLbpn7UJGRH1JupgHOeJFq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Unhealer",
+        "year": "2020",
+        "description": "A botched faith healing bestows supernatural Shaman powers on a bullied teenager. When his lifelong tormentors pull a prank that kills someone he loves, he uses his powers for revenge and goes on a bloody rampage to settle the score.",
+        "genre": "Fantasy, Thriller, Horror",
+        "director": "Martin Guigui",
+        "poster": "https://image.tmdb.org/t/p/w500/jEuKhYfeS4dz0uQj1yTZ2Gl8yNH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "year": "2016",
+        "description": "An American Ambassador is killed during an attack at a U.S. compound in Libya as a security team struggles to make sense out of the chaos.",
+        "genre": "War, Action, History, Drama, Thriller",
+        "director": "Michael Bay",
+        "poster": "https://image.tmdb.org/t/p/w500/AskDcQ6Sa6jImyt2KDQbgRuPebH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dog Man",
+        "year": "2025",
+        "description": "When a faithful police dog and his human police officer owner are injured together on the job, a harebrained but life-saving surgery fuses the two of them together and Dog Man is born. Dog Man is sworn to protect and serve—and fetch, sit and roll over. As Dog Man embraces his new identity and strives to impress his Chief, he must stop the pretty evil plots of feline supervillain Petey the Cat.",
+        "genre": "Family, Comedy, Adventure, Animation, Action",
+        "director": "Peter Hastings",
+        "poster": "https://image.tmdb.org/t/p/w500/89wNiexZdvLQ41OQWIsQy4O6jAQ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "3:10 to Yuma",
+        "year": "2007",
+        "description": "In Arizona in the late 1800s, infamous outlaw Ben Wade and his vicious gang of thieves and murderers have plagued the Southern Railroad. When Wade is captured, Civil War veteran Dan Evans, struggling to survive on his drought-plagued ranch, volunteers to deliver him alive to the \"3:10 to Yuma\", a train that will take the killer to trial.",
+        "genre": "Western",
+        "director": "James Mangold",
+        "poster": "https://image.tmdb.org/t/p/w500/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Crawl",
+        "year": "2019",
+        "description": "When a huge hurricane hits her hometown in Florida, Haley ignores evacuation orders to look for her father. After finding him badly wounded, both are trapped by the flood. With virtually no time to escape the storm, they discover that rising water levels are the least of their problems.",
+        "genre": "Horror, Thriller",
+        "director": "Alexandre Aja",
+        "poster": "https://image.tmdb.org/t/p/w500/4WH6AZd473lRZ3hUp8TYiv2LfZW.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Drunken Master",
+        "year": "1978",
+        "description": "After getting into trouble, a mischievous young man is sent to train under a brutal, but slovenly old beggar, who teaches him the secret of the Drunken Fist.",
+        "genre": "Action, Comedy",
+        "director": "Yuen Woo-Ping",
+        "poster": "https://image.tmdb.org/t/p/w500/cf43J2SH8tECZVl9N5n0Q6Ckche.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Skin I Live In",
+        "year": "2011",
+        "description": "A brilliant plastic surgeon creates a synthetic skin that withstands any kind of damage. His guinea pig: a mysterious and volatile woman who holds the key to his obsession.",
+        "genre": "Drama, Horror, Mystery, Thriller",
+        "director": "Pedro Almodóvar",
+        "poster": "https://image.tmdb.org/t/p/w500/xa7uCwGYykrf8MMI8iF5dZvNlrG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Cash Out",
+        "year": "2024",
+        "description": "Criminal mastermind Mason is about to execute the score of a lifetime when his lover and key member of his crew, Decker, takes the team down and reveals she’s an undercover Interpol agent. Heartbroken, Mason escapes and retires from the life of crime until his younger brother Shawn is out of his league taking on a big bank heist all on his own. Mason has no choice left but to come to the rescue, while Interpol brings Decker in hoping to unnerve him. Before the SWAT teams storm the bank, Mason must use every tool in his arsenal to not only escape with the prize, but also the love of his life.",
+        "genre": "Action, Thriller",
+        "director": "Randall Emmett",
+        "poster": "https://image.tmdb.org/t/p/w500/v3youHDLigrtIis1NqTjlY8Sk38.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Vixen!",
+        "year": "1968",
+        "description": "In a Canadian mountain resort, Vixen resides with her naive pilot husband. While he's away flying in tourists, she sleeps with practically everybody including a husband and his wife, and even her biker brother. However, the only one she won't bed is her brother's friend... who is Black.",
+        "genre": "Drama",
+        "director": "Russ Meyer",
+        "poster": "https://image.tmdb.org/t/p/w500/9KMZWDA3xTrlgrScqdMisINQmsh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Eegah",
+        "year": "1962",
+        "description": "Teenagers stumble across a prehistoric caveman, who goes on a rampage.",
+        "genre": "Horror, Science Fiction, Romance",
+        "director": "Arch Hall Sr.",
+        "poster": "https://image.tmdb.org/t/p/w500/mvLmdKwnzVjPNdRs5FYBgL3xQWB.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "RED",
+        "year": "2010",
+        "description": "After surviving an assault from a squad of hit men, retired CIA black ops agent Frank Moses reassembles his old team for an all-out war. Frank reunites with old Joe, crazy Marvin and wily Victoria to uncover a massive conspiracy that threatens their lives. Only their expert training will allow them to survive a near-impossible mission -- breaking into CIA headquarters.",
+        "genre": "Action, Adventure, Comedy, Crime, Thriller",
+        "director": "Robert Schwentke",
+        "poster": "https://image.tmdb.org/t/p/w500/8eeK3OB5PeSRQD7BpZcGZKkehG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bad Boys II",
+        "year": "2003",
+        "description": "Detectives Marcus Burnett and Mike Lowrey of the Miami Narcotics Task Force are tasked with stopping the flow of the drug Ecstasy into Miami. They track the drugs to the whacked-out Cuban drug lord Johnny Tapia, who is also involved in a bloody war with Russian and Haitian mobsters. If that isn't bad enough, there's tension between the two detectives when Marcus discovers that playboy Mike is secretly romancing Marcus’ sister, Syd.",
+        "genre": "Action, Crime, Comedy",
+        "director": "Michael Bay",
+        "poster": "https://image.tmdb.org/t/p/w500/yCvB5fG5aEPqa1St7ihY6KEAsHD.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ivanhoe",
+        "year": "1982",
+        "description": "Ivanhoe, a worthy and noble knight, the champion of justice returns to England after the holy wars, and finds England under the reign of Prince John and his henchmen and finds himself being involved in the power-struggle for the throne of England.",
+        "genre": "History, Adventure, TV Movie",
+        "director": "Douglas Camfield",
+        "poster": "https://image.tmdb.org/t/p/w500/rxlRUnpg8bFF1r2kBfB3w2rUAH4.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Surrender",
+        "year": "2025",
+        "description": "A fraught mother-daughter relationship is put to a terrifying test when the family patriarch dies, and the grieving mother hires a mysterious stranger to bring her husband back from the dead.",
+        "genre": "Drama, Horror",
+        "director": "Julia Max",
+        "poster": "https://image.tmdb.org/t/p/w500/t45V9B1kSvwVpupWie1t9e1YWXe.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Brave Citizen",
+        "year": "2023",
+        "description": "An expelled boxing champion, who now is a high-school teacher, witnesses intolerable violence and throws her first punch to build justice against it, while putting on a mask.",
+        "genre": "Action, Drama, Comedy",
+        "director": "Park Jin-pyo",
+        "poster": "https://image.tmdb.org/t/p/w500/ixQoOExnnvIxYvnqGgfhaWqXeXc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Shazam!",
+        "year": "2019",
+        "description": "A boy is given the ability to become an adult superhero in times of need with a single magic word.",
+        "genre": "Action, Comedy, Fantasy",
+        "director": "David F. Sandberg",
+        "poster": "https://image.tmdb.org/t/p/w500/xnopI5Xtky18MPhK40cZAGAOVeV.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Down",
+        "year": "2019",
+        "description": "A pair of coworkers gets trapped in an elevator over a long weekend, but what at first promises to be a romantic connection turns nefarious as each party begins to reveal who they truly are.",
+        "genre": "Horror, Thriller",
+        "director": "Daniel Stamm",
+        "poster": "https://image.tmdb.org/t/p/w500/tWD5FXfXTRcYzXZLq0bg8hxmQrs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Freelance",
+        "year": "2023",
+        "description": "An ex-special forces operative takes a job to provide security for a journalist as she interviews a dictator, but a military coup breaks out in the middle of the interview, they are forced to escape into the jungle where they must survive.",
+        "genre": "Action, Comedy",
+        "director": "Pierre Morel",
+        "poster": "https://image.tmdb.org/t/p/w500/7Bd4EUOqQDKZXA6Od5gkfzRNb0.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Splitsville",
+        "year": "2025",
+        "description": "After Ashley asks for a divorce, good-natured Carey runs to his friends, Julie and Paul, for support. He’s shocked to discover that the secret to their happiness is an open marriage, that is until Carey crosses the line and throws all of their relationships into chaos.",
+        "genre": "Comedy",
+        "director": "Michael Angelo Covino",
+        "poster": "https://image.tmdb.org/t/p/w500/gxCv6kUdywxYzIXX6xYcmX5APUV.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Salikmata",
+        "year": "2025",
+        "description": "In a remote town full of secrets and mysteries, a young man faces controversy after his secret relationship with a politician’s daughter is exposed. He must confront harsh consequences filled with deception, revenge, and unexplained events.",
+        "genre": "Thriller",
+        "director": "BC Amparado",
+        "poster": "https://image.tmdb.org/t/p/w500/yE87eY4g9K8Z4qSNPvpvxWZRwQG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Shanghai Noon",
+        "year": "2000",
+        "description": "Chon Wang, a clumsy imperial guard, trails Princess Pei Pei when she's kidnapped from the Forbidden City and transported to America. Wang follows her captors to Nevada, where he teams up with an unlikely partner, outcast outlaw Roy O'Bannon, and tries to spring the princess from her imprisonment.",
+        "genre": "Adventure, Action, Comedy, Western",
+        "director": "Tom Dey",
+        "poster": "https://image.tmdb.org/t/p/w500/b0WwWRcDiDahkah5vZ0KjB4N9ZZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bloody Escape: Bats Out of Hell",
+        "year": "2024",
+        "description": "After being turned into a cyborg, Kisaragi faces pursuit from vampires and vengeful yakuza.",
+        "genre": "Animation, Action, Science Fiction",
+        "director": "Goro Taniguchi",
+        "poster": "https://image.tmdb.org/t/p/w500/lWKtVX5oEgcLbMYMaWiyes6c4IB.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Iron Giant",
+        "year": "1999",
+        "description": "In the small town of Rockwell, Maine in October 1957, a giant metal machine befriends a nine-year-old boy and ultimately finds its humanity by unselfishly saving people from their own fears and prejudices.",
+        "genre": "Animation, Family, Science Fiction, Drama",
+        "director": "Brad Bird",
+        "poster": "https://image.tmdb.org/t/p/w500/ct04FCFLPImNG5thcPLRnVsZlmS.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Speed",
+        "year": "1994",
+        "description": "Jack Traven, an LAPD cop on SWAT detail, and veteran SWAT officer Harry Temple thwart an extortionist-bomber's scheme for a $3 million ransom. As they corner the bomber, he flees and detonates a bomb vest, seemingly killing himself. Weeks later, Jack witnesses a mass transit city bus explode and nearby a pay phone rings. On the phone is that same bomber looking for vengeance and the money he's owed. He gives a personal challenge to Jack: a bomb is rigged on another city bus - if it slows down below 50 mph, it will explode - bad enough any day, but a nightmare in LA traffic. And that's just the beginning...",
+        "genre": "Action, Thriller",
+        "director": "Jan de Bont",
+        "poster": "https://image.tmdb.org/t/p/w500/82PkCE4R95KhHICUDF7G4Ly2z3l.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Child's Play",
+        "year": "1988",
+        "description": "After being shot in a toy store, a serial killer transfers his soul into a Good Guy doll. A mother then gifts it to her 6-year old son Andy, which unleashes terror upon the city.",
+        "genre": "Horror",
+        "director": "Tom Holland",
+        "poster": "https://image.tmdb.org/t/p/w500/7jrOhGtRh6YK7sMfvH1E1f36aVx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Hunting Venus",
+        "year": "1999",
+        "description": "Former pop-star turned con artist Simon Delancey is kidnapped by two fans of his eighties band the Venus Hunters, and blackmailed to re-form the band for one final show.",
+        "genre": "Comedy, TV Movie",
+        "director": "Martin Clunes",
+        "poster": "https://image.tmdb.org/t/p/w500/zk24LmyWGXjlqNGsqEm2RmZX9JC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sleepy Hollow",
+        "year": "1999",
+        "description": "Skeptical young detective Ichabod Crane gets transferred to the hamlet of Sleepy Hollow, New York, where he is tasked with investigating the decapitations of three people – murders the townsfolk attribute to a legendary specter, The Headless Horseman.",
+        "genre": "Fantasy, Thriller, Mystery, Horror",
+        "director": "Tim Burton",
+        "poster": "https://image.tmdb.org/t/p/w500/1GuK965FLJxqUw9fd1pmvjbFAlv.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Escape Room",
+        "year": "2019",
+        "description": "Six strangers find themselves in circumstances beyond their control, and must use their wits to survive.",
+        "genre": "Horror, Thriller, Mystery",
+        "director": "Adam Robitel",
+        "poster": "https://image.tmdb.org/t/p/w500/8Ls1tZ6qjGzfGHjBB7ihOnf7f0b.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "XXXXXXX",
+        "year": "2016",
+        "description": "A tarot card reading as a starting point.  A disruptive relationship as a point.  Translation of the cards' symbols to a joint.\r Of the domestic exploration for finding my voice.",
+        "genre": "Documentary",
+        "director": "Liliana Colombo",
+        "poster": "https://image.tmdb.org/t/p/w500/vHwkMU0gKTDlg5A5kdgvcwKLtP3.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Violent Night",
+        "year": "2022",
+        "description": "When a team of mercenaries breaks into a wealthy family compound on Christmas Eve, taking everyone inside hostage, the team isn’t prepared for a surprise combatant: Santa Claus is on the grounds, and he’s about to show why this Nick is no saint.",
+        "genre": "Action, Comedy, Fantasy",
+        "director": "Tommy Wirkola",
+        "poster": "https://image.tmdb.org/t/p/w500/e8CpMgdyihz9Td7amQDqubPuzfN.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sweet Girl",
+        "year": "2021",
+        "description": "A man vows to bring justice to those responsible for his wife's death while protecting the only family he has left, his daughter.",
+        "genre": "Action, Thriller, Drama",
+        "director": "Brian Andrew Mendoza",
+        "poster": "https://image.tmdb.org/t/p/w500/cP7odDzzFBD9ycxj2laTeFWGLjD.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dilwale Dulhania Le Jayenge",
+        "year": "1995",
+        "description": "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.",
+        "genre": "Comedy, Drama, Romance",
+        "director": "Aditya Chopra",
+        "poster": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mom's Friend 2",
+        "year": "2016",
+        "description": "An art student named Gwang-ho gets dumped by his girlfriend because she was only his source of comfort, and that he's a Mama's boy and a premature ejaculator. He tries to avoid seeing her by going to a different academy and that's when his mother introduces him to her friend Soo-yeon, a sophisticated and intelligent looking woman. Gwang-ho falls for her.  Gwang-ho's mother suddenly leaves for Australia because his father is sick and Gwang-ho gets to stay in Soo-yeon's house for a few days. Looking at her, he thinks of all the things he would like to do with her and Soo-yeon's niece Ha-kyeong stimulates him to do something about his feelings.",
+        "genre": "Romance",
+        "director": "Lim Hyun-tae",
+        "poster": "https://image.tmdb.org/t/p/w500/mLlke4cd9R65FYqtMVUZ3h3Z2z9.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Lost in the Spotlight",
+        "year": "2025",
+        "description": "Just as he lands a prestigious role, a famous actor mysteriously loses his ability to act, sparking a journey of self-discovery amid public pressure.",
+        "genre": "Drama, Comedy",
+        "director": "Ernest Prakasa",
+        "poster": "https://image.tmdb.org/t/p/w500/yQ44md3qKEv4ZCDugkYaYIU2T4k.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bachelor Party",
+        "year": "1984",
+        "description": "On the eve of his wedding to his longtime girlfriend, unassuming nice guy Rick is dragged out for a night of debauchery by his friends.",
+        "genre": "Comedy",
+        "director": "Neal Israel",
+        "poster": "https://image.tmdb.org/t/p/w500/dZf3UpPZDvJYTODSUJQy7wYEop.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Shaun of the Dead",
+        "year": "2004",
+        "description": "Shaun lives a supremely uneventful life, which revolves around his girlfriend, his mother, and, above all, his local pub. This gentle routine is threatened when the dead return to life and make strenuous attempts to snack on ordinary Londoners.",
+        "genre": "Horror, Comedy",
+        "director": "Edgar Wright",
+        "poster": "https://image.tmdb.org/t/p/w500/dgXPhzNJH8HFTBjXPB177yNx6RI.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Final Destination 3",
+        "year": "2006",
+        "description": "High school senior Wendy's premonition of a deadly rollercoaster ride saves her life and a lucky few, but not from death itself — which seeks out those who escaped their fate.",
+        "genre": "Horror, Mystery",
+        "director": "James Wong",
+        "poster": "https://image.tmdb.org/t/p/w500/p7ARuNKUGPGvkBiDtIDvAzYzonX.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Limitless",
+        "year": "2011",
+        "description": "The life of an unsuccessful writer is transformed by a top-secret 'smart drug' that allows him to use 100% of his brain and become a perfect version of himself. His enhanced abilities soon attract shadowy forces that threaten his new life.",
+        "genre": "Thriller, Mystery, Science Fiction",
+        "director": "Neil Burger",
+        "poster": "https://image.tmdb.org/t/p/w500/kCokPP4WCQRrrAuZ7FcpIyHr8b2.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Oh, Hi!",
+        "year": "2025",
+        "description": "Iris and Isaac's first weekend away as a couple is going so well — until Isaac mentions he didn’t know they were a couple. Convinced she's met her perfect guy and that he's just confused, Iris goes to increasingly ridiculous and irrational lengths to prove to Isaac that they are meant to be together.",
+        "genre": "Romance, Comedy, Thriller",
+        "director": "Sophie Brooks",
+        "poster": "https://image.tmdb.org/t/p/w500/8nBOFo78pKgzLipgGZhC8VA33wp.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Apollo 13",
+        "year": "1995",
+        "description": "The true story of technical troubles that scuttle the Apollo 13 lunar mission in 1970, risking the lives of astronaut Jim Lovell and his crew, with the failed journey turning into a thrilling saga of heroism. Drifting more than 200,000 miles from Earth, the astronauts work furiously with the ground crew to avert tragedy.",
+        "genre": "Drama, History",
+        "director": "Ron Howard",
+        "poster": "https://image.tmdb.org/t/p/w500/tVeKscCm2fY1xDXZk8PgnZ87h9S.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dr. No",
+        "year": "1962",
+        "description": "Agent 007 battles mysterious Dr. No, a scientific genius bent on destroying the U.S. space program. As the countdown to disaster begins, Bond must go to Jamaica, where he encounters beautiful Honey Ryder, to confront a megalomaniacal villain in his massive island headquarters.",
+        "genre": "Adventure, Action, Thriller",
+        "director": "Terence Young",
+        "poster": "https://image.tmdb.org/t/p/w500/f9HsemSsBEHN5eoMble1bj6fDxs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Back in Action",
+        "year": "2025",
+        "description": "Fifteen years after vanishing from the CIA to start a family, elite spies Matt and Emily jump back into the world of espionage when their cover is blown.",
+        "genre": "Action, Comedy",
+        "director": "Seth Gordon",
+        "poster": "https://image.tmdb.org/t/p/w500/3L3l6LsiLGHkTG4RFB2aBA6BttB.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mar.IA",
+        "year": "2024",
+        "description": "Alina is a movie sound engineer. One day she receives an offer to do the direct sound for an erotic film featuring Maria Black, a famous star of the genre who had already retired. When Maria has a heart attack and dies in the middle of the shoot, and the producers decide not to call the police, a series of sinister and unexpected events are unleashed that will endanger everyone's lives.",
+        "genre": "Horror, Science Fiction",
+        "director": "Nicanor Loreti",
+        "poster": "https://image.tmdb.org/t/p/w500/wRI4NVCb78WFPq0Dhh2cm5gforG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "National Treasure",
+        "year": "2004",
+        "description": "Modern treasure hunters, led by archaeologist Ben Gates, search for a chest of riches rumored to have been stashed away by George Washington, Thomas Jefferson and Benjamin Franklin during the Revolutionary War. The chest's whereabouts may lie in secret clues embedded in the Constitution and the Declaration of Independence, and Gates is in a race to find the gold before his enemies do.",
+        "genre": "Adventure, Action, Thriller, Mystery",
+        "director": "Jon Turteltaub",
+        "poster": "https://image.tmdb.org/t/p/w500/pxL6E4GBOPUG6CdkO9cUQN5VMwI.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ash",
+        "year": "2025",
+        "description": "On the mysterious planet of Ash, Riya awakens to find her crew slaughtered. When a man named Brion arrives to rescue her, an ordeal of psychological and physical terror ensues while Riya and Brion must decide if they can trust one another to survive.",
+        "genre": "Horror, Science Fiction",
+        "director": "Flying Lotus",
+        "poster": "https://image.tmdb.org/t/p/w500/nRa8B3tQCUK6pVwjasIyQehbvpF.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Training Day",
+        "year": "2001",
+        "description": "On his first day on the job as a narcotics officer, a rookie cop works with a rogue detective who isn't what he appears.",
+        "genre": "Action, Crime, Drama",
+        "director": "Antoine Fuqua",
+        "poster": "https://image.tmdb.org/t/p/w500/bUeiwBQdupBLQthMCHKV7zv56uv.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bridesmaids",
+        "year": "2011",
+        "description": "Annie's life is a mess. But when she finds out her lifetime best friend is engaged, she simply must serve as Lillian's maid of honor. Though lovelorn and broke, Annie bluffs her way through the expensive and bizarre rituals. With one chance to get it perfect, she’ll show Lillian and her bridesmaids just how far you’ll go for someone you love.",
+        "genre": "Comedy, Romance",
+        "director": "Paul Feig",
+        "poster": "https://image.tmdb.org/t/p/w500/gJtA7hYsBMQ7EM3sPBMUdBfU7a0.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Lego Ninjago Movie",
+        "year": "2017",
+        "description": "Six young ninjas are tasked with defending their island home of Ninjago. By night, they’re gifted warriors using their skill and awesome fleet of vehicles to fight villains and monsters. By day, they’re ordinary teens struggling against their greatest enemy....high school.",
+        "genre": "Family, Comedy, Adventure, Animation, Action",
+        "director": "Charlie Bean",
+        "poster": "https://image.tmdb.org/t/p/w500/vUo0pNXGhp2ffTJxiStWt6fHL7F.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "I Swear",
+        "year": "2025",
+        "description": "Diagnosed with Tourette Syndrome at 15, John Davidson navigates his way against the odds through troubled teenage years and into adulthood, finding inspiration in the kindness of others to discover his true purpose in life.",
+        "genre": "Drama, History",
+        "director": "Kirk Jones",
+        "poster": "https://image.tmdb.org/t/p/w500/vUwyhNWBKkSwK8ELvEeBRwV724h.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Princess Diaries",
+        "year": "2001",
+        "description": "A socially awkward but very bright 15-year-old girl being raised by a single mom discovers that she is the princess of a small European country because of the recent death of her long-absent father, who, unknown to her, was the crown prince of Genovia. She must make a choice between continuing the life of a San Francisco teen or stepping up to the throne.",
+        "genre": "Comedy, Family, Romance",
+        "director": "Garry Marshall",
+        "poster": "https://image.tmdb.org/t/p/w500/qSw4lzhDGeM5MjQc86BLzJALhBs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Honey Don't!",
+        "year": "2025",
+        "description": "Honey O'Donahue, a small-town private investigator, delves into a series of strange deaths tied to a mysterious church.",
+        "genre": "Comedy, Crime",
+        "director": "Ethan Coen",
+        "poster": "https://image.tmdb.org/t/p/w500/fJm3kmd9NLZWypMas7g34oNFgbk.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Unfaithful",
+        "year": "2002",
+        "description": "Connie is a wife and mother whose 11-year marriage to Edward has lost its sexual spark. When Connie literally runs into handsome book collector Paul, he sweeps her into an all-consuming affair. But Edward soon becomes suspicious and decides to confront the other man.",
+        "genre": "Thriller, Drama, Romance",
+        "director": "Adrian Lyne",
+        "poster": "https://image.tmdb.org/t/p/w500/bjiHEhuiwhIygzjczbTPAA07cGc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Screamboat",
+        "year": "2025",
+        "description": "A late-night boat ride turns into a desperate fight for survival in New York City when a mischievous mouse becomes a monstrous reality.",
+        "genre": "Horror, Comedy",
+        "director": "Steven LaMorte",
+        "poster": "https://image.tmdb.org/t/p/w500/78xGAhQaKpgq9TI08XK40Ua2bGx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Scott Pilgrim vs. the World",
+        "year": "2010",
+        "description": "As bass guitarist for a garage-rock band, Scott Pilgrim has never had trouble getting a girlfriend; usually, the problem is getting rid of them. But when Ramona Flowers skates into his heart, he finds she has the most troublesome baggage of all: an army of ex-boyfriends who will stop at nothing to eliminate him from her list of suitors.",
+        "genre": "Action, Comedy, Romance",
+        "director": "Edgar Wright",
+        "poster": "https://image.tmdb.org/t/p/w500/g5IoYeudx9XBEfwNL0fHvSckLBz.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Orbis Pictus",
+        "year": "1997",
+        "description": "In Slovakia, the sixteen year-old Terezka is discharged from her school with a letter to her mother. Along her surrealistic journey to find her mother, Terezka entwines reality and fantasy and meets a man that is hired to burn clothes; a woman buried on the ground; a young bride that is marrying the forty and something year-old widow of his brother to support her family as a tradition in their village; her younger brother that is intern in a special school; a decadent TV comedian and his wife; a powerful mobster in the kitchen of a restaurant; one lover of her mother in her former address; and finally her promiscuous mother that advises her to travel through the world.",
+        "genre": "Drama, Fantasy",
+        "director": "Martin Šulík",
+        "poster": "https://image.tmdb.org/t/p/w500/uhM9kyBaMfSRSWcs2aqIpgIKOpV.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Outcast",
+        "year": "2014",
+        "description": "A mysterious warrior teams up with the daughter and son of a deposed Chinese Emperor to defeat their cruel brother, who seeks their deaths.",
+        "genre": "Action, Adventure",
+        "director": "Nick Powell",
+        "poster": "https://image.tmdb.org/t/p/w500/efsgCTlofzIuysfokEp7hwQnUho.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Benchwarmers",
+        "year": "2006",
+        "description": "A trio of guys try and make up for missed opportunities in childhood by forming a three-player baseball team to compete against standard little league squads.",
+        "genre": "Comedy",
+        "director": "Dennis Dugan",
+        "poster": "https://image.tmdb.org/t/p/w500/5yMPCr4qhuNg6fT538xicHaMaG7.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Purge",
+        "year": "2013",
+        "description": "Given the country's overcrowded prisons, the U.S. government begins to allow 12-hour periods of time in which all illegal activity is legal. During one of these free-for-alls, a family must protect themselves from a home invasion.",
+        "genre": "Science Fiction, Horror, Thriller",
+        "director": "James DeMonaco",
+        "poster": "https://image.tmdb.org/t/p/w500/46X1ei9uf13nkkr0OhWldGyr5Uh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Gandhi",
+        "year": "1982",
+        "description": "In the early years of the 20th century, Mohandas K. Gandhi, a British-trained lawyer, forsakes all worldly possessions to take up the cause of Indian independence. Faced with armed resistance from the British government, Gandhi adopts a policy of 'passive resistance', endeavouring to win freedom for his people without resorting to bloodshed.",
+        "genre": "Drama, History",
+        "director": "Richard Attenborough",
+        "poster": "https://image.tmdb.org/t/p/w500/rOXftt7SluxskrFrvU7qFJa5zeN.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Curly Sue",
+        "year": "1991",
+        "description": "Bill is a penniless drifter who scams strangers out of just enough money to feed himself and his partner in crime, an orphan girl known as Curly Sue. Bill and Curly Sue target Grey, a yuppie lawyer, but their con takes an unexpected turn when the successful woman begins to like the ramshackle duo. But there's one problem—Grey's jealous, conniving boyfriend, Walker.",
+        "genre": "Comedy, Drama, Family, Romance",
+        "director": "John Hughes",
+        "poster": "https://image.tmdb.org/t/p/w500/cndkzlP5frVWxng5HLd4JvA2g2y.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Janur Ireng",
+        "year": "2025",
+        "description": "Sabdo and Intan lived happily despite their material poverty, but tragedy struck when their parents’ house was completely burned down. In their confusion over where to live, they were approached by Arjo Kuncoro, a man who claimed to be their uncle— a wealthy merchant who had everything. They were taken to the Kuncoro family home, but it turned out that Arjo had a sinister plan to exploit them both.",
+        "genre": "Horror, Thriller",
+        "director": "Kimo Stamboel",
+        "poster": "https://image.tmdb.org/t/p/w500/1vw3ISK968CLRcqDSYd9iVMOMxZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Hot Girls Wanted",
+        "year": "2015",
+        "description": "A first-ever look at the realities of the professional “amateur” porn world and the steady stream of 18-to-19-year old girls entering into it.",
+        "genre": "Documentary",
+        "director": "Ronna Gradus",
+        "poster": "https://image.tmdb.org/t/p/w500/75ot83QOkc02vujyzmIbumQCU6Y.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Barnyard",
+        "year": "2006",
+        "description": "Otis is a mischievous, carefree Holstein cow who lives on a farm where, unbeknownst to humans, the animals are anthropomorphic. He prefers having fun with his best friends: Pip the mouse, Freddy the ferret, Peck the rooster, and Pig the pig - rather than following strict rules and accepting responsibility. This annoys his stern adoptive father Ben, the leader of the farm's community. One evening, Otis convinces Ben to cover his night watch so he can attend a massive party in the barn and impress Daisy, a pregnant cow who recently arrived at the farm with her best friend Bessy as a newcomer. As the animals party, Dag the coyote and his pack attempt to raid the chicken coop. Ben fends them off alone but is fatally wounded and killed. Otis must now learn the value of responsibility when he becomes the leader of his farm home's community.",
+        "genre": "Animation, Comedy, Family",
+        "director": "Steve Oedekerk",
+        "poster": "https://image.tmdb.org/t/p/w500/qB9jFInwUEb2VLhMeKQX17Vdrnp.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Evil Dead",
+        "year": "1981",
+        "description": "In 1979, a group of college students find a Sumerian Book of the Dead in an old wilderness cabin they've rented for a weekend getaway.",
+        "genre": "Horror",
+        "director": "Sam Raimi",
+        "poster": "https://image.tmdb.org/t/p/w500/54C1qdaiSijIU5NeNb4WsPJdNkG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The NeverEnding Story",
+        "year": "1984",
+        "description": "While hiding from bullies in his school's attic, a young boy discovers the extraordinary land of Fantasia, through a magical book called The Neverending Story. The book tells the tale of Atreyu, a young warrior who, with the help of a luck dragon named Falkor, must save Fantasia from the destruction of The Nothing.",
+        "genre": "Adventure, Fantasy, Family, Drama",
+        "director": "Wolfgang Petersen",
+        "poster": "https://image.tmdb.org/t/p/w500/ddYCa91iDXfJCxaqSYzwi2fjfnl.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bridge to Terabithia",
+        "year": "2007",
+        "description": "Jesse Aarons trained all summer to become the fastest runner in school. So he's very upset when newcomer Leslie Burke outruns him and everyone else. Despite this and other differences including that she's rich, he's poor, she's a city girl, and he's a country boy the two become fast friends. Together they create Terabithia, a land of monsters, trolls, ogres, and giants where they rule as king and queen.",
+        "genre": "Adventure, Drama, Family",
+        "director": "Gábor Csupó",
+        "poster": "https://image.tmdb.org/t/p/w500/3xFxGodKPMFLheS8rujFSmLfcq4.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Talk to Me",
+        "year": "2023",
+        "description": "When a group of friends discover how to conjure spirits using an embalmed hand, they become hooked on the new thrill, until one of them goes too far and unleashes terrifying supernatural forces.",
+        "genre": "Horror",
+        "director": "Michael Philippou",
+        "poster": "https://image.tmdb.org/t/p/w500/kdPMUMJzyYAc4roD52qavX0nLIC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Hunt",
+        "year": "2020",
+        "description": "Twelve strangers wake up in a clearing. They don't know where they are—or how they got there. In the shadow of a dark internet conspiracy theory, ruthless elitists gather at a remote location to hunt humans for sport. But their master plan is about to be derailed when one of the hunted turns the tables on her pursuers.",
+        "genre": "Action, Thriller, Horror",
+        "director": "Craig Zobel",
+        "poster": "https://image.tmdb.org/t/p/w500/wxPhn4ef1EAo5njxwBkAEVrlJJG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Footballest 2",
+        "year": "2025",
+        "description": "The Soto Alto football team, formed by Pakete and his friends, is at risk of being kicked out of the league. Thanks to a scam by a property development company, they’ve lost their pitch and now Los Justos, the team from a local reform school, looks set to take their place.",
+        "genre": "Family, Mystery, Comedy",
+        "director": "Miguel Ángel Lamata",
+        "poster": "https://image.tmdb.org/t/p/w500/sffjZlhE10T4I4PJo3tIAmB765x.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Friend",
+        "year": "2025",
+        "description": "New York City writer Iris finds her comfortable, solitary life thrown into disarray after her closest friend and mentor bequeaths her a Great Dane named Apollo. The huge dog immediately creates practical problems for Iris, from furniture destruction to eviction notices, as well as more existential ones. Yet as Iris finds herself unexpectedly bonding with Apollo, she begins to come to terms with her past, and her own creative inner life.",
+        "genre": "Comedy, Drama",
+        "director": "David Siegel",
+        "poster": "https://image.tmdb.org/t/p/w500/xPAcaKFWvbB9fXAmhIr3leBCRVJ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Rust",
+        "year": "2025",
+        "description": "Infamous outlaw Harland Rust breaks his estranged grandson Lucas out of prison, after Lucas is convicted to hang for an accidental murder. The two must outrun legendary U.S Marshal Wood Helm and bounty hunter Fenton \"Preacher\" Lang who are hot on their tails. Deeply buried secrets rise from the ashes and an unexpected familial bond begins to form as the mismatched duo tries to survive the merciless American Frontier.",
+        "genre": "Western",
+        "director": "Joel Souza",
+        "poster": "https://image.tmdb.org/t/p/w500/tbJ3RkA2s6X5qrBzrYHYTxvDBui.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Booksmart",
+        "year": "2019",
+        "description": "Two academic teenage superstars realize, on the eve of their high school graduation, that they should have worked less and played more. Determined to never fall short of their peers, the girls set out on a mission to cram four years of fun into one night.",
+        "genre": "Comedy",
+        "director": "Olivia Wilde",
+        "poster": "https://image.tmdb.org/t/p/w500/2aSxRDmisJP90H3S0aocyuQIe4z.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Last Summer",
+        "year": "2023",
+        "description": "One summer, a French teenager who has been living with his mother in the city moves in with his estranged father’s family in the countryside, where he clashes with his stepmother.",
+        "genre": "Drama",
+        "director": "Catherine Breillat",
+        "poster": "https://image.tmdb.org/t/p/w500/a94IHwd6t2oXKy5KWTvaEnAs6Ux.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Miraculous: Ladybug & Cat Noir, The Movie",
+        "year": "2023",
+        "description": "After a guardian of magical jewels turns an awkward girl and a popular boy into superheroes, they can never reveal their identities — even to each other.",
+        "genre": "Animation, Fantasy, Action, Romance, Family",
+        "director": "Jeremy Zag",
+        "poster": "https://image.tmdb.org/t/p/w500/dQNJ8SdCMn3zWwHzzQD2xrphR1X.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Akira",
+        "year": "1988",
+        "description": "A secret military project endangers Neo-Tokyo when it turns a biker gang member into a rampaging psychic psychopath that only two teenagers and a group of psychics can stop.",
+        "genre": "Animation, Science Fiction, Action",
+        "director": "Katsuhiro Otomo",
+        "poster": "https://image.tmdb.org/t/p/w500/neZ0ykEsPqxamsX6o5QNUFILQrz.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tank Girl",
+        "year": "1995",
+        "description": "After a comet disrupts the rain cycle of Earth, the planet has become a desolate, barren desert by the year 2033. With resources scarce, Kesslee, head of the powerful and evil Water & Power Corporation, the de facto government, has taken control of the water supply. Unwilling to cower under Kesslee's tyrannical rule, a pair of outlaws known as Tank Girl and Jet Girl rise up, joining the mysterious rebel Rippers to destroy the corrupt system.",
+        "genre": "Action, Comedy, Science Fiction, Fantasy",
+        "director": "Rachel Talalay",
+        "poster": "https://image.tmdb.org/t/p/w500/qohdY3BcJ98sFneOUAWp0FmH4Z6.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Padre no hay más que uno 5: Nido repleto",
+        "year": "2025",
+        "description": "Some parents experience the anguish of the \"empty nest\" when their children leave home. Javier, on the other hand, suffers the trauma of the \"full nest\": no one wants to leave home.",
+        "genre": "Comedy, Family",
+        "director": "Santiago Segura",
+        "poster": "https://image.tmdb.org/t/p/w500/7H27uvaPZfq794qVcLFrSEgHseZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mystic River",
+        "year": "2003",
+        "description": "The lives of three men who were childhood friends are shattered when one of them suffers a family tragedy.",
+        "genre": "Thriller, Crime, Drama, Mystery",
+        "director": "Clint Eastwood",
+        "poster": "https://image.tmdb.org/t/p/w500/hCHVDbo6XJGj3r2i4hVjKhE0GKF.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mapanukso",
+        "year": "2024",
+        "description": "Story about a group of five macho dancers navigating their own lives and the women who would do anything to keep them by their side.",
+        "genre": "Drama",
+        "director": "Jose Abdel Langit",
+        "poster": "https://image.tmdb.org/t/p/w500/2Ilc4sNRh6NL1nXiJ4XyzXdsL3.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sweet Dreams",
+        "year": "2024",
+        "description": "Morris navigates his way through a mandatory stay at Sweet Dreams sober living. In an attempt to get his life back on track, he agrees to coach a misfit softball team of his fellow housemates.",
+        "genre": "Comedy",
+        "director": "Lije Sarki",
+        "poster": "https://image.tmdb.org/t/p/w500/e1TyT5umEoAM2SXQIp7OwNBn7Hv.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Shark Tale",
+        "year": "2004",
+        "description": "Oscar is a small fish whose big aspirations often get him into trouble. Meanwhile, Lenny is a great white shark with a surprising secret that no sea creature would guess: He's a vegetarian. When a lie turns Oscar into an improbable hero and Lenny becomes an outcast, the two form an unlikely friendship.",
+        "genre": "Animation, Action, Comedy, Family",
+        "director": "Bibo Bergeron",
+        "poster": "https://image.tmdb.org/t/p/w500/r08DpyPyhXcJTfNZAICNGMzcQ8l.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dream Scenario",
+        "year": "2023",
+        "description": "Hapless family man Paul Matthews finds his life turned upside down when millions of strangers suddenly start seeing him in their dreams. But when his nighttime appearances take a nightmarish turn, Paul is forced to navigate his newfound stardom.",
+        "genre": "Comedy, Fantasy",
+        "director": "Kristoffer Borgli",
+        "poster": "https://image.tmdb.org/t/p/w500/2gIDL4hVp84tfgRE4r5NMzIR0QZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Day After Tomorrow",
+        "year": "2004",
+        "description": "After paleoclimatologist Jack Hall is largely ignored by UN officials when presenting his environmental concerns about the beginning of a new Ice Age, his research proves true when a superstorm develops, setting off catastrophic natural disasters throughout the world. Trying to get to his son, Sam, who is trapped in New York City with his friend Laura and others, Jack and his crew must travel to get to Sam before it's too late.",
+        "genre": "Science Fiction, Thriller, Adventure",
+        "director": "Roland Emmerich",
+        "poster": "https://image.tmdb.org/t/p/w500/Wr4HeYQRvwVCxzOV5TmGE7UkXq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "A Fistful of Dollars",
+        "year": "1964",
+        "description": "The Man With No Name enters the Mexican village of San Miguel in the midst of a power struggle among the three Rojo brothers and sheriff John Baxter. When a regiment of Mexican soldiers bearing gold intended to pay for new weapons is waylaid by the Rojo brothers, the stranger inserts himself into the middle of the long-simmering battle, selling false information to both sides for his own benefit.",
+        "genre": "Western",
+        "director": "Sergio Leone",
+        "poster": "https://image.tmdb.org/t/p/w500/lBwOEpwVeUAmrmglcstnaGcJq3Y.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Spithood",
+        "year": "2024",
+        "description": "When a dangerous patient escapes confinement in a mental asylum and goes on a rampant killing spree, the night shift staff face their worst nightmare, as they fight for survival.",
+        "genre": "Horror, Thriller",
+        "director": "Tim Pine",
+        "poster": "https://image.tmdb.org/t/p/w500/loH2BJPC7dlCw8e8QNEZCz9kTc2.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "It Boy",
+        "year": "2013",
+        "description": "38-year-old Alice has everything to become the next editor-in-chief of Rebelle magazine except for her uptight image. But when the young and charming Balthazar, barely 20, crosses Alice's path, she realizes that he holds the key to her promotion.",
+        "genre": "Comedy",
+        "director": "David Moreau",
+        "poster": "https://image.tmdb.org/t/p/w500/7PbiUzPjM6ZvD9sGppBtdLcDdwx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Krampus",
+        "year": "2015",
+        "description": "When his dysfunctional family clashes over the holidays, young Max is disillusioned and turns his back on Christmas.  Little does he know, this lack of festive spirit has unleashed the wrath of Krampus: a demonic force of ancient evil intent on punishing non-believers.",
+        "genre": "Horror, Comedy, Fantasy",
+        "director": "Michael Dougherty",
+        "poster": "https://image.tmdb.org/t/p/w500/mzPCU6xQ2XQmD76cDVZPm5PZAaS.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Secret Life of Walter Mitty",
+        "year": "2013",
+        "description": "A timid magazine photo manager who lives life vicariously through daydreams embarks on a true-life adventure when a negative goes missing.",
+        "genre": "Adventure, Comedy, Drama, Fantasy",
+        "director": "Ben Stiller",
+        "poster": "https://image.tmdb.org/t/p/w500/tY6ypjKOOtujhxiSwTmvA4OZ5IE.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Scary Movie 2",
+        "year": "2001",
+        "description": "While the original parodied slasher flicks like Scream, Keenen Ivory Wayans's sequel to Scary Movie takes comedic aim at haunted house movies. A group of students visit a mansion called \"Hell House,\" and murderous high jinks ensue.",
+        "genre": "Comedy",
+        "director": "Keenen Ivory Wayans",
+        "poster": "https://image.tmdb.org/t/p/w500/7Eb1JWK0Cb0rbfsYjwfc9g0PbQH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Black Lotus",
+        "year": "2023",
+        "description": "An ex-special forces operative wages a one man war through the streets of Amsterdam to rescue his friend's daughter from the local crime syndicate.",
+        "genre": "Action, Crime, Mystery, Thriller",
+        "director": "Todor Chapkanov",
+        "poster": "https://image.tmdb.org/t/p/w500/y3AeW200hqGLxoPyHMDHpzudylz.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Rookie Guide",
+        "year": "2025",
+        "description": "Yann can’t find a job he likes or can keep, and dreams of a better life. One day he learns that the famous travel guide Le Routard pays its employees to travel the world. Surely the perfect free holiday! Smooth-talking his way through the door, Yann manages to get himself hired for a trial research trip to Morocco, but he rapidly comes to realise that he’s seriously underestimated the job… Beguiled by Sofia, a feisty tourist guide, Yann gets swept up in an art trafficking operation led by the infamous mobster art dealer Dr Charoux and is plunged into an adventure where nothing will go as planned!",
+        "genre": "Comedy",
+        "director": "Philippe Mechelen",
+        "poster": "https://image.tmdb.org/t/p/w500/fSxrzckEOWAFBBPwt9X4AHfVEA7.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Book of Eli",
+        "year": "2010",
+        "description": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "genre": "Action, Thriller, Science Fiction",
+        "director": "Allen Hughes",
+        "poster": "https://image.tmdb.org/t/p/w500/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Rampage",
+        "year": "2018",
+        "description": "Primatologist Davis Okoye shares an unshakable bond with George, the extraordinarily intelligent, silverback gorilla who has been in his care since birth.  But a rogue genetic experiment gone awry mutates this gentle ape into a raging creature of enormous size.  To make matters worse, it’s soon discovered there are other similarly altered animals.  As these newly created alpha predators tear across North America, destroying everything in their path, Okoye teams with a discredited genetic engineer to secure an antidote, fighting his way through an ever-changing battlefield, not only to halt a global catastrophe but to save the fearsome creature that was once his friend.",
+        "genre": "Action, Adventure, Science Fiction",
+        "director": "Brad Peyton",
+        "poster": "https://image.tmdb.org/t/p/w500/MGADip4thVSErP34FAAfzFBTZ5.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "V/H/S/Halloween",
+        "year": "2025",
+        "description": "A collection of Halloween-themed videotapes unleashes a series of twisted, blood-soaked tales, turning trick-or-treat into a struggle for survival.",
+        "genre": "Horror, Thriller",
+        "director": "Bryan M. Ferguson",
+        "poster": "https://image.tmdb.org/t/p/w500/bvMKSZtN8KAdtlKoYbEi1Zhyaou.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sex Tape",
+        "year": "2014",
+        "description": "When Jay and Annie first got together, their romantic connection was intense – but ten years and two kids later, the flame of their love needs a spark.  To kick things up a notch, they decide – why not? – to make a video of themselves trying out every position in The Joy of Sex in one marathon three-hour session.  It seems like a great idea – until they discover that their most private video is no longer private.  With their reputations on the line, they know they’re just one click away from being laid bare to the world... but as their race to reclaim their video leads to a night they'll never forget, they'll find that their video will expose even more than they bargained for.",
+        "genre": "Comedy",
+        "director": "Jake Kasdan",
+        "poster": "https://image.tmdb.org/t/p/w500/pFdS7SIdjcrYXtf141dabWVly9B.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "27 Dresses",
+        "year": "2008",
+        "description": "Altruistic Jane finds herself facing her worst nightmare as her younger sister announces her engagement to the man Jane secretly adores.",
+        "genre": "Comedy, Romance",
+        "director": "Anne Fletcher",
+        "poster": "https://image.tmdb.org/t/p/w500/rEfourJfgEyKiewwH8ZkUYt9AqE.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Get Fast",
+        "year": "2024",
+        "description": "When The Thief’s partner is kidnapped after stealing millions in cash from a merciless drug lord named Nushi, he reluctantly teams up with an angst-ridden orphan to rescue him. Nushi enlists her most trusted hitman, The Cowboy, a lovable charmer who’s quick with his guns, to track down the Thief. Guns, cars, and explosions will give the newfound partners a head start, but how long will they be able to keep it up?",
+        "genre": "Action, Crime, Thriller",
+        "director": "James Clayton",
+        "poster": "https://image.tmdb.org/t/p/w500/tDpTR7xhHu9cz1X4JAIRFwXyf6U.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Jungle Cruise",
+        "year": "2021",
+        "description": "Dr. Lily Houghton enlists the aid of wisecracking skipper Frank Wolff to take her down the Amazon in his dilapidated boat. Together, they search for an ancient tree that holds the power to heal – a discovery that will change the future of medicine.",
+        "genre": "Fantasy, Adventure, Family, Action, Comedy",
+        "director": "Jaume Collet-Serra",
+        "poster": "https://image.tmdb.org/t/p/w500/yKy9ELL8CON5sqDg4yIvBb5LTZL.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Epic Movie",
+        "year": "2007",
+        "description": "When the Pevensie siblings each follow their own path, they find themselves at Willy's Chocolate Factory. Walking through a wardrobe, they discover the world of Gnarnia, ruled by the White Bitch. Meeting up with characters such as Harry Potter and Captain Jack Swallows, the newly reunited family must team up with Aslo, a wise-but-horny lion to stop the White Bitch's army.",
+        "genre": "Comedy, Adventure, Fantasy",
+        "director": "Jason Friedberg",
+        "poster": "https://image.tmdb.org/t/p/w500/l0lGJiTzU2Ce6T31DIRWv7I0kaC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Atomic Shark",
+        "year": "2016",
+        "description": "When a lifeguard catches wind of a dangerous anomaly off the coast of San Diego, she commissions a band of unlikely heroes to assist her on a suicide mission to save the west coast from total destruction.",
+        "genre": "Action, Horror",
+        "director": "Lisa Palenica",
+        "poster": "https://image.tmdb.org/t/p/w500/dnFYt8YTQXeZyq9oH3yi6kOqicO.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Three Steps Above Heaven",
+        "year": "2010",
+        "description": "Story of two young people who belong to different worlds. It is the chronicle of a love improbable, almost impossible but inevitable dragging in a frantic journey they discover the first great love. Babi is a girl from upper-middle class that is educated in goodness and innocence . Hache is a rebellious boy, impulsive, unconscious, has a appetite for risk and danger embodied in endless fights and illegal motorbike races, the limit of common sense",
+        "genre": "Romance, Drama",
+        "director": "Fernando González Molina",
+        "poster": "https://image.tmdb.org/t/p/w500/nNoMfNPnvEzGADXDkP6eJAP81KB.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Jack the Giant Slayer",
+        "year": "2013",
+        "description": "The story of an ancient war that is reignited when a young farmhand unwittingly opens a gateway between our world and a fearsome race of giants. Unleashed on the Earth for the first time in centuries, the giants strive to reclaim the land they once lost, forcing the young man, Jack into the battle of his life to stop them. Fighting for a kingdom, its people, and the love of a brave princess, he comes face to face with the unstoppable warriors he thought only existed in legend–and gets the chance to become a legend himself.",
+        "genre": "Fantasy, Action, Adventure, Drama",
+        "director": "Bryan Singer",
+        "poster": "https://image.tmdb.org/t/p/w500/9jSI7saUX9Qz0JLh19jX2ulEwL7.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Diary of a Wimpy Kid: The Last Straw",
+        "year": "2025",
+        "description": "When laidback Greg finds himself at odds with his dad's outsized expectations, pressure builds to turn his act around. After a series of hilarious near disasters, Greg's dad presents him with an ultimatum that just might challenge his wimpy ways for good.",
+        "genre": "Animation, Family, Comedy",
+        "director": "Matt Danner",
+        "poster": "https://image.tmdb.org/t/p/w500/emcCjpC289NxAGuVwlItHCTrgT7.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Equilibrium",
+        "year": "2002",
+        "description": "In a dystopian future, a totalitarian regime maintains peace by subduing the populace with a drug, and displays of emotion are punishable by death. A man in charge of enforcing the law rises to overthrow the system.",
+        "genre": "Action, Science Fiction, Thriller",
+        "director": "Kurt Wimmer",
+        "poster": "https://image.tmdb.org/t/p/w500/yQuovle5Ov6q69XSdTNdH52eANc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Obsesyon",
+        "year": "2025",
+        "description": "A middle-aged woman becomes obsessed with a student, who has a crush on her stepdaughter. Every time the young man becomes intimate with the daughter, the woman fantasizes that she is with him.",
+        "genre": "Drama, Romance",
+        "director": "Jeffrey Hidalgo",
+        "poster": "https://image.tmdb.org/t/p/w500/trn8Iz80atofrlCP6VOEFRRacRK.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ocean's Thirteen",
+        "year": "2007",
+        "description": "Danny Ocean's team of criminals are back and composing a plan more personal than ever. When ruthless casino owner Willy Bank doublecrosses Reuben Tishkoff, causing a heart attack, Danny Ocean vows that he and his team will do anything to bring down Willy Bank along with everything he's got. Even if it means asking for help from an enemy.",
+        "genre": "Crime, Thriller",
+        "director": "Steven Soderbergh",
+        "poster": "https://image.tmdb.org/t/p/w500/pBsZs4zYUiUTemqbikTZ76iQRaU.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Daddy's Home 2",
+        "year": "2017",
+        "description": "Father and stepfather Dusty and Brad join forces to make Christmastime perfect for the children. Their newfound partnership soon gets put to the test when Dusty's old-school, macho dad and Brad's gentle father arrive to turn the holiday upside down. After a sudden change in plans, the four men decide to take the kids to a luxury resort for a fun-filled getaway that turns into a hilarious and chaotic adventure.",
+        "genre": "Comedy",
+        "director": "Sean Anders",
+        "poster": "https://image.tmdb.org/t/p/w500/rF2IoKL0IFmumEXQFUuB8LajTYP.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Avengers",
+        "year": "1998",
+        "description": "British Ministry agent John Steed, under direction from \"Mother\", investigates a diabolical plot by arch-villain Sir August de Wynter to rule the world with his weather control machine. Steed investigates the beautiful Doctor Mrs. Emma Peel, the only suspect, but simultaneously falls for her and joins forces with her to combat Sir August.",
+        "genre": "Action, Adventure, Thriller, Science Fiction, Comedy",
+        "director": "Jeremiah S. Chechik",
+        "poster": "https://image.tmdb.org/t/p/w500/1p5thyQ4pCy876HpdvFARqJ62N9.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Not Another Teen Movie",
+        "year": "2001",
+        "description": "On a bet, a gridiron hero at John Hughes High School sets out to turn a bespectacled plain Jane into a beautiful and popular prom queen in this outrageous send-up of the teen movies of the 1980s and '90s.",
+        "genre": "Comedy",
+        "director": "Joel Gallen",
+        "poster": "https://image.tmdb.org/t/p/w500/9ZaGxvj1mqdKVLpSloq4mzS7SK6.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Kate & Leopold",
+        "year": "2001",
+        "description": "When her scientist ex-boyfriend discovers a portal to travel through time -- and brings back a 19th-century nobleman named Leopold to prove it -- a skeptical Kate reluctantly takes responsibility for showing Leopold the 21st century. The more time Kate spends with Leopold, the harder she falls for him. But if he doesn't return to his own time, his absence will forever alter history.",
+        "genre": "Romance, Comedy, Fantasy",
+        "director": "James Mangold",
+        "poster": "https://image.tmdb.org/t/p/w500/57kLEPlIXHynZXTjJF6Jyk3ZmKT.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Out on Bail",
+        "year": "1989",
+        "description": "A Tennessee sheriff and lawyer want a jailed drifter to assassinate a mayoral candidate.",
+        "genre": "Action, Crime, Thriller",
+        "director": "Gordon Hessler",
+        "poster": "https://image.tmdb.org/t/p/w500/rfXZokZsjQSoQJd5rza2h4x9BL5.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Havoc",
+        "year": "2005",
+        "description": "A wealthy Los Angeles teen and her superficial friends wants to break out of suburbia and experience Southern California's \"gangsta\" lifestyle. But problems arise when the preppies get in over their heads and provoke the wrath of a violent Latino gang. Suddenly, their role-playing seems a little too real.",
+        "genre": "Crime, Drama",
+        "director": "Barbara Kopple",
+        "poster": "https://image.tmdb.org/t/p/w500/xY4c4bHPCRrwIvkxJ6qRLoyxQVo.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Waterboy",
+        "year": "1998",
+        "description": "Bobby Boucher is a water boy for a struggling college football team. The coach discovers Boucher's hidden rage makes him a tackling machine whose bone-crushing power might vault his team into the playoffs.",
+        "genre": "Comedy",
+        "director": "Frank Coraci",
+        "poster": "https://image.tmdb.org/t/p/w500/miT42qWYC4D0n2mXNzJ9VfhheWW.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mama Jack",
+        "year": "2005",
+        "description": "Set in Cape Town, South Africa Mama Jack is the story of Jack Theron, an ordinary person working on a film set. However, his movie producer boss hates him and wants to remove him from the production of the film. In a bid to get rid of Jack, the producer spikes his drink with a drug at a glamorous function, and before long Jack has got himself on the wrong side of the law.  While on the run, Jack turns to his friend, a make-up artist, who turns him into \"Mama Bolo\". Mama Bolo soon finds “herself” employed by the producer’s fiancée, Angela.  A series of deceptions and misunderstandings pile up and comic mayhem ensues with Jack Theron becoming another character, Doctor Donald, a tramp from Scotland.",
+        "genre": "Comedy",
+        "director": "Gray Hofmeyr",
+        "poster": "https://image.tmdb.org/t/p/w500/ftMuRRl8tLlnzKRnVI3SeHyuCGh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Old",
+        "year": "2021",
+        "description": "A group of families on a tropical holiday discover that the secluded beach where they are staying is somehow causing them to age rapidly – reducing their entire lives into a single day.",
+        "genre": "Thriller, Mystery, Horror",
+        "director": "M. Night Shyamalan",
+        "poster": "https://image.tmdb.org/t/p/w500/vclShucpUmPhdAOmKgf3B3Z4POD.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "M3GAN",
+        "year": "2022",
+        "description": "A brilliant toy company roboticist uses artificial intelligence to develop M3GAN, a life-like doll programmed to emotionally bond with her newly orphaned niece. But when the doll's programming works too well, she becomes overprotective of her new friend with terrifying results.",
+        "genre": "Science Fiction, Horror",
+        "director": "Gerard Johnstone",
+        "poster": "https://image.tmdb.org/t/p/w500/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Ten Commandments",
+        "year": "1956",
+        "description": "Escaping death, a Hebrew infant is raised in a royal household to become a prince. Upon discovery of his true heritage, Moses embarks on a personal quest to reclaim his destiny as the leader and liberator of the Hebrew people.",
+        "genre": "Drama, History",
+        "director": "Cecil B. DeMille",
+        "poster": "https://image.tmdb.org/t/p/w500/3Ei59AR64x6dMZfWobPCkZjbqTL.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Die Another Day",
+        "year": "2002",
+        "description": "James Bond is sent to investigate the connection between a North Korean terrorist and a diamond mogul, who is funding the development of an international space weapon.",
+        "genre": "Adventure, Action, Thriller",
+        "director": "Lee Tamahori",
+        "poster": "https://image.tmdb.org/t/p/w500/bZmGqOhMhaLn8AoFMvFDct4tbrL.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Gifted",
+        "year": "2017",
+        "description": "Frank, a single man raising his child prodigy niece Mary, is drawn into a custody battle with his mother.",
+        "genre": "Drama, Comedy",
+        "director": "Marc Webb",
+        "poster": "https://image.tmdb.org/t/p/w500/9Ts7Vc4wLlpI9oox9mkVUE1tBHy.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mulan",
+        "year": "2020",
+        "description": "When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential.",
+        "genre": "Adventure, Fantasy, Action",
+        "director": "Niki Caro",
+        "poster": "https://image.tmdb.org/t/p/w500/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tombstone",
+        "year": "1993",
+        "description": "Legendary marshal Wyatt Earp, now a weary gunfighter, joins his brothers Morgan and Virgil to pursue their collective fortune in the thriving mining town of Tombstone. But Earp is forced to don a badge again and get help from his notorious pal Doc Holliday when a gang of renegade brigands and rustlers begins terrorizing the town.",
+        "genre": "Western, Action",
+        "director": "George P. Cosmatos",
+        "poster": "https://image.tmdb.org/t/p/w500/wGFCvylul8iEQhJOKfwZGGvXMzA.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Blade II",
+        "year": "2002",
+        "description": "Blade forms an uneasy alliance with the vampire council in order to combat the Reapers, who are feeding on vampires.",
+        "genre": "Fantasy, Horror, Action, Thriller",
+        "director": "Guillermo del Toro",
+        "poster": "https://image.tmdb.org/t/p/w500/yDHwo3eWcMiy5LnnEnlGV9iLu9k.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Naked Ambition 3D",
+        "year": "2014",
+        "description": "An honors graduate in literature, Wyman is stuck writing cheap erotic fiction, but somehow ends up starring in an AV film. Suddenly a porn superstar in Japan, he discovers a whole new world fraught with pleasure, pain and more twists and turns than he or the audience expects.",
+        "genre": "Comedy",
+        "director": "Lee Kung-Lok",
+        "poster": "https://image.tmdb.org/t/p/w500/5XMtLOARkGjttCbu6Hgmh6v0Mk4.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Rear Window",
+        "year": "1954",
+        "description": "A wheelchair-bound photographer spies on his neighbors from his apartment window and becomes convinced one of them has committed murder.",
+        "genre": "Thriller, Mystery",
+        "director": "Alfred Hitchcock",
+        "poster": "https://image.tmdb.org/t/p/w500/ILVF0eJxHMddjxeQhswFtpMtqx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dead Silence",
+        "year": "2007",
+        "description": "Jamie returns to his hometown in search of answers to his wife's murder, which occurred after receiving a weird package containing a ventriloquist dummy named Billy, which may be linked to the legend of ventriloquist Mary Shaw. Destined to find out the truth, Jamie goes to the town of Raven's Fair, where Shaw used to perform and is buried. But Jamie is in for more than he expected.",
+        "genre": "Horror",
+        "director": "James Wan",
+        "poster": "https://image.tmdb.org/t/p/w500/rvcUVdATIHKZt7BSSttUkKbeBXN.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Killer Elite",
+        "year": "2011",
+        "description": "Based on a shocking true story, Killer Elite pits two of the world’s most elite operatives—Danny, an ex-special ops agent and Hunter, his longtime mentor—against the cunning leader of a secret military society. Covering the globe from Australia to Paris, London and the Middle East, Danny and Hunter are plunged into a highly dangerous game of cat and mouse—where the predators become the prey.",
+        "genre": "Action, Adventure, Thriller",
+        "director": "Gary McKendry",
+        "poster": "https://image.tmdb.org/t/p/w500/7O2U0WPFPSvNSUYZlhbnV081lBF.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "A Complete Unknown",
+        "year": "2024",
+        "description": "New York, early 1960s. Against the backdrop of a vibrant music scene and tumultuous cultural upheaval, an enigmatic 19-year-old from Minnesota arrives in the West Village with his guitar and revolutionary talent, destined to change the course of American music.",
+        "genre": "Drama, Music",
+        "director": "James Mangold",
+        "poster": "https://image.tmdb.org/t/p/w500/llWl3GtNoXosbvYboelmoT459NM.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Run",
+        "year": "2020",
+        "description": "Chloe, a teenager who is confined to a wheelchair, is homeschooled by her mother, Diane. Chloe soon becomes suspicious of her mother and begins to suspect that she may be harboring a dark secret.",
+        "genre": "Thriller, Horror, Drama",
+        "director": "Aneesh Chaganty",
+        "poster": "https://image.tmdb.org/t/p/w500/ilHG4EayOVoYeKqslspY3pR4wzC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Last Shift",
+        "year": "2014",
+        "description": "Rookie police officer Jessica Loren has been assigned the last shift at a closing police station and must wait for a hazmat crew to collect biomedical evidence. Ordered not to leave the station under any circumstances, Jessica comes to learn that it's more than just an outdated station, it's home to the ultimate embodiment of evil and his devoted bloodthirsty followers. Jessica is left to fend for herself in the Devil's playground.",
+        "genre": "Horror, Mystery",
+        "director": "Anthony DiBlasi",
+        "poster": "https://image.tmdb.org/t/p/w500/oSTFMqFpVB4yq9SOIxBp8xZ9jh5.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Big Momma's House",
+        "year": "2000",
+        "description": "When a street-smart FBI agent is sent to Georgia to protect a beautiful single mother and her son from an escaped convict, he is forced to impersonate a crass Southern granny known as Big Momma in order to remain incognito.",
+        "genre": "Crime, Comedy",
+        "director": "Raja Gosnell",
+        "poster": "https://image.tmdb.org/t/p/w500/5YoSFqpTz5qIxsX61CPMGKONQIY.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Smurfs",
+        "year": "2011",
+        "description": "When the evil wizard Gargamel chases the tiny blue Smurfs out of their village, they tumble from their magical world and into ours -- in fact, smack dab in the middle of Central Park. Just three apples high and stuck in the Big Apple, the Smurfs must find a way to get back to their village before Gargamel tracks them down.",
+        "genre": "Animation, Family, Adventure, Comedy, Fantasy",
+        "director": "Raja Gosnell",
+        "poster": "https://image.tmdb.org/t/p/w500/vRhnslP2gW0QDym7BsMeSuioUfK.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Never Say Never Again",
+        "year": "1983",
+        "description": "James Bond returns as the secret agent 007 to battle the evil organization SPECTRE. Bond must defeat Largo, who has stolen two atomic warheads for nuclear blackmail. But Bond has an ally in Largo's girlfriend, the willowy Domino, who falls for Bond and seeks revenge.",
+        "genre": "Adventure, Action, Thriller",
+        "director": "Irvin Kershner",
+        "poster": "https://image.tmdb.org/t/p/w500/zhoAL4o1STGgLbLxJ9r1ijfyHC9.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Gunner",
+        "year": "2024",
+        "description": "While on a camping trip in order to reconnect, war veteran Colonel Lee Gunner must save his two sons from a gang of violent bikers when they're kidnapped after accidentally stumbling upon to a massive drug operation.",
+        "genre": "Action, Thriller, Crime",
+        "director": "Dimitri Logothetis",
+        "poster": "https://image.tmdb.org/t/p/w500/cS2TXN1YlrCvkZmMxaevC1ZKtEz.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Abyss",
+        "year": "1989",
+        "description": "A civilian oil rig crew is recruited to conduct a search and rescue effort when a nuclear submarine mysteriously sinks. One diver soon finds himself on a spectacular odyssey 25,000 feet below the ocean's surface where he confronts a mysterious force that has the power to change the world or destroy it.",
+        "genre": "Adventure, Thriller, Science Fiction",
+        "director": "James Cameron",
+        "poster": "https://image.tmdb.org/t/p/w500/2dCit3XAtv9KWCJvRKdPkJ0FAkH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Superman",
+        "year": "1978",
+        "description": "Mild-mannered Clark Kent works as a reporter at the Daily Planet alongside his crush, Lois Lane. Clark must summon his superhero alter-ego when the nefarious Lex Luthor launches a plan to take over the world.",
+        "genre": "Science Fiction, Action, Adventure",
+        "director": "Richard Donner",
+        "poster": "https://image.tmdb.org/t/p/w500/d7px1FQxW4tngdACVRsCSaZq0Xl.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ready or Not",
+        "year": "2019",
+        "description": "A young bride's wedding night turns into her worst nightmare when her ridiculously rich in-laws force her to play a gruesome game of hide-and-seek.",
+        "genre": "Horror, Comedy",
+        "director": "Tyler Gillett",
+        "poster": "https://image.tmdb.org/t/p/w500/oJD9KQFoObZmxAS1je56SIFVNJt.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The World Is Not Enough",
+        "year": "1999",
+        "description": "Greed, revenge, world dominance and high-tech terrorism – it's all in a day's work for Bond, who's on a mission to protect a beautiful oil heiress from a notorious terrorist. In a race against time that culminates in a dramatic submarine showdown, Bond works to defuse the international power struggle that has the world's oil supply hanging in the balance.",
+        "genre": "Adventure, Action, Thriller",
+        "director": "Michael Apted",
+        "poster": "https://image.tmdb.org/t/p/w500/wCb2msgoZPK01WIqry24M4xsM73.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Lost in Translation",
+        "year": "2003",
+        "description": "Two lost souls visiting Tokyo -- the young, neglected wife of a photographer and a washed-up movie star shooting a TV commercial -- find an odd solace and pensive freedom to be real in each other's company, away from their lives in America.",
+        "genre": "Drama, Romance, Comedy",
+        "director": "Sofia Coppola",
+        "poster": "https://image.tmdb.org/t/p/w500/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Solar Attack",
+        "year": "2006",
+        "description": "When the sun's increasing expulsions of plasma threaten to ignite methane in our atmosphere, international tensions rise while scientists race for a solution to avoid natural disaster.",
+        "genre": "Action, Science Fiction, Thriller, TV Movie",
+        "director": "Paul Ziller",
+        "poster": "https://image.tmdb.org/t/p/w500/dL5hDlxU8BLf1oVdnl9Llb2uoI.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tall Girl",
+        "year": "2019",
+        "description": "Jodi, the tallest girl in her high school, has always felt uncomfortable in her own skin. But after years of slouching, being made fun of, and avoiding attention at all costs, Jodi finally decides to find the confidence to stand tall.",
+        "genre": "Comedy, Drama, Romance",
+        "director": "Nzingha Stewart",
+        "poster": "https://image.tmdb.org/t/p/w500/m0clsFEXidLVJ0TueqWOvvImOMh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "About Love",
+        "year": "2004",
+        "description": "A sad story about life and love as it told by Grigori Stepanovich Smirnov who is trying to find what caused the suicide of young 15 years old Volodya.",
+        "genre": "Romance, Drama",
+        "director": "Sergey Solovyov",
+        "poster": "https://image.tmdb.org/t/p/w500/wBl88JygakzSNWvQwFMIqXeINKh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dune",
+        "year": "1984",
+        "description": "In the year 10,191, the most precious substance in the universe is the spice Melange. The spice extends life. The spice expands consciousness. The spice is vital to space travel.  The spice exists on only one planet in the entire universe, the vast desert planet Arrakis, also known as Dune.  Its native inhabitants, the Fremen, have long held a prophecy that a man would come, a messiah who would lead them to true freedom.",
+        "genre": "Action, Science Fiction, Adventure",
+        "director": "David Lynch",
+        "poster": "https://image.tmdb.org/t/p/w500/4kJmUCE7mkVJjXa7A0g2rY4IGTm.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Climax",
+        "year": "2018",
+        "description": "When a dance troupe is lured to an empty school, a bowl of drug-laced sangria causes their jubilant rehearsal to descend into a dark and explosive nightmare as they try to survive the night—and find who's responsible—before it's too late.",
+        "genre": "Horror, Drama",
+        "director": "Gaspar Noé",
+        "poster": "https://image.tmdb.org/t/p/w500/47IXH2iEWwX0F7vIyGXaKQ0psBG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ong-Bak",
+        "year": "2003",
+        "description": "When the head of a statue sacred to a village is stolen, a young martial artist goes to the big city and finds himself taking on the underworld to retrieve it.",
+        "genre": "Action, Crime",
+        "director": "Prachya Pinkaew",
+        "poster": "https://image.tmdb.org/t/p/w500/oagqAwp48dMPoCT94yDJUDOCVPi.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Neon Genesis Evangelion: The End of Evangelion",
+        "year": "1997",
+        "description": "SEELE orders an all-out attack on NERV, aiming to destroy the Evas before Gendo can advance his own plans for the Human Instrumentality Project. Shinji is pushed to the limits of his sanity as he is forced to decide the fate of humanity.",
+        "genre": "Animation, Science Fiction, Drama, Fantasy",
+        "director": "Kazuya Tsurumaki",
+        "poster": "https://image.tmdb.org/t/p/w500/j6G24dqI4WgUtChhWjfnI4lnmiK.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Lady and the Tramp",
+        "year": "1955",
+        "description": "Lady, a golden cocker spaniel, meets up with a mongrel dog who calls himself the Tramp. He is obviously from the wrong side of town, but happenings at Lady's home make her decide to travel with him for a while.",
+        "genre": "Family, Animation, Romance, Adventure, Comedy",
+        "director": "Hamilton Luske",
+        "poster": "https://image.tmdb.org/t/p/w500/340NcWz9SQXWQyf4oicMxjbrLOb.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Great Wall",
+        "year": "2016",
+        "description": "European mercenaries searching for black powder become embroiled in the defense of the Great Wall of China against a horde of monstrous creatures.",
+        "genre": "Action, Adventure, Fantasy",
+        "director": "Zhang Yimou",
+        "poster": "https://image.tmdb.org/t/p/w500/p70dq1YxabemdZDm5K6Q8G10wSn.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Plague",
+        "year": "2025",
+        "description": "A socially awkward tween endures the ruthless hierarchy at a water polo camp, his anxiety spiraling into psychological turmoil over the summer.",
+        "genre": "Drama, Thriller, Horror",
+        "director": "Charlie Polinger",
+        "poster": "https://image.tmdb.org/t/p/w500/e4aBtGkDgAbwcbT4TxW8kj7yCeq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Croods: A New Age",
+        "year": "2020",
+        "description": "Searching for a safer habitat, the prehistoric Crood family discovers an idyllic, walled-in paradise that meets all of its needs. Unfortunately, they must also learn to live with the Bettermans -- a family that's a couple of steps above the Croods on the evolutionary ladder. As tensions between the new neighbors start to rise, a new threat soon propels both clans on an epic adventure that forces them to embrace their differences, draw strength from one another, and survive together.",
+        "genre": "Animation, Family, Adventure, Fantasy, Comedy",
+        "director": "Joel Crawford",
+        "poster": "https://image.tmdb.org/t/p/w500/tbVZ3Sq88dZaCANlUcewQuHQOaE.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Fractured",
+        "year": "2019",
+        "description": "Driving cross-country, Ray and his wife and daughter stop at a highway rest area where his daughter falls and breaks her arm. After a frantic rush to the hospital and a clash with the check-in nurse, Ray is finally able to get her to a doctor. While the wife and daughter go downstairs for an MRI, Ray, exhausted, passes out in a chair in the lobby. Upon waking up, they have no record or knowledge of Ray's family ever being checked in.",
+        "genre": "Thriller, Drama",
+        "director": "Brad Anderson",
+        "poster": "https://image.tmdb.org/t/p/w500/paZNRffT3kUckuRFKbeDBuX1YcZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Monte Carlo",
+        "year": "2011",
+        "description": "Three young women vacationing in Paris find themselves whisked away to Monte Carlo after one of the girls is mistaken for a British heiress.",
+        "genre": "Adventure, Comedy, Romance",
+        "director": "Thomas Bezucha",
+        "poster": "https://image.tmdb.org/t/p/w500/dcbqyycrWA56HXq5lm41HYuED8Y.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Secretary",
+        "year": "2002",
+        "description": "A young woman, recently released from a mental hospital, gets a job as a secretary to a demanding lawyer, where their employer-employee relationship turns into a sexual, sadomasochistic one.",
+        "genre": "Romance, Drama, Comedy",
+        "director": "Steven Shainberg",
+        "poster": "https://image.tmdb.org/t/p/w500/mdRXSE7ho185SZlXj0JSwuecEd3.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Noche santa",
+        "year": "2002",
+        "description": "",
+        "genre": "Drama",
+        "director": "Mario Martínez Cobos",
+        "poster": "https://image.tmdb.org/t/p/w500None",
+        "category": "movies"
+    },
+    {
+        "title": "Creed",
+        "year": "2015",
+        "description": "The former World Heavyweight Champion Rocky Balboa serves as a trainer and mentor to Adonis Johnson, the son of his late friend and former rival Apollo Creed.",
+        "genre": "Drama, Action",
+        "director": "Ryan Coogler",
+        "poster": "https://image.tmdb.org/t/p/w500/1BfTsk5VWuw8FCocAhCyqnRbEzq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "War Dogs",
+        "year": "2016",
+        "description": "Based on the true story of two young men, David Packouz and Efraim Diveroli, who won a $300 million contract from the Pentagon to arm America's allies in Afghanistan.",
+        "genre": "Comedy, Crime, Drama",
+        "director": "Todd Phillips",
+        "poster": "https://image.tmdb.org/t/p/w500/mDcPRjZC1bb6LavFU3gwsWdVfCM.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Samurai Fury",
+        "year": "2025",
+        "description": "Set in war-torn 15th century Kyoto, on the eve of the Onin War, the movie centers on a band of outlaws led by Hyoe, a scoundrel whose lethal sword skills place him at the tip of the spear in a deadly uprising against the corrupt Shogunate and its army, led by former friend-turned-archrival Doken.",
+        "genre": "Action, Drama",
+        "director": "Yu Irie",
+        "poster": "https://image.tmdb.org/t/p/w500/apthwI5WmRT3cpiMg9sppEJ0PsN.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Lethal Weapon",
+        "year": "1987",
+        "description": "A veteran cop and an unstable detective become partners who must put their differences aside in order to bring down a heroin-smuggling ring run by ex-Special Forces.",
+        "genre": "Action, Comedy, Thriller",
+        "director": "Richard Donner",
+        "poster": "https://image.tmdb.org/t/p/w500/6gt44oqb4nE8vflPElffeGwsHVl.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Mortal Kombat",
+        "year": "2021",
+        "description": "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
+        "genre": "Action, Fantasy, Adventure",
+        "director": "Simon McQuoid",
+        "poster": "https://image.tmdb.org/t/p/w500/ybrX94xQm8lXYpZAPRmwD9iIbWP.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Pretty Guardian Sailor Moon Cosmos the Movie Part 1",
+        "year": "2023",
+        "description": "The Sailor Guardians enjoy a brief moment of peace until Mamoru's Golden Crystal is stolen by Sailor Galaxia and the mysterious Sailor Starlights appear. One by one, Sailor Moon’s friends and loved ones are targeted by a formidable new enemy who threatens to destroy everything and rule over the cosmos.",
+        "genre": "Animation, Action, Adventure, Fantasy, Romance",
+        "director": "Tomoya Takahashi",
+        "poster": "https://image.tmdb.org/t/p/w500/8X3nxTHHM2HZCUhCvCzKYDeOeoL.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Hop",
+        "year": "2011",
+        "description": "E.B., the Easter Bunny's teenage son, heads to Hollywood, determined to become a drummer in a rock 'n' roll band. In L.A., he's taken in by Fred after the out-of-work slacker hits E.B. with his car.",
+        "genre": "Animation, Comedy, Family",
+        "director": "Tim Hill",
+        "poster": "https://image.tmdb.org/t/p/w500/hRa9MJTgCbSuL3h2CVPwUdYOWJH.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ella McCay",
+        "year": "2025",
+        "description": "An idealistic young politician juggles familial issues and a challenging work life while preparing to take over the job of her mentor, the state’s longtime incumbent governor.",
+        "genre": "Comedy, Drama",
+        "director": "James L. Brooks",
+        "poster": "https://image.tmdb.org/t/p/w500/iQCtK477yqp6xnHHrQG2P0lXoow.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Con Air",
+        "year": "1997",
+        "description": "Newly-paroled former US Army ranger Cameron Poe is headed back to his wife, but must fly home aboard a prison transport flight dubbed \"Jailbird\" taking the “worst of the worst” prisoners, a group described as “pure predators”, to a new super-prison. Poe faces impossible odds when the transport plane is skyjacked mid-flight by the most vicious criminals in the country led by the mastermind — genius serial killer Cyrus \"The Virus\" Grissom, and backed by black militant Diamond Dog and psychopath Billy Bedlam.",
+        "genre": "Action, Thriller, Crime",
+        "director": "Simon West",
+        "poster": "https://image.tmdb.org/t/p/w500/kOKjgrEzGOP92rVQ6srA9jtp60l.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Book",
+        "year": "2024",
+        "description": "",
+        "genre": "Horror, Thriller",
+        "director": "Bernardo Hernández",
+        "poster": "https://image.tmdb.org/t/p/w500/qlOWxBek4G7Jw52ZBuCKzy4RlKm.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ghost in the Shell",
+        "year": "1995",
+        "description": "In the year 2029, the barriers of our world have been broken down by the net and by cybernetics, but this brings new vulnerability to humans in the form of brain-hacking. When a highly-wanted hacker known as 'The Puppetmaster' begins involving them in politics, Section 9, a group of cybernetically enhanced cops, are called in to investigate and stop the Puppetmaster.",
+        "genre": "Action, Animation, Science Fiction",
+        "director": "Mamoru Oshii",
+        "poster": "https://image.tmdb.org/t/p/w500/9gC88zYUBARRSThcG93MvW14sqx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Frost Giant",
+        "year": "2010",
+        "description": "A team searching for a long-lost ship in the Arctic unwittingly unleash an alien creature that looks like it's made of ice.",
+        "genre": "Action, Science Fiction, Thriller",
+        "director": "Víctor García",
+        "poster": "https://image.tmdb.org/t/p/w500/eqPbH6EM9BfXXL4SQUG5N31S8xp.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Belt",
+        "year": "1989",
+        "description": "Vittorio, an American novelist teaching in Rome, meets the beautiful but damaged Bianca and they rapidly fall into an urgent, tempestuous affair. He's hesitant over their relationship since she seems to thrive on conflict and is constantly baiting him into physical altercation. Bianca gives Vittorio an exquisite leather belt as a gift; he knows immediately that she wants him to whip her with it. Driven by his craving for her, Vittorio complies to Bianca's desire. Their relationship escalates into a dark realm of S&M which becomes more and more self-destructive.",
+        "genre": "Drama, Romance",
+        "director": "Giuliana Gamba",
+        "poster": "https://image.tmdb.org/t/p/w500/r6p2Stp158cIUPOLK4CKe3F4uHs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Iyarkai",
+        "year": "2003",
+        "description": "Marudhu, a sailor, falls in love with Nancy, a fruit vendor. However, she waits for the captain who had promised that he would return and marry her.",
+        "genre": "Drama, Romance, Action",
+        "director": "S. P. Jananathan",
+        "poster": "https://image.tmdb.org/t/p/w500/cBxswEDjuFr69IP7OjZLprZ7yUo.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ocean's Eleven",
+        "year": "1960",
+        "description": "Danny Ocean and his gang attempt to rob the five biggest casinos in Las Vegas in one night.",
+        "genre": "Crime, Comedy",
+        "director": "Lewis Milestone",
+        "poster": "https://image.tmdb.org/t/p/w500/A4R6u7SidBPVXMVzGSysCiRGTRz.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Nope",
+        "year": "2022",
+        "description": "Residents in a lonely gulch of inland California bear witness to an uncanny, chilling discovery.",
+        "genre": "Horror, Science Fiction",
+        "director": "Jordan Peele",
+        "poster": "https://image.tmdb.org/t/p/w500/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Kiskisan",
+        "year": "2024",
+        "description": "A steamy tale of love, lust, and betrayal. When Adele's sister Bea returns with her girlfriend Cheska, a secret affair begins between Cheska and Adele's boyfriend, Rener, leading to a climactic ending when they're caught.",
+        "genre": "Drama",
+        "director": "Bobby Bonifacio",
+        "poster": "https://image.tmdb.org/t/p/w500/2gavNjAvERUxLUEHDn8XJKFkRvy.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "When Harry Met Sally...",
+        "year": "1989",
+        "description": "Sex always gets in the way of friendships between men and women. At least, that's what Harry Burns believes. So when Harry meets Sally Albright and a deep friendship blossoms between them, Harry's determined not to let his attraction to Sally destroy it. But when a night of weakness ends in a morning of panic, can the pair avoid succumbing to Harry's fears by remaining friends and admitting they just might be the perfect match for each other?",
+        "genre": "Comedy, Romance, Drama",
+        "director": "Rob Reiner",
+        "poster": "https://image.tmdb.org/t/p/w500/rFOiFUhTMtDetqCGClC9PIgnC1P.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Security",
+        "year": "2017",
+        "description": "An ex-special services veteran, down on his luck and desperate for work, takes a job as a security guard at a run-down mall in a rough area of town. On his first night on the job, he opens the door to a distraught and desperate young girl who has fled the hijacking of a Police motorcade that was transporting her to testify as a witness in a trial. Hot on her heels is the psychopathic hijacker and his team of henchmen, who will stop at nothing to extract and eliminate the witness.",
+        "genre": "Action, Thriller, Crime",
+        "director": "Alain Desrochers",
+        "poster": "https://image.tmdb.org/t/p/w500/9FN5n8wGYrfSJaKGF9uObdKimIh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Devil",
+        "year": "2010",
+        "description": "A group of people are trapped in an elevator high above Philadelphia, and one of them is the devil.",
+        "genre": "Horror, Mystery, Thriller",
+        "director": "John Erick Dowdle",
+        "poster": "https://image.tmdb.org/t/p/w500/aivXPSi53H95BoUa5njEYso389s.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Les irresponsables",
+        "year": "2025",
+        "description": "Núria, Lila and Andrea are preparing to spend a weekend together, out of town, in a smart, luxurious house full of works of art that a friend of Núria's has left her. Their WhatsApp group is ablaze with good intentions, but the reality is that the three of them are too lazy...Everything changes when an innocent question pushes them to break free and let their impulses take over.",
+        "genre": "Comedy, Drama",
+        "director": "Laura Mañá",
+        "poster": "https://image.tmdb.org/t/p/w500/kq48E5i40mGlIZU2pc5Q4E9jEAs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Transporter 2",
+        "year": "2005",
+        "description": "Professional driver, and former Special Forces officer, Frank Martin is living in Miami, where he is temporarily filling in for a friend as the chauffeur for a government narcotics control policy director and his family. The young boy in the family is targeted for kidnapping, and Frank immediately becomes involved in protecting the child and exposing the kidnappers.",
+        "genre": "Action, Thriller, Crime",
+        "director": "Louis Leterrier",
+        "poster": "https://image.tmdb.org/t/p/w500/cdm17vK8PxHfTi7ayZf6WKbOgUO.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Cabrini",
+        "year": "2024",
+        "description": "Italian immigrant Francesca Cabrini arrives in 1889 New York City and is greeted by disease, crime, and impoverished children. Cabrini sets off on a daring mission to convince the hostile mayor to secure housing and healthcare for society's most vulnerable. With broken English and poor health, Cabrini uses her entrepreneurial mind to build an empire of hope unlike anything the world had ever seen.",
+        "genre": "History, Drama",
+        "director": "Alejandro Monteverde",
+        "poster": "https://image.tmdb.org/t/p/w500/rBiHiN8W4BqMFrDozemzkof7GmF.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Scary Movie 3",
+        "year": "2003",
+        "description": "In the third installment of the Scary Movie franchise, news anchorwoman Cindy Campbell has to investigate mysterious crop circles and killing video tapes, and help the President stop an alien invasion in the process.",
+        "genre": "Comedy",
+        "director": "David Zucker",
+        "poster": "https://image.tmdb.org/t/p/w500/lpNG1nx67rvYze1b1R9q0YoSzrC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Scent of a Woman",
+        "year": "1992",
+        "description": "Charlie Simms is a student at a private preparatory school who comes from a poor family. To earn the money for his flight home to Gresham, Oregon for Christmas, Charlie takes a job over Thanksgiving looking after retired U.S. Army officer Lieutenant Colonel Frank Slade, a cantankerous middle-aged man who lives with his niece and her family.",
+        "genre": "Drama",
+        "director": "Martin Brest",
+        "poster": "https://image.tmdb.org/t/p/w500/4adI7IaveWb7EidYXfLb3MK3CgO.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Lee",
+        "year": "2024",
+        "description": "The true story of photographer Elizabeth \"Lee\" Miller, a fashion model who became an acclaimed war correspondent for Vogue magazine during World War II.",
+        "genre": "History, Drama, War",
+        "director": "Ellen Kuras",
+        "poster": "https://image.tmdb.org/t/p/w500/zdNWyuim8gpJHe1LtKaDrs43dWz.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Reindeer Games",
+        "year": "2000",
+        "description": "After assuming his dead cellmate's identity to get with his girlfriend, an ex-con finds himself the reluctant participant in a casino heist.",
+        "genre": "Thriller, Action, Crime",
+        "director": "John Frankenheimer",
+        "poster": "https://image.tmdb.org/t/p/w500/8y1PedfYWllJVoBbkt9KWLY155v.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "For a Few Dollars More",
+        "year": "1965",
+        "description": "Two bounty hunters both pursue the brutal and sadistic bandit, El Indio, who has a large bounty on his head.",
+        "genre": "Western",
+        "director": "Sergio Leone",
+        "poster": "https://image.tmdb.org/t/p/w500/ooqASvA7qxlTVKL3KwOzBwy57Dh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Eragon",
+        "year": "2006",
+        "description": "In his homeland of Alagaesia, a farm boy happens upon a dragon's egg -- a discovery that leads him on a predestined journey where he realized he's the one person who can defend his home against an evil king.",
+        "genre": "Fantasy, Action, Adventure, Family",
+        "director": "Stefen Fangmeier",
+        "poster": "https://image.tmdb.org/t/p/w500/mNu6QLUnKqPIjRA3pgEb5dkJye6.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Clash of the Titans",
+        "year": "2010",
+        "description": "Born of a god but raised as a man, Perseus is helpless to save his family from Hades, vengeful god of the underworld. With nothing to lose, Perseus volunteers to lead a dangerous mission to defeat Hades before he can seize power from Zeus and unleash hell on earth. Battling unholy demons and fearsome beasts, Perseus and his warriors will only survive if Perseus accepts his power as a god, defies fate and creates his own destiny.",
+        "genre": "Adventure, Fantasy, Action",
+        "director": "Louis Leterrier",
+        "poster": "https://image.tmdb.org/t/p/w500/6iHYLipwEyZUPNO8MM3l1yHDaFE.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Annabelle Comes Home",
+        "year": "2019",
+        "description": "Determined to keep Annabelle from wreaking more havoc, demonologists Ed and Lorraine Warren bring the possessed doll to the locked artifacts room in their home, placing her “safely” behind sacred glass and enlisting a priest’s holy blessing. But an unholy night of horror awaits as Annabelle awakens the evil spirits in the room, who all set their sights on a new target—the Warrens' ten-year-old daughter, Judy, and her friends.",
+        "genre": "Horror",
+        "director": "Gary Dauberman",
+        "poster": "https://image.tmdb.org/t/p/w500/qWsHMrbg9DsBY3bCMk9jyYCRVRs.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "9",
+        "year": "2009",
+        "description": "When 9 first comes to life, he finds himself in a post-apocalyptic world. All humans are gone, and it is only by chance that he discovers a small community of others like him taking refuge from fearsome machines that roam the earth intent on their extinction. Despite being the neophyte of the group, 9 convinces the others that hiding will do them no good.",
+        "genre": "Action, Adventure, Animation, Science Fiction, Thriller",
+        "director": "Shane Acker",
+        "poster": "https://image.tmdb.org/t/p/w500/3uqXGOH4BQ2CLJWkDJZ0PzbUzOn.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bottoms",
+        "year": "2023",
+        "description": "Unpopular best friends PJ and Josie start a high school self-defense club to meet girls and lose their virginity. They soon find themselves in over their heads when the most popular students start beating each other up in the name of self-defense.",
+        "genre": "Comedy",
+        "director": "Emma Seligman",
+        "poster": "https://image.tmdb.org/t/p/w500/jeyTQrNEpyE1LZIgVlswYh3sc34.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Day the Earth Blew Up: A Looney Tunes Movie",
+        "year": "2024",
+        "description": "Porky and Daffy, the classic animated odd couple, turn into unlikely heroes when their antics at the local bubble gum factory uncover a secret alien mind control plot. Against all odds, the two are determined to save their town (and the world!)...that is if they don't drive each other crazy in the process.",
+        "genre": "Family, Comedy, Adventure, Animation, Science Fiction",
+        "director": "Peter Browngardt",
+        "poster": "https://image.tmdb.org/t/p/w500/s2lB1kaYCdGSnZX5meQCiOR6HfX.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tom & Jerry",
+        "year": "2021",
+        "description": "Tom the cat and Jerry the mouse get kicked out of their home and relocate to a fancy New York hotel, where a scrappy employee named Kayla will lose her job if she can’t evict Jerry before a high-class wedding at the hotel. Her solution? Hiring Tom to get rid of the pesky mouse.",
+        "genre": "Comedy, Family, Animation",
+        "director": "Tim Story",
+        "poster": "https://image.tmdb.org/t/p/w500/8XZI9QZ7Pm3fVkigWJPbrXCMzjq.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "An Affair: My Friend's Mom",
+        "year": "2017",
+        "description": "A young mother takes interest in her friend's son. Her interest in him makes her forget herself and drives her to pursue him.",
+        "genre": "Romance, Drama",
+        "director": "Kwak Yeong-geun",
+        "poster": "https://image.tmdb.org/t/p/w500/gzODeFmANKzUAknaNplB0QGqQqJ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Glass",
+        "year": "2019",
+        "description": "In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.",
+        "genre": "Thriller, Drama, Science Fiction",
+        "director": "M. Night Shyamalan",
+        "poster": "https://image.tmdb.org/t/p/w500/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sabrina",
+        "year": "1954",
+        "description": "Linus and David Larrabee are the two sons of a very wealthy family. Linus is all work – busily running the family corporate empire, he has no time for a wife and family. David is all play – technically he is employed by the family business, but never shows up for work, spends all his time entertaining, and has been married and divorced three times. Meanwhile, Sabrina Fairchild is the young, shy, and awkward daughter of the household chauffeur, who goes away to Paris for two years, and returns to capture David's attention, while falling in love with Linus.",
+        "genre": "Comedy, Romance, Drama",
+        "director": "Billy Wilder",
+        "poster": "https://image.tmdb.org/t/p/w500/e1Po9NDrH7IJZhv89467gJH5FS0.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Yi Yi",
+        "year": "2000",
+        "description": "A Taipei family faces personal and moral uncertainty as everyday events test their relationships and sense of purpose.",
+        "genre": "Drama",
+        "director": "Edward Yang",
+        "poster": "https://image.tmdb.org/t/p/w500/mR8dSQZI8X6Z1NClJhFrtJp636z.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Thursday Murder Club",
+        "year": "2025",
+        "description": "A group of senior sleuths passionate about solving cold cases get plunged into a real-life murder mystery in this comic crime caper.",
+        "genre": "Comedy, Mystery, Crime",
+        "director": "Chris Columbus",
+        "poster": "https://image.tmdb.org/t/p/w500/jbnazCHr8S2l2glyvjPTpa4NbEw.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Last Airbender",
+        "year": "2010",
+        "description": "The story follows the adventures of Aang, a young successor to a long line of Avatars, who must put his childhood ways aside and stop the Fire Nation from enslaving the Water, Earth and Air nations.",
+        "genre": "Action, Adventure, Fantasy",
+        "director": "M. Night Shyamalan",
+        "poster": "https://image.tmdb.org/t/p/w500/kl9JJ8288bNsY8oqT1SpQh1w2mb.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Save Me",
+        "year": "1994",
+        "description": "An accountant beleaguered by personal and professional problems gets involved with a femme fatale and her mysterious psychiatrist.",
+        "genre": "Mystery, Thriller",
+        "director": "Alan Roberts",
+        "poster": "https://image.tmdb.org/t/p/w500/l2U4rHA2Nv2V6DatCeaqDyUPv5J.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Valerian and the City of a Thousand Planets",
+        "year": "2017",
+        "description": "In the 28th century, Valerian and Laureline are special operatives charged with keeping order throughout the human territories. On assignment from the Minister of Defense, the two undertake a mission to Alpha, an ever-expanding metropolis where species from across the universe have converged over centuries to share knowledge, intelligence, and cultures. At the center of Alpha is a mysterious dark force which threatens the peaceful existence of the City of a Thousand Planets, and Valerian and Laureline must race to identify the menace and safeguard not just Alpha, but the future of the universe.",
+        "genre": "Adventure, Science Fiction, Action",
+        "director": "Luc Besson",
+        "poster": "https://image.tmdb.org/t/p/w500/vlc95gl3PtrjxSEuM8RhTtSm2xU.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Free Willy",
+        "year": "1993",
+        "description": "When maladjusted orphan Jesse vandalizes a theme park, he is placed with foster parents and must work at the park to make amends. There he meets Willy, a young Orca whale who has been separated from his family. Sensing kinship, they form a bond and, with the help of kindly whale trainer Rae Lindley, develop a routine of tricks. However, greedy park owner Dial soon catches wind of the duo and makes plans to profit from them.",
+        "genre": "Family, Adventure, Drama",
+        "director": "Simon Wincer",
+        "poster": "https://image.tmdb.org/t/p/w500/9iBgd9gi9ztWiVcYSG6zl8wDFBN.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Atonement",
+        "year": "2007",
+        "description": "A young girl irrevocably changes the course of several lives when she accuses her older sister's lover of a crime he did not commit.",
+        "genre": "Drama, Romance",
+        "director": "Joe Wright",
+        "poster": "https://image.tmdb.org/t/p/w500/hMRIyBjPzxaSXWM06se3OcNjIQa.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Creation of the Gods I: Kingdom of Storms",
+        "year": "2023",
+        "description": "Based on the most well-known classical fantasy novel of China, Fengshenyanyi, the trilogy is a magnificent eastern high fantasy epic that recreates the prolonged mythical wars between humans, immortals and monsters, which happened more than three thousand years ago.",
+        "genre": "Action, Fantasy, War",
+        "director": "Wuershan",
+        "poster": "https://image.tmdb.org/t/p/w500/6VOV2wU3WEyN0H1QtrbAS6whXPc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Bagnomaria",
+        "year": "1999",
+        "description": "In Pietrasanta all are excited for the annual party of summer end. Here we find four characters: Merigo, a naive guy passionate of bike; Pierre, son of the mayor; Simone, a pestiferous kid; Mario, lifeguard of \"Bagnomaria\".",
+        "genre": "Comedy",
+        "director": "Giorgio Panariello",
+        "poster": "https://image.tmdb.org/t/p/w500/7yxgsYHa1RCUYdnSyc73uazjgpT.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Arcadian",
+        "year": "2024",
+        "description": "In the near future, on a decimated Earth, Paul and his twin sons face terror at night when ferocious creatures awaken. When Paul is nearly killed, the boys come up with a plan for survival, using everything their father taught them to keep him alive.",
+        "genre": "Action, Horror, Thriller",
+        "director": "Benjamin Brewer",
+        "poster": "https://image.tmdb.org/t/p/w500/h4T8Xeydkw53h9uIbulYsss25UF.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Boss Baby: Family Business",
+        "year": "2021",
+        "description": "The Templeton brothers — Tim and his Boss Baby little bro Ted — have become adults and drifted away from each other. But a new boss baby with a cutting-edge approach and a can-do attitude is about to bring them together again … and inspire a new family business.",
+        "genre": "Animation, Comedy, Adventure, Family",
+        "director": "Tom McGrath",
+        "poster": "https://image.tmdb.org/t/p/w500/kv2Qk9MKFFQo4WQPaYta599HkJP.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "RoboCop",
+        "year": "1987",
+        "description": "In a violent, near-apocalyptic Detroit, evil corporation Omni Consumer Products wins a contract from the city government to privatize the police force. To test their crime-eradicating cyborgs, the company leads street cop Alex Murphy into an armed confrontation with crime lord Boddicker so they can use his body to support their untested RoboCop prototype. But when RoboCop learns of the company's nefarious plans, he turns on his masters.",
+        "genre": "Action, Thriller, Science Fiction",
+        "director": "Paul Verhoeven",
+        "poster": "https://image.tmdb.org/t/p/w500/esmAU0fCO28FbS6bUBKLAzJrohZ.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Highlander",
+        "year": "1986",
+        "description": "He fought his first battle on the Scottish Highlands in 1536. He will fight his greatest battle on the streets of New York City in 1986. His name is Connor MacLeod. He is immortal.",
+        "genre": "Adventure, Action, Fantasy",
+        "director": "Russell Mulcahy",
+        "poster": "https://image.tmdb.org/t/p/w500/8Z8dptJEypuLoOQro1WugD855YE.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Porco Rosso",
+        "year": "1992",
+        "description": "In Italy in the 1930s, sky pirates in biplanes terrorize wealthy cruise ships as they sail the Adriatic Sea. The only pilot brave enough to stop the scourge is the mysterious Porco Rosso, a former World War I flying ace who was somehow turned into a pig during the war. As he prepares to battle the pirate crew's American ace, Porco Rosso enlists the help of spunky girl mechanic Fio Piccolo and his longtime friend Madame Gina.",
+        "genre": "Family, Comedy, Animation, Adventure, Fantasy",
+        "director": "Hayao Miyazaki",
+        "poster": "https://image.tmdb.org/t/p/w500/8mIvSvnVBApfORL9N6S38Q7wD6A.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Stepmom",
+        "year": "1998",
+        "description": "Jackie is a divorced mother of two. Isabel is the career minded girlfriend of Jackie’s ex-husband Luke, forced into the role of unwelcome stepmother to their children. But when Jackie discovers she is ill, both women realise they must put aside their differences to find a common ground and celebrate life to the fullest, while they have the chance.",
+        "genre": "Drama, Romance, Comedy",
+        "director": "Chris Columbus",
+        "poster": "https://image.tmdb.org/t/p/w500/wMPv2Yz6QDzv6YhSbaqM48Medl1.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Alien Resurrection",
+        "year": "1997",
+        "description": "Two hundred years after Lt. Ripley died, a group of scientists clone her, hoping to breed the ultimate weapon. But the new Ripley is full of surprises … as are the new aliens. Ripley must team with a band of smugglers to keep the creatures from reaching Earth.",
+        "genre": "Science Fiction, Horror, Action",
+        "director": "Jean-Pierre Jeunet",
+        "poster": "https://image.tmdb.org/t/p/w500/9aRDMlU5Zwpysilm0WCWzU2PCFv.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "101 Dalmatians",
+        "year": "1996",
+        "description": "An evil, high-fashion designer plots to steal Dalmatian puppies in order to make an extravagant fur coat, but instead creates an extravagant mess.",
+        "genre": "Family, Comedy",
+        "director": "Stephen Herek",
+        "poster": "https://image.tmdb.org/t/p/w500/8o2ADoAyG796UwTjwBFjPyBz0yG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Waiting...",
+        "year": "2005",
+        "description": "Employees at a Bennigan's-like restaurant (called, creatively enough, Shenanigan's), kill time before their real lives get started. But while they wait, they'll have to deal with picky customers who want their steak cooked to order and enthusiastic managers who want to build the perfect wait staff. Luckily, these employees have effective revenge tactics.",
+        "genre": "Comedy, Romance",
+        "director": "Rob McKittrick",
+        "poster": "https://image.tmdb.org/t/p/w500/uyZ11F0ZdUWR29wx8pS9CMCNyse.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Map That Leads to You",
+        "year": "2025",
+        "description": "Heather is a young woman traveling Europe with friends before starting her perfectly planned life. A chance meeting with Jack sparks an unexpected romance that leads to deep emotional discovery. As secrets and life choices test their bond, her path changes forever.",
+        "genre": "Romance, Drama",
+        "director": "Lasse Hallström",
+        "poster": "https://image.tmdb.org/t/p/w500/uwvKQIjJpC37IEsEj4ZAn1ITyRy.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Autopsy of Jane Doe",
+        "year": "2016",
+        "description": "Father and son coroners receive a mysterious unidentified corpse with no apparent cause of death. As they attempt to examine the \"Jane Doe,\" they discover increasingly bizarre clues that hold the key to her terrifying secrets.",
+        "genre": "Horror, Mystery",
+        "director": "André Øvredal",
+        "poster": "https://image.tmdb.org/t/p/w500/6K0wjP8kPCiPYy9PtXBGuypyt5I.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Portrait of a Lady on Fire",
+        "year": "2019",
+        "description": "On an isolated island in Brittany at the end of the eighteenth century, a female painter is obliged to paint a wedding portrait of a young woman.",
+        "genre": "Drama, Romance, History",
+        "director": "Céline Sciamma",
+        "poster": "https://image.tmdb.org/t/p/w500/2LquGwEhbg3soxSCs9VNyh5VJd9.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dragon Ball Z: Wrath of the Dragon",
+        "year": "1995",
+        "description": "The Z Warriors discover an unopenable music box and are told to open it with the Dragon Balls. The contents turn out to be a warrior named Tapion who had sealed himself inside along with a monster called Hildegarn. Goku must now perfect a new technique to defeat the evil monster.",
+        "genre": "Animation, Action, Science Fiction",
+        "director": "Mitsuo Hashimoto",
+        "poster": "https://image.tmdb.org/t/p/w500/7uRu9EA3nie0n2mlVDDLlTI3IzC.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Thunderball",
+        "year": "1965",
+        "description": "A criminal organization has obtained two nuclear bombs and are asking for a 100 million pound ransom in the form of diamonds in seven days or they will use the weapons. The secret service sends James Bond to the Bahamas to once again save the world.",
+        "genre": "Adventure, Action, Thriller",
+        "director": "Terence Young",
+        "poster": "https://image.tmdb.org/t/p/w500/wCc4qllaTDsQN8zgGkAgQrKO6N9.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Time Trap",
+        "year": "2018",
+        "description": "A group of students become trapped inside a mysterious cave where they discover time passes differently underground than on the surface.",
+        "genre": "Science Fiction, Adventure",
+        "director": "Mark Dennis",
+        "poster": "https://image.tmdb.org/t/p/w500/583rpyMn8UL8F2oH26Sz6WoKDDe.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Perks of Being a Wallflower",
+        "year": "2012",
+        "description": "Pittsburgh, Pennsylvania, 1991. High school freshman Charlie is a wallflower, always watching life from the sidelines, until two senior students, Sam and her stepbrother Patrick, become his mentors, helping him discover the joys of friendship, music and love.",
+        "genre": "Drama",
+        "director": "Stephen Chbosky",
+        "poster": "https://image.tmdb.org/t/p/w500/aKCvdFFF5n80P2VdS7d8YBwbCjh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Swamp Shark",
+        "year": "2011",
+        "description": "Open on gorgeous swamplands of the Atchafalaya Basin in the summer. Lots of beautiful teens are at the beach the weekend before Gator Fest. That night an animal smuggling deal goes wrong and a large sea creature escapes into a swampy backwoods river. At the McDaniel's \"Gator Shack\" restaurant, a local, Jackson is drunk, and gets mangled to bits. The town sheriff blames the carnage on the McDaniel's \"escaped\" pack of gators and tries hauling them off to jail. Rachel McDaniel, head of the family, claims to have seen the fin of a shark! Rachel and her family, along with the help of a mysterious stranger, Charlie, take on the Swampshark and the law to clear their names, save Rachel's kid sister Krystal and prevent the unwitting folks at the upcoming Gator Fest from being torn to shreds by a beast the likes of which no one has ever seen!",
+        "genre": "Action, Adventure, Comedy, Horror, TV Movie",
+        "director": "Griff Furst",
+        "poster": "https://image.tmdb.org/t/p/w500/QtPPiLSKHZ3bI7oLbLHlMFRcyr.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Dilan 1990",
+        "year": "2018",
+        "description": "At a Bandung high school, charming and rebellious Dilan vies for the affections of shy new student Milea.",
+        "genre": "Drama, Romance",
+        "director": "Pidi Baiq",
+        "poster": "https://image.tmdb.org/t/p/w500/eitRZXfbw6rO0CfP3lPaGgK63qr.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "AVP: Alien vs. Predator",
+        "year": "2004",
+        "description": "When scientists discover something near Antarctica that appears to be a buried Pyramid, they send a research team out to investigate. Little do they know that they are about to step into a hunting ground where Aliens are grown as sport for the Predator race.",
+        "genre": "Adventure, Science Fiction, Action, Horror",
+        "director": "Paul W. S. Anderson",
+        "poster": "https://image.tmdb.org/t/p/w500/ySWu5bCnnmgV1cVacvFnFIhgOjp.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Naruto Shippuden the Movie",
+        "year": "2007",
+        "description": "Demons that once almost destroyed the world, are revived by someone. To prevent the world from being destroyed, the demon has to be sealed and the only one who can do it is the shrine maiden Shion from the country of demons, who has two powers; one is sealing demons and the other is predicting the deaths of humans. This time Naruto's mission is to guard Shion, but she predicts Naruto's death. The only way to escape it, is to get away from Shion, which would leave her unguarded, then the demon, whose only goal is to kill Shion will do so, thus meaning the end of the world. Naruto decides to challenge this \"prediction of death.\"",
+        "genre": "Animation, Action, Fantasy",
+        "director": "Hajime Kamegaki",
+        "poster": "https://image.tmdb.org/t/p/w500/vDkct38sSFSWJIATlfJw0l3QOIR.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Into Temptation",
+        "year": "2009",
+        "description": "When a suicidal prostitute confesses to a priest her plans to end her life on her birthday, he searches for her to intervene.",
+        "genre": "Drama, Mystery",
+        "director": "Patrick Coyle",
+        "poster": "https://image.tmdb.org/t/p/w500/ogoeMj22fCXSisuyEnuS1jrgktV.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Cowboys",
+        "year": "1972",
+        "description": "When his cattlemen abandon him for the gold fields, rancher Wil Andersen is forced to take on a collection of young boys as his cowboys in order to get his herd to market in time to avoid financial disaster. The boys learn to do a man's job under Andersen's tutelage, however, neither he nor the boys know that a gang of cattle thieves is stalking them.",
+        "genre": "Western, Adventure, Drama, Action",
+        "director": "Mark Rydell",
+        "poster": "https://image.tmdb.org/t/p/w500/srdRiGV9tYFzWd2C4IjPJNtLrmr.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Innocent",
+        "year": "1956",
+        "description": "After a quarrel with her boyfriend on New Year's Eve, Mane drives her car from Mexico City to Cuernavaca to meet her parents in their country house. The car breaks down in the highway and Mane has to ask for help. Mechanic Cruci arrives and, after testing the car, offers Mane a ride on his motorcycle. Back in Mane's house, she invites him some drinks to celebrate New Year's Eve. They get drunk and, the morning after, Mane's parents arrive and find them sleeping together. Not knowing what happened, Mane and Cruci are forced to get married against their will.",
+        "genre": "Comedy, Music",
+        "director": "Rogelio A. González",
+        "poster": "https://image.tmdb.org/t/p/w500/afynY4jTou6svwPCrdY8zEBSS0h.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "If I Had Legs I'd Kick You",
+        "year": "2025",
+        "description": "With her life crashing down around her, Linda attempts to navigate her child's mysterious illness, her absent husband, a missing person, and an increasingly hostile relationship with her therapist.",
+        "genre": "Drama, Thriller, Comedy",
+        "director": "Mary Bronstein",
+        "poster": "https://image.tmdb.org/t/p/w500/gkIFK1HzqfgQg4v4ifeNKogHtPG.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Tears of the Sun",
+        "year": "2003",
+        "description": "Navy SEAL Lieutenant A.K. Waters and his elite squadron of tactical specialists are forced to choose between their duty and their humanity, between following orders by ignoring the conflict that surrounds them, or finding the courage to follow their conscience and protect a group of innocent refugees. When the democratic government of Nigeria collapses and the country is taken over by a ruthless military dictator, Waters, a fiercely loyal and hardened veteran is dispatched on a routine mission to retrieve a Doctors Without Borders physician.",
+        "genre": "War, Action, Drama",
+        "director": "Antoine Fuqua",
+        "poster": "https://image.tmdb.org/t/p/w500/psP90zHD3ZYGLCLpt4B3MbtrlWr.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "남친깨기전에빨리빼!",
+        "year": "2021",
+        "description": "",
+        "genre": "",
+        "director": "Unknown",
+        "poster": "https://image.tmdb.org/t/p/w500/g0NN2e7WXekSGFyjtf4fTLEsOEh.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Twister",
+        "year": "1996",
+        "description": "An unprecedented series of violent tornadoes is sweeping across Oklahoma. Tornado chasers, headed by Dr. Jo Harding, attempt to release a groundbreaking device that will allow them to track them and create a more advanced warning system. They are joined by Jo's soon to be ex-husband Bill, a former tornado chaser himself, and his girlfriend Melissa.",
+        "genre": "Action, Adventure, Drama",
+        "director": "Jan de Bont",
+        "poster": "https://image.tmdb.org/t/p/w500/d4ie3f6QTvNw40V770Uzo87SDZn.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Sacramento",
+        "year": "2025",
+        "description": "When free-spirited Rickey suddenly reappears in father-to-be Glenn’s life, the two former best friends embark on a spontaneous road trip from LA to Sacramento.",
+        "genre": "Comedy, Drama",
+        "director": "Michael Angarano",
+        "poster": "https://image.tmdb.org/t/p/w500/9tAHcIb9hys2rO6eDcKatjVOLR8.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "The Bourne Ultimatum",
+        "year": "2007",
+        "description": "Bourne is brought out of hiding once again by reporter Simon Ross who is trying to unveil Operation Blackbriar, an upgrade to Project Treadstone, in a series of newspaper columns. Information from the reporter stirs a new set of memories, and Bourne must finally uncover his dark past while dodging The Company's best efforts to eradicate him.",
+        "genre": "Action, Drama, Mystery, Thriller",
+        "director": "Paul Greengrass",
+        "poster": "https://image.tmdb.org/t/p/w500/15rMz5MRXFp7CP4VxhjYw4y0FUn.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Silent Hill",
+        "year": "2006",
+        "description": "Rose, a desperate mother takes her adopted daughter, Sharon, to the town of Silent Hill in an attempt to cure her of her ailment. After a violent car crash, Sharon disappears and Rose begins a desperate search to get her back. She descends into the center of the twisted reality of a town's terrible secret. Pursued by grotesquely deformed creatures and townspeople stuck in permanent purgatory, Rose begins to uncover the truth behind the apocalyptic disaster that burned the town 30 years earlier.",
+        "genre": "Horror, Mystery",
+        "director": "Christophe Gans",
+        "poster": "https://image.tmdb.org/t/p/w500/dVW2L5eu6Hv0nfEEp0nY2lYmcbc.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Avatar: The Deep Dive - A Special Edition of 20/20",
+        "year": "2022",
+        "description": "An inside look at one of the most anticipated movie sequels ever with James Cameron and cast.",
+        "genre": "Documentary",
+        "director": "Dave Hoffman",
+        "poster": "https://image.tmdb.org/t/p/w500/pzZGqIyrrSqIfrkPLJnN1tvCGnV.jpg",
+        "category": "movies"
     }
 ]
