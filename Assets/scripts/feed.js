@@ -33,7 +33,7 @@ async function getAllMediaMap() {
         const mediaMap = {};
         allMedia.forEach(item => {
             if (item.title) {
-                const normTitle = item.title.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g, '_');
+                const normTitle = item.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '_');
                 mediaMap[normTitle] = item;
             }
         });
