@@ -16,16 +16,16 @@ import {
 //tv import
 import {
     tv
-} from "/Assets/TV Shows/tv.js";
+} from "../TV Shows/tv.js";
 import {
     music
-} from "/Assets/Music/music.js";
+} from "../Music/music.js";
 import {
     games
-} from "/Assets/Video Games/games.js";
+} from "../Video Games/games.js";
 import {
     books
-} from "/Assets/Books/books.js";
+} from "../Books/books.js";
 window.books = books;
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
@@ -56,7 +56,7 @@ async function getAverageRating(mediaId) {
 // Cards functionality for displaying popular content
 // Fetch movies from JSON file
 async function fetchMovies() {
-    const response = await fetch("/Assets/Movies/movieList.json");
+    const response = await fetch("../Movies/movieList.json");
     return await response.json();
 }
 document.addEventListener('DOMContentLoaded', async function () {
