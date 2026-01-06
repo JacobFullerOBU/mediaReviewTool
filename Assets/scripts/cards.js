@@ -101,9 +101,15 @@ async function initCards() {
     // Initialize tab functionality
     initTabFunctionality();
 
-    // Check if any items were loaded and render them.
+    // Set default sort to 'rating-desc'
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.value = 'rating-desc';
+    }
+
+    // Check if any items were loaded and render them with default sort.
     if (allItems.length > 0) {
-        loadCards('all');
+        await filterCards('all');
     } else {
         // If no items were loaded at all, display an error.
         const container = document.getElementById('cardsContainer');
@@ -177,7 +183,20 @@ function initTabFunctionality() {
     }
 }
 
-function filterCards(category) {
+async function fetchRatingsForItems(items) {
+    const itemsNeedingRating = items.filter(i => i.liveAvgRating === undefined);
+    if (itemsNeedingRating.length > 0) {
+        const ratingPromises = itemsNeedingRating.map(item => {
+            const mediaId = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            return getAverageRating(mediaId).then(rating => {
+                item.liveAvgRating = (rating === "N/A") ? -1 : parseFloat(rating);
+            });
+        });
+        await Promise.all(ratingPromises);
+    }
+}
+
+async function filterCards(category) {
     currentFilter = category;
     let items = allItems;
     const searchTerm = document.getElementById('mediaSearchInput')?.value.toLowerCase() || '';
@@ -200,8 +219,15 @@ function filterCards(category) {
             item.title && item.title.toLowerCase().includes(searchTerm)
         );
     }
-    // Sort items by selected option
+    
     const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
+
+    // Fetch ratings if sorting by rating
+    if (sortOption.startsWith('rating-')) {
+        await fetchRatingsForItems(items);
+    }
+
+    // Sort items by selected option
     items = sortItems(items, sortOption);
     loadCardsWithItems(items);
 }
@@ -484,37 +510,14 @@ function addCardListeners() {
 
 // Export function for use by other modules
 window.filterCards = filterCards;
-// Load cards by category
-function loadCards(category) {
-    console.log('[cards.js] loadCards called with category:', category);
-    let items = allItems;
-    if (category && category !== 'all') {
-        items = allItems.filter(item => {
-            // Accept both string and array category
-            if (typeof item.category === 'string') {
-                return item.category.toLowerCase() === category.toLowerCase();
-            } else if (Array.isArray(item.category)) {
-                return item.category.map(c => c.toLowerCase()).includes(category.toLowerCase());
-            }
-            // Fallback: Movies if no category
-            return category === 'movies' && !item.category;
-        });
-    }
-    loadCardsWithItems(items);
-}
 
 // Render cards in the container
 async function renderCards(container, items) {
     console.log('[cards.js] renderCards called with items:', items);
 
-    // First, fetch all average ratings for the current items in parallel
-    const ratingPromises = items.map(item => {
-        const mediaId = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-        return getAverageRating(mediaId).then(rating => {
-            item.liveAvgRating = rating; // Add the live rating to the item object
-        });
-    });
-    await Promise.all(ratingPromises); // Wait for all ratings to be fetched
+    // Ratings are now fetched before this function is called.
+    // We just need to ensure they are populated for display.
+    await fetchRatingsForItems(items);
 
     container.innerHTML = '';
     if (!items || items.length === 0) {
@@ -537,8 +540,8 @@ async function renderCards(container, items) {
         const toShow = items.slice(0, visibleCount);
         toShow.forEach(item => {
             // Prioritize live average rating, then fallback to static rating
-            const displayRating = item.liveAvgRating && item.liveAvgRating !== "N/A" ? item.liveAvgRating : (item.rating || item.avgRating);
-            const starRating = displayRating && displayRating !== "N/A" ?
+            const displayRating = item.liveAvgRating && item.liveAvgRating !== -1 ? item.liveAvgRating.toFixed(1) : "N/A";
+            const starRating = displayRating !== "N/A" ?
                 `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${displayRating}</div>` :
                 `<div class="text-slate-400 text-xs">No reviews yet</div>`;
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
@@ -624,10 +627,14 @@ function sortItems(items, sortOption) {
             sorted.sort((a, b) => (b.title || '').localeCompare(a.title || ''));
             break;
         case 'rating-desc':
-            sorted.sort((a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0));
+            sorted.sort((a, b) => (b.liveAvgRating ?? -1) - (a.liveAvgRating ?? -1));
             break;
         case 'rating-asc':
-            sorted.sort((a, b) => (parseFloat(a.rating) || 0) - (parseFloat(b.rating) || 0));
+            sorted.sort((a, b) => {
+                const aRating = a.liveAvgRating === -1 ? Infinity : (a.liveAvgRating ?? Infinity);
+                const bRating = b.liveAvgRating === -1 ? Infinity : (b.liveAvgRating ?? Infinity);
+                return aRating - bRating;
+            });
             break;
         default:
             break;
