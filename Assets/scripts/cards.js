@@ -16,16 +16,16 @@ import {
 //tv import
 import {
     tv
-} from "/Assets/TV Shows/tv.js";
+} from "./Assets/TV Shows/tv.js";
 import {
     music
-} from "/Assets/Music/music.js";
+} from "./Assets/Music/music.js";
 import {
     games
-} from "/Assets/Video Games/games.js";
+} from "./Assets/Video Games/games.js";
 import {
     books
-} from "/Assets/Books/books.js";
+} from "./Assets/Books/books.js";
 window.books = books;
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
