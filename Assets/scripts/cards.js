@@ -63,19 +63,54 @@ document.addEventListener('DOMContentLoaded', async function () {
     await initCards();
 });
 async function initCards() {
-    // Fetch movies from JSON
-    const movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
-    // Filter out empty items from other media arrays
-    const validTV = Array.isArray(tv) ? tv.filter(item => typeof item.title === 'string' && item.title) : [];
-    const validMusic = Array.isArray(music) ? music.filter(item => typeof item.title === 'string' && item.title) : [];
-    const validGames = Array.isArray(games) ? games.filter(item => typeof item.title === 'string' && item.title) : [];
-    const validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
+    let movies = [], validTV = [], validMusic = [], validGames = [], validBooks = [];
+
+    try {
+        movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
+    } catch (e) {
+        console.error("Failed to load movies:", e);
+    }
+
+    try {
+        validTV = Array.isArray(tv) ? tv.filter(item => typeof item.title === 'string' && item.title) : [];
+    } catch (e) {
+        console.error("Failed to load TV shows:", e);
+    }
+
+    try {
+        validMusic = Array.isArray(music) ? music.filter(item => typeof item.title === 'string' && item.title) : [];
+    } catch (e) {
+        console.error("Failed to load music:", e);
+    }
+
+    try {
+        validGames = Array.isArray(games) ? games.filter(item => typeof item.title === 'string' && item.title) : [];
+    } catch (e) {
+        console.error("Failed to load games:", e);
+    }
+
+    try {
+        validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
+    } catch (e) {
+        console.error("Failed to load books:", e);
+    }
+
     allItems = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks];
     window.allItems = allItems;
+    
     // Initialize tab functionality
     initTabFunctionality();
-    // Load initial content
-    loadCards('all');
+
+    // Check if any items were loaded and render them.
+    if (allItems.length > 0) {
+        loadCards('all');
+    } else {
+        // If no items were loaded at all, display an error.
+        const container = document.getElementById('cardsContainer');
+        if (container) {
+            container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Could not load any media. Please check data sources and browser console for errors.</div>';
+        }
+    }
 }
 
 function initTabFunctionality() {
