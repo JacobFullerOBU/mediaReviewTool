@@ -145,8 +145,8 @@ function initSurpriseMeButton() {
 
 // Mobile Navigation
 function initMobileNav() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
+    const hamburger = document.getElementById('mobile-menu-button');
+    const navMenu = document.getElementById('mobile-menu');
     
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
