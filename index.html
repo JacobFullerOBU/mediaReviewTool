@@ -6,6 +6,7 @@
     <title>Media Review Tool - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="Assets/styles/main.css">
     <link rel="stylesheet" href="Assets/styles/responsive.css">
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -59,7 +60,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative overflow-hidden bg-slate-900 py-16 sm:py-24">
+    <div class="relative overflow-hidden bg-slate-900 hero-section">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
             <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
                 Discover & Review <br/>
@@ -68,11 +69,11 @@
             <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400">
                 Join a community of reviewers. Give your take on movies, shows, music, games, books, and more!
             </p>
-            <div class="mt-8 flex justify-center gap-4">
+            <div class="mt-8 flex justify-center gap-4 hero-section-buttons">
                 <button id="explore-button" class="px-8 py-3 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-500/25 transition-all transform hover:scale-105">
                     Start Exploring
                 </button>
-                <button id="surprise-button" class="px-8 py-3 rounded-full bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold flex items-center gap-2 transition-all">
+                <button id="surprise-button" class="px-8 py-3 rounded-full bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold flex items-center justify-center gap-2 transition-all">
                     <i data-lucide="shuffle" class="w-4 h-4"></i> Surprise Me
                 </button>
             </div>
@@ -81,12 +82,12 @@
     </div>
 
     <!-- Main Content Area -->
-    <main id="browse-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main id="browse-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Controls Toolbar -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 backdrop-blur-sm">
             
-            <div class="flex overflow-x-auto pb-2 md:pb-0 gap-2 no-scrollbar">
+            <div class="filter-buttons-container">
                 <button class="tab-btn active flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-indigo-600 text-white shadow-md" data-category="all">All</button>
                 <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="movies"><i data-lucide="film" class="w-4 h-4"></i> Movies</button>
                 <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="tv"><i data-lucide="tv" class="w-4 h-4"></i> TV</button>

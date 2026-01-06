@@ -6,12 +6,20 @@
     }
 
     .controls-toolbar .flex.overflow-x-auto {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .controls-toolbar .flex.gap-4.items-center {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    #mediaSearchInput {
+        width: 100%;
+    }
+
+    #sortSelect {
+        width: 100%;
     }
 
     .hero-section-buttons {
@@ -22,5 +30,20 @@
     .hero-section-buttons button {
         width: 80%;
         text-align: center;
+    }
+
+    #explore-button, #surprise-button {
+        width: 80%;
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .hero-section {
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+
+    main#browse-page {
+        padding-top: 1rem;
     }
 }
