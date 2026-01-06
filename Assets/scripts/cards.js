@@ -102,6 +102,44 @@ function initTabFunctionality() {
             filterCards(category);
         });
     }
+
+    const surpriseBtn = document.getElementById('surprise-button');
+    if (surpriseBtn) {
+        surpriseBtn.addEventListener('click', function () {
+            // 1. Find the currently active category button
+            const activeBtn = document.querySelector('.tab-btn.active');
+            const currentCategory = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
+
+            // 2. Filter the list based on category
+            let poolOfItems = allItems;
+            
+            if (currentCategory !== 'all') {
+                poolOfItems = allItems.filter(item => 
+                    (item.category && item.category.toLowerCase() === currentCategory.toLowerCase())
+                );
+            }
+
+            // 3. Safety check if the category is empty
+            if (poolOfItems.length === 0) {
+                // If the current category is empty, fall back to using all items
+                poolOfItems = allItems;
+            }
+            
+            if (poolOfItems.length === 0) {
+                alert(`No media items have been loaded yet!`);
+                return;
+            }
+
+            // 4. Pick random from the filtered pool
+            const randomItem = poolOfItems[Math.floor(Math.random() * poolOfItems.length)];
+
+            if (randomItem) {
+                showItemDetails(randomItem);
+            } else {
+                alert("Could not find an item to show.");
+            }
+        });
+    }
 }
 
 function filterCards(category) {
