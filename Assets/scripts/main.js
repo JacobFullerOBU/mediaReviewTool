@@ -104,23 +104,20 @@ function initMobileNav() {
     
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+            navMenu.classList.toggle('hidden');
         });
         
         // Close mobile menu when clicking on nav links
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+                navMenu.classList.add('hidden');
             });
         });
         
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+                navMenu.classList.add('hidden');
             }
         });
     }

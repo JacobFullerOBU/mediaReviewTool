@@ -52,21 +52,21 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
-            <a href="#" id="mobile-explore-feed-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Explore</a>
-            <a href="#" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Browse</a>
-            <a href="Reviewers.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">Community</a>
-            <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">My Feed</a>
+            <a href="explore.html" id="mobile-explore-feed-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Explore</a>
+            <a href="#" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Browse</a>
+            <a href="Reviewers.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Community</a>
+            <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">My Feed</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <div class="relative overflow-hidden bg-slate-900 hero-section">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
+            <h1 class="hero-title sm:text-6xl font-extrabold text-white tracking-tight mb-6">
                 Discover & Review <br/>
                 <span class="text-indigo-400">Your Favorite Media</span>
             </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400">
+            <p class="hero-subtitle mt-4 max-w-2xl mx-auto text-slate-400">
                 Join a community of reviewers. Give your take on movies, shows, music, games, books, and more!
             </p>
             <div class="mt-8 flex justify-center gap-4 hero-section-buttons">
@@ -96,21 +96,27 @@
                 <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="books"><i data-lucide="book-open" class="w-4 h-4"></i> Books</button>
             </div>
 
-            <div class="flex gap-4 items-center">
-                <div class="relative">
-                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
-                    <input type="text" id="mediaSearchInput" placeholder="Search titles..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64 text-slate-200 placeholder-slate-500"/>
+            <div class="search-and-sort-container">
+                <div class="search-container">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
+                        <input type="text" id="mediaSearchInput" placeholder="Search titles..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64 text-slate-200 placeholder-slate-500"/>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2">
-                    <select id="sortSelect" class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none text-slate-200 cursor-pointer">
-                        <option value="year-desc">Newest First</option>
-                        <option value="year-asc">Oldest First</option>
-                        <option value="title-asc">Alphabetical (A-Z)</option>
-                        <option value="title-desc">Alphabetical (Z-A)</option>
-                        <option value="rating-desc">Highest Rated</option>
-                        <option value="rating-asc">Lowest Rated</option>
-                    </select>
-                    <button id="applySortBtn" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-all">Apply</button>
+                <div class="sort-container">
+                    <div class="flex items-center gap-2">
+                        <select id="sortSelect" class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none text-slate-200 cursor-pointer">
+                            <option value="year-desc">Newest First</option>
+                            <option value="year-asc">Oldest First</option>
+                            <option value="title-asc">Alphabetical (A-Z)</option>
+                            <option value="title-desc">Alphabetical (Z-A)</option>
+                            <option value="rating-desc">Highest Rated</option>
+                            <option value="rating-asc">Lowest Rated</option>
+                        </select>
+                        <div class="apply-button-container">
+                            <button id="applySortBtn" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-all">Apply</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
