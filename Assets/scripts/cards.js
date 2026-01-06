@@ -1,16 +1,32 @@
 let allItems = [];
 let currentFilter = 'all';
 // Firebase Firestore for dynamic ratings
-import { ref, push, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { auth, db } from "./firebase.js";
+import {
+    ref,
+    push,
+    get,
+    child,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import {
+    auth,
+    db
+} from "./firebase.js";
 // Import media arrays from separate files
 //tv import
-import { tv } from "/Assets/TV Shows/tv.js";
-import { music } from "/Assets/Music/music.js";
-import { games } from "/Assets/Video Games/games.js";
-import { books } from "/Assets/Books/books.js";
+import {
+    tv
+} from "/Assets/TV Shows/tv.js";
+import {
+    music
+} from "/Assets/Music/music.js";
+import {
+    games
+} from "/Assets/Video Games/games.js";
+import {
+    books
+} from "/Assets/Books/books.js";
 window.books = books;
-
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
     const reviewsRef = ref(db, `reviews/${mediaId}`);
@@ -20,7 +36,6 @@ async function getReviewCount(mediaId) {
     }
     return 0;
 }
-
 // Get average rating for a media item (Realtime Database)
 async function getAverageRating(mediaId) {
     const reviewsRef = ref(db, `reviews/${mediaId}`);
@@ -39,17 +54,14 @@ async function getAverageRating(mediaId) {
     return count > 0 ? (total / count).toFixed(1) : "N/A";
 }
 // Cards functionality for displaying popular content
-
 // Fetch movies from JSON file
 async function fetchMovies() {
     const response = await fetch("Assets/Movies/movieList.json");
     return await response.json();
 }
-
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     await initCards();
 });
-
 async function initCards() {
     // Fetch movies from JSON
     const movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
@@ -60,22 +72,17 @@ async function initCards() {
     const validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
     allItems = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks];
     window.allItems = allItems;
-
     // Initialize tab functionality
     initTabFunctionality();
-
     // Load initial content
     loadCards('all');
 }
 
-
 function initTabFunctionality() {
     const tabBtns = document.querySelectorAll('.tab-btn');
-
     tabBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const category = this.dataset.category;
-
             // Update active tab styling
             tabBtns.forEach(tab => {
                 tab.classList.remove('active', 'bg-indigo-600', 'text-white', 'shadow-md');
@@ -83,12 +90,10 @@ function initTabFunctionality() {
             });
             this.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow-md');
             this.classList.remove('bg-slate-800', 'text-slate-400');
-
             // Filter cards
             filterCards(category);
         });
     });
-
     const searchInput = document.getElementById('mediaSearchInput');
     if (searchInput) {
         searchInput.addEventListener('input', () => {
@@ -102,8 +107,7 @@ function initTabFunctionality() {
 function filterCards(category) {
     currentFilter = category;
     let items = allItems;
-    const searchTerm = document.getElementById('mediaSearchInput')?.value.toLowerCase() || '';
-
+    const searchTerm = document.getElementById('mediaSearchInput') ? .value.toLowerCase() || '';
     // Filter by category
     if (category && category !== 'all') {
         items = allItems.filter(item => {
@@ -117,16 +121,14 @@ function filterCards(category) {
             return category === 'movies' && !item.category;
         });
     }
-
     // Filter by search term
     if (searchTerm) {
-        items = items.filter(item => 
+        items = items.filter(item =>
             item.title && item.title.toLowerCase().includes(searchTerm)
         );
     }
-
     // Sort items by selected option
-    const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
+    const sortOption = document.getElementById('sortSelect') ? .value || 'year-desc';
     items = sortItems(items, sortOption);
     loadCardsWithItems(items);
 }
@@ -143,10 +145,8 @@ function loadCardsWithItems(items) {
         addCardListeners();
     }, 300);
 }
-
 // Export function for use by other modules
 window.filterCards = filterCards;
-
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
     // Use the same key logic as review submission
@@ -274,7 +274,7 @@ async function showItemDetails(item) {
             }
         });
     }
-    
+
     addToFavoritesBtn.addEventListener('click', async () => {
         if (!auth.currentUser) {
             alert('You must be logged in to add favorites.');
@@ -283,7 +283,10 @@ async function showItemDetails(item) {
         const userId = auth.currentUser.uid;
         const favRef = ref(db, `favorites/${userId}/${mediaKey}`);
         if (!isFavorite) {
-            await push(favRef, { mediaId: mediaKey, addedAt: new Date().toISOString() });
+            await push(favRef, {
+                mediaId: mediaKey,
+                addedAt: new Date().toISOString()
+            });
             addToFavoritesBtn.textContent = 'Remove from Favorites';
             isFavorite = true;
             addToFavoritesBtn.classList.add('bg-red-600', 'hover:bg-red-700', 'border-red-600');
@@ -291,10 +294,14 @@ async function showItemDetails(item) {
             get(favRef).then(snapshot => {
                 if (snapshot.exists()) {
                     const updates = {};
-                    Object.keys(snapshot.val()).forEach(key => { updates[`${key}`] = null; });
-                     import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ update }) => {
+                    Object.keys(snapshot.val()).forEach(key => {
+                        updates[`${key}`] = null;
+                    });
+                    import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({
+                        update
+                    }) => {
                         update(favRef, updates);
-                     });
+                    });
                 }
             });
             addToFavoritesBtn.textContent = 'Add to Favorites';
@@ -304,7 +311,7 @@ async function showItemDetails(item) {
     });
 
     // Review Submission Logic
-    modal.querySelector('#reviewForm').addEventListener('submit', async function(e) {
+    modal.querySelector('#reviewForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const reviewText = modal.querySelector('#reviewText').value.trim();
         const reviewRating = parseInt(modal.querySelector('#reviewRating').value);
@@ -339,8 +346,8 @@ async function showItemDetails(item) {
             let newReviewsHtml = '';
             if (reviewsSnapshot.exists()) {
                 const reviews = Object.values(reviewsSnapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                 newReviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
-                 newReviewsHtml += reviews.map(r => `
+                newReviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
+                newReviewsHtml += reviews.map(r => `
                     <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-2 text-yellow-400 font-bold">
@@ -357,7 +364,7 @@ async function showItemDetails(item) {
             modal.querySelector('#modalRating').textContent = `★ ${newAvgRating}`;
             modal.querySelector('#modalReviewCount').textContent = newReviewCount;
             lucide.createIcons();
-            
+
             modal.querySelector('#reviewForm').reset();
             modal.querySelector('#reviewFormContainer').classList.add('hidden');
 
@@ -372,7 +379,7 @@ window.showItemDetails = showItemDetails;
 function addCardListeners() {
     const container = document.getElementById('cardsContainer');
     if (!container) return;
-    container.onclick = function(e) {
+    container.onclick = function (e) {
         // Find the closest .media-card ancestor
         const card = e.target.closest('.media-card');
         if (!card || !container.contains(card)) return;
@@ -435,19 +442,20 @@ async function renderCards(container, items) {
     // Collapse logic: show only first 10 by default
     let visibleCount = 9;
     let expanded = false;
+
     function renderVisibleCards() {
         // Add themed background to container
         container.style.background = 'transparent'; // Let the body background show through
         container.style.padding = '0';
         container.style.borderRadius = '0';
         container.style.boxShadow = 'none';
-        
+
         let cardHTML = '';
         const toShow = items.slice(0, visibleCount);
         toShow.forEach(item => {
             const starRating = item.rating || item.avgRating ? `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${item.rating || item.avgRating}</div>` : '';
-            const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0,1).join('.') : '');
-            
+            const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
+
             cardHTML += `
                 <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '')}">
                     <div class="relative h-48 overflow-hidden">
@@ -474,7 +482,7 @@ async function renderCards(container, items) {
 
         container.innerHTML = cardHTML;
         lucide.createIcons();
-        
+
         // Add Show More/Show Less button if needed
         if (items.length > visibleCount) {
             const btn = document.createElement('button');
@@ -542,7 +550,7 @@ function sortItems(items, sortOption) {
 
 // Listen for sort apply button
 if (document.getElementById('applySortBtn')) {
-    document.getElementById('applySortBtn').addEventListener('click', function() {
+    document.getElementById('applySortBtn').addEventListener('click', function () {
         const btn = this;
         // Temporarily change style for feedback
         btn.classList.remove('bg-indigo-600');
