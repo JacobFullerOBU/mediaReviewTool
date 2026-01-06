@@ -1,61 +1,84 @@
 import json
 import requests
-
+import time
 # 1. PASTE YOUR API KEY HERE
 API_KEY = "f50a7cd62fa00a24f29a0e3ebb12c130"
+PAGES_TO_FETCH = 10  # Set this to 5 for 100 movies, 10 for 200, etc.
 
-def fetch_formatted_data():
-    # --- STEP A: Get the Genre List (Map IDs to Names) ---
-    # We need this because movies only give us IDs like "28", not "Action"
-    genre_url = f"https://api.themoviedb.org/3/genre/movie/list?api_key={API_KEY}&language=en-US"
+def fetch_large_batch():
+    print("1. Fetching Genre List...")
     genre_map = {}
-    
     try:
-        g_response = requests.get(genre_url)
-        g_data = g_response.json()
-        for g in g_data['genres']:
+        g_resp = requests.get(f"https://api.themoviedb.org/3/genre/movie/list?api_key={API_KEY}")
+        for g in g_resp.json().get('genres', []):
             genre_map[g['id']] = g['name']
     except Exception as e:
-        print(f"Error fetching genres: {e}")
+        print(f"   Error fetching genres: {e}")
 
-    # --- STEP B: Fetch the Movies ---
-    movie_url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language=en-US&page=1"
-    
-    try:
-        response = requests.get(movie_url)
-        data = response.json()
+    formatted_movies = []
+
+    # --- THE LOOP ---
+    # We loop from Page 1 up to PAGES_TO_FETCH
+    for page_num in range(1, PAGES_TO_FETCH + 1):
+        print(f"\n--- Processing Page {page_num} of {PAGES_TO_FETCH} ---")
         
-        formatted_movies = []
+        # Note: We added "&page={page_num}" to the URL
+        url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language=en-US&page={page_num}"
         
-        for item in data['results']:
-            # 1. Convert Genre IDs to a string like "Action, Adventure"
-            genre_names = [genre_map.get(g_id, "Unknown") for g_id in item['genre_ids']]
-            genre_string = ", ".join(genre_names)
-
-            # 2. Get just the Year from "2023-05-05"
-            year_only = item['release_date'][:4] if item.get('release_date') else "Unknown"
-
-            # 3. Build the object in YOUR specific format
-            movie_entry = {
-                "title": item['title'],
-                "year": year_only,
-                "description": item['overview'],
-                "genre": genre_string,
-                "director": "Unknown", # Requires separate API call per movie
-                "poster": f"https://image.tmdb.org/t/p/w500{item['poster_path']}",
-                "category": "movies"
-            }
+        try:
+            response = requests.get(url)
+            data = response.json()
             
-            formatted_movies.append(movie_entry)
+            if 'results' not in data:
+                print("   No results found on this page.")
+                continue
 
-        # --- STEP C: Save to JSON ---
-        with open('media_data.json', 'w', encoding='utf-8') as f:
-            json.dump(formatted_movies, f, indent=4, ensure_ascii=False)
+            current_batch = data['results']
             
-        print(f"Success! Formatted {len(formatted_movies)} movies.")
+            for index, item in enumerate(current_batch):
+                # Optional: Print progress so you know it's working
+                print(f"   Fetching Director for: {item['title']}")
+                
+                # --- SUB-FETCH: Get Director ---
+                director_name = "Unknown"
+                try:
+                    credits_url = f"https://api.themoviedb.org/3/movie/{item['id']}/credits?api_key={API_KEY}"
+                    cred_resp = requests.get(credits_url)
+                    crew = cred_resp.json().get('crew', [])
+                    
+                    director_entry = next((member for member in crew if member['job'] == 'Director'), None)
+                    if director_entry:
+                        director_name = director_entry['name']
+                except:
+                    pass # Keep going if director fails
 
-    except Exception as e:
-        print(f"Error fetching movies: {e}")
+                # --- FORMATTING ---
+                genre_names = [genre_map.get(g_id, "Unknown") for g_id in item.get('genre_ids', [])]
+                
+                movie_entry = {
+                    "title": item['title'],
+                    "year": item.get('release_date', '')[:4],
+                    "description": item['overview'],
+                    "genre": ", ".join(genre_names),
+                    "director": director_name,
+                    "poster": f"https://image.tmdb.org/t/p/w500{item['poster_path']}",
+                    "category": "movies"
+                }
+                
+                formatted_movies.append(movie_entry)
+                
+                # Tiny pause to respect API limits (important when doing hundreds of requests!)
+                time.sleep(0.1)
+
+        except Exception as e:
+            print(f"Error on page {page_num}: {e}")
+
+    # --- SAVE TO FILE ---
+    print(f"\nSAVING... Total movies fetched: {len(formatted_movies)}")
+    with open('media_data.json', 'w', encoding='utf-8') as f:
+        json.dump(formatted_movies, f, indent=4, ensure_ascii=False)
+        
+    print("Done! Check media_data.json")
 
 if __name__ == "__main__":
-    fetch_formatted_data()
+    fetch_large_batch()
