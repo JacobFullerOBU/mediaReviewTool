@@ -538,7 +538,9 @@ async function renderCards(container, items) {
         toShow.forEach(item => {
             // Prioritize live average rating, then fallback to static rating
             const displayRating = item.liveAvgRating && item.liveAvgRating !== "N/A" ? item.liveAvgRating : (item.rating || item.avgRating);
-            const starRating = displayRating ? `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${displayRating}</div>` : '';
+            const starRating = displayRating && displayRating !== "N/A" ?
+                `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${displayRating}</div>` :
+                `<div class="text-slate-400 text-xs">No reviews yet</div>`;
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
 
             cardHTML += `
