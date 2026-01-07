@@ -1,28 +1,31 @@
-## What You Can Do
+# MediaReview Tool 🎬 🎮 📚
 
-- Browse all types of media to find reccomendations and add your own reviews
-- Add media to your watchlist or favorites
-- Register as a reviewer and create your own profile
-- See reviews from other users and top reviewers
-- Submit and view reviews for movies, TV shows, books, music, and games
-- Explore new media
-- Quick search to find any item fast
+**Discover, Review, and Track your favorite entertainment.**
 
-## How to Get Started
+MediaReview is a responsive web application designed to help users categorize and rate their favorite Movies, TV Shows, Video Games, and Books. It features a dynamic feed, sorting capabilities, and a user authentication system.
 
-Just open any of the HTML files (like `movies.html`, `books.html`, or `music.html`) in your web browser. No installation or setup needed!
+🔗 **[Live Demo](https://jacobfullerobu.github.io/mediaReviewTool/index.html)**
 
-## How to Register as a Reviewer
-1. Go to the Reviewers page
-2. Click "Become a Reviewer"
-3. Fill out your info and a profile picture URL
-4. Your profile will appear in the Community Reviewers section
+---
 
-## Live Demo
-[Try it out here!](https://jacobfullerobu.github.io/mediaReviewTool/index.html)
+## 🚀 Features
 
-## Resources Used
-- HTML, CSS, JavaScript
-- Firebase Authentication
-- Firebase Realtime Database
-- Firebase Firestore
+* **Multi-Category Support:** Browse content across different media types (Movies, TV, Music, Games, Books).
+* **Dynamic Sorting & Filtering:** * Sort by Highest Rated, Newest, Oldest, or Alphabetical.
+    * Filter by specific categories instantly.
+* **User Authentication:** Secure Login and Registration functionality powered by **Firebase**.
+* **"Surprise Me" Mode:** A randomizer feature to help indecisive users find something new to watch or play.
+* **Responsive Design:** Fully optimized for desktop, tablet, and mobile viewing.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+)
+* **Backend / Auth:** Google Firebase (Authentication & Realtime Database)
+* **Hosting:** GitHub Pages
+* **Data Structure:** JSON
+
+---
+
+## 📂 Project Structure
