@@ -4,54 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - MediaReview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/cards.css">
-    <link rel="stylesheet" href="../styles/navigation.css">
-    <link rel="stylesheet" href="../styles/auth.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <h1>MediaReview</h1>
+<body class="bg-slate-900 text-slate-100 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                        MediaReview
+                    </span>
+                </a>
             </div>
-            <a class="btn" id="backHomeBtn" href="../index.html">Home</a>
         </div>
     </nav>
 
-    <section class="profile-section" style="background:#f7f8fa; min-height:100vh; padding-top:32px;">
-        <div class="container" style="max-width:900px; margin:auto;">
-            <div class="profile-header-card" style="background:#fff;box-shadow:0 2px 16px #0002;border-radius:16px;padding:32px 32px 24px 32px;margin-bottom:32px;display:flex;align-items:center;gap:32px;">
-                <div style="flex:1;">
-                    <h2 id="profileTitle" style="margin-top:0;margin-bottom:12px;font-size:2.2em;color:#222;">Your Profile</h2>
-                    <div id="profileInfo" style="font-size:1.1em;color:#444;"></div>
-                </div>
-
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="profile-header-card bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm mb-8 flex items-center gap-6">
+            <div class="flex-1">
+                <h2 id="profileTitle" class="text-3xl font-bold text-white mb-2">Your Profile</h2>
+                <div id="profileInfo" class="text-slate-400"></div>
             </div>
+        </div>
 
-            <div class="profile-sections" style="display:flex;flex-wrap:wrap;gap:32px;">
-                <div class="profile-reviews" style="flex:1 1 320px;background:#fff;border-radius:12px;box-shadow:0 2px 12px #0001;padding:24px;min-width:320px;">
-                    <h3 style="margin-top:0;margin-bottom:18px;color:#1976d2;">Your Reviews</h3>
-                    <ul id="userReviews" style="list-style:none;padding:0;margin:0;"></ul>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2">
+                <div class="profile-reviews bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm">
+                    <h3 class="text-xl font-bold text-white mb-4">Your Reviews</h3>
+                    <ul id="userReviews" class="space-y-4"></ul>
                 </div>
-                <div class="profile-favorites" style="flex:1 1 320px;background:#fff;border-radius:12px;box-shadow:0 2px 12px #0001;padding:24px;min-width:320px;">
-                    <h3 style="margin-top:0;margin-bottom:18px;color:#1976d2;">Your Favorites</h3>
-                    <div id="userFavorites" style="display:flex;flex-wrap:wrap;gap:16px;"></div>
+            </div>
+            <div>
+                <div class="profile-favorites bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm">
+                    <h3 class="text-xl font-bold text-white mb-4">Your Favorites</h3>
+                    <div id="userFavorites" class="grid grid-cols-2 gap-4"></div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <footer class="footer" style="margin-top:48px;">
-        <div class="container">
-            <p>&copy; 2024 MediaReview. All rights reserved.</p>
-            <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
-                <a href="../Top Reviewers/topReviewers.html" id="leaderboardLink" style="color:#1976d2; text-decoration:underline; font-size:1em;">Top Reviewers Leaderboard</a>
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>© 2024 MediaReview. All rights reserved.</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="hover:text-indigo-400">Contact</a>
+                <a href="#" class="hover:text-indigo-400">Privacy</a>
+                <a href="../Top Reviewers/topReviewers.html" class="hover:text-indigo-400">Top Reviewers</a>
             </div>
         </div>
     </footer>
 
     <script type="module" src="../scripts/cards.js"></script>
     <script type="module" src="../scripts/profile.js"></script>
+    <script>
+        // Loads icons and elements dynamically 
+        lucide.createIcons();
+    </script>
 </body>
 </html>

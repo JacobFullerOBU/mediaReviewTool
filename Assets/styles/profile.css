@@ -1,0 +1,52 @@
+/* Profile Page Specific Styles */
+
+#userReviews li {
+    background-color: #1e293b; /* slate-800 */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #334155; /* slate-700 */
+}
+
+#userFavorites .favorite-card {
+    background-color: #1e293b; /* slate-800 */
+    border-radius: 0.75rem; /* rounded-xl */
+    overflow: hidden;
+    border: 1px solid #334155; /* border-slate-700 */
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+#userFavorites .favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.1), 0 4px 6px -4px rgba(99, 102, 241, 0.1);
+    border-color: #4f46e5; /* indigo-500 */
+}
+
+#userFavorites .favorite-card .card-image {
+    height: 10rem;
+    background-size: cover;
+    background-position: center;
+}
+
+#userFavorites .favorite-card .card-content {
+    padding: 1rem;
+}
+
+#userFavorites .favorite-card .card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+#userFavorites .favorite-card .card-description {
+    font-size: 0.875rem;
+    color: #94a3b8; /* slate-400 */
+    line-height: 1.5;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
