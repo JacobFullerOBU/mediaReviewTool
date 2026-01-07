@@ -120,6 +120,22 @@ async function initCards() {
 }
 
 function initTabFunctionality() {
+        // Scroll search bar to top of viewport when sort changes
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', () => {
+                // Scroll search bar to top of viewport
+                const searchContainer = document.querySelector('.search-and-sort-container');
+                if (searchContainer) {
+                    const rect = searchContainer.getBoundingClientRect();
+                    window.scrollBy({
+                        top: rect.top - 64,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
         btn.addEventListener('click', function () {
@@ -133,6 +149,16 @@ function initTabFunctionality() {
             this.classList.remove('bg-slate-800', 'text-slate-400');
             // Filter cards
             filterCards(category);
+            // Scroll search bar to top of viewport
+            const searchContainer = document.querySelector('.search-and-sort-container');
+            if (searchContainer) {
+                const rect = searchContainer.getBoundingClientRect();
+                window.scrollBy({
+                    top: rect.top - 64,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
     const searchInput = document.getElementById('mediaSearchInput');
@@ -141,6 +167,16 @@ function initTabFunctionality() {
             const activeTab = document.querySelector('.tab-btn.active');
             const category = activeTab ? activeTab.dataset.category : 'all';
             filterCards(category);
+            // Scroll search bar to top of viewport
+            const searchContainer = document.querySelector('.search-and-sort-container');
+            if (searchContainer) {
+                const rect = searchContainer.getBoundingClientRect();
+                window.scrollBy({
+                    top: rect.top - 64,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            }
         });
     }
 
@@ -695,6 +731,17 @@ if (document.getElementById('applySortBtn')) {
         btn.classList.add('bg-indigo-800'); // A darker shade for pressed state
 
         filterCards(currentFilter);
+
+        // Scroll search bar to top of viewport
+        const searchContainer = document.querySelector('.search-and-sort-container');
+        if (searchContainer) {
+            const rect = searchContainer.getBoundingClientRect();
+            window.scrollBy({
+                top: rect.top - 64,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
 
         // Revert to original style
         setTimeout(() => {

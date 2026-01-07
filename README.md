@@ -1,13 +1,17 @@
-# Media Review Tool
+## What You Can Do
 
-A simple web app for browsing, reviewing, and following top reviewers in Movies, TV Shows, Music, Games, and Books.
-## Main Features
-- Browse all types of media, and add your own reviews
-- Add media to your watchlist 
-- Add media to your favorites
-- Register as a reviewer (profile picture in progress)
-- Reviewer profile allows you to see reviews a user has given
-- Submit and view reviews for various media types
+- Browse all types of media and add your own reviews
+- Add media to your watchlist or favorites
+- Register as a reviewer and create your own profile
+- See reviews from other users and top reviewers
+- Submit and view reviews for movies, TV shows, books, music, and games
+- Explore new media to add to your collection
+- Backup and restore your lists so you never lose your favorites
+- Quick search to find any item fast
+
+## How to Get Started
+
+Just open any of the HTML files (like `movies.html`, `books.html`, or `music.html`) in your web browser. No installation or setup needed!
 
 ## How to Register as a Reviewer
 1. Go to the Reviewers page
@@ -16,7 +20,7 @@ A simple web app for browsing, reviewing, and following top reviewers in Movies,
 4. Your profile will appear in the Community Reviewers section
 
 ## Live Demo
-[https://jacobfullerobu.github.io/mediaReviewTool/index.html](https://jacobfullerobu.github.io/mediaReviewTool/index.html)
+[Try it out here!](https://jacobfullerobu.github.io/mediaReviewTool/index.html)
 
 ## Resources Used
 - HTML, CSS, JavaScript
