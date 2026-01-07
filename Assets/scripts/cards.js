@@ -321,10 +321,10 @@ async function showItemDetails(item) {
                     <div class="flex items-center gap-4">
                         <button class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors" id="writeReviewBtn">Write a Review</button>
                         <button class="btn-secondary border border-slate-600 hover:bg-slate-700 text-slate-300 font-bold py-2 px-4 rounded-lg transition-colors" id="addToFavoritesBtn">Add to Favorites</button>
+                        <button class="btn-secondary border border-amber-600 hover:bg-amber-700 text-amber-300 font-bold py-2 px-4 rounded-lg transition-colors" id="addToWatchlistBtn">Add to Watchlist</button>
                     </div>
                 </div>
             </div>
-            
             <div id="reviewFormContainer" class="hidden mt-6 pt-6 border-t border-slate-700">
                 <form id="reviewForm" class="space-y-4">
                     <div>
@@ -339,10 +339,47 @@ async function showItemDetails(item) {
                 </form>
                 <div id="reviewError" class="text-red-500 mt-4"></div>
             </div>
-
             <div id="reviewsSection">${reviewsHtml}</div>
         </div>
     `;
+        // Watchlist Logic
+        const addToWatchlistBtn = modal.querySelector('#addToWatchlistBtn');
+        const mediaKey = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+        let isWatchlisted = false;
+        if (auth.currentUser) {
+            const userId = auth.currentUser.uid || auth.currentUser.email || auth.currentUser.displayName;
+            const watchRef = ref(db, `watchlist/${userId}/${mediaKey}`);
+            get(watchRef).then(snapshot => {
+                if (snapshot.exists()) {
+                    isWatchlisted = true;
+                    addToWatchlistBtn.textContent = 'Remove from Watchlist';
+                    addToWatchlistBtn.classList.add('bg-amber-900', 'border-amber-600');
+                    addToWatchlistBtn.classList.remove('bg-amber-600');
+                }
+            });
+        }
+
+        addToWatchlistBtn.addEventListener('click', async () => {
+            if (!auth.currentUser) {
+                alert('You must be logged in to use the watchlist.');
+                return;
+            }
+            const userId = auth.currentUser.uid || auth.currentUser.email || auth.currentUser.displayName;
+            const watchRef = ref(db, `watchlist/${userId}/${mediaKey}`);
+            if (!isWatchlisted) {
+                await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ set }) => set(watchRef, true));
+                addToWatchlistBtn.textContent = 'Remove from Watchlist';
+                isWatchlisted = true;
+                addToWatchlistBtn.classList.add('bg-amber-900', 'border-amber-600');
+                addToWatchlistBtn.classList.remove('bg-amber-600');
+            } else {
+                await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(watchRef));
+                addToWatchlistBtn.textContent = 'Add to Watchlist';
+                isWatchlisted = false;
+                addToWatchlistBtn.classList.remove('bg-amber-900', 'border-amber-600');
+                addToWatchlistBtn.classList.add('bg-amber-600');
+            }
+        });
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
     lucide.createIcons();
@@ -360,7 +397,6 @@ async function showItemDetails(item) {
 
     // Favorites Logic
     const addToFavoritesBtn = modal.querySelector('#addToFavoritesBtn');
-    const mediaKey = item.id || item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     let isFavorite = false;
     if (auth.currentUser) {
         const userId = auth.currentUser.uid;
@@ -478,6 +514,8 @@ window.showItemDetails = showItemDetails;
 function addCardListeners() {
     const container = document.getElementById('cardsContainer');
     if (!container) return;
+    // Remove any previous click handler
+    container.onclick = null;
     container.onclick = function (e) {
         // Find the closest .media-card ancestor
         const card = e.target.closest('.media-card');
@@ -562,7 +600,7 @@ async function renderCards(container, items) {
                          <p class="text-slate-400 text-sm mb-4 flex-1 line-clamp-2">
                             ${reviewSnippet}
                         </p>
-                        <div class="pt-4 border-t border-slate-700 text-slate-500 text-xs">
+                        <div class="pt-4 border-t border-slate-700 text-slate-500 text-xs mb-2">
                              <span class="font-medium text-slate-400">${item.genre || ''}</span>
                         </div>
                     </div>
@@ -572,6 +610,8 @@ async function renderCards(container, items) {
 
         container.innerHTML = cardHTML;
         lucide.createIcons();
+
+        // ...existing code...
 
         // Add Show More/Show Less button if needed
         if (items.length > visibleCount) {
