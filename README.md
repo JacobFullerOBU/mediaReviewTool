@@ -1,12 +1,11 @@
 ## What You Can Do
 
-- Browse all types of media and add your own reviews
+- Browse all types of media to find reccomendations and add your own reviews
 - Add media to your watchlist or favorites
 - Register as a reviewer and create your own profile
 - See reviews from other users and top reviewers
 - Submit and view reviews for movies, TV shows, books, music, and games
-- Explore new media to add to your collection
-- Backup and restore your lists so you never lose your favorites
+- Explore new media
 - Quick search to find any item fast
 
 ## How to Get Started
