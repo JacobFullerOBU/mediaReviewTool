@@ -187,7 +187,7 @@ async function fetchRatingsForItems(items) {
     const itemsNeedingRating = items.filter(i => i.liveAvgRating === undefined);
     if (itemsNeedingRating.length > 0) {
         const ratingPromises = itemsNeedingRating.map(item => {
-            const mediaId = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            const mediaId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
             return getAverageRating(mediaId).then(rating => {
                 item.liveAvgRating = (rating === "N/A") ? -1 : parseFloat(rating);
             });
@@ -249,7 +249,7 @@ window.filterCards = filterCards;
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
     // Use the same key logic as review submission
-    let mediaId = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+    let mediaId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
     let avgRating = await getAverageRating(mediaId);
     let reviewCount = await getReviewCount(mediaId);
     let reviewsHtml = '';
@@ -360,7 +360,7 @@ async function showItemDetails(item) {
 
     // Favorites Logic
     const addToFavoritesBtn = modal.querySelector('#addToFavoritesBtn');
-    const mediaKey = item.id || item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const mediaKey = item.id || item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     let isFavorite = false;
     if (auth.currentUser) {
         const userId = auth.currentUser.uid;
@@ -489,7 +489,7 @@ function addCardListeners() {
             if (item.id && item.id == itemId) return true;
             // fallback: match normalized title
             if (!item.id && item.title) {
-                const normTitle = item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                const normTitle = item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
                 return normTitle === itemId;
             }
             return false;
@@ -547,7 +547,7 @@ async function renderCards(container, items) {
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
 
             cardHTML += `
-                <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '')}">
+                <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '')}">
                     <div class="relative h-48 overflow-hidden">
                         <img class="card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform" src="${item.poster || item.image || ''}" alt="${item.title || ''}">
                         <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1">
