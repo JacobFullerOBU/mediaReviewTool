@@ -125,7 +125,7 @@ async function renderReviews(user) {
 }
 
 async function fetchMovies() {
-    const response = await fetch("Assets/Movies/movieList.json");
+    const response = await fetch("../Movies/movieList.json");
     return await response.json();
 }
 
@@ -167,36 +167,37 @@ async function renderFavorites(user) {
         updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
         return;
     }
-    const favKeys = Object.keys(snapshot.val() || {});
+    const favObj = snapshot.val() || {};
+    const favKeys = Object.keys(favObj);
     const movies = await fetchMovies();
     const mediaMap = getAllMediaMap(movies, tv, music, games, books);
-    const favoriteItems = favKeys.map(key => mediaMap[key]).filter(Boolean);
+    // Pair each favorite key with its media item
+    const favoriteItems = favKeys.map(key => ({ key, item: mediaMap[key] })).filter(fav => fav.item);
     window._favoriteCount = favoriteItems.length;
     updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: favoriteItems.length });
     if (favoriteItems.length === 0) {
         container.innerHTML = '<div>No favorites found in your media library.</div>';
         return;
     }
-    container.innerHTML = favoriteItems.map(createCardHTML).join('');
+    container.innerHTML = favoriteItems.map(fav => createCardHTML(fav.item)).join('');
     setTimeout(() => {
         const cards = Array.from(container.querySelectorAll('.favorite-card'));
-        cards.forEach(card => {
-            const id = card.getAttribute('data-id');
-            const item = favoriteItems.find(fav => (fav.id || fav.title) == id);
-            if (!item) return;
+        cards.forEach((card, idx) => {
+            const fav = favoriteItems[idx];
+            if (!fav) return;
             if (window.favoritesEditMode) {
                 const removeBtn = card.querySelector('.remove-favorite-btn');
                 if (removeBtn) {
                     removeBtn.addEventListener('click', async (e) => {
                         e.stopPropagation();
-                        await removeFavorite(userId, id, card);
+                        await removeFavorite(userId, fav.key, card);
                     });
                 }
                 card.style.cursor = 'default';
             } else {
                 card.addEventListener('click', function() {
                     if (window.favoritesEditMode) return;
-                    if (item) showFavoriteModal(item);
+                    if (fav.item) showFavoriteModal(fav.item);
                 });
             }
         });
@@ -210,16 +211,12 @@ async function removeFavorite(userId, id, cardElem) {
     // Remove from Firebase
     const favRef = ref(db, `favorites/${userId}/${id}`);
     await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(favRef));
-    // Remove from UI
-    if (cardElem) cardElem.remove();
-    // Update stats
-    window._favoriteCount = Math.max(0, (window._favoriteCount || 1) - 1);
-    updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: window._favoriteCount });
+    // Re-render favorites to reflect removal
+    if (typeof auth !== 'undefined' && auth.currentUser) {
+        await renderFavorites(auth.currentUser);
+    }
 }
 
-// Edit Favorites button logic
-
-}
 
 // Modal logic for favorite details
 function showFavoriteModal(item) {
