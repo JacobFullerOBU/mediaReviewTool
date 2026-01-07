@@ -105,7 +105,7 @@ function initAuthButtons() {
 
     if (profileBtn) {
         profileBtn.addEventListener('click', function() {
-            window.location.href = 'Assets/profile/index.html';
+            window.location.href = 'Assets/profile/userprofile.html';
         });
     }
 }

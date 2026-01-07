@@ -1,3 +1,4 @@
+console.log('[Profile] profile.js loaded');
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
 import { tv } from "../TV Shows/tv.js";
@@ -124,7 +125,7 @@ async function renderReviews(user) {
 }
 
 async function fetchMovies() {
-    const response = await fetch("../Movies/movieList.json");
+    const response = await fetch("Assets/Movies/movieList.json");
     return await response.json();
 }
 
@@ -143,17 +144,11 @@ function getAllMediaMap(movies, tv, music, games, books) {
 
 function createCardHTML(item) {
     return `
-        <div class="media-card favorite-card" data-id="${item.id || item.title}" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;cursor:pointer;">
+        <div class="media-card favorite-card" data-id="${item.id || item.title}" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;position:relative;cursor:pointer;">
+            ${window.favoritesEditMode ? `<button class=\"remove-favorite-btn\" title=\"Remove from favorites\" style=\"position:absolute;top:8px;right:8px;background:#e53e3e;color:white;border:none;border-radius:50%;width:28px;height:28px;font-size:18px;z-index:2;cursor:pointer;\">&times;</button>` : ''}
             <div class="card-image" style="background-image: url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;"></div>
             <div class="card-content">
                 <h3 class="card-title">${item.title || ''}</h3>
-                <p class="card-description">${item.description || ''}</p>
-                <div class="card-meta">
-                    <span class="card-year">${item.year || ''}</span>
-                    <span class="card-director">${item.director ? 'Director: ' + item.director : ''}</span>
-                </div>
-                <div class="card-actors">${item.actors ? 'Cast: ' + item.actors.replace(/\n/g, ', ') : ''}</div>
-                <div class="card-genre">${item.genre ? 'Genre: ' + item.genre : ''}</div>
             </div>
         </div>
     `;
@@ -183,23 +178,47 @@ async function renderFavorites(user) {
         return;
     }
     container.innerHTML = favoriteItems.map(createCardHTML).join('');
-    // Add click event listeners to each favorite card
     setTimeout(() => {
-        const normKey = r.mediaKey.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g, '_');
-        // Debug logging
-        console.log('[Profile] Review mediaKey:', r.mediaKey);
-        console.log('[Profile] Normalized key:', normKey);
-        console.log('[Profile] Media map keys:', Object.keys(mediaMap));
-        const mediaItem = mediaMap[normKey];
-        console.log('[Profile] Media item found:', mediaItem);
+        const cards = Array.from(container.querySelectorAll('.favorite-card'));
         cards.forEach(card => {
-            card.addEventListener('click', function() {
-                const id = card.getAttribute('data-id');
-                const item = favoriteItems.find(fav => (fav.id || fav.title) == id);
-                if (item) showFavoriteModal(item);
-            });
+            const id = card.getAttribute('data-id');
+            const item = favoriteItems.find(fav => (fav.id || fav.title) == id);
+            if (!item) return;
+            if (window.favoritesEditMode) {
+                const removeBtn = card.querySelector('.remove-favorite-btn');
+                if (removeBtn) {
+                    removeBtn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        await removeFavorite(userId, id, card);
+                    });
+                }
+                card.style.cursor = 'default';
+            } else {
+                card.addEventListener('click', function() {
+                    if (window.favoritesEditMode) return;
+                    if (item) showFavoriteModal(item);
+                });
+            }
         });
     }, 0);
+
+}
+
+window.favoritesEditMode = false;
+
+async function removeFavorite(userId, id, cardElem) {
+    // Remove from Firebase
+    const favRef = ref(db, `favorites/${userId}/${id}`);
+    await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(favRef));
+    // Remove from UI
+    if (cardElem) cardElem.remove();
+    // Update stats
+    window._favoriteCount = Math.max(0, (window._favoriteCount || 1) - 1);
+    updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: window._favoriteCount });
+}
+
+// Edit Favorites button logic
+
 }
 
 // Modal logic for favorite details
@@ -279,6 +298,7 @@ async function loadFavoriteReviews(item) {
 
 // On load, check auth and render profile
 auth.onAuthStateChanged(async (user) => {
+    console.log('[Profile] Auth state changed:', user);
     if (!user) {
         window.location.href = '../index.html';
         return;
@@ -286,4 +306,13 @@ auth.onAuthStateChanged(async (user) => {
     renderProfile(user);
     await renderReviews(user);
     await renderFavorites(user);
+    // Attach Edit Favorites button handler after DOM and profile are rendered
+    const editBtn = document.getElementById('editFavoritesBtn');
+    if (editBtn) {
+        editBtn.addEventListener('click', () => {
+            window.favoritesEditMode = !window.favoritesEditMode;
+            editBtn.textContent = window.favoritesEditMode ? 'Done' : 'Edit Favorites';
+            renderFavorites(user);
+        });
+    }
 });
