@@ -1062,16 +1062,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/r915sk2JpthZSjHEgZKifWxgo6L.jpg"
     },
     {
-        id: 122,
-        title: "Meet the Press",
-        description: "Meet the Press is a weekly American television news/interview program airing on NBC. It is the longest-running television series in American broadcasting history, despite bearing little resemblance to the original format of the program seen in its television debut on November 6, 1947. Meet the Press is the highest-rated of the American television Sunday morning talk shows.  It has been hosted by 11 moderators, beginning with Martha Rountree.  Meet the Press and similar shows specialize in interviewing national leaders on issues of politics, economics, foreign policy and other public affairs.",
-        category: "tv",
-        rating: 4.3,
-        year: "1947",
-        reviews: 19,
-        image: "https://image.tmdb.org/t/p/w500/aCLynKB2KB2Raqv7UufWwuQghtp.jpg"
-    },
-    {
         id: 123,
         title: "Squid Game",
         description: "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.",
@@ -1342,16 +1332,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/o0tMMK33JqmtpcWw0H41cEr9xQB.jpg"
     },
     {
-        id: 150,
-        title: "The Daily Show",
-        description: "The World's Fakest News Team tackle the biggest stories in news, politics and pop culture.",
-        category: "tv",
-        rating: 6.4,
-        year: "1996",
-        reviews: 611,
-        image: "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg"
-    },
-    {
         id: 151,
         title: "Frieren: Beyond Journey's End",
         description: "Decades after her party defeated the Demon King, an old friend's funeral launches the elf wizard Frieren on a journey of self-discovery.",
@@ -1500,16 +1480,6 @@ export const tv = [
         year: "1995",
         reviews: 1038,
         image: "https://image.tmdb.org/t/p/w500/gNS5tRSG3UlXodCxznKKOKweqxh.jpg"
-    },
-    {
-        id: 166,
-        title: "AVN Awards",
-        description: "The AVN Awards are movie awards sponsored and presented by the American adult video industry trade magazine AVN (Adult Video News) to honor exceptional performance in various aspects of the creation and marketing of American pornographic movies. The 'Oscars of porn'.",
-        category: "tv",
-        rating: 5.5,
-        year: "",
-        reviews: 24,
-        image: "https://image.tmdb.org/t/p/w500/7f6wnV0tkxn5sif7LqjyzN6eLk6.jpg"
     },
     {
         id: 167,
@@ -2181,16 +2151,6 @@ export const tv = [
         year: "2011",
         reviews: 1935,
         image: "https://image.tmdb.org/t/p/w500/62d8q4C1vNwhxAcuwKAjFkIrHdE.jpg"
-    },
-    {
-        id: 234,
-        title: "Washington Week with The Atlantic",
-        description: "Journalists participate in a round-table discussion of news events in this award-winning public affairs series. It first aired in 1967, making it the longest-running prime-time news and public affairs program on television.",
-        category: "tv",
-        rating: 9.5,
-        year: "1967",
-        reviews: 2,
-        image: "https://image.tmdb.org/t/p/w500/3EHbi6w6wvYIiCUxg7Hu51g29Ph.jpg"
     },
     {
         id: 235,
@@ -8446,16 +8406,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/pbV2eLnKSIm1epSZt473UYfqaeZ.jpg"
     },
     {
-        id: 860,
-        title: "Golden Globe Awards",
-        description: "An annual awards ceremony recognizing excellence in film and television, both domestic and foreign, bestowed by the Hollywood Foreign Press Association.",
-        category: "tv",
-        rating: 7.2,
-        year: "1944",
-        reviews: 17,
-        image: "https://image.tmdb.org/t/p/w500/gYG3SHNKui9ps9RfN4u9MMwpy10.jpg"
-    },
-    {
         id: 861,
         title: "The Cosby Show",
         description: "The Cosby Show is an American television situation comedy starring Bill Cosby, which aired for eight seasons on NBC from September 20, 1984 until April 30, 1992. The show focuses on the Huxtable family, an upper middle-class African-American family living in Brooklyn, New York.",
@@ -8824,16 +8774,6 @@ export const tv = [
         year: "2014",
         reviews: 882,
         image: "https://image.tmdb.org/t/p/w500/DRRHgvsNEfBloMgIP8bBw4zi4E.jpg"
-    },
-    {
-        id: 898,
-        title: "Dateline",
-        description: "Dateline NBC, or simply Dateline, is a weekly American television newsmagazine series. It was previously the network's flagship newsmagazine, but now focuses mainly on true crime stories with only occasional editions that focus on other topics.",
-        category: "tv",
-        rating: 6.4,
-        year: "1992",
-        reviews: 48,
-        image: "https://image.tmdb.org/t/p/w500/xj9zonhdomfBpEhZQmAON5u3CiB.jpg"
     },
     {
         id: 899,
