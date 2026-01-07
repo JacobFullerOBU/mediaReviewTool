@@ -7,7 +7,7 @@ import time
 
 # --- CONFIGURATION ---
 API_KEY = "f50a7cd62fa00a24f29a0e3ebb12c130"
-PAGES_TO_ADD = 20             # How many NEW pages to grab each time you run this
+PAGES_TO_ADD = 30             # How many NEW pages to grab each time you run this
 MASTER_FILE = 'Assets/Movies/movieList.json' 
 BACKUP_FILE = 'Assets/Movies/movieList_backup.json'
 CONFIG_FILE = 'Assets/Movies/fetch_config.json' # Stores the memory of where we left off

@@ -3,7 +3,7 @@ import requests
 import time
 # 1. PASTE YOUR API KEY HERE
 API_KEY = "f50a7cd62fa00a24f29a0e3ebb12c130"
-PAGES_TO_FETCH = 10  # Set this to 5 for 100 movies, 10 for 200, etc.
+PAGES_TO_FETCH = 30  # Set this to 5 for 100 movies, 10 for 200, etc.
 
 def fetch_large_batch():
     print("1. Fetching Genre List...")
