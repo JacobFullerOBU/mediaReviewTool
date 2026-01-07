@@ -1,5 +1,10 @@
 // --- Firebase Auth State UI Sync for Home Page ---
 import { auth } from "./firebase.js";
+import { 
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 // Authentication functionality
 
 function updateAuthUI(user) {
@@ -226,17 +231,21 @@ function handleLogout() {
     showNotification('Logged out successfully', 'info');
 }
 
+document.addEventListener('DOMContentLoaded', initAuth);
+
 // Utility functions
 function showModal(modal) {
     if (modal) {
-        modal.classList.add('show');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
     }
 }
 
 function hideModal(modal) {
     if (modal) {
-        modal.classList.remove('show');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
         document.body.style.overflow = 'auto';
         
         // Clear form errors
