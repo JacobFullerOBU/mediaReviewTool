@@ -1,5 +1,4 @@
-export const tv = [
-    {
+export const tv = [{
         id: 4,
         title: "Breaking Bad",
         description: "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing drugs.",
@@ -50,7 +49,7 @@ export const tv = [
         id: 9,
         title: "Mad Men",
         description: "",
-        category: "tv", 
+        category: "tv",
         year: 2007,
         image: "https://upload.wikimedia.org/wikipedia/en/3/33/Mad-men-title-card.jpg"
     },
