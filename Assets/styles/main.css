@@ -5,13 +5,13 @@
 
 @media (min-width: 640px) {
     .hero-section {
-        padding-top: 14rem;
-        padding-bottom: 14rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
     }
 }
 
 main#browse-page {
-    padding-top: 6rem;
+    padding-top: 2rem;
     padding-bottom: 3rem;
 }
 
