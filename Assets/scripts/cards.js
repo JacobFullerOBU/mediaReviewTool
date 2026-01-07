@@ -726,10 +726,12 @@ function sortItems(items, sortOption) {
     let sorted = [...items];
     switch (sortOption) {
         case 'year-desc':
-            sorted.sort((a, b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
+            sorted = sorted.filter(item => item.year && !isNaN(parseInt(item.year)));
+            sorted.sort((a, b) => parseInt(b.year) - parseInt(a.year));
             break;
         case 'year-asc':
-            sorted.sort((a, b) => (parseInt(a.year) || 0) - (parseInt(b.year) || 0));
+            sorted = sorted.filter(item => item.year && !isNaN(parseInt(item.year)));
+            sorted.sort((a, b) => parseInt(a.year) - parseInt(b.year));
             break;
         case 'title-asc':
             sorted.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
