@@ -249,11 +249,42 @@ async function filterCards(category) {
             return category === 'movies' && !item.category;
         });
     }
-    // Filter by search term
+    // Filter by search term (title, director, actors, description, etc.)
     if (searchTerm) {
-        items = items.filter(item =>
-            item.title && item.title.toLowerCase().includes(searchTerm)
-        );
+        items = items.filter(item => {
+            // Always check title
+            let match = item.title && item.title.toLowerCase().includes(searchTerm);
+            // Movies: director, actors, description
+            if (!match && item.director) {
+                match = item.director.toLowerCase().includes(searchTerm);
+            }
+            if (!match && item.actors) {
+                match = item.actors.toLowerCase().includes(searchTerm);
+            }
+            if (!match && item.description) {
+                match = item.description.toLowerCase().includes(searchTerm);
+            }
+            // TV: creators, cast
+            if (!match && item.creators) {
+                match = item.creators.toLowerCase().includes(searchTerm);
+            }
+            if (!match && item.cast) {
+                match = item.cast.toLowerCase().includes(searchTerm);
+            }
+            // Music: artist
+            if (!match && item.artist) {
+                match = item.artist.toLowerCase().includes(searchTerm);
+            }
+            // Games: developer
+            if (!match && item.developer) {
+                match = item.developer.toLowerCase().includes(searchTerm);
+            }
+            // Books: author
+            if (!match && item.author) {
+                match = item.author.toLowerCase().includes(searchTerm);
+            }
+            return match;
+        });
     }
     
     const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
