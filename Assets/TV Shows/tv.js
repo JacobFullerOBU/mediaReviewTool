@@ -320,17 +320,6 @@ export const tv = [
         category: "tv",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/HowIMetYourMother.svg/250px-HowIMetYourMother.svg.png"
     },
-
-    {
-        id: 48,
-        title: "Watch What Happens Live with Andy Cohen",
-        description: "Bravo network executive Andy Cohen discusses pop culture topics with celebrities and reality show personalities.",
-        category: "tv",
-        rating: 5.031,
-        year: "2009",
-        reviews: 81,
-        image: "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg"
-    },
     {
         id: 49,
         title: "Supernatural",
@@ -852,16 +841,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg"
     },
     {
-        id: 101,
-        title: "跟着书本去旅行",
-        description: "",
-        category: "tv",
-        rating: 0.0,
-        year: "2019",
-        reviews: 0,
-        image: "https://image.tmdb.org/t/p/w500/j1nH6MopccnN7V2UM5FJX4AlGFM.jpg"
-    },
-    {
         id: 102,
         title: "Doraemon",
         description: "Robotic cat Doraemon is sent back in time from the 22nd century to protect 10-year-old Noby, a lazy and uncoordinated boy who is destined to have a tragic future. Doraemon can create secret gadgets from a pocket on his stomach, but they usually cause more bad than good because of Noby's propensity to misuse them.",
@@ -912,16 +891,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/7NAvPYPAu7MeHwP8E9sn81PqsRh.jpg"
     },
     {
-        id: 107,
-        title: "The Tonight Show with Conan O'Brien",
-        description: "The Tonight Show with Conan O'Brien is an American television talk show broadcast by NBC. The show is the fifth installment of The Tonight Show, hosted by Conan O'Brien. It aired from June 1, 2009, to January 22, 2010, succeeding The Tonight Show with Jay Leno and ended when Leno returned to the role of Tonight Show host.",
-        category: "tv",
-        rating: 7.0,
-        year: "2009",
-        reviews: 81,
-        image: "https://image.tmdb.org/t/p/w500/hkDDxwhBKqrziSVHZknZFomTslq.jpg"
-    },
-    {
         id: 108,
         title: "Landman",
         description: "Set in the proverbial boomtowns of West-Texas and a modern-day tale of fortune-seeking in the world of oil rigs, the series is an upstairs/downstairs story of roughnecks and wildcat billionaires that are fueling a boom so big it’s reshaping our climate, our economy and our geopolitics.",
@@ -940,16 +909,6 @@ export const tv = [
         year: "2025",
         reviews: 499,
         image: "https://image.tmdb.org/t/p/w500/nrM2xFUfKJJEmZzd5d7kohT2G0C.jpg"
-    },
-    {
-        id: 110,
-        title: "The Tonight Show Starring Jimmy Fallon",
-        description: "After Jay Leno's second retirement from the program, Jimmy Fallon stepped in as his permanent replacement. After 42 years in Los Angeles the program was brought back to New York.",
-        category: "tv",
-        rating: 5.9,
-        year: "2014",
-        reviews: 362,
-        image: "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg"
     },
     {
         id: 111,
@@ -1240,16 +1199,6 @@ export const tv = [
         year: "2022",
         reviews: 3529,
         image: "https://image.tmdb.org/t/p/w500/kf5Hz70tjNAHg4swGDzOr9BfoZ1.jpg"
-    },
-    {
-        id: 141,
-        title: "The Tonight Show Starring Johnny Carson",
-        description: "The Tonight Show Starring Johnny Carson is a talk show hosted by Johnny Carson under The Tonight Show franchise from 1962 to 1992. It originally aired during late-night. For its first ten years, Carson's Tonight Show was based in New York City with occasional trips to Burbank, California; in May 1972, the show moved permanently to Burbank, California. In 2002, The Tonight Show Starring Johnny Carson was ranked #12 on TV Guide's 50 Greatest TV Shows of All Time.",
-        category: "tv",
-        rating: 7.5,
-        year: "1962",
-        reviews: 87,
-        image: "https://image.tmdb.org/t/p/w500/uSvET5YUvHNDIeoCpErrbSmasFb.jpg"
     },
     {
         id: 142,
@@ -1712,16 +1661,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/aRwmcX36r1ZpR5Xq5mmFcpUDQ8J.jpg"
     },
     {
-        id: 190,
-        title: "Late Night with Seth Meyers",
-        description: "Seth Meyers, who is 'Saturday Night Live’s' longest serving anchor on the show’s wildly popular 'Weekend Update,' takes over as host of NBC’s 'Late Night' — home to A-list celebrity guests, memorable comedy and the best in musical talent. As the Emmy Award-winning head writer for 'SNL,' Meyers has established a reputation for sharp wit and perfectly timed comedy, and has gained fame for his spot-on jokes and satire. Meyers takes his departure from 'SNL' to his new post at 'Late Night,' as Jimmy Fallon moves to 'The Tonight Show'.",
-        category: "tv",
-        rating: 5.269,
-        year: "2014",
-        reviews: 119,
-        image: "https://image.tmdb.org/t/p/w500/jm95V8XjfvqmEhw0MN09wbg9Mi3.jpg"
-    },
-    {
         id: 191,
         title: "The White Lotus",
         description: "Follow the exploits of various guests and employees at an exclusive tropical resort over the span of a week as with each passing day, a darker complexity emerges in these picture-perfect travelers, the hotel’s cheerful employees and the idyllic locale itself.",
@@ -1880,16 +1819,6 @@ export const tv = [
         year: "2002",
         reviews: 1664,
         image: "https://image.tmdb.org/t/p/w500/pNW64pjaHvf6purNaFhq4SHYRfl.jpg"
-    },
-    {
-        id: 207,
-        title: "La semaine des 4 Julie",
-        description: "",
-        category: "tv",
-        rating: 2.0,
-        year: "2020",
-        reviews: 1,
-        image: "https://image.tmdb.org/t/p/w500/sdgcLDvJhNo1obob0kFiqf8rXkV.jpg"
     },
     {
         id: 208,
@@ -2303,16 +2232,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/6iSnec83UEMgLOXAtGYwaVNHLjR.jpg"
     },
     {
-        id: 250,
-        title: "El Chavo del Ocho",
-        description: "The mishaps of Chavo, an 8-year-old orphan boy who lives in a barrel. Together with Quico, Chilindrina, Ñoño and La Popis, Chavo experiences a series of humorous entanglements.",
-        category: "tv",
-        rating: 8.023,
-        year: "1973",
-        reviews: 1988,
-        image: "https://image.tmdb.org/t/p/w500/1TdBpVOASafzfWlnecwW17UL6a5.jpg"
-    },
-    {
         id: 251,
         title: "JoJo's Bizarre Adventure",
         description: "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers.",
@@ -2481,16 +2400,6 @@ export const tv = [
         year: "2007",
         reviews: 274,
         image: "https://image.tmdb.org/t/p/w500/vrbqaBXB8AALynQzpWz6JdCPEJS.jpg"
-    },
-    {
-        id: 268,
-        title: "Como la vida misma",
-        description: "",
-        category: "tv",
-        rating: 7.5,
-        year: "2023",
-        reviews: 4,
-        image: "https://image.tmdb.org/t/p/w500/t9AvoW1RS7kGb1smvSHfvQa54Fi.jpg"
     },
     {
         id: 269,
@@ -4254,16 +4163,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/gJZ1rhLLFpatuAeylJoUI82DKC7.jpg"
     },
     {
-        id: 445,
-        title: "La que se avecina",
-        description: "La que se avecina is a Spanish television comedy created by Alberto Caballero, Laura Caballero and Daniel Deorador. The TV-series focusing around the inhabitants of Mirador de Montepinar, a fictional building located on the outskirts of a big city. Both its storylines and cast are heavily based on Aquí no hay quien viva, which ended when Telecinco bought Miramón Mendi, the series production company.  The episodes debuted on the Telecinco network, and were later rerun by the same network as well as cable/satellite channels FactoríaDeFicción and Paramount Comedy. The series debuted in 22 April 2007 and became popular thanks to its funny characters, witty script, use of catchphrases and capacity to integrate and poke fun at contemporary issues; the program presents a caustic satire of many of the 'types' found in Spanish society.  The name of the show involves wordplay, as 'vecina' is the Spanish word for neighbour.",
-        category: "tv",
-        rating: 8.12,
-        year: "2007",
-        reviews: 274,
-        image: "https://image.tmdb.org/t/p/w500/ceoJyZgsHBaenUxhobHUA6mXXf0.jpg"
-    },
-    {
         id: 446,
         title: "Only You",
         description: "",
@@ -4962,16 +4861,6 @@ export const tv = [
         year: "1998",
         reviews: 4,
         image: "https://image.tmdb.org/t/p/w500/zvS0sib3PgjlyPol1iHbalujTCp.jpg"
-    },
-    {
-        id: 516,
-        title: "La promesa",
-        description: "In 1913 Spain, a woman gets a job at the palace of La Promesa as a reward for saving the marquesses' son - but nobody knows that she has her own plans, which involve avenging her mother's death and finding her missing brother.",
-        category: "tv",
-        rating: 7.662,
-        year: "2023",
-        reviews: 68,
-        image: "https://image.tmdb.org/t/p/w500/y656ZhHU2Hh3bmC5vBtMa2vKpUM.jpg"
     },
     {
         id: 517,
@@ -7826,16 +7715,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/jgvW9n0EwKtq9nbztWhyTvvoqjS.jpg"
     },
     {
-        id: 802,
-        title: "La Isla de las Tentaciones",
-        description: "Five couples at a critical moment in their relationship search for the answer to the big question: Are they made for each other? The participants will live apart but they will not be alone. They will live with ten single men and ten single women who want to find love. When this experience is over, they will have to decide how they want to return home: with their partner, alone or with their new love.",
-        category: "tv",
-        rating: 7.471,
-        year: "2020",
-        reviews: 17,
-        image: "https://image.tmdb.org/t/p/w500/5UNSRQc1ZCVmkDxi9llNqrUudYt.jpg"
-    },
-    {
         id: 803,
         title: "Fireman Sam",
         description: "Follow the adventures of fireman Sam and his colleagues as they protect the citizens of the Welsh town of Pontypandy. Whenever the alarm sounds, brave Sam and his co-workers can be counted on to jump into a fire engine, hop onto a helicopter, or even launch an inflatable lifeboat to battle blazes, mount rescue missions, or provide medical attention to those in need.",
@@ -8616,26 +8495,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/ojlLmx0tpjW7z9c3anvx8HMda1Y.jpg"
     },
     {
-        id: 882,
-        title: "Plus belle la vie",
-        description: "The daily lives of the inhabitants of 'le Mistral', an imaginary neighbourhood in the Mediterranean port city of Marseille, where wealthy families cross paths with the less than rich.",
-        category: "tv",
-        rating: 4.3,
-        year: "2004",
-        reviews: 34,
-        image: "https://image.tmdb.org/t/p/w500/jmU8HlTDn87xmRqXagcL2swDr8I.jpg"
-    },
-    {
-        id: 883,
-        title: "KBS Drama Special",
-        description: "Forget the existing one-act dramas! Short but impactive! KBS Drama Special presents high quality single episode dramas. Dramas are the broadcast content with the widest public appeal. KBS Drama Special will produce short dramas of far-reaching impact involving at times a serious social message, unique emotions or perspectives. It will stay abreast of modern viewership.",
-        category: "tv",
-        rating: 7.4,
-        year: "2010",
-        reviews: 5,
-        image: "https://image.tmdb.org/t/p/w500/9nRwFvAs5toFtkLEzffqu39Fw7m.jpg"
-    },
-    {
         id: 884,
         title: "That's So Raven",
         description: "No ordinary teenager; Raven Baxter can see glimpses of the future! Watch her schemes and misadventures as she enlists the help of friends, including best friends Eddie and Chelsea, to change life's little outcomes. Raven's younger brother, Cory, is obsessed with money and creates get-rich-quick schemes to try to earn cash.",
@@ -8744,16 +8603,6 @@ export const tv = [
         year: "2026",
         reviews: 0,
         image: "https://image.tmdb.org/t/p/w500/jJfk8NXauN4UgFQ1qn9lFzEk7ib.jpg"
-    },
-    {
-        id: 895,
-        title: "La resistencia",
-        description: "",
-        category: "tv",
-        rating: 6.0,
-        year: "2018",
-        reviews: 20,
-        image: "https://image.tmdb.org/t/p/w500/yFwkWTDUjLN0LQmidsUJWEViCmo.jpg"
     },
     {
         id: 896,
@@ -8876,16 +8725,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/8bxGKgG2KGoNfHhctcTHVao5lJA.jpg"
     },
     {
-        id: 909,
-        title: "Manos a la obra",
-        description: "",
-        category: "tv",
-        rating: 5.667,
-        year: "1998",
-        reviews: 15,
-        image: "https://image.tmdb.org/t/p/w500/n5f1VtkrDvyMKBJH0YFB1D4ObTQ.jpg"
-    },
-    {
         id: 910,
         title: "Sweet Punishment: I'm the Guard's Personal Pet",
         description: "The story is set in a prison in the near future. It revolves around Hina Saotome, imprisoned despite her innocence, and the elegant yet sadistic guard Aki Myoujin. Hina's heart and body are at the mercy of Myoujin's 'heartless yet sweet domination' from physical examinations to lovers' prison visits.",
@@ -8894,36 +8733,6 @@ export const tv = [
         year: "2018",
         reviews: 12,
         image: "https://image.tmdb.org/t/p/w500/rbETzzJLGIB2Bg6NwNekWTKfM6d.jpg"
-    },
-    {
-        id: 911,
-        title: "Las Fierbinţi",
-        description: "A rural comedy where the intrigues caused by the upcoming elections in a small village give rise to a ridiculous war between the mayor and deputy mayor. Unfortunately, they have no clue that their struggle will prove to be in vain at the end of the election day.",
-        category: "tv",
-        rating: 7.952,
-        year: "2012",
-        reviews: 21,
-        image: "https://image.tmdb.org/t/p/w500/yLWh5w8KeukYhMsBojl0Nx6CfJX.jpg"
-    },
-    {
-        id: 912,
-        title: "Wakfu",
-        description: "Follow Yogu and his friends Amalia, Evangelyne, Tristepin, Ruel and Az as they try to rescue the world of Wakfu from destruction.",
-        category: "tv",
-        rating: 8.2,
-        year: "2008",
-        reviews: 112,
-        image: "https://image.tmdb.org/t/p/w500/nA8Z1fq3OTE2IrM8BiWxlPmrCpU.jpg"
-    },
-    {
-        id: 913,
-        title: "Yo soy Betty, la fea",
-        description: "Beatriz Pinzón Solano is a brilliant economist with a master's degree in finance; she has only one flaw: she's ugly. Everything changes when she starts working at Ecomoda, one of the country's largest companies, where she meets and falls in love with Armando Mendoza. This time, life will give her a second chance to prove she can become the most desired and beloved woman in the world.",
-        category: "tv",
-        rating: 8.343,
-        year: "1999",
-        reviews: 3485,
-        image: "https://image.tmdb.org/t/p/w500/iEBOiXiDGaxVR6w8aKgG5MEusuO.jpg"
     },
     {
         id: 914,
@@ -8946,16 +8755,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/tM6xqRKXoloH9UchaJEyyRE9O1w.jpg"
     },
     {
-        id: 916,
-        title: "Mahsun J",
-        description: "Mahsun is a motorcycle courier in Istanbul. While searching for a way out of his life filled with debt, he accidentally discovers his 'greatest' talent and decides to become a GIGOLO. Her manager will be her friend Leyla, who is a failed advertising executive.",
-        category: "tv",
-        rating: 7.8,
-        year: "2024",
-        reviews: 17,
-        image: "https://image.tmdb.org/t/p/w500/f6VrRlLqbWiGlhdBT658rWe1nLQ.jpg"
-    },
-    {
         id: 917,
         title: "HIP - High Intellectual Potential",
         description: "Morgane is 38-years old, has three children, two exes and an IQ of 160; her destiny as a cleaner is turned upside-down when her extraordinary abilities are spotted by the police who offer her a job as a consultant.",
@@ -8974,16 +8773,6 @@ export const tv = [
         year: "2024",
         reviews: 184,
         image: "https://image.tmdb.org/t/p/w500/c2Od0cY2IeayDj5osUxZSAD1QK.jpg"
-    },
-    {
-        id: 919,
-        title: "El Chapulín Colorado",
-        description: "",
-        category: "tv",
-        rating: 8.036,
-        year: "1973",
-        reviews: 741,
-        image: "https://image.tmdb.org/t/p/w500/qF8NDpVBSTDhdLlEjVAhNhfqB8K.jpg"
     },
     {
         id: 920,
@@ -9066,16 +8855,6 @@ export const tv = [
         image: "https://image.tmdb.org/t/p/w500/fbqDG7GjodvaNecgv1q8kfSNPl5.jpg"
     },
     {
-        id: 928,
-        title: "Morgenmagazin",
-        description: "",
-        category: "tv",
-        rating: 3.5,
-        year: "1992",
-        reviews: 2,
-        image: "https://image.tmdb.org/t/p/w500/aJlCBcmAE4xvLGR1xFMMB3rd1GI.jpg"
-    },
-    {
         id: 929,
         title: "Saint Seiya Omega",
         description: "An anime-original spin-off/sequel based on the Saint Seiya series: The god of war and guardian of his namesake planet, Mars, was once sealed away by Seiya, but time has passed and his revival is at hand. Meanwhile, Saori Kido is raising the boy Kouga, whose life Seiya saved, and he's been training every day to become a Saint in order to prepare for the coming crisis. Unaware of his destiny, when Kouga awakens to the power of his Cosmo hidden inside him, the curtain will rise upon the legend of a new Saint.",
@@ -9094,15 +8873,5 @@ export const tv = [
         year: "2019",
         reviews: 76,
         image: "https://image.tmdb.org/t/p/w500/p65f4XPIneEjFhASI9HuJId3D3d.jpg"
-    },
-    {
-        id: 931,
-        title: "Pékin Express",
-        description: "",
-        category: "tv",
-        rating: 6.9,
-        year: "2006",
-        reviews: 7,
-        image: "https://image.tmdb.org/t/p/w500/FTtjQqz19eJKWxYFll2FDLid1Z.jpg"
-    },
+    }
 ];
