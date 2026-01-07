@@ -11,7 +11,7 @@ MediaReview is a responsive web application designed to help users categorize an
 ## 🚀 Features
 
 * **Multi-Category Support:** Browse content across different media types (Movies, TV, Music, Games, Books).
-* **Dynamic Sorting & Filtering:** * Sort by Highest Rated, Newest, Oldest, or Alphabetical.
+* **Dynamic Sorting & Filtering:**  Sort by Highest Rated, Newest, Oldest, or Alphabetical.
     * Filter by specific categories instantly.
 * **User Authentication:** Secure Login and Registration functionality powered by **Firebase**.
 * **"Surprise Me" Mode:** A randomizer feature to help indecisive users find something new to watch or play.
@@ -25,7 +25,3 @@ MediaReview is a responsive web application designed to help users categorize an
 * **Backend / Auth:** Google Firebase (Authentication & Realtime Database)
 * **Hosting:** GitHub Pages
 * **Data Structure:** JSON
-
----
-
-## 📂 Project Structure
