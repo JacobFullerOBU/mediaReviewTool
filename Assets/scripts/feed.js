@@ -11,7 +11,7 @@ import { books } from "../Books/books.js";
 
 async function fetchMovies() {
     try {
-        const response = await fetch("../Movies/movieList.json");
+        const response = await fetch("Assets/Movies/movieList.json");
         return await response.json();
     } catch (e) {
         console.error("Failed to fetch movies:", e);
@@ -37,7 +37,6 @@ async function getAllMediaMap() {
                 mediaMap[normTitle] = item;
             }
         });
-        console.log('Media Map:', mediaMap);
         return mediaMap;
     } catch (error) {
         console.error("Error fetching all media:", error);
@@ -48,8 +47,8 @@ async function getAllMediaMap() {
 async function fetchAllData() {
     try {
         const [reviewsRes, reviewersRes, movies] = await Promise.all([
-            fetch('../Data/reviews.json'),
-            fetch('../Data/reviewers.json'),
+            fetch('Assets/Data/reviews.json'),
+            fetch('Assets/Data/reviewers.json'),
             fetchMovies()
         ]);
 
@@ -183,9 +182,7 @@ async function displayExploreFeed() {
         exploreFeedContainer.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
         let cardsHTML = '';
         allRecentReviews.forEach(review => {
-            console.log('Processing review for mediaId:', review.mediaId);
             const mediaItem = mediaMap[review.mediaId];
-            console.log('Found mediaItem:', mediaItem);
 
             // Create a placeholder reviewer
             const reviewer = {
