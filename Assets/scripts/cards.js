@@ -565,11 +565,10 @@ async function renderCards(container, items) {
 
     // Collapse logic: show only first 10 by default
     let visibleCount = 9;
-    let expanded = false;
+    let loadingMore = false;
 
     function renderVisibleCards() {
-        // Add themed background to container
-        container.style.background = 'transparent'; // Let the body background show through
+        container.style.background = 'transparent';
         container.style.padding = '0';
         container.style.borderRadius = '0';
         container.style.boxShadow = 'none';
@@ -622,32 +621,28 @@ async function renderCards(container, items) {
             });
         }, 0);
 
-        // Add Show More/Show Less button if needed
+        // Infinite scroll: add sentinel if more cards remain
         if (items.length > visibleCount) {
-            const btn = document.createElement('button');
-            btn.className = 'btn btn-primary col-span-full'; // Span full width of the grid
-            btn.style.display = 'block';
-            btn.style.margin = '24px auto 0 auto';
-            btn.textContent = `Show More (${Math.min(9, items.length - visibleCount)} more)`;
-            btn.addEventListener('click', () => {
-                visibleCount += 9;
-                renderVisibleCards();
-                addCardListeners();
+            let sentinel = document.getElementById('infinite-scroll-sentinel');
+            if (!sentinel) {
+                sentinel = document.createElement('div');
+                sentinel.id = 'infinite-scroll-sentinel';
+                sentinel.style.height = '32px';
+                container.appendChild(sentinel);
+            }
+            // Setup IntersectionObserver
+            const observer = new window.IntersectionObserver(entries => {
+                if (entries[0].isIntersecting && !loadingMore) {
+                    loadingMore = true;
+                    setTimeout(() => {
+                        visibleCount += 9;
+                        renderVisibleCards();
+                        addCardListeners();
+                        loadingMore = false;
+                    }, 200);
+                }
             });
-            container.appendChild(btn);
-        } else if (items.length > 9) {
-            // Show Less button if expanded
-            const btn = document.createElement('button');
-            btn.className = 'btn btn-secondary col-span-full';
-            btn.style.display = 'block';
-            btn.style.margin = '24px auto 0 auto';
-            btn.textContent = 'Show Less';
-            btn.addEventListener('click', () => {
-                visibleCount = 9;
-                renderVisibleCards();
-                addCardListeners();
-            });
-            container.appendChild(btn);
+            observer.observe(sentinel);
         }
     }
     renderVisibleCards();
