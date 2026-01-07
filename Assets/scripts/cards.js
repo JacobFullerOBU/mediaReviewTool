@@ -577,19 +577,14 @@ async function renderCards(container, items) {
         let cardHTML = '';
         const toShow = items.slice(0, visibleCount);
         toShow.forEach(item => {
-            // Prioritize live average rating, then fallback to static rating
-            const displayRating = item.liveAvgRating && item.liveAvgRating !== -1 ? item.liveAvgRating.toFixed(1) : "N/A";
-            const starRating = displayRating !== "N/A" ?
-                `<div class="star-rating text-yellow-400 text-xs flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ${displayRating}</div>` :
-                `<div class="text-slate-400 text-xs">No reviews yet</div>`;
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
-
+            const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
             cardHTML += `
-                <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '')}">
+                <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${cardId}">
                     <div class="relative h-48 overflow-hidden">
                         <img class="card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform" src="${item.poster || item.image || ''}" alt="${item.title || ''}">
                         <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1">
-                            ${starRating}
+                            <span class="star-rating text-yellow-400 text-xs flex items-center gap-1" id="rating-${cardId}"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ...</span>
                         </div>
                     </div>
                     <div class="p-5 flex-1 flex flex-col">
@@ -611,7 +606,21 @@ async function renderCards(container, items) {
         container.innerHTML = cardHTML;
         lucide.createIcons();
 
-        // ...existing code...
+        // Lazy load ratings/reviews for visible cards
+        setTimeout(() => {
+            toShow.forEach(async item => {
+                const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+                const ratingElem = document.getElementById(`rating-${cardId}`);
+                if (ratingElem) {
+                    ratingElem.innerHTML = '<i data-lucide="star" class="w-3 h-3 fill-current"></i> ...';
+                    const avgRating = await getAverageRating(cardId);
+                    ratingElem.innerHTML = avgRating !== "N/A"
+                        ? `<i data-lucide="star" class="w-3 h-3 fill-current"></i> ${avgRating}`
+                        : `<span class="text-slate-400 text-xs">No reviews yet</span>`;
+                    lucide.createIcons();
+                }
+            });
+        }, 0);
 
         // Add Show More/Show Less button if needed
         if (items.length > visibleCount) {
