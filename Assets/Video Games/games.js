@@ -25,6 +25,6 @@ export const games = [
         rating: 9.1,
         year: 2018,
         reviews: 167,
-        image: "cardimage.jpeg"
+        image: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg"
     }
 ];
