@@ -37,6 +37,7 @@ async function getAllMediaMap() {
                 mediaMap[normTitle] = item;
             }
         });
+        console.log('Media Map:', mediaMap);
         return mediaMap;
     } catch (error) {
         console.error("Error fetching all media:", error);
@@ -182,7 +183,9 @@ async function displayExploreFeed() {
         exploreFeedContainer.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
         let cardsHTML = '';
         allRecentReviews.forEach(review => {
+            console.log('Processing review for mediaId:', review.mediaId);
             const mediaItem = mediaMap[review.mediaId];
+            console.log('Found mediaItem:', mediaItem);
 
             // Create a placeholder reviewer
             const reviewer = {
