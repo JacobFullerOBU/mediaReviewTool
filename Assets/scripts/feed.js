@@ -75,35 +75,32 @@ async function fetchAllData() {
 }
 
 
-function createFeedItem(review, reviewer, mediaItem) {
-    const item = document.createElement('div');
-    item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex gap-6';
-
-    const mediaPoster = mediaItem ? mediaItem.poster : 'https://via.placeholder.com/100x150.png?text=No+Image';
+function createExploreCard(review, reviewer, mediaItem) {
+    const mediaPoster = mediaItem ? mediaItem.poster : 'https://via.placeholder.com/300x450.png?text=No+Image';
     const mediaTitle = mediaItem ? mediaItem.title : (review.mediaId ? review.mediaId.replace(/_/g, ' ') : "Unknown Media");
-    const rating = Math.round((review.rating || 0) / 2); // Scale 1-10 to 0-5
-    const originalRating = review.rating || 'N/A';
+    const rating = review.rating || 0;
 
-    item.innerHTML = `
-        <div class="w-24 flex-shrink-0">
-            <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
-        </div>
-        <div class="flex-grow">
-            <div class="flex items-center gap-3 mb-2">
-                <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
-                <span class="font-semibold text-white">${reviewer.username}</span>
-                <span class="text-xs text-slate-400">reviewed</span>
-                <span class="font-semibold text-indigo-400">${mediaTitle}</span>
+    return `
+        <div class="explore-card bg-slate-800 rounded-xl overflow-hidden border border-slate-700 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col">
+            <div class="relative h-48 overflow-hidden">
+                <img class="w-full h-full object-cover" src="${mediaPoster}" alt="${mediaTitle}">
+                <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1 text-yellow-400 text-xs">
+                    <i data-lucide="star" class="w-3 h-3 fill-current"></i> ${rating}/10
+                </div>
             </div>
-            <div class="flex items-center gap-1 mb-3">
-                ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
-                <span class="text-xs text-slate-400 ml-2">(${originalRating}/10)</span>
+            <div class="p-4 flex-1 flex flex-col">
+                <h3 class="text-lg font-bold text-white mb-2 line-clamp-1">${mediaTitle}</h3>
+                <div class="flex items-center gap-2 mb-3">
+                    <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-6 h-6 rounded-full">
+                    <span class="text-sm font-semibold text-slate-300">${reviewer.username}</span>
+                </div>
+                <p class="text-slate-400 text-sm mb-4 flex-1 line-clamp-3">"${review.reviewText}"</p>
+                <div class="pt-3 border-t border-slate-700 text-center">
+                    <a href="#" class="text-indigo-400 hover:underline text-sm font-semibold">Read More</a>
+                </div>
             </div>
-            <p class="text-slate-300">${review.reviewText}</p>
-            <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
         </div>
     `;
-    return item;
 }
 
 async function displayFeed() {
@@ -112,7 +109,7 @@ async function displayFeed() {
 
     const currentUser = window.getCurrentUser ? window.getCurrentUser() : { following: [] };
     if (currentUser.following.length === 0) {
-        feedContainer.innerHTML = `<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">You are not following any reviewers yet. Go to the <a href="#" id="feed-to-community" class="text-indigo-400 hover:underline">Community</a> page to find people to follow!</div>`;
+        feedContainer.innerHTML = \`<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">You are not following any reviewers yet. Go to the <a href="#" id="feed-to-community" class="text-indigo-400 hover:underline">Community</a> page to find people to follow!</div>\`;
         document.getElementById('feed-to-community')?.addEventListener('click', (e) => {
             e.preventDefault();
             if(window.showPage) window.showPage('community-page');
@@ -130,7 +127,10 @@ async function displayFeed() {
     followedReviews.forEach(review => {
         const reviewer = reviewers.find(r => r.id === review.reviewerId);
         const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
-        if (reviewer) feedContainer.appendChild(createFeedItem(review, reviewer, mediaItem));
+        if (reviewer) {
+            const cardHTML = createExploreCard(review, reviewer, mediaItem);
+            feedContainer.innerHTML += cardHTML;
+        }
     });
     lucide.createIcons();
 }
@@ -164,7 +164,7 @@ async function displayExploreFeed() {
         }
 
         if (allReviews.length === 0) {
-            exploreFeedContainer.innerHTML = `<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">No reviews have been posted yet. Be the first!</div>`;
+            exploreFeedContainer.innerHTML = \`<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">No reviews have been posted yet. Be the first!</div>\`;
             return;
         }
 
@@ -173,31 +173,34 @@ async function displayExploreFeed() {
         const allRecentReviews = allReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
         exploreFeedContainer.innerHTML = '';
+        exploreFeedContainer.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
+
         allRecentReviews.forEach(review => {
             const mediaItem = mediaMap[review.mediaId];
 
             // Create a placeholder reviewer
             const reviewer = {
-                username: review.userId ? `User ${review.userId.substring(0, 6)}...` : 'Anonymous',
-                avatar: `https://i.pravatar.cc/150?u=${review.userId || 'anonymous'}`
+                username: review.userId ? \`User \${review.userId.substring(0, 6)}...\` : 'Anonymous',
+                avatar: \`https://i.pravatar.cc/150?u=\${review.userId || 'anonymous'}\`
             };
 
             if(review.rating && review.reviewText) { // Ensure review has content
-                exploreFeedContainer.appendChild(createFeedItem(review, reviewer, mediaItem));
+                const cardHTML = createExploreCard(review, reviewer, mediaItem);
+                exploreFeedContainer.innerHTML += cardHTML;
             }
         });
         
         if (exploreFeedContainer.innerHTML === '') {
-            exploreFeedContainer.innerHTML = `<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">No valid reviews found to display.</div>`;
+            exploreFeedContainer.innerHTML = \`<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">No valid reviews found to display.</div>\`;
         }
 
         lucide.createIcons();
     } catch (error) {
         console.error("Error fetching or displaying explore feed:", error);
-        exploreFeedContainer.innerHTML = `<div class="text-center text-red-500 p-8 bg-slate-800 rounded-lg">Could not load reviews. Error: ${error.message}</div>`;
+        exploreFeedContainer.innerHTML = \`<div class="text-center text-red-500 p-8 bg-slate-800 rounded-lg">Could not load reviews. Error: \${error.message}</div>\`;
     }
 }
 
 window.displayExploreFeed = displayExploreFeed;
 window.fetchAllData = fetchAllData;
-window.createFeedItem = createFeedItem;
+window.createFeedItem = createExploreCard;
