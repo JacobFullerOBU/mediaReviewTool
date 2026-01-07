@@ -101,8 +101,13 @@
 
 /* Mobile-specific styles */
 @media (max-width: 767px) {
+    #explore-feed-page {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .explore-feed-card {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .explore-feed-card-header {
@@ -122,6 +127,6 @@
     }
 
     .explore-feed-review-text {
-        font-size: 0.875rem; /* text-sm */
+        font-size: 1rem; /* text-base */
     }
 }
