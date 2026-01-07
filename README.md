@@ -2,11 +2,12 @@
 
 A simple web app for browsing, reviewing, and following top reviewers in Movies, TV Shows, Music, Games, and Books.
 ## Main Features
-- Browse top reviewers by category
-- Follow/unfollow reviewers
+- Browse all types of media, and add your own reviews
+- Add media to your watchlist 
+- Add media to your favorites
 - Register as a reviewer (profile picture in progress)
-- Reviewer profiles shown live from Firebase Realtime Database
-- Submit and view reviews (all reviews stored in Firestore)
+- Reviewer profile allows you to see reviews a user has given
+- Submit and view reviews for various media types
 
 ## How to Register as a Reviewer
 1. Go to the Reviewers page

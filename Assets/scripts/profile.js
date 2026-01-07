@@ -1,3 +1,72 @@
+const userWatchlist = document.getElementById('userWatchlist');
+
+window.watchlistEditMode = false;
+
+// Render Watchlist Section
+async function renderWatchlist(user) {
+    const container = document.getElementById('userWatchlist');
+    if (!container) return;
+    container.innerHTML = '<div>Loading watchlist...</div>';
+    const userId = user.uid || user.email || user.displayName;
+    const watchRef = ref(db, `watchlist/${userId}`);
+    const snapshot = await get(watchRef);
+    if (!snapshot.exists()) {
+        container.innerHTML = '<div>No items in your watchlist yet.</div>';
+        return;
+    }
+    const watchObj = snapshot.val() || {};
+    const watchKeys = Object.keys(watchObj);
+    const movies = await fetchMovies();
+    const mediaMap = getAllMediaMap(movies, tv, music, games, books);
+    const watchItems = watchKeys.map(key => ({ key, item: mediaMap[key] })).filter(w => w.item);
+    if (watchItems.length === 0) {
+        container.innerHTML = '<div>No items found in your watchlist.</div>';
+        return;
+    }
+    container.innerHTML = watchItems.map(w => createWatchlistCardHTML(w.item)).join('');
+    setTimeout(() => {
+        const cards = Array.from(container.querySelectorAll('.watchlist-card'));
+        cards.forEach((card, idx) => {
+            const w = watchItems[idx];
+            if (!w) return;
+            if (window.watchlistEditMode) {
+                const removeBtn = card.querySelector('.remove-watchlist-btn');
+                if (removeBtn) {
+                    removeBtn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        await removeWatchlist(userId, w.key, card);
+                    });
+                }
+                card.style.cursor = 'default';
+            } else {
+                card.addEventListener('click', function() {
+                    if (window.watchlistEditMode) return;
+                    if (w.item) showFavoriteModal(w.item);
+                });
+            }
+        });
+    }, 0);
+}
+
+function createWatchlistCardHTML(item) {
+    return `
+        <div class="media-card watchlist-card" data-id="${item.id || item.title}" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;position:relative;cursor:pointer;">
+            ${window.watchlistEditMode ? `<button class=\"remove-watchlist-btn\" title=\"Remove from watchlist\" style=\"position:absolute;top:8px;right:8px;background:#eab308;color:white;border:none;border-radius:50%;width:28px;height:28px;font-size:18px;z-index:2;cursor:pointer;\">&times;</button>` : ''}
+            <div class="card-image" style="background-image: url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;"></div>
+            <div class="card-content">
+                <h3 class="card-title">${item.title || ''}</h3>
+            </div>
+        </div>
+    `;
+}
+
+async function removeWatchlist(userId, id, cardElem) {
+    const watchRef = ref(db, `watchlist/${userId}/${id}`);
+    await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(watchRef));
+    if (typeof auth !== 'undefined' && auth.currentUser) {
+        await renderWatchlist(auth.currentUser);
+    }
+}
 console.log('[Profile] profile.js loaded');
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "./firebase.js";
@@ -303,6 +372,7 @@ auth.onAuthStateChanged(async (user) => {
     renderProfile(user);
     await renderReviews(user);
     await renderFavorites(user);
+    await renderWatchlist(user);
     // Attach Edit Favorites button handler after DOM and profile are rendered
     const editBtn = document.getElementById('editFavoritesBtn');
     if (editBtn) {
@@ -310,6 +380,16 @@ auth.onAuthStateChanged(async (user) => {
             window.favoritesEditMode = !window.favoritesEditMode;
             editBtn.textContent = window.favoritesEditMode ? 'Done' : 'Edit Favorites';
             renderFavorites(user);
+        });
+    }
+
+    // Attach Edit Watchlist button handler
+    const editWatchBtn = document.getElementById('editWatchlistBtn');
+    if (editWatchBtn) {
+        editWatchBtn.addEventListener('click', () => {
+            window.watchlistEditMode = !window.watchlistEditMode;
+            editWatchBtn.textContent = window.watchlistEditMode ? 'Done' : 'Edit Watchlist';
+            renderWatchlist(user);
         });
     }
 });
