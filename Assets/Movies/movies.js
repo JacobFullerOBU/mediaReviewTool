@@ -1,5 +1,14 @@
 import { ref, push, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "../scripts/firebase.js";
+import { 
+    initializeRichTextEditor, 
+    getEditorHTMLContent, 
+    getEditorTextContent, 
+    clearEditor, 
+    destroyEditor,
+    createReviewFormHTML,
+    formatReviewForDisplay 
+} from "../scripts/richTextEditor.js";
 
 // Fetch movies from JSON file
 async function fetchMovies() {
@@ -202,6 +211,9 @@ function getMovieByGlobalIndex(index) {
     return null;
 }
 
+// Initialize rich text editor if not already loaded
+let quillEditor = null;
+
 function showMovieModal(movie) {
     // Remove any existing modal
     let modal = document.getElementById('movieDetailModal');
@@ -210,7 +222,7 @@ function showMovieModal(movie) {
     modal.id = 'movieDetailModal';
     modal.className = 'modal';
     modal.innerHTML = `
-        <div class="modal-content" style="max-width:600px;">
+        <div class="modal-content" style="max-width:700px; max-height:90vh; overflow-y:auto;">
             <span class="close" id="closeMovieModal">&times;</span>
             <div class="modal-header" style="margin-bottom:12px;">
                 <h2 style="margin-bottom:0;">${movie.title || ''}</h2>
@@ -229,48 +241,58 @@ function showMovieModal(movie) {
             <div id="reviewsSection" style="margin-top:12px;">
                 <h3 style="margin-bottom:8px;">Reviews</h3>
                 <div id="reviewsList" style="margin-bottom:12px;">Loading reviews...</div>
-                <form id="reviewForm" style="margin-top:12px;">
-                    <textarea id="reviewText" rows="3" style="width:100%;" placeholder="Write your review..."></textarea>
-                    <button type="submit" class="btn btn-primary" style="margin-top:8px;">Submit Review</button>
-                </form>
+                ${createReviewFormHTML()}
             </div>
         </div>
     `;
     document.body.appendChild(modal);
     modal.style.display = 'block';
     document.getElementById('closeMovieModal').onclick = function() {
+        destroyEditor();
         modal.remove();
     };
     modal.onclick = function(e) {
-        if (e.target === modal) modal.remove();
+        if (e.target === modal) {
+            destroyEditor();
+            modal.remove();
+        }
     };
+    
+    // Initialize the rich text editor
+    initializeRichTextEditorForModal();
+    
     // Load and handle reviews
     loadReviews(movie);
     document.getElementById('reviewForm').onsubmit = async function(e) {
         e.preventDefault();
-        const text = document.getElementById('reviewText').value.trim();
-        // For now, ask for rating as a prompt (can be improved with UI)
-        let rating = 5;
-        if (window.prompt) {
-            const input = window.prompt('Enter your rating (1-10):', '5');
-            const num = parseInt(input);
-            if (!isNaN(num) && num >= 1 && num <= 10) {
-                rating = num;
-            }
-        }
-        if (text) {
-            // Use Firestore-backed review upload
+        const htmlContent = getEditorHTMLContent();
+        const textContent = getEditorTextContent();
+        const rating = parseInt(document.getElementById('reviewRating').value);
+        
+        if (textContent.length > 0) {
             try {
                 // Dynamically import postReview from main.js
                 const { postReview } = await import('../scripts/main.js');
-                await postReview(movie.id || (movie.title ? movie.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : ''), text, rating);
-                document.getElementById('reviewText').value = '';
+                await postReview(movie.id || (movie.title ? movie.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : ''), htmlContent, rating);
+                
+                // Clear the editor
+                clearEditor();
                 loadReviews(movie);
             } catch (err) {
                 alert('Error posting review: ' + (err.message || err));
             }
+        } else {
+            alert('Please write a review before submitting.');
         }
     };
+}
+
+async function initializeRichTextEditorForModal() {
+    try {
+        quillEditor = await initializeRichTextEditor('reviewEditor');
+    } catch (error) {
+        console.error('Failed to initialize rich text editor:', error);
+    }
 }
 
 async function loadReviews(movie) {
@@ -306,18 +328,8 @@ async function loadReviews(movie) {
                     if (r && (r.text || r.review)) return (r.text || r.review).trim() !== '';
                     return false;
                 })
-                .map(r => {
-                    let text = '';
-                    if (typeof r === 'string') {
-                        text = r;
-                    } else if (r && (r.text || r.review)) {
-                        text = r.text || r.review;
-                    }
-                    const user = r && r.user ? r.user : 'Anonymous';
-                    // Truncate very long reviews for performance
-                    const truncatedText = text.length > 300 ? text.substring(0, 300) + '...' : text;
-                    return `<div class="review" style="background:#f7f7f7; color:#222; border-radius:6px; padding:8px 12px; margin-bottom:8px;"><strong>${user}:</strong> <span>${truncatedText}</span></div>`;
-                }).join('');
+                .map(review => formatReviewForDisplay(review))
+                .join('');
             
             if (reviewsList.innerHTML.trim() === '') {
                 reviewsList.innerHTML = '<p style="color:#888;">No reviews yet. Be the first to review!</p>';
