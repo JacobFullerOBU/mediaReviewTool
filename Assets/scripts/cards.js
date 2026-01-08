@@ -1,5 +1,213 @@
 let allItems = [];
 let currentFilter = 'all';
+let quillEditor = null;
+
+// Rich Text Editor functionality
+function loadQuillJS() {
+    return new Promise((resolve, reject) => {
+        if (window.Quill) {
+            resolve();
+            return;
+        }
+        
+        // Load Quill CSS
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'https://cdn.quilljs.com/1.3.7/quill.snow.css';
+        document.head.appendChild(css);
+        
+        // Load Quill JS
+        const script = document.createElement('script');
+        script.src = 'https://cdn.quilljs.com/1.3.7/quill.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+async function initializeRichTextEditor(containerId) {
+    console.log('Initializing rich text editor for:', containerId);
+    
+    try {
+        await loadQuillJS();
+        
+        const editorElement = document.getElementById(containerId);
+        if (!editorElement) {
+            console.error('Editor container not found:', containerId);
+            return null;
+        }
+        
+        const toolbarOptions = [
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['link'],
+            ['clean'] // remove formatting button
+        ];
+        
+        quillEditor = new Quill(`#${containerId}`, {
+            theme: 'snow',
+            placeholder: 'Write your review here... You can use formatting like bold, italics, lists, and links.',
+            modules: {
+                toolbar: toolbarOptions
+            }
+        });
+        
+        // Style the editor to match the theme
+        setTimeout(() => {
+            const editorContainer = document.querySelector(`#${containerId} .ql-container`);
+            const toolbar = document.querySelector(`#${containerId} .ql-toolbar`);
+            
+            if (editorContainer) {
+                editorContainer.style.borderColor = '#374151';
+                editorContainer.style.fontSize = '14px';
+                editorContainer.style.borderRadius = '0 0 8px 8px';
+                editorContainer.style.backgroundColor = '#1f2937';
+                editorContainer.style.color = '#f8fafc';
+            }
+            
+            if (toolbar) {
+                toolbar.style.borderColor = '#374151';
+                toolbar.style.borderRadius = '8px 8px 0 0';
+                toolbar.style.backgroundColor = '#374151';
+                toolbar.style.color = '#f8fafc';
+            }
+            
+            // Style toolbar buttons
+            const toolbarButtons = toolbar.querySelectorAll('.ql-formats button, .ql-formats .ql-picker');
+            toolbarButtons.forEach(btn => {
+                btn.style.color = '#f8fafc';
+            });
+        }, 100);
+        
+        console.log('Rich text editor initialized successfully');
+        return quillEditor;
+        
+    } catch (error) {
+        console.error('Failed to load rich text editor, falling back to textarea:', error);
+        // Fallback to textarea if Quill fails to load
+        const editorElement = document.getElementById(containerId);
+        if (editorElement) {
+            editorElement.outerHTML = `
+                <textarea id="${containerId}Fallback" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none resize-vertical" placeholder="Write your review..."></textarea>
+            `;
+        }
+        return null;
+    }
+}
+
+function getEditorContent() {
+    if (quillEditor) {
+        return {
+            html: quillEditor.root.innerHTML,
+            text: quillEditor.getText().trim()
+        };
+    } else {
+        // Fallback for textarea
+        const fallbackElement = document.querySelector('[id$="Fallback"]');
+        if (fallbackElement) {
+            const text = fallbackElement.value.trim();
+            return {
+                html: text.replace(/\n/g, '<br>'),
+                text: text
+            };
+        }
+    }
+    return { html: '', text: '' };
+}
+
+function clearEditor() {
+    if (quillEditor) {
+        quillEditor.setText('');
+    } else {
+        const fallbackElement = document.querySelector('[id$="Fallback"]');
+        if (fallbackElement) {
+            fallbackElement.value = '';
+        }
+    }
+}
+
+function sanitizeHTML(html) {
+    const allowedTags = ['b', 'strong', 'i', 'em', 'u', 'p', 'br', 'ul', 'ol', 'li', 'a'];
+    const allowedAttributes = {
+        'a': ['href', 'target']
+    };
+    
+    if (typeof html !== 'string') {
+        return String(html);
+    }
+    
+    // If it looks like plain text (no HTML tags), return as is but escape any HTML
+    if (!html.includes('<')) {
+        return html.replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
+                  .replace(/"/g, '&quot;')
+                  .replace(/'/g, '&#x27;')
+                  .replace(/\n/g, '<br>');
+    }
+    
+    // Create a temporary div to parse HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    function sanitizeNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            return node.textContent;
+        }
+        
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            const tagName = node.tagName.toLowerCase();
+            
+            if (allowedTags.includes(tagName)) {
+                let result = `<${tagName}`;
+                
+                // Add allowed attributes
+                if (allowedAttributes[tagName]) {
+                    for (const attr of allowedAttributes[tagName]) {
+                        const value = node.getAttribute(attr);
+                        if (value) {
+                            // Sanitize URLs for links
+                            if (attr === 'href' && !value.match(/^https?:\/\/|^mailto:|^\//)) {
+                                continue; // Skip unsafe links
+                            }
+                            result += ` ${attr}="${value.replace(/"/g, '&quot;')}"`;
+                        }
+                    }
+                }
+                
+                result += '>';
+                
+                // Process child nodes
+                for (const child of node.childNodes) {
+                    result += sanitizeNode(child);
+                }
+                
+                result += `</${tagName}>`;
+                return result;
+            } else {
+                // For disallowed tags, just return the text content
+                let result = '';
+                for (const child of node.childNodes) {
+                    result += sanitizeNode(child);
+                }
+                return result;
+            }
+        }
+        
+        return '';
+    }
+    
+    let result = '';
+    for (const child of tempDiv.childNodes) {
+        result += sanitizeNode(child);
+    }
+    
+    return result || html.replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#x27;');
+}
 // Firebase Firestore for dynamic ratings
 import {
     ref,
@@ -327,17 +535,24 @@ async function showItemDetails(item) {
         if (snapshot.exists()) {
             const reviews = Object.values(snapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             reviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
-            reviewsHtml += reviews.map(r => `
+            reviewsHtml += reviews.map(r => {
+                const reviewContent = r.reviewText || r.text || '';
+                const sanitizedContent = sanitizeHTML(reviewContent);
+                return `
                 <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2 text-yellow-400 font-bold">
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
                         </div>
-                        <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span>
+                        <div class="text-right">
+                            <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
+                            <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : ''}</span>
+                        </div>
                     </div>
-                    <p class="text-slate-300">${r.reviewText}</p>
+                    <div class="text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
             reviewsHtml += `</div>`;
         } else {
             reviewsHtml = `<div class="mt-8 text-slate-500">No reviews yet.</div>`;
@@ -393,16 +608,17 @@ async function showItemDetails(item) {
                 </div>
             </div>
             <div id="reviewFormContainer" class="hidden mt-6 pt-6 border-t border-slate-700">
+                <h4 class="text-lg font-bold text-white mb-4">Write Your Review</h4>
                 <form id="reviewForm" class="space-y-4">
                     <div>
                         <label for="reviewRating" class="block text-sm font-medium text-slate-300 mb-2">Rating (1-10):</label>
                         <input type="number" id="reviewRating" min="1" max="10" required class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
                     <div>
-                        <label for="reviewText" class="block text-sm font-medium text-slate-300 mb-2">Your Review:</label>
-                        <textarea id="reviewText" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                        <label for="reviewTextEditor" class="block text-sm font-medium text-slate-300 mb-2">Your Review:</label>
+                        <div id="reviewTextEditor" style="height: 150px; background: #1f2937; border: 1px solid #374151; border-radius: 8px;"></div>
                     </div>
-                    <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">Submit</button>
+                    <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">Submit Review</button>
                 </form>
                 <div id="reviewError" class="text-red-500 mt-4"></div>
             </div>
@@ -458,8 +674,18 @@ async function showItemDetails(item) {
         document.body.style.overflow = 'auto';
     });
 
-    modal.querySelector('#writeReviewBtn').addEventListener('click', () => {
-        modal.querySelector('#reviewFormContainer').classList.toggle('hidden');
+    modal.querySelector('#writeReviewBtn').addEventListener('click', async () => {
+        const reviewFormContainer = modal.querySelector('#reviewFormContainer');
+        reviewFormContainer.classList.toggle('hidden');
+        
+        // Initialize rich text editor when form is shown
+        if (!reviewFormContainer.classList.contains('hidden')) {
+            console.log('Initializing rich text editor...');
+            quillEditor = await initializeRichTextEditor('reviewTextEditor');
+        } else {
+            // Clean up editor when form is hidden
+            quillEditor = null;
+        }
     });
 
     // Favorites Logic
@@ -515,10 +741,16 @@ async function showItemDetails(item) {
     // Review Submission Logic
     modal.querySelector('#reviewForm').addEventListener('submit', async function (e) {
         e.preventDefault();
-        const reviewText = modal.querySelector('#reviewText').value.trim();
+        console.log('Review form submitted');
+        
+        const editorContent = getEditorContent();
+        const reviewText = editorContent.text;
+        const reviewHTML = editorContent.html;
         const reviewRating = parseInt(modal.querySelector('#reviewRating').value);
         const reviewError = modal.querySelector('#reviewError');
         reviewError.textContent = '';
+
+        console.log('Review text:', reviewText, 'Rating:', reviewRating);
 
         if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10) {
             reviewError.textContent = 'Please enter a review and a rating between 1 and 10.';
@@ -536,9 +768,11 @@ async function showItemDetails(item) {
             await push(reviewsRef, {
                 userId: user.uid,
                 mediaId: mediaId,
-                reviewText,
+                reviewText: reviewHTML, // Store HTML content for formatting
+                text: reviewText, // Also store plain text for backwards compatibility
                 rating: reviewRating,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                user: user.email || user.displayName || 'Anonymous'
             });
 
             // Refresh reviews, rating, and count
@@ -549,17 +783,24 @@ async function showItemDetails(item) {
             if (reviewsSnapshot.exists()) {
                 const reviews = Object.values(reviewsSnapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 newReviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
-                newReviewsHtml += reviews.map(r => `
+                newReviewsHtml += reviews.map(r => {
+                    const reviewContent = r.reviewText || r.text || '';
+                    const sanitizedContent = sanitizeHTML(reviewContent);
+                    return `
                     <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-2 text-yellow-400 font-bold">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
                             </div>
-                            <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span>
+                            <div class="text-right">
+                                <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
+                                <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : ''}</span>
+                            </div>
                         </div>
-                        <p class="text-slate-300">${r.reviewText}</p>
+                        <div class="text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
                     </div>
-                `).join('');
+                `;
+                }).join('');
                 newReviewsHtml += `</div>`;
             }
             modal.querySelector('#reviewsSection').innerHTML = newReviewsHtml;
@@ -567,8 +808,11 @@ async function showItemDetails(item) {
             modal.querySelector('#modalReviewCount').textContent = newReviewCount;
             lucide.createIcons();
 
+            // Clear the rich text editor and form
+            clearEditor();
             modal.querySelector('#reviewForm').reset();
             modal.querySelector('#reviewFormContainer').classList.add('hidden');
+            console.log('Review submitted successfully!');
 
         } catch (err) {
             reviewError.textContent = 'Error submitting review: ' + (err.message || err);

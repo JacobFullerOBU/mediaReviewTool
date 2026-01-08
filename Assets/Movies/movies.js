@@ -1,14 +1,113 @@
 import { ref, push, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { auth, db } from "../scripts/firebase.js";
-import { 
-    initializeRichTextEditor, 
-    getEditorHTMLContent, 
-    getEditorTextContent, 
-    clearEditor, 
-    destroyEditor,
-    createReviewFormHTML,
-    formatReviewForDisplay 
-} from "../scripts/richTextEditor.js";
+
+// Rich Text Editor functionality
+let quillEditor = null;
+
+function loadQuillJS() {
+    return new Promise((resolve, reject) => {
+        if (window.Quill) {
+            resolve();
+            return;
+        }
+        
+        // Load Quill CSS
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'https://cdn.quilljs.com/1.3.7/quill.snow.css';
+        document.head.appendChild(css);
+        
+        // Load Quill JS
+        const script = document.createElement('script');
+        script.src = 'https://cdn.quilljs.com/1.3.7/quill.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+function sanitizeHTML(html) {
+    const allowedTags = ['b', 'strong', 'i', 'em', 'u', 'p', 'br', 'ul', 'ol', 'li', 'a'];
+    const allowedAttributes = {
+        'a': ['href', 'target']
+    };
+    
+    if (typeof html !== 'string') {
+        return String(html);
+    }
+    
+    // If it looks like plain text (no HTML tags), return as is but escape any HTML
+    if (!html.includes('<')) {
+        return html.replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
+                  .replace(/"/g, '&quot;')
+                  .replace(/'/g, '&#x27;')
+                  .replace(/\n/g, '<br>');
+    }
+    
+    // Create a temporary div to parse HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    function sanitizeNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            return node.textContent;
+        }
+        
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            const tagName = node.tagName.toLowerCase();
+            
+            if (allowedTags.includes(tagName)) {
+                let result = `<${tagName}`;
+                
+                // Add allowed attributes
+                if (allowedAttributes[tagName]) {
+                    for (const attr of allowedAttributes[tagName]) {
+                        const value = node.getAttribute(attr);
+                        if (value) {
+                            // Sanitize URLs for links
+                            if (attr === 'href' && !value.match(/^https?:\/\/|^mailto:|^\//)) {
+                                continue; // Skip unsafe links
+                            }
+                            result += ` ${attr}="${value.replace(/"/g, '&quot;')}"`;
+                        }
+                    }
+                }
+                
+                result += '>';
+                
+                // Process child nodes
+                for (const child of node.childNodes) {
+                    result += sanitizeNode(child);
+                }
+                
+                result += `</${tagName}>`;
+                return result;
+            } else {
+                // For disallowed tags, just return the text content
+                let result = '';
+                for (const child of node.childNodes) {
+                    result += sanitizeNode(child);
+                }
+                return result;
+            }
+        }
+        
+        return '';
+    }
+    
+    let result = '';
+    for (const child of tempDiv.childNodes) {
+        result += sanitizeNode(child);
+    }
+    
+    return result || html.replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#x27;');
+}
 
 // Fetch movies from JSON file
 async function fetchMovies() {
@@ -187,9 +286,13 @@ function renderMovieCards(movies, append = false) {
         if (!card.hasAttribute('data-listener-added')) {
             card.addEventListener('click', function(e) {
                 e.stopPropagation();
+                console.log('Movie card clicked, index:', movieIndex);
                 const movie = getMovieByGlobalIndex(movieIndex);
+                console.log('Movie data:', movie);
                 if (movie) {
                     showMovieModal(movie);
+                } else {
+                    console.error('No movie found for index:', movieIndex);
                 }
             });
             card.setAttribute('data-listener-added', 'true');
@@ -212,62 +315,118 @@ function getMovieByGlobalIndex(index) {
 }
 
 // Initialize rich text editor if not already loaded
-let quillEditor = null;
 
 function showMovieModal(movie) {
+    console.log('showMovieModal called with movie:', movie);
+    
     // Remove any existing modal
     let modal = document.getElementById('movieDetailModal');
-    if (modal) modal.remove();
+    if (modal) {
+        console.log('Removing existing modal');
+        modal.remove();
+    }
+    
     modal = document.createElement('div');
     modal.id = 'movieDetailModal';
     modal.className = 'modal';
+    modal.style.cssText = `
+        display: block;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+    `;
+    
     modal.innerHTML = `
-        <div class="modal-content" style="max-width:700px; max-height:90vh; overflow-y:auto;">
-            <span class="close" id="closeMovieModal">&times;</span>
-            <div class="modal-header" style="margin-bottom:12px;">
-                <h2 style="margin-bottom:0;">${movie.title || ''}</h2>
+        <div class="modal-content" style="background: white; margin: 5% auto; padding: 20px; border-radius: 8px; max-width: 700px; max-height: 90vh; overflow-y: auto; position: relative;">
+            <span class="close" id="closeMovieModal" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
+            <div class="modal-header" style="margin-bottom: 12px; padding-top: 30px;">
+                <h2 style="margin-bottom: 0; color: #333;">${movie.title || 'Unknown Title'}</h2>
             </div>
-            <div class="modal-body" style="display:flex; gap:18px;">
-                <img src="${movie.poster || movie.image || ''}" alt="${movie.title}" style="max-width:180px; border-radius:8px; box-shadow:0 2px 8px #0002;">
-                <div style="flex:1;">
-                    <p><strong>Year:</strong> ${movie.year || ''}</p>
-                    <p><strong>Genre:</strong> ${movie.genre || ''}</p>
-                    <p><strong>Director:</strong> ${movie.director || ''}</p>
-                    <p><strong>Cast:</strong> ${movie.actors || ''}</p>
-                    <p><strong>Description:</strong> ${movie.description || ''}</p>
+            <div class="modal-body" style="display: flex; gap: 18px; margin-bottom: 20px;">
+                <img src="${movie.poster || movie.image || ''}" alt="${movie.title}" style="max-width: 180px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
+                <div style="flex: 1; color: #333;">
+                    <p><strong>Year:</strong> ${movie.year || 'N/A'}</p>
+                    <p><strong>Genre:</strong> ${movie.genre || 'N/A'}</p>
+                    <p><strong>Director:</strong> ${movie.director || 'N/A'}</p>
+                    <p><strong>Cast:</strong> ${movie.actors || 'N/A'}</p>
+                    <p><strong>Description:</strong> ${movie.description || 'No description available'}</p>
                 </div>
             </div>
-            <hr style="margin:18px 0;">
-            <div id="reviewsSection" style="margin-top:12px;">
-                <h3 style="margin-bottom:8px;">Reviews</h3>
-                <div id="reviewsList" style="margin-bottom:12px;">Loading reviews...</div>
-                ${createReviewFormHTML()}
+            <hr style="margin: 18px 0; border: 0; border-top: 1px solid #eee;">
+            <div id="reviewsSection" style="margin-top: 12px;">
+                <h3 style="margin-bottom: 8px; color: #333;">Reviews</h3>
+                <div id="reviewsList" style="margin-bottom: 12px;">Loading reviews...</div>
+                <div id="reviewFormContainer" style="background: #f8f9fa; padding: 16px; border-radius: 8px; border: 1px solid #e9ecef; margin-top: 12px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Write your review:</label>
+                    <div id="reviewEditor" style="height: 150px; background: white; border: 1px solid #ccc; border-radius: 4px;"></div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 12px;">
+                        <label style="font-weight: bold; color: #333;">Rating:</label>
+                        <select id="reviewRating" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; min-width: 120px;">
+                            <option value="1">1 ⭐</option>
+                            <option value="2">2 ⭐⭐</option>
+                            <option value="3">3 ⭐⭐⭐</option>
+                            <option value="4">4 ⭐⭐⭐⭐</option>
+                            <option value="5" selected>5 ⭐⭐⭐⭐⭐</option>
+                        </select>
+                        <button id="submitReviewBtn" class="btn btn-primary" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Submit Review</button>
+                    </div>
+                </div>
             </div>
         </div>
     `;
+    
     document.body.appendChild(modal);
-    modal.style.display = 'block';
+    console.log('Modal added to DOM');
+    
     document.getElementById('closeMovieModal').onclick = function() {
-        destroyEditor();
+        console.log('Close button clicked');
+        quillEditor = null;
         modal.remove();
     };
+    
     modal.onclick = function(e) {
         if (e.target === modal) {
-            destroyEditor();
+            console.log('Modal background clicked');
+            quillEditor = null;
             modal.remove();
         }
     };
     
     // Initialize the rich text editor
-    initializeRichTextEditorForModal();
+    console.log('Initializing rich text editor...');
+    initializeRichTextEditor();
     
     // Load and handle reviews
     loadReviews(movie);
-    document.getElementById('reviewForm').onsubmit = async function(e) {
+    
+    // Handle review submission
+    document.getElementById('submitReviewBtn').onclick = async function(e) {
         e.preventDefault();
-        const htmlContent = getEditorHTMLContent();
-        const textContent = getEditorTextContent();
+        console.log('Submit review button clicked');
+        
+        let htmlContent = '';
+        let textContent = '';
+        
+        if (quillEditor) {
+            console.log('Using Quill editor');
+            htmlContent = quillEditor.root.innerHTML;
+            textContent = quillEditor.getText().trim();
+        } else {
+            console.log('Using fallback textarea');
+            // Fallback to textarea
+            const fallbackElement = document.getElementById('reviewTextFallback');
+            if (fallbackElement) {
+                textContent = fallbackElement.value.trim();
+                htmlContent = textContent.replace(/\n/g, '<br>');
+            }
+        }
+        
         const rating = parseInt(document.getElementById('reviewRating').value);
+        console.log('Review content:', textContent, 'Rating:', rating);
         
         if (textContent.length > 0) {
             try {
@@ -276,9 +435,18 @@ function showMovieModal(movie) {
                 await postReview(movie.id || (movie.title ? movie.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : ''), htmlContent, rating);
                 
                 // Clear the editor
-                clearEditor();
+                if (quillEditor) {
+                    quillEditor.setText('');
+                } else {
+                    const fallbackElement = document.getElementById('reviewTextFallback');
+                    if (fallbackElement) {
+                        fallbackElement.value = '';
+                    }
+                }
                 loadReviews(movie);
+                alert('Review submitted successfully!');
             } catch (err) {
+                console.error('Error posting review:', err);
                 alert('Error posting review: ' + (err.message || err));
             }
         } else {
@@ -287,11 +455,68 @@ function showMovieModal(movie) {
     };
 }
 
-async function initializeRichTextEditorForModal() {
+async function initializeRichTextEditor() {
+    console.log('Starting rich text editor initialization...');
+    
     try {
-        quillEditor = await initializeRichTextEditor('reviewEditor');
+        console.log('Loading Quill.js...');
+        await loadQuillJS();
+        console.log('Quill.js loaded successfully');
+        
+        const editorElement = document.getElementById('reviewEditor');
+        if (!editorElement) {
+            console.error('reviewEditor element not found');
+            return;
+        }
+        
+        const toolbarOptions = [
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['link'],
+            ['clean'] // remove formatting button
+        ];
+        
+        console.log('Initializing Quill editor...');
+        quillEditor = new Quill('#reviewEditor', {
+            theme: 'snow',
+            placeholder: 'Write your review here... You can use formatting like bold, italics, lists, and links.',
+            modules: {
+                toolbar: toolbarOptions
+            }
+        });
+        
+        console.log('Quill editor initialized successfully');
+        
+        // Style the editor to match the theme
+        setTimeout(() => {
+            const editorContainer = document.querySelector('#reviewEditor .ql-container');
+            const toolbar = document.querySelector('#reviewEditor .ql-toolbar');
+            
+            if (editorContainer) {
+                editorContainer.style.borderColor = '#ccc';
+                editorContainer.style.fontSize = '14px';
+                editorContainer.style.borderRadius = '0 0 4px 4px';
+                console.log('Styled editor container');
+            }
+            
+            if (toolbar) {
+                toolbar.style.borderColor = '#ccc';
+                toolbar.style.borderRadius = '4px 4px 0 0';
+                toolbar.style.backgroundColor = '#f8f9fa';
+                console.log('Styled editor toolbar');
+            }
+        }, 100);
+        
     } catch (error) {
-        console.error('Failed to initialize rich text editor:', error);
+        console.error('Failed to load rich text editor, falling back to textarea:', error);
+        // Fallback to textarea if Quill fails to load
+        const editorElement = document.getElementById('reviewEditor');
+        if (editorElement) {
+            editorElement.outerHTML = `
+                <textarea id="reviewTextFallback" rows="4" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; resize:vertical; font-family: inherit;" placeholder="Write your review..."></textarea>
+            `;
+            console.log('Fallback textarea created');
+        }
     }
 }
 
@@ -328,8 +553,51 @@ async function loadReviews(movie) {
                     if (r && (r.text || r.review)) return (r.text || r.review).trim() !== '';
                     return false;
                 })
-                .map(review => formatReviewForDisplay(review))
-                .join('');
+                .map(review => {
+                    let content = '';
+                    let rating = null;
+                    let user = 'Anonymous';
+                    let timestamp = '';
+                    
+                    if (typeof review === 'string') {
+                        content = review;
+                    } else if (review && (review.text || review.review)) {
+                        content = review.text || review.review;
+                        rating = review.rating || null;
+                        user = review.user || 'Anonymous';
+                        if (review.timestamp) {
+                            try {
+                                timestamp = new Date(review.timestamp).toLocaleDateString();
+                            } catch (e) {
+                                timestamp = '';
+                            }
+                        }
+                    }
+                    
+                    // Sanitize HTML content to prevent XSS while allowing basic formatting
+                    const sanitizedContent = sanitizeHTML(content);
+                    
+                    // Create rating display
+                    let ratingDisplay = '';
+                    if (rating && rating >= 1 && rating <= 5) {
+                        const stars = '⭐'.repeat(rating);
+                        ratingDisplay = `<div style="margin-bottom:4px; font-size:14px;">${stars} (${rating}/5)</div>`;
+                    }
+                    
+                    // Create timestamp display
+                    const timeDisplay = timestamp ? `<span style="color:#999; font-size:12px;"> • ${timestamp}</span>` : '';
+                    
+                    return `
+                        <div class="review" style="background:#f7f7f7; color:#222; border-radius:8px; padding:12px; margin-bottom:12px; border-left:3px solid #007bff;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                <strong style="color:#333;">${user}</strong>
+                                ${timeDisplay}
+                            </div>
+                            ${ratingDisplay}
+                            <div style="line-height:1.5;">${sanitizedContent}</div>
+                        </div>
+                    `;
+                }).join('');
             
             if (reviewsList.innerHTML.trim() === '') {
                 reviewsList.innerHTML = '<p style="color:#888;">No reviews yet. Be the first to review!</p>';
@@ -339,6 +607,7 @@ async function loadReviews(movie) {
         }
     } catch (err) {
         reviewsList.innerHTML = '<p style="color:#c00;">Error loading reviews.</p>';
+        console.error('Error loading reviews:', err);
     }
 }
 

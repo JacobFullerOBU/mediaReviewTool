@@ -219,11 +219,15 @@
     <script type="module" src="Assets/scripts/auth.js"></script>
     <script type="module" src="Assets/scripts/community.js"></script>
     <script type="module" src="Assets/scripts/feed.js"></script>
-    <script type="module">
-        // Loads icons and elements dynamically 
-        lucide.createIcons();
-    </script>
     <script type="module" src="Assets/scripts/cards.js?v=1.1"></script>
+    <script>
+        // Load icons after DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 
 </body>
 </html>

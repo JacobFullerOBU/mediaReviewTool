@@ -71,16 +71,16 @@ main#browse-page {
     }
 }
 
-/* Rich Text Editor Styles */
+/* Rich Text Editor Styles - Dark Theme */
 .ql-toolbar {
-    border-color: #ccc !important;
-    border-radius: 4px 4px 0 0 !important;
-    background-color: #f8f9fa;
+    border-color: #374151 !important;
+    border-radius: 8px 8px 0 0 !important;
+    background-color: #1f2937 !important;
 }
 
 .ql-container {
-    border-color: #ccc !important;
-    border-radius: 0 0 4px 4px !important;
+    border-color: #374151 !important;
+    border-radius: 0 0 8px 8px !important;
     font-size: 14px !important;
     line-height: 1.5 !important;
 }
@@ -88,17 +88,54 @@ main#browse-page {
 .ql-editor {
     min-height: 120px;
     padding: 12px !important;
+    background-color: #111827 !important;
+    color: #e5e7eb !important;
 }
 
 .ql-editor.ql-blank::before {
-    color: #999 !important;
+    color: #6b7280 !important;
     font-style: italic;
 }
 
-/* Modal styles for better rich text editor integration */
+/* Toolbar buttons dark theme */
+.ql-toolbar .ql-formats {
+    margin-right: 15px;
+}
+
+.ql-toolbar button {
+    color: #d1d5db !important;
+}
+
+.ql-toolbar button:hover {
+    color: #ffffff !important;
+}
+
+.ql-toolbar button.ql-active {
+    color: #6366f1 !important;
+}
+
+.ql-toolbar .ql-picker-label {
+    color: #d1d5db !important;
+}
+
+.ql-toolbar .ql-picker-options {
+    background-color: #374151 !important;
+    border: 1px solid #4b5563 !important;
+}
+
+.ql-toolbar .ql-picker-item {
+    color: #d1d5db !important;
+}
+
+.ql-toolbar .ql-picker-item:hover {
+    background-color: #4b5563 !important;
+    color: #ffffff !important;
+}
+
+/* Modal styles for better dark theme integration */
 .modal-content {
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .review {
@@ -107,21 +144,5 @@ main#browse-page {
 
 .review:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Review form improvements */
-#reviewForm {
-    background: #f8f9fa;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-#reviewForm label {
-    color: #333 !important;
-}
-
-#reviewRating {
-    min-width: 120px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
