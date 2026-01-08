@@ -2,6 +2,34 @@ let allItems = [];
 let currentFilter = 'all';
 let quillEditor = null;
 
+// Function to check if user has unsaved review content
+function checkUnsavedReviewContent() {
+    // Check if review form is open
+    const reviewForm = document.querySelector('#reviewFormContainer');
+    if (!reviewForm || reviewForm.classList.contains('hidden')) {
+        return false;
+    }
+    
+    // Check if Quill editor has content
+    if (quillEditor && quillEditor.getText().trim().length > 0) {
+        return true;
+    }
+    
+    // Check if fallback textarea has content
+    const fallbackTextarea = document.querySelector('#reviewTextEditorFallback');
+    if (fallbackTextarea && fallbackTextarea.value.trim().length > 0) {
+        return true;
+    }
+    
+    // Check if rating is selected
+    const ratingInput = document.querySelector('#reviewRating');
+    if (ratingInput && ratingInput.value && ratingInput.value !== '') {
+        return true;
+    }
+    
+    return false;
+}
+
 // Rich Text Editor functionality
 function loadQuillJS() {
     return new Promise((resolve, reject) => {
@@ -565,6 +593,14 @@ async function showItemDetails(item) {
     modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm';
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
+            // Check if user has unsaved review content
+            const hasUnsavedContent = checkUnsavedReviewContent();
+            if (hasUnsavedContent) {
+                // Show warning and prevent closure
+                if (!confirm('You have unsaved review content. Are you sure you want to close without saving?')) {
+                    return;
+                }
+            }
             modal.remove();
             document.body.style.overflow = 'auto';
         }
@@ -667,9 +703,42 @@ async function showItemDetails(item) {
     document.body.style.overflow = 'hidden';
     lucide.createIcons();
 
+    // Add keyboard event listener for Escape key
+    const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            // Check if user has unsaved review content
+            const hasUnsavedContent = checkUnsavedReviewContent();
+            if (hasUnsavedContent) {
+                // Show warning and prevent closure
+                if (!confirm('You have unsaved review content. Are you sure you want to close without saving?')) {
+                    return;
+                }
+            }
+            modal.remove();
+            document.body.style.overflow = 'auto';
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    
+    // Clean up event listener when modal is removed
+    const originalRemove = modal.remove;
+    modal.remove = function() {
+        document.removeEventListener('keydown', handleKeyDown);
+        originalRemove.call(this);
+    };
+
     // --- Add Event Listeners to Modal Elements ---
 
     modal.querySelector('.close-btn').addEventListener('click', () => {
+        // Check if user has unsaved review content
+        const hasUnsavedContent = checkUnsavedReviewContent();
+        if (hasUnsavedContent) {
+            // Show warning and prevent closure
+            if (!confirm('You have unsaved review content. Are you sure you want to close without saving?')) {
+                return;
+            }
+        }
         modal.remove();
         document.body.style.overflow = 'auto';
     });
