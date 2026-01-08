@@ -12,7 +12,8 @@ REMOVE_FOREIGN_CHARACTERS = True
 
 # 2. FILTER: EXPLICIT / UNWANTED KEYWORDS (Case Insensitive)
 BAD_KEYWORDS = [
-    "xxx", "porn", "erotic", "hentai", "nude", "sex", "uncensored"
+    "xxx", "porn", "erotic", "hentai", "nude", "sex", "uncensored","adultery", "fetish","bdsm", "bondage", "voyeur", "incest",
+    "infidelity", "prostitution", "striptease", "swimsuit", "lingerie", "topless", "bottomless", "naked", "bareback", "masturbation", "orgy", "threesome", "foursome"
 ]
 
 # 3. FILTER: UNWANTED GENRES
