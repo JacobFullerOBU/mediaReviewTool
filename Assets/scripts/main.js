@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     async function renderSuggestions() {
+        if (!suggestionsUl) return;
         suggestionsUl.innerHTML = '';
         let suggestions = [];
         try {

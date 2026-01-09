@@ -1,30 +1,40 @@
+import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
+import { ref, set, get } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js';
+import { auth, db } from './firebase.js';
 
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
-import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js';
-import { app } from './firebase.js';
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const auth = getAuth(app);
-    const db = getDatabase(app);
-
+document.addEventListener('DOMContentLoaded', () => {
     const communityContainer = document.getElementById('community-container');
     const becomeReviewerBtn = document.getElementById('becomeReviewerBtn');
     const registrationModal = document.getElementById('registrationModal');
-    const closeModalBtn = registrationModal.querySelector('.close');
+    const closeModalBtn = registrationModal ? registrationModal.querySelector('.close') : null;
     const registrationForm = document.getElementById('registrationForm');
 
-    if (becomeReviewerBtn) {
+    // Modal Logic
+    if (becomeReviewerBtn && registrationModal) {
         becomeReviewerBtn.onclick = () => {
             registrationModal.classList.remove('hidden');
+            registrationModal.classList.add('flex');
         };
     }
 
-    if (closeModalBtn) {
+    if (closeModalBtn && registrationModal) {
         closeModalBtn.onclick = () => {
             registrationModal.classList.add('hidden');
+            registrationModal.classList.remove('flex');
         };
     }
 
+    // Close modal on outside click
+    if (registrationModal) {
+        window.onclick = (event) => {
+            if (event.target == registrationModal) {
+                registrationModal.classList.add('hidden');
+                registrationModal.classList.remove('flex');
+            }
+        };
+    }
+
+    // Registration Logic
     if (registrationForm) {
         registrationForm.onsubmit = async (e) => {
             e.preventDefault();
@@ -48,51 +58,71 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 alert('Reviewer account created!');
                 registrationModal.classList.add('hidden');
-                fetchAndRenderReviewers();
+                registrationModal.classList.remove('flex');
+                registrationForm.reset();
+                fetchAndRenderReviewers(); // Refresh the list
             } catch (err) {
                 alert('Registration failed: ' + err.message);
+                console.error(err);
             }
         };
     }
 
+    // Fetch and Render Logic
     async function fetchAndRenderReviewers() {
-        if (communityContainer) {
-            communityContainer.innerHTML = '<h3 class="text-white text-2xl font-bold mb-4">Community Reviewers</h3>';
-            try {
-                const snapshot = await get(ref(db, 'reviewers'));
-                console.log("Firebase snapshot:", snapshot.val()); // Log the snapshot
-                if (snapshot.exists()) {
-                    const reviewers = snapshot.val();
-                    const reviewersGrid = document.createElement('div');
-                    reviewersGrid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
-                    Object.entries(reviewers).forEach(([userId, reviewer]) => {
-                        if (reviewer && reviewer.name) {
-                            const reviewerCard = document.createElement('div');
-                            reviewerCard.className = 'bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-indigo-500/50 transition-all duration-300';
-                            reviewerCard.innerHTML = `
-                                <a href="reviewer-profile.html?id=${userId}" class="block">
-                                    <img src="${reviewer.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${reviewer.name || 'Anonymous'}" class="w-full h-48 object-cover">
-                                    <div class="p-4">
-                                        <h3 class="text-lg font-bold text-white">${reviewer.name || 'Anonymous'}</h3>
-                                        <p class="text-sm text-slate-400 mt-1">${reviewer.bio || 'No bio provided.'}</p>
-                                    </div>
-                                </a>
-                            `;
-                            reviewersGrid.appendChild(reviewerCard);
-                        }
-                    });
-                    if (reviewersGrid.hasChildNodes()) {
-                        communityContainer.appendChild(reviewersGrid);
-                    } else {
-                        communityContainer.innerHTML += '<p class="text-slate-400">No reviewers with valid data found.</p>';
+        if (!communityContainer) return;
+
+        // Show loading state
+        communityContainer.innerHTML = `
+            <div class="flex justify-center items-center py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
+            </div>
+        `;
+
+        try {
+            const snapshot = await get(ref(db, 'reviewers'));
+            
+            if (snapshot.exists()) {
+                const reviewers = snapshot.val();
+                communityContainer.innerHTML = ''; // Clear loading
+                
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
+                
+                Object.entries(reviewers).forEach(([userId, reviewer]) => {
+                    if (reviewer && reviewer.name) {
+                        const card = document.createElement('div');
+                        card.className = 'bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500 transition-all hover:shadow-lg hover:shadow-indigo-500/20 group';
+                        
+                        const avatar = reviewer.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+                        
+                        card.innerHTML = `
+                            <div class="p-6 flex flex-col items-center text-center">
+                                <img src="${avatar}" alt="${reviewer.name}" class="w-24 h-24 rounded-full object-cover border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4">
+                                <h3 class="text-xl font-bold text-white mb-1">${reviewer.name}</h3>
+                                <p class="text-indigo-400 text-sm mb-4">${reviewer.genres || 'General Reviewer'}</p>
+                                <a href="reviewer-profile.html?id=${userId}" class="w-full py-2 px-4 bg-slate-700 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium">View Profile</a>
+                            </div>
+                        `;
+                        grid.appendChild(card);
                     }
-                } else {
-                    communityContainer.innerHTML += '<p class="text-slate-400">No reviewers have signed up yet. Be the first to create a profile!</p>';
-                }
-            } catch (err) {
-                communityContainer.innerHTML += '<p class="text-red-500">Error loading reviewers. Check the console for more details.</p>';
-                console.error('Error fetching reviewers:', err);
+                });
+                
+                communityContainer.appendChild(grid);
+            } else {
+                communityContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-slate-400 text-lg">No reviewers found. Be the first to join!</p>
+                    </div>
+                `;
             }
+        } catch (err) {
+            console.error('Error fetching reviewers:', err);
+            communityContainer.innerHTML = `
+                <div class="text-center py-12">
+                    <p class="text-red-400">Failed to load community. Please try again later.</p>
+                </div>
+            `;
         }
     }
 

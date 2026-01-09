@@ -107,19 +107,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("Total media items:", allMedia.length);
         
         let allReviews = [];
-        console.log("Fetching reviews for all media...");
-        for (const media of allMedia) {
-            const mediaId = media.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-            const reviewsRef = ref(db, `reviews/${mediaId}`);
-            const reviewsSnapshot = await get(reviewsRef);
-            if (reviewsSnapshot.exists()) {
-                const reviews = reviewsSnapshot.val();
+        console.log("Fetching all reviews...");
+        
+        // Create a map for faster media lookup
+        const mediaMap = {};
+        allMedia.forEach(media => {
+            const mId = media.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            mediaMap[mId] = media;
+        });
+
+        const reviewsRef = ref(db, 'reviews');
+        const reviewsSnapshot = await get(reviewsRef);
+
+        if (reviewsSnapshot.exists()) {
+            const reviewsData = reviewsSnapshot.val();
+            Object.entries(reviewsData).forEach(([mediaId, reviews]) => {
                 Object.values(reviews).forEach(review => {
                     if (review.userId === reviewerId) {
-                        allReviews.push({ ...review, mediaTitle: media.title });
+                        const mediaItem = mediaMap[mediaId];
+                        allReviews.push({ 
+                            ...review, 
+                            mediaTitle: mediaItem ? mediaItem.title : mediaId.replace(/_/g, ' ') 
+                        });
                     }
                 });
-            }
+            });
         }
         console.log("Found reviews for this user:", allReviews.length);
 
