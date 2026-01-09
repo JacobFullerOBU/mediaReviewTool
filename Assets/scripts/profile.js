@@ -112,8 +112,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Create a map for faster media lookup
         const mediaMap = {};
         allMedia.forEach(media => {
-            const mId = media.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-            mediaMap[mId] = media;
+            if (media.id != null) {
+                mediaMap[media.id] = media;
+            }
+            if (media.title) {
+                const mId = media.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                mediaMap[mId] = media;
+            }
         });
 
         const reviewsRef = ref(db, 'reviews');

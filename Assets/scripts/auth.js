@@ -7,6 +7,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 // Authentication functionality
 
+export function requireLogin(callback) {
+    if (auth.currentUser) {
+        callback(auth.currentUser);
+    } else {
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal) {
+            showModal(loginModal);
+        }
+    }
+}
+
 function updateAuthUI(user) {
   const loginBtn = document.getElementById('loginBtn');
   const registerBtn = document.getElementById('registerBtn');

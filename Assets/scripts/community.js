@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
 import { ref, set, get } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js';
 import { auth, db } from './firebase.js';
+import { requireLogin } from './auth.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const communityContainer = document.getElementById('community-container');
@@ -12,8 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal Logic
     if (becomeReviewerBtn && registrationModal) {
         becomeReviewerBtn.onclick = () => {
-            registrationModal.classList.remove('hidden');
-            registrationModal.classList.add('flex');
+            requireLogin((user) => {
+                registrationModal.classList.remove('hidden');
+                registrationModal.classList.add('flex');
+
+                // If user is already logged in, hide password field and pre-fill email
+                if (user) {
+                    const passInput = document.getElementById('regPassword');
+                    if (passInput) {
+                        passInput.removeAttribute('required');
+                        passInput.parentElement.style.display = 'none';
+                    }
+                    const emailInput = document.getElementById('regEmail');
+                    if (emailInput) {
+                        emailInput.value = user.email;
+                        emailInput.readOnly = true;
+                    }
+                }
+            });
         };
     }
 
@@ -45,8 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const avatarUrl = document.getElementById('regAvatarUrl').value;
             
             try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const userId = userCredential.user.uid;
+                let userId;
+                if (auth.currentUser) {
+                    userId = auth.currentUser.uid;
+                } else {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    userId = userCredential.user.uid;
+                }
                 
                 await set(ref(db, 'reviewers/' + userId), {
                     name,
