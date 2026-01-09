@@ -1,6 +1,7 @@
 import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { app, auth } from './firebase.js';
+import { fetchMovies } from './main.js';
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
@@ -61,25 +62,6 @@ function createWatchlistCard(item) {
     };
     
     return card;
-}
-
-async function fetchMovies() {
-    const potentialPaths = [
-        "Assets/Movies/movieList.json", // For root pages
-        "../Movies/movieList.json",     // For pages in Assets/profile/
-        "../../Assets/Movies/movieList.json" // Fallback
-    ];
-
-    for (const path of potentialPaths) {
-        try {
-            const response = await fetch(path);
-            if (response.ok) return await response.json();
-        } catch (e) {
-            // Continue to next path
-        }
-    }
-    console.error("Failed to fetch movies from any path.");
-    return [];
 }
 
 document.addEventListener('DOMContentLoaded', () => {

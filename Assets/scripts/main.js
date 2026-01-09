@@ -1,5 +1,28 @@
 // Main JavaScript functionality for the Media Review Tool
 
+export async function fetchMovies() {
+    const potentialPaths = [
+        "Assets/Movies/movieList.json",
+        "../Movies/movieList.json",
+        "../../Assets/Movies/movieList.json",
+        "./Assets/Movies/movieList.json"
+    ];
+
+    for (const path of potentialPaths) {
+        try {
+            const response = await fetch(path);
+            const contentType = response.headers.get("content-type");
+            if (response.ok && contentType && contentType.includes("application/json")) {
+                return await response.json();
+            }
+        } catch (e) {
+            // Continue to next path
+        }
+    }
+    console.error("Failed to fetch movies from any path.");
+    return [];
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     initAppUI();
 
