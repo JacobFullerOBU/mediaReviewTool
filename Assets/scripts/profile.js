@@ -1,5 +1,6 @@
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { app } from './firebase.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { app, auth } from './firebase.js';
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
@@ -48,7 +49,7 @@ async function fetchMovies() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM Content Loaded, starting script.");
     lucide.createIcons();
 
@@ -61,15 +62,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const params = new URLSearchParams(window.location.search);
-    const reviewerId = params.get('id');
-    console.log("Reviewer ID from URL:", reviewerId);
+    const urlReviewerId = params.get('id');
+    console.log("Reviewer ID from URL:", urlReviewerId);
 
-
-    if (!reviewerId) {
-        document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer ID not provided.</p>';
-        return;
+    if (urlReviewerId) {
+        loadProfile(urlReviewerId);
+    } else {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadProfile(user.uid);
+            } else {
+                const container = document.getElementById('profile-container');
+                if (container) {
+                    container.innerHTML = '<p class="text-center text-red-500">Reviewer ID not provided and you are not logged in.</p>';
+                }
+            }
+        });
     }
+});
 
+async function loadProfile(reviewerId) {
     const db = getDatabase(app);
     const reviewerRef = ref(db, 'reviewers/' + reviewerId);
     
@@ -159,4 +171,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     lucide.createIcons();
-});
+}
