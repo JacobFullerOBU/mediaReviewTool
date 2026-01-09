@@ -25,9 +25,10 @@ function createFeedItem(review, reviewer, mediaItem) {
                 <span class="text-xs text-slate-400">reviewed</span>
                 <span class="font-semibold text-indigo-400">${mediaTitle}</span>
             </div>
-            <div class="flex items-center gap-1 mb-3">
-                ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
-                <span class="text-xs text-slate-400 ml-2">(${review.rating}/5)</span>
+            <div class="flex items-center gap-1 mb-3 text-yellow-400">
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <span class="font-bold">${review.rating}</span>
+                <span class="text-xs text-slate-400 ml-1">/ 10</span>
             </div>
             <p class="text-slate-300">${review.reviewText}</p>
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
