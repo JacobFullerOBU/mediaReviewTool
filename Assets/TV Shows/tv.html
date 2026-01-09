@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows - MediaReview</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/cards.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+</head>
+<body>
+        <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../../index.html" class="nav-link"><h1>MediaReview</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../Movies/movies.html" class="nav-link">Movies</a></li>
+                <li class="nav-item"><a href="tv.html" class="nav-link" data-category="tv">TV Shows</a></li>
+                <li class="nav-item"><a href="../Music/music.html" class="nav-link" data-category="music">Music</a></li>
+                <li class="nav-item"><a href="../Video Games/games.html" class="nav-link" data-category="games">Games</a></li>
+                <li class="nav-item"><a href="../Books/books.html" class="nav-link" data-category="books">Books</a></li>
+                <li class="nav-item"><a href="../../community.html" class="nav-link">Community</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-login" id="loginBtn">Login</button>
+                <button class="btn btn-register" id="registerBtn">Register</button>
+                <button class="btn btn-profile" id="profileBtn" style="display:none;">Profile</button>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover & Review TV Shows</h1>
+            <p>Browse, search, and review TV shows. Find your next binge-watch!</p>
+            <div style="margin-bottom: 18px;">
+                <input type="text" id="tvSearchInput" placeholder="Search TV shows by title, actor, or director..." style="width: 100%; max-width: 400px; padding: 8px; font-size: 1em;">
+            </div>
+            <button class="btn btn-primary btn-large" id="exploreBtn">Explore TV Shows</button>
+        </div>
+    </section>
+
+    <!-- TV Shows Content Section -->
+    <section class="popular-content">
+        <div class="container">
+            <h2>Browse by Genre</h2>
+            <div class="genre-tabs" id="genreTabs">
+                <!-- Genre buttons will be populated by JS -->
+            </div>
+            <div class="cards-container" id="tvCardsContainer">
+                <!-- TV show cards will be populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MediaReview. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="tv.js"></script>
+    <script type="module" src="../scripts/auth.js"></script>
+</body>
+</html>
