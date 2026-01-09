@@ -1,3 +1,4 @@
+import { fetchMovies } from './main.js';
 let allItems = [];
 let currentFilter = 'all';
 let quillEditor = null;
@@ -290,15 +291,13 @@ async function getAverageRating(mediaId) {
     return count > 0 ? (total / count).toFixed(1) : "N/A";
 }
 // Cards functionality for displaying popular content
-// Fetch movies from JSON file
-async function fetchMovies() {
-    const response = await fetch("Assets/Movies/movieList.json");
-    return await response.json();
-}
 document.addEventListener('DOMContentLoaded', async function () {
     await initCards();
 });
 async function initCards() {
+    const container = document.getElementById('cardsContainer');
+    if (!container) return;
+
     let movies = [], validTV = [], validMusic = [], validGames = [], validBooks = [];
 
     try {
@@ -347,11 +346,7 @@ async function initCards() {
     if (allItems.length > 0) {
         await filterCards('all');
     } else {
-        // If no items were loaded at all, display an error.
-        const container = document.getElementById('cardsContainer');
-        if (container) {
-            container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Could not load any media. Please check data sources and browser console for errors.</div>';
-        }
+        container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Could not load any media. Please check data sources and browser console for errors.</div>';
     }
 }
 

@@ -137,11 +137,20 @@ async function loadProfile(reviewerId) {
         };
 
         console.log("Populating profile info...");
-        document.getElementById('profileAvatar').src = reviewerData.avatar || 'https://via.placeholder.com/150';
-        document.getElementById('profileAvatar').alt = reviewerData.name;
-        document.getElementById('profileName').textContent = reviewerData.name;
-        document.getElementById('profileBio').textContent = reviewerData.bio || 'No bio provided.';
-        document.getElementById('profileGenres').textContent = `Genres: ${reviewerData.genres || 'N/A'}`;
+        const profileAvatar = document.getElementById('profileAvatar');
+        if (profileAvatar) {
+            profileAvatar.src = reviewerData.avatar || 'https://via.placeholder.com/150';
+            profileAvatar.alt = reviewerData.name;
+        }
+        
+        const profileName = document.getElementById('profileName');
+        if (profileName) profileName.textContent = reviewerData.name;
+        
+        const profileBio = document.getElementById('profileBio');
+        if (profileBio) profileBio.textContent = reviewerData.bio || 'No bio provided.';
+        
+        const profileGenres = document.getElementById('profileGenres');
+        if (profileGenres) profileGenres.textContent = `Genres: ${reviewerData.genres || 'N/A'}`;
 
         console.log("Fetching media...");
         const movies = await fetchMovies();
@@ -229,7 +238,10 @@ async function loadProfile(reviewerId) {
 
     } catch (error) {
         console.error("An error occurred:", error);
-        document.getElementById('profile-container').innerHTML = `<p class="text-center text-red-500">An error occurred while loading the profile: ${error.message}</p>`;
+        const container = document.getElementById('profile-container');
+        if (container) {
+            container.innerHTML = `<p class="text-center text-red-500">An error occurred while loading the profile: ${error.message}</p>`;
+        }
     }
 
     lucide.createIcons();
