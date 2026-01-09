@@ -1,395 +1,145 @@
-const userWatchlist = document.getElementById('userWatchlist');
-
-window.watchlistEditMode = false;
-
-// Render Watchlist Section
-async function renderWatchlist(user) {
-    const container = document.getElementById('userWatchlist');
-    if (!container) return;
-    container.innerHTML = '<div>Loading watchlist...</div>';
-    const userId = user.uid || user.email || user.displayName;
-    const watchRef = ref(db, `watchlist/${userId}`);
-    const snapshot = await get(watchRef);
-    if (!snapshot.exists()) {
-        container.innerHTML = '<div>No items in your watchlist yet.</div>';
-        return;
-    }
-    const watchObj = snapshot.val() || {};
-    const watchKeys = Object.keys(watchObj);
-    const movies = await fetchMovies();
-    const mediaMap = getAllMediaMap(movies, tv, music, games, books);
-    const watchItems = watchKeys.map(key => ({ key, item: mediaMap[key] })).filter(w => w.item);
-    if (watchItems.length === 0) {
-        container.innerHTML = '<div>No items found in your watchlist.</div>';
-        return;
-    }
-    container.innerHTML = watchItems.map(w => createWatchlistCardHTML(w.item)).join('');
-    setTimeout(() => {
-        const cards = Array.from(container.querySelectorAll('.watchlist-card'));
-        cards.forEach((card, idx) => {
-            const w = watchItems[idx];
-            if (!w) return;
-            if (window.watchlistEditMode) {
-                const removeBtn = card.querySelector('.remove-watchlist-btn');
-                if (removeBtn) {
-                    removeBtn.addEventListener('click', async (e) => {
-                        e.stopPropagation();
-                        await removeWatchlist(userId, w.key, card);
-                    });
-                }
-                card.style.cursor = 'default';
-            } else {
-                card.addEventListener('click', function() {
-                    if (window.watchlistEditMode) return;
-                    if (w.item) showFavoriteModal(w.item);
-                });
-            }
-        });
-    }, 0);
-}
-
-function createWatchlistCardHTML(item) {
-    return `
-        <div class="media-card watchlist-card" data-id="${item.id || item.title}" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;position:relative;cursor:pointer;">
-            ${window.watchlistEditMode ? `<button class=\"remove-watchlist-btn\" title=\"Remove from watchlist\" style=\"position:absolute;top:8px;right:8px;background:#eab308;color:white;border:none;border-radius:50%;width:28px;height:28px;font-size:18px;z-index:2;cursor:pointer;\">&times;</button>` : ''}
-            <div class="card-image" style="background-image: url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;"></div>
-            <div class="card-content">
-                <h3 class="card-title">${item.title || ''}</h3>
-            </div>
-        </div>
-    `;
-}
-
-async function removeWatchlist(userId, id, cardElem) {
-    const watchRef = ref(db, `watchlist/${userId}/${id}`);
-    await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(watchRef));
-    if (typeof auth !== 'undefined' && auth.currentUser) {
-        await renderWatchlist(auth.currentUser);
-    }
-}
-console.log('[Profile] profile.js loaded');
-import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { auth, db } from "./firebase.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { app } from './firebase.js';
 import { tv } from "../TV Shows/tv.js";
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
-// Ensure showItemDetails is available if cards.js is loaded
-if (window.showItemDetails) {
-    window.showItemDetails = window.showItemDetails;
-}
 
-const profileInfo = document.getElementById('profileInfo');
-const userReviews = document.getElementById('userReviews');
-const userFavorites = document.getElementById('userFavorites');
-const profileTitle = document.getElementById('profileTitle');
-const backHomeBtn = document.getElementById('backHomeBtn');
+function createFeedItem(review, reviewer, mediaItem) {
+    const item = document.createElement('div');
+    item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex gap-6';
 
-// Fix: Use window.location.replace for Home button to force navigation
-if (backHomeBtn) {
-    backHomeBtn.onclick = function(e) {
-        e.preventDefault();
-        window.location.href = '../index.html';
-    };
-}
+    const mediaPoster = mediaItem ? (mediaItem.poster || mediaItem.image) : 'https://via.placeholder.com/100x150.png?text=No+Image';
+    const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
 
-function renderProfile(user) {
-    profileTitle.textContent = `${user.displayName || user.email || user.uid}'s Profile`;
-    profileInfo.innerHTML = `<strong>Email:</strong> ${user.email || user.uid}<br><span id="profileStats"></span>`;
-}
-
-// Helper to update the stats area
-function updateProfileStats({ reviewCount, favoriteCount }) {
-    const stats = document.getElementById('profileStats');
-    if (stats) {
-        stats.innerHTML = `
-            <strong>Reviews Given:</strong> ${reviewCount} <br>
-            <strong>Media Favorites:</strong> ${favoriteCount}
-        `;
-    }
-}
-
-function showLoading(target) {
-    target.innerHTML = '<li>Loading...</li>';
-}
-
-async function renderReviews(user) {
-    showLoading(userReviews);
-    const reviewsRef = ref(db, 'reviews');
-    const snapshot = await get(reviewsRef);
-    userReviews.innerHTML = '';
-    let reviewCount = 0;
-    if (!snapshot.exists()) {
-        userReviews.innerHTML = '<li>No reviews yet.</li>';
-        updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
-        console.log('[Profile] No reviews found in database.');
-        return;
-    }
-    const reviewsData = snapshot.val();
-    console.log('[Profile] All reviews data:', reviewsData);
-    const userReviewList = [];
-    Object.entries(reviewsData).forEach(([mediaKey, reviewObj]) => {
-        Object.values(reviewObj).forEach(r => {
-            if (
-                r.user === user.email ||
-                r.user === user.uid ||
-                r.user === user.displayName ||
-                r.userId === user.uid // Added support for userId field
-            ) {
-                userReviewList.push({ mediaKey, ...r });
-            }
-        });
-    });
-    console.log('[Profile] Current user:', user);
-    console.log('[Profile] Matched user reviews:', userReviewList);
-    if (userReviewList.length === 0) {
-        userReviews.innerHTML = '<li>No reviews yet.</li>';
-        updateProfileStats({ reviewCount: 0, favoriteCount: window._favoriteCount || 0 });
-        return;
-    }
-    // Build a media map for quick lookup
-    const movies = await fetchMovies();
-    const mediaMap = getAllMediaMap(
-        movies,
-        Array.isArray(tv) ? tv : [],
-        Array.isArray(music) ? music : [],
-        Array.isArray(games) ? games : [],
-        Array.isArray(books) ? books : []
-    );
-    console.log('[Profile] Media map for "the_empire_strikes_back":', mediaMap['the_empire_strikes_back']);
-    userReviewList.forEach(r => {
-        const li = document.createElement('li');
-        const reviewContent = r.reviewText || r.text || r.review || '';
-        // Show title if available
-        const mediaItem = mediaMap[r.mediaKey];
-            // Always format title: remove underscores, proper case
-            let rawTitle = mediaItem ? mediaItem.title : r.mediaKey;
-            let title = rawTitle.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-            // Create clickable span for title
-            const titleSpan = document.createElement('span');
-            titleSpan.textContent = title;
-            titleSpan.style.color = '#1976d2';
-            titleSpan.style.cursor = 'pointer';
-            titleSpan.style.textDecoration = 'underline';
-            titleSpan.onclick = async function(e) {
-                e.stopPropagation();
-                console.log('[Profile] Clicked review title:', title);
-                console.log('[Profile] mediaItem:', mediaItem);
-                console.log('[Profile] window.showItemDetails:', window.showItemDetails);
-                if (mediaItem && window.showItemDetails) {
-                    window.showItemDetails(mediaItem);
-                } else if (window.showItemDetails) {
-                    window.showItemDetails({ title, id: r.mediaKey });
-                } else {
-                    alert('Media details not found for this review.');
-                }
-            };
-            li.appendChild(titleSpan);
-            li.appendChild(document.createTextNode(`: ${reviewContent}`));
-        userReviews.appendChild(li);
-        reviewCount++;
-    });
-    window._reviewCount = reviewCount;
-    updateProfileStats({ reviewCount, favoriteCount: window._favoriteCount || 0 });
+    item.innerHTML = `
+        <div class="w-24 flex-shrink-0">
+            <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
+        </div>
+        <div class="flex-grow">
+            <div class="flex items-center gap-3 mb-2">
+                <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
+                <span class="font-semibold text-white">${reviewer.username}</span>
+                <span class="text-xs text-slate-400">reviewed</span>
+                <span class="font-semibold text-indigo-400">${mediaTitle}</span>
+            </div>
+            <div class="flex items-center gap-1 mb-3">
+                ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                <span class="text-xs text-slate-400 ml-2">(${review.rating}/5)</span>
+            </div>
+            <p class="text-slate-300">${review.reviewText}</p>
+            <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
+        </div>
+    `;
+    return item;
 }
 
 async function fetchMovies() {
-    const response = await fetch("../Movies/movieList.json");
-    return await response.json();
-}
-
-function getAllMediaMap(movies, tv, music, games, books) {
-    const all = [...movies, ...tv, ...music, ...games, ...books];
-    const map = {};
-    all.forEach(item => {
-            if (item.title) {
-                const normTitle = item.title.trim().toLowerCase();
-                const key = normTitle.replace(/[^a-zA-Z0-9]/g, '_');
-            map[key] = item;
+    try {
+        const response = await fetch("Assets/Movies/movieList.json");
+        if (!response.ok) {
+            console.error("Failed to fetch movies:", response.statusText);
+            return [];
         }
-    });
-    return map;
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching movies:", error);
+        return [];
+    }
 }
 
-function createCardHTML(item) {
-    return `
-        <div class="media-card favorite-card" data-id="${item.id || item.title}" style="margin:12px;max-width:260px;display:inline-block;vertical-align:top;position:relative;cursor:pointer;">
-            ${window.favoritesEditMode ? `<button class=\"remove-favorite-btn\" title=\"Remove from favorites\" style=\"position:absolute;top:8px;right:8px;background:#e53e3e;color:white;border:none;border-radius:50%;width:28px;height:28px;font-size:18px;z-index:2;cursor:pointer;\">&times;</button>` : ''}
-            <div class="card-image" style="background-image: url('${item.poster || item.image || ''}');height:180px;background-size:cover;background-position:center;"></div>
-            <div class="card-content">
-                <h3 class="card-title">${item.title || ''}</h3>
-            </div>
-        </div>
-    `;
-}
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log("DOM Content Loaded, starting script.");
+    lucide.createIcons();
 
-async function renderFavorites(user) {
-    const container = document.getElementById('userFavorites');
-    if (!container) return;
-    container.innerHTML = '<div>Loading favorites...</div>';
-    const userId = user.uid || user.email || user.displayName;
-    const favRef = ref(db, `favorites/${userId}`);
-    const snapshot = await get(favRef);
-    if (!snapshot.exists()) {
-        container.innerHTML = '<div>No favorites yet.</div>';
-        window._favoriteCount = 0;
-        updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: 0 });
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const reviewerId = params.get('id');
+    console.log("Reviewer ID from URL:", reviewerId);
+
+
+    if (!reviewerId) {
+        document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer ID not provided.</p>';
         return;
     }
-    const favObj = snapshot.val() || {};
-    const favKeys = Object.keys(favObj);
-    const movies = await fetchMovies();
-    const mediaMap = getAllMediaMap(movies, tv, music, games, books);
-    // Pair each favorite key with its media item
-    const favoriteItems = favKeys.map(key => ({ key, item: mediaMap[key] })).filter(fav => fav.item);
-    window._favoriteCount = favoriteItems.length;
-    updateProfileStats({ reviewCount: window._reviewCount || 0, favoriteCount: favoriteItems.length });
-    if (favoriteItems.length === 0) {
-        container.innerHTML = '<div>No favorites found in your media library.</div>';
-        return;
-    }
-    container.innerHTML = favoriteItems.map(fav => createCardHTML(fav.item)).join('');
-    setTimeout(() => {
-        const cards = Array.from(container.querySelectorAll('.favorite-card'));
-        cards.forEach((card, idx) => {
-            const fav = favoriteItems[idx];
-            if (!fav) return;
-            if (window.favoritesEditMode) {
-                const removeBtn = card.querySelector('.remove-favorite-btn');
-                if (removeBtn) {
-                    removeBtn.addEventListener('click', async (e) => {
-                        e.stopPropagation();
-                        await removeFavorite(userId, fav.key, card);
-                    });
-                }
-                card.style.cursor = 'default';
-            } else {
-                card.addEventListener('click', function() {
-                    if (window.favoritesEditMode) return;
-                    if (fav.item) showFavoriteModal(fav.item);
+
+    const db = getDatabase(app);
+    const reviewerRef = ref(db, 'reviewers/' + reviewerId);
+    
+    try {
+        console.log("Fetching reviewer data from Firebase...");
+        const snapshot = await get(reviewerRef);
+        if (!snapshot.exists()) {
+            console.log("Reviewer not found in Firebase.");
+            document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer not found.</p>';
+            return;
+        }
+
+        const reviewerData = snapshot.val();
+        console.log("Reviewer Data:", reviewerData);
+
+        const reviewerForFeed = {
+            id: reviewerId,
+            username: reviewerData.name,
+            avatar: reviewerData.avatar,
+            bio: reviewerData.bio,
+            following: [],
+            followers: 0
+        };
+
+        console.log("Populating profile info...");
+        document.getElementById('profileAvatar').src = reviewerData.avatar || 'https://via.placeholder.com/150';
+        document.getElementById('profileAvatar').alt = reviewerData.name;
+        document.getElementById('profileName').textContent = reviewerData.name;
+        document.getElementById('profileBio').textContent = reviewerData.bio || 'No bio provided.';
+        document.getElementById('profileGenres').textContent = `Genres: ${reviewerData.genres || 'N/A'}`;
+
+        console.log("Fetching media...");
+        const movies = await fetchMovies();
+        const allMedia = [...movies, ...tv, ...music, ...games, ...books].filter(item => item && item.title);
+        console.log("Total media items:", allMedia.length);
+        
+        let allReviews = [];
+        console.log("Fetching reviews for all media...");
+        for (const media of allMedia) {
+            const mediaId = media.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const reviewsRef = ref(db, `reviews/${mediaId}`);
+            const reviewsSnapshot = await get(reviewsRef);
+            if (reviewsSnapshot.exists()) {
+                const reviews = reviewsSnapshot.val();
+                Object.values(reviews).forEach(review => {
+                    if (review.userId === reviewerId) {
+                        allReviews.push({ ...review, mediaTitle: media.title });
+                    }
                 });
             }
-        });
-    }, 0);
-
-}
-
-window.favoritesEditMode = false;
-
-async function removeFavorite(userId, id, cardElem) {
-    // Remove from Firebase
-    const favRef = ref(db, `favorites/${userId}/${id}`);
-    await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(favRef));
-    // Re-render favorites to reflect removal
-    if (typeof auth !== 'undefined' && auth.currentUser) {
-        await renderFavorites(auth.currentUser);
-    }
-}
-
-
-// Modal logic for favorite details
-function showFavoriteModal(item) {
-    let modal = document.getElementById('movieDetailModal');
-    if (modal) modal.remove();
-    modal = document.createElement('div');
-    modal.id = 'movieDetailModal';
-    modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width:600px;">
-            <span class="close" id="closeMovieModal">&times;</span>
-            <div class="modal-header" style="margin-bottom:12px;">
-                <h2 style="margin-bottom:0;">${item.title || ''}</h2>
-            </div>
-            <div class="modal-body" style="display:flex; gap:18px;">
-                <img src="${item.poster || item.image || ''}" alt="${item.title}" style="max-width:180px; border-radius:8px; box-shadow:0 2px 8px #0002;">
-                <div style="flex:1;">
-                    <p><strong>Year:</strong> ${item.year || ''}</p>
-                    <p><strong>Genre:</strong> ${item.genre || ''}</p>
-                    <p><strong>Director:</strong> ${item.director || ''}</p>
-                    <p><strong>Cast:</strong> ${item.actors || ''}</p>
-                    <p><strong>Description:</strong> ${item.description || ''}</p>
-                </div>
-            </div>
-            <hr style="margin:18px 0;">
-            <div id="reviewsSection" style="margin-top:12px;">
-                <h3 style="margin-bottom:8px;">Reviews</h3>
-                <div id="reviewsList" style="margin-bottom:12px;">Loading reviews...</div>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-    modal.style.display = 'block';
-    document.getElementById('closeMovieModal').onclick = function() {
-        modal.remove();
-    };
-    modal.onclick = function(e) {
-        if (e.target === modal) modal.remove();
-    };
-    // Load reviews for this item
-    loadFavoriteReviews(item);
-}
-
-// Load reviews for favorite modal
-async function loadFavoriteReviews(item) {
-    const reviewsList = document.getElementById('reviewsList');
-    if (!reviewsList) return;
-    reviewsList.innerHTML = 'Loading reviews...';
-    const reviewsRef = ref(db, 'reviews');
-    const snapshot = await get(reviewsRef);
-    if (!snapshot.exists()) {
-        reviewsList.innerHTML = '<div>No reviews yet.</div>';
-        return;
-    }
-    const reviewsData = snapshot.val();
-    let reviewArr = [];
-    // Try to match by id or title
-    const key = item.id || (item.title ? item.title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-    if (reviewsData[key]) {
-        reviewArr = Object.values(reviewsData[key]);
-    } else {
-        // Try to match by title if id not found
-        for (const k in reviewsData) {
-            if (k === item.title || k === key) {
-                reviewArr = Object.values(reviewsData[k]);
-                break;
-            }
         }
-    }
-    if (reviewArr.length === 0) {
-        reviewsList.innerHTML = '<div>No reviews yet.</div>';
-        return;
-    }
-    reviewsList.innerHTML = reviewArr.map(r => `<div style="margin-bottom:8px;"><strong>${r.user || 'Anonymous'}:</strong> ${r.text || r.review || ''}</div>`).join('');
-}
+        console.log("Found reviews for this user:", allReviews.length);
 
-// On load, check auth and render profile
-auth.onAuthStateChanged(async (user) => {
-    console.log('[Profile] Auth state changed:', user);
-    if (!user) {
-        window.location.href = '../index.html';
-        return;
-    }
-    renderProfile(user);
-    await renderReviews(user);
-    await renderFavorites(user);
-    await renderWatchlist(user);
-    // Attach Edit Favorites button handler after DOM and profile are rendered
-    const editBtn = document.getElementById('editFavoritesBtn');
-    if (editBtn) {
-        editBtn.addEventListener('click', () => {
-            window.favoritesEditMode = !window.favoritesEditMode;
-            editBtn.textContent = window.favoritesEditMode ? 'Done' : 'Edit Favorites';
-            renderFavorites(user);
-        });
+        const userReviewsContainer = document.getElementById('userReviews');
+        if (allReviews.length > 0) {
+            userReviewsContainer.innerHTML = '';
+            allReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            allReviews.forEach(review => {
+                const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
+                const feedItem = createFeedItem(review, reviewerForFeed, mediaItem);
+                userReviewsContainer.appendChild(feedItem);
+            });
+        } else {
+            userReviewsContainer.innerHTML = '<p class="text-slate-500 text-center">This reviewer has not posted any reviews yet.</p>';
+        }
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+        document.getElementById('profile-container').innerHTML = `<p class="text-center text-red-500">An error occurred while loading the profile: ${error.message}</p>`;
     }
 
-    // Attach Edit Watchlist button handler
-    const editWatchBtn = document.getElementById('editWatchlistBtn');
-    if (editWatchBtn) {
-        editWatchBtn.addEventListener('click', () => {
-            window.watchlistEditMode = !window.watchlistEditMode;
-            editWatchBtn.textContent = window.watchlistEditMode ? 'Done' : 'Edit Watchlist';
-            renderWatchlist(user);
-        });
-    }
+    lucide.createIcons();
 });

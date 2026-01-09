@@ -75,7 +75,7 @@ async function fetchAllData() {
 }
 
 
-function createExploreCard(review, reviewer, mediaItem) {
+function createFeedCard(review, reviewer, mediaItem) {
     const mediaPoster = (mediaItem && (mediaItem.poster || mediaItem.image)) || 'https://via.placeholder.com/300x450.png?text=No+Image';
     const mediaTitle = mediaItem ? mediaItem.title : (review.mediaId ? review.mediaId.replace(/_/g, ' ') : "Unknown Media");
     const rating = review.rating || 0;
@@ -104,47 +104,6 @@ function createExploreCard(review, reviewer, mediaItem) {
     `;
 }
 
-async function displayFeed() {
-    const feedContainer = document.getElementById('feed-container');
-    if (!feedContainer) return;
-
-    const currentUser = window.getCurrentUser ? window.getCurrentUser() : { following: [] };
-    if (currentUser.following.length === 0) {
-        feedContainer.innerHTML = `<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">You are not following any reviewers yet. Go to the <a href="#" id="feed-to-community" class="text-indigo-400 hover:underline">Community</a> page to find people to follow!</div>`;
-        document.getElementById('feed-to-community')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            if(window.showPage) window.showPage('community-page');
-        });
-        return;
-    }
-
-    const { reviews, reviewers, allMedia } = await fetchAllData();
-
-    const followedReviews = reviews
-        .filter(review => currentUser.following.includes(review.reviewerId))
-        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-    let cardsHTML = '';
-    followedReviews.forEach(review => {
-        const reviewer = reviewers.find(r => r.id === review.reviewerId);
-        const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
-        if (reviewer) {
-            cardsHTML += createExploreCard(review, reviewer, mediaItem);
-        }
-    });
-    
-    if (cardsHTML === '') {
-        feedContainer.innerHTML = `<div class="text-center text-slate-400 p-8 bg-slate-800 rounded-lg">No reviews from followed users.</div>`;
-    } else {
-        feedContainer.innerHTML = cardsHTML;
-    }
-    
-    lucide.createIcons();
-}
-
-window.displayFeed = displayFeed;
-
-// --- NEW FUNCTION for Explore Feed ---
 async function displayExploreFeed() {
     const exploreFeedContainer = document.getElementById('explore-feed-container');
     if (!exploreFeedContainer) return;
@@ -191,7 +150,7 @@ async function displayExploreFeed() {
             };
 
             if(review.rating && review.reviewText) { // Ensure review has content
-                cardsHTML += createExploreCard(review, reviewer, mediaItem);
+                cardsHTML += createFeedCard(review, reviewer, mediaItem);
             }
         });
         
@@ -228,4 +187,4 @@ async function displayExploreFeed() {
 
 window.displayExploreFeed = displayExploreFeed;
 window.fetchAllData = fetchAllData;
-window.createFeedItem = createExploreCard;
+window.createFeedItem = createFeedCard;

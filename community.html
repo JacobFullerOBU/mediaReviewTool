@@ -3,33 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community</title>
-    <link rel="stylesheet" href="Assets/styles/main.css">
+    <title>Media Review Tool - Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="Assets/styles/main.css?v=1.2">
+    <link rel="stylesheet" href="Assets/styles/responsive.css">
     <link rel="stylesheet" href="Assets/styles/community.css">
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <a href="index.html" class="nav-link"><h1>MediaReview</h1></a>
+<body class="bg-slate-900 text-slate-100 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                        MediaReview
+                    </span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" id="home-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Home</a>
+                    <a href="#" id="browse-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Browse</a>
+                    <a href="community.html" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="#" id="feed-nav" style="display:none;" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">My Feed</a>
+                    <div class="auth-buttons flex items-center space-x-2">
+                        <button id="loginBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all shadow-lg shadow-indigo-500/20">Login</button>
+                        <button id="registerBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Register</button>
+                        <button id="profileBtn" style="display:none;" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Profile</button>
+                        <button id="logoutBtn" style="display:none;" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Logout</button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-400 hover:text-white">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="./Assets/Movies/movies.html" class="nav-link">Movies</a></li>
-                <li class="nav-item"><a href="#tv" class="nav-link" data-category="tv">TV Shows</a></li>
-                <li class="nav-item"><a href="#music" class="nav-link" data-category="music">Music</a></li>
-                <li class="nav-item"><a href="#games" class="nav-link" data-category="games">Games</a></li>
-                <li class="nav-item"><a href="#books" class="nav-link" data-category="books">Books</a></li>
-                <li class="nav-item"><a href="./community.html" class="nav-link">Community</a></li>
-            </ul>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" id="mobile-home-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Home</a>
+            <a href="#" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Browse</a>
+            <a href="community.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Community</a>
+            <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">My Feed</a>
         </div>
     </nav>
-    <div class="container">
-        <h1>Community</h1>
-        <p>Meet our community of reviewers.</p>
-        <div id="community-container">
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center">
+            <h1 class="text-4xl font-extrabold text-white tracking-tight mb-4">Community</h1>
+            <p class="max-w-2xl mx-auto text-slate-400">Meet our community of reviewers.</p>
+            <div class="mt-8">
+                <button id="becomeReviewerBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg shadow-indigo-500/25 transform hover:scale-105">Become a Reviewer</button>
+            </div>
+        </div>
+        <div id="community-container" class="mt-8">
+            <!-- Community content will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>© 2024 MediaReview. All rights reserved.</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="hover:text-indigo-400">Contact</a>
+                <a href="#" class="hover:text-indigo-400">Privacy</a>
+                <a href="#" class="hover:text-indigo-400">Top Reviewers</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal">
+        <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-slate-700 shadow-2xl relative modal-content">
+            <div class="modal-header flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">Create Reviewer Account</h2>
+                <span class="close text-slate-400 hover:text-white cursor-pointer" data-modal="registrationModal"><i data-lucide="x" class="w-5 h-5"></i></span>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm" class="space-y-4">
+                    <div class="form-group">
+                        <label for="regName" class="block text-xs font-medium text-slate-400 mb-1">Name:</label>
+                        <input type="text" id="regName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail" class="block text-xs font-medium text-slate-400 mb-1">Email:</label>
+                        <input type="email" id="regEmail" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword" class="block text-xs font-medium text-slate-400 mb-1">Password:</label>
+                        <input type="password" id="regPassword" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="regGenres" class="block text-xs font-medium text-slate-400 mb-1">Genres (comma separated):</label>
+                        <input type="text" id="regGenres" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="regAvatarUrl" class="block text-xs font-medium text-slate-400 mb-1">Profile Picture URL:</label>
+                        <input type="url" id="regAvatarUrl" placeholder="https://example.com/image.jpg" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Register</button>
+                </form>
+            </div>
         </div>
     </div>
-    <script src="Assets/scripts/community.js"></script>
+
+    <!-- Profile Edit Modal -->
+    <div id="profileEditModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal">
+        <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-slate-700 shadow-2xl relative modal-content">
+            <div class="modal-header flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">Edit Reviewer Profile</h2>
+                <span class="close text-slate-400 hover:text-white cursor-pointer" data-modal="profileEditModal"><i data-lucide="x" class="w-5 h-5"></i></span>
+            </div>
+            <div class="modal-body">
+                <form id="profileEditForm" class="space-y-4">
+                    <div class="form-group">
+                        <label for="editName" class="block text-xs font-medium text-slate-400 mb-1">Name:</label>
+                        <input type="text" id="editName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="editGenres" class="block text-xs font-medium text-slate-400 mb-1">Genres (comma separated):</label>
+                        <input type="text" id="editGenres" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="editAvatar" class="block text-xs font-medium text-slate-400 mb-1">Avatar URL:</label>
+                        <input type="url" id="editAvatar" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="editBio" class="block text-xs font-medium text-slate-400 mb-1">Bio:</label>
+                        <textarea id="editBio" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="Assets/scripts/main.js"></script>
+    <script type="module" src="Assets/scripts/auth.js"></script>
+    <script type="module" src="Assets/scripts/community.js"></script>
+    <script>
+        // Load icons after DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 </body>
 </html>
