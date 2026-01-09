@@ -1,5 +1,6 @@
 // --- Firebase Auth State UI Sync for Home Page ---
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { 
     onAuthStateChanged,
     signInWithEmailAndPassword,
@@ -199,6 +200,17 @@ async function handleRegister(e) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        
+        // Create user profile in Realtime Database
+        await set(ref(db, 'reviewers/' + user.uid), {
+            name: username,
+            email: email,
+            avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+            bio: "New member",
+            genres: "General",
+            createdAt: new Date().toISOString()
+        });
+
         updateAuthUI({ username, email: user.email });
         hideModal(document.getElementById('registerModal'));
         showNotification('Registration successful!', 'success');

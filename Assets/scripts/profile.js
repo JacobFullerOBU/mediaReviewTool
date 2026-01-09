@@ -1,4 +1,4 @@
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { app, auth } from './firebase.js';
 import { tv } from "../TV Shows/tv.js";
@@ -64,17 +64,22 @@ function createWatchlistCard(item) {
 }
 
 async function fetchMovies() {
-    try {
-        const response = await fetch("Assets/Movies/movieList.json");
-        if (!response.ok) {
-            console.error("Failed to fetch movies:", response.statusText);
-            return [];
+    const potentialPaths = [
+        "Assets/Movies/movieList.json", // For root pages
+        "../Movies/movieList.json",     // For pages in Assets/profile/
+        "../../Assets/Movies/movieList.json" // Fallback
+    ];
+
+    for (const path of potentialPaths) {
+        try {
+            const response = await fetch(path);
+            if (response.ok) return await response.json();
+        } catch (e) {
+            // Continue to next path
         }
-        return await response.json();
-    } catch (error) {
-        console.error("Error fetching movies:", error);
-        return [];
     }
+    console.error("Failed to fetch movies from any path.");
+    return [];
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -116,13 +121,28 @@ async function loadProfile(reviewerId) {
     try {
         console.log("Fetching reviewer data from Firebase...");
         const snapshot = await get(reviewerRef);
+        let reviewerData = snapshot.val();
+
         if (!snapshot.exists()) {
-            console.log("Reviewer not found in Firebase.");
-            document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer not found.</p>';
-            return;
+            // Fallback: If viewing own profile but data is missing, create default data
+            const currentUser = auth.currentUser;
+            if (currentUser && currentUser.uid === reviewerId) {
+                console.log("Profile missing in DB, creating default...");
+                reviewerData = {
+                    name: currentUser.displayName || currentUser.email.split('@')[0],
+                    email: currentUser.email,
+                    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+                    bio: "Welcome to my profile!",
+                    genres: "General",
+                    createdAt: new Date().toISOString()
+                };
+                await set(reviewerRef, reviewerData);
+            } else {
+                document.getElementById('profile-container').innerHTML = '<p class="text-center text-red-500">Reviewer not found.</p>';
+                return;
+            }
         }
 
-        const reviewerData = snapshot.val();
         console.log("Reviewer Data:", reviewerData);
 
         const reviewerForFeed = {
