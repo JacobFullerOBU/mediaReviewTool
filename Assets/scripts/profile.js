@@ -35,6 +35,34 @@ function createFeedItem(review, reviewer, mediaItem) {
     return item;
 }
 
+function createWatchlistCard(item) {
+    const card = document.createElement('div');
+    card.className = 'bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-indigo-500 transition-all cursor-pointer group relative';
+    
+    const poster = item.poster || item.image || 'https://via.placeholder.com/300x450';
+    
+    card.innerHTML = `
+        <div class="aspect-[2/3] relative">
+            <img src="${poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+            <div class="absolute bottom-0 left-0 p-3 w-full">
+                <h4 class="text-white font-bold text-sm line-clamp-2 leading-tight">${item.title}</h4>
+                <p class="text-indigo-400 text-xs mt-1">${item.year || 'N/A'}</p>
+            </div>
+        </div>
+    `;
+    
+    card.onclick = () => {
+        if (window.showItemDetails) {
+            window.showItemDetails(item);
+        } else {
+            console.warn('showItemDetails function not found. Ensure cards.js is loaded.');
+        }
+    };
+    
+    return card;
+}
+
 async function fetchMovies() {
     try {
         const response = await fetch("Assets/Movies/movieList.json");
@@ -163,6 +191,38 @@ async function loadProfile(reviewerId) {
             });
         } else {
             userReviewsContainer.innerHTML = '<p class="text-slate-500 text-center">This reviewer has not posted any reviews yet.</p>';
+        }
+
+        // Fetch and Render Watchlist
+        console.log("Fetching watchlist...");
+        const watchlistContainer = document.getElementById('userWatchlist');
+        if (watchlistContainer) {
+            const watchlistRef = ref(db, `watchlist/${reviewerId}`);
+            const watchlistSnapshot = await get(watchlistRef);
+            
+            if (watchlistSnapshot.exists()) {
+                const watchlistData = watchlistSnapshot.val();
+                const watchlistItems = [];
+                
+                Object.keys(watchlistData).forEach(mediaKey => {
+                    const mediaItem = mediaMap[mediaKey];
+                    if (mediaItem) {
+                        watchlistItems.push(mediaItem);
+                    }
+                });
+
+                watchlistContainer.innerHTML = '';
+                if (watchlistItems.length > 0) {
+                    watchlistContainer.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4';
+                    watchlistItems.forEach(item => {
+                        watchlistContainer.appendChild(createWatchlistCard(item));
+                    });
+                } else {
+                    watchlistContainer.innerHTML = '<p class="text-slate-500 text-center col-span-full">Watchlist is empty.</p>';
+                }
+            } else {
+                watchlistContainer.innerHTML = '<p class="text-slate-500 text-center col-span-full">Watchlist is empty.</p>';
+            }
         }
 
     } catch (error) {
