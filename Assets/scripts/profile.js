@@ -7,14 +7,21 @@ import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
 
-function createFeedItem(review, reviewer, mediaItem) {
+function createFeedItem(review, reviewer, mediaItem, isOwner) {
     const item = document.createElement('div');
-    item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex gap-6';
+    item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex gap-6 relative group';
 
     const mediaPoster = mediaItem ? (mediaItem.poster || mediaItem.image) : 'https://via.placeholder.com/100x150.png?text=No+Image';
     const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
 
+    const editButton = isOwner ? `
+        <button class="edit-review-btn absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-700 transition-colors opacity-0 group-hover:opacity-100" data-review-id="${review.id}" data-media-id="${review.mediaId}">
+            <i data-lucide="edit-2" class="w-4 h-4"></i>
+        </button>
+    ` : '';
+
     item.innerHTML = `
+        ${editButton}
         <div class="w-24 flex-shrink-0">
             <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
         </div>
@@ -179,11 +186,13 @@ async function loadProfile(reviewerId) {
         if (reviewsSnapshot.exists()) {
             const reviewsData = reviewsSnapshot.val();
             Object.entries(reviewsData).forEach(([mediaId, reviews]) => {
-                Object.values(reviews).forEach(review => {
+                Object.entries(reviews).forEach(([reviewId, review]) => {
                     if (review.userId === reviewerId) {
                         const mediaItem = mediaMap[mediaId];
                         allReviews.push({ 
                             ...review, 
+                            id: reviewId,
+                            mediaId: mediaId,
                             mediaTitle: mediaItem ? mediaItem.title : mediaId.replace(/_/g, ' ') 
                         });
                     }
@@ -192,13 +201,15 @@ async function loadProfile(reviewerId) {
         }
         console.log("Found reviews for this user:", allReviews.length);
 
+        const isOwner = auth.currentUser && auth.currentUser.uid === reviewerId;
+
         const userReviewsContainer = document.getElementById('userReviews');
         if (allReviews.length > 0) {
             userReviewsContainer.innerHTML = '';
             allReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             allReviews.forEach(review => {
                 const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
-                const feedItem = createFeedItem(review, reviewerForFeed, mediaItem);
+                const feedItem = createFeedItem(review, reviewerForFeed, mediaItem, isOwner);
                 userReviewsContainer.appendChild(feedItem);
             });
         } else {
