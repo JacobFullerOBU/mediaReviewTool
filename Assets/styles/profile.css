@@ -5,6 +5,7 @@
     padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid #334155; /* slate-700 */
+    text-emphasis-color: white;
 }
 
 #userFavorites .favorite-card {
@@ -49,4 +50,29 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+#review-body {
+    color: white;
+    text-emphasis-color: white ;
+}
+#review-body p {
+    margin-bottom: 1rem;
+    color: white;
+}   
+p.review-text {
+    color: white;
+}
+p.review-body {
+    color: white;
+}
+
+.review-body p,
+.review-body span,
+.review-body strong,
+.review-body em,
+.review-body u,
+.review-body li,
+.review-body h3 {
+    color: white !important;
+    background-color: transparent !important;
 }

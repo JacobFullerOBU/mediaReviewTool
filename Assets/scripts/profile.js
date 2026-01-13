@@ -37,7 +37,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
                 <span class="font-bold">${review.rating}</span>
                 <span class="text-xs text-slate-400 ml-1">/ 10</span>
             </div>
-            <p class="text-slate-300">${review.reviewText}</p>
+            <div class="review-body">${review.reviewText}</div>
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
         </div>
     `;
