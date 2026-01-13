@@ -176,25 +176,19 @@ async function handleRegister(e) {
     e.preventDefault();
     const form = e.target;
     const submitBtn = form.querySelector('button[type="submit"]');
-    const username = document.getElementById('registerUsername').value;
-    const email = document.getElementById('registerEmail').value;
-    const password = document.getElementById('registerPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+    const username = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+    const genres = document.getElementById('regGenres').value;
+    const avatarUrl = document.getElementById('regAvatarUrl').value;
+    const bio = document.getElementById('regBio').value;
 
-    // Validation
-    if (!username || !email || !password || !confirmPassword) {
-        showFormError(form, 'Please fill in all fields');
+    // Basic validation
+    if (!username || !email || !password) {
+        showFormError(form, 'Please fill in all required fields');
         return;
     }
-    if (password !== confirmPassword) {
-        showFormError(form, 'Passwords do not match');
-        return;
-    }
-    if (password.length < 6) {
-        showFormError(form, 'Password must be at least 6 characters');
-        return;
-    }
-
+    
     setButtonLoading(submitBtn, true);
 
     try {
@@ -205,14 +199,14 @@ async function handleRegister(e) {
         await set(ref(db, 'reviewers/' + user.uid), {
             name: username,
             email: email,
-            avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-            bio: "New member",
-            genres: "General",
+            avatar: avatarUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+            bio: bio || "New member",
+            genres: genres || "General",
             createdAt: new Date().toISOString()
         });
 
         updateAuthUI({ username, email: user.email });
-        hideModal(document.getElementById('registerModal'));
+        hideModal(document.getElementById('registrationModal'));
         showNotification('Registration successful!', 'success');
     } catch (error) {
         showFormError(form, error.message);

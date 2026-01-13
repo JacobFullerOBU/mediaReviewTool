@@ -93,7 +93,7 @@
             <div class="modal-body">
                 <form id="registrationForm" class="space-y-4">
                     <div class="form-group">
-                        <label for="regName" class="block text-xs font-medium text-slate-400 mb-1">Name:</label>
+                        <label for="regName" class="block text-xs font-medium text-slate-400 mb-1">Username:</label>
                         <input type="text" id="regName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
                     <div class="form-group">
@@ -111,6 +111,10 @@
                     <div class="form-group">
                         <label for="regAvatarUrl" class="block text-xs font-medium text-slate-400 mb-1">Profile Picture URL:</label>
                         <input type="url" id="regAvatarUrl" placeholder="https://example.com/image.jpg" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="form-group">
+                        <label for="regBio" class="block text-xs font-medium text-slate-400 mb-1">Bio:</label>
+                        <textarea id="regBio" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
                     </div>
                     <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Register</button>
                 </form>

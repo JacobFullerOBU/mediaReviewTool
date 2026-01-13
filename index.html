@@ -207,6 +207,18 @@
                     <label for="confirmPassword" class="block text-xs font-medium text-slate-400 mb-1">Confirm Password:</label>
                     <input type="password" id="confirmPassword" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
+                <div class="form-group">
+                    <label for="regGenres" class="block text-xs font-medium text-slate-400 mb-1">Genres (comma separated):</label>
+                    <input type="text" id="regGenres" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="form-group">
+                    <label for="regAvatarUrl" class="block text-xs font-medium text-slate-400 mb-1">Profile Picture URL:</label>
+                    <input type="url" id="regAvatarUrl" placeholder="https://example.com/image.jpg" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="form-group">
+                    <label for="regBio" class="block text-xs font-medium text-slate-400 mb-1">Bio:</label>
+                    <textarea id="regBio" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                </div>
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Register</button>
             </form>
             <p class="auth-switch mt-6 text-center text-sm text-slate-400">Already have an account? <a href="#" id="switchToLogin" class="text-indigo-400 hover:text-indigo-300 font-medium hover:underline">Login here</a></p>
