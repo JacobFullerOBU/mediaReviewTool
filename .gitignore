@@ -3,3 +3,7 @@
 ~$*
 *.tmp
 *.lock
+# --- The "Lag Killer" (Required for Web Dev) ---
+node_modules/
+dist/
+.env
