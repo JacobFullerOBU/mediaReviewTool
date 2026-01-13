@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Reviews - MediaReview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="Assets/styles/main.css?v=1.2">
+    <link rel="stylesheet" href="Assets/styles/responsive.css">
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                        MediaReview
+                    </span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" id="home-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Home</a>
+                    <a href="browse.html" id="browse-nav" class="text-sm font-medium text-white transition-colors px-3 py-2">Browse Reviews</a>
+                    <a href="community.html" id="community-nav" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">Community</a>
+                    <a href="#" id="feed-nav" style="display:none;" class="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2">My Feed</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-400 hover:text-white">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" id="mobile-home-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Home</a>
+            <a href="browse.html" id="mobile-browse-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Browse Reviews</a>
+            <a href="community.html" id="mobile-community-nav" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">Community</a>
+            <a href="#" id="mobile-feed-nav" style="display:none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white nav-link">My Feed</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center">
+            <h1 class="text-4xl font-extrabold text-white tracking-tight mb-4">Browse Reviews</h1>
+            <p class="max-w-2xl mx-auto text-slate-400">See what the community is saying.</p>
+        </div>
+        
+        <!-- Search and Sort Controls -->
+        <div class="flex items-center my-8">
+            <div class="w-1/4"></div> <!-- Spacer -->
+            <div class="w-1/2 text-center">
+                <input type="text" id="search-reviews" placeholder="Search reviews..." class="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full">
+            </div>
+            <div class="w-1/4 text-right">
+                <div class="flex items-center justify-end">
+                    <label for="sort-reviews" class="text-sm font-medium text-slate-400 mr-2">Sort by:</label>
+                    <select id="sort-reviews" class="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <option value="newest">Most Recent</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="rating-desc">Rating (High to Low)</option>
+                        <option value="rating-asc">Rating (Low to High)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviews-container" class="mt-8 space-y-6">
+            <!-- Reviews will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>© 2024 MediaReview. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Assets/scripts/browse.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
