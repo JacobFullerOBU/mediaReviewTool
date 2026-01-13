@@ -19,13 +19,42 @@ async function fetchReviewers() {
     `;
 
     try {
-        // Reference to the 'reviewers' node in Firebase Realtime Database
+        // Find Reviewers from firebase
         const reviewersRef = ref(db, "reviewers");
-        const snapshot = await get(reviewersRef);
+        const reviewersSnapshot = await get(reviewersRef);
 
-        if (snapshot.exists()) {
-            const reviewers = snapshot.val();
-            renderReviewers(reviewers, container);
+        const reviewsRef = ref(db, "reviews");
+        const reviewsSnapshot = await get(reviewsRef);
+
+        if (reviewersSnapshot.exists()) {
+            const reviewers = reviewersSnapshot.val();
+            const reviews = reviewsSnapshot.exists() ? reviewsSnapshot.val() : {};
+
+            // Storing times of reviews
+            const lastReviewTimestamps = {};
+            Object.entries(reviewers).forEach(([userId, data]) => {
+                lastReviewTimestamps[userId] = data.createdAt ? new Date(data.createdAt).getTime() : 0;
+            });
+
+            // Find latest review
+            if(reviewsSnapshot.exists()) {
+                Object.values(reviews).forEach(mediaReviews => {
+                    Object.values(mediaReviews).forEach(review => {
+                        if (!lastReviewTimestamps[review.userId] || lastReviewTimestamps[review.userId] < review.timestamp) {
+                            lastReviewTimestamps[review.userId] = review.timestamp;
+                        }
+                    });
+                });
+            }
+
+            // Convert reviewers object to an array and sort it
+            const sortedReviewers = Object.entries(reviewers).sort(([userIdA], [userIdB]) => {
+                const timeA = lastReviewTimestamps[userIdA] || 0;
+                const timeB = lastReviewTimestamps[userIdB] || 0;
+                return timeB - timeA;
+            });
+
+            renderReviewers(sortedReviewers, container);
         } else {
             container.innerHTML = `
                 <div class="text-center py-12">
@@ -48,7 +77,7 @@ function renderReviewers(reviewers, container) {
     const grid = document.createElement("div");
     grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
 
-    Object.entries(reviewers).forEach(([userId, data]) => {
+    reviewers.forEach(([userId, data]) => {
         const card = document.createElement("div");
         card.className = "bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-indigo-500 transition-all hover:shadow-lg hover:shadow-indigo-500/10 group cursor-pointer flex flex-col";
         
