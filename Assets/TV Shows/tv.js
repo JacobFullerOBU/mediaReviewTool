@@ -3221,16 +3221,6 @@ export const tv = [{
         image: "https://image.tmdb.org/t/p/w500/oQxrvUhP3ycwnlxIrIMQ9Z3kleq.jpg"
     },
     {
-        id: 351,
-        title: "Charmsukh",
-        description: "Charmsukh is an erotic, drama web-series streamed on ULLU network with each episode having unique storyline.",
-        category: "tv",
-        rating: 6.0,
-        year: "2019",
-        reviews: 1,
-        image: "https://image.tmdb.org/t/p/w500/6Kt9zIsrtqs1x1XyNFxOeEjlkKB.jpg"
-    },
-    {
         id: 352,
         title: "High Potential",
         description: "Morgan is a single mom with an exceptional mind, whose unconventional knack for solving crimes leads to an unusual and unstoppable partnership with a by-the-book seasoned detective.",
@@ -5410,16 +5400,6 @@ export const tv = [{
         year: "1982",
         reviews: 635,
         image: "https://image.tmdb.org/t/p/w500/nD1ZQBKbgKSmKcrAkWTofohsScj.jpg"
-    },
-    {
-        id: 572,
-        title: "Joshiochi! 2-kai kara Onnanoko ga... Futtekita!?",
-        description: "Sousuke Aikawa is a part-time worker who lives in a rundown apartment building where his only consolation is that the landlord is a beautiful woman and the girl who lives above him is cute.  One day though, the ceiling above him creaks and... Bang! In from the second floor, directly above him, the cute girl comes crashing down on him…!?  In an erotic encounter that can only be classified as a miracle, hearts and bodies are connected by chance. Then for some reason, he starts to live with both of these beautiful women!? Under this one roof, just what exactly will become of this crowded love triangle...!?",
-        category: "tv",
-        rating: 7.2,
-        year: "2018",
-        reviews: 24,
-        image: "https://image.tmdb.org/t/p/w500/7x8x6dl4leOSw6KGUcOrQew7Eua.jpg"
     },
     {
         id: 573,
