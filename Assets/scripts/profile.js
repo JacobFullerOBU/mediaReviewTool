@@ -151,6 +151,7 @@ async function loadProfile(reviewerId) {
             profileAvatar.alt = reviewerData.name;
         }
         
+        // For reviewer-profile.html
         const profileName = document.getElementById('profileName');
         if (profileName) profileName.textContent = reviewerData.name;
         
@@ -159,6 +160,22 @@ async function loadProfile(reviewerId) {
         
         const profileGenres = document.getElementById('profileGenres');
         if (profileGenres) profileGenres.textContent = `Genres: ${reviewerData.genres || 'N/A'}`;
+
+        // For userprofile.html
+        const profileTitle = document.getElementById('profileTitle');
+        if (profileTitle && auth.currentUser && auth.currentUser.uid === reviewerId) {
+            profileTitle.textContent = `${reviewerData.name}'s Profile`;
+        }
+
+        const profileInfoContainer = document.getElementById('profileInfo');
+        if (profileInfoContainer) {
+            const joinDate = reviewerData.createdAt ? new Date(reviewerData.createdAt).toLocaleDateString() : 'Unknown';
+            profileInfoContainer.innerHTML = `
+                <p class="text-sm"><strong>Bio:</strong> ${reviewerData.bio || 'No bio provided.'}</p>
+                <p class="text-sm mt-1"><strong>Favorite Genres:</strong> ${reviewerData.genres || 'N/A'}</p>
+                <p class="text-xs text-slate-500 mt-2">Joined: ${joinDate}</p>
+            `;
+        }
 
         console.log("Fetching media...");
         const movies = await fetchMovies();
