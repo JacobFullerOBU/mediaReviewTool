@@ -11,6 +11,12 @@
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Performance optimization for large lists */
+        #cardsContainer > *, #feed-container > *, #explore-feed-container > * {
+            content-visibility: auto;
+            contain-intrinsic-size: 500px; /* Estimated height to prevent scroll jumping */
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans">
