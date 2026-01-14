@@ -642,8 +642,8 @@ async function showItemDetails(item) {
                 <h4 class="text-lg font-bold text-white mb-4">Write Your Review</h4>
                 <form id="reviewForm" class="space-y-4">
                     <div>
-                        <label for="reviewRating" class="block text-sm font-medium text-slate-300 mb-2">Rating (1-10):</label>
-                        <input type="number" id="reviewRating" min="1" max="10" required class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <label for="reviewRating" class="block text-sm font-medium text-slate-300 mb-2">Rating (1-10, half-points allowed):</label>
+                        <input type="number" id="reviewRating" min="1" max="10" step="0.5" required class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
                     <div>
                         <label for="reviewTextEditor" class="block text-sm font-medium text-slate-300 mb-2">Your Review:</label>
@@ -810,14 +810,14 @@ async function showItemDetails(item) {
         const editorContent = getEditorContent();
         const reviewText = editorContent.text;
         const reviewHTML = editorContent.html;
-        const reviewRating = parseInt(modal.querySelector('#reviewRating').value);
+        const reviewRating = parseFloat(modal.querySelector('#reviewRating').value);
         const reviewError = modal.querySelector('#reviewError');
         reviewError.textContent = '';
 
         console.log('Review text:', reviewText, 'Rating:', reviewRating);
 
-        if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10) {
-            reviewError.textContent = 'Please enter a review and a rating between 1 and 10.';
+        if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10 || (reviewRating * 10) % 1 !== 0) {
+            reviewError.textContent = 'Please enter a review and a rating between 1 and 10, with at most one decimal place.';
             return;
         }
 
