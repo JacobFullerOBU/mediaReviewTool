@@ -60,7 +60,7 @@
     </nav>
 
     <!-- Reviewer Profile Section -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div id="profile-container" class="bg-slate-800 rounded-lg p-8 border border-slate-700">
             <div class="flex flex-col md:flex-row items-center gap-8">
                 <img id="profileAvatar" class="w-32 h-32 rounded-full border-4 border-slate-700" src="" alt="Reviewer Avatar">
@@ -70,10 +70,22 @@
                     <p id="profileGenres" class="text-indigo-400 text-sm mt-2"></p>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-slate-700">
-                <h3 class="text-2xl font-bold text-white mb-6">Recent Reviews</h3>
-                <div id="userReviews" class="space-y-6">
-                    <!-- Reviews will be injected here -->
+            <div class="mt-8 pt-8 border-t border-slate-700 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-bold text-white mb-6">Recent Reviews</h3>
+                    <div id="userReviews" class="space-y-6">
+                        <!-- Reviews will be injected here -->
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-6">Watchlist</h3>
+                    <div id="watchlistContainer" class="relative">
+                        <div id="userWatchlist" class="space-y-4 overflow-hidden transition-all duration-500">
+                            <!-- Watchlist items will be injected here -->
+                        </div>
+                        <div id="watchlistFade" class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-800 to-transparent hidden pointer-events-none"></div>
+                    </div>
+                    <button id="showMoreWatchlistBtn" class="hidden mt-4 w-full py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-sm font-medium transition-colors">Show More</button>
                 </div>
             </div>
         </div>
@@ -147,6 +159,51 @@
         const closeBtn = document.getElementById('closeEditReviewModalBtn');
         const editForm = document.getElementById('editReviewForm');
         const userReviewsContainer = document.getElementById('userReviews');
+
+        // Watchlist Logic
+        const watchlistContainer = document.getElementById('userWatchlist');
+        const showMoreBtn = document.getElementById('showMoreWatchlistBtn');
+        const watchlistFade = document.getElementById('watchlistFade');
+        let isExpanded = false;
+
+        function updateWatchlistHeight() {
+            if (isExpanded || !watchlistContainer || !userReviewsContainer) return;
+            
+            const reviewsHeight = userReviewsContainer.offsetHeight;
+            // Ensure a minimum height for usability
+            const targetHeight = Math.max(reviewsHeight, 300); 
+            
+            if (watchlistContainer.scrollHeight > targetHeight) {
+                watchlistContainer.style.maxHeight = `${targetHeight}px`;
+                showMoreBtn.classList.remove('hidden');
+                watchlistFade.classList.remove('hidden');
+            } else {
+                watchlistContainer.style.maxHeight = 'none';
+                showMoreBtn.classList.add('hidden');
+                watchlistFade.classList.add('hidden');
+            }
+        }
+
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                if (isExpanded) {
+                    watchlistContainer.style.maxHeight = 'none';
+                    showMoreBtn.textContent = 'Show Less';
+                    watchlistFade.classList.add('hidden');
+                } else {
+                    updateWatchlistHeight();
+                    showMoreBtn.textContent = 'Show More';
+                }
+            });
+        }
+
+        const resizeObserver = new ResizeObserver(() => {
+            if (!isExpanded) updateWatchlistHeight();
+        });
+        
+        if (userReviewsContainer) resizeObserver.observe(userReviewsContainer);
+        if (watchlistContainer) resizeObserver.observe(watchlistContainer);
 
         function toggleModal(show) {
             if (show) {
