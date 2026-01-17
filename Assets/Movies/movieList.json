@@ -49805,5 +49805,32 @@
         "director": "Nouchka van Brakel",
         "poster": "https://image.tmdb.org/t/p/w500/xGYmW5REGiGB58eykhQJfqJNBjI.jpg",
         "category": "Movie"
+    },
+    {
+        "title": "The Wizard of Oz",
+        "year": 1939,
+        "description":"Young Dorothy finds herself in a magical world where she makes friends with a lion, a scarecrow and a tin man as they make their way along the yellow brick road to talk with the Wizard and ask for the things they miss most in their lives. The Wicked Witch of the West is the only thing that could stop them.",
+        "genre":"Adventure, Fantasy, Family",
+        "director":"Victor Fleming",
+        "poster":"https://www.themoviedb.org/t/p/w1280/lbezZTzzOcomu2ezKJBUsIPtqA6.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"The Land Before Time",
+        "year":1988,
+        "description":"An orphaned brontosaurus named Littlefoot sets off in search of the legendary Great Valley. A land of lush vegetation where the dinosaurs can thrive and live in peace. Along the way he meets four other young dinosaurs, each one a different species, and they encounter several obstacles as they learn to work together in order to survive.",
+        "genre":"Family, Animation, Adventure",
+        "director":"Don Bluth",
+        "poster":"https://www.themoviedb.org/t/p/w1280/7phV1ETZnQrLsEeuk4hNeceEl25.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"One Eight Seven",
+        "year":"1997",
+        "description":"After surviving a stabbing by a student, teacher Trevor Garfield moves from New York to Los Angeles. There, he resumes teaching as a substitute teacher. The education system, where violent bullies control the classrooms and the administration is afraid of lawsuits, slowly drives Garfield mad. He then moves to California to be a sub for a predominantly Native Hispanic/Latin-American high school in Los Angeles. He is tormented by members of a Native Hispanic/Latino-American tag crew named K.O.S. (Kappin’ off Suckaz).",
+        "genre":"Drama, Thriller",
+        "director":"Kevin Reynolds",
+        "poster":"https://www.themoviedb.org/t/p/w1280/rPmmyspi1MZBItSvfx40qwep8ow.jpg",
+        "category":"Movie"
     }
 ]
