@@ -49832,5 +49832,122 @@
         "director":"Kevin Reynolds",
         "poster":"https://www.themoviedb.org/t/p/w1280/rPmmyspi1MZBItSvfx40qwep8ow.jpg",
         "category":"Movie"
+    },
+    {
+        "title":"Austin Powers in Goldmember",
+        "year":"2002",
+        "description":"The world's most shagadelic spy continues his fight against Dr. Evil. This time, the diabolical doctor and his clone, Mini-Me, team up with a new foe—'70s kingpin Goldmember. While pursuing the team of villains to stop them from world domination, Austin gets help from his dad and an old girlfriend.",
+        "genre":"Comedy, Crime, Science Fiction",
+        "director":"Mike Myers",
+        "poster":"https://www.themoviedb.org/t/p/w1280/n8V61f1v7idya4WJzGEJNoIp9iL.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"",
+        "year":" ",
+        "description":" ",
+        "genre":" ", 
+        "director":" ", 
+        "poster":" ",
+        "category":"Movie"
+    },
+    {
+        "title":"That's My Boy",
+        "year":"2012",
+        "description":"While in his teens, Donny fathered a son, Todd, and raised him as a single parent up until Todd's 18th birthday. Now, after not seeing each other for years, Todd's world comes crashing down when Donny resurfaces just before Todd's wedding.",
+        "genre":"Comedy",
+        "director":"Sean Anders", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/ati7KTjMaYtinjU0xDaxKp15vzN.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Catch Me If You Can",
+        "year":"2002",
+        "description":"A true story about Frank Abagnale Jr. who, before his 19th birthday, successfully conned millions of dollars worth of checks as a Pan Am pilot, doctor, and legal prosecutor. An FBI agent makes it his mission to put him behind bars. But Frank not only eludes capture, he revels in the pursuit.",
+        "genre":"Drama, Crime", 
+        "director":"Steven Spielberg", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/ctjEj2xM32OvBXCq8zAdK3ZrsAj.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Alamo (2004)",
+        "year":"2004",
+        "description":"Based on the 1836 standoff between a group of Texan and Tejano men, led by Davy Crockett and Jim Bowie, and Mexican dictator Santa Anna's forces at the Alamo in San Antonio, Texas.",
+        "genre":"History, War, Drama", 
+        "director":"John Lee Hancock", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/aZrWYkxCCwSPKp4VjVvn46uHbIX.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Skyfall",
+        "year":"2012",
+        "description":"When Bond's latest assingemnt goes gravely wrong, agents around the world are exposed and MI6 headquarters is attacked. While M faces challenges to her authroity and position from Gareth Mallory, the new Chairman of the Intelligence and Security Committee, it's up to Bond, aided only by field agent Eve, to locate the mastermind behind the attack.",
+        "genre":"Action, Adventure, Thriller", 
+        "director":"Ian Flemming", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/d0IVecFQvsGdSbnMAHqiYsNYaJT.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Eight Legged Freaks",
+        "year":"2002",
+        "description":"The residents of a rural mining town discover that an unforturnate chemical spill has caused hundreds of little spiders to mutate overnight to the size of SUVs. It's then up to mining engineer Chris McCormack and Sheriff Sam Parker to mobilide an eclectc group of townspeople, including the Sheriff's young son, Mike, her daughter, Ashley, and paranoid radio announcer Harlan, into battle against the bloodthirsty eight-legged beasts.",
+        "genre":"Action, Comedy, Horror, Thriller", 
+        "director":"Ellory Elkayem", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/5blAumPPS6vX6zcUlt9oIhOEheK.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Friday Night Lights",
+        "year":"2004",
+        "description":"A small, turbulent town in Texas obsesses over their high school football team to an unhealthy degree. When the star tailback, Boobie Miles, is seriously injured during the first game of the season, all hope is lost, and the town's dormant social problems begin to flare up. It is left up to the inspiring abilites of new coach Gary Gaines to instill in the other team members --and, by proxy, the town itself -- a sense of self-resepect and honor.",
+        "genre":"Drama,Sports", 
+        "director":"Peter Berg", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/8HIqpOgqShRc3TAleabnYispDl1.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Lights Out (2024)",
+        "year":"2024",
+        "description":"A drifting ex-soldier turns underground fighter with the help of a just-released ex-con, pitting him against corrupt cops and hired killers now gunning for him and all those he cares about",
+        "genre":"Action, Thriller", 
+        "director":"Christian Sesma", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/gCOSDDyN0qA8rGoVwsZc72v3RuZ.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Austin Powers: the Spy Who Shagged Me",
+        "year":"1999",
+        "description":"When diabolical genius Dr. Evil travels back in time to steal superspy Austin Powers's ‘mojo,’ Austin must return to the swingin' '60s himself - with the help of American agent, Felicity Shagwell - to stop the dastardly plan. Once there, Austin faces off against Dr. Evil's army of minions to try to save the world in his own unbelievably groovy way.",
+        "genre":"Adventure, Comedy, Crime, Science Fiction", 
+        "director":"Mike Myers", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/jiF7UShERJFn5RtgfBK2lIJrOTc.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Austin Powers: International Man of Mystery",
+        "year":"1997",
+        "description":"As a swinging fashion photographer by day and a groovy British superagent by night, Austin Powers is the '60s' most shagadelic spy. But can he stop megalomaniac Dr. Evil after the bald villain freezes himself and unthaws in the '90s? With the help of sexy sidekick Vanessa Kensington, he just might",
+        "genre":"Science Fiction, Comedy, Crime", 
+        "director":"Jay Roach", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/5uD4dxNX8JKFjWKYMHyOsqhi5pN.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Rio Bravo",
+        "year":"1959",
+        "description":"A Small-stown sheriff in the American West enlists the help of a disabled man, a drunk, and a young gunfighter in his efforts to hold in jail the brother of the local bad guy",
+        "genre":"Western", 
+        "director":"Howard Hawks", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/4gI4KKmoi0d3yfsF71YU3S0I5t8.jpg",
+        "category":"Movie"
+    },
+    {
+        "title":"Lights Out (2016)",
+        "year":"2016",
+        "description":"Rebecca must unlock the terror behind her little brother's experiences that once tested her sanity, bringing her face to face with a supernatural spirit attached to their mother",
+        "genre":"Horror", 
+        "director":"David F. Sandberg", 
+        "poster":"https://www.themoviedb.org/t/p/w1280/8BnElzAQQpp7ZgdJJiAe1diomr4.jpg",
+        "category":"Movie"
     }
 ]
