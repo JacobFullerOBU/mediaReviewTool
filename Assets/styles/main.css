@@ -157,3 +157,8 @@ main#browse-page {
     color: white !important;
     background-color: transparent !important;
 }
+
+/* Make sure the text in the rich text editor is white */
+.ql-editor, .ql-editor * {
+    color: #ffffff !important;
+}
