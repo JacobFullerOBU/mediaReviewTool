@@ -22,7 +22,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 
     item.innerHTML = `
         ${editButton}
-        <div class="w-24 flex-shrink-0">
+        <div class="w-24 flex-shrink-0 media-link cursor-pointer">
             <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
         </div>
         <div class="flex-grow">
@@ -30,7 +30,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
                 <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
                 <span class="font-semibold text-white">${reviewer.username}</span>
                 <span class="text-xs text-slate-400">reviewed</span>
-                <span class="font-semibold text-indigo-400">${mediaTitle}</span>
+                <span class="font-semibold text-indigo-400 media-link cursor-pointer">${mediaTitle}</span>
             </div>
             <div class="flex items-center gap-1 mb-3 text-yellow-400">
                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -41,6 +41,19 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
         </div>
     `;
+
+    if (mediaItem) {
+        item.querySelectorAll('.media-link').forEach(el => {
+            el.addEventListener('click', () => {
+                if (window.showItemDetails) {
+                    window.showItemDetails(mediaItem);
+                } else {
+                    console.error('showItemDetails function not found. Ensure cards.js is loaded.');
+                }
+            });
+        });
+    }
+
     return item;
 }
 
