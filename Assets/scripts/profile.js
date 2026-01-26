@@ -7,12 +7,28 @@ import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
 
+const mediaItemCache = {};
+
+window.openMediaDetails = (mediaId) => {
+    const mediaItem = mediaItemCache[mediaId];
+    if (mediaItem && window.showItemDetails) {
+        window.showItemDetails(mediaItem);
+    } else {
+        console.error('Media item not found or showItemDetails is not available.');
+    }
+};
+
 function createFeedItem(review, reviewer, mediaItem, isOwner) {
     const item = document.createElement('div');
     item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex gap-6 relative group';
 
     const mediaPoster = mediaItem ? (mediaItem.poster || mediaItem.image) : 'https://via.placeholder.com/100x150.png?text=No+Image';
     const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
+    const mediaId = `media-${review.id}`;
+    
+    if (mediaItem) {
+        mediaItemCache[mediaId] = mediaItem;
+    }
 
     const editButton = isOwner ? `
         <button class="edit-review-btn absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-700 transition-colors opacity-0 group-hover:opacity-100" data-review-id="${review.id}" data-media-id="${review.mediaId}">
@@ -22,7 +38,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 
     item.innerHTML = `
         ${editButton}
-        <div class="w-24 flex-shrink-0 media-link cursor-pointer">
+        <div class="w-24 flex-shrink-0 cursor-pointer" onclick="openMediaDetails('${mediaId}')">
             <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
         </div>
         <div class="flex-grow">
@@ -30,7 +46,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
                 <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
                 <span class="font-semibold text-white">${reviewer.username}</span>
                 <span class="text-xs text-slate-400">reviewed</span>
-                <span class="font-semibold text-indigo-400 media-link cursor-pointer">${mediaTitle}</span>
+                <span class="font-semibold text-indigo-400 cursor-pointer" onclick="openMediaDetails('${mediaId}')">${mediaTitle}</span>
             </div>
             <div class="flex items-center gap-1 mb-3 text-yellow-400">
                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -41,18 +57,6 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
         </div>
     `;
-
-    if (mediaItem) {
-        item.querySelectorAll('.media-link').forEach(el => {
-            el.addEventListener('click', () => {
-                if (window.showItemDetails) {
-                    window.showItemDetails(mediaItem);
-                } else {
-                    console.error('showItemDetails function not found. Ensure cards.js is loaded.');
-                }
-            });
-        });
-    }
 
     return item;
 }
