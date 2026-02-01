@@ -46,14 +46,14 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
                 <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
                 <span class="font-semibold text-white">${reviewer.username}</span>
                 <span class="text-xs text-slate-400">reviewed</span>
-                <span class="font-semibold text-indigo-400 cursor-pointer" onclick="openMediaDetails('${mediaId}')">${mediaTitle}</span>
+                <span class="font-semibold text-indigo-400 cursor-pointer break-all" onclick="openMediaDetails('${mediaId}')">${mediaTitle}</span>
             </div>
             <div class="flex items-center gap-1 mb-3 text-yellow-400">
                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                 <span class="font-bold">${review.rating}</span>
                 <span class="text-xs text-slate-400 ml-1">/ 10</span>
             </div>
-            <div class="review-body">${review.reviewText}</div>
+            <div class="review-body break-words">${review.reviewText}</div>
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
         </div>
     `;
@@ -72,7 +72,7 @@ function createWatchlistItem(item) {
             <img src="${poster}" alt="${item.title}" class="w-full h-auto rounded-md">
         </div>
         <div class="flex-grow">
-            <h4 class="text-white font-semibold">${item.title}</h4>
+            <h4 class="text-white font-semibold break-all">${item.title}</h4>
             <p class="text-slate-400 text-sm">${item.year || 'N/A'}</p>
         </div>
     `;
