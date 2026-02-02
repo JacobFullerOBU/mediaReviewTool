@@ -271,8 +271,11 @@ async function handleImport(e) {
             const reviews = parseCSV(text);
             console.log('Imported reviews:', reviews);
             
-            // TODO: Add logic here to save 'reviews' to your Firebase database
-            
+            // Save to Firebase under the user's profile
+            if (auth.currentUser) {
+                await set(ref(db, 'users/' + auth.currentUser.uid + '/imported_reviews'), reviews);
+            }
+
             hideModal(document.getElementById('importModal'));
             showNotification(`Successfully imported ${reviews.length} items!`, 'success');
             fileInput.value = ''; // Reset input
