@@ -4,7 +4,8 @@ import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-dat
 import { 
     onAuthStateChanged,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 // Authentication functionality
 
@@ -25,18 +26,21 @@ function updateAuthUI(user) {
   const profileBtn = document.getElementById('profileBtn');
   const importBtn = document.getElementById('importBtn');
   const mobileImportNav = document.getElementById('mobile-import-nav');
+  const logoutBtn = document.getElementById('logoutBtn');
 
   if (!loginBtn || !registerBtn || !profileBtn) return;
   if (user) {
     profileBtn.style.display = '';
     if (importBtn) importBtn.style.display = 'inline-block';
     if (mobileImportNav) mobileImportNav.style.display = 'block';
+    if (logoutBtn) logoutBtn.style.display = 'inline-block';
     loginBtn.style.display = 'none';
     registerBtn.style.display = 'none';
   } else {
     profileBtn.style.display = 'none';
     if (importBtn) importBtn.style.display = 'none';
     if (mobileImportNav) mobileImportNav.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'none';
     loginBtn.style.display = '';
     registerBtn.style.display = '';
   }
@@ -110,6 +114,7 @@ function initAuthButtons() {
     const registerBtn = document.getElementById('registerBtn');
     const importBtn = document.getElementById('importBtn');
     const profileBtn = document.getElementById('profileBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
 
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
@@ -133,6 +138,10 @@ function initAuthButtons() {
         profileBtn.addEventListener('click', function() {
             window.location.href = 'Assets/profile/userprofile.html';
         });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
     }
 }
 
@@ -180,6 +189,7 @@ async function handleLogin(e) {
             username: user.email.split('@')[0],
             loginTime: new Date().toISOString()
         };
+        localStorage.setItem('userData', JSON.stringify(userData));
         updateAuthUI(userData);
         hideModal(document.getElementById('loginModal'));
         showNotification('Login successful!', 'success');
@@ -289,20 +299,13 @@ function parseCSV(text) {
 // Handle logout
 function handleLogout() {
     localStorage.removeItem('userData');
-    
-    // Reset auth UI
-    const authButtons = document.querySelector('.auth-buttons');
-    if (authButtons) {
-        authButtons.innerHTML = `
-            <button class="btn btn-login" id="loginBtn">Login</button>
-            <button class="btn btn-register" id="registerBtn">Register</button>
-        `;
-        
-        // Re-initialize auth buttons
-        initAuthButtons();
-    }
-    
-    showNotification('Logged out successfully', 'info');
+    signOut(auth).then(() => {
+        // Reset auth UI
+        updateAuthUI(null);
+        showNotification('Logged out successfully', 'info');
+    }).catch((error) => {
+        console.error('Sign out error', error);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
