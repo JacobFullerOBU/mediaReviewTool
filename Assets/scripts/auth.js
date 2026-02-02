@@ -281,7 +281,7 @@ async function handleImport(e) {
             fileInput.value = ''; // Reset input
         } catch (err) {
             console.error(err);
-            showNotification('Failed to parse CSV file.', 'error');
+            showNotification('Failed to parse CSV file. Try again or contact the developer', 'error');
         }
     };
     reader.readAsText(file);
