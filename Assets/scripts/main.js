@@ -5,7 +5,12 @@ export async function fetchMovies() {
         "Assets/Movies/movieList.json",
         "../Movies/movieList.json",
         "../../Assets/Movies/movieList.json",
-        "./Assets/Movies/movieList.json"
+        "./Assets/Movies/movieList.json",
+            "/mediaReviewTool/Assets/Movies/movieList.json", // For GitHub Pages root
+            "Assets/Movies/movieList.json", // For local dev
+            "../Movies/movieList.json",
+            "../../Assets/Movies/movieList.json",
+            "./Assets/Movies/movieList.json"
     ];
 
     for (const path of potentialPaths) {
