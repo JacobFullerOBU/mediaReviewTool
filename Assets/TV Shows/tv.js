@@ -1590,16 +1590,6 @@ export const tv = [{
         image: "https://image.tmdb.org/t/p/w500/3axGMbUecXXOPSeG47v2i9wK5y5.jpg"
     },
     {
-        id: 183,
-        title: "Caprica",
-        description: "Set 58 years before Battlestar Galactica, Caprica follows two rival families - the Graystones and the Adamas - as they grow, compete, and thrive in the vibrant world of the peaceful 12 Colonies, living in a society close to our own. Entangled in the burgeoning technology of artificial intelligence and robotics that will eventually lead to the creation of the Cylons, the two houses go toe-to-toe, blending action with corporate conspiracy and sexual politics.",
-        category: "tv",
-        rating: 6.929,
-        year: "2010",
-        reviews: 385,
-        image: "https://image.tmdb.org/t/p/w500/wGCdHYsx0aY5Z5236XTC6JQMpNn.jpg"
-    },
-    {
         id: 184,
         title: "NCIS: Los Angeles",
         description: "The exploits of the Los Angeles–based Office of Special Projects (OSP), an elite division of the Naval Criminal Investigative Service that specializes in undercover assignments.",
@@ -3029,16 +3019,6 @@ export const tv = [{
         year: "2002",
         reviews: 255,
         image: "https://image.tmdb.org/t/p/w500/zSu4xj0WKh9W6V2QQl3qPBKMaoI.jpg"
-    },
-    {
-        id: 332,
-        title: "Adam's Sweet Agony",
-        description: "This is the story of a boy, who became the lone Adam among four billion Eves. In a world where a pandemic has rendered all men impotent, high school student Itsuki is the exception who escaped it. In order to protect this secret, he transfers to a very special high school, which turns out to be composed of 90% girls! There, he encounters an upbeat and friendly senior, a sexually frustrated female teacher, a tomboyish school 'prince,' and an heiress from a wealthy family. For Itsuki, who has his pick of any woman in the world, the question remains: which one will he choose?",
-        category: "tv",
-        rating: 6.8,
-        year: "2024",
-        reviews: 33,
-        image: "https://image.tmdb.org/t/p/w500/1n1ZP0KHXUSvVxZG63x7aOzmO4M.jpg"
     },
     {
         id: 333,
@@ -8342,16 +8322,6 @@ export const tv = [{
         year: "2019",
         reviews: 1249,
         image: "https://image.tmdb.org/t/p/w500/sh9iNWkleOjEHRHj8WPHhmMi8HL.jpg"
-    },
-    {
-        id: 869,
-        title: "A Girl's Guide to 21st Century Sex",
-        description: "A Girl's Guide to 21st Century Sex is a documentary TV series about sex, which ran in eight episodes on Channel 5 and was presented by Dr Catherine Hood. The 45-minute long episodes were broadcast on Monday nights. The series started on 30 October 2006, with the final programme broadcast on 18 December 2006.  Each episode explained a sex position and covered a sexually transmitted disease. Additionally, the following topics were discussed: sex among handicapped and overweight people, penis enlargement devices, penis enlargement surgery, sexual violence against men and penis removal, tantric sex, the g-spot, erectile dysfunction, sex reassignment surgery, cosmetic surgery of the vagina, swinging, lichen sclerosus, the use of recreational drugs during sex, male homosexual sex in public toilets, full body plastic wrap bondage, and sex dolls.",
-        category: "tv",
-        rating: 5.0,
-        year: "2006",
-        reviews: 17,
-        image: "https://image.tmdb.org/t/p/w500/9NSX2YrFGBIih0XqRedsSbDVx4U.jpg"
     },
     {
         id: 870,
