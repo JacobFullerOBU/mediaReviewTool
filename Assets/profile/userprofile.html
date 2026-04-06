@@ -275,7 +275,7 @@
         import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
         import { app } from '../scripts/firebase.js';
 
-        const db = getDatabase(app);
+        const dbProfile = getDatabase(app);
         const auth = getAuth(app);
         const editProfileModal = document.getElementById('profileEditModal');
         const editProfileBtn = document.getElementById('editProfileBtn');
@@ -296,7 +296,7 @@
             editProfileBtn.addEventListener('click', async () => {
                 const user = auth.currentUser;
                 if (user) {
-                    const userRef = ref(db, 'reviewers/' + user.uid);
+                    const userRef = ref(dbProfile, 'reviewers/' + user.uid);
                     const snapshot = await get(userRef);
                     if (snapshot.exists()) {
                         const data = snapshot.val();
@@ -332,7 +332,7 @@
                     const avatar = document.getElementById('editAvatar').value;
                     const bio = document.getElementById('editBio').value;
 
-                    const userRef = ref(db, 'reviewers/' + user.uid);
+                    const userRef = ref(dbProfile, 'reviewers/' + user.uid);
                     await update(userRef, {
                         name,
                         genres,
