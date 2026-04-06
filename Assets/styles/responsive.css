@@ -1,27 +1,81 @@
-/* Add mobile-specific styles here */
+/* Responsive styles for tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* General mobile and tablet improvements */
 @media (max-width: 768px) {
+    /* Make hero text smaller on mobile */
+    .hero-title {
+        font-size: 2.5rem; /* Smaller, but still impactful */
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    /* Stack controls vertically */
     .controls-toolbar {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .controls-toolbar .flex.overflow-x-auto {
-        justify-content: flex-start;
+    /* Ensure filter buttons are scrollable and properly spaced */
+    .filter-buttons-container {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;  /* For Firefox */
+        -ms-overflow-style: none; /* For IE/Edge */
+        padding-bottom: 0.5rem; /* Add some space below */
     }
 
-    .controls-toolbar .flex.gap-4.items-center {
+    .filter-buttons-container::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Opera */
+    }
+
+    .filter-buttons-container .tab-btn {
+        flex-shrink: 0; /* Prevent buttons from shrinking */
+        margin-right: 0.5rem;
+    }
+    
+    .search-and-sort-container {
+        display: flex;
         flex-direction: column;
-        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    #mediaSearchInput, #sortSelect {
+        width: 100%;
     }
 
-    #mediaSearchInput {
+    .sort-container .flex {
+        display: flex;
         width: 100%;
     }
 
     #sortSelect {
-        width: 100%;
+        flex-grow: 1;
     }
 
+    .apply-button-container {
+        flex-shrink: 0;
+    }
+
+    /* Single column layout for cards on mobile */
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Adjust modal for mobile */
+    .modal-content {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    /* Make hero buttons more manageable */
     .hero-section-buttons {
         flex-direction: column;
         align-items: center;
@@ -29,20 +83,13 @@
 
     .hero-section-buttons button {
         width: 80%;
+        max-width: 320px; /* Max width for consistency */
         text-align: center;
     }
+}
 
-    #explore-button, #surprise-button {
-        width: 80%;
-        padding: 0.75rem 1rem;
-        font-size: 0.875rem;
-    }
-
-    .hero-section {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-
+/* Styles for very small screens (e.g., iPhone SE) */
+@media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
     }
@@ -50,28 +97,26 @@
     .hero-subtitle {
         font-size: 1rem;
     }
-
-    main#browse-page {
-        padding-top: 1rem;
+    
+    #explore-button, #surprise-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .modal-content {
+        padding: 1rem;
     }
 
-    .filter-buttons-container {
-        display: flex;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; 
-        -ms-overflow-style: none; 
+    .modal-header h2 {
+        font-size: 1.25rem;
     }
-
-    .filter-buttons-container::-webkit-scrollbar {
-        display: none;
+    
+    /* Adjust card details for smaller screens */
+    .media-card .p-5 {
+        padding: 1rem;
     }
-
-    .sort-container .flex {
-        width: 100%;
-    }
-
-    #sortSelect {
-        flex-grow: 1;
+    
+    .media-card .text-lg {
+        font-size: 1rem;
     }
 }

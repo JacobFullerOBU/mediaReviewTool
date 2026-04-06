@@ -4,7 +4,8 @@ import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-dat
 import { 
     onAuthStateChanged,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 // Authentication functionality
 
@@ -23,13 +24,23 @@ function updateAuthUI(user) {
   const loginBtn = document.getElementById('loginBtn');
   const registerBtn = document.getElementById('registerBtn');
   const profileBtn = document.getElementById('profileBtn');
+  const importBtn = document.getElementById('importBtn');
+  const mobileImportNav = document.getElementById('mobile-import-nav');
+  const logoutBtn = document.getElementById('logoutBtn');
+
   if (!loginBtn || !registerBtn || !profileBtn) return;
   if (user) {
     profileBtn.style.display = '';
+    if (importBtn) importBtn.style.display = 'inline-block';
+    if (mobileImportNav) mobileImportNav.style.display = 'block';
+    if (logoutBtn) logoutBtn.style.display = 'inline-block';
     loginBtn.style.display = 'none';
     registerBtn.style.display = 'none';
   } else {
     profileBtn.style.display = 'none';
+    if (importBtn) importBtn.style.display = 'none';
+    if (mobileImportNav) mobileImportNav.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'none';
     loginBtn.style.display = '';
     registerBtn.style.display = '';
   }
@@ -101,7 +112,9 @@ function initModals() {
 function initAuthButtons() {
     const loginBtn = document.getElementById('loginBtn');
     const registerBtn = document.getElementById('registerBtn');
+    const importBtn = document.getElementById('importBtn');
     const profileBtn = document.getElementById('profileBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
 
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
@@ -115,10 +128,20 @@ function initAuthButtons() {
         });
     }
 
+    if (importBtn) {
+        importBtn.addEventListener('click', function() {
+            showModal(document.getElementById('importModal'));
+        });
+    }
+
     if (profileBtn) {
         profileBtn.addEventListener('click', function() {
             window.location.href = 'Assets/profile/userprofile.html';
         });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
     }
 }
 
@@ -126,6 +149,7 @@ function initAuthButtons() {
 function initAuthForms() {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
+    const importForm = document.getElementById('importForm');
     
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
@@ -133,6 +157,10 @@ function initAuthForms() {
     
     if (registerForm) {
         registerForm.addEventListener('submit', handleRegister);
+    }
+
+    if (importForm) {
+        importForm.addEventListener('submit', handleImport);
     }
 }
 
@@ -161,6 +189,7 @@ async function handleLogin(e) {
             username: user.email.split('@')[0],
             loginTime: new Date().toISOString()
         };
+        localStorage.setItem('userData', JSON.stringify(userData));
         updateAuthUI(userData);
         hideModal(document.getElementById('loginModal'));
         showNotification('Login successful!', 'success');
@@ -228,24 +257,58 @@ function checkAuthState() {
     }
 }
 
+// Handle CSV Import
+async function handleImport(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById('importFile');
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async function(event) {
+        try {
+            const text = event.target.result;
+            const reviews = parseCSV(text);
+            console.log('Imported reviews:', reviews);
+            
+            // Save to Firebase under the user's profile
+            if (auth.currentUser) {
+                await set(ref(db, 'users/' + auth.currentUser.uid + '/imported_reviews'), reviews);
+            }
+
+            hideModal(document.getElementById('importModal'));
+            showNotification(`Successfully imported ${reviews.length} items!`, 'success');
+            fileInput.value = ''; // Reset input
+        } catch (err) {
+            console.error(err);
+            showNotification('Failed to parse CSV file. Try again or contact the developer', 'error');
+        }
+    };
+    reader.readAsText(file);
+}
+
+function parseCSV(text) {
+    const lines = text.split('\n');
+    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+    return lines.slice(1).filter(l => l.trim()).map(line => {
+        const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+        return headers.reduce((obj, header, i) => {
+            obj[header] = values[i] ? values[i].trim().replace(/^"|"$/g, '') : '';
+            return obj;
+        }, {});
+    });
+}
 
 // Handle logout
 function handleLogout() {
     localStorage.removeItem('userData');
-    
-    // Reset auth UI
-    const authButtons = document.querySelector('.auth-buttons');
-    if (authButtons) {
-        authButtons.innerHTML = `
-            <button class="btn btn-login" id="loginBtn">Login</button>
-            <button class="btn btn-register" id="registerBtn">Register</button>
-        `;
-        
-        // Re-initialize auth buttons
-        initAuthButtons();
-    }
-    
-    showNotification('Logged out successfully', 'info');
+    signOut(auth).then(() => {
+        // Reset auth UI
+        updateAuthUI(null);
+        showNotification('Logged out successfully', 'info');
+    }).catch((error) => {
+        console.error('Sign out error', error);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);

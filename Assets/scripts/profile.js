@@ -7,12 +7,28 @@ import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
 import { books } from "../Books/books.js";
 
+const mediaItemCache = {};
+
+window.openMediaDetails = (mediaId) => {
+    const mediaItem = mediaItemCache[mediaId];
+    if (mediaItem && window.showItemDetails) {
+        window.showItemDetails(mediaItem);
+    } else {
+        console.error('Media item not found or showItemDetails is not available.');
+    }
+};
+
 function createFeedItem(review, reviewer, mediaItem, isOwner) {
     const item = document.createElement('div');
-    item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex gap-6 relative group';
+    item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col sm:flex-row gap-6 relative group';
 
     const mediaPoster = mediaItem ? (mediaItem.poster || mediaItem.image) : 'https://via.placeholder.com/100x150.png?text=No+Image';
     const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
+    const mediaId = `media-${review.id}`;
+    
+    if (mediaItem) {
+        mediaItemCache[mediaId] = mediaItem;
+    }
 
     const editButton = isOwner ? `
         <button class="edit-review-btn absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-700 transition-colors opacity-0 group-hover:opacity-100" data-review-id="${review.id}" data-media-id="${review.mediaId}">
@@ -22,25 +38,26 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 
     item.innerHTML = `
         ${editButton}
-        <div class="w-24 flex-shrink-0">
+        <div class="w-24 mx-auto sm:mx-0 flex-shrink-0 cursor-pointer" onclick="openMediaDetails('${mediaId}')">
             <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
         </div>
-        <div class="flex-grow">
-            <div class="flex items-center gap-3 mb-2">
+        <div class="flex-grow text-center sm:text-left">
+            <div class="flex items-center justify-center sm:justify-start gap-3 mb-2 flex-wrap">
                 <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
                 <span class="font-semibold text-white">${reviewer.username}</span>
                 <span class="text-xs text-slate-400">reviewed</span>
-                <span class="font-semibold text-indigo-400">${mediaTitle}</span>
+                <span class="font-semibold text-indigo-400 cursor-pointer break-all" onclick="openMediaDetails('${mediaId}')">${mediaTitle}</span>
             </div>
-            <div class="flex items-center gap-1 mb-3 text-yellow-400">
+            <div class="flex items-center justify-center sm:justify-start gap-1 mb-3 text-yellow-400">
                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                 <span class="font-bold">${review.rating}</span>
                 <span class="text-xs text-slate-400 ml-1">/ 10</span>
             </div>
-            <div class="review-body">${review.reviewText}</div>
+            <div class="review-body break-words">${review.reviewText}</div>
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
         </div>
     `;
+
     return item;
 }
 
@@ -55,7 +72,7 @@ function createWatchlistItem(item) {
             <img src="${poster}" alt="${item.title}" class="w-full h-auto rounded-md">
         </div>
         <div class="flex-grow">
-            <h4 class="text-white font-semibold">${item.title}</h4>
+            <h4 class="text-white font-semibold break-all">${item.title}</h4>
             <p class="text-slate-400 text-sm">${item.year || 'N/A'}</p>
         </div>
     `;
