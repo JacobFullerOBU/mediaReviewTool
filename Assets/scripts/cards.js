@@ -530,7 +530,7 @@ async function showItemDetails(item) {
             reviewsHtml += reviews.map(r => {
                 const reviewContent = r.reviewText || r.text || '';
                 const sanitizedContent = sanitizeHTML(reviewContent);
-                // Format date as 'April 6, 2026'
+                // Format date as Month Day, Year (ex April 4, 2026)
                 let formattedDate = '';
                 if (r.timestamp) {
                     const dateObj = new Date(r.timestamp);
