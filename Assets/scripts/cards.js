@@ -131,7 +131,6 @@ function getEditorContent() {
             text: quillEditor.getText().trim()
         };
     } else {
-        // Fallback for textarea
         const fallbackElement = document.querySelector('[id$="Fallback"]');
         if (fallbackElement) {
             const text = fallbackElement.value.trim();
@@ -164,8 +163,6 @@ function sanitizeHTML(html) {
     if (typeof html !== 'string') {
         return String(html);
     }
-    
-    // If it looks like plain text (no HTML tags), return as is but escape any HTML
     if (!html.includes('<')) {
         return html.replace(/&/g, '&amp;')
                   .replace(/</g, '&lt;')
@@ -175,15 +172,12 @@ function sanitizeHTML(html) {
                   .replace(/\n/g, '<br>');
     }
     
-    // Create a temporary div to parse HTML
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
-    
     function sanitizeNode(node) {
         if (node.nodeType === Node.TEXT_NODE) {
             return node.textContent;
         }
-        
         if (node.nodeType === Node.ELEMENT_NODE) {
             const tagName = node.tagName.toLowerCase();
             
@@ -203,18 +197,13 @@ function sanitizeHTML(html) {
                         }
                     }
                 }
-                
                 result += '>';
-                
-                // Process child nodes
                 for (const child of node.childNodes) {
                     result += sanitizeNode(child);
                 }
-                
                 result += `</${tagName}>`;
                 return result;
             } else {
-                // For disallowed tags, just return the text content
                 let result = '';
                 for (const child of node.childNodes) {
                     result += sanitizeNode(child);
@@ -222,7 +211,6 @@ function sanitizeHTML(html) {
                 return result;
             }
         }
-        
         return '';
     }
     
@@ -237,7 +225,6 @@ function sanitizeHTML(html) {
                         .replace(/"/g, '&quot;')
                         .replace(/'/g, '&#x27;');
 }
-// Firebase Firestore for dynamic ratings
 import {
     ref,
     push,
@@ -414,22 +401,15 @@ function initTabFunctionality() {
     const surpriseBtn = document.getElementById('surprise-button');
     if (surpriseBtn) {
         surpriseBtn.addEventListener('click', function () {
-            // 1. Find the currently active category button
             const activeBtn = document.querySelector('.tab-btn.active');
             const currentCategory = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
-
-            // 2. Filter the list based on category
             let poolOfItems = allItems;
-            
             if (currentCategory !== 'all') {
                 poolOfItems = allItems.filter(item => 
                     (item.category && item.category.toLowerCase() === currentCategory.toLowerCase())
                 );
             }
-
-            // 3. Safety check if the category is empty
             if (poolOfItems.length === 0) {
-                // If the current category is empty, fall back to using all items
                 poolOfItems = allItems;
             }
             
@@ -437,10 +417,7 @@ function initTabFunctionality() {
                 alert(`No media items have been loaded yet!`);
                 return;
             }
-
-            // 4. Pick random from the filtered pool
             const randomItem = poolOfItems[Math.floor(Math.random() * poolOfItems.length)];
-
             if (randomItem) {
                 showItemDetails(randomItem);
             } else {
@@ -483,7 +460,6 @@ async function filterCards(category) {
     // Filter by search term (title, director, actors, description, etc.)
     if (searchTerm) {
         items = items.filter(item => {
-            // Always check title
             let match = item.title && item.title.toLowerCase().includes(searchTerm);
             // Movies: director, actors, description
             if (!match && item.director) {
@@ -495,7 +471,7 @@ async function filterCards(category) {
             if (!match && item.description) {
                 match = item.description.toLowerCase().includes(searchTerm);
             }
-            // TV: creators, cast
+            // For TV: Creators, cast
             if (!match && item.creators) {
                 match = item.creators.toLowerCase().includes(searchTerm);
             }
@@ -517,15 +493,10 @@ async function filterCards(category) {
             return match;
         });
     }
-    
     const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
-
-    // Fetch ratings if sorting by rating
     if (sortOption.startsWith('rating-')) {
         await fetchRatingsForItems(items);
     }
-
-    // Sort items by selected option
     items = sortItems(items, sortOption);
     loadCardsWithItems(items);
 }
@@ -542,11 +513,9 @@ function loadCardsWithItems(items) {
         addCardListeners();
     }, 300);
 }
-// Export function for use by other modules
 window.filterCards = filterCards;
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
-    // Use the same key logic as review submission
     let mediaId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
     let avgRating = await getAverageRating(mediaId);
     let reviewCount = await getReviewCount(mediaId);
@@ -561,6 +530,12 @@ async function showItemDetails(item) {
             reviewsHtml += reviews.map(r => {
                 const reviewContent = r.reviewText || r.text || '';
                 const sanitizedContent = sanitizeHTML(reviewContent);
+                // Format date as 'April 6, 2026'
+                let formattedDate = '';
+                if (r.timestamp) {
+                    const dateObj = new Date(r.timestamp);
+                    formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                }
                 return `
                 <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
                     <div class="flex items-center justify-between mb-2">
@@ -569,7 +544,7 @@ async function showItemDetails(item) {
                         </div>
                         <div class="text-right">
                             <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
-                            <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : ''}</span>
+                            <span class="text-slate-500 text-xs">${formattedDate}</span>
                         </div>
                     </div>
                     <div class="text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
@@ -600,7 +575,6 @@ async function showItemDetails(item) {
             document.body.style.overflow = 'auto';
         }
     });
-
     modal.innerHTML = `
         <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-2xl border border-slate-700 shadow-2xl relative max-h-[90vh] overflow-y-auto no-scrollbar">
             <button class="close-btn absolute top-4 right-4 text-slate-400 hover:text-white">
@@ -656,7 +630,7 @@ async function showItemDetails(item) {
             <div id="reviewsSection">${reviewsHtml}</div>
         </div>
     `;
-        // Watchlist Logic
+        // Watchlist functionality
         const addToWatchlistBtn = modal.querySelector('#addToWatchlistBtn');
         const mediaKey = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
         let isWatchlisted = false;
@@ -672,7 +646,7 @@ async function showItemDetails(item) {
                 }
             });
         }
-
+        //Add to watchlist
         addToWatchlistBtn.addEventListener('click', async () => {
             if (!auth.currentUser) {
                 alert('You must be logged in to use the watchlist.');
@@ -701,7 +675,6 @@ async function showItemDetails(item) {
     // Add keyboard event listener for Escape key
     const handleKeyDown = (e) => {
         if (e.key === 'Escape') {
-            // Check if user has unsaved review content
             const hasUnsavedContent = checkUnsavedReviewContent();
             if (hasUnsavedContent) {
                 // Show warning and prevent closure
