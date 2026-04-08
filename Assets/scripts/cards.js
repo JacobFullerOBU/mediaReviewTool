@@ -511,7 +511,7 @@ function loadCardsWithItems(items) {
     setTimeout(async () => {
         await renderCards(container, items);
         addCardListeners();
-    }, 300);
+    }, 200);
 }
 window.filterCards = filterCards;
 // Modal logic moved to a dedicated async function
