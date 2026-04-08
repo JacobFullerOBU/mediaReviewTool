@@ -21,7 +21,7 @@
 
 ## Tech Stack 💻💾
 
-* **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+)
+* **Frontend:** HTML5, CSS, JavaScript 
 * **Backend / Auth:** Google Firebase (Authentication & Realtime Database)
 * **Hosting:** GitHub Pages
 * **Data Structure:** JSON
