@@ -94,20 +94,23 @@
         <!-- Controls Toolbar -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 backdrop-blur-sm mt-[-2.5rem] md:mt-[-3rem]">
             
-            <div class="filter-buttons-container flex-shrink-0">
-                <!-- Filter Buttons -->
-                <!-- <button class="tab-btn active flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-indigo-600 text-white shadow-md" data-category="all">All</button> -->
-                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="all"><i data-lucide="grid" class="w-4 h-4"></i> All</button>
-                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="movies"><i data-lucide="film" class="w-4 h-4"></i> Movies</button>
-                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="tv"><i data-lucide="tv" class="w-4 h-4"></i> TV</button>
-                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="music"><i data-lucide="music" class="w-4 h-4"></i> Music</button>
-                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="games"><i data-lucide="gamepad-2" class="w_4 h_4"></i> Games</button>
-                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="books"><i data-lucide="book-open" class="w-4 h-4"></i> Books</button>
+            <div class="w-full flex flex-row items-center gap-2">
+                <div class="filter-buttons-container flex-shrink-0 flex flex-row gap-2">
+                    <!-- Filter Buttons -->
+                    <!-- <button class="tab-btn active flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-indigo-600 text-white shadow-md" data-category="all">All</button> -->
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="all"><i data-lucide="grid" class="w-4 h-4"></i> All</button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="movies"><i data-lucide="film" class="w-4 h-4"></i> Movies</button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="tv"><i data-lucide="tv" class="w-4 h-4"></i> TV</button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="music"><i data-lucide="music" class="w-4 h-4"></i> Music</button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="games"><i data-lucide="gamepad-2" class="w_4 h_4"></i> Games</button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="books"><i data-lucide="book-open" class="w-4 h-4"></i> Books</button>
+                </div>
+                <div class="search-and-sort-container flex-1 ml-4">
             </div>
 
             <div class="search-and-sort-container">
                 <div class="search-container w-full flex flex-row justify-end">
-                    <div class="relative w-full md:w-1/2 md:ml-auto">
+                    <div class="relative w-full">
                         <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
                         <input type="text" id="mediaSearchInput" placeholder="Search by title, director, actors, etc..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full text-slate-200 placeholder-slate-500"/>
                     </div>
