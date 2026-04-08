@@ -501,17 +501,16 @@ async function filterCards(category) {
     loadCardsWithItems(items);
 }
 
-function loadCardsWithItems(items) {
+async function loadCardsWithItems(items) {
     const container = document.getElementById('cardsContainer');
     if (!container) {
         console.error('[cards.js] cardsContainer not found');
         return;
     }
     showLoadingState(container);
-    setTimeout(async () => {
-        await renderCards(container, items);
-        addCardListeners();
-    }, 200);
+    // No artificial delay; render immediately
+    await renderCards(container, items);
+    addCardListeners();
 }
 window.filterCards = filterCards;
 // Modal logic moved to a dedicated async function
@@ -901,21 +900,18 @@ window.filterCards = filterCards;
 async function renderCards(container, items) {
     console.log('[cards.js] renderCards called with items:', items);
 
-    // Ratings are now fetched before this function is called.
-    // We just need to ensure they are populated for display.
-    await fetchRatingsForItems(items);
-
     container.innerHTML = '';
     if (!items || items.length === 0) {
         container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">No media items found.</div>';
         return;
     }
 
-    // Collapse logic: show only first 10 by default
+    // Collapse logic: show only first 9 by default
     let visibleCount = 9;
     let loadingMore = false;
+    let observer = null;
 
-    function renderVisibleCards() {
+    async function renderVisibleCards() {
         container.style.background = 'transparent';
         container.style.padding = '0';
         container.style.borderRadius = '0';
@@ -923,15 +919,20 @@ async function renderCards(container, items) {
 
         let cardHTML = '';
         const toShow = items.slice(0, visibleCount);
+        // Batch fetch ratings for only visible cards
+        await fetchRatingsForItems(toShow);
         toShow.forEach(item => {
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
             const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            const avgRating = (item.liveAvgRating !== undefined && item.liveAvgRating !== -1)
+                ? `<i data-lucide="star" class="w-3 h-3 fill-current"></i> ${item.liveAvgRating}`
+                : `<span class="text-slate-400 text-xs">No reviews yet</span>`;
             cardHTML += `
                 <div class="media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer" data-id="${cardId}">
                     <div class="relative h-48 overflow-hidden">
                         <img class="card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform" src="${item.poster || item.image || ''}" alt="${item.title || ''}">
                         <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1">
-                            <span class="star-rating text-yellow-400 text-xs flex items-center gap-1" id="rating-${cardId}"><i data-lucide="star" class="w-3 h-3 fill-current"></i> ...</span>
+                            <span class="star-rating text-yellow-400 text-xs flex items-center gap-1" id="rating-${cardId}">${avgRating}</span>
                         </div>
                     </div>
                     <div class="p-5 flex-1 flex flex-col">
@@ -953,22 +954,6 @@ async function renderCards(container, items) {
         container.innerHTML = cardHTML;
         lucide.createIcons();
 
-        // Lazy load ratings/reviews for visible cards
-        setTimeout(() => {
-            toShow.forEach(async item => {
-                const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-                const ratingElem = document.getElementById(`rating-${cardId}`);
-                if (ratingElem) {
-                    ratingElem.innerHTML = '<i data-lucide="star" class="w-3 h-3 fill-current"></i> ...';
-                    const avgRating = await getAverageRating(cardId);
-                    ratingElem.innerHTML = avgRating !== "N/A"
-                        ? `<i data-lucide="star" class="w-3 h-3 fill-current"></i> ${avgRating}`
-                        : `<span class="text-slate-400 text-xs">No reviews yet</span>`;
-                    lucide.createIcons();
-                }
-            });
-        }, 0);
-
         // Infinite scroll: add sentinel if more cards remain
         if (items.length > visibleCount) {
             let sentinel = document.getElementById('infinite-scroll-sentinel');
@@ -979,12 +964,13 @@ async function renderCards(container, items) {
                 container.appendChild(sentinel);
             }
             // Setup IntersectionObserver
-            const observer = new window.IntersectionObserver(entries => {
+            if (observer) observer.disconnect();
+            observer = new window.IntersectionObserver(entries => {
                 if (entries[0].isIntersecting && !loadingMore) {
                     loadingMore = true;
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         visibleCount += 9;
-                        renderVisibleCards();
+                        await renderVisibleCards();
                         addCardListeners();
                         loadingMore = false;
                     }, 200);
