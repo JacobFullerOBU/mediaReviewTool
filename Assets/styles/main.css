@@ -35,8 +35,15 @@
 }
 
 main#browse-page {
-    padding-top: 2rem;
+    padding-top: 0;
     padding-bottom: 3rem;
+}
+
+.controls-toolbar {
+    position: sticky;
+    top: 64px;
+    z-index: 100;
+    margin-top: -2.5rem;
 }
 
 .hero-title {
