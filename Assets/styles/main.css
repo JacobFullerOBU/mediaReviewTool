@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .sort-container {
     display: flex;
     flex-direction: column;
@@ -12,6 +13,8 @@
     flex-direction: column;
     justify-content: center;
 }
+=======
+>>>>>>> parent of 1d269bf (Adjust search bar to make it more prominent)
 /* Add a dark glow behind the review score on media cards */
 .review-score-glow {
     text-shadow:
