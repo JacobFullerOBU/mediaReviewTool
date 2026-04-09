@@ -25,24 +25,36 @@ function updateAuthUI(user) {
   const registerBtn = document.getElementById('registerBtn');
   const profileBtn = document.getElementById('profileBtn');
   const importBtn = document.getElementById('importBtn');
+  const mobileLoginBtn = document.getElementById('mobile-loginBtn');
+  const mobileRegisterBtn = document.getElementById('mobile-registerBtn');
+  const mobileProfileBtn = document.getElementById('mobile-profileBtn');
+  const mobileImportBtn = document.getElementById('mobile-importBtn');
   const mobileImportNav = document.getElementById('mobile-import-nav');
   const logoutBtn = document.getElementById('logoutBtn');
 
   if (!loginBtn || !registerBtn || !profileBtn) return;
   if (user) {
     profileBtn.style.display = '';
+    if (mobileProfileBtn) mobileProfileBtn.style.display = 'block';
     if (importBtn) importBtn.style.display = 'inline-block';
+    if (mobileImportBtn) mobileImportBtn.style.display = 'block';
     if (mobileImportNav) mobileImportNav.style.display = 'block';
     if (logoutBtn) logoutBtn.style.display = 'inline-block';
     loginBtn.style.display = 'none';
     registerBtn.style.display = 'none';
+    if (mobileLoginBtn) mobileLoginBtn.style.display = 'none';
+    if (mobileRegisterBtn) mobileRegisterBtn.style.display = 'none';
   } else {
     profileBtn.style.display = 'none';
+    if (mobileProfileBtn) mobileProfileBtn.style.display = 'none';
     if (importBtn) importBtn.style.display = 'none';
+    if (mobileImportBtn) mobileImportBtn.style.display = 'none';
     if (mobileImportNav) mobileImportNav.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = 'none';
     loginBtn.style.display = '';
     registerBtn.style.display = '';
+    if (mobileLoginBtn) mobileLoginBtn.style.display = 'block';
+    if (mobileRegisterBtn) mobileRegisterBtn.style.display = 'block';
   }
 }
 
@@ -114,10 +126,20 @@ function initAuthButtons() {
     const registerBtn = document.getElementById('registerBtn');
     const importBtn = document.getElementById('importBtn');
     const profileBtn = document.getElementById('profileBtn');
+    const mobileLoginBtn = document.getElementById('mobile-loginBtn');
+    const mobileRegisterBtn = document.getElementById('mobile-registerBtn');
+    const mobileImportBtn = document.getElementById('mobile-importBtn');
+    const mobileProfileBtn = document.getElementById('mobile-profileBtn');
     const logoutBtn = document.getElementById('logoutBtn');
 
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
+            showModal(document.getElementById('loginModal'));
+        });
+    }
+
+    if (mobileLoginBtn) {
+        mobileLoginBtn.addEventListener('click', function() {
             showModal(document.getElementById('loginModal'));
         });
     }
@@ -128,14 +150,32 @@ function initAuthButtons() {
         });
     }
 
+    if (mobileRegisterBtn) {
+        mobileRegisterBtn.addEventListener('click', function() {
+            showModal(document.getElementById('registerModal'));
+        });
+    }
+
     if (importBtn) {
         importBtn.addEventListener('click', function() {
             showModal(document.getElementById('importModal'));
         });
     }
 
+    if (mobileImportBtn) {
+        mobileImportBtn.addEventListener('click', function() {
+            showModal(document.getElementById('importModal'));
+        });
+    }
+
     if (profileBtn) {
         profileBtn.addEventListener('click', function() {
+            window.location.href = 'Assets/profile/userprofile.html';
+        });
+    }
+
+    if (mobileProfileBtn) {
+        mobileProfileBtn.addEventListener('click', function() {
             window.location.href = 'Assets/profile/userprofile.html';
         });
     }
