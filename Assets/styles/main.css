@@ -40,9 +40,8 @@ main#browse-page {
 }
 
 .controls-toolbar {
-    position: sticky;
-    top: 64px;
-    z-index: 40;
+    position: relative;
+    z-index: 10;
 }
 
 .hero-title {
