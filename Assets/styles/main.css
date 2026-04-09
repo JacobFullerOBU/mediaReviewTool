@@ -169,7 +169,20 @@ main#browse-page {
     background-color: transparent !important;
 }
 
-/* Make sure the text in the rich text editor is white */
+/* Adjust text color here */
 .ql-editor, .ql-editor * {
     color: #ffffff !important;
+}
+.stars-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    gap: 2px; /* Small space between stars */
+}
+
+.stars-row svg, 
+.stars-row i {
+    flex-shrink: 0 !important;
+    display: inline-block !important;
 }

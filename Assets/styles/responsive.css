@@ -123,6 +123,44 @@
     }
 }
 
+/* Browse page specific mobile optimizations */
+@media (max-width: 768px) {
+    /* Browse page header adjustments */
+    .browse-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .browse-header p {
+        font-size: 0.875rem;
+    }
+
+    /* Review cards on mobile */
+    #reviews-container > div {
+        margin-bottom: 1rem;
+    }
+
+    #reviews-container .bg-slate-800 {
+        padding: 1rem;
+    }
+
+    /* Review card layout adjustments */
+    #reviews-container .flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    #reviews-container .w-full.sm\\:w-20 {
+        width: 100%;
+        max-width: 120px;
+        margin: 0 auto;
+    }
+
+    /* Review text improvements */
+    .review-body {
+        line-height: 1.5;
+    }
+}
+
 /* Mobile-specific layout adjustments for condensed UI */
 @media (max-width: 768px) {
     /* Make the main content area a flex column for mobile */
@@ -211,4 +249,17 @@
         margin-top: 0;
         padding: 0;
     }
+}
+.stars-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    gap: 2px; /* Small space between stars */
+}
+
+.stars-row svg, 
+.stars-row i {
+    flex-shrink: 0 !important;
+    display: inline-block !important;
 }

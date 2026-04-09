@@ -51,40 +51,44 @@
     </nav>
 
     <!-- Main Content Area -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center">
-            <h1 class="text-4xl font-extrabold text-white tracking-tight mb-4">Browse Reviews</h1>
-            <p class="max-w-2xl mx-auto text-slate-400">See what the community is saying.</p>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="text-center mb-6 browse-header">
+            <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">Browse Reviews</h1>
+            <p class="max-w-xl mx-auto text-slate-400 text-sm">See what the community is saying.</p>
         </div>
-        
+
         <!-- Search and Sort Controls -->
-        <div class="flex items-center my-8">
-            <div class="w-1/4"></div> <!-- Spacer -->
-            <div class="w-1/2 text-center">
-                <input type="text" id="search-reviews" placeholder="Search reviews..." class="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full">
-            </div>
-            <div class="w-1/4 text-right">
-                <div class="flex items-center justify-end">
-                    <label for="sort-reviews" class="text-sm font-medium text-slate-400 mr-2">Sort by:</label>
-                    <select id="sort-reviews" class="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <option value="newest">Most Recent</option>
-                        <option value="oldest">Oldest First</option>
-                        <option value="rating-desc">Rating (High to Low)</option>
-                        <option value="rating-asc">Rating (Low to High)</option>
-                    </select>
+        <div class="bg-slate-800/50 rounded-xl border border-slate-700/50 backdrop-blur-sm p-4 mb-6">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex-1">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
+                        <input type="text" id="search-reviews" placeholder="Search reviews..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full">
+                    </div>
+                </div>
+                <div class="sm:w-48">
+                    <div class="flex items-center gap-2">
+                        <label for="sort-reviews" class="text-sm font-medium text-slate-400 whitespace-nowrap">Sort by:</label>
+                        <select id="sort-reviews" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none flex-1">
+                            <option value="newest">Most Recent</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="rating-desc">Rating (High to Low)</option>
+                            <option value="rating-asc">Rating (Low to High)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="reviews-container" class="mt-8 space-y-6">
-            <!-- Reviews will be populated by JavaScript -->
+        <div id="reviews-container" class="space-y-4">
+            <!-- Reviews populated by JavaScript function -->
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-12">
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-8">
         <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
-            <p>© 2024 MediaReview. All rights reserved.</p>
+            <p>© 2026 MediaReview. All rights reserved.</p>
         </div>
     </footer>
 
