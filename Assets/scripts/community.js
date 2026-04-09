@@ -58,8 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
-            const genres = document.getElementById('regGenres').value;
-            const avatarUrl = document.getElementById('regAvatarUrl').value;
             
             try {
                 let userId;
@@ -73,8 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 await set(ref(db, 'reviewers/' + userId), {
                     name,
                     email,
-                    genres,
-                    avatar: avatarUrl,
                     createdAt: new Date().toISOString()
                 });
                 
@@ -122,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="p-6 flex flex-col items-center text-center">
                                 <img src="${avatar}" alt="${reviewer.name}" class="w-24 h-24 rounded-full object-cover border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4">
                                 <h3 class="text-xl font-bold text-white mb-1">${reviewer.name}</h3>
-                                <p class="text-indigo-400 text-sm mb-4">${reviewer.genres || 'General Reviewer'}</p>
                                 <a href="reviewer-profile.html?id=${userId}" class="w-full py-2 px-4 bg-slate-700 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium">View Profile</a>
                             </div>
                         `;

@@ -86,8 +86,6 @@
                         <h2 style="margin-bottom:18px;">Edit Reviewer Profile</h2>
                         <form id="profileEditForm">
                             <label>Name<br><input type="text" id="editName" required style="width:100%;margin-bottom:12px;"></label><br>
-                            <label>Genres (comma separated)<br><input type="text" id="editGenres" required style="width:100%;margin-bottom:12px;"></label><br>
-                            <label>Avatar URL<br><input type="url" id="editAvatar" style="width:100%;margin-bottom:12px;"></label><br>
                             <label>Bio<br><textarea id="editBio" style="width:100%;margin-bottom:12px;"></textarea></label><br>
                             <button type="submit" style="width:100%;padding:10px 0;background:#6a89cc;color:#fff;border:none;border-radius:8px;font-size:1em;">Save Changes</button>
                             <button type="button" id="closeEditModalBtn" style="width:100%;margin-top:8px;padding:8px 0;background:#eee;color:#333;border:none;border-radius:8px;font-size:1em;">Cancel</button>
@@ -103,8 +101,6 @@
                     <label>Name<br><input type="text" id="regName" required style="width:100%;margin-bottom:12px;"></label><br>
                     <label>Email<br><input type="email" id="regEmail" required style="width:100%;margin-bottom:12px;"></label><br>
                     <label>Password<br><input type="password" id="regPassword" required style="width:100%;margin-bottom:12px;"></label><br>
-                    <label>Genres (comma separated)<br><input type="text" id="regGenres" required style="width:100%;margin-bottom:12px;"></label><br>
-                    <label>Profile Picture URL<br><input type="url" id="regAvatarUrl" placeholder="https://example.com/image.jpg" style="width:100%;margin-bottom:12px;"></label><br>
                     <button type="submit" style="width:100%;padding:10px 0;background:#6a89cc;color:#fff;border:none;border-radius:8px;font-size:1em;">Register</button>
                     <button type="button" id="closeModalBtn" style="width:100%;margin-top:8px;padding:8px 0;background:#eee;color:#333;border:none;border-radius:8px;font-size:1em;">Cancel</button>
                 </form>
@@ -260,8 +256,6 @@
                     const name = document.getElementById('regName').value;
                     const email = document.getElementById('regEmail').value;
                     const password = document.getElementById('regPassword').value;
-                    const genres = document.getElementById('regGenres').value;
-                    const avatarUrl = document.getElementById('regAvatarUrl').value;
                     // Register user with Firebase Auth
                     try {
                         const { getAuth, createUserWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js');
@@ -274,8 +268,6 @@
                         await set(ref(dbInstance, 'reviewers/' + userId), {
                             name,
                             email,
-                            genres,
-                            avatar: avatarUrl,
                             createdAt: new Date().toISOString()
                         });
                         alert('Reviewer account created!');
@@ -306,7 +298,6 @@
                                     <img class="avatar" src="${reviewer.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="Reviewer Avatar">
                                     <div class="reviewer-info">
                                         <div class="reviewer-name">${reviewer.name}</div>
-                                        <div class="reviewer-genres">Genres: ${reviewer.genres}</div>
                                         <div class="reviewer-stats">Joined: ${new Date(reviewer.createdAt).toLocaleDateString()}</div>
                                     </div>
                                 `;

@@ -248,8 +248,6 @@ async function handleRegister(e) {
     const username = document.getElementById('regName').value;
     const email = document.getElementById('regEmail').value;
     const password = document.getElementById('regPassword').value;
-    const genres = document.getElementById('regGenres').value;
-    const avatarUrl = document.getElementById('regAvatarUrl').value;
     const bio = document.getElementById('regBio').value;
 
     // Basic validation
@@ -268,9 +266,7 @@ async function handleRegister(e) {
         await set(ref(db, 'reviewers/' + user.uid), {
             name: username,
             email: email,
-            avatar: avatarUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
             bio: bio || "New member",
-            genres: genres || "General",
             createdAt: new Date().toISOString()
         });
 

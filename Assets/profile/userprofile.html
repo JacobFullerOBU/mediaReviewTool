@@ -102,14 +102,6 @@
                         <input type="text" id="editName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
                     <div class="form-group">
-                        <label for="editGenres" class="block text-xs font-medium text-slate-400 mb-1">Genres (comma separated):</label>
-                        <input type="text" id="editGenres" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
-                    </div>
-                    <div class="form-group">
-                        <label for="editAvatar" class="block text-xs font-medium text-slate-400 mb-1">Avatar URL:</label>
-                        <input type="url" id="editAvatar" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
-                    </div>
-                    <div class="form-group">
                         <label for="editBio" class="block text-xs font-medium text-slate-400 mb-1">Bio:</label>
                         <textarea id="editBio" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
                     </div>
@@ -301,8 +293,6 @@
                     if (snapshot.exists()) {
                         const data = snapshot.val();
                         document.getElementById('editName').value = data.name || '';
-                        document.getElementById('editGenres').value = data.genres || '';
-                        document.getElementById('editAvatar').value = data.avatar || '';
                         document.getElementById('editBio').value = data.bio || '';
                         toggleProfileEditModal(true);
                     }
@@ -328,15 +318,11 @@
                 const user = auth.currentUser;
                 if (user) {
                     const name = document.getElementById('editName').value;
-                    const genres = document.getElementById('editGenres').value;
-                    const avatar = document.getElementById('editAvatar').value;
                     const bio = document.getElementById('editBio').value;
 
                     const userRef = ref(dbProfile, 'reviewers/' + user.uid);
                     await update(userRef, {
                         name,
-                        genres,
-                        avatar,
                         bio
                     });
 
