@@ -99,10 +99,10 @@ function filterSortAndRenderReviews() {
 
     switch (sortBy) {
         case 'newest':
-            filteredReviews.sort((a, b) => b.timestamp - a.timestamp);
+            filteredReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             break;
         case 'oldest':
-            filteredReviews.sort((a, b) => a.timestamp - b.timestamp);
+            filteredReviews.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
             break;
         case 'rating-desc':
             filteredReviews.sort((a, b) => b.rating - a.rating);
