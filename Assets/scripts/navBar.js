@@ -1,7 +1,7 @@
 async function initNavbar() {
     // We use a relative path from the root. 
     // On some servers, './navbar.html' is safer than '/navbar.html'
-    const navbarPath = '/navbar.html'; 
+    const navbarPath = './navbar.html'; 
 
     try {
         console.log(`Attempting to fetch navbar from: ${window.location.origin}${navbarPath}`);
