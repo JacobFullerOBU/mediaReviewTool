@@ -7,7 +7,7 @@ async function fetchDetails() {
     const mediaId = params.get('id');
 
     if (!mediaId) {
-        window.location.href = '/browse.html';
+        window.location.href = './browse.html';
         return;
     }
 
@@ -70,7 +70,7 @@ function renderDetails(review, movie, reviewer) {
         <div class="max-w-6xl mx-auto px-4 py-8 md:py-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
             
             <nav class="mb-8">
-                <a href="browse.html" class="group inline-flex items-center text-slate-400 hover:text-indigo-400 transition-colors">
+                <a href="./browse.html" class="group inline-flex items-center text-slate-400 hover:text-indigo-400 transition-colors">
                     <i data-lucide="chevron-left" class="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform"></i>
                     <span class="text-sm font-medium uppercase tracking-widest">Back to Library</span>
                 </a>
