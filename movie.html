@@ -2,37 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Details | MediaReview</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <base href="/">
-</head>
-<body class="bg-slate-900 text-white">
+    </head>
+<body class="bg-slate-900 text-white min-h-screen">
+
     <div id="navbar-container"></div>
 
     <main class="max-w-7xl mx-auto px-4 py-8">
-        <div id="movie-details-container" class="flex flex-col md:flex-row gap-8">
-            <p>Loading movie details...</p>
+        <div id="movie-details-container">
+            <div class="flex items-center justify-center py-20">
+                <p class="text-slate-400 animate-pulse">Loading movie details...</p>
+            </div>
         </div>
     </main>
+
     <style>
-            body {
-        transition: background 0.8s ease-in-out;
-        background-color: #0f172a; /* Slate-900 fallback */
+        body {
+            transition: background 0.8s ease-in-out;
+            background-color: #0f172a;
         }
-
-        /* Fix for the prose class if you don't have the Tailwind Typography plugin */
-        .prose p {
-            margin-bottom: 1.5rem;
-        }
-        .review-content {
-            color: #e2e8f0 !important; /* Forces light slate color */
-        }
-
-        /* This targets any bold text or headers inside the review text */
-        .review-content b, 
-        .review-content strong {
-            color: #818cf8; /* Makes the "The Good/Bad" headers a nice Indigo */
+        .prose p { margin-bottom: 1.5rem; }
+        .review-content { color: #e2e8f0 !important; }
+        .review-content b, .review-content strong {
+            color: #818cf8;
             font-weight: 700;
             display: block;
             margin-top: 1.5rem;
@@ -41,19 +36,11 @@
             font-size: 0.875rem;
             letter-spacing: 0.05em;
         }
-
-        /* Removes margin from the very first header */
-        .review-content b:first-child, 
-        .review-content strong:first-child {
-            margin-top: 0;
-        }
-
-        /* Ensures any paragraphs in the review are spaced nicely */
-        .review-content p {
-            margin-bottom: 1rem;
-        }
+        .review-content b:first-child, .review-content strong:first-child { margin-top: 0; }
+        .review-content p { margin-bottom: 1rem; }
     </style>
-    <div id="navbar-container"></div> <script type="module" src="/Assets/scripts/navBar.js"></script>
+
+    <script type="module" src="/Assets/scripts/navBar.js"></script>
     <script type="module" src="/Assets/scripts/reviewDetails.js"></script>
 </body>
 </html>
