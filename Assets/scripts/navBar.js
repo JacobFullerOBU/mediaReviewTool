@@ -1,30 +1,38 @@
 async function initNavbar() {
-    // We use a relative path from the root. 
-    // On some servers, './navbar.html' is safer than '/navbar.html'
+    const container = document.getElementById('navbar-container');
+    
+    // If the container doesn't exist yet, wait 10ms and try once more
+    if (!container) {
+        console.warn("Navbar container not found, retrying...");
+        setTimeout(initNavbar, 50); 
+        return;
+    }
+
+    // Using a relative path is usually safest for root files
     const navbarPath = './navbar.html'; 
 
     try {
-        console.log(`Attempting to fetch navbar from: ${window.location.origin}${navbarPath}`);
-        
         const response = await fetch(navbarPath);
         
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status} at ${navbarPath}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.text();
-        const container = document.getElementById('navbar-container');
-        
-        if (container) {
-            container.innerHTML = data;
-            // Re-run any scripts that need to target navbar elements here
-            if (window.lucide) lucide.createIcons();
-        } else {
-            console.error("Target container #navbar-container not found in HTML.");
+        container.innerHTML = data;
+
+        // Initialize icons if you use them in the navbar
+        if (window.lucide) {
+            window.lucide.createIcons();
         }
     } catch (error) {
         console.error("Error loading navbar:", error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', initNavbar);
+// Start the process
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbar);
+} else {
+    initNavbar();
+}
