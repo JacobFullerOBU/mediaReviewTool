@@ -153,7 +153,7 @@ function createReviewCard(review) {
     item.className = 'bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700 hover:border-slate-600 transition-colors';
 
     const mediaPoster = review.mediaPoster || 'https://via.placeholder.com/100x150.png?text=No+Image';
-    const detailsLink = `/movie.html?id=${review.mediaId}`;
+    const detailsLink = `movie.html?id=${review.mediaId}`;
 
     // Show more / less logic
     const maxLength = 200;
