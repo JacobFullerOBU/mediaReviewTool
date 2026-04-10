@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/responsive.css">
     <link rel="stylesheet" href="../styles/profile.css">
+    <script src="/Assets/scripts/navBar.js"></script>
+    <script type="module" src="/Assets/scripts/auth.js"></script>
+
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -30,25 +33,7 @@
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans">
 
-    <!-- Navigation Bar -->
-    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <a href="../../index.html" class="flex items-center gap-2 cursor-pointer">
-                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
-                        <i data-lucide="star" class="text-white w-5 h-5 fill-current"></i>
-                    </div>
-                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
-                        MediaReview
-                    </span>
-                </a>
-                <ul class="nav-menu flex items-center space-x-2">
-                    <li class="nav-item"><a href="../../browse.html" class="nav-link">Browse Reviews</a></li>
-                    <li class="nav-item"><a href="../../community.html" class="nav-link">Community</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div id="nav-placeholder"></div>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="profile-header-card bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm mb-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
@@ -125,6 +110,7 @@
 
     <script type="module" src="../scripts/cards.js"></script>
     <script type="module" src="../scripts/profile.js"></script>
+
     <script>
         // Loads icons and elements dynamically 
         lucide.createIcons();

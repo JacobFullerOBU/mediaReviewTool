@@ -1,4 +1,4 @@
-// --- Firebase Auth State UI Sync for Home Page ---
+// --- Firebase Auth & Database Imports ---
 import { auth, db } from "./firebase.js";
 import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { 
@@ -7,8 +7,30 @@ import {
     createUserWithEmailAndPassword,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-// Authentication functionality
 
+// --- 1. Initialization Logic ---
+function initAuth() {
+    initModals();
+    initAuthForms();
+    
+    // Wait for the navbar to exist in the DOM before binding buttons
+    document.addEventListener('navbarLoaded', () => {
+        console.log("Navbar signal received: Binding buttons and syncing UI.");
+        initAuthButtons();
+        // Sync UI once the navbar is physically present
+        onAuthStateChanged(auth, updateAuthUI);
+    });
+
+    // Fallback: If navbar is already there (e.g. static pages)
+    if (document.getElementById('loginBtn')) {
+        initAuthButtons();
+        onAuthStateChanged(auth, updateAuthUI);
+    }
+
+    // Check localStorage for a faster "perceived" login
+    checkAuthState();
+}
+// --- Required for Community and Protected Actions ---
 export function requireLogin(callback) {
     if (auth.currentUser) {
         callback(auth.currentUser);
@@ -16,410 +38,207 @@ export function requireLogin(callback) {
         const loginModal = document.getElementById('loginModal');
         if (loginModal) {
             showModal(loginModal);
+            showNotification('Please log in to continue', 'info');
+        } else {
+            console.error("Login modal not found. Make sure navbar is loaded.");
         }
     }
 }
-
+// --- 2. UI Syncing Logic ---
 function updateAuthUI(user) {
-  const loginBtn = document.getElementById('loginBtn');
-  const registerBtn = document.getElementById('registerBtn');
-  const profileBtn = document.getElementById('profileBtn');
-  const importBtn = document.getElementById('importBtn');
-  const mobileLoginBtn = document.getElementById('mobile-loginBtn');
-  const mobileRegisterBtn = document.getElementById('mobile-registerBtn');
-  const mobileProfileBtn = document.getElementById('mobile-profileBtn');
-  const mobileImportBtn = document.getElementById('mobile-importBtn');
-  const mobileImportNav = document.getElementById('mobile-import-nav');
-  const logoutBtn = document.getElementById('logoutBtn');
+    const elements = {
+        loginBtn: document.getElementById('loginBtn'),
+        registerBtn: document.getElementById('registerBtn'),
+        profileBtn: document.getElementById('profileBtn'),
+        importBtn: document.getElementById('importBtn'),
+        mobileLogin: document.getElementById('mobile-loginBtn'),
+        mobileRegister: document.getElementById('mobile-registerBtn'),
+        mobileProfile: document.getElementById('mobile-profileBtn'),
+        mobileImport: document.getElementById('mobile-importBtn'),
+        mobileImportNav: document.getElementById('mobile-import-nav'),
+        logoutBtn: document.getElementById('logoutBtn')
+    };
 
-  if (!loginBtn || !registerBtn || !profileBtn) return;
-  if (user) {
-    profileBtn.style.display = '';
-    if (mobileProfileBtn) mobileProfileBtn.style.display = 'block';
-    if (importBtn) importBtn.style.display = 'inline-block';
-    if (mobileImportBtn) mobileImportBtn.style.display = 'block';
-    if (mobileImportNav) mobileImportNav.style.display = 'block';
-    if (logoutBtn) logoutBtn.style.display = 'inline-block';
-    loginBtn.style.display = 'none';
-    registerBtn.style.display = 'none';
-    if (mobileLoginBtn) mobileLoginBtn.style.display = 'none';
-    if (mobileRegisterBtn) mobileRegisterBtn.style.display = 'none';
-  } else {
-    profileBtn.style.display = 'none';
-    if (mobileProfileBtn) mobileProfileBtn.style.display = 'none';
-    if (importBtn) importBtn.style.display = 'none';
-    if (mobileImportBtn) mobileImportBtn.style.display = 'none';
-    if (mobileImportNav) mobileImportNav.style.display = 'none';
-    if (logoutBtn) logoutBtn.style.display = 'none';
-    loginBtn.style.display = '';
-    registerBtn.style.display = '';
-    if (mobileLoginBtn) mobileLoginBtn.style.display = 'block';
-    if (mobileRegisterBtn) mobileRegisterBtn.style.display = 'block';
-  }
+    // Exit if navbar isn't ready
+    if (!elements.loginBtn) return;
+
+    if (user) {
+        // User is Logged In
+        if (elements.profileBtn) elements.profileBtn.style.display = 'inline-block';
+        if (elements.mobileProfile) elements.mobileProfile.style.display = 'block';
+        if (elements.importBtn) elements.importBtn.style.display = 'inline-block';
+        if (elements.mobileImport) elements.mobileImport.style.display = 'block';
+        if (elements.mobileImportNav) elements.mobileImportNav.style.display = 'block';
+        if (elements.logoutBtn) elements.logoutBtn.style.display = 'inline-block';
+        
+        if (elements.loginBtn) elements.loginBtn.style.display = 'none';
+        if (elements.registerBtn) elements.registerBtn.style.display = 'none';
+        if (elements.mobileLogin) elements.mobileLogin.style.display = 'none';
+        if (elements.mobileRegister) elements.mobileRegister.style.display = 'none';
+    } else {
+        // User is Logged Out
+        if (elements.profileBtn) elements.profileBtn.style.display = 'none';
+        if (elements.mobileProfile) elements.mobileProfile.style.display = 'none';
+        if (elements.importBtn) elements.importBtn.style.display = 'none';
+        if (elements.mobileImport) elements.mobileImport.style.display = 'none';
+        if (elements.mobileImportNav) elements.mobileImportNav.style.display = 'none';
+        if (elements.logoutBtn) elements.logoutBtn.style.display = 'none';
+        
+        if (elements.loginBtn) elements.loginBtn.style.display = 'inline-block';
+        if (elements.registerBtn) elements.registerBtn.style.display = 'inline-block';
+        if (elements.mobileLogin) elements.mobileLogin.style.display = 'block';
+        if (elements.mobileRegister) elements.mobileRegister.style.display = 'block';
+    }
 }
 
-function initAuth() {
-    // Initialize modal functionality
-    initModals();
-    
-    // Initialize form submissions
-    initAuthForms();
-    
-    // Initialize auth button listeners
-    initAuthButtons();
-    
-    // Set up auth state listener
-    onAuthStateChanged(auth, updateAuthUI);
+// --- 3. Interaction Listeners ---
+function initAuthButtons() {
+    const modalMappings = [
+        { id: 'loginBtn', modal: 'loginModal' },
+        { id: 'mobile-loginBtn', modal: 'loginModal' },
+        { id: 'registerBtn', modal: 'registerModal' },
+        { id: 'mobile-registerBtn', modal: 'registerModal' },
+        { id: 'importBtn', modal: 'importModal' },
+        { id: 'mobile-importBtn', modal: 'importModal' }
+    ];
 
-    // Check if user is already logged in
-    checkAuthState();
+    modalMappings.forEach(item => {
+        const btn = document.getElementById(item.id);
+        if (btn) {
+            btn.onclick = () => showModal(document.getElementById(item.modal));
+        }
+    });
+
+    const profileBtns = ['profileBtn', 'mobile-profileBtn'];
+    profileBtns.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.onclick = () => window.location.href = '/Assets/profile/userprofile.html';
+    });
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.onclick = handleLogout;
 }
 
-// Modal functionality
 function initModals() {
     const loginModal = document.getElementById('loginModal');
     const registerModal = document.getElementById('registerModal');
-    const closeBtns = document.querySelectorAll('.close');
     
-    // Close modal when clicking the X button
-    closeBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const modalId = this.dataset.modal;
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                hideModal(modal);
-            }
-        });
+    // Close logic
+    document.querySelectorAll('.close').forEach(btn => {
+        btn.onclick = function() {
+            hideModal(document.getElementById(this.dataset.modal));
+        };
     });
     
-    // Close modal when clicking outside of it
-    window.addEventListener('click', function(e) {
-        if (e.target.classList.contains('modal')) {
-            hideModal(e.target);
-        }
+    window.onclick = (e) => {
+        if (e.target.classList.contains('modal')) hideModal(e.target);
+    };
+    
+    // Switches
+    document.getElementById('switchToRegister')?.addEventListener('click', (e) => {
+        e.preventDefault(); hideModal(loginModal); showModal(registerModal);
     });
-    
-    // Switch between login and register modals
-    const switchToRegister = document.getElementById('switchToRegister');
-    const switchToLogin = document.getElementById('switchToLogin');
-    
-    if (switchToRegister) {
-        switchToRegister.addEventListener('click', function(e) {
-            e.preventDefault();
-            hideModal(loginModal);
-            showModal(registerModal);
-        });
-    }
-    
-    if (switchToLogin) {
-        switchToLogin.addEventListener('click', function(e) {
-            e.preventDefault();
-            hideModal(registerModal);
-            showModal(loginModal);
-        });
-    }
+    document.getElementById('switchToLogin')?.addEventListener('click', (e) => {
+        e.preventDefault(); hideModal(registerModal); showModal(loginModal);
+    });
 }
 
-// Auth button listeners
-function initAuthButtons() {
-    const loginBtn = document.getElementById('loginBtn');
-    const registerBtn = document.getElementById('registerBtn');
-    const importBtn = document.getElementById('importBtn');
-    const profileBtn = document.getElementById('profileBtn');
-    const mobileLoginBtn = document.getElementById('mobile-loginBtn');
-    const mobileRegisterBtn = document.getElementById('mobile-registerBtn');
-    const mobileImportBtn = document.getElementById('mobile-importBtn');
-    const mobileProfileBtn = document.getElementById('mobile-profileBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    if (loginBtn) {
-        loginBtn.addEventListener('click', function() {
-            showModal(document.getElementById('loginModal'));
-        });
-    }
-
-    if (mobileLoginBtn) {
-        mobileLoginBtn.addEventListener('click', function() {
-            showModal(document.getElementById('loginModal'));
-        });
-    }
-
-    if (registerBtn) {
-        registerBtn.addEventListener('click', function() {
-            showModal(document.getElementById('registerModal'));
-        });
-    }
-
-    if (mobileRegisterBtn) {
-        mobileRegisterBtn.addEventListener('click', function() {
-            showModal(document.getElementById('registerModal'));
-        });
-    }
-
-    if (importBtn) {
-        importBtn.addEventListener('click', function() {
-            showModal(document.getElementById('importModal'));
-        });
-    }
-
-    if (mobileImportBtn) {
-        mobileImportBtn.addEventListener('click', function() {
-            showModal(document.getElementById('importModal'));
-        });
-    }
-
-    if (profileBtn) {
-        profileBtn.addEventListener('click', function() {
-            window.location.href = 'Assets/profile/userprofile.html';
-        });
-    }
-
-    if (mobileProfileBtn) {
-        mobileProfileBtn.addEventListener('click', function() {
-            window.location.href = 'Assets/profile/userprofile.html';
-        });
-    }
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', handleLogout);
-    }
-}
-
-// Form submissions
 function initAuthForms() {
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const importForm = document.getElementById('importForm');
-    
-    if (loginForm) {
-        loginForm.addEventListener('submit', handleLogin);
-    }
-    
-    if (registerForm) {
-        registerForm.addEventListener('submit', handleRegister);
-    }
-
-    if (importForm) {
-        importForm.addEventListener('submit', handleImport);
-    }
+    document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
+    document.getElementById('registerForm')?.addEventListener('submit', handleRegister);
+    document.getElementById('importForm')?.addEventListener('submit', handleImport);
 }
 
-// Handle login
+// --- 4. Auth Handlers ---
 async function handleLogin(e) {
     e.preventDefault();
-    const form = e.target;
-    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitBtn = e.target.querySelector('button[type="submit"]');
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
 
-    // Basic validation
-    if (!email || !password) {
-        showFormError(form, 'Please fill in all fields');
-        return;
-    }
+    if (!email || !password) return showFormError(e.target, 'Please fill in all fields');
 
     setButtonLoading(submitBtn, true);
-
     try {
-        // Use Firebase Auth for login
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        const userData = {
-            email: user.email,
-            username: user.email.split('@')[0],
-            loginTime: new Date().toISOString()
-        };
-        localStorage.setItem('userData', JSON.stringify(userData));
-        updateAuthUI(userData);
+        localStorage.setItem('userData', JSON.stringify({ email: userCredential.user.email }));
         hideModal(document.getElementById('loginModal'));
         showNotification('Login successful!', 'success');
     } catch (error) {
-        showFormError(form, error.message || 'Login failed. Please try again.');
+        showFormError(e.target, error.message);
     } finally {
         setButtonLoading(submitBtn, false);
     }
 }
 
-// Handle registration
 async function handleRegister(e) {
     e.preventDefault();
-    const form = e.target;
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const username = document.getElementById('regName').value;
-    const email = document.getElementById('regEmail').value;
-    const password = document.getElementById('regPassword').value;
-    const bio = document.getElementById('regBio').value;
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const username = document.getElementById('registerUsername').value; // Matching your HTML ID
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
 
-    // Basic validation
-    if (!username || !email || !password) {
-        showFormError(form, 'Please fill in all required fields');
-        return;
-    }
-    
     setButtonLoading(submitBtn, true);
-
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        
-        // Create user profile in Realtime Database
-        await set(ref(db, 'reviewers/' + user.uid), {
+        await set(ref(db, 'reviewers/' + userCredential.user.uid), {
             name: username,
             email: email,
-            bio: bio || "New member",
             createdAt: new Date().toISOString()
         });
-
-        updateAuthUI({ username, email: user.email });
-        hideModal(document.getElementById('registrationModal'));
+        hideModal(document.getElementById('registerModal'));
         showNotification('Registration successful!', 'success');
     } catch (error) {
-        showFormError(form, error.message);
+        showFormError(e.target, error.message);
     } finally {
         setButtonLoading(submitBtn, false);
     }
 }
 
-// Check authentication state
-function checkAuthState() {
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-        try {
-            const user = JSON.parse(userData);
-            updateAuthUI(user);
-        } catch (error) {
-            localStorage.removeItem('userData');
-        }
-    }
-}
-
-// Handle CSV Import
-async function handleImport(e) {
-    e.preventDefault();
-    const fileInput = document.getElementById('importFile');
-    const file = fileInput.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = async function(event) {
-        try {
-            const text = event.target.result;
-            const reviews = parseCSV(text);
-            console.log('Imported reviews:', reviews);
-            
-            // Save to Firebase under the user's profile
-            if (auth.currentUser) {
-                await set(ref(db, 'users/' + auth.currentUser.uid + '/imported_reviews'), reviews);
-            }
-
-            hideModal(document.getElementById('importModal'));
-            showNotification(`Successfully imported ${reviews.length} items!`, 'success');
-            fileInput.value = ''; // Reset input
-        } catch (err) {
-            console.error(err);
-            showNotification('Failed to parse CSV file. Try again or contact the developer', 'error');
-        }
-    };
-    reader.readAsText(file);
-}
-
-function parseCSV(text) {
-    const lines = text.split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-    return lines.slice(1).filter(l => l.trim()).map(line => {
-        const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-        return headers.reduce((obj, header, i) => {
-            obj[header] = values[i] ? values[i].trim().replace(/^"|"$/g, '') : '';
-            return obj;
-        }, {});
-    });
-}
-
-// Handle logout
 function handleLogout() {
     localStorage.removeItem('userData');
-    signOut(auth).then(() => {
-        // Reset auth UI
-        updateAuthUI(null);
-        showNotification('Logged out successfully', 'info');
-    }).catch((error) => {
-        console.error('Sign out error', error);
-    });
+    signOut(auth).then(() => showNotification('Logged out', 'info'));
 }
 
-document.addEventListener('DOMContentLoaded', initAuth);
+function checkAuthState() {
+    const userData = localStorage.getItem('userData');
+    if (userData) updateAuthUI(JSON.parse(userData));
+}
 
-// Utility functions
+// --- 5. Utility Functions ---
 function showModal(modal) {
-    if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-    }
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
 }
 
 function hideModal(modal) {
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.style.overflow = 'auto';
-        
-        // Clear form errors
-        const errorMessages = modal.querySelectorAll('.form-error');
-        errorMessages.forEach(error => error.style.display = 'none');
-    }
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
 }
 
 function setButtonLoading(button, loading) {
-    if (loading) {
-        button.classList.add('loading');
-        button.disabled = true;
-    } else {
-        button.classList.remove('loading');
-        button.disabled = false;
-    }
+    button.disabled = loading;
+    button.textContent = loading ? 'Processing...' : button.textContent.replace('Processing...', '');
 }
 
 function showFormError(form, message) {
-    let errorElement = form.querySelector('.form-error');
-    if (!errorElement) {
-        errorElement = document.createElement('div');
-        errorElement.className = 'form-error';
-        form.appendChild(errorElement);
-    }
-    errorElement.textContent = message;
-    errorElement.style.display = 'block';
+    let err = form.querySelector('.form-error') || document.createElement('div');
+    err.className = 'form-error text-red-500 text-xs mt-2';
+    err.textContent = message;
+    if (!form.querySelector('.form-error')) form.appendChild(err);
 }
 
-function showNotification(message, type = 'info') {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#007bff'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: 5px;
-        z-index: 9999;
-        animation: slideIn 0.3s ease-out;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Auto remove after 3 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-out';
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
+function showNotification(message, type) {
+    const toast = document.createElement('div');
+    toast.className = `fixed top-5 right-5 p-4 rounded shadow-lg text-white z-[100] ${type === 'success' ? 'bg-green-600' : 'bg-blue-600'}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
 }
 
-// Simulate API call for demo
-function simulateApiCall() {
-    return new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-    });
-}
+// Start the app
+document.addEventListener('DOMContentLoaded', initAuth);
