@@ -42,12 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Default to browse page
-    showPage(browsePage);
-    setActiveLink(browseNav);
-    setActiveLink(mobileBrowseNav);
-
-
     if (browseNav && mobileBrowseNav) {
         browseNav.addEventListener('click', (e) => {
             e.preventDefault();
