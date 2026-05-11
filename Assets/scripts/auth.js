@@ -112,7 +112,7 @@ function initAuthButtons() {
     const profileBtns = ['profileBtn', 'mobile-profileBtn'];
     profileBtns.forEach(id => {
         const btn = document.getElementById(id);
-        if (btn) btn.onclick = () => window.location.href = '/Assets/profile/userprofile.html';
+        if (btn) btn.onclick = () => window.location.href = './Assets/profile/userprofile.html';
     });
 
     const logoutBtn = document.getElementById('logoutBtn');

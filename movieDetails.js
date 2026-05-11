@@ -30,7 +30,7 @@ async function fetchDetails() {
             container.innerHTML = `
                 <div class="text-center py-20">
                     <p class="text-slate-400">No review found for "${mediaId}"</p>
-                    <a href="/browse.html" class="text-indigo-400 hover:underline mt-4 inline-block">Return to Browse</a>
+                    <a href="./browse.html" class="text-indigo-400 hover:underline mt-4 inline-block">Return to Browse</a>
                 </div>`;
         }
     } catch (error) {
@@ -56,7 +56,7 @@ function renderDetails(data) {
             </div>
             <div class="flex-1">
                 <nav class="mb-6">
-                    <a href="/browse.html" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center gap-1">
+                    <a href="./browse.html" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center gap-1">
                         ← Back to Browse
                     </a>
                 </nav>
