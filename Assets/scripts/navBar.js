@@ -25,6 +25,9 @@ async function initNavbar() {
         if (window.lucide) {
             window.lucide.createIcons();
         }
+
+        // Emit event to notify that navbar has loaded
+        document.dispatchEvent(new Event('navbarLoaded'));
     } catch (error) {
         console.error("Error loading navbar:", error);
     }
