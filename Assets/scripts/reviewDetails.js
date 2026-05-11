@@ -142,4 +142,8 @@ function renderDetails(review, movie, reviewer) {
     }
 }
 
-fetchDetails();
+// Only fetch details if the container exists (i.e., we're on a details page)
+const detailsContainer = document.getElementById('movie-details-container');
+if (detailsContainer) {
+    fetchDetails();
+}
