@@ -174,9 +174,12 @@ async function handleLogin(e) {
 async function handleRegister(e) {
     e.preventDefault();
     const submitBtn = e.target.querySelector('button[type="submit"]');
-    const username = document.getElementById('registerUsername').value; // Matching your HTML ID
+    const username = document.getElementById('registerUsername').value;
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) return showFormError(e.target, 'Passwords do not match');
 
     setButtonLoading(submitBtn, true);
     try {

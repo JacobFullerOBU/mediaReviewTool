@@ -11,6 +11,40 @@ let allReviews = [];
 let allMedia = [];
 let allReviewers = {};
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function sanitizeReviewHtml(html) {
+    if (!html) return '';
+    const allowed = new Set(['p', 'br', 'b', 'i', 'u', 'strong', 'em', 'ul', 'ol', 'li', 'a', 'span']);
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    (function clean(node) {
+        Array.from(node.childNodes).forEach(child => {
+            if (child.nodeType === Node.ELEMENT_NODE) {
+                const tag = child.tagName.toLowerCase();
+                if (!allowed.has(tag)) {
+                    child.replaceWith(...child.childNodes);
+                } else {
+                    Array.from(child.attributes).forEach(attr => {
+                        if (attr.name.startsWith('on') || (attr.name === 'href' && /^javascript:/i.test(attr.value))) {
+                            child.removeAttribute(attr.name);
+                        }
+                    });
+                    clean(child);
+                }
+            }
+        });
+    })(div);
+    return div.innerHTML;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     await fetchData();
 
@@ -153,40 +187,45 @@ function createReviewCard(review) {
     item.className = 'bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700 hover:border-slate-600 transition-colors';
 
     const mediaPoster = review.mediaPoster || 'https://via.placeholder.com/100x150.png?text=No+Image';
-    const detailsLink = `movie.html?id=${review.mediaId}`;
+    const detailsLink = `movie.html?id=${encodeURIComponent(review.mediaId)}`;
+    const safeReviewerName = escapeHtml(review.reviewerName);
+    const safeMediaTitle = escapeHtml(review.mediaTitle);
+    const safeRating = escapeHtml(String(review.rating));
 
-    // Show more / less logic
+    // Show more / less logic — sanitize HTML from Quill editor
     const maxLength = 200;
-    const isLongReview = review.reviewText && review.reviewText.length > maxLength;
-    const truncatedText = isLongReview ? review.reviewText.substring(0, maxLength) + '...' : review.reviewText;
-    const reviewId = `review-${review.id || Math.random().toString(36).substr(2, 9)}`;
+    const fullHtml = sanitizeReviewHtml(review.reviewText);
+    const plainText = fullHtml.replace(/<[^>]*>/g, '');
+    const isLongReview = plainText.length > maxLength;
+    const truncatedHtml = isLongReview ? sanitizeReviewHtml(review.reviewText?.substring(0, maxLength)) + '...' : fullHtml;
+    const reviewId = `review-${escapeHtml(review.id || Math.random().toString(36).substr(2, 9))}`;
 
     item.innerHTML = `
         <div class="flex flex-col sm:flex-row gap-4">
             <div class="w-full sm:w-20 flex-shrink-0">
                 <a href="${detailsLink}">
-                    <img src="${mediaPoster}" alt="${review.mediaTitle}" class="w-full h-auto rounded-md max-h-32 object-cover mx-auto sm:mx-0 hover:opacity-80 transition-opacity cursor-pointer">
+                    <img src="${escapeHtml(mediaPoster)}" alt="${safeMediaTitle}" class="w-full h-auto rounded-md max-h-32 object-cover mx-auto sm:mx-0 hover:opacity-80 transition-opacity cursor-pointer">
                 </a>
             </div>
             <div class="flex-grow min-w-0">
                 <div class="flex items-center gap-2 mb-2">
-                    <img src="${review.reviewerAvatar}" alt="${review.reviewerName}" class="w-6 h-6 rounded-full flex-shrink-0">
-                    <span class="font-semibold text-white text-sm">${review.reviewerName}</span>
+                    <img src="${escapeHtml(review.reviewerAvatar)}" alt="${safeReviewerName}" class="w-6 h-6 rounded-full flex-shrink-0">
+                    <span class="font-semibold text-white text-sm">${safeReviewerName}</span>
                 </div>
                 <div class="text-xs text-slate-400 mb-2">
-                    reviewed 
+                    reviewed
                     <a href="${detailsLink}" class="inline-block">
                         <span class="font-semibold text-indigo-400 text-sm hover:text-indigo-300 transition-colors cursor-pointer">
-                            ${review.mediaTitle}
+                            ${safeMediaTitle}
                         </span>
                     </a>
                 </div>
                 <div class="flex items-center gap-2 mb-3 overflow-x-auto pb-1">
                     ${generateStarRating(review.rating)}
-                    <span class="text-xs text-slate-400 ml-2 whitespace-nowrap">${review.rating}/10</span>
+                    <span class="text-xs text-slate-400 ml-2 whitespace-nowrap">${safeRating}/10</span>
                 </div>
                 <div class="review-body text-slate-300 text-sm leading-relaxed mb-3" id="${reviewId}">
-                    ${truncatedText}
+                    ${truncatedHtml}
                     ${isLongReview ? '<span class="toggle-review-btn text-indigo-400 cursor-pointer hover:text-indigo-300 text-sm font-medium ml-1" data-action="more">Show more</span>' : ''}
                 </div>
                 <div class="flex justify-between items-center">
@@ -200,9 +239,9 @@ function createReviewCard(review) {
         const reviewBody = item.querySelector(`#${reviewId}`);
         const toggleReview = (showFull) => {
             if (showFull) {
-                reviewBody.innerHTML = review.reviewText + ' <span class="toggle-review-btn text-indigo-400 cursor-pointer hover:text-indigo-300 text-sm font-medium ml-1" data-action="less">Show less</span>';
+                reviewBody.innerHTML = fullHtml + ' <span class="toggle-review-btn text-indigo-400 cursor-pointer hover:text-indigo-300 text-sm font-medium ml-1" data-action="less">Show less</span>';
             } else {
-                reviewBody.innerHTML = truncatedText + ' <span class="toggle-review-btn text-indigo-400 cursor-pointer hover:text-indigo-300 text-sm font-medium ml-1" data-action="more">Show more</span>';
+                reviewBody.innerHTML = truncatedHtml + ' <span class="toggle-review-btn text-indigo-400 cursor-pointer hover:text-indigo-300 text-sm font-medium ml-1" data-action="more">Show more</span>';
             }
         };
 

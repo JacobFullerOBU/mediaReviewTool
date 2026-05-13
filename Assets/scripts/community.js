@@ -111,16 +111,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (reviewer && reviewer.name) {
                         const card = document.createElement('div');
                         card.className = 'bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500 transition-all hover:shadow-lg hover:shadow-indigo-500/20 group';
-                        
-                        const avatar = reviewer.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
-                        
-                        card.innerHTML = `
-                            <div class="p-6 flex flex-col items-center text-center">
-                                <img src="${avatar}" alt="${reviewer.name}" class="w-24 h-24 rounded-full object-cover border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4">
-                                <h3 class="text-xl font-bold text-white mb-1">${reviewer.name}</h3>
-                                <a href="reviewer-profile.html?id=${userId}" class="w-full py-2 px-4 bg-slate-700 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium">View Profile</a>
-                            </div>
-                        `;
+
+                        const inner = document.createElement('div');
+                        inner.className = 'p-6 flex flex-col items-center text-center';
+
+                        const img = document.createElement('img');
+                        img.className = 'w-24 h-24 rounded-full object-cover border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4';
+                        img.alt = reviewer.name;
+                        img.src = reviewer.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+
+                        const nameEl = document.createElement('h3');
+                        nameEl.className = 'text-xl font-bold text-white mb-1';
+                        nameEl.textContent = reviewer.name;
+
+                        const link = document.createElement('a');
+                        link.className = 'w-full py-2 px-4 bg-slate-700 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium';
+                        link.href = `reviewer-profile.html?id=${encodeURIComponent(userId)}`;
+                        link.textContent = 'View Profile';
+
+                        inner.appendChild(img);
+                        inner.appendChild(nameEl);
+                        inner.appendChild(link);
+                        card.appendChild(inner);
                         grid.appendChild(card);
                     }
                 });
