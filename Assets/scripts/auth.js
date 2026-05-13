@@ -240,5 +240,5 @@ function showNotification(message, type) {
     setTimeout(() => toast.remove(), 3000);
 }
 
-// Start the app
-document.addEventListener('DOMContentLoaded', initAuth);
+// Module scripts run after HTML is parsed, so the DOM is ready — no need to wait for DOMContentLoaded
+initAuth();
