@@ -35,6 +35,21 @@ async function initNavbar() {
             window.lucide.createIcons();
         }
 
+        // Wire up mobile hamburger toggle for every page that loads this script
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+            document.addEventListener('click', (e) => {
+                if (!menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+
         document.dispatchEvent(new Event('navbarLoaded'));
     } catch (error) {
         console.error("Error loading navbar:", error);

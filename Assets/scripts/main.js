@@ -28,9 +28,6 @@ export async function fetchMovies() {
     return [];
 }
 
-// Mobile nav elements live inside the dynamically-loaded navbar, so initialize after it's injected
-document.addEventListener('navbarLoaded', initMobileNav);
-
 document.addEventListener('DOMContentLoaded', async function() {
     initAppUI();
 
@@ -117,9 +114,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 function initAppUI() {
-    // Initialize mobile navigation
-    initMobileNav();
-    
     // Initialize smooth scrolling
     initSmoothScrolling();
     
