@@ -157,6 +157,7 @@ async function handleLogin(e) {
     const password = document.getElementById('loginPassword').value;
 
     if (!email || !password) return showFormError(e.target, 'Please fill in all fields');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showFormError(e.target, 'Please enter a valid email address.');
 
     setButtonLoading(submitBtn, true);
     try {

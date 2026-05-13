@@ -202,21 +202,22 @@
         box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
 
-    /* Hide sort container on mobile to simplify */
+    /* Sort controls remain visible on mobile */
     .sort-container {
-        display: none;
+        display: block;
+        width: 100%;
     }
 
-    /* Make filter buttons smaller and scrollable at top */
+    /* Filter buttons: scrollable row, no negative margins that could hide buttons */
     .filter-buttons-container {
         position: sticky;
-        top: 64px; /* nav height */
+        top: 64px;
         z-index: 40;
         background: rgba(30, 41, 59, 0.95);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(71, 85, 105, 0.3);
         padding: 0.5rem 1rem;
-        margin: -1rem -1rem 1rem -1rem;
+        margin: 0 0 1rem 0;
     }
 
     /* Cards container takes remaining space at bottom */
