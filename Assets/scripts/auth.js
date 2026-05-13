@@ -10,22 +10,14 @@ import {
 
 // --- 1. Initialization Logic ---
 function initAuth() {
-    initModals();
-    initAuthForms();
-    
-    // Wait for the navbar to exist in the DOM before binding buttons
+    // Modals, forms, and buttons all live inside the dynamically-loaded navbar,
+    // so everything is initialized after navbarLoaded fires.
     document.addEventListener('navbarLoaded', () => {
-        console.log("Navbar signal received: Binding buttons and syncing UI.");
+        initModals();
+        initAuthForms();
         initAuthButtons();
-        // Sync UI once the navbar is physically present
         onAuthStateChanged(auth, updateAuthUI);
     });
-
-    // Fallback: If navbar is already there (e.g. static pages)
-    if (document.getElementById('loginBtn')) {
-        initAuthButtons();
-        onAuthStateChanged(auth, updateAuthUI);
-    }
 
     // Check localStorage for a faster "perceived" login
     checkAuthState();
@@ -109,10 +101,11 @@ function initAuthButtons() {
         }
     });
 
+    const root = document.getElementById('navbar-container')?.dataset.root || './';
     const profileBtns = ['profileBtn', 'mobile-profileBtn'];
     profileBtns.forEach(id => {
         const btn = document.getElementById(id);
-        if (btn) btn.onclick = () => window.location.href = './Assets/profile/userprofile.html';
+        if (btn) btn.onclick = () => window.location.href = root + 'Assets/profile/userprofile.html';
     });
 
     const logoutBtn = document.getElementById('logoutBtn');

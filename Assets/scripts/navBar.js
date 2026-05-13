@@ -1,39 +1,46 @@
 async function initNavbar() {
     const container = document.getElementById('navbar-container');
-    
-    // If the container doesn't exist yet, wait 10ms and try once more
+
     if (!container) {
         console.warn("Navbar container not found, retrying...");
-        setTimeout(initNavbar, 50); 
+        setTimeout(initNavbar, 50);
         return;
     }
 
-    // Using a relative path is usually safest for root files
-    const navbarPath = './navbar.html'; 
+    // data-root lets subdirectory pages specify the path back to the project root
+    const root = container.dataset.root || './';
+    const navbarPath = root + 'navbar.html';
 
     try {
         const response = await fetch(navbarPath);
-        
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
-        const data = await response.text();
+
+        let data = await response.text();
+
+        // Fix all root-relative links when loaded from a subdirectory page
+        if (root !== './') {
+            data = data
+                .replace(/href="index\.html"/g, `href="${root}index.html"`)
+                .replace(/href="browse\.html"/g, `href="${root}browse.html"`)
+                .replace(/href="community\.html"/g, `href="${root}community.html"`)
+                .replace(/window\.location\.href='index\.html'/g, `window.location.href='${root}index.html'`);
+        }
+
         container.innerHTML = data;
 
-        // Initialize icons if you use them in the navbar
         if (window.lucide) {
             window.lucide.createIcons();
         }
 
-        // Emit event to notify that navbar has loaded
         document.dispatchEvent(new Event('navbarLoaded'));
     } catch (error) {
         console.error("Error loading navbar:", error);
     }
 }
 
-// Start the process
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initNavbar);
 } else {
