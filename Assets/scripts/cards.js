@@ -1023,27 +1023,25 @@ function sortItems(items, sortOption) {
 }
 
 // Listen for sort apply button
-if (document.getElementById('applySortBtn')) {
-    document.getElementById('applySortBtn').addEventListener('click', function () {
+const applySortBtn = document.getElementById('applySortBtn');
+if (applySortBtn) {
+    applySortBtn.addEventListener('click', async function () {
         const btn = this;
-        // Temporarily change style for feedback
         btn.classList.remove('bg-indigo-600');
-        btn.classList.add('bg-indigo-800'); // A darker shade for pressed state
+        btn.classList.add('bg-indigo-800');
 
-        filterCards(currentFilter);
+        try {
+            await filterCards(currentFilter);
+        } catch (err) {
+            console.error('Error applying sort/filter:', err);
+        }
 
-        // Scroll search bar to top of viewport
         const searchContainer = document.querySelector('.search-and-sort-container');
         if (searchContainer) {
             const rect = searchContainer.getBoundingClientRect();
-            window.scrollBy({
-                top: rect.top - 64,
-                left: 0,
-                behavior: 'smooth'
-            });
+            window.scrollBy({ top: rect.top - 64, left: 0, behavior: 'smooth' });
         }
 
-        // Revert to original style
         setTimeout(() => {
             btn.classList.remove('bg-indigo-800');
             btn.classList.add('bg-indigo-600');

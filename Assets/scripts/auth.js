@@ -165,7 +165,7 @@ async function handleLogin(e) {
         hideModal(document.getElementById('loginModal'));
         showNotification('Login successful!', 'success');
     } catch (error) {
-        showFormError(e.target, error.message);
+        showFormError(e.target, getAuthErrorMessage(error));
     } finally {
         setButtonLoading(submitBtn, false);
     }
@@ -192,7 +192,7 @@ async function handleRegister(e) {
         hideModal(document.getElementById('registerModal'));
         showNotification('Registration successful!', 'success');
     } catch (error) {
-        showFormError(e.target, error.message);
+        showFormError(e.target, getAuthErrorMessage(error));
     } finally {
         setButtonLoading(submitBtn, false);
     }
@@ -224,8 +224,27 @@ function hideModal(modal) {
 }
 
 function setButtonLoading(button, loading) {
-    button.disabled = loading;
-    button.textContent = loading ? 'Processing...' : button.textContent.replace('Processing...', '');
+    if (loading) {
+        button.dataset.originalText = button.textContent;
+        button.textContent = 'Processing...';
+        button.disabled = true;
+    } else {
+        button.textContent = button.dataset.originalText || button.textContent;
+        button.disabled = false;
+    }
+}
+
+function getAuthErrorMessage(error) {
+    const code = error.code || '';
+    if (code.includes('invalid-credential') || code.includes('wrong-password') || code.includes('user-not-found')) {
+        return 'Incorrect email or password.';
+    }
+    if (code.includes('invalid-email')) return 'Please enter a valid email address.';
+    if (code.includes('too-many-requests')) return 'Too many attempts. Please try again later.';
+    if (code.includes('email-already-in-use')) return 'An account with this email already exists.';
+    if (code.includes('weak-password')) return 'Password must be at least 6 characters.';
+    if (code.includes('network-request-failed')) return 'Network error. Please check your connection.';
+    return error.message || 'An error occurred. Please try again.';
 }
 
 function showFormError(form, message) {

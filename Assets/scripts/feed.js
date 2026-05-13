@@ -188,3 +188,7 @@ async function displayExploreFeed() {
 window.displayExploreFeed = displayExploreFeed;
 window.fetchAllData = fetchAllData;
 window.createFeedItem = createFeedCard;
+
+// Load the explore feed immediately on page load — section may be hidden but
+// content is ready by the time the user navigates to it
+displayExploreFeed();
