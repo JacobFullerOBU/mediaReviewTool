@@ -1,3 +1,8 @@
+// Capture script's own absolute URL synchronously — document.currentScript is null inside any callback.
+// For type="module" scripts document.currentScript is also null; those are always at the root level
+// so they fall back to the data-root attribute (or './').
+const _navbarScriptSrc = document.currentScript ? document.currentScript.src : null;
+
 async function initNavbar() {
     const container = document.getElementById('navbar-container');
 
@@ -7,12 +12,20 @@ async function initNavbar() {
         return;
     }
 
-    // data-root lets subdirectory pages specify the path back to the project root
+    // root is used to rewrite internal links inside the injected navbar HTML.
+    // Subdirectory pages (e.g. Assets/profile/) set data-root="../../" on the container.
     const root = container.dataset.root || './';
-    const navbarPath = root + 'navbar.html';
+
+    // Resolve navbar.html using the script's own absolute URL so the fetch always succeeds
+    // no matter which page loaded this script.  navBar.js lives at Assets/scripts/navBar.js,
+    // so navbar.html is exactly two directories up from the script.
+    // Fall back to root-relative path for module-script callers (index.html, movie.html).
+    const navbarUrl = _navbarScriptSrc
+        ? new URL('../../navbar.html', _navbarScriptSrc).href
+        : root + 'navbar.html';
 
     try {
-        const response = await fetch(navbarPath);
+        const response = await fetch(navbarUrl);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -20,7 +33,7 @@ async function initNavbar() {
 
         let data = await response.text();
 
-        // Fix all root-relative links when loaded from a subdirectory page
+        // Rewrite root-level links so they resolve correctly from subdirectory pages
         if (root !== './') {
             data = data
                 .replace(/href="index\.html"/g, `href="${root}index.html"`)
@@ -35,7 +48,7 @@ async function initNavbar() {
             window.lucide.createIcons();
         }
 
-        // Wire up mobile hamburger toggle for every page that loads this script
+        // Wire up mobile hamburger toggle — done here so it works on every page
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         if (menuButton && mobileMenu) {
