@@ -5,9 +5,15 @@ import time
 import requests
 
 # ── CONFIGURATION ─────────────────────────────────────────────────────────────
-# Open Library trending doesn't paginate — fetch from multiple periods instead
-TREND_PERIODS    = ["daily", "weekly", "monthly", "yearly"]
-RESULTS_PER_PAGE = 100   # books per period
+API_KEY = "AIzaSyB6vCAjCO_wFlAWO2h9kgYnmRrIfXxq8pA"
+
+# Subjects to search — 40 books fetched per subject (Google Books max per request)
+SUBJECTS = [
+    "fiction", "mystery", "romance", "fantasy", "thriller",
+    "biography", "science fiction", "historical fiction",
+    "horror", "self help", "nonfiction", "young adult", "classics",
+]
+RESULTS_PER_SUBJECT  = 40   # Google Books API max per request
 CHECKPOINT_MAX_AGE_HOURS = 12
 
 _SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
@@ -17,8 +23,7 @@ MASTER_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Books", "books.json")
 BACKUP_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Books", "books_backup.json")
 CHECKPOINT_FILE = os.path.join(_SCRIPT_DIR, "books_fetch_checkpoint.json")
 
-BASE_URL   = "https://openlibrary.org"
-COVERS_URL = "https://covers.openlibrary.org/b/id"
+BASE_URL = "https://www.googleapis.com/books/v1/volumes"
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────
 def load_json(path):
@@ -83,37 +88,45 @@ def clear_checkpoint():
     except Exception as e:
         print(f"  Warning: could not clear checkpoint: {e}")
 
-# ── STEP 1: FETCH FROM OPEN LIBRARY ──────────────────────────────────────────
+# ── STEP 1: FETCH FROM GOOGLE BOOKS ──────────────────────────────────────────
 def fetch_books(existing_fingerprints):
-    print("\n── FETCHING FROM OPEN LIBRARY ───────────────────────────────────────")
-    print("  Mode: weekly trending books")
+    print("\n── FETCHING FROM GOOGLE BOOKS ───────────────────────────────────────")
     print(f"  Checkpoint file: {CHECKPOINT_FILE}")
 
     processed_ids, fetched = load_checkpoint()
 
     skipped_existing = skipped_checkpoint = 0
-    for period in TREND_PERIODS:
-        print(f"\n  Period: {period}")
+    for subject in SUBJECTS:
+        print(f"\n  Subject: {subject}")
         try:
             resp = requests.get(
-                f"{BASE_URL}/trending/{period}.json?limit={RESULTS_PER_PAGE}",
-                headers={"User-Agent": "MediaReviewTool/1.0"}
+                BASE_URL,
+                params={
+                    "q":          f"subject:{subject}",
+                    "orderBy":    "relevance",
+                    "maxResults": RESULTS_PER_SUBJECT,
+                    "printType":  "books",
+                    "langRestrict": "en",
+                    "key":        API_KEY,
+                },
+                timeout=15,
             )
-            if "application/json" not in resp.headers.get("Content-Type", ""):
-                print(f"  Non-JSON response for '{period}' — skipping.")
-                continue
-            works = resp.json().get("works", [])
-            if not works:
-                print(f"  No results for '{period}'.")
+            resp.raise_for_status()
+            items = resp.json().get("items", [])
+            if not items:
+                print(f"  No results for '{subject}'.")
                 continue
 
-            for work in works:
-                work_key = work.get("key", "")
-                title    = work.get("title", "").strip()
-                year     = str(work.get("first_publish_year", "")).strip()
+            for item in items:
+                volume_id   = item.get("id", "")
+                volume_info = item.get("volumeInfo", {})
 
+                title = volume_info.get("title", "").strip()
                 if not title:
                     continue
+
+                published = volume_info.get("publishedDate", "")
+                year      = published[:4] if published else ""
 
                 fp = f"{title.lower()}|{year}|books"
 
@@ -122,36 +135,26 @@ def fetch_books(existing_fingerprints):
                     skipped_existing += 1
                     continue
 
-                if work_key in processed_ids:
+                if volume_id in processed_ids:
                     print(f"    Skipping (checkpoint): {title}")
                     skipped_checkpoint += 1
                     continue
 
-                print(f"    Fetching details for: {title}")
+                print(f"    Adding: {title}")
 
-                # Fetch work detail page for description
-                description = ""
-                try:
-                    detail = requests.get(
-                        f"{BASE_URL}{work_key}.json",
-                        headers={"User-Agent": "MediaReviewTool/1.0"}
-                    ).json()
-                    desc = detail.get("description", "")
-                    if isinstance(desc, dict):
-                        description = desc.get("value", "")
-                    elif isinstance(desc, str):
-                        description = desc
-                except Exception:
-                    pass
+                authors     = volume_info.get("authors", [])
+                author      = ", ".join(authors)
 
-                authors = work.get("author_name", [])
-                author  = ", ".join(authors)
+                categories  = volume_info.get("categories", [subject.title()])
+                genre       = ", ".join(categories[:3])
 
-                subjects    = work.get("subject", [])[:3]
-                genre       = ", ".join(subjects) if subjects else ""
+                description = volume_info.get("description", "")
 
-                cover_id = work.get("cover_i")
-                poster   = f"{COVERS_URL}/{cover_id}-M.jpg" if cover_id else ""
+                image_links = volume_info.get("imageLinks", {})
+                poster      = (image_links.get("thumbnail") or
+                               image_links.get("smallThumbnail") or "")
+                # Upgrade to HTTPS if needed
+                poster = poster.replace("http://", "https://")
 
                 fetched.append({
                     "title":       title,
@@ -162,13 +165,13 @@ def fetch_books(existing_fingerprints):
                     "poster":      poster,
                     "category":    "books",
                 })
-                processed_ids.add(work_key)
+                processed_ids.add(volume_id)
                 save_checkpoint(processed_ids, fetched)
                 print(f"      ✔ Checkpoint saved ({len(processed_ids)} processed, {len(fetched)} queued)")
-                time.sleep(0.2)
+                time.sleep(0.1)
 
         except Exception as e:
-            print(f"  Error on period '{period}': {e}")
+            print(f"  Error on subject '{subject}': {e}")
 
     print(f"\n  New: {len(fetched)}  |  Skipped (master): {skipped_existing}  |  Skipped (checkpoint): {skipped_checkpoint}")
     return fetched
