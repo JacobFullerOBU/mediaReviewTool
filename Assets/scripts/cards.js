@@ -1,4 +1,17 @@
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
+
+const AMAZON_TAG = 'mediareviews6-20';
+function buildAmazonUrl(item) {
+    let terms = item.title || '';
+    const cat = (item.category || '').toLowerCase();
+    if (cat === 'books')  { if (item.author) terms += ' ' + item.author; terms += ' book'; }
+    else if (cat === 'movies') terms += ' blu-ray dvd';
+    else if (cat === 'tv')     terms += ' complete series dvd';
+    else if (cat === 'music')  terms += ' cd vinyl album';
+    else if (cat === 'games')  terms += ' video game';
+    return `https://www.amazon.com/s?k=${encodeURIComponent(terms)}&tag=${AMAZON_TAG}`;
+}
+
 let allItems = [];
 let currentFilter = 'all';
 let quillEditor = null;
@@ -601,10 +614,13 @@ async function showItemDetails(item) {
                             <span id="modalReviewCount" class="font-bold text-white ml-1">${reviewCount}</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4">
+                    <div class="flex flex-wrap items-center gap-3">
                         <button class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors" id="writeReviewBtn">Write a Review</button>
                         <button class="btn-secondary border border-slate-600 hover:bg-slate-700 text-slate-300 font-bold py-2 px-4 rounded-lg transition-colors" id="addToFavoritesBtn">Add to Favorites</button>
                         <button class="btn-secondary border border-amber-600 hover:bg-amber-700 text-amber-300 font-bold py-2 px-4 rounded-lg transition-colors" id="addToWatchlistBtn">Add to Watchlist</button>
+                        <a href="${buildAmazonUrl(item)}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold py-2 px-4 rounded-lg transition-colors text-sm">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i> Buy on Amazon
+                        </a>
                     </div>
                 </div>
             </div>
