@@ -1,6 +1,21 @@
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 
 const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
+
+// Maps TMDB provider IDs to a function that builds a platform search URL
+const STREAMING_URLS = {
+    8:   t => `https://www.netflix.com/search?q=${encodeURIComponent(t)}`,
+    9:   t => `https://www.amazon.com/gp/video/search?phrase=${encodeURIComponent(t)}&tag=${AMAZON_TAG}`,
+    15:  t => `https://www.hulu.com/search?q=${encodeURIComponent(t)}`,
+    337: t => `https://www.disneyplus.com/search/${encodeURIComponent(t)}`,
+    384: t => `https://www.max.com/search?q=${encodeURIComponent(t)}`,
+    386: t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
+    531: t => `https://www.paramountplus.com/search/?query=${encodeURIComponent(t)}`,
+    387: t => `https://www.peacocktv.com/search?q=${encodeURIComponent(t)}`,
+    283: t => `https://www.crunchyroll.com/search?q=${encodeURIComponent(t)}`,
+    192: t => `https://www.youtube.com/results?search_query=${encodeURIComponent(t)}`,
+};
+
 async function fetchStreamingProviders(item) {
     const cat = (item.category || '').toLowerCase();
     const mediaType = cat === 'movies' ? 'movie' : cat === 'tv' ? 'tv' : null;
@@ -14,7 +29,11 @@ async function fetchStreamingProviders(item) {
         const provResp = await fetch(
             `https://api.themoviedb.org/3/${mediaType}/${tmdbId}/watch/providers?api_key=${TMDB_KEY}`
         );
-        return (await provResp.json()).results?.US?.flatrate || null;
+        const usData = (await provResp.json()).results?.US;
+        return {
+            providers: usData?.flatrate || null,
+            justWatchLink: usData?.link || null,
+        };
     } catch (e) {
         console.error('Streaming lookup failed:', e);
         return null;
@@ -714,14 +733,19 @@ async function showItemDetails(item) {
     // Streaming availability (movies + TV only)
     const streamingSection = modal.querySelector('#streamingSection');
     if (streamingSection && ['movies', 'tv'].includes((item.category || '').toLowerCase())) {
-        fetchStreamingProviders(item).then(providers => {
-            if (!providers || providers.length === 0) {
+        fetchStreamingProviders(item).then(result => {
+            if (!result || !result.providers || result.providers.length === 0) {
                 streamingSection.innerHTML = '<p class="text-xs text-slate-500">Not available to stream in the US.</p>';
                 return;
             }
-            const logos = providers.slice(0, 8).map(p =>
-                `<img src="https://image.tmdb.org/t/p/w45${p.logo_path}" alt="${p.provider_name}" title="${p.provider_name}" class="w-8 h-8 rounded-md" onerror="this.style.display='none'">`
-            ).join('');
+            const { providers, justWatchLink } = result;
+            const logos = providers.slice(0, 8).map(p => {
+                const urlFn = STREAMING_URLS[p.provider_id];
+                const href = urlFn ? urlFn(item.title) : justWatchLink || '#';
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer" title="Watch on ${p.provider_name}">
+                    <img src="https://image.tmdb.org/t/p/w45${p.logo_path}" alt="${p.provider_name}" class="w-9 h-9 rounded-lg hover:ring-2 hover:ring-white transition-all" onerror="this.parentElement.style.display='none'">
+                </a>`;
+            }).join('');
             streamingSection.innerHTML = `
                 <p class="text-xs text-slate-400 font-semibold mb-2 uppercase tracking-wide">Available to Stream</p>
                 <div class="flex flex-wrap gap-2">${logos}</div>
