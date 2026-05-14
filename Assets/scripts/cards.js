@@ -622,6 +622,7 @@ async function showItemDetails(item) {
                             <i data-lucide="shopping-cart" class="w-4 h-4"></i> Buy on Amazon
                         </a>
                     </div>
+                    <p class="text-xs text-slate-500 mt-2">As an Amazon Associate I earn from qualifying purchases.</p>
                 </div>
             </div>
             <div id="reviewFormContainer" class="hidden mt-6 pt-6 border-t border-slate-700">
