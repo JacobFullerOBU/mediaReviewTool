@@ -1,11 +1,1271 @@
 [
-  {
-    "title": "",
-    "year": "",
-    "description": "",
-    "genre": "",
-    "director": "",
-    "actors": "",
-    "poster": ""
-  }
+    {
+        "title": "",
+        "year": "",
+        "description": "",
+        "genre": "",
+        "director": "",
+        "actors": "",
+        "poster": ""
+    },
+    {
+        "title": "There There",
+        "year": "2018",
+        "description": "PULITZER PRIZE FINALIST • NATIONAL BESTSELLER • A wondrous and shattering award-winning novel that follows twelve characters from Native communities: all traveling to the Big Oakland Powwow, all connected to one another in ways they may not yet realize. A contemporary classic, this “astonishing literary debut” (Margaret Atwood, bestselling author of The Handmaid’s Tale) “places Native American voices front and center” (NPR/Fresh Air). One of The Atlantic’s Great American Novels of the Past 100 Years Among them is Jacquie Red Feather, newly sober and trying to make it back to the family she left behind. Dene Oxendene, pulling his life together after his uncle’s death and working at the powwow to honor his memory. Fourteen-year-old Orvil, coming to perform traditional dance for the very first time. They converge and collide on one fateful day at the Big Oakland Powwow and together this chorus of voices tells of the plight of the urban Native American—grappling with a complex and painful history, with an inheritance of beauty and spirituality, with communion and sacrifice and heroism A book with “so much jangling energy and brings so much news from a distinct corner of American life that it’s a revelation” (The New York Times). It is fierce, funny, suspenseful, and impossible to put down--full of poetry and rage, exploding onto the page with urgency and force. There There is at once poignant and unflinching, utterly contemporary and truly unforgettable. Don't miss Tommy Orange's new book, Wandering Stars!",
+        "genre": "Fiction",
+        "author": "Tommy Orange",
+        "poster": "https://books.google.com/books/content?id=oNY0DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Mysteries",
+        "year": "2001",
+        "description": "The first complete English translation of the Nobel Prize-winner’s literary masterpiece A Penguin Classic Mysteries is the story of Johan Nilsen Nagel, a mysterious stranger who suddenly turns up in a small Norwegian town one summer—and just as suddenly disappears. Nagel is a complete outsider, a sort of modern Christ treated in a spirit of near parody. He condemns the politics and thought of the age, brings comfort to the “insulted and injured,” and gains the love of two women suggestive of the biblical Mary and Martha. But there is a sinister side of him: in his vest he carries a vial of prussic acid... The novel creates a powerful sense of Nagel's stream of thought, as he increasingly withdraws into the torture chamber of his own subconscious psyche. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,800 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+        "genre": "Fiction",
+        "author": "Knut Hamsun",
+        "poster": "https://books.google.com/books/content?id=MRoMUV2kLZEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Lone Star Ranger",
+        "year": "2010",
+        "description": "",
+        "genre": "Fiction",
+        "author": "Zane Grey",
+        "poster": "https://books.google.com/books/content?id=ptQSSgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Journey to the Center of the Earth",
+        "year": "2006",
+        "description": "The intrepid Professor Lindenbrock embarks upon the strangest expedition of the nineteenth century: a journey down an extinct Icelandic volcano to the Earth’s very core. In his quest to penetrate the planet’s primordial secrets, the geologist—together with his quaking nephew Axel and their devoted guide, Hans—discovers an astonishing subterranean menagerie of prehistoric proportions. Verne’s imaginative tale is at once the ultimate science fiction adventure and a reflection on the perfectibility of human understanding and the psychology of the questor. As David Brin notes in his Introduction, though Verne never knew the term “science fiction,” Journey to the Centre of the Earth is “inarguably one of the wellsprings from which it all began.”",
+        "genre": "Fiction",
+        "author": "Jules Verne",
+        "poster": "https://books.google.com/books/content?id=icKmd-tlvPMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "I, Tituba, Black Witch of Salem",
+        "year": "1994",
+        "description": "Blending the fictional with the factual, this highly praised novel ranges from the warm shores of seventeenth-century Barbados to the harsh realities of the slave trade, and the cold customs of Puritanical New England. It tells the story of Tituba, the only Black victim of the Salem witch trials and in doing so recalls a life of extraordinary experiences and mystical powers. Foreword by Angela Davis. Winner of France's prestigious Grand Prix Literaire de la Femme.",
+        "genre": "Fiction",
+        "author": "Maryse Condé",
+        "poster": "https://books.google.com/books/content?id=6uPBhEIKP7kC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Return of the Soldier",
+        "year": "1998",
+        "description": "Writing her first novel during World War I, West examines the relationship between three women and a soldier suffering from shell-shock. This novel of an enclosed world invaded by public events also embodies in its characters the shifts in England's class structures at the beginning of the twentieth century. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,700 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+        "genre": "Fiction",
+        "author": "Rebecca West",
+        "poster": "https://books.google.com/books/content?id=Wx3M_7XNTysC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Web of Dreams",
+        "year": "2009",
+        "description": "With nowhere to go, no one to help her, will Leigh flee into the arms of the one person she shouldn’t run to? Don’t miss this fifth and final installment in the Casteel family saga from New York Times bestselling author and literary phenomenon V.C. Andrews (Flowers in the Attic, My Sweet Audrina), now a major Lifetime movie event. Leigh VanVoreen had to escape from Boston’s Farthinggale Manor. The foul secret she harbored within her seemed to darken her life forever. Jillian, her mother, would not believe her, and Tony Tatterton, her stepfather, had betrayed her cruelly. But the pure devotion of Luke Casteel promised her hope and respect. Only Luke knew her deepest of secrets…only Luke would love and protect her. Bravely she bore the suspicions of the Willies’ hillfolk, as she tried to grasp the happiness that had so long eluded her. Leigh prayed with all her heart that her bright, shining dreams would save her from tragedy at last…",
+        "genre": "Fiction",
+        "author": "V.C. Andrews",
+        "poster": "https://books.google.com/books/content?id=7WjitMEwF78C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Mrs. Dalloway",
+        "year": "1925",
+        "description": "Heralded as Virginia Woolf's greatest novel, this is a vivid portrait of a single day in a woman's life. When we meet her, Mrs. Clarissa Dalloway is preoccupied with the last-minute details of party preparation while in her mind she is something much more than a perfect society hostess. As she readies her house, she is flooded with remembrances of faraway times. And, met with the realities of the present, Clarissa reexamines the choices that brought her there, hesitantly looking ahead to the unfamiliar work of growing old. \"Mrs. Dalloway was the first novel to split the atom. If the novel before Mrs. Dalloway aspired to immensities of scope and scale, to heroic journeys across vast landscapes, with Mrs. Dalloway Virginia Woolf insisted that it could also locate the enormous within the everyday; that a life of errands and party-giving was every bit as viable a subject as any life lived anywhere; and that should any human act in any novel seem unimportant, it has merely been inadequately observed. The novel asan art form has not been the same since. \"Mrs. Dalloway also contains some of the most beautiful, complex, incisive and idiosyncratic sentences ever written in English, and that alone would be reason enough to read it. It is one of the most moving, revolutionary artworks of the twentieth century.\" --Michael Cunningham, author of The Hours",
+        "genre": "Fiction",
+        "author": "Virginia Woolf",
+        "poster": "https://books.google.com/books/content?id=OqAFAQAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Plague",
+        "year": "1991",
+        "description": "“Its relevance lashes you across the face.” —Stephen Metcalf, The Los Angeles Times • “A redemptive book, one that wills the reader to believe, even in a time of despair.” —Roger Lowenstein, The Washington Post A haunting tale of human resilience and hope in the face of unrelieved horror, Albert Camus' iconic novel about an epidemic ravaging the people of a North African coastal town is a classic of twentieth-century literature. The townspeople of Oran are in the grip of a deadly plague, which condemns its victims to a swift and horrifying death. Fear, isolation and claustrophobia follow as they are forced into quarantine. Each person responds in their own way to the lethal disease: some resign themselves to fate, some seek blame, and a few, like Dr. Rieux, resist the terror. An immediate triumph when it was published in 1947, The Plague is in part an allegory of France's suffering under the Nazi occupation, and a timeless story of bravery and determination against the precariousness of human existence.",
+        "genre": "Fiction",
+        "author": "Albert Camus",
+        "poster": "https://books.google.com/books/content?id=KVGd-NabpW0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Fugitive Pieces",
+        "year": "1997",
+        "description": "A stunning debut novel from an award-winning poet. Jakob Beer, traumatically orphaned as a young child during World War II, learns over his lifetime the power of language to destroy, omit, and obliterate, and also to restore, conjure and witness, as he comes to understand and experience the extent of what was lost to him and of what is possible to regain.",
+        "genre": "Fiction",
+        "author": "Anne Michaels",
+        "poster": "https://books.google.com/books/content?id=EIHmvTdDOVoC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Trial",
+        "year": "1992",
+        "description": "The story of the mysterious indictment, trial, and reckoning forced upon Joseph K—one of the twentieth century’s master parables from one of the greatest writers of the twentieth century, the author of The Metamorphosis. Translated by Willa and Edwin Muir The Trial reflects the central spiritual crises of modern life. Kafka’s method—one that has influenced, in some way, almost every writer of substance who followed him—was to render the absurd and the terrifying convincing by a scrupulous, hyperreal matter-of-factness of tone and treatment. He thereby imparted to his work a level of seriousness normally associated with civilization’s most cherished poems and religious texts. Everyman's Library pursues the highest production standards, printing on acid-free cream-colored paper, with full-cloth cases with two-color foil stamping, decorative endpapers, silk ribbon markers, European-style half-round spines, and a full-color illustrated jacket. Contemporary Classics include an introduction, a select bibliography, and a chronology of the author's life and times.",
+        "genre": "Fiction",
+        "author": "Franz Kafka",
+        "poster": "https://books.google.com/books/content?id=8T9_cxH7z6sC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Odyssey of Homer",
+        "year": "2005",
+        "description": "A stunning verse translation of Homer’s epic tale about one man’s decade-long struggle to return home after years on the battlefields of Troy, from National Book Award–winning translator Allen Mandelbaum The inspiration for the upcoming film The Odyssey, directed by Christopher Nolan and starring Matt Damon, Tom Holland, Elliot Page, and Zendaya “Muse, tell me of the man of many wiles . . .” So begins one of the greatest adventures of world literature. Homer’s epic chronicle of the Greek hero Odysseus’ journey home from the Trojan War has inspired writers from Virgil to James Joyce. Odysseus survives storm and shipwreck, the cave of the Cyclops and the isle of Circe, the lure of the Sirens’ song and a trip to the Underworld, only to find his most difficult challenge at home, where treacherous suitors seek to steal his kingdom and his loyal wife, Penelope. Allen Mandelbaum’s brilliant verse translation realizes the power and the beauty of the original Greek and demonstrates why the Odyssey has captured the human imagination for nearly three thousand years.",
+        "genre": "Fiction",
+        "author": "Homer",
+        "poster": "https://books.google.com/books/content?id=ORyo8qAA-CQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Pudd'nhead Wilson",
+        "year": "2016",
+        "description": "Enriched Classics offer readers accessible editions of great works of literature enhanced by helpful notes and commentary. Each book includes educational tools alongside the text, enabling students and readers alike to gain a deeper and more developed understanding of the writer and their work. Mark Twain's darkly comic short classic set in the antebellum South stands as a literary condemnation of slavery and racial inequality. This edition includes: -A concise introduction that gives readers important background information -A chronology of the author's life and work -A timeline of significant events that provides the book's historical context -An outline of key themes and plot points to help readers form their own interpretations -Detailed explanatory notes -Critical analysis, including contemporary and modern perspectives on the work -Discussion questions to promote lively classroom and book group interaction -A list of recommended related books and films to broaden the reader's experience Enriched Classics offer readers affordable editions of great works of literature enhanced by helpful notes and insightful commentary. The scholarship provided in Enriched Classics enables readers to appreciate, understand, and enjoy the world's finest books to their full potential.",
+        "genre": "Fiction",
+        "author": "Mark Twain",
+        "poster": "https://books.google.com/books/content?id=B9qLCgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "That Hideous Strength",
+        "year": "1945",
+        "description": "SF/Fantasy.",
+        "genre": "Fiction",
+        "author": "Clive Staples Lewis",
+        "poster": "https://books.google.com/books/content?id=g_RaAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "My Struggle: Book 1",
+        "year": "2013",
+        "description": "The New York Times bestseller that launched the Norwegian author's audacious, addictive, and globally acclaimed six-volume autobiographical novel. It has already been anointed a Proustian masterpiece and is the rare work of dazzling literary originality that is intensely, irresistibly readable. Unafraid of the big issues—death, love, art, fear—and yet committed to the intimate details of life as it is lived, My Struggle is an essential work of contemporary literature. \"Knausgaard is among the finest writers alive.\" —Dwight Garner, The New York Times \"Knausgaard is a master . . . guiding us inexorably and irresistibly towards the next installment.\" — Financial Times \"It would not be an exaggeration to say that Karl Ove Knausgaard's six-volume memoir My Struggle . . . has catapulted the Norwegian writer into the rarefied company of such authors as James Joyce, Marcel Proust and Henry Miller. These writers burst forth with a new consciousness and in so doing became the voice of their generation. Years hence we will be talking about Knausgaard's incredibly detailed memoir cycle doing the same for the late 20th century.\" — The Providence Journal \"It's unbelievable. I just read 200 pages of it and I need the next volume like crack.\" —Zadie Smith, via Twitter \"What makes his book extraordinary is not what happens, which couldn't be more familiar or ordinary. It's that Knausgaard aims to capture the unending blizzard of feelings, objects, people and situations that make up a life. At the same time, like Proust—the inevitable point of comparison—he hopes to shape all this stuff into a form that gives his experience a larger meaning.\" —NPR",
+        "genre": "Fiction",
+        "author": "Karl Ove Knausgaard",
+        "poster": "https://books.google.com/books/content?id=46KJ4ERrzNkC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "THE Murder Of Roger Ackroyd",
+        "year": "2024",
+        "description": "Considered to be one of Agatha Christie's greatest, and also most controversial mysteries, 'The Murder Of Roger Ackroyd' breaks the rules of traditional mystery. The peaceful English village of King’s Abbot is stunned. The widow Ferrars dies from an overdose of Veronal. Not twenty-four hours later, Roger Ackroyd—the man she had planned to marry—is murdered. It is a baffling case involving blackmail and death that taxes Hercule Poirot’s “little grey cells” before he reaches one of the most startling conclusions of his career. Librarian's note: the first fifteen novels in the Hercule Poirot series are 1) The Mysterious Affair at Styles, 1920; 2) The Murder on the Links, 1923; 3) The Murder of Roger Ackroyd, 1926; 4) The Big Four, 1927; 5) The Mystery of the Blue Train, 1928; 6) Peril at End House, 1932; 7) Lord Edgware Dies, 1933; 8) Murder on the Orient Express, 1934; 9) Three Act Tragedy, 1935; 10) Death in the Clouds, 1935; 11) The A.B.C. Murders, 1936; 12) Murder in Mesopotamia, 1936; 13) Cards on the Table, 1936; 14) Dumb Witness, 1937; and 15) Death on the Nile, 1937. These are just the novels; Poirot also appears in this period in a play, Black Coffee, 1930, and two collections of short stories, Poirot Investigates, 1924, and Murder in the Mews, 1937. Each novel, play and short story has its own entry on Goodreads.",
+        "genre": "Fiction",
+        "author": "AGATHA CHRISTIE",
+        "poster": "https://books.google.com/books/content?id=fP33EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Canterbury Tales",
+        "year": "1977",
+        "description": "A translation into modern English of the medieval poem about a group of travelers on a pilgrimage to Canterbury and the tales they tell each other.",
+        "genre": "Fiction",
+        "author": "Geoffrey Chaucer",
+        "poster": "https://books.google.com/books/content?id=Bqa5AAAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Sense and Sensibility - Illustrated Edition",
+        "year": "2017",
+        "description": "SENSE AND SENSIBILITY written by Jane Austen with 41 illustrations by Hugh Thomson. When Elinor Dashwood's father dies, her family's finances are crippled. After the Dashwoods move to a cottage in Devonshire, Elinor's sister Marianne is torn between the handsome John Willoughby and the older Colonel Brandon. Meanwhile, Elinor's romantic hopes with Edward Ferrars are hindered due to his prior engagement. Both Elinor and Marianne strive for love while the circumstances in their lives constantly change.",
+        "genre": "Fiction",
+        "author": "Jane Austen",
+        "poster": "https://books.google.com/books/content?id=qvk6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Last Trail",
+        "year": "2014",
+        "description": "Zane Grey (January 31, 1872 - October 23, 1939) was an American author best known for his popular adventure novels and stories that presented an idealized image of the American frontier, including the novel Riders of the Purple Sage, his bes selling book. This is one of his stories.",
+        "genre": "Fiction",
+        "author": "Zane Grey",
+        "poster": "https://books.google.com/books/content?id=fU30AgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Taras Bulba",
+        "year": "2006",
+        "description": "Feroces, crueles, valientes y apasionados, los cosacos hacen temblar la estepa bajo los cascos de sus caballos. Y entre ellos se encuentra Taras Bulba, un anciano lleno aún de fuerza e inteligencia que junto a sus hijos, Ostap y Andrí, avanzará por tierras polacas con intención de vengar su fe ortodoxa burlada por los católicos. Ninguna guarnición, ciudad amurallada o iglesia podrán detenerlos, hasta que la desgracia se cierna sobre ellos y el apuesto y enamoradizo Andrí haga que su padre maldiga el día en que lo engendró. Taras Bulba, una anomalía entre la obra más conocida de Gogol, es una aventura trepidante, una sinfonía en perpetuo crescendo, en la que cada capítulo es más intenso y sorprendente que el anterior. un fresco tan afinadamente dibujado y tan vívido que resulta absolutamente intemporal.",
+        "genre": "Literary Criticism",
+        "author": "Nikolái V. Gogol",
+        "poster": "https://books.google.com/books/content?id=XdMBTKWSfeMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Narrows",
+        "year": "2005",
+        "description": "When an infamous serial killer known as the Poet reemerges, FBI agent Rachel Walling, long haunted by her unsuccessful efforts to bring him to justice, receives assistance from LAPD detective Harry Bosch.",
+        "genre": "Fiction",
+        "author": "Michael Connelly",
+        "poster": "https://books.google.com/books/content?id=dXccl8vD4LoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "\"A\" is for Alibi",
+        "year": "2005",
+        "description": "After serving 8 years for her husband's murder, Nikki Fife is out to find out who really did it.",
+        "genre": "Fiction",
+        "author": "Sue Grafton",
+        "poster": "https://books.google.com/books/content?id=Vk1EcQsbDkoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Sleeping Doll",
+        "year": "2007",
+        "description": "Thriller.",
+        "genre": "Fiction",
+        "author": "Jeffery Deaver",
+        "poster": "https://books.google.com/books/content?id=jtYeoK0ym14C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "QBD Murder on the Orient Express",
+        "year": "2015",
+        "description": "",
+        "genre": "Mystery",
+        "author": "Agatha Christie",
+        "poster": "",
+        "category": "books"
+    },
+    {
+        "title": "Cards on the Table",
+        "year": "1993",
+        "description": "Mr. Shaitana is a strange and wealthy collector of snuff boxes and other objets d'art. One evening he invites two specialists, Superintendent Battle of Scotland Yard and crime novelist Ariadne Oliver, to a dinner party to view his special collection: four people who have committed murder and gotten away with it. As they play bridge after dinner, Shaitana is daringly murdered by someone at the party. Battle sets out to solve the crime aided, of course, by the eager Mrs. Oliver who begins with psychological deductions from the bridge score cards. After many red herrings, skeletons in the cupboard and two more deaths, Battle lays his cards on the table.",
+        "genre": "Fiction",
+        "author": "Agatha Christie",
+        "poster": "https://books.google.com/books/content?id=NGoFudTo7YsC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Runaway Jury",
+        "year": "1997",
+        "description": "The jury in a Mississippi tobacco trial appears to be manipulated and controlled.",
+        "genre": "Fiction",
+        "author": "John Grisham",
+        "poster": "https://books.google.com/books/content?id=35SA8u4QpacC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "A Time to Kill",
+        "year": "1992",
+        "description": "Courtroom drama of an inhuman crime.",
+        "genre": "Fiction",
+        "author": "John Grisham",
+        "poster": "https://books.google.com/books/content?id=4qVGAFRByvIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Rising Sun",
+        "year": "1995",
+        "description": "\"On the 45th floor of the Matsumoto Tower in LA, the headquarters of the Japanese Electronics Corporation, celebrities from the film and music world mix with the captains of industry and politics. On the 46th floor, the dead body of a young woman is discovered.\"--Publisher.",
+        "genre": "Fiction",
+        "author": "Michael Crichton",
+        "poster": "https://books.google.com/books/content?id=jqFKObezRdcC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Missing Joseph",
+        "year": "1993",
+        "description": "When the vicar who has given her so much support is found dead, Deborah St. James begins a journey of personal discovery in order to find out who is responsible",
+        "genre": "Fiction",
+        "author": "Elizabeth George",
+        "poster": "https://books.google.com/books/content?id=5PP_5-5onKIC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "For the Sake of Elena",
+        "year": "1992",
+        "description": "Elena Weaver was a surprise to anyone meeting her for the first time. In her clingy dresses and dangling earrings she exuded a sexuality at odds with the innocence projected by the unicorn posters on her walls. While her embittered mother fretted about her welfare from her home in London, in Cambridge—where Elena was a student at St. Stephen's College—her father and his second wife each had their own very different image of the girl. As for Elena, she lived a life of casual and intense physical and emotional relationships, with scores to settle and goals to achieve--until someone, lying in wait along the route she ran every morning, bludgeoned her to death. Unwilling to turn the killing over to the local police, the university calls in New Scotland Yard. Thus, Detective Inspector Thomas Lynley and his partner, Detective Sergeant Barbara Havers, enter the rarefied world of Cambridge University, where academic gowns often hide murderous intentions. For both officers, the true identity of Elena Weaver proves elusive. Each relationship the girl left behind casts new light both on Elena and on those people who appeared to know her best—from an unsavory Swedish-born Shakespearean professor to the brooding head of the Deaf Students Union. What's more, Elena's father, a Cambridge professor under consideration for a prestigious post, is a man with his own dark secrets. While his past sins make him neurotically dedicated to Elena and blind to her blacker side, present demons drive him toward betrayal.",
+        "genre": "Fiction",
+        "author": "Elizabeth George",
+        "poster": "https://books.google.com/books/content?id=aZBw8kYM5T0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Revenge of the Wizard's Ghost",
+        "year": "1997",
+        "description": "Collapsed in a weird trance, Johnny Dixon is dying. Professor Childermass soon learns why--Johnny is possessed by the spirit of the late Warren Windrow. In a desperate effort to find a clue that will save Johnny's life, the Professor races to the gloomy Windrow estate where he finds himself fighting for his own life.",
+        "genre": "Juvenile Fiction",
+        "author": "John Bellairs",
+        "poster": "https://books.google.com/books/content?id=FoyhSrj6RFsC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Angel of Darkness",
+        "year": "1998",
+        "description": "In one of the most critically acclaimed novels of the year, Caleb Carr-- bestselling author of The Alienist--pits Dr. Laszlo Kreizler and his colleagues against a murderer as evil as the darkest night. . . .",
+        "genre": "Fiction",
+        "author": "Caleb Carr",
+        "poster": "https://books.google.com/books/content?id=3kTCn5KmnFUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "And Then There Were None",
+        "year": "2001",
+        "description": "One by one, the guests arrived at the mansion on Indian Island, summoned by a mysterious host. And one by one, with terrifying meticulousness, they were stalked by a cunning murderer. Utterly baffling...and yet there was a pattern, concealed in a nursery rhyme hanging over the fireplace.",
+        "genre": "Fiction",
+        "author": "Agatha Christie",
+        "poster": "https://books.google.com/books/content?id=ACMYLqk_7GoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "To the Nines",
+        "year": "2004",
+        "description": "Pursuing a skip, Stephanie travels to Las Vegas, where she meets up with Sally Sweet, Joe Morelli, and Ranger, and works to outmaneuver a trio of mobsters who are determined to prevent Stephanie's return home.",
+        "genre": "Fiction",
+        "author": "Janet Evanovich",
+        "poster": "https://books.google.com/books/content?id=Mt90K-0Jty4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Farewell, My Lovely",
+        "year": "1992",
+        "description": "Marlowe's about to give up on a completely routine case when he finds himself in the wrong place at the right time to get caught up in a murder that leads to a ring of jewel thieves, another murder, a fortune-teller, a couple more murders, and more corruption than your average graveyard.",
+        "genre": "Fiction",
+        "author": "Raymond Chandler",
+        "poster": "https://books.google.com/books/content?id=PtT0C1rWniIC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Golden Ball and Other Stories",
+        "year": "1984",
+        "description": "It was an offer the St. Vincent family could not refuse -- a splendid mansion, complete with servants, with nothing asked for in return! But young Rupert St. Vincent suspected a sinister trap ...",
+        "genre": "Fiction",
+        "author": "Agatha Christie",
+        "poster": "https://books.google.com/books/content?id=2zs_gq_DPC4C&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "A Purple Place for Dying",
+        "year": "1995",
+        "description": "A Purple Place for Dying is the third book in John MacDonald's Travis McGee series, and McGee comes upon his most troubling case yet. McGee is brought to the Midwest by a big, brassy, bossy Blonde who needs help. Mona Yeoman suspects that her husband has pilfered her trust fund, and she wants a divorce. McGee's job is to find out what happened to the money. McGee doesn't particularly like Yeoman, but is tempted to take the case because he needs the money. But before he even has a chance to say yes, Mona is murdered right in front of his eyes, and this changes everything. What makes things even more mysterious is that her body disappears when the police are called to the scene of the crime.",
+        "genre": "Fiction",
+        "author": "John Dann MacDonald",
+        "poster": "https://books.google.com/books/content?id=UEAfl4Qwb1AC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Emil and the Detectives",
+        "year": "1930",
+        "description": "On his way to Berlin to visit his grandmother Emil fell asleep and had his money stolen by the man who shared his compartment. Altho he came from the country Emil was not stupid, and he determined to get that money back. He followed the man, met the boy with the auto horn, who summoned his friends, and among them all they caught a very clever thief.",
+        "genre": "Berlin (Germany)",
+        "author": "Erich Kästner",
+        "poster": "https://books.google.com/books/content?id=rDRAAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Hollywood Nocturnes",
+        "year": "1994",
+        "description": "Dig it. A famous musician-cum-draft dodger is plotting the perfect celebrity snatch- his own. An ex-con raging on revenge in High Darktown becomes a cop's worst nightmare. While chasing kidnappers, two cops stumble on an okie town as bloody as the O.K. Corral. A strongarm for Howard Hughes and mobster Mickey Cohen finds himself playing both ends against the middle, all for a murderously magnificent moll. This is L.A., Ellroy style- corrupt cops, goons with guns, rattling roadsters- and all in the staccato rhythm of the streets. \"Hollywood Nocturnes\" shows us the seedy side of glamorous Hollywood, laid out like a corpse in the morgue.",
+        "genre": "Fiction",
+        "author": "James Ellroy",
+        "poster": "https://books.google.com/books/content?id=ljkhAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Daughter of Time",
+        "year": "1988",
+        "description": "A hospitalized English policeman reconstructs historical evidence concerning Richard III's role in the murder of Edward IV's two sons.",
+        "genre": "Fiction",
+        "author": "Josephine Tey",
+        "poster": "https://books.google.com/books/content?id=AVWtezN75agC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Gifts",
+        "year": "2004",
+        "description": "A darkly compelling fantasy about a world in which each person has a magical, dangerous gift.",
+        "genre": "Juvenile Fiction",
+        "author": "Ursula K. Le Guin",
+        "poster": "https://books.google.com/books/content?id=UY7bjfq3mYkC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Plague of Fantasies",
+        "year": "1997",
+        "description": "Slavoj Zizek is, without doubt, one of the most stimulating and vibrant thinkers of our time, and his idiosyncratic blend of Lacan and Hegel is always sparkling with insight and studded with amusing stories, anecdotes and jokes. In The Plague of Fantasies Zizek approaches another enormous subject with characteristic brio and provocativeness. The current epoch is plagued by fantasms: there is an ever intensifying antagonism between the process of ever greater abstraction of our lives—whether in the form of digitalization or market relations—and the deluge of pseudo-concrete images which surround us. Traditional critical thought would have sought to trace the roots of abstract notions in concrete social reality; but today, the correct procedure is the inverse—from pseudo-concrete imagery to the abstract process which structures our lives. Ranging in his examples from national differences in toilet design to cybersex, and from intellectuals' responses to the Bosnian war to Robert Schumann's music, Zizek explores the relations between fantasy and ideology, the way in which fantasy animates enjoy-ment while protecting against its excesses, the associations of the notion of fetishism with fantasized seduction, and the ways in which digitalization and cyberspace affect the status of subjectivity. To the already initiated, The Plague of Fantasies will be a welcome reminder of why they enjoy Zizek's writing so much. For new readers, it will be the beginning of a long and meaningful relationship.",
+        "genre": "Computers",
+        "author": "Slavoj Žižek",
+        "poster": "https://books.google.com/books/content?id=NM5PqgKd2dsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "A Wizard of Earthsea",
+        "year": "2012",
+        "description": "A boy grows to manhood while attempting to subdue the evil he unleashed on the world as an apprentice to the Master Wizard.",
+        "genre": "Juvenile Fiction",
+        "author": "Ursula K. Le Guin",
+        "poster": "https://books.google.com/books/content?id=FD72ekYZqIkC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Dark Tower VII",
+        "year": "2004",
+        "description": "Sams Local 11-7-2004 $35.00.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=Geq0uKAxZPEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Winnie-the-Pooh",
+        "year": "1926",
+        "description": "The various adventures of Christopher Robin and his friends in which Pooh Bear uses a balloon to get honey, Piglet meets a Heffalump, and Eeyore has a birthday.",
+        "genre": "Animals",
+        "author": "Alan Alexander Milne",
+        "poster": "https://books.google.com/books/content?id=XB7hAAAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "An Ember in the Ashes",
+        "year": "2020",
+        "description": "BOOK ONE IN THE NEW YORK TIMES BESTSELLING SERIES One of Time Magazine's 100 Best Fantasy Books of All Time Instant New York Times bestseller From #1 New York Times bestselling author Sabaa Tahir Amazon's Best Young Adult Book of 2015 People's Choice Award winner - Favorite Fantasy Bustle's Best Young Adult Book of 2015 \"This novel is a harrowing, haunting reminder of what it means to be human -- and how hope might be kindled in the midst of oppression and fear.\" -- The Washington Post \"An Ember in the Ashes could launch Sabaa Tahir into JK Rowling territory...It has the addictive quality of The Hunger Games combined with the fantasy of Harry Potter and the brutality of Game of Thrones.\"--Public Radio International \"An Ember in the Ashes glows, burns, and smolders--as beautiful and radiant as it is searing.\"--Huffington Post \"A worthy novel - and one as brave as its characters.\" --The New York Times Book Review Laia is a slave. Elias is a soldier. Neither is free. Under the Martial Empire, defiance is met with death. Those who do not vow their blood and bodies to the Emperor risk the execution of their loved ones and the destruction of all they hold dear. It is in this brutal world, inspired by ancient Rome, that Laia lives with her grandparents and older brother. The family ekes out an existence in the Empire's impoverished backstreets. They do not challenge the Empire. They've seen what happens to those who do. But when Laia's brother is arrested for treason, Laia is forced to make a decision. In exchange for help from rebels who promise to rescue her brother, she will risk her life to spy for them from within the Empire's greatest military academy. There, Laia meets Elias, the school's finest soldier--and secretly, its most unwilling. Elias wants only to be free of the tyranny he's being trained to enforce. He and Laia will soon realize that their destinies are intertwined--and that their choices will change the fate of the Empire itself.",
+        "genre": "Juvenile Fiction",
+        "author": "Sabaa Tahir",
+        "poster": "https://books.google.com/books/content?id=M8D1DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Silver Chair",
+        "year": "1998",
+        "description": "Two English children undergo hair-raising adventures as they go on a search and rescue mission for the missing Prince Rilian, who is held captive in the underground kingdom of the Emerald Witch.",
+        "genre": "Juvenile Fiction",
+        "author": "Clive Staples Lewis",
+        "poster": "https://books.google.com/books/content?id=Pnqx6B2lF60C&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Bloodmarked",
+        "year": "2022",
+        "description": "\"When the leaders of the Order reveal that they will do everything in their power to keep the approaching demon war a secret, Bree and her friends go on the run so she can learn how to control her devastating new powers.\"--",
+        "genre": "Young Adult Fiction",
+        "author": "Tracy Deonn",
+        "poster": "https://books.google.com/books/content?id=S9RJEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Fablehaven",
+        "year": "2007",
+        "description": "Kendra and Seth find themselves in the midst of a battle between good and evil when they visit their grandparents' estate and discover that it is a sanctuary for magical creatures.",
+        "genre": "Juvenile Fiction",
+        "author": "Brandon Mull",
+        "poster": "https://books.google.com/books/content?id=w7FfrQxhnxEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Cat in the Hat",
+        "year": "2012",
+        "description": "The Cat in the Hat entertains two children on a rainy day.",
+        "genre": "Juvenile Fiction",
+        "author": "Dr. Seuss",
+        "poster": "https://books.google.com/books/content?id=VTu8i9vGUksC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Eragon",
+        "year": "2006",
+        "description": "14 Compact Discs; 16 hours, 23 minutes; unabridged Audio CD.",
+        "genre": "Juvenile Fiction",
+        "author": "Christopher Paolini",
+        "poster": "https://books.google.com/books/content?id=0ovOTsTs22AC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Trumpet of the Swan",
+        "year": "1970",
+        "description": "Knowing how to read and write is not enough for Louis, a voiceless Trumpeter Swan; his determination to learn to play a stolen trumpet takes him far from his wilderness home.",
+        "genre": "Juvenile Fiction",
+        "author": "Elwyn Brooks White",
+        "poster": "https://books.google.com/books/content?id=crVOPngoovIC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Peter Pan",
+        "year": "2008",
+        "description": "The adventures of the three darling children in Never-Never Land with Peter Pan, the boy who would not grow up.",
+        "genre": "Fiction",
+        "author": "James Matthew Barrie",
+        "poster": "https://books.google.com/books/content?id=WdM_qxJq8T8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Hobbit, Or, There and Back Again",
+        "year": "1995",
+        "description": "Bilbo Baggins, a respectable, well-to-do hobbit, lives comfortably in his hobbit-hole until the day the wandering wizard Gandalf chooses him to take part in an adventure from which he may never return.",
+        "genre": "Baggins, Bilbo (Fictitious character)",
+        "author": "John Ronald Reuel Tolkien",
+        "poster": "https://books.google.com/books/content?id=4XGKQQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Crown of Midnight",
+        "year": "2013",
+        "description": "It puts this entire castle in jeopardy ... and the life of your friend.\"",
+        "genre": "Juvenile Fiction",
+        "author": "Sarah J. Maas",
+        "poster": "https://books.google.com/books/content?id=uZEkAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Wizard of Oz",
+        "year": "2009",
+        "description": ".0000000000This is the story of Dorothy and her little dog Toto, who are carried away from Kansas by a cyclone and transported to the wonderful world of Oz. She meets three companions - the Scarecrow, the Tin Woodman and the Cowardly Lion - and the three journey to the Emerald City of Oz to ask the Wizard of Oz to give them their hearts' desires, which in Dorothy's case is to return home to Kansas. On their way to Oz and while fulfilling the tasks that the surprising Wizard asks of them they encounter witches, winged monkeys, the Deadly Desert, fighting trees and magic shoes.This edition is evocatively illustrated with the original drawings of W. W. Denslow, with an Afterword by Ned Halley.",
+        "genre": "Fiction",
+        "author": "Lyman Frank Baum",
+        "poster": "https://books.google.com/books/content?id=hRd7dJ-9G1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Nightfall",
+        "year": "2017",
+        "description": "Sophie and her friends face battles unlike anything they've experienced before in this thrilling sixth book of Messenger's New York Times- and USA Today-bestselling series. 5 1/2 x 8 5/16.",
+        "genre": "Juvenile Fiction",
+        "author": "Shannon Messenger",
+        "poster": "https://books.google.com/books/content?id=90k8DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Tales from Earthsea",
+        "year": "2002",
+        "description": "Exploring the legend of Earthsea's history, people, languages, literature, and magic, this collection of four magical stories is now available in a paperback edition.",
+        "genre": "Fiction",
+        "author": "Ursula K. Le Guin",
+        "poster": "https://books.google.com/books/content?id=Fc4vX8-vQPgC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Skandar and the Unicorn Thief",
+        "year": "2022",
+        "description": "Soar into a breathtaking world of heroes and unicorns as you’ve never seen them before in this fantastical middle grade debut perfect for fans of the Percy Jackson and Eragon series! Skandar Smith has always yearned to leave the Mainland and escape to the secretive Island, where wild unicorns roam free. He’s spent years studying for his Hatchery exam, the annual test that selects a handful of Mainlander thirteen-year-olds to train to become unicorn riders. But on the day of Skandar’s exam, things go horribly wrong, and his hopes are shattered…until a mysterious figure knocks on his door at midnight, bearing a message: the Island is in peril and Skandar must answer its call. Skandar is thrust into a world of epic sky battles, dangerous clashes with wild unicorns, and rumors of a shadowy villain amassing a unicorn army. And the closer Skandar grows to his newfound friends and community of riders, the harder it becomes to keep his secrets—especially when he discovers their lives may all be in graver danger than he ever imagined.",
+        "genre": "Juvenile Fiction",
+        "author": "A.F. Steadman",
+        "poster": "https://books.google.com/books/content?id=_GBMEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Graceling",
+        "year": "2008",
+        "description": "With elegant, evocative prose and a cast of unforgettable characters, a debut author creates a mesmerizing medieval world, a death-defying adventure, and a heart-racing romance that is sure to captivate readers.",
+        "genre": "Juvenile Fiction",
+        "author": "Kristin Cashore",
+        "poster": "https://books.google.com/books/content?id=M1AUC4TY4u0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Pet Sematary",
+        "year": "1983",
+        "description": "\"\"Sometimes dead is better....\"\" When the Creeds move into a beautiful old house in rural Maine, it all seems too good to be true: physician father, beautiful wife, charming little daughter, adorable infant son -- and now an idyllic home. As a family, they've got it all...right down to the friendly cat. But the nearby woods hide a blood-chilling truth -- more terrifying than death itself...and hideously more powerful.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=m7MhAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Ghost Story",
+        "year": "1979",
+        "description": "Horror. Early novel about four men who inadvertently cause the death of a young woman in the 1920s.",
+        "genre": "Fiction",
+        "author": "Peter Straub",
+        "poster": "https://books.google.com/books/content?id=IU18-v_3Tm4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Waste Lands",
+        "year": "1993",
+        "description": "Roland, the Last Gunslinger, moves closer to The Dark Tower of his dreams and nightmares through a world of the fiendish foes.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=f36xnlfQyDwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Four Past Midnight",
+        "year": "1990",
+        "description": "Jet passengers are stuck in a time-slip, a psychopath accuses a writer of plagiarism, a man with an overdue book encounters a demonic librarian, and a boy's camera snaps photos of a huge and nasty dog in these four horror novellas. Repackaged. Reissue.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=oLr2iVoNENAC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Christine",
+        "year": "1983",
+        "description": "Arnie Cunningham, a bookish and bullied high school senior, becomes obsessed with a 1958 Plymouth named Christine, which he is restoring.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=nVnaCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Needful Things",
+        "year": "1991",
+        "description": "In King's #1 bestselling book, the master of the horror genre takes readers to his famous fictional town for one final visit. A wonderful new store has opened in Castle Rock, Maine. It's a place where you can get anything your heart desires--sexual pleasure, wealth, power . . . but for a nerve-shattering price. \"Ranks with King's best!\"--Publishers Weekly. Copyright © Libri GmbH. All rights reserved.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=ylLoGsee8YcC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Thrill Club",
+        "year": "1994",
+        "description": "Talia writes horror stories that everyone loves -until they start to come true.",
+        "genre": "Juvenile Fiction",
+        "author": "R. L. Stine",
+        "poster": "https://books.google.com/books/content?id=hQONI55NRxsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Long Walk",
+        "year": "1999",
+        "description": "The dystopian classic written by Stephen King under his penname Richard Bachman",
+        "genre": "Fiction",
+        "author": "Richard Bachman, Stephen King",
+        "poster": "https://books.google.com/books/content?id=WXTWAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Monster Blood",
+        "year": "1992",
+        "description": "When Evan and Andy find a dusty can labeled \"Monster Blood\" in weird Aunt Kathryn's house, they make the mistake of opening it.",
+        "genre": "Juvenile Fiction",
+        "author": "R. L. Stine",
+        "poster": "https://books.google.com/books/content?id=uzqYkg9_kWMC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Thinner",
+        "year": "1985",
+        "description": "Billy Halleck's nightmare begins after he sideswipes an old Gypsy woman as she is crossing the street: he loses ninety-three pounds within six weeks.",
+        "genre": "Fiction",
+        "author": "Stephen King, Richard Bachman",
+        "poster": "https://books.google.com/books/content?id=TKgOAQAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Don't Go to Sleep",
+        "year": "1997",
+        "description": "It's a no-snooze situation! Matt hates his tiny bedroom. It's so small it's practically a closet! Still, Matt's mom refuses to let him sleep in the guest room. After all, they might have guests. Some day. Or year. Then Matt does it. Late one night. When everyone's in bed. He sneaks into the guest room and falls asleep. Poor Matt. He should have listened to his mom. Because when Matt wakes up, his whole life has changed. For the worse. And every time he falls asleep, he wakes up in a new nightmare. . . .",
+        "genre": "Juvenile Fiction",
+        "author": "R. L. Stine",
+        "poster": "https://books.google.com/books/content?id=axyA_7m0RrwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Go Eat Worms!",
+        "year": "2004",
+        "description": "Discovering the creatures of his basement worm farm in unlikely and unwanted places, like his bed, his toothbrush, and his spaghetti, worm-obsessed Todd finds himself grossed out by the very things with which he used to torture his sister.",
+        "genre": "Juvenile Fiction",
+        "author": "R. L. Stine",
+        "poster": "https://books.google.com/books/content?id=zOrwGwAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Frankenstein",
+        "year": "1994",
+        "description": "A monster assembled by a scientist from parts of dead bodies develops a mind of his own as he learns to loathe himself and hate his creator.",
+        "genre": "Juvenile Fiction",
+        "author": "Mary Shelley",
+        "poster": "https://books.google.com/books/content?id=4dHXkNcpIXgC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Last Kids on Earth",
+        "year": "2015",
+        "description": "\"After a monster apocalypse hits town, average thirteen-year-old Jack Sullivan builds a team of friends to help slay the eerily intelligent monster known as Blarg\"--",
+        "genre": "Juvenile Fiction",
+        "author": "Max Brallier",
+        "poster": "https://books.google.com/books/content?id=_rTZCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Green Mile",
+        "year": "2000",
+        "description": "The Green Mile: those who walk it do not return, because at the end of that walk is the room in which sits Cold Mountain penitentiary's electric chair. In 1932 the newest resident on death row is John Coffey, a giant black man convicted of the brutal murder of two little girls. But nothing is as it seems with John Coffey, and around him unfolds a bizarre and horrifying story. Evil murderer or holy innocent - whichever he is - Coffey has strange powers which may yet offer salvation to others, even if they can do nothing to save him. THE AUTHOR",
+        "genre": "Coffey, John (Fictitious character)",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=1lJmPwAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Tomb",
+        "year": "1998",
+        "description": "A repairman Jack thriller. Follow Hosts.",
+        "genre": "Fiction",
+        "author": "F. Paul Wilson",
+        "poster": "https://books.google.com/books/content?id=ecO-mMwry7cC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Cold Fire",
+        "year": "1991",
+        "description": "Reporter Holly Thorne investigates the case of Jim Ironheart, who has saved six lives in different parts of the country in three months, with the help of a force that suddenly turns against both of them",
+        "genre": "Fiction",
+        "author": "Dean Ray Koontz",
+        "poster": "https://books.google.com/books/content?id=-pM6F_hcpRUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Tommyknockers",
+        "year": "1987",
+        "description": "Science fiction-roman.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=b76wAAAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Tales from the Shadowhunter Academy",
+        "year": "2016",
+        "description": "Collects short stories chronicling Simon's journey from amnesia to Ascension, as he works to regain his lost life while attending the Shadowhunter Academy.",
+        "genre": "Juvenile Fiction",
+        "author": "Cassandra Clare, Sarah Rees Brennan, Maureen Johnson, Robin Wasserman",
+        "poster": "https://books.google.com/books/content?id=gvB1DQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Shining",
+        "year": "1977",
+        "description": "Terrible events occur at an isolated hotel in the off season, when a small boy with psychic powers struggles to hold his own against the forces of evil that are driving his father insane. Reissue.",
+        "genre": "Fiction",
+        "author": "Stephen King",
+        "poster": "https://books.google.com/books/content?id=Wv9Rs7uC-mQC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Empowerment of Women Through Self Help Groups",
+        "year": "2006",
+        "description": "The book is an in-depth study of Empowerment of Women Through Self Help Groups. It covers the problems and perspectives of Self Help Groups and suggest several measures. The study has evaluated the implementation of several schemes in Anantapur District in particular and in Andhra Pradesh in general such as rearing goats, dairying, petty business activities, making of soft toys and so on. The findings are very much encouraging, such as Women are now managing their families, Panchayat Raj Institutions, are able to concentrate on their children s education and health. Contents include: Introduction, Public Policy Theoretical Perspectives, Evaluation, Aims and Objectctives of Self Help Groups in Anantapur District, Socio-Economic Background of the Sample Study, Problems and perspectives of Self Help Groups, Performance of Self Help Groups and Conclusion. This outstanding Text-cum-Reference book will be of great use to Scholars, Administrators, Planners, Policy-makers, Statesmen and Students of Political Science, Economics, Sociology, Commerce and Women Studites.",
+        "genre": "Political Science",
+        "author": "G. Sreeramulu",
+        "poster": "https://books.google.com/books/content?id=Mmtn9-YpF6EC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Measuring Ego Development",
+        "year": "1970",
+        "description": "Vol.2 by Jane Loevinger, Ruth Wessler and Carolyn Redmore.",
+        "genre": "Ego (Psychology)",
+        "author": "Jane Loevinger, Ruth Wessler",
+        "poster": "https://books.google.com/books/content?id=cod9AAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Ego Analysis in the Helping Professions",
+        "year": "1973",
+        "description": "",
+        "genre": "Psychology",
+        "author": "Frances Upham",
+        "poster": "https://books.google.com/books/content?id=OAVHAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "A Study of the Relationship of the Self-concept to Adjustment in a Selected Group of College Women",
+        "year": "1953",
+        "description": "",
+        "genre": "Attitude (Psychology)",
+        "author": "Frances Helen DeLisle",
+        "poster": "https://books.google.com/books/content?id=oYIUjjWVT0AC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Magic Within",
+        "year": "1990",
+        "description": "",
+        "genre": "Psychology",
+        "author": "Mary Lee Zawadski",
+        "poster": "https://books.google.com/books/content?id=8QoNAQAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Inquiring about Myself",
+        "year": "1972",
+        "description": "",
+        "genre": "Interpersonal relations",
+        "author": "Frances M. Epps",
+        "poster": "https://books.google.com/books/content?id=7kJMAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "About Me",
+        "year": "1969",
+        "description": "A book for the child who \"looks for answers to his questions about his growing body, his budding mind, his sometimes puzzling emotions, his developing abilities.\"",
+        "genre": "Child development",
+        "author": "",
+        "poster": "https://books.google.com/books/content?id=5znhAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Act Thin, Stay Thin",
+        "year": "1978",
+        "description": "",
+        "genre": "Health & Fitness",
+        "author": "Richard B. Stuart",
+        "poster": "https://books.google.com/books/content?id=VpA_AAAAYAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Breadth of Perspective, Culture Contact, and Self",
+        "year": "1959",
+        "description": "",
+        "genre": "Apperception",
+        "author": "Leon Harold Warshay",
+        "poster": "https://books.google.com/books/content?id=krchlWLqnmUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Hidden Paths",
+        "year": "2007",
+        "description": "Hidden paths analyses the representation of character in Greek tragedy, focusing on one of the most important and controversial theatre plays of all times the Bacchae. Euripides' last play has always been a favourite, enjoying an enormous success for centuries on and off the stage. This book argues that in the representation of characters in the play we can find a development in the view of self and representation of man. This development, which is also to be partly traced in the works of Sophocles and in earlier plays by Euripides, finds a fuller expression in the Bacchae and culminates in the catastrophe of ignorance and incommunicability which has Pentheus at its centre. The construction of character in the text and the view of self which it entails are explored through a meticulous analysis of keywords, while verbal usage, imagery and style are exposed as the very 'stuff' of characterisation. The book uncovers the 'hidden paths' along which human life is experienced in the play and through which human characterisation materializes from the fabric of the text.",
+        "genre": "Performing Arts",
+        "author": "Chiara Thumiger",
+        "poster": "https://books.google.com/books/content?id=D3R4AAAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Encounters with the Self",
+        "year": "1992",
+        "description": "This text addresses the issues involved with the development of self-concept and growth of self-esteem.",
+        "genre": "Medical",
+        "author": "Don E. Hamachek",
+        "poster": "https://books.google.com/books/content?id=vwARAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Psychological Perspectives on the Self",
+        "year": "1982",
+        "description": "",
+        "genre": "Ego (Psychology)",
+        "author": "Jerry M. Suls",
+        "poster": "https://books.google.com/books/content?id=Rz1-AAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "In an African Direction",
+        "year": "1999",
+        "description": "",
+        "genre": "Africa",
+        "author": "Hendrikus Laan",
+        "poster": "https://books.google.com/books/content?id=1BC5AAAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Midlife Mothers in Transition",
+        "year": "1994",
+        "description": "",
+        "genre": "Ego (Psychology)",
+        "author": "Elizabeth Irene Price",
+        "poster": "https://books.google.com/books/content?id=KmeO-N1ES9AC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Development of the Ego",
+        "year": "1989",
+        "description": "On the developmental stages of the ego, beginning in early infancy, from the perspectives of tasks and challenges, internal self and object representations, and ego mechanisms and functions. Annotation copyrighted by Book News, Inc., Portland, OR",
+        "genre": "Psychology",
+        "author": "Stanley I. Greenspan",
+        "poster": "https://books.google.com/books/content?id=4IvL1DHwlycC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Self and Family",
+        "year": "1984",
+        "description": "",
+        "genre": "Family & Relationships",
+        "author": "Jane Cary Peck",
+        "poster": "https://books.google.com/books/content?id=45jlDZlhT4sC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Everyday Life Philosophers",
+        "year": "1996",
+        "description": "Autobiography in Norway. Eng. Universitetsforlaget, 1996. 346 s. ISBN 82-00-22605-0 Det er stigende interesse for å lese eller skrive selvbiografier. Forfatter-en, som er sosialantropolog, mener at det hverdagsmennesker ikke er mindre reflekterte enn vitenskapelige forskere, og det å skrive en selvbiografi er en måte å reflektere livets erfaringer. I dagens Norge godtas og feires kulturelle variasjoner, så vel som tradisjon og nasjonalisme. Det har skjedden verdiforandring, og forfatteren argumenterer overbevisende for at skriv- ing av selvbiografier er en måte å ta kulturell avstand på.",
+        "genre": "Philosophy",
+        "author": "Marianne Gullestad",
+        "poster": "https://books.google.com/books/content?id=0h-gAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Weaning and Human Development",
+        "year": "1969",
+        "description": "",
+        "genre": "Family & Relationships",
+        "author": "Gordon R. Forrer",
+        "poster": "https://books.google.com/books/content?id=B3NqAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Unmanifest Self",
+        "year": "1990",
+        "description": "Teaches a method of objective self-observation leading to the essential truth of who we are.",
+        "genre": "Body, Mind & Spirit",
+        "author": "Ligia Dantes",
+        "poster": "https://books.google.com/books/content?id=Tbl6VNGP2XwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Self-concept, Ideal-self, and Concept of Mother and Father of Male Students who Seek Help for Achievement Problems",
+        "year": "1966",
+        "description": "",
+        "genre": "Ego (Psychology)",
+        "author": "Jerry Anthony Treppa",
+        "poster": "https://books.google.com/books/content?id=SdM1YR-JcucC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "A Night to Remember",
+        "year": "2005",
+        "description": "A cloth bag containing eight copies of the title.",
+        "genre": "History",
+        "author": "Walter Lord",
+        "poster": "https://books.google.com/books/content?id=w1wpDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "AI Superpowers",
+        "year": "2018",
+        "description": "AI Superpowers is Kai-Fu Lee's New York Times and USA Today bestseller about the American-Chinese competition over the future of artificial intelligence.",
+        "genre": "Business & Economics",
+        "author": "Kai-Fu Lee",
+        "poster": "https://books.google.com/books/content?id=Xb9wDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Tao Te Ching (Daodejing)",
+        "year": "2018",
+        "description": "A new \"translation of the ancient Chinese book of the Tao\"--Dust jacket front.",
+        "genre": "Body, Mind & Spirit",
+        "author": "Laozi",
+        "poster": "https://books.google.com/books/content?id=Val2DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Abraham Lincoln",
+        "year": "2013",
+        "description": "Now in paperback, this award-winning biography has been hailed as the definitive portrait of Lincoln. In the first multi-volume biography of Abraham Lincoln to be published in decades, Lincoln scholar Michael Burlingame offers a fresh look at the life of one of America’s greatest presidents. Incorporating the field notes of earlier biographers, along with decades of research in multiple manuscript archives and long-neglected newspapers, this remarkable work will both alter and reinforce current understanding of America’s sixteenth president. In volume 2, Burlingame examines Lincoln’s presidency and the trials of the Civil War. He supplies fascinating details on the crisis over Fort Sumter and the relentless office seekers who plagued Lincoln. He introduces readers to the president’s battles with hostile newspaper editors and his quarrels with incompetent field commanders. Burlingame also interprets Lincoln’s private life, discussing his marriage to Mary Todd, the untimely death of his son Willie to disease in 1862, and his recurrent anguish over the enormous human costs of the war.",
+        "genre": "Biography & Autobiography",
+        "author": "Michael Burlingame",
+        "poster": "https://books.google.com/books/content?id=nmibKY8iY84C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Mind Over Mood",
+        "year": "2015",
+        "description": "Discover simple yet powerful steps you can take to overcome emotional distress--and feel happier, calmer, and more confident. This life-changing book has already helped more than 1,300,000 readers use cognitive-behavioral therapy--one of today's most effective forms of psychotherapy--to conquer depression, anxiety, panic attacks, anger, guilt, shame, low self-esteem, eating disorders, substance abuse, and relationship problems. Revised and expanded to reflect significant scientific developments of the past 20 years, the second edition contains numerous new features: expanded content on anxiety; chapters on setting personal goals and maintaining progress; happiness rating scales; gratitude journals; innovative exercises focused on mindfulness, acceptance, and forgiveness; 25 new worksheets; and much more. Mind Over Mood will help you: *Learn proven, powerful, practical strategies to transform your life. *Follow step-by-step plans to overcome depression, anxiety, anger, guilt, and shame. *Set doable personal goals and track your progress (you can photocopy the worksheets from the book or download and print additional copies). *Practice your new skills until they become second nature. Cited as “The Most Influential Cognitive-Behavioral Therapy Publication” by the British Association for Behavioural and Cognitive Psychotherapies and included in the UK National Health Service Bibliotherapy Program. Winner (Second Place)--American Journal of Nursing Book of the Year Award, Consumer Health Category See also the Spanish-language edition: El control de tu estado de ánimo, Segunda edición. Plus, mental health professionals, see also The Clinician's Guide to CBT Using Mind Over Mood, Second Edition.",
+        "genre": "Medical",
+        "author": "Dennis Greenberger, Christine A. Padesky",
+        "poster": "https://books.google.com/books/content?id=VLvMDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "In the Closet of The Vatican",
+        "year": "2019",
+        "description": "The New York Times Bestseller'[An] earth-shaking exposé of clerical corruption' - National Catholic ReporterIn the Closet of the Vatican exposes the rot at the heart of the Vatican and the Roman Catholic Church today. This brilliant piece of investigative writing is based on four years' authoritative research, including extensive interviews with those in power. The celibacy of priests, the condemnation of the use of contraceptives, the cover up of countless cases of sexual abuse, the resignation of Benedict XVI, misogyny among the clergy, the dramatic fall in Europe of the number of vocations to the priesthood, the plotting against Pope Francis - all these issues are clouded in mystery and secrecy.In the Closet of the Vatican is a book that reveals these secrets and penetrates this enigma. It derives from a system founded on a clerical culture of secrecy which starts in junior seminaries and continues right up to the Vatican itself. It is based on the double lives of priests and on extreme homophobia. The resulting schizophrenia in the Church is hard to fathom. But the more a prelate is homophobic, the more likely it is that he is himself gay.'Behind rigidity there is always something hidden, in many cases a double life'. These are the words of Pope Francis himself and with them the Pope has unlocked the Closet.No one can claim to really understand the Catholic Church today until they have read this book. It reveals a truth that is extraordinary and disturbing.",
+        "genre": "Literary Collections",
+        "author": "Frédéric Martel",
+        "poster": "https://books.google.com/books/content?id=z68yEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Field Guide to Edible Wild Plants",
+        "year": "2008",
+        "description": "Provides an illustrated guide to North American wild edible plants. In this edition, Foster revises Angier's foraging handbook, updating the taxonomy and adding more than a dozen species. Scientific information for a general audience and full-color illustrations combine with intriguing accounts of the plants' uses, making this a practical guide for modern-day foragers. --From publisher description.",
+        "genre": "Cooking",
+        "author": "Bradford Angier, David K. Foster",
+        "poster": "https://books.google.com/books/content?id=OTtFAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Teach Your Child to Read in 100 Easy Lessons",
+        "year": "1986",
+        "description": "* Is your child halfway through first grade and still unable to read? * Is your preschooler bored with coloring and ready for reading? * Are you worried that your child will become lost in overcrowded classrooms? * Did you know that early readers hold an advantage over their peers throughout school? * Do you want to help your child read, but are afraid you'll do something wrong? Teach Your Child to Read in 100 Easy Lessons is a complete, step-by-step program that shows parents simply and clearly how to teach their children to read. Twenty minutes a day is all you need, and within 100 teaching days your child will be reading on a solid second-grade reading level. It's a sensible, easy-to-follow, and enjoyable way to help your child gain the essential skills of reading. Everything you need is here - no paste, no scissors, no flash cards, no complicated directions - just you and your child learning together.",
+        "genre": "Education",
+        "author": "Phyllis Haddox, Siegfried Engelmann, Elaine Bruner",
+        "poster": "https://books.google.com/books/content?id=MUucJV0dRaIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Science in the Soul",
+        "year": "2017",
+        "description": "A \"defense of science and clear thinking [in a] career-spanning collection of essays, including twenty pieces published in the United States for the first time\"--Amazon.com.",
+        "genre": "Science",
+        "author": "Richard Dawkins",
+        "poster": "https://books.google.com/books/content?id=ZpkrDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Faithful Executioner",
+        "year": "2013",
+        "description": "\"A work of nonfiction that explores the thoughts and experiences of one early modern executioner, Nuremberg's Frantz Schmidt (1555-1634), through his own words - a rare personal journal, in which he recorded and described all the executions and corporal punishments he administered between 1573 and his retirement in 1617\"-- Provided by publisher",
+        "genre": "Biography & Autobiography",
+        "author": "Joel F. Harrington",
+        "poster": "https://books.google.com/books/content?id=ZmZkBm-AqwIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Nonviolent Communication",
+        "year": "2015",
+        "description": "Psychologist Marshall Rosenberg lays out a communication and conflict-resolution process focusing on inspiring empathy and listening empathically.",
+        "genre": "Psychology",
+        "author": "Marshall B. Rosenberg",
+        "poster": "https://books.google.com/books/content?id=bTgQrgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Lady First",
+        "year": "2019",
+        "description": "\"While the Woman's Rights convention was taking place at Seneca Falls in 1848, First Lady Sarah Childress Polk was wielding influence unprecedented for a woman in Washington, D.C. Yet while history remembers the women of the convention, it has all but forgotten Sarah Polk. Now, Amy S. Greenberg's riveting biography brings Sarah's story into vivid focus. We meet Sarah as the daughter of a frontiersman who raised her to discuss politics and business with men. We see the savvy and charm she brandished to help her brilliant but unlikeable husband, James K. Polk, ascend to the White House. We watch as she exercises truly extraordinary power as First Lady: quietly manipulating elected officials, shaping foreign policy, and directing a campaign in support of America's expansionist war against Mexico. And we meet many of the enslaved men and women whose difficult labor made Sarah's political success possible. Lady First also shines a light on Sarah's many contradictions. While her marriage to James was one of equals, she firmly opposed the feminist movement's demands for what she perceived to be far-reaching equality. She banned dancing and hard liquor from the White House, but did more entertaining than any of her predecessors. During the Civil War, she worked on behalf of the Confederacy even though she claimed to be neutral. And in the late nineteenth century, she became a celebrity among female Christian temperance reformers, while she struggled to redeem her husband's tarnished political legacy. Sarah Polk's life spanned nearly the entirety of the nineteenth century, and her legacy, which profoundly transformed the South, continues to endure. Comprehensive, nuanced, and brimming with invaluable insight, Lady First is a revelation of our eleventh First Lady's complex but essential part in American feminism.\"--Dust jacket.",
+        "genre": "BIOGRAPHY & AUTOBIOGRAPHY",
+        "author": "Amy S. Greenberg",
+        "poster": "https://books.google.com/books/content?id=Z-KCDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "How Not to Die",
+        "year": "2015",
+        "description": "Discover the foods scientifically proven to prevent and reverse disease.",
+        "genre": "Health & Fitness",
+        "author": "Michael Greger, Gene Stone",
+        "poster": "https://books.google.com/books/content?id=jEfXCgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "How to Win Friends and Influence People in the Digital Age",
+        "year": "2011",
+        "description": "An up-to-the-minute adaptation of Dale Carnegie's timeless, commonsense approach to communicating. In today's world, where more and more of our communication takes place across wires and screens, Carnegie's lessons have not only lasted but become all the more critical.",
+        "genre": "Business & Economics",
+        "author": "Brent Cole, Dale Carnegie & Associates",
+        "poster": "https://books.google.com/books/content?id=31Y4vjgcU7kC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Undo It!",
+        "year": "2019",
+        "description": "It works! -- Why it works-a unified theory of health and healing -- The lifestyle medicine revolution -- Eat well -- Move more -- Stress less -- Love more -- Ornish kitchen/true love recipes.",
+        "genre": "Cooking",
+        "author": "Dean Ornish MD, Dean Ornish, Anne Ornish",
+        "poster": "https://books.google.com/books/content?id=N5KADwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The TB12 Method",
+        "year": "2017",
+        "description": "The #1 New York Times bestseller by the 6-time Super Bowl champion The first book by New England Patriots quarterback Tom Brady--the 6-time Super Bowl champion who is still reaching unimaginable heights of excellence at 42 years old--a gorgeously illustrated and deeply practical \"athlete's bible\" that reveals Brady's revolutionary approach to sustained peak performance for athletes of all kinds and all ages. In modern sports, some athletes have managed to transcend their competition in a way that no one will ever forget: Jordan. Jeter. Ali. Williams. These elite legends have changed the game, achieved the unthinkable, and pushed their bodies to unbelievable limits. Joining their exclusive ranks is Tom Brady. \"Brady is the healthiest great champion the NFL has ever had, both physically and mentally\" (Sally Jenkins, The Washington Post). The longtime New England Patriots quarterback, who in 2017 achieved his fifth Super Bowl win and fourth Super Bowl MVP award, is widely regarded as an athlete whose training and determination pushed him from a mediocre draft position to the most-revered and respected professional football player of his generation. In The TB12 Method, Tom Brady explains how he developed his groundbreaking approach to long-term fitness, presenting a comprehensive, step-by-step guide to his personal practice. Brady offers the principles behind pliability, which is at the heart of a new paradigm shift and movement toward a more natural, healthier way of exercising, training, and living--and one that challenges some commonly held assumptions around health and wellness. Filled with lessons learned from Brady's own peak performance training, and step-by-step action steps to help readers develop and maintain their own peak performance, The TB12 Method also advocates for more effective approaches to strength training, hydration, nutrition, supplementation, cognitive fitness, recovery, and other lifestyle choices that dramatically decrease the risk of injury while amplifying and extending performance, as well as quality of life. After using his methods for over a decade, Brady believes that the TB12 approach has made him--and can make any athlete, male or female, in any sport and at any level--achieve their own peak performance. With instructions, drills, photos, in-depth case studies that Brady himself has used, as well as personal anecdotes and experiences from on and off the field, The TB12 Method is the only book an athlete will ever need, a playbook from Brady himself that will change the game.",
+        "genre": "Biography & Autobiography",
+        "author": "Tom Brady",
+        "poster": "https://books.google.com/books/content?id=tkk1DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Why the Rich Are Getting Richer",
+        "year": "2017",
+        "description": "Kiyosaki believes that our educational system-- and poor job it does on financial education-- is what causes the gap between the rich and everyone else. In this book, he explains why savers are losers, debt and taxes make the rich richer, and why going to school, working hard, getting out of debt, and investing for the long term in the stock market is the worst financial advice for most people. Kiyosaki and Wheelwright share ideas on how to survive-- and thrive-- into the future",
+        "genre": "Finance, Personal",
+        "author": "Robert T. Kiyosaki, Tom Wheelwright",
+        "poster": "https://books.google.com/books/content?id=h6QBvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "How to Raise Successful People",
+        "year": "2019",
+        "description": "Outlines simple, counterintuitive approaches to raising happy, healthy, and successful children through parental demonstrations of respectful examples and child-directed activities that facilitate early independence and problem-solving skills.",
+        "genre": "Business & Economics",
+        "author": "Esther Wojcicki",
+        "poster": "https://books.google.com/books/content?id=IiGTDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Narrative of the Life of Frederick Douglass, an American Slave",
+        "year": "2014",
+        "description": "\"First published in the United States of America by The Anti-Slavery Office 1845\"--Title page verso.",
+        "genre": "Biography & Autobiography",
+        "author": "Frederick Douglass",
+        "poster": "https://books.google.com/books/content?id=4FxfNBYMOicC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "My Country, My Life",
+        "year": "2018",
+        "description": "\"One of Israel's most influential and enduring figures, Ehud Barak was born on a kibbutz six years before the establishment of the state. During a long career in the military, he led the country's elite special-forces unit and rose to become armed forces chief of staff before going on to serve as Israel's defense minister and prime minister. This is his story--in his own words, for the very first time. In [this book], Ehud Barak draws on his experience as a military and political leader, son, and father to offer an up-close-and-personal look at both the history and future of Israel. In writing this groundbreaking memoir, he found himself \"\\'retracing not just my own life but Israel's, step by step, since our shared infancy.' From the country's creation and founding vision to its seven wars, two intifadas, and everyday conflicts between its Jewish and Palestinian populations, Barak examines the reasons his beloved ancestral homeland is at a crossroads today. Israel may be facing a crisis 'more profound than any in my lifetime,' he writes. Still, he feels 'fundamentally optimistic about our ability to come out stronger and more vigorous on the other side.' Offering candid assessments of his fellow politicians, the American administrations with which he worked, and his own trials and tribulations while in office, Barak argues that the country's current drift toward a 'one-state' solution to the conflict with the Palestinians--with permanent control over the West Bank--will inevitably end in tragedy, eroding its democratic principles and the core values of Zionism and sowing the seeds of future violence. He argues that Israel's own security and national interests dictate that, however long it might take, a two-state solution is the only conceivable destination. By rediscovering the twin pillars on which Israel was built--military might and moral purpose--it can thrive, he believes, and only then can peace and stability in the Middle East be achieved.\"--Dust jacket.",
+        "genre": "Biography & Autobiography",
+        "author": "Ehud Barak",
+        "poster": "https://books.google.com/books/content?id=r5NUDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "And Then There Were None",
+        "year": "2004",
+        "description": "And Then There Were None is the signature novel of Agatha Christie, the most popular work of the world's bestselling novelist. It is a masterpiece of mystery and suspense that has been a fixture in popular literature since it was originally published in 1939. First there were ten-a curious assortment of strangers summoned to a private island off the coast of Devon. Their host, an eccentric millionaire unknown to any of them, is nowhere to be found. The ten guests have precious little in common except that each has a deadly secret buried deep in their own past. And, unknown to them, each has been marked for murder. Alone on the island and trapped by foul weather, one by one the guests begin to fall prey to the hidden murderer among them. With themselves as the only suspects, only the dead are above suspicion.",
+        "genre": "Fiction",
+        "author": "Agatha Christie",
+        "poster": "https://books.google.com/books/content?id=zr5NBldVA5UC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Ivanhoe",
+        "year": "1984",
+        "description": "Young Ivanhoe returns from the Crusades to claim his inheritance and becomes involved in the power struggle between Richard the Lionheart and his brother John. Edited with an introduction and notes by A.N. Wilson.",
+        "genre": "Fiction",
+        "author": "Walter Scott",
+        "poster": "https://books.google.com/books/content?id=KTQrAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Grapes of Wrath",
+        "year": "1993",
+        "description": "Steinbeck won the Pulitzer Prize with The Grapes of Wrath as well as being awarded the 1940 Nobel Prize for Literature as a mark of his outstanding contribution to literature.",
+        "genre": "Fiction",
+        "author": "John Steinbeck",
+        "poster": "https://books.google.com/books/content?id=FAlBAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "David Copperfield",
+        "year": "1996",
+        "description": "Born six months after his father's death, David faces many hardships growing up in nineteenth-century England",
+        "genre": "Fiction",
+        "author": "Charles Dickens",
+        "poster": "https://books.google.com/books/content?id=O5F9a-NotOAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Dombey and Son",
+        "year": "1995",
+        "description": "A rich and pompous merchant is plagued by loneliness and misfortune.",
+        "genre": "Fiction",
+        "author": "Charles Dickens",
+        "poster": "https://books.google.com/books/content?id=tXda29cDfw8C&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Johnny Tremain",
+        "year": "1987",
+        "description": "A story filled with danger and excitement, Johnny Tremain tells of the turbulent passionate times in Boston just after the Revolutionary War. Johnny, a young apprentice silversmith, is caught up in a dramatic involvement with James Otis, John Hancock, and John and Samuel Adams in the Boston Tea Party and the Battle of Lexington. Copyright © Libri GmbH. All rights reserved.",
+        "genre": "Juvenile Fiction",
+        "author": "Esther Forbes",
+        "poster": "https://books.google.com/books/content?id=9gKVcv-loJAC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Dead Souls",
+        "year": "1923",
+        "description": "Few literary works have been so variously interpreted as Nikolai Gogol's enduring comic masterpiece, Dead Souls.",
+        "genre": "Fiction",
+        "author": "Nikolaĭ Vasilʹevich Gogolʹ",
+        "poster": "https://books.google.com/books/content?id=iX19AAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Little Women",
+        "year": "1953",
+        "description": "Little Women is one of the best loved books of all time. Lovely Meg, talented Jo, frail Beth, spoiled Amy: these are hard lessons of poverty and of growing up in New England during the Civil War. Through their dreams, plays, pranks, letters, illnesses, and courtships, women of all ages have become a part of this remarkable family and have felt the deep sadness when Meg leaves the circle of sisters to be married at the end of Part I. Part II, chronicles Meg's joys and mishaps as a young wife and mother, Jo's struggle to become a writer, Beth's tragedy, and Amy's artistic pursuits and unexpected romance. Based on Louise May Alcott's childhood, this lively portrait of nineteenth-century family life possesses a lasting vitality that has endeared it to generations of readers. From the Paperback edition.",
+        "genre": "Juvenile Fiction",
+        "author": "Louisa May Alcott",
+        "poster": "https://books.google.com/books/content?id=K5cIAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "House of the Seven Gables [eBook - RBdigital]",
+        "year": "1993",
+        "description": "The House of the Seven Gables, a fixture in Hawthorne's Salem, serves as the ancestral home of the fictional Pyncheon family;whose distinguished legacy is tainted by pious thievery. When country cousin Phoebe arrives at the house, she is like a cool breeze, refreshing a room that has been sealed for too long. The resulting mixture of dark and light imagery, illustrated by Hawthorne's rich prose, makes this romance an important American classic.",
+        "genre": "Domestic fiction",
+        "author": "Nathaniel Hawthorne",
+        "poster": "https://books.google.com/books/content?id=5YbGxgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "David Balfour",
+        "year": "1994",
+        "description": "The further adventures of David Balfour in which he continues his friendship with Alan Breck Stewart and support of the Scottish highlanders' cause, travels abroad to complete his education, and finds romance.",
+        "genre": "Fiction",
+        "author": "Robert Louis Stevenson",
+        "poster": "https://books.google.com/books/content?id=gu78JKzMB2cC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The House of the Seven Gables",
+        "year": "1970",
+        "description": "",
+        "genre": "Classic",
+        "author": "Nathaniel Hawthorne, Philip Young",
+        "poster": "",
+        "category": "books"
+    },
+    {
+        "title": "The Scarlet Letter",
+        "year": "199?",
+        "description": "Set in an early New England colony, this novel explores the terrible impact a single, passionate act has on the lives of three members of the community: the defiant Hester Prynne, the fiery, tortured Reverend Dimmesdale, and the obsessed, vengeful Chillingworth.",
+        "genre": "American fiction",
+        "author": "Nathaniel Hawthorne",
+        "poster": "https://books.google.com/books/content?id=OvYHuAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Sanctuary",
+        "year": "1981",
+        "description": "Brutal novel of the Deep South by the Nobel prize winner.",
+        "genre": "Fiction",
+        "author": "William Faulkner",
+        "poster": "https://books.google.com/books/content?id=VZJaAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "A Christmas Carol",
+        "year": "2018",
+        "description": "This single-volume edition of Dicken's classic Christmas story also includes Dicken's four other Christmas books and a selection of original illustrations.",
+        "genre": "Fiction",
+        "author": "Charles Dickens",
+        "poster": "https://books.google.com/books/content?id=74hNEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Lord of the Rings",
+        "year": "1974",
+        "description": "Contains The Fellowship of the ring, The Two towers, and The Return of the king, appendices, indexes, and notes on the text.",
+        "genre": "Fiction",
+        "author": "John Ronald Reuel Tolkien",
+        "poster": "https://books.google.com/books/content?id=TddVAQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Hard Times",
+        "year": "1998",
+        "description": "Unusually for Dickens, Hard Times is set, not in London, but in the imaginary mid-Victorian Northern industrial town of Coketown with its blackened factories, downtrodden workers and polluted environment. This is the soulless domain of the strict utilitarian Thomas Gradgrind and the heartless factory owner Josiah Bounderby.",
+        "genre": "Fiction",
+        "author": "Charles Dickens",
+        "poster": "https://books.google.com/books/content?id=5s9pBMAbzmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Mystery of the Blue Train",
+        "year": "1985",
+        "description": "A BBC full-cast radio drama starring Maurice Denham as the great Belgian detective. A millionaire strikes a deal on the seedier side of Paris and gives to his heartsick daughter, Ruth Kettering, the \"Heart of Fire,\" one of the world's legendary jewels. Legend has it that the possession of the jewel leads to death - but despite her father's protests, young Ruth decides to take it with her on the Blue Train to the French Riviera, where she has planned a reunion with her former lover. A few days into the journey, Ruth is found dead and her priceless rubies stolen. The suspects line up: could the murderer be Derek, her weak and greedy husband; Ruth's former lover, the Comte de la Roche; or the beautiful but tempestuous dancer Mirelle? Only master sleuth Hercule Poirot can unravel the mystery and find the truth.",
+        "genre": "Fiction",
+        "author": "Agatha Christie",
+        "poster": "https://books.google.com/books/content?id=nPIrAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Three Musketeers",
+        "year": "1993",
+        "description": "CLASSIC FICTION (PRE C 1945). A historical romance, this novel tells of the adventures of the hot-headed young Gascon, d'Artagnan and his three companions Athos, Porthos and Aramis as they gallantly defend the Queen of France, using their wit and their swords.",
+        "genre": "Fiction",
+        "author": "Alexandre Dumas",
+        "poster": "https://books.google.com/books/content?id=vp--U7m0g-AC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "Moby-Dick",
+        "year": "2002",
+        "description": "",
+        "genre": "Fiction",
+        "author": "Herman Melville",
+        "poster": "https://books.google.com/books/content?id=KklXzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "category": "books"
+    },
+    {
+        "title": "The Talisman",
+        "year": "1929",
+        "description": "Through a series of adventures, a poor but doughty Scottish crusader known as Sir Kenneth proves his honor and discovers his destiny in Sir Walter Scott's tale of chivalry, violence, virtue, romance, and deceit.",
+        "genre": "Fiction",
+        "author": "Walter Scott",
+        "poster": "https://books.google.com/books/content?id=D7E8AQAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "category": "books"
+    }
 ]
