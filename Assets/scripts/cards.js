@@ -1,4 +1,4 @@
-import { fetchMovies } from './main.js';
+import { fetchMovies, fetchTV } from './main.js';
 let allItems = [];
 let currentFilter = 'all';
 let quillEditor = null;
@@ -237,10 +237,6 @@ import {
     db
 } from "./firebase.js";
 // Import media arrays from separate files
-//tv import
-import {
-    tv
-} from "../TV Shows/tv.js";
 import {
     music
 } from "../Music/music.js";
@@ -294,7 +290,8 @@ async function initCards() {
     }
 
     try {
-        validTV = Array.isArray(tv) ? tv.filter(item => typeof item.title === 'string' && item.title) : [];
+        const tvData = await fetchTV();
+        validTV = tvData.filter(item => typeof item.title === 'string' && item.title);
     } catch (e) {
         console.error("Failed to load TV shows:", e);
     }

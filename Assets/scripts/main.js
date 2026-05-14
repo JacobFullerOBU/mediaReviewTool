@@ -28,6 +28,30 @@ export async function fetchMovies() {
     return [];
 }
 
+export async function fetchTV() {
+    const potentialPaths = [
+        "Assets/TV Shows/tvList.json",
+        "./Assets/TV Shows/tvList.json",
+        "/mediaReviewTool/Assets/TV Shows/tvList.json",
+        "../TV Shows/tvList.json",
+        "../../Assets/TV Shows/tvList.json",
+    ];
+
+    for (const path of potentialPaths) {
+        try {
+            const response = await fetch(path);
+            const contentType = response.headers.get("content-type");
+            if (response.ok && contentType && contentType.includes("application/json")) {
+                return await response.json();
+            }
+        } catch (e) {
+            // Continue to next path
+        }
+    }
+    console.error("Failed to fetch TV shows from any path.");
+    return [];
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     initAppUI();
 
