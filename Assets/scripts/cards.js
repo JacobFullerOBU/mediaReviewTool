@@ -1,5 +1,26 @@
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 
+const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
+async function fetchStreamingProviders(item) {
+    const cat = (item.category || '').toLowerCase();
+    const mediaType = cat === 'movies' ? 'movie' : cat === 'tv' ? 'tv' : null;
+    if (!mediaType) return null;
+    try {
+        const searchResp = await fetch(
+            `https://api.themoviedb.org/3/search/${mediaType}?api_key=${TMDB_KEY}&query=${encodeURIComponent(item.title)}&language=en-US`
+        );
+        const tmdbId = (await searchResp.json()).results?.[0]?.id;
+        if (!tmdbId) return null;
+        const provResp = await fetch(
+            `https://api.themoviedb.org/3/${mediaType}/${tmdbId}/watch/providers?api_key=${TMDB_KEY}`
+        );
+        return (await provResp.json()).results?.US?.flatrate || null;
+    } catch (e) {
+        console.error('Streaming lookup failed:', e);
+        return null;
+    }
+}
+
 const AMAZON_TAG = 'mediareviews6-20';
 function buildAmazonUrl(item) {
     let terms = item.title || '';
@@ -603,7 +624,12 @@ async function showItemDetails(item) {
                     <div class="text-sm text-slate-400 mb-4">
                         ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
                     </div>
-                    <p class="text-slate-400 mb-6">${item.description || ''}</p>
+                    <p class="text-slate-400 mb-4">${item.description || ''}</p>
+                    <div id="streamingSection" class="mb-4">
+                        ${['movies', 'tv'].includes((item.category || '').toLowerCase())
+                            ? '<p class="text-xs text-slate-500 italic">Checking streaming availability...</p>'
+                            : ''}
+                    </div>
                     <div class="flex items-center gap-6 bg-slate-900/50 p-3 rounded-lg mb-6">
                         <div>
                             <strong>Avg. Rating:</strong> 
@@ -684,6 +710,24 @@ async function showItemDetails(item) {
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
     lucide.createIcons();
+
+    // Streaming availability (movies + TV only)
+    const streamingSection = modal.querySelector('#streamingSection');
+    if (streamingSection && ['movies', 'tv'].includes((item.category || '').toLowerCase())) {
+        fetchStreamingProviders(item).then(providers => {
+            if (!providers || providers.length === 0) {
+                streamingSection.innerHTML = '<p class="text-xs text-slate-500">Not available to stream in the US.</p>';
+                return;
+            }
+            const logos = providers.slice(0, 8).map(p =>
+                `<img src="https://image.tmdb.org/t/p/w45${p.logo_path}" alt="${p.provider_name}" title="${p.provider_name}" class="w-8 h-8 rounded-md" onerror="this.style.display='none'">`
+            ).join('');
+            streamingSection.innerHTML = `
+                <p class="text-xs text-slate-400 font-semibold mb-2 uppercase tracking-wide">Available to Stream</p>
+                <div class="flex flex-wrap gap-2">${logos}</div>
+            `;
+        });
+    }
 
     // Add keyboard event listener for Escape key
     const handleKeyDown = (e) => {
