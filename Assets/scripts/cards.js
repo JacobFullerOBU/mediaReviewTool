@@ -585,7 +585,7 @@ async function showItemDetails(item) {
                         ${item.genre ? `<span><strong>Genre:</strong> ${item.genre}</span>` : ''}
                     </div>
                     <div class="text-sm text-slate-400 mb-4">
-                        ${item.director ? `<strong>Director:</strong> ${item.director}` : ''}
+                        ${item.director ? `<strong>Director:</strong> ${item.director}` : item.creator ? `<strong>Creator:</strong> ${item.creator}` : ''}
                     </div>
                     <div class="text-sm text-slate-400 mb-4">
                         ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
