@@ -2,7 +2,7 @@
 
 **Discover, Review, and Track your favorite entertainment.**
 
-🔗 **[Live Demo](https://jacobfullerobu.github.io/mediaReviewTool/index.html)**
+🔗 **[Live Deployment]((https://truerated.co/))**
 
 ---
 
