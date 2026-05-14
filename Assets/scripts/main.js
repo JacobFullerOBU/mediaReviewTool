@@ -1,4 +1,4 @@
-// Main JavaScript functionality for the Media Review Tool
+// Main JavaScript functionality for True Rated
 
 export async function fetchMovies() {
     const potentialPaths = [
@@ -168,7 +168,7 @@ function initAppUI() {
     // Initialize explore button
     initExploreButton();
     
-    console.log('Media Review Tool initialized successfully');
+    console.log('True Rated initialized successfully');
 }
 
 // Mobile Navigation

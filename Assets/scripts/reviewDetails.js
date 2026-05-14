@@ -49,7 +49,7 @@ async function fetchDetails() {
 
 function renderDetails(review, movie, reviewer) {
     const title = movie ? movie.title : review.mediaId.replace(/_/g, ' ');
-    document.title  = `${title} - Review Details | MediaReview`;
+    document.title  = `${title} - Review Details | True Rated`;
     const poster = movie ? (movie.poster || movie.image) : '';
     const reviewerName = reviewer.name || "Anonymous Critic";
     const reviewerAvatar = reviewer.avatar || "";
