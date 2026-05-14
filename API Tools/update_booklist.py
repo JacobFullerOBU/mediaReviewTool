@@ -7,13 +7,15 @@ import requests
 # ── CONFIGURATION ─────────────────────────────────────────────────────────────
 API_KEY = "AIzaSyB6vCAjCO_wFlAWO2h9kgYnmRrIfXxq8pA"
 
-# Subjects to search — 40 books fetched per subject (Google Books max per request)
+# Subjects to search — Google Books returns up to 40 per page
 SUBJECTS = [
     "fiction", "mystery", "romance", "fantasy", "thriller",
     "biography", "science fiction", "historical fiction",
     "horror", "self help", "nonfiction", "young adult", "classics",
+    "graphic novels", "true crime", "cookbooks", "poetry",
 ]
-RESULTS_PER_SUBJECT  = 40   # Google Books API max per request
+PAGES_PER_SUBJECT    = 3    # pages per subject (3 × 40 = up to 120 books each)
+RESULTS_PER_PAGE     = 40   # Google Books API hard max per request
 CHECKPOINT_MAX_AGE_HOURS = 12
 
 _SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
@@ -98,24 +100,37 @@ def fetch_books(existing_fingerprints):
     skipped_existing = skipped_checkpoint = 0
     for subject in SUBJECTS:
         print(f"\n  Subject: {subject}")
-        try:
-            resp = requests.get(
-                BASE_URL,
-                params={
-                    "q":          f"subject:{subject}",
-                    "orderBy":    "relevance",
-                    "maxResults": RESULTS_PER_SUBJECT,
-                    "printType":  "books",
-                    "langRestrict": "en",
-                    "key":        API_KEY,
-                },
-                timeout=15,
-            )
-            resp.raise_for_status()
-            items = resp.json().get("items", [])
-            if not items:
-                print(f"  No results for '{subject}'.")
-                continue
+        for page in range(PAGES_PER_SUBJECT):
+            start_index = page * RESULTS_PER_PAGE
+            print(f"    Page {page + 1}/{PAGES_PER_SUBJECT} (startIndex={start_index})")
+            try:
+                resp = requests.get(
+                    BASE_URL,
+                    params={
+                        "q":            f"subject:{subject}",
+                        "orderBy":      "relevance",
+                        "maxResults":   RESULTS_PER_PAGE,
+                        "startIndex":   start_index,
+                        "printType":    "books",
+                        "langRestrict": "en",
+                        "key":          API_KEY,
+                    },
+                    timeout=15,
+                )
+                resp.raise_for_status()
+                data       = resp.json()
+                items      = data.get("items", [])
+                total_items = data.get("totalItems", 0)
+                if not items:
+                    print(f"    No results on this page.")
+                    break
+                # Stop paginating if we've gone past the total available
+                if start_index >= total_items:
+                    break
+
+            except Exception as e:
+                print(f"    Error on subject '{subject}' page {page + 1}: {e}")
+                break
 
             for item in items:
                 volume_id   = item.get("id", "")
@@ -169,9 +184,6 @@ def fetch_books(existing_fingerprints):
                 save_checkpoint(processed_ids, fetched)
                 print(f"      ✔ Checkpoint saved ({len(processed_ids)} processed, {len(fetched)} queued)")
                 time.sleep(0.1)
-
-        except Exception as e:
-            print(f"  Error on subject '{subject}': {e}")
 
     print(f"\n  New: {len(fetched)}  |  Skipped (master): {skipped_existing}  |  Skipped (checkpoint): {skipped_checkpoint}")
     return fetched
