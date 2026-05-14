@@ -468,7 +468,10 @@ async function filterCards(category) {
             if (!match && item.description) {
                 match = item.description.toLowerCase().includes(searchTerm);
             }
-            // For TV: Creators, cast
+            // For TV: creator(s), cast
+            if (!match && item.creator) {
+                match = item.creator.toLowerCase().includes(searchTerm);
+            }
             if (!match && item.creators) {
                 match = item.creators.toLowerCase().includes(searchTerm);
             }
