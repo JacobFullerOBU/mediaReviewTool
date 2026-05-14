@@ -1,4 +1,4 @@
-import { fetchMovies, fetchTV } from './main.js';
+import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 let allItems = [];
 let currentFilter = 'all';
 let quillEditor = null;
@@ -243,10 +243,6 @@ import {
 import {
     games
 } from "../Video Games/games.js";
-import {
-    books
-} from "../Books/books.js";
-window.books = books;
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
     const reviewsRef = ref(db, `reviews/${mediaId}`);
@@ -309,7 +305,8 @@ async function initCards() {
     }
 
     try {
-        validBooks = Array.isArray(books) ? books.filter(item => typeof item.title === 'string' && item.title) : [];
+        const booksData = await fetchBooks();
+        validBooks = booksData.filter(item => typeof item.title === 'string' && item.title);
     } catch (e) {
         console.error("Failed to load books:", e);
     }
@@ -588,7 +585,7 @@ async function showItemDetails(item) {
                         ${item.genre ? `<span><strong>Genre:</strong> ${item.genre}</span>` : ''}
                     </div>
                     <div class="text-sm text-slate-400 mb-4">
-                        ${item.director ? `<strong>Director:</strong> ${item.director}` : item.creator ? `<strong>Creator:</strong> ${item.creator}` : ''}
+                        ${item.director ? `<strong>Director:</strong> ${item.director}` : item.creator ? `<strong>Creator:</strong> ${item.creator}` : item.author ? `<strong>Author:</strong> ${item.author}` : ''}
                     </div>
                     <div class="text-sm text-slate-400 mb-4">
                         ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
