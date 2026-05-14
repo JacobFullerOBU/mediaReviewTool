@@ -3,31 +3,19 @@
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { db } from "./firebase.js";
 
-// Import media arrays from separate files
-import { tv } from "../TV Shows/tv.js";
+import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
-import { books } from "../Books/books.js";
-
-async function fetchMovies() {
-    try {
-        const response = await fetch("Assets/Movies/movieList.json");
-        return await response.json();
-    } catch (e) {
-        console.error("Failed to fetch movies:", e);
-        return [];
-    }
-}
 
 async function getAllMediaMap() {
     try {
-        const movies = await fetchMovies();
+        const [movies, tvData, booksData] = await Promise.all([fetchMovies(), fetchTV(), fetchBooks()]);
         const allMedia = [
             ...movies.filter(item => item.title),
-            ...tv.filter(item => item.title),
+            ...tvData.filter(item => item.title),
             ...music.filter(item => item.title),
             ...games.filter(item => item.title),
-            ...books.filter(item => item.title)
+            ...booksData.filter(item => item.title)
         ];
 
         const mediaMap = {};
@@ -46,10 +34,12 @@ async function getAllMediaMap() {
 
 async function fetchAllData() {
     try {
-        const [reviewsRes, reviewersRes, movies] = await Promise.all([
+        const [reviewsRes, reviewersRes, movies, tvData, booksData] = await Promise.all([
             fetch('Assets/Data/reviews.json'),
             fetch('Assets/Data/reviewers.json'),
-            fetchMovies()
+            fetchMovies(),
+            fetchTV(),
+            fetchBooks()
         ]);
 
         if (!reviewsRes.ok || !reviewersRes.ok) {
@@ -58,13 +48,13 @@ async function fetchAllData() {
 
         const reviews = await reviewsRes.json();
         const reviewers = await reviewersRes.json();
-        
+
         const allMedia = [
             ...movies.filter(item => item.title),
-            ...tv.filter(item => item.title),
+            ...tvData.filter(item => item.title),
             ...music.filter(item => item.title),
             ...games.filter(item => item.title),
-            ...books.filter(item => item.title)
+            ...booksData.filter(item => item.title)
         ];
 
         return { reviews, reviewers, allMedia };

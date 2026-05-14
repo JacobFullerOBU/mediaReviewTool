@@ -1,11 +1,9 @@
 import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { app, auth } from './firebase.js';
-import { fetchMovies } from './main.js';
-import { tv } from "../TV Shows/tv.js";
+import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 import { music } from "../Music/music.js";
 import { games } from "../Video Games/games.js";
-import { books } from "../Books/books.js";
 
 const mediaItemCache = {};
 
@@ -192,8 +190,8 @@ async function loadProfile(reviewerId) {
         }
 
         console.log("Fetching media...");
-        const movies = await fetchMovies();
-        const allMedia = [...movies, ...tv, ...music, ...games, ...books].filter(item => item && item.title);
+        const [movies, tvData, booksData] = await Promise.all([fetchMovies(), fetchTV(), fetchBooks()]);
+        const allMedia = [...movies, ...tvData, ...music, ...games, ...booksData].filter(item => item && item.title);
         console.log("Total media items:", allMedia.length);
         
         let allReviews = [];
