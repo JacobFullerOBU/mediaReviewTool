@@ -2,7 +2,7 @@
 
 **Discover, Review, and Track your favorite entertainment.**
 
-🔗 **[Live Deployment]((https://truerated.co/))**))
+🔗 **[Live Deployment]((https://truerated.co/))**
 
 ---
 
