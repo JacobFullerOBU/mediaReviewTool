@@ -83,6 +83,7 @@ def clear_checkpoint():
 def fetch_movies(existing_fingerprints):
     print("\n── FETCHING FROM TMDB ───────────────────────────────────────────────")
     print("  Mode: now playing in theatres")
+    print(f"  Checkpoint file: {CHECKPOINT_FILE}")
 
     processed_ids, fetched = load_checkpoint()
 
@@ -110,7 +111,6 @@ def fetch_movies(existing_fingerprints):
                 print(f"  Reached last page ({total_pages}). Stopping early.")
                 break
 
-            page_had_new = False
             for item in results:
                 title   = item["title"]
                 year    = item.get("release_date", "")[:4]
@@ -153,12 +153,9 @@ def fetch_movies(existing_fingerprints):
                     "category":    "movies",
                 })
                 processed_ids.add(tmdb_id)
-                page_had_new = True
-                time.sleep(0.1)
-
-            # Save checkpoint once per page (not once per movie)
-            if page_had_new:
                 save_checkpoint(processed_ids, fetched)
+                print(f"      ✔ Checkpoint saved ({len(processed_ids)} processed, {len(fetched)} queued)")
+                time.sleep(0.1)
 
         except Exception as e:
             print(f"  Error on page {page}: {e}")

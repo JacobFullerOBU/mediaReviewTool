@@ -56410,5 +56410,23 @@
         "director": "Unknown",
         "poster": "https://image.tmdb.org/t/p/w500/pVNvbDX9psQhmCvc37A3XKLZjEz.jpg",
         "category": "movies"
+    },
+    {
+        "title": "Daadi Ki Shaadi",
+        "year": "2026",
+        "description": "A grandmother’s mishap with a social media post causes consternation amongst her children and threatens the prospect of her granddaughter’s wedding.",
+        "genre": "Comedy, Drama, Family",
+        "director": "Ashish R. Mohan",
+        "poster": "https://image.tmdb.org/t/p/w500/hKbQjE5ZcZUpuzApEjyoVCUWwdx.jpg",
+        "category": "movies"
+    },
+    {
+        "title": "Ponyo",
+        "year": "2008",
+        "description": "When Sosuke, a young boy who lives on a clifftop overlooking the sea, rescues a stranded goldfish named Ponyo, he discovers more than he bargained for. Ponyo is a curious, energetic young creature who yearns to be human, but even as she causes chaos around the house, her father, a powerful sorcerer, schemes to return Ponyo to the sea.",
+        "genre": "Animation, Fantasy, Family",
+        "director": "Hayao Miyazaki",
+        "poster": "https://image.tmdb.org/t/p/w500/yp8vEZflGynlEylxEesbYasc06i.jpg",
+        "category": "movies"
     }
 ]
