@@ -150,20 +150,39 @@ function buildFavoriteSlot(mediaItem, index, isOwner, allMedia, db, reviewerId, 
 }
 
 function openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, mediaMap) {
-    wrapper.innerHTML = `
-        <div class="w-full aspect-[2/3] rounded-lg border border-indigo-500 bg-slate-900 flex flex-col p-2 overflow-hidden">
-            <input type="text"
-                class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1.5 text-white text-xs outline-none focus:border-indigo-500 placeholder-slate-500 flex-shrink-0"
-                placeholder="Search title…"
-                autocomplete="off"
-            >
-            <div class="search-results mt-1.5 flex-1 overflow-y-auto space-y-px min-h-0"></div>
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm';
+    overlay.innerHTML = `
+        <div class="bg-slate-800 rounded-xl w-full max-w-sm shadow-2xl border border-slate-700">
+            <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-slate-700">
+                <h4 class="text-white font-semibold text-sm">Add to Favorites</h4>
+                <button class="close-btn text-slate-400 hover:text-white text-xl leading-none">&times;</button>
+            </div>
+            <div class="p-4">
+                <input type="text"
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white text-sm outline-none focus:border-indigo-500 placeholder-slate-500"
+                    placeholder="Search for a title…"
+                    autocomplete="off"
+                >
+                <div class="search-results mt-3 space-y-1 max-h-64 overflow-y-auto"></div>
+            </div>
         </div>
     `;
 
-    const input = wrapper.querySelector('input');
-    const resultsList = wrapper.querySelector('.search-results');
+    document.body.appendChild(overlay);
+    const input = overlay.querySelector('input');
+    const resultsList = overlay.querySelector('.search-results');
     input.focus();
+
+    function close() {
+        overlay.remove();
+    }
+
+    overlay.querySelector('.close-btn').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') { close(); document.removeEventListener('keydown', escHandler); }
+    });
 
     input.addEventListener('input', () => {
         const term = input.value.trim().toLowerCase();
@@ -172,30 +191,24 @@ function openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, m
 
         allMedia
             .filter(item => item.title && item.title.toLowerCase().includes(term))
-            .slice(0, 7)
+            .slice(0, 8)
             .forEach(item => {
+                const poster = item.poster || item.image || '';
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'w-full text-left px-2 py-1 text-xs text-slate-200 hover:bg-indigo-600 rounded truncate';
-                btn.textContent = item.title;
-                btn.addEventListener('mousedown', async (e) => {
-                    e.preventDefault();
+                btn.className = 'w-full text-left flex items-center gap-3 px-3 py-2 text-sm text-slate-200 hover:bg-indigo-600 rounded-lg transition-colors';
+                btn.innerHTML = poster
+                    ? `<img src="${poster}" class="w-8 h-11 object-cover rounded flex-shrink-0"><span class="truncate">${item.title}</span>`
+                    : `<span class="truncate">${item.title}</span>`;
+                btn.addEventListener('click', async () => {
                     const mediaId = item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
                     await set(ref(db, `favorites/${reviewerId}/${index}`), mediaId);
                     wrapper.replaceWith(buildFavoriteSlot(item, index, isOwner, allMedia, db, reviewerId, mediaMap));
                     if (window.lucide) lucide.createIcons();
+                    close();
                 });
                 resultsList.appendChild(btn);
             });
-    });
-
-    input.addEventListener('blur', () => {
-        setTimeout(() => {
-            if (wrapper.querySelector('input')) {
-                wrapper.replaceWith(buildFavoriteSlot(null, index, isOwner, allMedia, db, reviewerId, mediaMap));
-                if (window.lucide) lucide.createIcons();
-            }
-        }, 150);
     });
 }
 
