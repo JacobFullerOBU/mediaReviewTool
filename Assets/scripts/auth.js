@@ -1,11 +1,13 @@
 // --- Firebase Auth & Database Imports ---
 import { auth, db } from "./firebase.js";
 import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { 
+import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    signOut
+    signOut,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 // --- 1. Initialization Logic ---
@@ -140,6 +142,8 @@ function initAuthForms() {
     document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
     document.getElementById('registerForm')?.addEventListener('submit', handleRegister);
     document.getElementById('importForm')?.addEventListener('submit', handleImport);
+    document.getElementById('googleLoginBtn')?.addEventListener('click', handleGoogleSignIn);
+    document.getElementById('googleRegisterBtn')?.addEventListener('click', handleGoogleSignIn);
 }
 
 // --- 4. Auth Handlers ---
@@ -189,6 +193,30 @@ async function handleRegister(e) {
         showFormError(e.target, getAuthErrorMessage(error));
     } finally {
         setButtonLoading(submitBtn, false);
+    }
+}
+
+async function handleGoogleSignIn() {
+    const provider = new GoogleAuthProvider();
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        // Create profile if it doesn't exist yet (update won't overwrite existing fields)
+        await import("https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js").then(({ ref: dbRef, update }) =>
+            update(dbRef(db, 'reviewers/' + user.uid), {
+                name: user.displayName || user.email.split('@')[0],
+                email: user.email,
+                photoURL: user.photoURL || null,
+            })
+        );
+        localStorage.setItem('userData', JSON.stringify({ email: user.email }));
+        hideModal(document.getElementById('loginModal'));
+        hideModal(document.getElementById('registerModal'));
+        showNotification('Signed in with Google!', 'success');
+    } catch (error) {
+        if (error.code !== 'auth/popup-closed-by-user') {
+            showNotification(getAuthErrorMessage(error), 'error');
+        }
     }
 }
 
