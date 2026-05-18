@@ -63,6 +63,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 function createWatchlistItem(item) {
     const listItem = document.createElement('div');
     listItem.className = 'flex items-center gap-4 p-2 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer';
+    listItem.dataset.category = item.category || 'unknown';
 
     const poster = item.poster || item.image || 'https://via.placeholder.com/100x150.png?text=No+Image';
     

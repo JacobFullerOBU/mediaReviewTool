@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Watchlist</h3>
+                    <h3 class="text-2xl font-bold text-white mb-6" id="watchlistHeading">Watchlist</h3>
                     <div id="watchlistContainer" class="relative">
                         <div id="userWatchlist" class="space-y-4 overflow-hidden transition-all duration-500">
                             <!-- Watchlist items will be injected here -->
@@ -117,6 +117,29 @@
                 lucide.createIcons();
             }
 
+            function filterSection(container, category, emptyText) {
+                const items = container.querySelectorAll('[data-category]');
+                let visibleCount = 0;
+                items.forEach(function(item) {
+                    const match = category === 'all' || item.dataset.category === category;
+                    item.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
+                });
+
+                let emptyMsg = container.querySelector('.filter-empty-msg');
+                if (visibleCount === 0 && items.length > 0) {
+                    if (!emptyMsg) {
+                        emptyMsg = document.createElement('p');
+                        emptyMsg.className = 'text-slate-500 text-center filter-empty-msg';
+                        container.appendChild(emptyMsg);
+                    }
+                    emptyMsg.textContent = emptyText;
+                    emptyMsg.style.display = '';
+                } else if (emptyMsg) {
+                    emptyMsg.style.display = 'none';
+                }
+            }
+
             const reviewFilterTabs = document.getElementById('reviewFilterTabs');
             if (reviewFilterTabs) {
                 reviewFilterTabs.addEventListener('click', function(e) {
@@ -131,27 +154,17 @@
                     tab.classList.remove('bg-slate-700', 'text-slate-300');
 
                     const category = tab.dataset.filter;
+                    const label = tab.textContent.trim();
+
                     const reviewsContainer = document.getElementById('userReviews');
-                    const items = reviewsContainer.querySelectorAll('[data-category]');
-                    let visibleCount = 0;
+                    filterSection(reviewsContainer, category, 'No ' + label + ' reviews yet.');
 
-                    items.forEach(function(item) {
-                        const match = category === 'all' || item.dataset.category === category;
-                        item.style.display = match ? '' : 'none';
-                        if (match) visibleCount++;
-                    });
+                    const watchlistContainer = document.getElementById('userWatchlist');
+                    filterSection(watchlistContainer, category, 'No ' + label + ' items in watchlist.');
 
-                    let emptyMsg = reviewsContainer.querySelector('.filter-empty-msg');
-                    if (visibleCount === 0 && items.length > 0) {
-                        if (!emptyMsg) {
-                            emptyMsg = document.createElement('p');
-                            emptyMsg.className = 'text-slate-500 text-center filter-empty-msg';
-                            reviewsContainer.appendChild(emptyMsg);
-                        }
-                        emptyMsg.textContent = 'No ' + tab.textContent.trim() + ' reviews yet.';
-                        emptyMsg.style.display = '';
-                    } else if (emptyMsg) {
-                        emptyMsg.style.display = 'none';
+                    const watchlistHeading = document.getElementById('watchlistHeading');
+                    if (watchlistHeading) {
+                        watchlistHeading.textContent = category === 'all' ? 'Watchlist' : label + ' Watchlist';
                     }
                 });
             }
