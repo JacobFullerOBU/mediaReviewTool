@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { app, auth } from './firebase.js';
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
@@ -87,6 +87,117 @@ function createWatchlistItem(item) {
     
     return listItem;
 }
+
+// ── Favorites ────────────────────────────────────────────────────────────────
+
+function renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, reviewerId) {
+    const container = document.getElementById('favoritesSection');
+    if (!container) return;
+
+    container.innerHTML = `
+        <h3 class="text-xl font-bold text-white mb-4">Top 5 Favorites</h3>
+        <div class="grid grid-cols-5 gap-2 sm:gap-3" id="favoriteSlots"></div>
+    `;
+
+    const slotsEl = document.getElementById('favoriteSlots');
+    for (let i = 0; i < 5; i++) {
+        const mediaId = favData[i] || null;
+        const mediaItem = mediaId ? (mediaMap[mediaId] || null) : null;
+        slotsEl.appendChild(buildFavoriteSlot(mediaItem, i, isOwner, allMedia, db, reviewerId, mediaMap));
+    }
+    if (window.lucide) lucide.createIcons();
+}
+
+function buildFavoriteSlot(mediaItem, index, isOwner, allMedia, db, reviewerId, mediaMap) {
+    const wrapper = document.createElement('div');
+    wrapper.dataset.slotIndex = index;
+
+    if (mediaItem) {
+        const poster = mediaItem.poster || mediaItem.image || '';
+        wrapper.className = 'relative group cursor-default';
+        wrapper.innerHTML = `
+            <img src="${poster}" alt="${mediaItem.title}"
+                 class="w-full aspect-[2/3] object-cover rounded-lg border border-slate-700 shadow-md">
+            <div class="absolute inset-0 rounded-lg bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="text-white text-xs font-medium line-clamp-2 leading-tight">${mediaItem.title}</span>
+            </div>
+            ${isOwner ? `<button class="slot-clear-btn absolute top-1 right-1 w-5 h-5 bg-black/70 hover:bg-red-500 text-white rounded-full text-xs opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">✕</button>` : ''}
+        `;
+        if (isOwner) {
+            wrapper.querySelector('.slot-clear-btn').addEventListener('click', async () => {
+                await remove(ref(db, `favorites/${reviewerId}/${index}`));
+                wrapper.replaceWith(buildFavoriteSlot(null, index, isOwner, allMedia, db, reviewerId, mediaMap));
+                if (window.lucide) lucide.createIcons();
+            });
+        }
+    } else if (isOwner) {
+        wrapper.innerHTML = `
+            <button class="slot-add-btn w-full aspect-[2/3] rounded-lg border-2 border-dashed border-slate-600 hover:border-indigo-500 hover:bg-indigo-500/5 flex flex-col items-center justify-center gap-1.5 transition-colors">
+                <i data-lucide="plus" class="w-6 h-6 text-slate-500"></i>
+                <span class="text-slate-500 text-xs font-medium">Add</span>
+            </button>
+        `;
+        wrapper.querySelector('.slot-add-btn').addEventListener('click', () => {
+            openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, mediaMap);
+        });
+    } else {
+        wrapper.innerHTML = `<div class="w-full aspect-[2/3] rounded-lg border border-dashed border-slate-700/40 bg-slate-800/30"></div>`;
+    }
+
+    return wrapper;
+}
+
+function openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, mediaMap) {
+    wrapper.innerHTML = `
+        <div class="w-full aspect-[2/3] rounded-lg border border-indigo-500 bg-slate-900 flex flex-col p-2 overflow-hidden">
+            <input type="text"
+                class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1.5 text-white text-xs outline-none focus:border-indigo-500 placeholder-slate-500 flex-shrink-0"
+                placeholder="Search title…"
+                autocomplete="off"
+            >
+            <div class="search-results mt-1.5 flex-1 overflow-y-auto space-y-px min-h-0"></div>
+        </div>
+    `;
+
+    const input = wrapper.querySelector('input');
+    const resultsList = wrapper.querySelector('.search-results');
+    input.focus();
+
+    input.addEventListener('input', () => {
+        const term = input.value.trim().toLowerCase();
+        resultsList.innerHTML = '';
+        if (term.length < 2) return;
+
+        allMedia
+            .filter(item => item.title && item.title.toLowerCase().includes(term))
+            .slice(0, 7)
+            .forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'w-full text-left px-2 py-1 text-xs text-slate-200 hover:bg-indigo-600 rounded truncate';
+                btn.textContent = item.title;
+                btn.addEventListener('mousedown', async (e) => {
+                    e.preventDefault();
+                    const mediaId = item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                    await set(ref(db, `favorites/${reviewerId}/${index}`), mediaId);
+                    wrapper.replaceWith(buildFavoriteSlot(item, index, isOwner, allMedia, db, reviewerId, mediaMap));
+                    if (window.lucide) lucide.createIcons();
+                });
+                resultsList.appendChild(btn);
+            });
+    });
+
+    input.addEventListener('blur', () => {
+        setTimeout(() => {
+            if (wrapper.querySelector('input')) {
+                wrapper.replaceWith(buildFavoriteSlot(null, index, isOwner, allMedia, db, reviewerId, mediaMap));
+                if (window.lucide) lucide.createIcons();
+            }
+        }, 150);
+    });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM Content Loaded, starting script.");
@@ -234,6 +345,11 @@ async function loadProfile(reviewerId) {
         console.log("Found reviews for this user:", allReviews.length);
 
         const isOwner = auth.currentUser && auth.currentUser.uid === reviewerId;
+
+        // Render favorites section
+        const favSnap = await get(ref(db, `favorites/${reviewerId}`));
+        const favData = favSnap.exists() ? favSnap.val() : {};
+        renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, reviewerId);
 
         const userReviewsContainer = document.getElementById('userReviews');
         if (allReviews.length > 0) {
