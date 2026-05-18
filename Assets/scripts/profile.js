@@ -95,8 +95,8 @@ function renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, review
     if (!container) return;
 
     container.innerHTML = `
-        <h3 class="text-xl font-bold text-white mb-4">Top 5 Favorites</h3>
-        <div class="grid grid-cols-5 gap-2 sm:gap-3" id="favoriteSlots"></div>
+        <h3 class="text-base font-semibold text-white mb-3">Top 5 Favorites</h3>
+        <div class="grid grid-cols-5 gap-2" id="favoriteSlots"></div>
     `;
 
     const slotsEl = document.getElementById('favoriteSlots');
@@ -283,9 +283,6 @@ async function loadProfile(reviewerId) {
         const profileBio = document.getElementById('profileBio');
         if (profileBio) profileBio.textContent = reviewerData.bio || 'No bio provided.';
         
-        const profileGenres = document.getElementById('profileGenres');
-        if (profileGenres) profileGenres.textContent = `Genres: ${reviewerData.genres || 'N/A'}`;
-
         // For userprofile.html
         const profileTitle = document.getElementById('profileTitle');
         if (profileTitle && auth.currentUser && auth.currentUser.uid === reviewerId) {
