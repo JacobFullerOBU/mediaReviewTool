@@ -19,6 +19,7 @@ window.openMediaDetails = (mediaId) => {
 function createFeedItem(review, reviewer, mediaItem, isOwner) {
     const item = document.createElement('div');
     item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col sm:flex-row gap-6 relative group';
+    item.dataset.category = review.mediaCategory || (mediaItem ? (mediaItem.category || 'unknown') : 'unknown');
 
     const mediaPoster = mediaItem ? (mediaItem.poster || mediaItem.image) : 'https://via.placeholder.com/100x150.png?text=No+Image';
     const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
@@ -218,11 +219,12 @@ async function loadProfile(reviewerId) {
                 Object.entries(reviews).forEach(([reviewId, review]) => {
                     if (review.userId === reviewerId) {
                         const mediaItem = mediaMap[mediaId];
-                        allReviews.push({ 
-                            ...review, 
+                        allReviews.push({
+                            ...review,
                             id: reviewId,
                             mediaId: mediaId,
-                            mediaTitle: mediaItem ? mediaItem.title : mediaId.replace(/_/g, ' ') 
+                            mediaTitle: mediaItem ? mediaItem.title : mediaId.replace(/_/g, ' '),
+                            mediaCategory: mediaItem ? (mediaItem.category || 'unknown') : 'unknown'
                         });
                     }
                 });

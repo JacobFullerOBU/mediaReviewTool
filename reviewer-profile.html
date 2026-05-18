@@ -31,7 +31,17 @@
             </div>
             <div class="mt-8 pt-8 border-t border-slate-700 grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-bold text-white mb-6">Recent Reviews</h3>
+                    <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+                        <h3 class="text-2xl font-bold text-white">Reviews</h3>
+                        <div class="flex gap-2 flex-wrap" id="reviewFilterTabs">
+                            <button class="filter-tab px-3 py-1.5 rounded-full text-sm font-medium bg-indigo-600 text-white transition-colors" data-filter="all">All</button>
+                            <button class="filter-tab px-3 py-1.5 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors" data-filter="movies">Movies</button>
+                            <button class="filter-tab px-3 py-1.5 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors" data-filter="tv">TV</button>
+                            <button class="filter-tab px-3 py-1.5 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors" data-filter="music">Music</button>
+                            <button class="filter-tab px-3 py-1.5 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors" data-filter="games">Games</button>
+                            <button class="filter-tab px-3 py-1.5 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors" data-filter="books">Books</button>
+                        </div>
+                    </div>
                     <div id="userReviews" class="space-y-6">
                         <!-- Reviews will be injected here -->
                     </div>
@@ -102,10 +112,48 @@
     <script type="module" src="./Assets/scripts/auth.js"></script>
     <script type="module" src="./Assets/scripts/profile.js"></script>
     <script>
-        // Load icons after DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
+            }
+
+            const reviewFilterTabs = document.getElementById('reviewFilterTabs');
+            if (reviewFilterTabs) {
+                reviewFilterTabs.addEventListener('click', function(e) {
+                    const tab = e.target.closest('.filter-tab');
+                    if (!tab) return;
+
+                    reviewFilterTabs.querySelectorAll('.filter-tab').forEach(function(t) {
+                        t.classList.remove('bg-indigo-600', 'text-white');
+                        t.classList.add('bg-slate-700', 'text-slate-300');
+                    });
+                    tab.classList.add('bg-indigo-600', 'text-white');
+                    tab.classList.remove('bg-slate-700', 'text-slate-300');
+
+                    const category = tab.dataset.filter;
+                    const reviewsContainer = document.getElementById('userReviews');
+                    const items = reviewsContainer.querySelectorAll('[data-category]');
+                    let visibleCount = 0;
+
+                    items.forEach(function(item) {
+                        const match = category === 'all' || item.dataset.category === category;
+                        item.style.display = match ? '' : 'none';
+                        if (match) visibleCount++;
+                    });
+
+                    let emptyMsg = reviewsContainer.querySelector('.filter-empty-msg');
+                    if (visibleCount === 0 && items.length > 0) {
+                        if (!emptyMsg) {
+                            emptyMsg = document.createElement('p');
+                            emptyMsg.className = 'text-slate-500 text-center filter-empty-msg';
+                            reviewsContainer.appendChild(emptyMsg);
+                        }
+                        emptyMsg.textContent = 'No ' + tab.textContent.trim() + ' reviews yet.';
+                        emptyMsg.style.display = '';
+                    } else if (emptyMsg) {
+                        emptyMsg.style.display = 'none';
+                    }
+                });
             }
         });
     </script>
