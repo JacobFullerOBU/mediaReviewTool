@@ -2,8 +2,8 @@ import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/1
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { app, auth } from './firebase.js';
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
-import { music } from "../Music/music.js";
-import { games } from "../Video Games/games.js";
+import { music } from "./music.js";
+import { games } from "./games.js";
 
 const mediaItemCache = {};
 

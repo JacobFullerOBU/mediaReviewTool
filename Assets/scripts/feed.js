@@ -4,8 +4,8 @@ import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-dat
 import { db } from "./firebase.js";
 
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
-import { music } from "../Music/music.js";
-import { games } from "../Video Games/games.js";
+import { music } from "./music.js";
+import { games } from "./games.js";
 
 async function getAllMediaMap() {
     try {
