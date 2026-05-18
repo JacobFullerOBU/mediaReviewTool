@@ -1,6 +1,6 @@
 # TrueRated 🎬 🎮 📚 🎵 📺
 
-Tired of critic scores that don't match what anyone actually thinks? TrueRated is built around real opinions from real people — covering movies, TV, music, games, and books all in one place.
+Tired of critic scores that don't match what anyone actually thinks? TrueRated is built around real opinions from real people. This site allows covering movies, TV, music, games, and books all in one place.
 
 🔗 **[truerated.co](https://truerated.co/)**
 
