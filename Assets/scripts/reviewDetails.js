@@ -29,7 +29,7 @@ async function fetchDetails() {
 
             // 2. Find the Movie Metadata
             const movieInfo = allMovies.find(m => {
-                const mId = m.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                const mId = (m.title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
                 return mId === mediaId || m.id == mediaId;
             });
 
@@ -44,6 +44,10 @@ async function fetchDetails() {
         }
     } catch (error) {
         console.error("Fetch Error:", error);
+        const container = document.getElementById('movie-details-container');
+        if (container) {
+            container.innerHTML = `<div class="text-center py-20 text-slate-400">Failed to load review details. Please try again.</div>`;
+        }
     }
 }
 
