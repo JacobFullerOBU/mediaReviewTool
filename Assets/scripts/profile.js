@@ -96,7 +96,9 @@ function renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, review
 
     container.innerHTML = `
         <h3 class="text-base font-semibold text-white mb-3">Top 5 Favorites</h3>
-        <div class="grid grid-cols-5 gap-2" id="favoriteSlots"></div>
+        <div class="overflow-x-auto pb-1">
+            <div class="grid grid-cols-5 gap-2 min-w-[280px]" id="favoriteSlots"></div>
+        </div>
     `;
 
     const slotsEl = document.getElementById('favoriteSlots');
@@ -343,9 +345,14 @@ async function loadProfile(reviewerId) {
 
         const isOwner = auth.currentUser && auth.currentUser.uid === reviewerId;
 
-        // Render favorites section
-        const favSnap = await get(ref(db, `favorites/${reviewerId}`));
-        const favData = favSnap.exists() ? favSnap.val() : {};
+        // Render favorites section (non-fatal if rules block read)
+        let favData = {};
+        try {
+            const favSnap = await get(ref(db, `favorites/${reviewerId}`));
+            if (favSnap.exists()) favData = favSnap.val();
+        } catch (e) {
+            console.warn('Favorites read blocked — check Firebase rules:', e.message);
+        }
         renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, reviewerId);
 
         const userReviewsContainer = document.getElementById('userReviews');
