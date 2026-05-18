@@ -7,7 +7,8 @@ import {
     createUserWithEmailAndPassword,
     signOut,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 // --- 1. Initialization Logic ---
@@ -144,6 +145,42 @@ function initAuthForms() {
     document.getElementById('importForm')?.addEventListener('submit', handleImport);
     document.getElementById('googleLoginBtn')?.addEventListener('click', handleGoogleSignIn);
     document.getElementById('googleRegisterBtn')?.addEventListener('click', handleGoogleSignIn);
+    initForgotPassword();
+}
+
+function initForgotPassword() {
+    const link = document.getElementById('forgotPasswordLink');
+    const section = document.getElementById('forgotPasswordSection');
+    const cancelBtn = document.getElementById('cancelResetBtn');
+    const sendBtn = document.getElementById('sendResetBtn');
+
+    link?.addEventListener('click', (e) => {
+        e.preventDefault();
+        section.classList.remove('hidden');
+        document.getElementById('resetEmail').value = document.getElementById('loginEmail').value;
+        document.getElementById('resetEmail').focus();
+    });
+
+    cancelBtn?.addEventListener('click', () => {
+        section.classList.add('hidden');
+    });
+
+    sendBtn?.addEventListener('click', async () => {
+        const email = document.getElementById('resetEmail').value.trim();
+        if (!email) return;
+        sendBtn.textContent = 'Sending...';
+        sendBtn.disabled = true;
+        try {
+            await sendPasswordResetEmail(auth, email);
+            section.classList.add('hidden');
+            showNotification('Password reset email sent!', 'success');
+        } catch (error) {
+            showNotification(getAuthErrorMessage(error), 'error');
+        } finally {
+            sendBtn.textContent = 'Send Reset Email';
+            sendBtn.disabled = false;
+        }
+    });
 }
 
 // --- 4. Auth Handlers ---
