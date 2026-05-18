@@ -91,15 +91,26 @@ function createWatchlistItem(item) {
 // ── Favorites ────────────────────────────────────────────────────────────────
 
 function renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, reviewerId) {
-    const container = document.getElementById('favoritesSection');
-    if (!container) return;
+    // reviewer-profile.html uses #favoritesSection (renders heading + grid)
+    // userprofile.html uses #userFavorites (heading already in HTML, render grid only)
+    const fullContainer = document.getElementById('favoritesSection');
+    const inlineContainer = document.getElementById('userFavorites');
+    if (!fullContainer && !inlineContainer) return;
 
-    container.innerHTML = `
-        <h3 class="text-base font-semibold text-white mb-3">Top 5 Favorites</h3>
+    const gridHTML = `
         <div class="overflow-x-auto pb-1">
             <div class="grid grid-cols-5 gap-2 min-w-[280px]" id="favoriteSlots"></div>
         </div>
     `;
+
+    if (fullContainer) {
+        fullContainer.innerHTML = `
+            <h3 class="text-base font-semibold text-white mb-3">Top 5 Favorites</h3>
+            ${gridHTML}
+        `;
+    } else {
+        inlineContainer.innerHTML = gridHTML;
+    }
 
     const slotsEl = document.getElementById('favoriteSlots');
     for (let i = 0; i < 5; i++) {
