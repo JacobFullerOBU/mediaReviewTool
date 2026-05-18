@@ -290,12 +290,8 @@ import {
     db
 } from "./firebase.js";
 // Import media arrays from separate files
-import {
-    music
-} from "../Music/music.js";
-import {
-    games
-} from "../Video Games/games.js";
+import { music } from "./music.js";
+import { games } from "./games.js";
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
     const reviewsRef = ref(db, `reviews/${mediaId}`);
