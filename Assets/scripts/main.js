@@ -2,15 +2,11 @@
 
 export async function fetchMovies() {
     const potentialPaths = [
-        "Assets/Movies/movieList.json",
-        "../Movies/movieList.json",
-        "../../Assets/Movies/movieList.json",
-        "./Assets/Movies/movieList.json",
-            "/mediaReviewTool/Assets/Movies/movieList.json", // For GitHub Pages root
-            "Assets/Movies/movieList.json", // For local dev
-            "../Movies/movieList.json",
-            "../../Assets/Movies/movieList.json",
-            "./Assets/Movies/movieList.json"
+        "Assets/Data/movieList.json",
+        "./Assets/Data/movieList.json",
+        "/mediaReviewTool/Assets/Data/movieList.json",
+        "../Data/movieList.json",
+        "../../Assets/Data/movieList.json",
     ];
 
     for (const path of potentialPaths) {
@@ -30,11 +26,11 @@ export async function fetchMovies() {
 
 export async function fetchTV() {
     const potentialPaths = [
-        "Assets/TV Shows/tvList.json",
-        "./Assets/TV Shows/tvList.json",
-        "/mediaReviewTool/Assets/TV Shows/tvList.json",
-        "../TV Shows/tvList.json",
-        "../../Assets/TV Shows/tvList.json",
+        "Assets/Data/tvList.json",
+        "./Assets/Data/tvList.json",
+        "/mediaReviewTool/Assets/Data/tvList.json",
+        "../Data/tvList.json",
+        "../../Assets/Data/tvList.json",
     ];
 
     for (const path of potentialPaths) {
@@ -54,11 +50,11 @@ export async function fetchTV() {
 
 export async function fetchBooks() {
     const potentialPaths = [
-        "Assets/Books/books.json",
-        "./Assets/Books/books.json",
-        "/mediaReviewTool/Assets/Books/books.json",
-        "../Books/books.json",
-        "../../Assets/Books/books.json",
+        "Assets/Data/books.json",
+        "./Assets/Data/books.json",
+        "/mediaReviewTool/Assets/Data/books.json",
+        "../Data/books.json",
+        "../../Assets/Data/books.json",
     ];
 
     for (const path of potentialPaths) {

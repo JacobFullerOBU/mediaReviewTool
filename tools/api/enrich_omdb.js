@@ -7,7 +7,7 @@ const fs = require('fs');
 const axios = require('axios');
 
 const OMDB_API_KEY = 'a24ffa83';
-const MOVIE_LIST_PATH = '../Assets/Movies/movieList.json';
+const MOVIE_LIST_PATH = '../../Assets/Data/movieList.json';
 const DAILY_LIMIT = 950; // Stay under 1,000 with a small buffer
 const REQUEST_DELAY_MS = 200; // 5 req/sec — well within OMDb limits
 
