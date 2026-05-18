@@ -233,6 +233,18 @@ function hideSkeletonCards() {
     const skeletonCards = container.querySelectorAll('.skeleton-card');
     skeletonCards.forEach(card => card.remove());
 }
+11
+function buildScoreBadges(movie) {
+    const badges = [];
+    if (movie.imdbRating) badges.push(`<span style="background:#f5c518;color:#000;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;">IMDb ${movie.imdbRating}</span>`);
+    if (movie.rottenTomatoes) {
+        const pct = parseInt(movie.rottenTomatoes);
+        const bg = pct >= 60 ? '#fa320a' : '#818181';
+        badges.push(`<span style="background:${bg};color:#fff;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;">RT ${movie.rottenTomatoes}</span>`);
+    }
+    if (movie.metacritic) badges.push(`<span style="background:#663399;color:#fff;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;">MC ${movie.metacritic}</span>`);
+    return badges.length ? `<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">${badges.join('')}</div>` : '';
+}
 
 function createMovieCardHTML(movie) {
     const movieId = generateMovieId(movie);
@@ -250,6 +262,7 @@ function createMovieCardHTML(movie) {
                     <span class="card-director">${movie.director ? 'Director: ' + movie.director : ''}</span>
                 </div>
                 <div class="card-actors">${movie.actors ? 'Cast: ' + movie.actors.replace(/\n/g, ', ').substring(0, 100) + (movie.actors.length > 100 ? '...' : '') : ''}</div>
+                ${buildScoreBadges(movie)}
             </div>
         </div>
     `;
@@ -354,6 +367,7 @@ function showMovieModal(movie) {
                     <p><strong>Director:</strong> ${movie.director || 'N/A'}</p>
                     <p><strong>Cast:</strong> ${movie.actors || 'N/A'}</p>
                     <p><strong>Description:</strong> ${movie.description || 'No description available'}</p>
+                    ${buildScoreBadges(movie)}
                 </div>
             </div>
             <hr style="margin: 18px 0; border: 0; border-top: 1px solid #eee;">
