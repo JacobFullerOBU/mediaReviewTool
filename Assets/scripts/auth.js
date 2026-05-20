@@ -1,6 +1,7 @@
 // --- Firebase Auth & Database Imports ---
 import { auth, db } from "./firebase.js";
 import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { checkAdminStatus, adminState } from "./admin.js";
 import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
@@ -65,11 +66,19 @@ function updateAuthUI(user) {
         if (elements.mobileImport) elements.mobileImport.style.display = 'block';
         if (elements.mobileImportNav) elements.mobileImportNav.style.display = 'block';
         if (elements.logoutBtn) elements.logoutBtn.style.display = 'inline-block';
-        
+
         if (elements.loginBtn) elements.loginBtn.style.display = 'none';
         if (elements.registerBtn) elements.registerBtn.style.display = 'none';
         if (elements.mobileLogin) elements.mobileLogin.style.display = 'none';
         if (elements.mobileRegister) elements.mobileRegister.style.display = 'none';
+
+        // Show admin button if user is admin
+        checkAdminStatus(user.uid).then(isAdmin => {
+            const adminBtn       = document.getElementById('adminBtn');
+            const mobileAdminBtn = document.getElementById('mobile-adminBtn');
+            if (adminBtn)       adminBtn.style.display       = isAdmin ? 'inline-block' : 'none';
+            if (mobileAdminBtn) mobileAdminBtn.style.display = isAdmin ? 'block'        : 'none';
+        });
     } else {
         // User is Logged Out
         if (elements.profileBtn) elements.profileBtn.style.display = 'none';
@@ -78,11 +87,18 @@ function updateAuthUI(user) {
         if (elements.mobileImport) elements.mobileImport.style.display = 'none';
         if (elements.mobileImportNav) elements.mobileImportNav.style.display = 'none';
         if (elements.logoutBtn) elements.logoutBtn.style.display = 'none';
-        
+
         if (elements.loginBtn) elements.loginBtn.style.display = 'inline-block';
         if (elements.registerBtn) elements.registerBtn.style.display = 'inline-block';
         if (elements.mobileLogin) elements.mobileLogin.style.display = 'block';
         if (elements.mobileRegister) elements.mobileRegister.style.display = 'block';
+
+        // Hide admin button on logout
+        adminState.isAdmin = false;
+        const adminBtn       = document.getElementById('adminBtn');
+        const mobileAdminBtn = document.getElementById('mobile-adminBtn');
+        if (adminBtn)       adminBtn.style.display       = 'none';
+        if (mobileAdminBtn) mobileAdminBtn.style.display = 'none';
     }
 }
 
@@ -109,6 +125,12 @@ function initAuthButtons() {
     profileBtns.forEach(id => {
         const btn = document.getElementById(id);
         if (btn) btn.onclick = () => window.location.href = root + 'Assets/profile/userprofile.html';
+    });
+
+    const adminBtns = ['adminBtn', 'mobile-adminBtn'];
+    adminBtns.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.onclick = () => window.location.href = root + 'admin.html';
     });
 
     const logoutBtn = document.getElementById('logoutBtn');

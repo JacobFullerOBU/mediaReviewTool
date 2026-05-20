@@ -292,6 +292,7 @@ import {
 // Import media arrays from separate files
 import { music } from "./music.js";
 import { games } from "./games.js";
+import { adminState, deleteReview, editReview } from "./admin.js";
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
     const reviewsRef = ref(db, `reviews/${mediaId}`);
@@ -559,6 +560,49 @@ async function loadCardsWithItems(items) {
     addCardListeners();
 }
 window.filterCards = filterCards;
+
+function buildReviewsHtml(reviewsData, mediaId) {
+    const entries = Object.entries(reviewsData).sort((a, b) => new Date(b[1].timestamp) - new Date(a[1].timestamp));
+    if (!entries.length) return '<div class="mt-8 text-slate-500">No reviews yet.</div>';
+
+    let html = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
+    html += entries.map(([reviewId, r]) => {
+        const sanitizedContent = sanitizeHTML(r.reviewText || r.text || '');
+        let formattedDate = '';
+        if (r.timestamp) {
+            formattedDate = new Date(r.timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+        const adminControls = adminState.isAdmin ? `
+            <div class="admin-controls flex gap-2 mt-3 pt-2 border-t border-slate-700/50">
+                <button class="admin-edit-review flex items-center gap-1 text-xs bg-blue-900/50 hover:bg-blue-800 text-blue-300 px-2 py-1 rounded transition-colors" data-review-id="${reviewId}" data-media-id="${mediaId}">
+                    <i data-lucide="edit-2" class="w-3 h-3"></i> Edit
+                </button>
+                <button class="admin-delete-review flex items-center gap-1 text-xs bg-red-900/50 hover:bg-red-800 text-red-300 px-2 py-1 rounded transition-colors" data-review-id="${reviewId}" data-media-id="${mediaId}">
+                    <i data-lucide="trash-2" class="w-3 h-3"></i> Delete
+                </button>
+            </div>` : '';
+        return `
+            <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700"
+                 data-review-id="${reviewId}" data-media-id="${mediaId}"
+                 data-rating="${r.rating}" data-plain-text="${encodeURIComponent(r.text || '')}">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2 text-yellow-400 font-bold">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
+                    </div>
+                    <div class="text-right">
+                        <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
+                        <span class="text-slate-500 text-xs">${formattedDate}</span>
+                    </div>
+                </div>
+                <div class="review-content text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
+                ${adminControls}
+            </div>
+        `;
+    }).join('');
+    html += `</div>`;
+    return html;
+}
+
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
     let mediaId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
@@ -569,37 +613,9 @@ async function showItemDetails(item) {
     try {
         const reviewsRef = ref(db, `reviews/${mediaId}`);
         const snapshot = await get(reviewsRef);
-        if (snapshot.exists()) {
-            const reviews = Object.values(snapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            reviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
-            reviewsHtml += reviews.map(r => {
-                const reviewContent = r.reviewText || r.text || '';
-                const sanitizedContent = sanitizeHTML(reviewContent);
-                // Format date as Month Day, Year (ex April 4, 2026)
-                let formattedDate = '';
-                if (r.timestamp) {
-                    const dateObj = new Date(r.timestamp);
-                    formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                }
-                return `
-                <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-2 text-yellow-400 font-bold">
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
-                        </div>
-                        <div class="text-right">
-                            <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
-                            <span class="text-slate-500 text-xs">${formattedDate}</span>
-                        </div>
-                    </div>
-                    <div class="text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
-                </div>
-            `;
-            }).join('');
-            reviewsHtml += `</div>`;
-        } else {
-            reviewsHtml = `<div class="mt-8 text-slate-500">No reviews yet.</div>`;
-        }
+        reviewsHtml = snapshot.exists()
+            ? buildReviewsHtml(snapshot.val(), mediaId)
+            : `<div class="mt-8 text-slate-500">No reviews yet.</div>`;
     } catch (err) {
         reviewsHtml = `<div class="mt-8 text-red-500">Error loading reviews.</div>`;
     }
@@ -725,6 +741,83 @@ async function showItemDetails(item) {
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
     lucide.createIcons();
+
+    // Admin controls: delete and inline-edit any review
+    if (adminState.isAdmin) {
+        const reviewsSection = modal.querySelector('#reviewsSection');
+        reviewsSection.addEventListener('click', async (e) => {
+            const deleteBtn = e.target.closest('.admin-delete-review');
+            const editBtn   = e.target.closest('.admin-edit-review');
+            const saveBtn   = e.target.closest('.admin-save-edit');
+            const cancelBtn = e.target.closest('.admin-cancel-edit');
+
+            async function refreshReviews() {
+                const snap = await get(ref(db, `reviews/${mediaId}`));
+                reviewsSection.innerHTML = snap.exists()
+                    ? buildReviewsHtml(snap.val(), mediaId)
+                    : '<div class="mt-8 text-slate-500">No reviews yet.</div>';
+                const count  = snap.exists() ? Object.keys(snap.val()).length : 0;
+                const newAvg = snap.exists()
+                    ? (Object.values(snap.val()).reduce((s, r) => s + (r.rating || 0), 0) / count).toFixed(1)
+                    : 'N/A';
+                modal.querySelector('#modalReviewCount').textContent = count;
+                modal.querySelector('#modalRating').textContent = `★ ${newAvg}`;
+                lucide.createIcons();
+            }
+
+            if (deleteBtn) {
+                if (!confirm('Delete this review? This cannot be undone.')) return;
+                const reviewId = deleteBtn.dataset.reviewId;
+                await deleteReview(mediaId, reviewId);
+                await refreshReviews();
+            }
+
+            if (editBtn) {
+                const reviewBlock = editBtn.closest('.review-block');
+                if (reviewBlock.querySelector('.admin-edit-form')) return;
+                const reviewId   = reviewBlock.dataset.reviewId;
+                const currRating = reviewBlock.dataset.rating;
+                const currText   = decodeURIComponent(reviewBlock.dataset.plainText || '');
+
+                reviewBlock.innerHTML = `
+                    <div class="admin-edit-form space-y-3">
+                        <p class="text-xs text-slate-400 uppercase tracking-wide font-medium">Editing Review</p>
+                        <div class="flex items-center gap-2">
+                            <label class="text-xs text-slate-400">Rating:</label>
+                            <input type="number" class="edit-rating w-24 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white text-sm" min="1" max="10" step="0.5">
+                        </div>
+                        <textarea class="edit-text w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white text-sm resize-vertical" rows="5"></textarea>
+                        <div class="flex gap-2">
+                            <button class="admin-save-edit text-xs bg-green-700 hover:bg-green-600 text-white px-3 py-1.5 rounded transition-colors" data-review-id="${reviewId}">Save Changes</button>
+                            <button class="admin-cancel-edit text-xs bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded transition-colors">Cancel</button>
+                        </div>
+                    </div>
+                `;
+                reviewBlock.dataset.reviewId = reviewId;
+                reviewBlock.querySelector('.edit-rating').value = currRating;
+                reviewBlock.querySelector('.edit-text').value   = currText;
+            }
+
+            if (saveBtn) {
+                const reviewId  = saveBtn.dataset.reviewId;
+                const form      = saveBtn.closest('.admin-edit-form');
+                const newText   = form.querySelector('.edit-text').value.trim();
+                const newRating = parseFloat(form.querySelector('.edit-rating').value);
+                if (!newText || isNaN(newRating) || newRating < 1 || newRating > 10) {
+                    alert('Valid review text and rating (1–10) required.');
+                    return;
+                }
+                saveBtn.textContent = 'Saving…';
+                saveBtn.disabled = true;
+                await editReview(mediaId, reviewId, newText, newRating);
+                await refreshReviews();
+            }
+
+            if (cancelBtn) {
+                await refreshReviews();
+            }
+        });
+    }
 
     // Streaming availability (movies + TV only)
     const streamingSection = modal.querySelector('#streamingSection');
@@ -893,31 +986,9 @@ async function showItemDetails(item) {
             const newAvgRating = await getAverageRating(mediaId);
             const newReviewCount = await getReviewCount(mediaId);
             const reviewsSnapshot = await get(reviewsRef);
-            let newReviewsHtml = '';
-            if (reviewsSnapshot.exists()) {
-                const reviews = Object.values(reviewsSnapshot.val()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                newReviewsHtml = `<h3 class="text-xl font-bold text-white mt-8 mb-4">All Reviews</h3><div class="space-y-4">`;
-                newReviewsHtml += reviews.map(r => {
-                    const reviewContent = r.reviewText || r.text || '';
-                    const sanitizedContent = sanitizeHTML(reviewContent);
-                    return `
-                    <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center gap-2 text-yellow-400 font-bold">
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
-                            </div>
-                            <div class="text-right">
-                                <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
-                                <span class="text-slate-500 text-xs">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : ''}</span>
-                            </div>
-                        </div>
-                        <div class="text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
-                    </div>
-                `;
-                }).join('');
-                newReviewsHtml += `</div>`;
-            }
-            modal.querySelector('#reviewsSection').innerHTML = newReviewsHtml;
+            modal.querySelector('#reviewsSection').innerHTML = reviewsSnapshot.exists()
+                ? buildReviewsHtml(reviewsSnapshot.val(), mediaId)
+                : '<div class="mt-8 text-slate-500">No reviews yet.</div>';
             modal.querySelector('#modalRating').textContent = `★ ${newAvgRating}`;
             modal.querySelector('#modalReviewCount').textContent = newReviewCount;
             lucide.createIcons();
