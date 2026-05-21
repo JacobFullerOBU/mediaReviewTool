@@ -504,6 +504,17 @@ async function initCards() {
         sortSelect.value = 'rating-desc';
     }
 
+    // Mark the 'All' tab as active on initial load
+    const allTabBtn = document.querySelector('.tab-btn[data-category="all"]');
+    if (allTabBtn) {
+        document.querySelectorAll('.tab-btn').forEach(t => {
+            t.classList.remove('active', 'bg-indigo-600', 'text-white', 'shadow-md');
+            t.classList.add('bg-slate-800', 'text-slate-400');
+        });
+        allTabBtn.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow-md');
+        allTabBtn.classList.remove('bg-slate-800', 'text-slate-400');
+    }
+
     // Check if any items were loaded and render them with default sort.
     if (allItems.length > 0) {
         await filterCards('all');
@@ -812,10 +823,8 @@ async function filterCards(category) {
         });
     }
 
-    // Default home view: only show items that have at least one review
-    const isDefaultHome = (!category || category === 'all')
-        && (!currentGenreFilter || currentGenreFilter === 'all')
-        && !searchTerm;
+    // 'All' tab always shows only reviewed items, regardless of search/genre state
+    const isDefaultHome = !category || category === 'all';
     if (isDefaultHome) {
         await fetchLatestReviewTimesForItems(items);
         items = items.filter(item => item.latestReviewTime > 0);
@@ -877,6 +886,10 @@ async function filterCards(category) {
     const sortOption = document.getElementById('sortSelect')?.value || 'rating-desc';
     if (sortOption.startsWith('rating-')) {
         await fetchRatingsForItems(items);
+        // Secondary guard: in 'all' tab, drop any item that has no actual rating
+        if (isDefaultHome) {
+            items = items.filter(item => item.liveAvgRating !== -1);
+        }
     } else if (sortOption === 'recent-desc') {
         await fetchLatestReviewTimesForItems(items);
     }
