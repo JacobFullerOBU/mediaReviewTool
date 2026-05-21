@@ -1,6 +1,17 @@
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-import { db } from "./firebase.js"; 
-import { fetchMovies } from './main.js'; // Import your movie list
+import { db } from "./firebase.js";
+import { fetchMovies, fetchTV, fetchBooks } from './main.js';
+import { music } from "./music.js";
+import { games } from "./games.js";
+
+const KNOWN_CATEGORIES = ['movies', 'tv', 'books', 'games', 'music'];
+
+function stripCategoryPrefix(mediaId) {
+    for (const cat of KNOWN_CATEGORIES) {
+        if (mediaId.startsWith(cat + '_')) return mediaId.slice(cat.length + 1);
+    }
+    return mediaId;
+}
 
 async function fetchDetails() {
     const params = new URLSearchParams(window.location.search);
@@ -11,14 +22,16 @@ async function fetchDetails() {
         return;
     }
 
+    const slugOnly = stripCategoryPrefix(mediaId);
     const container = document.getElementById('movie-details-container');
 
     try {
-        // 1. Fetch Review, Movie List, and ALL Reviewers
-        // Fetching the whole 'reviewers' list ensures we can find the name for the specific userId
-        const [reviewSnapshot, allMovies, reviewersSnapshot] = await Promise.all([
+        // 1. Fetch Review, all media lists, and ALL Reviewers in parallel
+        const [reviewSnapshot, allMovies, allTV, allBooks, reviewersSnapshot] = await Promise.all([
             get(ref(db, `reviews/${mediaId}`)),
             fetchMovies(),
+            fetchTV(),
+            fetchBooks(),
             get(ref(db, "reviewers"))
         ]);
 
@@ -27,10 +40,11 @@ async function fetchDetails() {
             const firstReviewKey = Object.keys(reviewsData)[0];
             const review = reviewsData[firstReviewKey];
 
-            // 2. Find the Movie Metadata
-            const movieInfo = allMovies.find(m => {
+            // 2. Find the media item across all categories
+            const allMedia = [...allMovies, ...allTV, ...allBooks, ...music, ...games];
+            const movieInfo = allMedia.find(m => {
                 const mId = (m.title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                return mId === mediaId || m.id == mediaId;
+                return mId === mediaId || mId === slugOnly || m.id == mediaId;
             });
 
             // 3. Get the Reviewer's Display Name and Avatar
@@ -52,7 +66,8 @@ async function fetchDetails() {
 }
 
 function renderDetails(review, movie, reviewer) {
-    const title = movie ? movie.title : review.mediaId.replace(/_/g, ' ');
+    const rawId = review.mediaId || '';
+    const title = movie ? movie.title : stripCategoryPrefix(rawId).replace(/_/g, ' ');
     document.title  = `${title} - Review Details | True Rated`;
     const poster = movie ? (movie.poster || movie.image) : '';
     const reviewerName = reviewer.name || "Anonymous Critic";
