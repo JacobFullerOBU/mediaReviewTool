@@ -13,9 +13,12 @@ export async function fetchMusic() {
     for (const path of PATHS) {
         try {
             const res = await fetch(path);
-            if (res.ok && res.headers.get('content-type')?.includes('application/json')) {
-                albums = await res.json();
-                break;
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    albums = data;
+                    break;
+                }
             }
         } catch { /* try next path */ }
     }
