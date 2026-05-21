@@ -405,7 +405,7 @@ async function initCards() {
 
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) {
-        sortSelect.value = 'recent-desc';
+        sortSelect.value = 'rating-desc';
     }
 
     // Check if any items were loaded and render them with default sort.
@@ -585,11 +585,14 @@ function initTabFunctionality() {
 async function fetchRatingsForItems(items) {
     const itemsNeedingRating = items.filter(i => i.liveAvgRating === undefined);
     if (itemsNeedingRating.length > 0) {
-        const ratingPromises = itemsNeedingRating.map(item => {
+        const ratingPromises = itemsNeedingRating.map(async item => {
             const mediaId = getMediaId(item);
-            return getAverageRating(mediaId).then(rating => {
-                item.liveAvgRating = (rating === "N/A") ? -1 : parseFloat(rating);
-            });
+            const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+            let rating = await getAverageRating(mediaId);
+            if (rating === 'N/A' && legacyId !== mediaId) {
+                rating = await getAverageRating(legacyId);
+            }
+            item.liveAvgRating = (rating === 'N/A') ? -1 : parseFloat(rating);
         });
         await Promise.all(ratingPromises);
     }
@@ -645,6 +648,16 @@ async function filterCards(category) {
             return category === 'movies' && !item.category;
         });
     }
+
+    // Default home view: only show items that have at least one review
+    const isDefaultHome = (!category || category === 'all')
+        && (!currentGenreFilter || currentGenreFilter === 'all')
+        && !searchTerm;
+    if (isDefaultHome) {
+        await fetchLatestReviewTimesForItems(items);
+        items = items.filter(item => item.latestReviewTime > 0);
+    }
+
     // Filter by genre
     if (currentGenreFilter && currentGenreFilter !== 'all') {
         items = items.filter(item => {
@@ -695,7 +708,7 @@ async function filterCards(category) {
             return match;
         });
     }
-    const sortOption = document.getElementById('sortSelect')?.value || 'recent-desc';
+    const sortOption = document.getElementById('sortSelect')?.value || 'rating-desc';
     if (sortOption.startsWith('rating-')) {
         await fetchRatingsForItems(items);
     } else if (sortOption === 'recent-desc') {
