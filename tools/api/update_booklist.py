@@ -14,67 +14,102 @@ QUERIES = [
     "subject:epic+fantasy",
     "subject:dark+fantasy",
     "subject:romantasy",
-    'inauthor:"William Shakespeare"',
-    'inauthor:"Agatha Christie"',
-    'inauthor:"Danielle Steel"',
-    'inauthor:"Barbara Cartland"',
-    'inauthor:"J.K. Rowling"',
-    'inauthor:"Enid Blyton"',
-    'inauthor:"Nora Roberts"',
-    'inauthor:"James Patterson"',
-    'inauthor:"Stephen King"',
-    'inauthor:"J.R.R. Tolkien"',
-    'inauthor:"C.S. Lewis"',
-    'inauthor:"Dr. Seuss"',
-    'inauthor:"Leo Tolstoy"',
-    'inauthor:"Dean Koontz"',
-    'inauthor:"Dan Brown"',
-    'inauthor:"Roald Dahl"',
-    'inauthor:"Paulo Coelho"',
-    'inauthor:"Anne Rice"',
-    'inauthor:"Nicholas Sparks"',
-    'inauthor:"David Baldacci"',
-    'inauthor:"Michael Crichton"',
-    'inauthor:"Ken Follett"',
-    'inauthor:"Debbie Macomber"',
-    'inauthor:"E.L. James"',
-    'inauthor:"Stephenie Meyer"',
-    'inauthor:"Rick Riordan"',
-    'inauthor:"R.L. Stine"',
-    'inauthor:"Jeff Kinney"',
-    'inauthor:"Dav Pilkey"',
-    'inauthor:"Ian Fleming"',
-    'inauthor:"Mary Higgins Clark"',
-    'inauthor:"Janet Evanovich"',
-    'inauthor:"John Grisham"',
-    'inauthor:"Tom Clancy"',
-    'inauthor:"Clive Cussler"',
-    'inauthor:"Lee Child"',
-    'inauthor:"Harlan Coben"',
-    'inauthor:"Toni Morrison"',
-    'inauthor:"Ernest Hemingway"',
-    'inauthor:"F. Scott Fitzgerald"',
-    'inauthor:"George Orwell"',
-    'inauthor:"Mark Twain"',
-    'inauthor:"Charles Dickens"',
-    'inauthor:"Jane Austen"',
-    'inauthor:"Colleen Hoover"',
-    'inauthor:"Taylor Jenkins Reid"',
-    'inauthor:"Sarah J. Maas"',
-    'inauthor:"Rebecca Yarros"',
-    'inauthor:"Freida McFadden"',
-    'inauthor:"Kristin Hannah"',
-    'inauthor:"Emily Henry"',
-    'inauthor:"Lucy Score"',
-    'inauthor:"Mel Robbins"',
-    'inauthor:"Suzanne Collins"',
-    'inauthor:"James Clear"',
-    'inauthor:"Bessel van der Kolk"',
-    'inauthor:"Jonathan Haidt"',
-    'inauthor:"Peter Attia"',
-    'inauthor:"Bill Gates"',
-    'inauthor:"Amy Tan"',
-    'inauthor:"Rupi Kaur"'
+    'inauthor:"Gillian Flynn"',
+    'inauthor:"Paula Hawkins"',
+    'inauthor:"Jodi Picoult"',
+    'inauthor:"Liane Moriarty"',
+    'inauthor:"Lisa Jewell"',
+    'inauthor:"Tana French"',
+    'inauthor:"Kate Quinn"',
+    'inauthor:"Lucinda Riley"',
+    'inauthor:"Diane Chamberlain"',
+    'inauthor:"Barbara Kingsolver"',
+    'inauthor:"Amor Towles"',
+    'inauthor:"Celeste Ng"',
+    'inauthor:"Delia Owens"',
+    'inauthor:"Elin Hilderbrand"',
+    'inauthor:"Susan Mallery"',
+    'inauthor:"Robyn Carr"',
+    'inauthor:"Lisa Kleypas"',
+    'inauthor:"Julia Quinn"',
+    'inauthor:"Eloisa James"',
+    'inauthor:"Nalini Singh"',
+    'inauthor:"Patricia Briggs"',
+    'inauthor:"Ilona Andrews"',
+    'inauthor:"Brandon Sanderson"',
+    'inauthor:"Patrick Rothfuss"',
+    'inauthor:"Robin Hobb"',
+    'inauthor:"Joe Abercrombie"',
+    'inauthor:"George R.R. Martin"',
+    'inauthor:"Terry Pratchett"',
+    'inauthor:"Neil Gaiman"',
+    'inauthor:"Ursula K. Le Guin"',
+    'inauthor:"Isaac Asimov"',
+    'inauthor:"Arthur C. Clarke"',
+    'inauthor:"Philip K. Dick"',
+    'inauthor:"Frank Herbert"',
+    'inauthor:"Ray Bradbury"',
+    'inauthor:"Andy Weir"',
+    'inauthor:"Pierce Brown"',
+    'inauthor:"Scott Lynch"',
+    'inauthor:"V.E. Schwab"',
+    'inauthor:"Leigh Bardugo"',
+    'inauthor:"Holly Black"',
+    'inauthor:"Cassandra Clare"',
+    'inauthor:"Rainbow Rowell"',
+    'inauthor:"John Green"',
+    'inauthor:"Jenny Han"',
+    'inauthor:"Jason Reynolds"',
+    'inauthor:"Angie Thomas"',
+    'inauthor:"Tomi Adeyemi"',
+    'inauthor:"Dhonielle Clayton"',
+    'inauthor:"Chimamanda Ngozi Adichie"',
+    'inauthor:"Zadie Smith"',
+    'inauthor:"Colson Whitehead"',
+    'inauthor:"Tayari Jones"',
+    'inauthor:"Ocean Vuong"',
+    'inauthor:"Tommy Orange"',
+    'inauthor:"Louise Erdrich"',
+    'inauthor:"Amor Towles"',
+    'inauthor:"Anthony Doerr"',
+    'inauthor:"Khaled Hosseini"',
+    'inauthor:"Gabriel Garcia Marquez"',
+    'inauthor:"Isabel Allende"',
+    'inauthor:"Haruki Murakami"',
+    'inauthor:"Stieg Larsson"',
+    'inauthor:"Jo Nesbo"',
+    'inauthor:"Henning Mankell"',
+    'inauthor:"Fredrik Backman"',
+    'inauthor:"Jonas Jonasson"',
+    'inauthor:"Michel Houellebecq"',
+    'inauthor:"Karl Ove Knausgard"',
+    'inauthor:"Elena Ferrante"',
+    'inauthor:"Umberto Eco"',
+    'inauthor:"Donna Tartt"',
+    'inauthor:"Cormac McCarthy"',
+    'inauthor:"Don DeLillo"',
+    'inauthor:"Jonathan Franzen"',
+    'inauthor:"Jeffrey Eugenides"',
+    'inauthor:"Michael Connelly"',
+    'inauthor:"Dennis Lehane"',
+    'inauthor:"James Ellroy"',
+    'inauthor:"Thomas Harris"',
+    'inauthor:"Patricia Cornwell"',
+    'inauthor:"Karin Slaughter"',
+    'inauthor:"Lisa Gardner"',
+    'inauthor:"Sandra Brown"',
+    'inauthor:"Stuart Woods"',
+    'inauthor:"Brad Thor"',
+    'inauthor:"Vince Flynn"',
+    'inauthor:"Daniel Silva"',
+    'inauthor:"Nelson DeMille"',
+    'inauthor:"Scott Turow"',
+    'inauthor:"Lincoln Child"',
+    'inauthor:"Douglas Preston"',
+    'inauthor:"Matthew Reilly"',
+    'inauthor:"Andy McDermott"',
+    'inauthor:"Chris Ryan"',
+    'inauthor:"Andy McNab"'
 ]
 PAGES_PER_SUBJECT    = 3    # pages per query (3 × 40 = up to 120 each)
 RESULTS_PER_PAGE     = 40   # Google Books API hard max per request
@@ -83,9 +118,10 @@ CHECKPOINT_MAX_AGE_HOURS = 12
 _SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))  # tools/api -> tools -> project root
 
-MASTER_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books.json")
-BACKUP_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books_backup.json")
-CHECKPOINT_FILE = os.path.join(_SCRIPT_DIR, "books_fetch_checkpoint.json")
+MASTER_FILE          = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books.json")
+BACKUP_FILE          = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books_backup.json")
+MISSING_COVERS_FILE  = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books_missing_covers.json")
+CHECKPOINT_FILE      = os.path.join(_SCRIPT_DIR, "books_fetch_checkpoint.json")
 
 BASE_URL = "https://www.googleapis.com/books/v1/volumes"
 
@@ -281,6 +317,74 @@ def dedup(books):
             unique.append(item)
     return unique, dupes
 
+# ── COVER ART ─────────────────────────────────────────────────────────────────
+def find_missing_covers(books):
+    """Split books into (with_cover, missing_cover) and print a summary."""
+    with_cover = [b for b in books if b.get("poster", "").strip()]
+    missing    = [b for b in books if not b.get("poster", "").strip()]
+    print(f"  Cover art present: {len(with_cover)}  |  Missing: {len(missing)}")
+    return with_cover, missing
+
+def _fetch_open_library_cover(title, author):
+    """Return a cover URL from Open Library, or '' if not found."""
+    try:
+        params = {"title": title, "limit": 1}
+        if author:
+            params["author"] = author
+        resp = requests.get(
+            "https://openlibrary.org/search.json",
+            params=params,
+            timeout=10,
+        )
+        resp.raise_for_status()
+        docs = resp.json().get("docs", [])
+        if not docs:
+            return ""
+        cover_i = docs[0].get("cover_i")
+        if cover_i:
+            return f"https://covers.openlibrary.org/b/id/{cover_i}-L.jpg"
+    except Exception:
+        pass
+    return ""
+
+def fill_missing_covers(books):
+    """
+    For books without a poster, try Open Library.
+    Returns (updated_books, still_missing) where still_missing are written
+    to MISSING_COVERS_FILE for manual review.
+    """
+    print("\n── FILLING MISSING COVERS (Open Library) ────────────────────────────")
+    _, missing = find_missing_covers(books)
+    if not missing:
+        print("  Nothing to do — all books have cover art.")
+        return books, []
+
+    filled = still_missing = 0
+    book_index = {id(b): i for i, b in enumerate(books)}
+
+    for book in missing:
+        title  = book.get("title", "")
+        author = book.get("author", "")
+        print(f"  Trying Open Library: {title} …", end=" ", flush=True)
+        url = _fetch_open_library_cover(title, author)
+        if url:
+            books[book_index[id(book)]]["poster"] = url
+            print(f"✔")
+            filled += 1
+        else:
+            print("✖ not found")
+            still_missing += 1
+        time.sleep(0.2)
+
+    print(f"\n  Filled: {filled}  |  Still missing: {still_missing}")
+
+    _, remaining_missing = find_missing_covers(books)
+    if remaining_missing:
+        save_json(MISSING_COVERS_FILE, remaining_missing)
+        print(f"  ✔ Missing-cover list saved to {MISSING_COVERS_FILE}")
+
+    return books, remaining_missing
+
 # ── STEP 4: MERGE ─────────────────────────────────────────────────────────────
 def merge(master, new_items):
     existing = {fingerprint(item) for item in master}
@@ -327,7 +431,10 @@ def run():
     print("\n── MERGING ──────────────────────────────────────────────────────────")
     master, added, skipped = merge(master, new_books)
 
-    # 5. Save — clear checkpoint only after a confirmed successful write
+    # 5. Fill missing cover art, save stragglers for manual review
+    master, _ = fill_missing_covers(master)
+
+    # 6. Save — clear checkpoint only after a confirmed successful write
     print("\n── SAVING ───────────────────────────────────────────────────────────")
     try:
         save_json(MASTER_FILE, master)
