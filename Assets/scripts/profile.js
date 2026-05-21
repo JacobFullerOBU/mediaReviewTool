@@ -212,7 +212,10 @@ function openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, m
                     ? `<img src="${poster}" class="w-8 h-11 object-cover rounded flex-shrink-0"><span class="truncate">${item.title}</span>`
                     : `<span class="truncate">${item.title}</span>`;
                 btn.addEventListener('click', async () => {
-                    const mediaId = item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                    const titleSlug = item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                    const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
+                    const catSlug = cat.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                    const mediaId = catSlug ? `${catSlug}_${titleSlug}` : titleSlug;
                     await set(ref(db, `favorites/${reviewerId}/${index}`), mediaId);
                     wrapper.replaceWith(buildFavoriteSlot(item, index, isOwner, allMedia, db, reviewerId, mediaMap));
                     if (window.lucide) lucide.createIcons();

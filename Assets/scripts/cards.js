@@ -54,6 +54,7 @@ function buildAmazonUrl(item) {
 
 let allItems = [];
 let currentFilter = 'all';
+let currentGenreFilter = 'all';
 let quillEditor = null;
 
 // Function to check if user has unsaved review content
@@ -293,6 +294,15 @@ import {
 import { music } from "./music.js";
 import { games } from "./games.js";
 import { adminState, deleteReview, editReview } from "./admin.js";
+
+function getMediaId(item) {
+    if (item.id) return item.id;
+    const titleSlug = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+    const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
+    const catSlug = cat.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    return catSlug ? `${catSlug}_${titleSlug}` : titleSlug;
+}
+
 // Get number of reviews for a media item (Realtime Database)
 async function getReviewCount(mediaId) {
     const reviewsRef = ref(db, `reviews/${mediaId}`);
@@ -381,6 +391,69 @@ async function initCards() {
     }
 }
 
+function renderGenreFilters(category) {
+    const container = document.getElementById('genreFilterContainer');
+    if (!container) return;
+
+    if (!category || category === 'all') {
+        container.innerHTML = '';
+        container.classList.add('hidden');
+        container.classList.remove('flex');
+        currentGenreFilter = 'all';
+        return;
+    }
+
+    const categoryItems = allItems.filter(item => {
+        if (typeof item.category === 'string') return item.category.toLowerCase() === category.toLowerCase();
+        if (Array.isArray(item.category)) return item.category.map(c => c.toLowerCase()).includes(category.toLowerCase());
+        return category === 'movies' && !item.category;
+    });
+
+    const genreSet = new Set();
+    categoryItems.forEach(item => {
+        if (item.genre) {
+            item.genre.split(',').forEach(g => { const t = g.trim(); if (t) genreSet.add(t); });
+        }
+    });
+
+    const genres = Array.from(genreSet).sort();
+    if (genres.length === 0) {
+        container.innerHTML = '';
+        container.classList.add('hidden');
+        container.classList.remove('flex');
+        return;
+    }
+
+    currentGenreFilter = 'all';
+
+    const base = 'genre-btn px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border';
+    const inactive = 'bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700';
+    const active = 'bg-indigo-600 text-white border-indigo-600 shadow-sm';
+
+    container.innerHTML = [
+        `<button class="${base} ${active}" data-genre="all">All</button>`,
+        ...genres.map(g => `<button class="${base} ${inactive}" data-genre="${escapeHtml(g)}">${escapeHtml(g)}</button>`)
+    ].join('');
+
+    container.classList.remove('hidden');
+    container.classList.add('flex');
+
+    container.querySelectorAll('.genre-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            container.querySelectorAll('.genre-btn').forEach(b => {
+                b.className = `${base} ${inactive}`;
+            });
+            this.className = `${base} ${active}`;
+            currentGenreFilter = this.dataset.genre;
+            filterCards(category);
+        });
+    });
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 function initTabFunctionality() {
         // Scroll search bar to top of viewport when sort changes
         const sortSelect = document.getElementById('sortSelect');
@@ -409,7 +482,8 @@ function initTabFunctionality() {
             });
             this.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow-md');
             this.classList.remove('bg-slate-800', 'text-slate-400');
-            // Filter cards
+            // Render genre sub-filters then filter cards
+            renderGenreFilters(category);
             filterCards(category);
             // Scroll search bar to top of viewport
             const searchContainer = document.querySelector('.search-and-sort-container');
@@ -475,7 +549,7 @@ async function fetchRatingsForItems(items) {
     const itemsNeedingRating = items.filter(i => i.liveAvgRating === undefined);
     if (itemsNeedingRating.length > 0) {
         const ratingPromises = itemsNeedingRating.map(item => {
-            const mediaId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            const mediaId = getMediaId(item);
             return getAverageRating(mediaId).then(rating => {
                 item.liveAvgRating = (rating === "N/A") ? -1 : parseFloat(rating);
             });
@@ -499,6 +573,13 @@ async function filterCards(category) {
             }
             // Fallback: Movies if no category
             return category === 'movies' && !item.category;
+        });
+    }
+    // Filter by genre
+    if (currentGenreFilter && currentGenreFilter !== 'all') {
+        items = items.filter(item => {
+            if (!item.genre) return false;
+            return item.genre.split(',').map(g => g.trim()).includes(currentGenreFilter);
         });
     }
     // Filter by search term (title, director, actors, description, etc.)
@@ -605,20 +686,29 @@ function buildReviewsHtml(reviewsData, mediaId) {
 
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
-    let mediaId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-    let avgRating = await getAverageRating(mediaId);
-    let reviewCount = await getReviewCount(mediaId);
+    let mediaId = getMediaId(item);
+    const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
     let reviewsHtml = '';
 
     try {
-        const reviewsRef = ref(db, `reviews/${mediaId}`);
-        const snapshot = await get(reviewsRef);
+        let snapshot = await get(ref(db, `reviews/${mediaId}`));
+        // Fall back to legacy title-only ID so existing reviews are still visible
+        if (!snapshot.exists() && legacyId !== mediaId) {
+            const legacySnapshot = await get(ref(db, `reviews/${legacyId}`));
+            if (legacySnapshot.exists()) {
+                snapshot = legacySnapshot;
+                mediaId = legacyId;
+            }
+        }
         reviewsHtml = snapshot.exists()
             ? buildReviewsHtml(snapshot.val(), mediaId)
             : `<div class="mt-8 text-slate-500">No reviews yet.</div>`;
     } catch (err) {
         reviewsHtml = `<div class="mt-8 text-red-500">Error loading reviews.</div>`;
     }
+
+    let avgRating = await getAverageRating(mediaId);
+    let reviewCount = await getReviewCount(mediaId);
 
     let modal = document.createElement('div');
     modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm';
@@ -702,7 +792,7 @@ async function showItemDetails(item) {
     `;
         // Watchlist functionality
         const addToWatchlistBtn = modal.querySelector('#addToWatchlistBtn');
-        const mediaKey = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+        const mediaKey = getMediaId(item);
         let isWatchlisted = false;
         if (auth.currentUser) {
             const userId = auth.currentUser.uid || auth.currentUser.email || auth.currentUser.displayName;
