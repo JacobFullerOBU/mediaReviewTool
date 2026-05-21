@@ -32,10 +32,10 @@
                         <input type="text" id="search-reviews" placeholder="Search reviews..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full">
                     </div>
                 </div>
-                <div class="sm:w-48">
-                    <div class="flex items-center gap-2">
-                        <label for="sort-reviews" class="text-sm font-medium text-slate-400 whitespace-nowrap">Sort by:</label>
-                        <select id="sort-reviews" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none flex-1">
+                <div class="flex items-center gap-2 sm:w-56 shrink-0">
+                    <label for="sort-reviews" class="text-sm font-medium text-slate-400 whitespace-nowrap">Sort by:</label>
+                    <div class="flex-1 min-w-0">
+                        <select id="sort-reviews" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full">
                             <option value="newest">Most Recent</option>
                             <option value="oldest">Oldest First</option>
                             <option value="rating-desc">Rating (High to Low)</option>
