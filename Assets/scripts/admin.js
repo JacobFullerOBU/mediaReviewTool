@@ -33,6 +33,13 @@ export async function getMediaOverride(mediaId) {
     } catch { return null; }
 }
 
+export async function getAllMediaOverrides() {
+    try {
+        const snap = await get(ref(db, 'mediaOverrides'));
+        return snap.exists() ? snap.val() : {};
+    } catch { return {}; }
+}
+
 export async function updateMediaOverride(mediaId, fields) {
     await update(ref(db, `mediaOverrides/${mediaId}`), fields);
 }

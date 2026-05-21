@@ -93,7 +93,6 @@
 
         <!-- Grid -->
         <div id="cardsContainer" class="cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Media cards will be added via cards.js -->
         </div>
     </main>
 
@@ -101,7 +100,6 @@
     <main id="explore-feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 class="text-3xl font-bold text-white mb-8">Explore Feed</h2>
         <div id="explore-feed-container" class="space-y-6">
-            <!-- Review items will be added here -->
         </div>
     </main>
 
@@ -109,7 +107,6 @@
     <main id="feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 class="text-3xl font-bold text-white mb-8">My Feed</h2>
         <div id="feed-container" class="space-y-6">
-            <!-- Review items will be added here -->
         </div>
     </main>
 
@@ -122,44 +119,8 @@
                 <a href="#" class="hover:text-indigo-400">Privacy</a>
                 <a href="#" class="hover:text-indigo-400">Top Reviewers</a>
             </div>
-            <!--
-            <div id="suggestions" class="mt-4">
-                <h3 class="text-lg font-bold text-white">Suggestions</h3>
-                <ul id="suggestionsUl" class="mt-2"></ul>
-            </div>
-        -->
         </div>
     </footer>
-
-    <!-- Import Modal
-    <div id="importModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal">
-      <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-slate-700 shadow-2xl relative modal-content">
-        <div class="modal-header flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-white">Import Reviews</h2>
-            <span class="close text-slate-400 hover:text-white cursor-pointer" data-modal="importModal"><i data-lucide="x" class="w-5 h-5"></i></span>
-        </div>
-        <div class="modal-body">
-            <p class="text-slate-400 text-sm mb-4">Upload your Letterboxd export file (CSV) to import your reviews.</p>
-            <div class="bg-slate-900/50 p-4 rounded-lg mb-4 text-xs text-slate-400">
-                <p class="font-semibold text-slate-300 mb-2">How to get your Letterboxd data:</p>
-                <ol class="list-decimal list-inside space-y-1">
-                    <li>Go to Letterboxd Website > <strong>Settings > Data</strong></li>
-                    <li>Select the <strong>Import & Export</strong> tab</li>
-                    <li>Click <strong>Export Your Data</strong></li>
-                    <li>Unzip the file and select <strong> "reviews" file. Should be in CSV format.</strong></li>
-                </ol>
-            </div>
-            <form id="importForm" class="space-y-4">
-                <div class="form-group">
-                    <label for="importFile" class="block text-xs font-medium text-slate-400 mb-1">Select CSV File:</label>
-                    <input type="file" id="importFile" accept=".csv" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700">
-                </div>
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg mt-4 transition-colors">Import Data</button>
-            </form>
-        </div>
-      </div>
-    </div>
--->
     <script type="module" src="./Assets/scripts/main.js"></script>
     <script type="module" src="./Assets/scripts/auth.js"></script>
     <script type="module" src="./Assets/scripts/community.js"></script>

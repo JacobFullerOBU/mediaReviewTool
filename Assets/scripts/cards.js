@@ -371,7 +371,7 @@ import {
 // Import media arrays from separate files
 import { fetchMusic } from "./music.js";
 import { games } from "./games.js";
-import { adminState, deleteReview, editReview, getMediaOverride, updateMediaOverride } from "./admin.js";
+import { adminState, deleteReview, editReview, getMediaOverride, updateMediaOverride, getAllMediaOverrides } from "./admin.js";
 
 function getMediaId(item) {
     if (item.id) return item.id;
@@ -491,11 +491,21 @@ async function initCards() {
         ...allRaw.filter(i => i.category !== 'books'),
         ...dedupedBooks,
     ];
+
+    // Apply admin field overrides (e.g. genre, title) stored in Firebase
+    const overrides = await getAllMediaOverrides();
+    if (overrides && Object.keys(overrides).length > 0) {
+        allItems = allItems.map(item => {
+            const id = getMediaId(item);
+            return overrides[id] ? { ...item, ...overrides[id] } : item;
+        });
+    }
+
     window.allItems = allItems;
 
     // Build the cross-category ambiguous slugs set so legacy fallback won't bleed across categories.
     buildCrossCategoryAmbiguousSlugs();
-    
+
     // Initialize tab functionality
     initTabFunctionality();
 
@@ -1290,11 +1300,26 @@ async function showItemDetails(item) {
                 // Sync in-memory allItems so the grid reflects changes without reload
                 const idx = allItems.findIndex(i => getMediaId(i) === mediaId);
                 if (idx !== -1) Object.assign(allItems[idx], fields);
-                // Update poster/title on the visible grid card
+                // Update poster/title/genre on the visible grid card
                 const gridCard = document.querySelector(`.media-card[data-id="${mediaId}"]`);
                 if (gridCard) {
                     if (fields.poster) gridCard.querySelector('.card-image')?.setAttribute('src', fields.poster);
                     if (fields.title)  { const t = gridCard.querySelector('.card-title'); if (t) t.textContent = fields.title; }
+                    const genreContainer = gridCard.querySelector('.pt-3');
+                    if (genreContainer) {
+                        const rawGenres = (fields.genre || '').split(',').map(g => g.trim()).filter(Boolean);
+                        let newPillText = '';
+                        if (cat === 'music') {
+                            for (const g of rawGenres) { const n = normalizeMusicGenre(g); if (n) { newPillText = n; break; } }
+                        } else if (cat === 'books') {
+                            for (const g of rawGenres) { const n = normalizeBookGenre(g); if (n) { newPillText = n; break; } }
+                        } else {
+                            newPillText = rawGenres[0] || '';
+                        }
+                        genreContainer.innerHTML = newPillText
+                            ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${newPillText}</span>`
+                            : '';
+                    }
                 }
                 editInfoPanel.classList.add('hidden');
                 editInfoBtn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i> Edit Info';
