@@ -1546,6 +1546,20 @@ async function renderCards(container, items) {
                 }
             }
 
+            // For non-music: pick the first recognizable genre for the pill
+            let primaryGenre = '';
+            if (!isMusic) {
+                const rawGenres = (item.genre || '').split(',').map(g => g.trim()).filter(Boolean);
+                if (cat === 'books') {
+                    for (const g of rawGenres) {
+                        const n = normalizeBookGenre(g);
+                        if (n) { primaryGenre = n; break; }
+                    }
+                } else {
+                    primaryGenre = rawGenres[0] || '';
+                }
+            }
+
             const cardBody = isMusic ? `
                     <div class="flex justify-between items-start mb-1">
                         <h3 class="card-title text-lg font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">${item.title || ''}</h3>
@@ -1557,13 +1571,13 @@ async function renderCards(container, items) {
                         ${topMusicGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${topMusicGenre}</span>` : '<span></span>'}
                     </div>
             ` : `
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="flex justify-between items-start mb-1">
                         <h3 class="card-title text-lg font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">${item.title || ''}</h3>
                         <span class="text-xs text-slate-500 font-mono mt-1">${item.year || ''}</span>
                     </div>
-                    <p class="text-slate-400 text-sm mb-4 flex-1 line-clamp-2">${reviewSnippet}</p>
-                    <div class="pt-4 border-t border-slate-700 text-slate-500 text-xs mb-2">
-                        <span class="font-medium text-slate-400">${item.genre || ''}</span>
+                    <p class="text-slate-400 text-sm mb-3 flex-1 line-clamp-2">${reviewSnippet}</p>
+                    <div class="pt-3 border-t border-slate-700 flex items-center">
+                        ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : ''}
                     </div>
             `;
 
