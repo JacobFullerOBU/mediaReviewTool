@@ -1496,30 +1496,56 @@ async function renderCards(container, items) {
         // Batch fetch ratings for only visible cards
         await fetchRatingsForItems(toShow);
         toShow.forEach(item => {
+            const cat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
+            const isMusic = cat === 'music';
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
             const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
             const avgRating = (item.liveAvgRating !== undefined && item.liveAvgRating !== -1)
                 ? `<i data-lucide=\"star\" class=\"w-3 h-3 fill-current\"></i> ${item.liveAvgRating}`
                 : `<span class=\"text-slate-400 text-xs\">No reviews yet</span>`;
+
+            // For music: find the primary normalized genre to display as a pill
+            let topMusicGenre = '';
+            if (isMusic) {
+                for (const g of getMusicGenres(item)) {
+                    const n = normalizeMusicGenre(g);
+                    if (n) { topMusicGenre = n; break; }
+                }
+            }
+
+            const cardBody = isMusic ? `
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="card-title text-lg font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">${item.title || ''}</h3>
+                        <span class="text-xs text-slate-500 font-mono mt-1 ml-2 shrink-0">${item.year || ''}</span>
+                    </div>
+                    <p class="text-indigo-400 text-sm font-medium mb-3 line-clamp-1">${item.artist || ''}</p>
+                    <div class="flex-1"></div>
+                    <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
+                        ${topMusicGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${topMusicGenre}</span>` : '<span></span>'}
+                    </div>
+            ` : `
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="card-title text-lg font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">${item.title || ''}</h3>
+                        <span class="text-xs text-slate-500 font-mono mt-1">${item.year || ''}</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4 flex-1 line-clamp-2">${reviewSnippet}</p>
+                    <div class="pt-4 border-t border-slate-700 text-slate-500 text-xs mb-2">
+                        <span class="font-medium text-slate-400">${item.genre || ''}</span>
+                    </div>
+            `;
+
+            const imageHeight = isMusic ? 'h-56' : 'h-48';
+
             cardHTML += `
                 <div class=\"media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer\" data-id=\"${cardId}\">
-                    <div class=\"relative h-48 overflow-hidden\">
+                    <div class=\"relative ${imageHeight} overflow-hidden\">
                         <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\">
                         <div class=\"absolute top-2 right-2 px-2 py-1 rounded-md flex items-center gap-1\">
                             <span class=\"star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow\" id=\"rating-${cardId}\">${avgRating}</span>
                         </div>
                     </div>
                     <div class=\"p-5 flex-1 flex flex-col\">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="card-title text-lg font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">${item.title || ''}</h3>
-                            <span class="text-xs text-slate-500 font-mono mt-1">${item.year || ''}</span>
-                        </div>
-                         <p class="text-slate-400 text-sm mb-4 flex-1 line-clamp-2">
-                            ${reviewSnippet}
-                        </p>
-                        <div class="pt-4 border-t border-slate-700 text-slate-500 text-xs mb-2">
-                             <span class="font-medium text-slate-400">${item.genre || ''}</span>
-                        </div>
+                        ${cardBody}
                     </div>
                 </div>
             `;
