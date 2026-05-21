@@ -414,40 +414,50 @@ async function initCards() {
     const container = document.getElementById('cardsContainer');
     if (!container) return;
 
+    // Show skeleton cards immediately so the page isn't blank during fetch
+    container.innerHTML = Array(9).fill(`
+        <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 animate-pulse">
+            <div class="h-48 bg-slate-700"></div>
+            <div class="p-5 space-y-3">
+                <div class="h-5 bg-slate-700 rounded w-3/4"></div>
+                <div class="h-4 bg-slate-700 rounded w-1/2"></div>
+                <div class="h-4 bg-slate-700 rounded w-1/3 mt-4"></div>
+            </div>
+        </div>
+    `).join('');
+
     let movies = [], validTV = [], validMusic = [], validGames = [], validBooks = [];
 
-    try {
-        movies = (await fetchMovies()).filter(m => typeof m.title === 'string' && m.title);
-    } catch (e) {
-        console.error("Failed to load movies:", e);
+    // Fetch all data sources in parallel
+    const [moviesRes, tvRes, musicRes, booksRes] = await Promise.allSettled([
+        fetchMovies(),
+        fetchTV(),
+        fetchMusic(),
+        fetchBooks(),
+    ]);
+
+    if (moviesRes.status === 'fulfilled') {
+        movies = moviesRes.value.filter(m => typeof m.title === 'string' && m.title);
+    } else {
+        console.error("Failed to load movies:", moviesRes.reason);
+    }
+    if (tvRes.status === 'fulfilled') {
+        validTV = tvRes.value.filter(item => typeof item.title === 'string' && item.title);
+    } else {
+        console.error("Failed to load TV shows:", tvRes.reason);
+    }
+    if (musicRes.status === 'fulfilled') {
+        validMusic = musicRes.value.filter(item => typeof item.title === 'string' && item.title);
+    } else {
+        console.error("Failed to load music:", musicRes.reason);
+    }
+    if (booksRes.status === 'fulfilled') {
+        validBooks = booksRes.value.filter(item => typeof item.title === 'string' && item.title);
+    } else {
+        console.error("Failed to load books:", booksRes.reason);
     }
 
-    try {
-        const tvData = await fetchTV();
-        validTV = tvData.filter(item => typeof item.title === 'string' && item.title);
-    } catch (e) {
-        console.error("Failed to load TV shows:", e);
-    }
-
-    try {
-        const musicData = await fetchMusic();
-        validMusic = musicData.filter(item => typeof item.title === 'string' && item.title);
-    } catch (e) {
-        console.error("Failed to load music:", e);
-    }
-
-    try {
-        validGames = Array.isArray(games) ? games.filter(item => typeof item.title === 'string' && item.title) : [];
-    } catch (e) {
-        console.error("Failed to load games:", e);
-    }
-
-    try {
-        const booksData = await fetchBooks();
-        validBooks = booksData.filter(item => typeof item.title === 'string' && item.title);
-    } catch (e) {
-        console.error("Failed to load books:", e);
-    }
+    validGames = Array.isArray(games) ? games.filter(item => typeof item.title === 'string' && item.title) : [];
 
     // Normalize category casing ("Movie" → "movies", "TV" → "tv", etc.)
     const CAT_NORM = { movie: 'movies', tv: 'tv', book: 'books', game: 'games', music: 'music' };
@@ -1472,7 +1482,6 @@ window.filterCards = filterCards;
 
 // Render cards in the container
 async function renderCards(container, items) {
-    console.log('[cards.js] renderCards called with items:', items);
 
     container.innerHTML = '';
     if (!items || items.length === 0) {

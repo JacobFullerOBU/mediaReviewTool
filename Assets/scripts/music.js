@@ -16,7 +16,7 @@ export async function fetchMusic() {
             if (res.ok) {
                 const data = await res.json();
                 if (Array.isArray(data) && data.length > 0) {
-                    albums = data;
+                    albums = data.slice(0, 500); // cap at top 500 by popularity
                     break;
                 }
             }
@@ -28,7 +28,7 @@ export async function fetchMusic() {
             ...album,
             genre: Array.isArray(album.genres) ? album.genres.join(', ') : (album.genre || '')
         };
-        if (album.poster) return base;
+        if ('poster' in album) return base; // already attempted poster fetch (even if empty)
         const spotifyData = await getAlbumData(album.title, album.artist);
         if (!spotifyData) return base;
         return { ...base, poster: spotifyData.poster, image: spotifyData.poster, spotifyId: spotifyData.spotifyId };
