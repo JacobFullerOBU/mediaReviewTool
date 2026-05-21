@@ -7,30 +7,47 @@ import requests
 # ── CONFIGURATION ─────────────────────────────────────────────────────────────
 API_KEY = "AIzaSyB6vCAjCO_wFlAWO2h9kgYnmRrIfXxq8pA"
 
-# Popularity-focused queries — each walks down Google's ranked list
+# Fantasy and romance — uses subject: and inauthor: which Google Books actually indexes
 QUERIES = [
-    '"New York Times bestseller"',
-    '"bestselling novel"',
-    '"instant bestseller"',
-    '"Pulitzer Prize" novel',
-    '"Booker Prize" novel',
-    '"National Book Award"',
-    '"Oprah\'s Book Club"',
-    "popular fiction bestseller",
-    "popular mystery thriller bestseller",
-    "popular romance bestseller",
-    "popular fantasy bestseller",
-    "popular science fiction bestseller",
-    "popular historical fiction bestseller",
-    "popular biography memoir bestseller",
-    "popular self help bestseller",
-    "popular young adult bestseller",
-    "popular horror bestseller",
-    "popular true crime bestseller",
-    "popular graphic novel bestseller",
-    "popular cookbook bestseller",
+    # ── FANTASY SUBJECTS ─────────────────────────────────────────────────
+    "subject:fantasy",
+    "subject:epic+fantasy",
+    "subject:dark+fantasy",
+    "subject:romantasy",
+    # ── TOP FANTASY AUTHORS ───────────────────────────────────────────────
+    'inauthor:"Sarah J. Maas"',
+    'inauthor:"Brandon Sanderson"',
+    'inauthor:"Leigh Bardugo"',
+    'inauthor:"V.E. Schwab"',
+    'inauthor:"N.K. Jemisin"',
+    'inauthor:"Robin Hobb"',
+    'inauthor:"Joe Abercrombie"',
+    'inauthor:"Robert Jordan"',
+    'inauthor:"Patrick Rothfuss"',
+    'inauthor:"George R.R. Martin"',
+    'inauthor:"Neil Gaiman"',
+    'inauthor:"Naomi Novik"',
+    'inauthor:"Laini Taylor"',
+    'inauthor:"Cassandra Clare"',
+    'inauthor:"Pierce Brown"',
+    # ── ROMANCE SUBJECTS ─────────────────────────────────────────────────
+    "subject:romance",
+    "subject:historical+romance",
+    "subject:contemporary+romance",
+    # ── TOP ROMANCE AUTHORS ───────────────────────────────────────────────
+    'inauthor:"Colleen Hoover"',
+    'inauthor:"Emily Henry"',
+    'inauthor:"Julia Quinn"',
+    'inauthor:"Lisa Kleypas"',
+    'inauthor:"Nora Roberts"',
+    'inauthor:"Talia Hibbert"',
+    'inauthor:"Helen Hoang"',
+    'inauthor:"Penny Reid"',
+    'inauthor:"Nalini Singh"',
+    'inauthor:"Kristen Ashley"',
+    'inauthor:"Ana Huang"',
 ]
-PAGES_PER_SUBJECT    = 5    # pages per query (5 × 40 = up to 200 books each)
+PAGES_PER_SUBJECT    = 3    # pages per query (3 × 40 = up to 120 each)
 RESULTS_PER_PAGE     = 40   # Google Books API hard max per request
 CHECKPOINT_MAX_AGE_HOURS = 12
 
