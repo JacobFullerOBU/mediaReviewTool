@@ -781,15 +781,6 @@ async function filterCards(category) {
         });
     }
 
-    // Default home view: only show items that have at least one review
-    const isDefaultHome = (!category || category === 'all')
-        && (!currentGenreFilter || currentGenreFilter === 'all')
-        && !searchTerm;
-    if (isDefaultHome) {
-        await fetchLatestReviewTimesForItems(items);
-        items = items.filter(item => item.latestReviewTime > 0);
-    }
-
     // Filter by genre
     if (currentGenreFilter && currentGenreFilter !== 'all') {
         items = items.filter(item => {
@@ -844,9 +835,7 @@ async function filterCards(category) {
         });
     }
     const sortOption = document.getElementById('sortSelect')?.value || 'rating-desc';
-    if (sortOption.startsWith('rating-')) {
-        await fetchRatingsForItems(items);
-    } else if (sortOption === 'recent-desc') {
+    if (sortOption === 'recent-desc') {
         await fetchLatestReviewTimesForItems(items);
     }
     items = sortItems(items, sortOption);
@@ -1526,16 +1515,17 @@ async function renderCards(container, items) {
 
         let cardHTML = '';
         const toShow = items.slice(0, visibleCount);
-        // Batch fetch ratings for only visible cards
-        await fetchRatingsForItems(toShow);
         toShow.forEach(item => {
             const cat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
             const isMusic = cat === 'music';
             const reviewSnippet = item.reviewSnippet || (item.description ? item.description.split('.').slice(0, 1).join('.') : '');
             const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            // Use cached rating immediately; uncached items show placeholder until async fetch completes
             const avgRating = (item.liveAvgRating !== undefined && item.liveAvgRating !== -1)
-                ? `<i data-lucide=\"star\" class=\"w-3 h-3 fill-current\"></i> ${item.liveAvgRating}`
-                : `<span class=\"text-slate-400 text-xs\">No reviews yet</span>`;
+                ? `★ ${item.liveAvgRating}`
+                : item.liveAvgRating === -1
+                    ? `<span class=\"text-slate-400 text-xs\">No reviews yet</span>`
+                    : `<span class=\"text-slate-400 text-xs opacity-40\">★ —</span>`;
 
             // For music: find the primary normalized genre to display as a pill
             let topMusicGenre = '';
@@ -1600,6 +1590,25 @@ async function renderCards(container, items) {
 
         container.innerHTML = cardHTML;
         lucide.createIcons();
+
+        // Fetch ratings for any uncached cards and patch them into the DOM without re-rendering
+        const uncached = toShow.filter(i => i.liveAvgRating === undefined);
+        if (uncached.length > 0) {
+            fetchRatingsForItems(uncached).then(() => {
+                uncached.forEach(item => {
+                    const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+                    const el = document.getElementById(`rating-${cId}`);
+                    if (!el) return;
+                    if (item.liveAvgRating !== undefined && item.liveAvgRating !== -1) {
+                        el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
+                        el.textContent = `★ ${item.liveAvgRating}`;
+                    } else {
+                        el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
+                        el.innerHTML = `<span class="text-slate-400 text-xs">No reviews yet</span>`;
+                    }
+                });
+            });
+        }
 
         // Infinite scroll: add sentinel if more cards remain
         if (items.length > visibleCount) {
