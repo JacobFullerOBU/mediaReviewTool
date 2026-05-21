@@ -710,28 +710,55 @@ function initTabFunctionality() {
 }
 
 async function fetchRatingsForItems(items) {
-    const itemsNeedingRating = items.filter(i => i.liveAvgRating === undefined);
+    // Pull from sessionStorage cache (5-min TTL) before hitting Firebase
+    let ssCache = {};
+    try {
+        const stored = sessionStorage.getItem('ratingCache');
+        if (stored) {
+            const { data, ts } = JSON.parse(stored);
+            if (Date.now() - ts < 5 * 60 * 1000) ssCache = data;
+        }
+    } catch {}
+
+    const itemsNeedingRating = items.filter(i => {
+        if (i.liveAvgRating !== undefined) return false;
+        const mediaId = getMediaId(i);
+        if (ssCache[mediaId] !== undefined) { i.liveAvgRating = ssCache[mediaId]; return false; }
+        return true;
+    });
+
     if (itemsNeedingRating.length > 0) {
         const ratingPromises = itemsNeedingRating.map(async item => {
             const mediaId = getMediaId(item);
             const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
             let rating = await getAverageRating(mediaId);
-            // Only fall back to the legacy (title-only) ID if the slug is unambiguous —
-            // i.e., this title does NOT exist in another category. If it does, the legacy
-            // reviews belong to whichever category had them first, and we must not
-            // let a book steal a movie's reviews (or vice versa).
             if (rating === 'N/A' && legacyId !== mediaId && !crossCategoryAmbiguousSlugs.has(legacyId)) {
                 rating = await getAverageRating(legacyId);
             }
             item.liveAvgRating = (rating === 'N/A') ? -1 : parseFloat(rating);
+            ssCache[mediaId] = item.liveAvgRating;
         });
         await Promise.all(ratingPromises);
+        try {
+            sessionStorage.setItem('ratingCache', JSON.stringify({ data: ssCache, ts: Date.now() }));
+        } catch {}
     }
 }
 
 let reviewTimestampCache = null;
 
 async function fetchLatestReviewTimesForItems(items) {
+    if (!reviewTimestampCache) {
+        // Check sessionStorage first (5-min TTL) to avoid re-reading the full reviews tree on refresh
+        try {
+            const stored = sessionStorage.getItem('reviewTsCache');
+            if (stored) {
+                const { data, ts } = JSON.parse(stored);
+                if (Date.now() - ts < 5 * 60 * 1000) reviewTimestampCache = data;
+            }
+        } catch {}
+    }
+
     if (!reviewTimestampCache) {
         reviewTimestampCache = {};
         try {
@@ -752,7 +779,11 @@ async function fetchLatestReviewTimesForItems(items) {
         } catch (e) {
             reviewTimestampCache = {};
         }
+        try {
+            sessionStorage.setItem('reviewTsCache', JSON.stringify({ data: reviewTimestampCache, ts: Date.now() }));
+        } catch {}
     }
+
     const cache = reviewTimestampCache;
     items.forEach(item => {
         if (item.latestReviewTime !== undefined) return;
@@ -779,6 +810,15 @@ async function filterCards(category) {
             // Fallback: Movies if no category
             return category === 'movies' && !item.category;
         });
+    }
+
+    // Default home view: only show items that have at least one review
+    const isDefaultHome = (!category || category === 'all')
+        && (!currentGenreFilter || currentGenreFilter === 'all')
+        && !searchTerm;
+    if (isDefaultHome) {
+        await fetchLatestReviewTimesForItems(items);
+        items = items.filter(item => item.latestReviewTime > 0);
     }
 
     // Filter by genre
@@ -835,7 +875,9 @@ async function filterCards(category) {
         });
     }
     const sortOption = document.getElementById('sortSelect')?.value || 'rating-desc';
-    if (sortOption === 'recent-desc') {
+    if (sortOption.startsWith('rating-')) {
+        await fetchRatingsForItems(items);
+    } else if (sortOption === 'recent-desc') {
         await fetchLatestReviewTimesForItems(items);
     }
     items = sortItems(items, sortOption);
