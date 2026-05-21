@@ -56,6 +56,7 @@ let allItems = [];
 let currentFilter = 'all';
 let currentGenreFilter = 'all';
 let quillEditor = null;
+let musicLoaded = false;
 
 // Title slugs that appear in more than one category (e.g. "the_housemaid" in both movies + books).
 // The legacy fallback must be blocked for these to prevent a book card from displaying movie reviews.
@@ -426,13 +427,12 @@ async function initCards() {
         </div>
     `).join('');
 
-    let movies = [], validTV = [], validMusic = [], validGames = [], validBooks = [];
+    let movies = [], validTV = [], validGames = [], validBooks = [];
 
-    // Fetch all data sources in parallel
-    const [moviesRes, tvRes, musicRes, booksRes] = await Promise.allSettled([
+    // Fetch fast sources in parallel — music is background-loaded after initial render
+    const [moviesRes, tvRes, booksRes] = await Promise.allSettled([
         fetchMovies(),
         fetchTV(),
-        fetchMusic(),
         fetchBooks(),
     ]);
 
@@ -445,11 +445,6 @@ async function initCards() {
         validTV = tvRes.value.filter(item => typeof item.title === 'string' && item.title);
     } else {
         console.error("Failed to load TV shows:", tvRes.reason);
-    }
-    if (musicRes.status === 'fulfilled') {
-        validMusic = musicRes.value.filter(item => typeof item.title === 'string' && item.title);
-    } else {
-        console.error("Failed to load music:", musicRes.reason);
     }
     if (booksRes.status === 'fulfilled') {
         validBooks = booksRes.value.filter(item => typeof item.title === 'string' && item.title);
@@ -468,7 +463,7 @@ async function initCards() {
         return item;
     };
 
-    const allRaw = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks].map(normalizeCategory);
+    const allRaw = [...movies, ...validTV, ...validGames, ...validBooks].map(normalizeCategory);
 
     // Deduplicate: within each category, keep one card per title slug.
     // For books: multiple editions of the same book → keep one with the best cover + longest description.
@@ -515,6 +510,32 @@ async function initCards() {
     } else {
         container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Could not load any media. Please check data sources and browser console for errors.</div>';
     }
+
+    // Background-load music — large JSON, doesn't block the initial render
+    fetchMusic().then(async musicData => {
+        const validMusic = musicData
+            .filter(item => typeof item.title === 'string' && item.title)
+            .map(item => {
+                const raw = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).trim();
+                const lc = raw.toLowerCase();
+                item.category = CAT_NORM[lc] || lc || raw;
+                return item;
+            });
+        musicLoaded = true;
+        if (!validMusic.length) return;
+        allItems.push(...validMusic);
+        window.allItems = allItems;
+        buildCrossCategoryAmbiguousSlugs();
+        // Re-render only if the active tab will show music
+        const activeTab = document.querySelector('.tab-btn.active');
+        const activeCat = activeTab ? activeTab.dataset.category : 'all';
+        if (activeCat === 'all' || activeCat === 'music') {
+            await filterCards(activeCat);
+        }
+    }).catch(e => {
+        musicLoaded = true; // don't show "Loading..." forever on failure
+        console.error('Failed to load music:', e);
+    });
 }
 
 function renderGenreFilters(category) {
@@ -1485,7 +1506,10 @@ async function renderCards(container, items) {
 
     container.innerHTML = '';
     if (!items || items.length === 0) {
-        container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">No media items found.</div>';
+        const isMusicPending = !musicLoaded && currentFilter === 'music';
+        container.innerHTML = isMusicPending
+            ? '<div style="padding:32px;text-align:center;color:#888;">Loading music...</div>'
+            : '<div style="padding:32px;text-align:center;color:#888;">No media items found.</div>';
         return;
     }
 
