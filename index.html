@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>True Rated - Home</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <link rel="stylesheet" href="./Assets/styles/main.css">
     <link rel="stylesheet" href="./Assets/styles/responsive.css">
-    
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -25,7 +22,6 @@
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans">
     <div id="navbar-container"></div>
-
     <!-- Hero Section -->
     <div class="relative overflow-hidden bg-slate-900 hero-section">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 pb-2 md:pb-4" style="margin-bottom:0;">
@@ -43,14 +39,11 @@
             </div>
         </div>
         <div class="absolute top-0 left-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <!-- Reduce bottom margin of hero section -->
     </div>
-
     <!-- Main Content Area -->
     <main id="browse-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Controls Toolbar -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 backdrop-blur-sm mt-[-2.5rem] md:mt-[-3rem] controls-toolbar">
-            
             <div class="flex flex-col gap-2">
                 <div class="filter-buttons-container">
                     <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="all"><i data-lucide="grid" class="w-4 h-4"></i> All</button>
@@ -64,7 +57,6 @@
                 <div id="genreFilterContainer" class="hidden flex-wrap gap-2 pt-1 border-t border-slate-700/50">
                 </div>
             </div>
-
             <div class="search-and-sort-container">
                 <div class="search-container">
                     <div class="relative">
@@ -90,26 +82,22 @@
                 </div>
             </div>
         </div>
-
-        <!-- Grid -->
+        <!-- Card Container -->
         <div id="cardsContainer" class="cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         </div>
     </main>
-
-    <!-- Explore Feed Page -->
+    <!-- Explore Feed Heading -->
     <main id="explore-feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 class="text-3xl font-bold text-white mb-8">Explore Feed</h2>
         <div id="explore-feed-container" class="space-y-6">
         </div>
     </main>
-
     <!-- My Feed Page -->
     <main id="feed-page" class="hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 class="text-3xl font-bold text-white mb-8">My Feed</h2>
         <div id="feed-container" class="space-y-6">
         </div>
     </main>
-
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
