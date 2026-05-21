@@ -1,7 +1,7 @@
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { app } from "./firebase.js";
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
-import { music } from "./music.js";
+import { fetchMusic } from "./music.js";
 import { games } from "./games.js";
 
 const db = getDatabase(app);
@@ -63,19 +63,20 @@ async function fetchData() {
     container.innerHTML = `<div class="flex justify-center items-center py-12"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div></div>`;
 
     try {
-        const [reviewersSnapshot, reviewsSnapshot, movies, tvData, booksData] = await Promise.all([
+        const [reviewersSnapshot, reviewsSnapshot, movies, tvData, booksData, musicData] = await Promise.all([
             get(ref(db, "reviewers")),
             get(ref(db, "reviews")),
             fetchMovies(),
             fetchTV(),
-            fetchBooks()
+            fetchBooks(),
+            fetchMusic()
         ]);
 
         if (reviewersSnapshot.exists()) {
             allReviewers = reviewersSnapshot.val();
         }
 
-        allMedia = [...movies, ...tvData, ...music, ...games, ...booksData].filter(item => item && item.title);
+        allMedia = [...movies, ...tvData, ...musicData, ...games, ...booksData].filter(item => item && item.title);
 
         const CAT_NORM = { movie: 'movies', book: 'books', game: 'games' };
         const mediaMap = {};

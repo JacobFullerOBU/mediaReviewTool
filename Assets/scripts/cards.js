@@ -336,7 +336,7 @@ import {
     db
 } from "./firebase.js";
 // Import media arrays from separate files
-import { music } from "./music.js";
+import { fetchMusic } from "./music.js";
 import { games } from "./games.js";
 import { adminState, deleteReview, editReview, getMediaOverride, updateMediaOverride } from "./admin.js";
 
@@ -398,7 +398,8 @@ async function initCards() {
     }
 
     try {
-        validMusic = Array.isArray(music) ? music.filter(item => typeof item.title === 'string' && item.title) : [];
+        const musicData = await fetchMusic();
+        validMusic = musicData.filter(item => typeof item.title === 'string' && item.title);
     } catch (e) {
         console.error("Failed to load music:", e);
     }

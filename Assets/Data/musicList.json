@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Abbey Road",
+    "artist": "The Beatles",
+    "year": 1969,
+    "description": "The Beatles' penultimate studio album, featuring classics like 'Come Together' and 'Here Comes the Sun'.",
+    "category": "music"
+  },
+  {
+    "title": "The Dark Side of the Moon",
+    "artist": "Pink Floyd",
+    "year": 1973,
+    "description": "Pink Floyd's conceptual masterpiece exploring themes of conflict, greed, time, and mental illness.",
+    "category": "music"
+  },
+  {
+    "title": "Thriller",
+    "artist": "Michael Jackson",
+    "year": 1982,
+    "description": "Michael Jackson's legendary album that became the best-selling album of all time.",
+    "category": "music"
+  }
+]

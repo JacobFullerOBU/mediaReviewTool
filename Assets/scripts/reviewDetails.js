@@ -1,7 +1,7 @@
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { db } from "./firebase.js";
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
-import { music } from "./music.js";
+import { fetchMusic } from "./music.js";
 import { games } from "./games.js";
 
 const KNOWN_CATEGORIES = ['movies', 'tv', 'books', 'games', 'music'];
@@ -27,12 +27,13 @@ async function fetchDetails() {
 
     try {
         // 1. Fetch Review, all media lists, and ALL Reviewers in parallel
-        const [reviewSnapshot, allMovies, allTV, allBooks, reviewersSnapshot] = await Promise.all([
+        const [reviewSnapshot, allMovies, allTV, allBooks, reviewersSnapshot, allMusicData] = await Promise.all([
             get(ref(db, `reviews/${mediaId}`)),
             fetchMovies(),
             fetchTV(),
             fetchBooks(),
-            get(ref(db, "reviewers"))
+            get(ref(db, "reviewers")),
+            fetchMusic()
         ]);
 
         if (reviewSnapshot.exists()) {
@@ -41,7 +42,7 @@ async function fetchDetails() {
             const review = reviewsData[firstReviewKey];
 
             // 2. Find the media item across all categories
-            const allMedia = [...allMovies, ...allTV, ...allBooks, ...music, ...games];
+            const allMedia = [...allMovies, ...allTV, ...allBooks, ...allMusicData, ...games];
             const movieInfo = allMedia.find(m => {
                 const mId = (m.title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
                 return mId === mediaId || mId === slugOnly || m.id == mediaId;
