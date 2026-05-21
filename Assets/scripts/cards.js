@@ -377,10 +377,9 @@ async function initCards() {
     // Initialize tab functionality
     initTabFunctionality();
 
-    // Set default sort to 'rating-desc'
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) {
-        sortSelect.value = 'rating-desc';
+        sortSelect.value = 'recent-desc';
     }
 
     // Check if any items were loaded and render them with default sort.
@@ -558,6 +557,39 @@ async function fetchRatingsForItems(items) {
     }
 }
 
+let reviewTimestampCache = null;
+
+async function fetchLatestReviewTimesForItems(items) {
+    if (!reviewTimestampCache) {
+        reviewTimestampCache = {};
+        try {
+            const snapshot = await get(ref(db, 'reviews'));
+            if (snapshot.exists()) {
+                snapshot.forEach(mediaSnap => {
+                    let latest = 0;
+                    mediaSnap.forEach(reviewSnap => {
+                        const ts = reviewSnap.val().timestamp;
+                        if (ts) {
+                            const t = new Date(ts).getTime();
+                            if (t > latest) latest = t;
+                        }
+                    });
+                    reviewTimestampCache[mediaSnap.key] = latest;
+                });
+            }
+        } catch (e) {
+            reviewTimestampCache = {};
+        }
+    }
+    const cache = reviewTimestampCache;
+    items.forEach(item => {
+        if (item.latestReviewTime !== undefined) return;
+        const mediaId = getMediaId(item);
+        const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+        item.latestReviewTime = cache[mediaId] || cache[legacyId] || 0;
+    });
+}
+
 async function filterCards(category) {
     currentFilter = category;
     let items = allItems;
@@ -621,9 +653,11 @@ async function filterCards(category) {
             return match;
         });
     }
-    const sortOption = document.getElementById('sortSelect')?.value || 'year-desc';
+    const sortOption = document.getElementById('sortSelect')?.value || 'recent-desc';
     if (sortOption.startsWith('rating-')) {
         await fetchRatingsForItems(items);
+    } else if (sortOption === 'recent-desc') {
+        await fetchLatestReviewTimesForItems(items);
     }
     items = sortItems(items, sortOption);
     loadCardsWithItems(items);
@@ -1072,6 +1106,10 @@ async function showItemDetails(item) {
                 user: user.email || user.displayName || 'Anonymous'
             });
 
+            // Invalidate timestamp cache so "Most Recently Reviewed" sort reflects the new review
+            reviewTimestampCache = null;
+            delete item.latestReviewTime;
+
             // Refresh reviews, rating, and count
             const newAvgRating = await getAverageRating(mediaId);
             const newReviewCount = await getReviewCount(mediaId);
@@ -1254,6 +1292,9 @@ function sortItems(items, sortOption) {
                 const bRating = b.liveAvgRating === -1 ? Infinity : (b.liveAvgRating ?? Infinity);
                 return aRating - bRating;
             });
+            break;
+        case 'recent-desc':
+            sorted.sort((a, b) => (b.latestReviewTime || 0) - (a.latestReviewTime || 0));
             break;
         default:
             break;
