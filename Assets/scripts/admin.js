@@ -26,6 +26,17 @@ export async function editReview(mediaId, reviewId, plainText, rating) {
     });
 }
 
+export async function getMediaOverride(mediaId) {
+    try {
+        const snap = await get(ref(db, `mediaOverrides/${mediaId}`));
+        return snap.exists() ? snap.val() : null;
+    } catch { return null; }
+}
+
+export async function updateMediaOverride(mediaId, fields) {
+    await update(ref(db, `mediaOverrides/${mediaId}`), fields);
+}
+
 export async function deleteUserAccount(uid) {
     const reviewsSnap = await get(ref(db, 'reviews'));
     if (reviewsSnap.exists()) {

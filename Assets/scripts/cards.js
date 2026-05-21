@@ -338,7 +338,7 @@ import {
 // Import media arrays from separate files
 import { music } from "./music.js";
 import { games } from "./games.js";
-import { adminState, deleteReview, editReview } from "./admin.js";
+import { adminState, deleteReview, editReview, getMediaOverride, updateMediaOverride } from "./admin.js";
 
 function getMediaId(item) {
     if (item.id) return item.id;
@@ -840,6 +840,8 @@ function buildReviewsHtml(reviewsData, mediaId) {
 async function showItemDetails(item) {
     let mediaId = getMediaId(item);
     const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+    const override = await getMediaOverride(mediaId);
+    const displayItem = override ? { ...item, ...override } : item;
     let reviewsHtml = '';
 
     try {
@@ -886,22 +888,22 @@ async function showItemDetails(item) {
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             <div class="flex flex-col md:flex-row gap-8 items-start">
-                <img src="${item.poster || item.image || ''}" alt="${item.title}" class="w-48 h-auto rounded-lg shadow-lg object-cover flex-shrink-0 mx-auto md:mx-0">
+                <img id="modalPoster" src="${displayItem.poster || displayItem.image || ''}" alt="${displayItem.title}" class="w-48 h-auto rounded-lg shadow-lg object-cover flex-shrink-0 mx-auto md:mx-0">
                 <div class="flex-1 text-slate-300">
-                    <h2 class="text-3xl font-bold text-white mb-2">${item.title || ''}</h2>
+                    <h2 id="modalTitle" class="text-3xl font-bold text-white mb-2">${displayItem.title || ''}</h2>
                     <div class="flex items-center gap-4 text-sm text-slate-400 mb-4">
-                        <span>${item.year ? `<strong>Year:</strong> ${item.year}` : ''}</span>
-                        ${item.genre ? `<span><strong>Genre:</strong> ${item.genre}</span>` : ''}
+                        <span id="modalYear">${displayItem.year ? `<strong>Year:</strong> ${displayItem.year}` : ''}</span>
+                        <span id="modalGenre">${displayItem.genre ? `<strong>Genre:</strong> ${displayItem.genre}` : ''}</span>
                     </div>
-                    <div class="text-sm text-slate-400 mb-4">
-                        ${item.director ? `<strong>Director:</strong> ${item.director}` : item.creator ? `<strong>Creator:</strong> ${item.creator}` : item.author ? `<strong>Author:</strong> ${item.author}` : ''}
+                    <div id="modalCredit" class="text-sm text-slate-400 mb-4">
+                        ${displayItem.director ? `<strong>Director:</strong> ${displayItem.director}` : displayItem.creator ? `<strong>Creator:</strong> ${displayItem.creator}` : displayItem.author ? `<strong>Author:</strong> ${displayItem.author}` : ''}
                     </div>
-                    <div class="text-sm text-slate-400 mb-4">
-                        ${item.actors ? `<strong>Cast:</strong> ${item.actors}` : ''}
+                    <div id="modalActors" class="text-sm text-slate-400 mb-4">
+                        ${displayItem.actors ? `<strong>Cast:</strong> ${displayItem.actors}` : ''}
                     </div>
-                    <p class="text-slate-400 mb-4">${item.description || ''}</p>
+                    <p id="modalDescription" class="text-slate-400 mb-4">${displayItem.description || ''}</p>
                     <div id="streamingSection" class="mb-4">
-                        ${['movies', 'tv'].includes((item.category || '').toLowerCase())
+                        ${['movies', 'tv'].includes((displayItem.category || '').toLowerCase())
                             ? '<p class="text-xs text-slate-500 italic">Checking streaming availability...</p>'
                             : ''}
                     </div>
@@ -922,10 +924,57 @@ async function showItemDetails(item) {
                         <a href="${buildAmazonUrl(item)}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold py-2 px-4 rounded-lg transition-colors text-sm">
                             <i data-lucide="shopping-cart" class="w-4 h-4"></i> Buy on Amazon
                         </a>
+                        ${adminState.isAdmin ? `<button id="editInfoBtn" class="flex items-center gap-1 border border-purple-600 hover:bg-purple-800 text-purple-300 font-bold py-2 px-4 rounded-lg transition-colors text-sm"><i data-lucide="pencil" class="w-4 h-4"></i> Edit Info</button>` : ''}
                     </div>
                     <p class="text-xs text-slate-500 mt-2">As an Amazon Associate I earn from qualifying purchases.</p>
                 </div>
             </div>
+            ${adminState.isAdmin ? `
+            <div id="editInfoPanel" class="hidden mt-6 pt-6 border-t border-purple-800/50">
+                <h4 class="text-sm font-bold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
+                    <i data-lucide="pencil" class="w-4 h-4 text-purple-400"></i> Edit Card Info
+                </h4>
+                <div class="space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Title</label>
+                            <input id="editTitle" type="text" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Year</label>
+                            <input id="editYear" type="text" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Genre</label>
+                        <input id="editGenre" type="text" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Poster URL</label>
+                        <input id="editPoster" type="url" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Description</label>
+                        <textarea id="editDescription" rows="4" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-2 text-white text-sm resize-vertical focus:ring-1 focus:ring-purple-500 outline-none"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label id="editCreditLabel" class="block text-xs text-slate-400 mb-1">Director</label>
+                            <input id="editCredit" type="text" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Cast / Actors</label>
+                            <input id="editActors" type="text" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                        </div>
+                    </div>
+                    <div class="flex gap-2 pt-2">
+                        <button id="saveInfoBtn" class="text-sm bg-purple-700 hover:bg-purple-600 text-white px-4 py-1.5 rounded font-semibold transition-colors">Save Changes</button>
+                        <button id="cancelInfoBtn" class="text-sm bg-slate-700 hover:bg-slate-600 text-white px-4 py-1.5 rounded transition-colors">Cancel</button>
+                    </div>
+                    <p id="editInfoError" class="text-red-400 text-xs hidden"></p>
+                </div>
+            </div>
+            ` : ''}
             <div id="reviewFormContainer" class="hidden mt-6 pt-6 border-t border-slate-700">
                 <h4 class="text-lg font-bold text-white mb-4">Write Your Review</h4>
                 <form id="reviewForm" class="space-y-4">
@@ -1060,6 +1109,93 @@ async function showItemDetails(item) {
             if (cancelBtn) {
                 await refreshReviews();
             }
+        });
+
+        // Edit card info controls
+        const editInfoBtn    = modal.querySelector('#editInfoBtn');
+        const editInfoPanel  = modal.querySelector('#editInfoPanel');
+        const saveInfoBtn    = modal.querySelector('#saveInfoBtn');
+        const cancelInfoBtn  = modal.querySelector('#cancelInfoBtn');
+
+        const cat = (displayItem.category || '').toLowerCase();
+        const creditKey = cat === 'books' ? 'author' : cat === 'tv' ? 'creator' : 'director';
+        const creditLabel = modal.querySelector('#editCreditLabel');
+        if (creditLabel) creditLabel.textContent = cat === 'books' ? 'Author' : cat === 'tv' ? 'Creator' : 'Director';
+
+        editInfoBtn?.addEventListener('click', () => {
+            const isHidden = editInfoPanel.classList.contains('hidden');
+            editInfoPanel.classList.toggle('hidden');
+            if (isHidden) {
+                modal.querySelector('#editTitle').value       = displayItem.title || '';
+                modal.querySelector('#editYear').value        = displayItem.year || '';
+                modal.querySelector('#editGenre').value       = displayItem.genre || '';
+                modal.querySelector('#editPoster').value      = displayItem.poster || displayItem.image || '';
+                modal.querySelector('#editDescription').value = displayItem.description || '';
+                modal.querySelector('#editCredit').value      = displayItem[creditKey] || '';
+                modal.querySelector('#editActors').value      = displayItem.actors || '';
+                editInfoBtn.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i> Close Editor';
+            } else {
+                editInfoBtn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i> Edit Info';
+            }
+            lucide.createIcons();
+        });
+
+        saveInfoBtn?.addEventListener('click', async () => {
+            const fields = {
+                title:       modal.querySelector('#editTitle').value.trim(),
+                year:        modal.querySelector('#editYear').value.trim(),
+                genre:       modal.querySelector('#editGenre').value.trim(),
+                poster:      modal.querySelector('#editPoster').value.trim(),
+                description: modal.querySelector('#editDescription').value.trim(),
+            };
+            const creditVal = modal.querySelector('#editCredit').value.trim();
+            if (creditVal) fields[creditKey] = creditVal;
+            const actorsVal = modal.querySelector('#editActors').value.trim();
+            if (actorsVal) fields.actors = actorsVal;
+
+            const errEl = modal.querySelector('#editInfoError');
+            errEl.classList.add('hidden');
+            saveInfoBtn.textContent = 'Saving…';
+            saveInfoBtn.disabled = true;
+            try {
+                await updateMediaOverride(mediaId, fields);
+                // Merge into displayItem so re-opens reflect changes
+                Object.assign(displayItem, fields);
+                // Update visible modal elements
+                modal.querySelector('#modalTitle').textContent = fields.title || '';
+                modal.querySelector('#modalYear').innerHTML    = fields.year ? `<strong>Year:</strong> ${fields.year}` : '';
+                modal.querySelector('#modalGenre').innerHTML   = fields.genre ? `<strong>Genre:</strong> ${fields.genre}` : '';
+                modal.querySelector('#modalDescription').textContent = fields.description || '';
+                if (fields.poster) modal.querySelector('#modalPoster').src = fields.poster;
+                const creditEl = modal.querySelector('#modalCredit');
+                if (creditEl) creditEl.innerHTML = fields[creditKey] ? `<strong>${creditLabel?.textContent || 'Credit'}:</strong> ${fields[creditKey]}` : '';
+                const actorsEl = modal.querySelector('#modalActors');
+                if (actorsEl) actorsEl.innerHTML = fields.actors ? `<strong>Cast:</strong> ${fields.actors}` : '';
+                // Sync in-memory allItems so the grid reflects changes without reload
+                const idx = allItems.findIndex(i => getMediaId(i) === mediaId);
+                if (idx !== -1) Object.assign(allItems[idx], fields);
+                // Update poster/title on the visible grid card
+                const gridCard = document.querySelector(`.media-card[data-id="${mediaId}"]`);
+                if (gridCard) {
+                    if (fields.poster) gridCard.querySelector('.card-image')?.setAttribute('src', fields.poster);
+                    if (fields.title)  { const t = gridCard.querySelector('.card-title'); if (t) t.textContent = fields.title; }
+                }
+                editInfoPanel.classList.add('hidden');
+                editInfoBtn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i> Edit Info';
+                lucide.createIcons();
+            } catch (e) {
+                errEl.textContent = 'Save failed: ' + e.message;
+                errEl.classList.remove('hidden');
+            } finally {
+                saveInfoBtn.textContent = 'Save Changes';
+                saveInfoBtn.disabled = false;
+            }
+        });
+
+        cancelInfoBtn?.addEventListener('click', () => {
+            editInfoPanel.classList.add('hidden');
+            editInfoBtn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i> Edit Info';
+            lucide.createIcons();
         });
     }
 
