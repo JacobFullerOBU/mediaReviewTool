@@ -57,6 +57,25 @@ let currentFilter = 'all';
 let currentGenreFilter = 'all';
 let quillEditor = null;
 
+// Title slugs that appear in more than one category (e.g. "the_housemaid" in both movies + books).
+// The legacy fallback must be blocked for these to prevent a book card from displaying movie reviews.
+let crossCategoryAmbiguousSlugs = new Set();
+
+function buildCrossCategoryAmbiguousSlugs() {
+    const slugCatMap = {};
+    for (const item of allItems) {
+        const slug = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+        const cat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
+        if (!slugCatMap[slug]) slugCatMap[slug] = new Set();
+        slugCatMap[slug].add(cat);
+    }
+    crossCategoryAmbiguousSlugs = new Set(
+        Object.entries(slugCatMap)
+            .filter(([, cats]) => cats.size > 1)
+            .map(([slug]) => slug)
+    );
+}
+
 // Ordered most-specific → least-specific so "Science Fiction" matches before "Fiction"
 const BOOK_GENRE_BUCKETS = [
     { label: 'Mystery & Thriller', re: /mystery|thriller|detective|crime|suspense|true crime/i },
@@ -397,8 +416,47 @@ async function initCards() {
         console.error("Failed to load books:", e);
     }
 
-    allItems = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks];
+    // Normalize category casing ("Movie" → "movies", "TV" → "tv", etc.)
+    const CAT_NORM = { movie: 'movies', tv: 'tv', book: 'books', game: 'games', music: 'music' };
+    const normalizeCategory = item => {
+        const raw = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).trim();
+        const lc = raw.toLowerCase();
+        item.category = CAT_NORM[lc] || lc || raw;
+        return item;
+    };
+
+    const allRaw = [...movies, ...validTV, ...validMusic, ...validGames, ...validBooks].map(normalizeCategory);
+
+    // Deduplicate: within each category, keep one card per title slug.
+    // For books: multiple editions of the same book → keep one with the best cover + longest description.
+    // For movies/TV: same-slug items may be legitimately different films (remakes) — keep all.
+    const dedupedBooks = (() => {
+        const seen = {};
+        for (const item of allRaw.filter(i => i.category === 'books')) {
+            const slug = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+            if (!seen[slug]) {
+                seen[slug] = item;
+            } else {
+                const prev = seen[slug];
+                const hasBetterCover = item.poster && !item.poster.includes('image not available') &&
+                    (!prev.poster || prev.poster.includes('image not available'));
+                const hasLongerDesc = (item.description || '').length > (prev.description || '').length;
+                if (hasBetterCover || (!prev.poster && hasLongerDesc)) {
+                    seen[slug] = item;
+                }
+            }
+        }
+        return Object.values(seen);
+    })();
+
+    allItems = [
+        ...allRaw.filter(i => i.category !== 'books'),
+        ...dedupedBooks,
+    ];
     window.allItems = allItems;
+
+    // Build the cross-category ambiguous slugs set so legacy fallback won't bleed across categories.
+    buildCrossCategoryAmbiguousSlugs();
     
     // Initialize tab functionality
     initTabFunctionality();
@@ -589,7 +647,11 @@ async function fetchRatingsForItems(items) {
             const mediaId = getMediaId(item);
             const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
             let rating = await getAverageRating(mediaId);
-            if (rating === 'N/A' && legacyId !== mediaId) {
+            // Only fall back to the legacy (title-only) ID if the slug is unambiguous —
+            // i.e., this title does NOT exist in another category. If it does, the legacy
+            // reviews belong to whichever category had them first, and we must not
+            // let a book steal a movie's reviews (or vice versa).
+            if (rating === 'N/A' && legacyId !== mediaId && !crossCategoryAmbiguousSlugs.has(legacyId)) {
                 rating = await getAverageRating(legacyId);
             }
             item.liveAvgRating = (rating === 'N/A') ? -1 : parseFloat(rating);
@@ -627,7 +689,8 @@ async function fetchLatestReviewTimesForItems(items) {
         if (item.latestReviewTime !== undefined) return;
         const mediaId = getMediaId(item);
         const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
-        item.latestReviewTime = cache[mediaId] || cache[legacyId] || 0;
+        const canUseLegacy = legacyId !== mediaId && !crossCategoryAmbiguousSlugs.has(legacyId);
+        item.latestReviewTime = cache[mediaId] || (canUseLegacy ? cache[legacyId] : 0) || 0;
     });
 }
 
@@ -781,8 +844,10 @@ async function showItemDetails(item) {
 
     try {
         let snapshot = await get(ref(db, `reviews/${mediaId}`));
-        // Fall back to legacy title-only ID so existing reviews are still visible
-        if (!snapshot.exists() && legacyId !== mediaId) {
+        // Fall back to the legacy title-only ID only when the slug is unambiguous
+        // (i.e. this title does not exist in another category). This prevents a book
+        // detail view from displaying reviews that were written for a same-named movie.
+        if (!snapshot.exists() && legacyId !== mediaId && !crossCategoryAmbiguousSlugs.has(legacyId)) {
             const legacySnapshot = await get(ref(db, `reviews/${legacyId}`));
             if (legacySnapshot.exists()) {
                 snapshot = legacySnapshot;
