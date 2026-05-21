@@ -1572,7 +1572,7 @@ async function renderCards(container, items) {
             cardHTML += `
                 <div class=\"media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer\" data-id=\"${cardId}\">
                     <div class=\"relative ${imageHeight} overflow-hidden\">
-                        <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\">
+                        <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\" onerror=\"handleImageError(this)\">
                         <div class=\"absolute top-2 right-2 px-2 py-1 rounded-md flex items-center gap-1\">
                             <span class=\"star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow\" id=\"rating-${cardId}\">${avgRating}</span>
                         </div>
@@ -1614,6 +1614,22 @@ async function renderCards(container, items) {
     }
     renderVisibleCards();
 }
+
+window.handleImageError = function(img) {
+    img.onerror = null;
+    img.style.display = 'none';
+    const ph = document.createElement('div');
+    ph.className = 'w-full h-full flex flex-col items-center justify-center bg-slate-700/50 text-slate-500 select-none';
+    ph.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-2 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span class="text-xs font-medium tracking-wide">No Image</span>
+    `;
+    img.parentElement.appendChild(ph);
+};
 
 // Show loading state
 function showLoadingState(container) {
