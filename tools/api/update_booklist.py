@@ -7,22 +7,38 @@ import requests
 # ── CONFIGURATION ─────────────────────────────────────────────────────────────
 API_KEY = "AIzaSyB6vCAjCO_wFlAWO2h9kgYnmRrIfXxq8pA"
 
-# Subjects to search — Google Books returns up to 40 per page
-SUBJECTS = [
-    "fiction", "mystery", "romance", "fantasy", "thriller",
-    "biography", "science fiction", "historical fiction",
-    "horror", "self help", "nonfiction", "young adult", "classics",
-    "graphic novels", "true crime", "cookbooks", "poetry",
+# Popularity-focused queries — each walks down Google's ranked list
+QUERIES = [
+    '"New York Times bestseller"',
+    '"bestselling novel"',
+    '"instant bestseller"',
+    '"Pulitzer Prize" novel',
+    '"Booker Prize" novel',
+    '"National Book Award"',
+    '"Oprah\'s Book Club"',
+    "popular fiction bestseller",
+    "popular mystery thriller bestseller",
+    "popular romance bestseller",
+    "popular fantasy bestseller",
+    "popular science fiction bestseller",
+    "popular historical fiction bestseller",
+    "popular biography memoir bestseller",
+    "popular self help bestseller",
+    "popular young adult bestseller",
+    "popular horror bestseller",
+    "popular true crime bestseller",
+    "popular graphic novel bestseller",
+    "popular cookbook bestseller",
 ]
-PAGES_PER_SUBJECT    = 3    # pages per subject (3 × 40 = up to 120 books each)
+PAGES_PER_SUBJECT    = 5    # pages per query (5 × 40 = up to 200 books each)
 RESULTS_PER_PAGE     = 40   # Google Books API hard max per request
 CHECKPOINT_MAX_AGE_HOURS = 12
 
 _SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
-_PROJECT_ROOT = os.path.dirname(_SCRIPT_DIR)
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))  # tools/api -> tools -> project root
 
-MASTER_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Books", "books.json")
-BACKUP_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Books", "books_backup.json")
+MASTER_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books.json")
+BACKUP_FILE     = os.path.join(_PROJECT_ROOT, "Assets", "Data", "books_backup.json")
 CHECKPOINT_FILE = os.path.join(_SCRIPT_DIR, "books_fetch_checkpoint.json")
 
 BASE_URL = "https://www.googleapis.com/books/v1/volumes"
@@ -98,8 +114,8 @@ def fetch_books(existing_fingerprints):
     processed_ids, fetched = load_checkpoint()
 
     skipped_existing = skipped_checkpoint = 0
-    for subject in SUBJECTS:
-        print(f"\n  Subject: {subject}")
+    for query in QUERIES:
+        print(f"\n  Query: {query}")
         for page in range(PAGES_PER_SUBJECT):
             start_index = page * RESULTS_PER_PAGE
             print(f"    Page {page + 1}/{PAGES_PER_SUBJECT} (startIndex={start_index})")
@@ -107,7 +123,7 @@ def fetch_books(existing_fingerprints):
                 resp = requests.get(
                     BASE_URL,
                     params={
-                        "q":            f"subject:{subject}",
+                        "q":            query,
                         "orderBy":      "relevance",
                         "maxResults":   RESULTS_PER_PAGE,
                         "startIndex":   start_index,
@@ -129,7 +145,7 @@ def fetch_books(existing_fingerprints):
                     break
 
             except Exception as e:
-                print(f"    Error on subject '{subject}' page {page + 1}: {e}")
+                print(f"    Error on query '{query}' page {page + 1}: {e}")
                 break
 
             for item in items:
@@ -160,16 +176,22 @@ def fetch_books(existing_fingerprints):
                 authors     = volume_info.get("authors", [])
                 author      = ", ".join(authors)
 
-                categories  = volume_info.get("categories", [subject.title()])
+                categories  = volume_info.get("categories", ["General"])
                 genre       = ", ".join(categories[:3])
 
                 description = volume_info.get("description", "")
 
                 image_links = volume_info.get("imageLinks", {})
-                poster      = (image_links.get("thumbnail") or
+                poster      = (image_links.get("extraLarge") or
+                               image_links.get("large") or
+                               image_links.get("medium") or
+                               image_links.get("small") or
+                               image_links.get("thumbnail") or
                                image_links.get("smallThumbnail") or "")
-                # Upgrade to HTTPS if needed
                 poster = poster.replace("http://", "https://")
+                # Strip curl effect and request full-size cover
+                if poster and "books.google.com" in poster:
+                    poster = poster.replace("&zoom=1", "&zoom=0").replace("&edge=curl", "")
 
                 fetched.append({
                     "title":       title,
