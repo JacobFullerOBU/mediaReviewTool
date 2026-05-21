@@ -21,10 +21,14 @@ export async function fetchMusic() {
     }
 
     const enriched = await Promise.all(albums.map(async album => {
-        if (album.poster) return album;
+        const base = {
+            ...album,
+            genre: Array.isArray(album.genres) ? album.genres.join(', ') : (album.genre || '')
+        };
+        if (album.poster) return base;
         const spotifyData = await getAlbumData(album.title, album.artist);
-        if (!spotifyData) return album;
-        return { ...album, poster: spotifyData.poster, image: spotifyData.poster, spotifyId: spotifyData.spotifyId };
+        if (!spotifyData) return base;
+        return { ...base, poster: spotifyData.poster, image: spotifyData.poster, spotifyId: spotifyData.spotifyId };
     }));
 
     return enriched;

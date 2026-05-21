@@ -76,6 +76,38 @@ function buildCrossCategoryAmbiguousSlugs() {
     );
 }
 
+const MUSIC_GENRE_BUCKETS = [
+    { label: 'Pop',        re: /\bpop\b/i },
+    { label: 'Rock',       re: /\brock\b|hard rock|classic rock/i },
+    { label: 'Hip-Hop',    re: /hip.?hop|\brap\b|\btrap\b/i },
+    { label: 'Electronic', re: /electronic|edm|\bhouse\b|techno|trance|\bdance\b/i },
+    { label: 'R&B / Soul', re: /r.?n.?b|\bsoul\b|\bfunk\b|rhythm and blues/i },
+    { label: 'Country',    re: /\bcountry\b/i },
+    { label: 'Jazz',       re: /\bjazz\b/i },
+    { label: 'Classical',  re: /classical|orchestral|opera/i },
+    { label: 'Indie',      re: /\bindie\b|alternative/i },
+    { label: 'Metal',      re: /\bmetal\b/i },
+    { label: 'Latin',      re: /latin|reggaeton|salsa|bachata/i },
+    { label: 'K-Pop',      re: /k.?pop|korean pop/i },
+    { label: 'Blues',      re: /\bblues\b/i },
+    { label: 'Folk',       re: /\bfolk\b/i },
+    { label: 'Reggae',     re: /reggae/i },
+    { label: 'Punk',       re: /\bpunk\b/i },
+];
+
+function normalizeMusicGenre(rawGenre) {
+    for (const bucket of MUSIC_GENRE_BUCKETS) {
+        if (bucket.re.test(rawGenre)) return bucket.label;
+    }
+    return null;
+}
+
+function getMusicGenres(item) {
+    if (Array.isArray(item.genres) && item.genres.length) return item.genres;
+    if (item.genre) return item.genre.split(',').map(g => g.trim()).filter(Boolean);
+    return [];
+}
+
 // Ordered most-specific → least-specific so "Science Fiction" matches before "Fiction"
 const BOOK_GENRE_BUCKETS = [
     { label: 'Mystery & Thriller', re: /mystery|thriller|detective|crime|suspense|true crime/i },
@@ -494,14 +526,17 @@ function renderGenreFilters(category) {
     });
 
     const isBooks = category.toLowerCase() === 'books';
+    const isMusic = category.toLowerCase() === 'music';
     const genreSet = new Set();
     categoryItems.forEach(item => {
-        if (!item.genre) return;
-        item.genre.split(',').forEach(g => {
-            const t = g.trim();
+        const rawGenres = isMusic ? getMusicGenres(item) : (item.genre || '').split(',').map(g => g.trim()).filter(Boolean);
+        rawGenres.forEach(t => {
             if (!t) return;
             if (isBooks) {
                 const normalized = normalizeBookGenre(t);
+                if (normalized) genreSet.add(normalized);
+            } else if (isMusic) {
+                const normalized = normalizeMusicGenre(t);
                 if (normalized) genreSet.add(normalized);
             } else {
                 genreSet.add(t);
@@ -509,10 +544,12 @@ function renderGenreFilters(category) {
         });
     });
 
-    // For books, preserve BOOK_GENRE_BUCKETS order; otherwise sort alphabetically
+    // Preserve bucket order for books and music; sort alphabetically for others
     const genres = isBooks
         ? BOOK_GENRE_BUCKETS.map(b => b.label).filter(l => genreSet.has(l))
-        : Array.from(genreSet).sort();
+        : isMusic
+            ? MUSIC_GENRE_BUCKETS.map(b => b.label).filter(l => genreSet.has(l))
+            : Array.from(genreSet).sort();
     if (genres.length === 0) {
         container.innerHTML = '';
         container.classList.add('hidden');
@@ -725,9 +762,12 @@ async function filterCards(category) {
     // Filter by genre
     if (currentGenreFilter && currentGenreFilter !== 'all') {
         items = items.filter(item => {
+            const cat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
+            if (cat === 'music') {
+                return getMusicGenres(item).some(g => normalizeMusicGenre(g) === currentGenreFilter);
+            }
             if (!item.genre) return false;
-            const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
-            if (cat.toLowerCase() === 'books') {
+            if (cat === 'books') {
                 return item.genre.split(',').some(g => normalizeBookGenre(g.trim()) === currentGenreFilter);
             }
             return item.genre.split(',').map(g => g.trim()).includes(currentGenreFilter);
