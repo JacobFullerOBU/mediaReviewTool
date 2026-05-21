@@ -57,6 +57,32 @@ let currentFilter = 'all';
 let currentGenreFilter = 'all';
 let quillEditor = null;
 
+// Ordered most-specific → least-specific so "Science Fiction" matches before "Fiction"
+const BOOK_GENRE_BUCKETS = [
+    { label: 'Mystery & Thriller', re: /mystery|thriller|detective|crime|suspense|true crime/i },
+    { label: 'Science Fiction',    re: /science fiction|sci-fi|dystopia|extraterrestrial|life on other planets|alternate history/i },
+    { label: 'Fantasy',            re: /fantasy|magic\b|dragon|wizard|hobbit|sorcery|mythical/i },
+    { label: 'Horror',             re: /horror|vampire|haunted|supernatural/i },
+    { label: 'Historical Fiction', re: /historical fiction|historical romance/i },
+    { label: 'Romance',            re: /\bromance\b|love stor/i },
+    { label: 'Biography & Memoir', re: /biograph|autobiography|memoir/i },
+    { label: 'Young Adult',        re: /young adult|juvenile/i },
+    { label: 'Graphic Novels',     re: /graphic novel|comic/i },
+    { label: 'Self-Help',          re: /self.help|self.actuali|motivat|personal development/i },
+    { label: 'History',            re: /\bhistory\b|political science|world war|social history/i },
+    { label: 'Science',            re: /\bscience\b|technology|engineering|mathematics|physics|biology/i },
+    { label: 'Business',           re: /\bbusiness\b|economics|finance|management|leadership/i },
+    { label: 'Poetry',             re: /poetry|poems/i },
+    { label: 'Fiction',            re: /fiction|literature|literary/i },
+];
+
+function normalizeBookGenre(rawGenre) {
+    for (const bucket of BOOK_GENRE_BUCKETS) {
+        if (bucket.re.test(rawGenre)) return bucket.label;
+    }
+    return null;
+}
+
 // Function to check if user has unsaved review content
 function checkUnsavedReviewContent() {
     // Check if review form is open
@@ -408,14 +434,26 @@ function renderGenreFilters(category) {
         return category === 'movies' && !item.category;
     });
 
+    const isBooks = category.toLowerCase() === 'books';
     const genreSet = new Set();
     categoryItems.forEach(item => {
-        if (item.genre) {
-            item.genre.split(',').forEach(g => { const t = g.trim(); if (t) genreSet.add(t); });
-        }
+        if (!item.genre) return;
+        item.genre.split(',').forEach(g => {
+            const t = g.trim();
+            if (!t) return;
+            if (isBooks) {
+                const normalized = normalizeBookGenre(t);
+                if (normalized) genreSet.add(normalized);
+            } else {
+                genreSet.add(t);
+            }
+        });
     });
 
-    const genres = Array.from(genreSet).sort();
+    // For books, preserve BOOK_GENRE_BUCKETS order; otherwise sort alphabetically
+    const genres = isBooks
+        ? BOOK_GENRE_BUCKETS.map(b => b.label).filter(l => genreSet.has(l))
+        : Array.from(genreSet).sort();
     if (genres.length === 0) {
         container.innerHTML = '';
         container.classList.add('hidden');
@@ -611,6 +649,10 @@ async function filterCards(category) {
     if (currentGenreFilter && currentGenreFilter !== 'all') {
         items = items.filter(item => {
             if (!item.genre) return false;
+            const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
+            if (cat.toLowerCase() === 'books') {
+                return item.genre.split(',').some(g => normalizeBookGenre(g.trim()) === currentGenreFilter);
+            }
             return item.genre.split(',').map(g => g.trim()).includes(currentGenreFilter);
         });
     }
