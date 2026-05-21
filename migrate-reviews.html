@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Migration Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-8 font-mono">
+
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold text-white mb-2">Review Migration Tool</h1>
+    <p class="text-slate-400 text-sm mb-6">
+        Moves legacy reviews (stored as <code class="text-indigo-400">the_housemaid</code>)
+        to category-prefixed paths (<code class="text-indigo-400">movies_the_housemaid</code>).
+        Preview is shown before any changes are made.
+    </p>
+
+    <div class="flex gap-3 mb-6">
+        <button id="scanBtn"
+            class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition-colors">
+            Scan Firebase
+        </button>
+        <button id="migrateBtn"
+            class="px-5 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-colors hidden">
+            Run Migration
+        </button>
+    </div>
+
+    <div id="status" class="text-slate-400 text-sm mb-4"></div>
+    <div id="results" class="space-y-2"></div>
+</div>
+
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAKGL7v8zhVHFsoV_AWwgAshiWmv8v84yA",
+    authDomain: "mediareviews-3cf32.firebaseapp.com",
+    databaseURL: "https://mediareviews-3cf32-default-rtdb.firebaseio.com/",
+    projectId: "mediareviews-3cf32",
+    storageBucket: "mediareviews-3cf32.appspot.com",
+    messagingSenderId: "324432751049",
+    appId: "1:324432751049:web:37e669334f3480dfc02018"
+};
+
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const db  = getDatabase(app);
+
+// ── Migration logic ───────────────────────────────────────────────────────────
+
+const KNOWN_CATEGORIES = ['movies', 'tv', 'books', 'games', 'music'];
+
+function titleSlug(title) {
+    return (title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+}
+
+function isNewStyleKey(key) {
+    return KNOWN_CATEGORIES.some(cat => key.startsWith(cat + '_'));
+}
+
+async function loadDataFiles() {
+    const files = [
+        { url: './Assets/Data/movieList.json', category: 'movies' },
+        { url: './Assets/Data/tvList.json',    category: 'tv' },
+        { url: './Assets/Data/books.json',     category: 'books' },
+    ];
+
+    const slugToCategories = {};
+    const newStyleKeys = new Set();
+
+    for (const { url, category } of files) {
+        try {
+            const items = await (await fetch(url)).json();
+            for (const item of items) {
+                if (!item.title) continue;
+                const slug   = titleSlug(item.title);
+                const newKey = `${category}_${slug}`;
+                newStyleKeys.add(newKey);
+                if (!slugToCategories[slug]) slugToCategories[slug] = [];
+                if (!slugToCategories[slug].includes(category)) {
+                    slugToCategories[slug].push(category);
+                }
+            }
+        } catch (e) {
+            console.error(`Failed to load ${url}:`, e);
+        }
+    }
+
+    return { slugToCategories, newStyleKeys };
+}
+
+function setStatus(msg) { document.getElementById('status').textContent = msg; }
+
+function addResult(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    document.getElementById('results').appendChild(div);
+}
+
+function clearResults() { document.getElementById('results').innerHTML = ''; }
+
+let migrationPlan = [];
+
+document.getElementById('scanBtn').addEventListener('click', async () => {
+    clearResults();
+    migrationPlan = [];
+    document.getElementById('migrateBtn').classList.add('hidden');
+    setStatus('Loading data files...');
+
+    const { slugToCategories, newStyleKeys } = await loadDataFiles();
+
+    setStatus('Reading Firebase reviews...');
+    const snapshot = await get(ref(db, 'reviews'));
+    if (!snapshot.exists()) { setStatus('No reviews found in Firebase.'); return; }
+
+    const reviewsData = snapshot.val();
+    const keys = Object.keys(reviewsData);
+    let toMigrate = 0, alreadyMigrated = 0, ambiguous = 0, orphaned = 0;
+
+    for (const key of keys) {
+        if (isNewStyleKey(key)) { alreadyMigrated++; continue; }
+
+        const cats = slugToCategories[key] || [];
+
+        if (cats.length === 0) {
+            orphaned++;
+            addResult(`<div class="bg-slate-800 rounded px-4 py-2 text-xs flex gap-2">
+                <span class="text-yellow-400 font-bold shrink-0">ORPHANED</span>
+                <span class="text-slate-300">${key}</span>
+                <span class="text-slate-500">— title not found in any data file</span>
+            </div>`);
+
+        } else if (cats.length > 1) {
+            ambiguous++;
+            addResult(`<div class="bg-slate-800 rounded px-4 py-2 text-xs flex gap-2">
+                <span class="text-orange-400 font-bold shrink-0">AMBIGUOUS</span>
+                <span class="text-slate-300">${key}</span>
+                <span class="text-slate-500">— exists in: ${cats.join(', ')} — needs manual resolution</span>
+            </div>`);
+
+        } else {
+            const newKey = `${cats[0]}_${key}`;
+            const reviewCount = Object.keys(reviewsData[key]).length;
+            migrationPlan.push({ oldKey: key, newKey, data: reviewsData[key] });
+            toMigrate++;
+            addResult(`<div class="bg-slate-800 rounded px-4 py-2 text-xs flex gap-2 items-center">
+                <span class="text-green-400 font-bold shrink-0">MIGRATE</span>
+                <span class="text-slate-500">${key}</span>
+                <span class="text-slate-400">→</span>
+                <span class="text-indigo-400">${newKey}</span>
+                <span class="text-slate-500">(${reviewCount} review${reviewCount !== 1 ? 's' : ''})</span>
+            </div>`);
+        }
+    }
+
+    setStatus(`Scan complete — ${toMigrate} to migrate, ${alreadyMigrated} already up-to-date, ${ambiguous} ambiguous, ${orphaned} orphaned.`);
+    if (toMigrate > 0) document.getElementById('migrateBtn').classList.remove('hidden');
+});
+
+document.getElementById('migrateBtn').addEventListener('click', async () => {
+    if (migrationPlan.length === 0) return;
+
+    if (!confirm(`Move ${migrationPlan.length} legacy review set(s) to category-prefixed paths and delete the old paths?\n\nThis cannot be undone.`)) return;
+
+    document.getElementById('migrateBtn').disabled = true;
+    setStatus('Migrating...');
+    clearResults();
+
+    let success = 0, failed = 0;
+
+    for (const { oldKey, newKey, data } of migrationPlan) {
+        try {
+            await set(ref(db, `reviews/${newKey}`), data);
+            await remove(ref(db, `reviews/${oldKey}`));
+            success++;
+            addResult(`<div class="bg-slate-800 rounded px-4 py-2 text-xs flex gap-2 items-center">
+                <span class="text-green-400 font-bold shrink-0">DONE</span>
+                <span class="text-slate-500">${oldKey}</span>
+                <span class="text-slate-400">→</span>
+                <span class="text-indigo-400">${newKey}</span>
+            </div>`);
+        } catch (e) {
+            failed++;
+            addResult(`<div class="bg-slate-800 rounded px-4 py-2 text-xs flex gap-2 items-center">
+                <span class="text-red-400 font-bold shrink-0">ERROR</span>
+                <span class="text-slate-300">${oldKey}</span>
+                <span class="text-slate-500">${e.message}</span>
+            </div>`);
+        }
+    }
+
+    setStatus(`Migration complete — ${success} succeeded, ${failed} failed.`);
+    document.getElementById('migrateBtn').classList.add('hidden');
+    document.getElementById('migrateBtn').disabled = false;
+});
+</script>
+</body>
+</html>
