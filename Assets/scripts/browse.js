@@ -76,16 +76,23 @@ async function fetchData() {
         }
 
         allMedia = [...movies, ...tvData, ...music, ...games, ...booksData].filter(item => item && item.title);
-        
+
+        const CAT_NORM = { movie: 'movies', book: 'books', game: 'games' };
         const mediaMap = {};
         allMedia.forEach(media => {
-            if (media.id != null) {
-                mediaMap[media.id] = media;
-            }
-            if (media.title) {
-                const mId = media.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                mediaMap[mId] = media;
-            }
+            const titleSlug = media.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const rawCat = Array.isArray(media.category) ? media.category[0] : (media.category || '');
+            const normCat = CAT_NORM[rawCat.trim().toLowerCase()] || rawCat.trim().toLowerCase();
+            const catSlug = normCat.replace(/[^a-zA-Z0-9]/g, '_');
+
+            // Category-prefixed key matches migrated Firebase paths (e.g. 'movies_the_housemaid')
+            if (catSlug) mediaMap[`${catSlug}_${titleSlug}`] = media;
+
+            // Explicit media.id if present
+            if (media.id != null) mediaMap[media.id] = media;
+
+            // Title-only fallback: first category wins so movies take priority over books
+            if (!mediaMap[titleSlug]) mediaMap[titleSlug] = media;
         });
 
         if (reviewsSnapshot.exists()) {
