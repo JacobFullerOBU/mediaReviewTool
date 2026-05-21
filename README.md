@@ -47,7 +47,7 @@ Right now movies support anonymous reviews so you can jump straight in without m
 
 ## Contributing
 
-Got ideas or found a bug? Open an issue or send a pull request — always happy to take a look.
+Got additional ideas or found a bug? Open an issue or send a pull request, or shoot me an email trueratedadmin@gmail.com. I'malways happy to take a look.
 
 ---
 
