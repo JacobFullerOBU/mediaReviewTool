@@ -745,6 +745,21 @@ async function fetchRatingsForItems(items) {
         if (i.liveAvgRating !== undefined) return false;
         const mediaId = getMediaId(i);
         if (ssCache[mediaId] !== undefined) { i.liveAvgRating = ssCache[mediaId]; return false; }
+        // Use bulk rating cache computed from the single reviews tree read — avoids N individual Firebase requests
+        if (ratingBulkCache !== null) {
+            const legacyId = i.title ? i.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+            const canUseLegacy = legacyId !== mediaId && !crossCategoryAmbiguousSlugs.has(legacyId);
+            if (ratingBulkCache[mediaId] !== undefined) {
+                i.liveAvgRating = ratingBulkCache[mediaId];
+                return false;
+            }
+            if (canUseLegacy && ratingBulkCache[legacyId] !== undefined) {
+                i.liveAvgRating = ratingBulkCache[legacyId];
+                return false;
+            }
+            i.liveAvgRating = -1;
+            return false;
+        }
         return true;
     });
 
@@ -767,6 +782,7 @@ async function fetchRatingsForItems(items) {
 }
 
 let reviewTimestampCache = null;
+let ratingBulkCache = null;
 
 async function fetchLatestReviewTimesForItems(items) {
     if (!reviewTimestampCache) {
@@ -780,28 +796,51 @@ async function fetchLatestReviewTimesForItems(items) {
         } catch {}
     }
 
+    // Restore rating bulk cache from sessionStorage on page reload
+    if (!ratingBulkCache) {
+        try {
+            const stored = sessionStorage.getItem('reviewRatingCache');
+            if (stored) {
+                const { data, ts } = JSON.parse(stored);
+                if (Date.now() - ts < 5 * 60 * 1000) ratingBulkCache = data;
+            }
+        } catch {}
+    }
+
     if (!reviewTimestampCache) {
         reviewTimestampCache = {};
+        ratingBulkCache = {};
         try {
             const snapshot = await get(ref(db, 'reviews'));
             if (snapshot.exists()) {
                 snapshot.forEach(mediaSnap => {
                     let latest = 0;
+                    let total = 0, count = 0;
                     mediaSnap.forEach(reviewSnap => {
-                        const ts = reviewSnap.val().timestamp;
+                        const data = reviewSnap.val();
+                        const ts = data.timestamp;
                         if (ts) {
                             const t = new Date(ts).getTime();
                             if (t > latest) latest = t;
                         }
+                        if (typeof data.rating === 'number') {
+                            total += data.rating;
+                            count++;
+                        }
                     });
                     reviewTimestampCache[mediaSnap.key] = latest;
+                    if (count > 0) {
+                        ratingBulkCache[mediaSnap.key] = parseFloat((total / count).toFixed(1));
+                    }
                 });
             }
         } catch (e) {
             reviewTimestampCache = {};
+            ratingBulkCache = {};
         }
         try {
             sessionStorage.setItem('reviewTsCache', JSON.stringify({ data: reviewTimestampCache, ts: Date.now() }));
+            sessionStorage.setItem('reviewRatingCache', JSON.stringify({ data: ratingBulkCache, ts: Date.now() }));
         } catch {}
     }
 
@@ -895,6 +934,9 @@ async function filterCards(category) {
     }
     const sortOption = document.getElementById('sortSelect')?.value || 'rating-desc';
     if (sortOption.startsWith('rating-')) {
+        // Pre-populate the bulk rating cache (single Firebase read) so fetchRatingsForItems
+        // can resolve all items from cache instead of making N individual requests.
+        await fetchLatestReviewTimesForItems(items);
         await fetchRatingsForItems(items);
         // Secondary guard: in 'all' tab, drop any item that has no actual rating
         if (isDefaultHome) {
@@ -1503,8 +1545,10 @@ async function showItemDetails(item) {
                 user: user.email || user.displayName || 'Anonymous'
             });
 
-            // Invalidate timestamp cache so "Most Recently Reviewed" sort reflects the new review
+            // Invalidate caches so ratings and timestamps reflect the new review
             reviewTimestampCache = null;
+            ratingBulkCache = null;
+            sessionStorage.removeItem('reviewRatingCache');
             delete item.latestReviewTime;
 
             // Refresh reviews, rating, and count
