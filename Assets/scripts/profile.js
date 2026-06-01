@@ -37,7 +37,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 
     item.innerHTML = `
         ${editButton}
-        <div class="w-24 mx-auto sm:mx-0 flex-shrink-0 cursor-pointer bg-slate-700 rounded-md overflow-hidden" onclick="openMediaDetails('${mediaId}')">
+        <div class="w-24 mx-auto sm:mx-0 flex-shrink-0 cursor-pointer" onclick="openMediaDetails('${mediaId}')">
             <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.style.display='none'">
         </div>
         <div class="flex-grow text-center sm:text-left">
