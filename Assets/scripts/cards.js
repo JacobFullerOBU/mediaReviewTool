@@ -407,6 +407,17 @@ async function getAverageRating(mediaId) {
     }
     return count > 0 ? (total / count).toFixed(1) : "N/A";
 }
+const SKELETON_CARD_HTML = `
+    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 animate-pulse">
+        <div class="h-48 bg-slate-700"></div>
+        <div class="p-5 space-y-3">
+            <div class="h-5 bg-slate-700 rounded w-3/4"></div>
+            <div class="h-4 bg-slate-700 rounded w-1/2"></div>
+            <div class="h-4 bg-slate-700 rounded w-1/3 mt-4"></div>
+        </div>
+    </div>
+`;
+
 // Cards functionality for displaying popular content
 document.addEventListener('DOMContentLoaded', async function () {
     await initCards();
@@ -416,24 +427,17 @@ async function initCards() {
     if (!container) return;
 
     // Show skeleton cards immediately so the page isn't blank during fetch
-    container.innerHTML = Array(9).fill(`
-        <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 animate-pulse">
-            <div class="h-48 bg-slate-700"></div>
-            <div class="p-5 space-y-3">
-                <div class="h-5 bg-slate-700 rounded w-3/4"></div>
-                <div class="h-4 bg-slate-700 rounded w-1/2"></div>
-                <div class="h-4 bg-slate-700 rounded w-1/3 mt-4"></div>
-            </div>
-        </div>
-    `).join('');
+    container.innerHTML = Array(9).fill(SKELETON_CARD_HTML).join('');
 
     let movies = [], validTV = [], validGames = [], validBooks = [];
 
-    // Fetch fast sources in parallel — music is background-loaded after initial render
-    const [moviesRes, tvRes, booksRes] = await Promise.allSettled([
+    // Fetch JSON sources, Firebase overrides, and review caches all in parallel
+    const [moviesRes, tvRes, booksRes, overridesRes] = await Promise.allSettled([
         fetchMovies(),
         fetchTV(),
         fetchBooks(),
+        getAllMediaOverrides(),
+        fetchLatestReviewTimesForItems([]), // warms reviewTimestampCache + ratingBulkCache early
     ]);
 
     if (moviesRes.status === 'fulfilled') {
@@ -493,7 +497,7 @@ async function initCards() {
     ];
 
     // Apply admin field overrides (e.g. genre, title) stored in Firebase
-    const overrides = await getAllMediaOverrides();
+    const overrides = overridesRes?.status === 'fulfilled' ? overridesRes.value : {};
     if (overrides && Object.keys(overrides).length > 0) {
         allItems = allItems.map(item => {
             const id = getMediaId(item);
@@ -955,8 +959,10 @@ async function loadCardsWithItems(items) {
         console.error('[cards.js] cardsContainer not found');
         return;
     }
-    showLoadingState(container);
-    // No artificial delay; render immediately
+    // Only replace with skeletons if not already showing them (avoids resetting the animation)
+    if (!container.querySelector('.animate-pulse')) {
+        container.innerHTML = Array(9).fill(SKELETON_CARD_HTML).join('');
+    }
     await renderCards(container, items);
     addCardListeners();
 }
@@ -1699,7 +1705,7 @@ async function renderCards(container, items) {
 
             cardHTML += `
                 <div class=\"media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer\" data-id=\"${cardId}\">
-                    <div class=\"relative ${imageHeight} overflow-hidden\">
+                    <div class=\"relative ${imageHeight} overflow-hidden bg-slate-700\">
                         <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\" onerror=\"handleImageError(this)\">
                         <div class=\"absolute top-2 right-2 px-2 py-1 rounded-md flex items-center gap-1\">
                             <span class=\"star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow\" id=\"rating-${cardId}\">${avgRating}</span>
@@ -1777,11 +1783,6 @@ window.handleImageError = function(img) {
     `;
     img.parentElement.appendChild(ph);
 };
-
-// Show loading state
-function showLoadingState(container) {
-    container.innerHTML = '<div style="padding:32px;text-align:center;color:#888;">Loading...</div>';
-}
 
 // Sorting functionality
 function sortItems(items, sortOption) {
