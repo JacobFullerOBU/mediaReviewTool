@@ -98,14 +98,12 @@ function renderFavoritesSection(favData, allMedia, mediaMap, isOwner, db, review
     if (!fullContainer && !inlineContainer) return;
 
     const gridHTML = `
-        <div class="overflow-x-auto pb-1">
-            <div class="grid grid-cols-5 gap-2 min-w-[280px]" id="favoriteSlots"></div>
-        </div>
+        <div class="grid grid-cols-5 gap-4" id="favoriteSlots"></div>
     `;
 
     if (fullContainer) {
         fullContainer.innerHTML = `
-            <h3 class="text-base font-semibold text-white mb-3">Top 5 Favorites</h3>
+            <h3 class="text-xl font-bold text-white mb-4">Top 5 Favorites</h3>
             ${gridHTML}
         `;
     } else {
@@ -130,11 +128,11 @@ function buildFavoriteSlot(mediaItem, index, isOwner, allMedia, db, reviewerId, 
         wrapper.className = 'relative group cursor-default';
         wrapper.innerHTML = `
             <img src="${poster}" alt="${mediaItem.title}"
-                 class="w-full aspect-[2/3] object-cover rounded-lg border border-slate-700 shadow-md">
-            <div class="absolute inset-0 rounded-lg bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span class="text-white text-xs font-medium line-clamp-2 leading-tight">${mediaItem.title}</span>
+                 class="w-full aspect-[2/3] object-cover rounded-xl border border-slate-700 shadow-lg">
+            <div class="absolute inset-0 rounded-xl bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="text-white text-sm font-semibold line-clamp-2 leading-tight">${mediaItem.title}</span>
             </div>
-            ${isOwner ? `<button class="slot-clear-btn absolute top-1 right-1 w-5 h-5 bg-black/70 hover:bg-red-500 text-white rounded-full text-xs opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">✕</button>` : ''}
+            ${isOwner ? `<button class="slot-clear-btn absolute top-2 right-2 w-6 h-6 bg-black/70 hover:bg-red-500 text-white rounded-full text-xs opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">✕</button>` : ''}
         `;
         if (isOwner) {
             wrapper.querySelector('.slot-clear-btn').addEventListener('click', async () => {
@@ -145,16 +143,16 @@ function buildFavoriteSlot(mediaItem, index, isOwner, allMedia, db, reviewerId, 
         }
     } else if (isOwner) {
         wrapper.innerHTML = `
-            <button class="slot-add-btn w-full aspect-[2/3] rounded-lg border-2 border-dashed border-slate-600 hover:border-indigo-500 hover:bg-indigo-500/5 flex flex-col items-center justify-center gap-1.5 transition-colors">
-                <i data-lucide="plus" class="w-6 h-6 text-slate-500"></i>
-                <span class="text-slate-500 text-xs font-medium">Add</span>
+            <button class="slot-add-btn w-full aspect-[2/3] rounded-xl border-2 border-dashed border-slate-600 hover:border-indigo-500 hover:bg-indigo-500/5 flex flex-col items-center justify-center gap-2 transition-colors">
+                <i data-lucide="plus" class="w-8 h-8 text-slate-500"></i>
+                <span class="text-slate-500 text-sm font-medium">Add</span>
             </button>
         `;
         wrapper.querySelector('.slot-add-btn').addEventListener('click', () => {
             openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, mediaMap);
         });
     } else {
-        wrapper.innerHTML = `<div class="w-full aspect-[2/3] rounded-lg border border-dashed border-slate-700/40 bg-slate-800/30"></div>`;
+        wrapper.innerHTML = `<div class="w-full aspect-[2/3] rounded-xl border border-dashed border-slate-700/40 bg-slate-800/30"></div>`;
     }
 
     return wrapper;
