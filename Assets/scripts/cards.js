@@ -959,10 +959,6 @@ async function loadCardsWithItems(items) {
         console.error('[cards.js] cardsContainer not found');
         return;
     }
-    // Only replace with skeletons if not already showing them (avoids resetting the animation)
-    if (!container.querySelector('.animate-pulse')) {
-        container.innerHTML = Array(9).fill(SKELETON_CARD_HTML).join('');
-    }
     await renderCards(container, items);
     addCardListeners();
 }
@@ -1705,7 +1701,7 @@ async function renderCards(container, items) {
 
             cardHTML += `
                 <div class=\"media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer\" data-id=\"${cardId}\">
-                    <div class=\"relative ${imageHeight} overflow-hidden bg-slate-700\">
+                    <div class=\"relative ${imageHeight} overflow-hidden\">
                         <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\" onerror=\"handleImageError(this)\">
                         <div class=\"absolute top-2 right-2 px-2 py-1 rounded-md flex items-center gap-1\">
                             <span class=\"star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow\" id=\"rating-${cardId}\">${avgRating}</span>
