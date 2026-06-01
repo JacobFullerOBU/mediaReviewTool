@@ -21,7 +21,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
     item.className = 'bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col sm:flex-row gap-6 relative group';
     item.dataset.category = review.mediaCategory || (mediaItem ? (mediaItem.category || 'unknown') : 'unknown');
 
-    const mediaPoster = mediaItem ? (mediaItem.poster || mediaItem.image) : 'https://via.placeholder.com/100x150.png?text=No+Image';
+    const mediaPoster = (mediaItem && (mediaItem.poster || mediaItem.image)) || '';
     const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
     const mediaId = `media-${review.id}`;
     
@@ -37,8 +37,8 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 
     item.innerHTML = `
         ${editButton}
-        <div class="w-24 mx-auto sm:mx-0 flex-shrink-0 cursor-pointer" onclick="openMediaDetails('${mediaId}')">
-            <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md">
+        <div class="w-24 mx-auto sm:mx-0 flex-shrink-0 cursor-pointer bg-slate-700 rounded-md overflow-hidden" onclick="openMediaDetails('${mediaId}')">
+            <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.style.display='none'">
         </div>
         <div class="flex-grow text-center sm:text-left">
             <div class="flex items-center justify-center sm:justify-start gap-3 mb-2 flex-wrap">
@@ -334,15 +334,22 @@ async function loadProfile(reviewerId) {
         let allReviews = [];
         console.log("Fetching all reviews...");
         
-        // Create a map for faster media lookup
+        // Create a map for faster media lookup.
+        // Index by both the plain title slug AND the category-prefixed slug (e.g. "movies_the_dark_knight")
+        // because cards.js saves Firebase review keys in the category-prefixed format via getMediaId().
         const mediaMap = {};
         allMedia.forEach(media => {
             if (media.id != null) {
                 mediaMap[media.id] = media;
             }
             if (media.title) {
-                const mId = media.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                mediaMap[mId] = media;
+                const titleSlug = media.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                mediaMap[titleSlug] = media;
+                const cat = Array.isArray(media.category) ? media.category[0] : (media.category || '');
+                const catSlug = cat.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                if (catSlug) {
+                    mediaMap[`${catSlug}_${titleSlug}`] = media;
+                }
             }
         });
 
@@ -385,7 +392,7 @@ async function loadProfile(reviewerId) {
             userReviewsContainer.innerHTML = '';
             allReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             allReviews.forEach(review => {
-                const mediaItem = allMedia.find(m => m.title.trim() === review.mediaTitle.trim());
+                const mediaItem = mediaMap[review.mediaId] || null;
                 const feedItem = createFeedItem(review, reviewerForFeed, mediaItem, isOwner);
                 userReviewsContainer.appendChild(feedItem);
             });
