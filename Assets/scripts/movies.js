@@ -117,6 +117,7 @@ async function fetchMovies() {
 
 let allMovies = [];
 let currentGenre = 'all';
+let currentInTheatres = false;
 let filteredMovies = [];
 let currentPage = 0;
 let isLoading = false;
@@ -155,12 +156,20 @@ function createGenreTabs(genres) {
     });
 }
 
+function applyFilters(source = allMovies) {
+    let result = source;
+    if (currentInTheatres) {
+        result = result.filter(m => m.inTheatres === true);
+    }
+    if (currentGenre !== 'all') {
+        result = result.filter(m => m.genre && m.genre.toLowerCase().includes(currentGenre.toLowerCase()));
+    }
+    return result;
+}
+
 function filterByGenre(genre) {
     currentGenre = genre;
-    filteredMovies = allMovies;
-    if (genre !== 'all') {
-        filteredMovies = allMovies.filter(m => m.genre && m.genre.toLowerCase().includes(genre.toLowerCase()));
-    }
+    filteredMovies = applyFilters();
     resetPagination();
     loadMoviesPage();
 }
@@ -646,6 +655,18 @@ window.addEventListener('DOMContentLoaded', async () => {
     // Setup infinite scrolling
     setupInfiniteScrolling();
     
+    // Setup "Now in Theatres" toggle
+    const theatresBtn = document.getElementById('inTheatresBtn');
+    if (theatresBtn) {
+        theatresBtn.addEventListener('click', function() {
+            currentInTheatres = !currentInTheatres;
+            this.classList.toggle('active', currentInTheatres);
+            filteredMovies = applyFilters();
+            resetPagination();
+            loadMoviesPage();
+        });
+    }
+
     // Setup debounced search
     const searchInput = document.getElementById('movieSearchInput');
     if (searchInput) {
@@ -667,12 +688,8 @@ function performSearch(query) {
         (movie.director && movie.director.toLowerCase().includes(query)) ||
         (movie.actors && movie.actors.toLowerCase().includes(query))
     );
-    
-    if (currentGenre !== 'all') {
-        filtered = filtered.filter(m => m.genre && m.genre.toLowerCase().includes(currentGenre.toLowerCase()));
-    }
-    
-    filteredMovies = filtered;
+
+    filteredMovies = applyFilters(filtered);
     resetPagination();
     loadMoviesPage();
 }

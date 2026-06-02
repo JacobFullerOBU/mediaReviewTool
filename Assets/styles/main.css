@@ -41,6 +41,41 @@ main#browse-page {
     justify-content: center;
 }
 
+/* Now in Theatres filter */
+.movies-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.movies-filter-row h2 {
+    margin: 0;
+}
+
+.btn-theatres-filter {
+    background: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-theatres-filter:hover {
+    background: #007bff;
+    color: white;
+}
+
+.btn-theatres-filter.active {
+    background: #007bff;
+    color: white;
+}
+
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
