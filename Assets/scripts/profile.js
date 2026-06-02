@@ -24,7 +24,8 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
     const mediaPoster = (mediaItem && (mediaItem.poster || mediaItem.image)) || '';
     const mediaTitle = mediaItem ? mediaItem.title : review.mediaTitle;
     const mediaId = `media-${review.id}`;
-    
+    const movieUrl = `movie.html?id=${encodeURIComponent(review.mediaId)}`;
+
     if (mediaItem) {
         mediaItemCache[mediaId] = mediaItem;
     }
@@ -37,15 +38,17 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
 
     item.innerHTML = `
         ${editButton}
-        <div class="w-24 mx-auto sm:mx-0 flex-shrink-0 cursor-pointer" onclick="openMediaDetails('${mediaId}')">
-            <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.style.display='none'">
-        </div>
+        <a href="${movieUrl}" class="w-24 mx-auto sm:mx-0 flex-shrink-0 block" onclick="if(window.showItemDetails){event.preventDefault();openMediaDetails('${mediaId}');}">
+            <img src="${mediaPoster}" alt="${mediaTitle}" class="w-full h-auto rounded-md hover:opacity-80 transition-opacity" onerror="this.onerror=null;this.style.display='none'">
+        </a>
         <div class="flex-grow text-center sm:text-left">
             <div class="flex items-center justify-center sm:justify-start gap-3 mb-2 flex-wrap">
                 <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
                 <span class="font-semibold text-white">${reviewer.username}</span>
                 <span class="text-xs text-slate-400">reviewed</span>
-                <span class="font-semibold text-indigo-400 cursor-pointer break-all" onclick="openMediaDetails('${mediaId}')">${mediaTitle}</span>
+                <a href="${movieUrl}" class="font-semibold text-indigo-400 hover:text-indigo-300 break-all" onclick="if(window.showItemDetails){event.preventDefault();openMediaDetails('${mediaId}');}">
+                    ${mediaTitle}
+                </a>
             </div>
             <div class="flex items-center justify-center sm:justify-start gap-1 mb-3 text-yellow-400">
                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
