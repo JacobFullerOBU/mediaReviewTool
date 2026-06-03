@@ -1026,6 +1026,19 @@ function buildReviewsHtml(reviewsData, mediaId) {
                     <i data-lucide="trash-2" class="w-3 h-3"></i> Delete
                 </button>
             </div>` : '';
+        const spoilerTag = r.spoilers
+            ? `<span class="text-xs font-semibold text-amber-400 bg-amber-900/30 border border-amber-700/50 px-2 py-0.5 rounded">Spoilers</span>`
+            : '';
+        const uid = `spoiler-${reviewId}`;
+        const contentHtml = r.spoilers ? `
+            <div class="spoiler-gate mt-2">
+                <label class="flex items-center gap-2 text-sm text-amber-400 cursor-pointer select-none w-fit">
+                    <input type="checkbox" class="spoiler-toggle w-4 h-4 rounded border-amber-700 bg-slate-900 text-amber-500 focus:ring-amber-500 cursor-pointer" id="${uid}" checked>
+                    Uncheck to reveal spoilers
+                </label>
+                <div class="spoiler-body hidden mt-2 review-content text-slate-300" style="line-height: 1.6;" data-for="${uid}">${sanitizedContent}</div>
+            </div>
+        ` : `<div class="review-content text-slate-300 mt-2" style="line-height: 1.6;">${sanitizedContent}</div>`;
         return `
             <div class="review-block bg-slate-900/50 p-4 rounded-lg border border-slate-700"
                  data-review-id="${reviewId}" data-media-id="${mediaId}"
@@ -1033,13 +1046,14 @@ function buildReviewsHtml(reviewsData, mediaId) {
                 <div class="flex items-center justify-between mb-2">
                     <div class="flex items-center gap-2 text-yellow-400 font-bold">
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i> ${r.rating}
+                        ${spoilerTag}
                     </div>
                     <div class="text-right">
                         <div class="text-slate-400 text-sm">${r.user || 'Anonymous'}</div>
                         <span class="text-slate-500 text-xs">${formattedDate}</span>
                     </div>
                 </div>
-                <div class="review-content text-slate-300" style="line-height: 1.6;">${sanitizedContent}</div>
+                ${contentHtml}
                 ${adminControls}
             </div>
         `;
@@ -1198,6 +1212,10 @@ async function showItemDetails(item) {
                         <label for="reviewTextEditor" class="block text-sm font-medium text-slate-300 mb-2">Your Review:</label>
                         <div id="reviewTextEditor" style="height: 150px; background: #1f2937; border: 1px solid #374151; border-radius: 8px;"></div>
                     </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="reviewSpoilers" class="w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-500 focus:ring-amber-500 cursor-pointer">
+                        <label for="reviewSpoilers" class="text-sm text-slate-300 cursor-pointer select-none">Contains spoilers</label>
+                    </div>
                     <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">Submit Review</button>
                 </form>
                 <div id="reviewError" class="text-red-500 mt-4"></div>
@@ -1246,6 +1264,14 @@ async function showItemDetails(item) {
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
     lucide.createIcons();
+
+    // Spoiler toggles: reveal/hide spoiler content when checkbox is unchecked/checked
+    modal.querySelector('#reviewsSection').addEventListener('change', (e) => {
+        const toggle = e.target.closest('.spoiler-toggle');
+        if (!toggle) return;
+        const body = toggle.closest('.spoiler-gate').querySelector('.spoiler-body');
+        if (body) body.classList.toggle('hidden', toggle.checked);
+    });
 
     // Admin controls: delete and inline-edit any review
     if (adminState.isAdmin) {
@@ -1561,6 +1587,7 @@ async function showItemDetails(item) {
         const reviewText = editorContent.text;
         const reviewHTML = editorContent.html;
         const reviewRating = parseFloat(modal.querySelector('#reviewRating').value);
+        const containsSpoilers = modal.querySelector('#reviewSpoilers')?.checked ?? false;
         const reviewError = modal.querySelector('#reviewError');
         reviewError.textContent = '';
 
@@ -1585,6 +1612,7 @@ async function showItemDetails(item) {
                 reviewText: reviewHTML, // Store HTML content for formatting
                 text: reviewText, // Also store plain text for backwards compatibility
                 rating: reviewRating,
+                spoilers: containsSpoilers,
                 timestamp: new Date().toISOString(),
                 user: user.email || user.displayName || 'Anonymous'
             });
