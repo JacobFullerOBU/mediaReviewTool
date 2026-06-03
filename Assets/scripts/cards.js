@@ -910,9 +910,19 @@ async function filterCards(category) {
         items = items.filter(item => item.latestReviewTime > 0);
     }
 
-    // Filter by in-theatres (movies only)
+    // Filter by in-theatres (movies only): if a releaseDate is present, only include movies
+    // that have already opened and are within the standard 8-week theatrical window.
     if (currentInTheatresFilter) {
-        items = items.filter(item => item.inTheatres === true);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const eightWeeksAgo = new Date(today);
+        eightWeeksAgo.setDate(today.getDate() - 56);
+        items = items.filter(item => {
+            if (!item.inTheatres) return false;
+            if (!item.releaseDate) return true; // no date yet — include it
+            const release = new Date(item.releaseDate);
+            return release <= today && release >= eightWeeksAgo;
+        });
     }
 
     // Filter by genre
