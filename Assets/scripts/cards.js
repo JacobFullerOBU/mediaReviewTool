@@ -55,6 +55,7 @@ function buildAmazonUrl(item) {
 let allItems = [];
 let currentFilter = 'all';
 let currentGenreFilter = 'all';
+let currentInTheatresFilter = false;
 let quillEditor = null;
 let musicLoaded = false;
 
@@ -572,8 +573,14 @@ function renderGenreFilters(category) {
         container.classList.add('hidden');
         container.classList.remove('flex');
         currentGenreFilter = 'all';
+        currentInTheatresFilter = false;
         return;
     }
+
+    const isMovies = category.toLowerCase() === 'movies';
+
+    // Reset in-theatres toggle when switching away from movies
+    if (!isMovies) currentInTheatresFilter = false;
 
     const categoryItems = allItems.filter(item => {
         if (typeof item.category === 'string') return item.category.toLowerCase() === category.toLowerCase();
@@ -606,7 +613,8 @@ function renderGenreFilters(category) {
         : isMusic
             ? MUSIC_GENRE_BUCKETS.map(b => b.label).filter(l => genreSet.has(l))
             : Array.from(genreSet).sort();
-    if (genres.length === 0) {
+
+    if (genres.length === 0 && !isMovies) {
         container.innerHTML = '';
         container.classList.add('hidden');
         container.classList.remove('flex');
@@ -618,14 +626,33 @@ function renderGenreFilters(category) {
     const base = 'genre-btn px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border';
     const inactive = 'bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700';
     const active = 'bg-indigo-600 text-white border-indigo-600 shadow-sm';
+    const theatresActive = 'bg-emerald-600 text-white border-emerald-600 shadow-sm';
+    const theatresInactive = 'bg-slate-800 text-emerald-400 border-emerald-700 hover:bg-slate-700';
 
-    container.innerHTML = [
-        `<button class="${base} ${active}" data-genre="all">All</button>`,
-        ...genres.map(g => `<button class="${base} ${inactive}" data-genre="${escapeHtml(g)}">${escapeHtml(g)}</button>`)
-    ].join('');
+    const parts = [];
+    if (isMovies) {
+        parts.push(`<button id="inTheatresMainBtn" class="px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border ${currentInTheatresFilter ? theatresActive : theatresInactive}">In Theatres</button>`);
+        if (genres.length > 0) {
+            parts.push(`<span class="text-slate-600 self-center select-none">|</span>`);
+        }
+    }
+    if (genres.length > 0) {
+        parts.push(`<button class="${base} ${active}" data-genre="all">All</button>`);
+        genres.forEach(g => parts.push(`<button class="${base} ${inactive}" data-genre="${escapeHtml(g)}">${escapeHtml(g)}</button>`));
+    }
 
+    container.innerHTML = parts.join('');
     container.classList.remove('hidden');
     container.classList.add('flex');
+
+    const inTheatresBtn = document.getElementById('inTheatresMainBtn');
+    if (inTheatresBtn) {
+        inTheatresBtn.addEventListener('click', function () {
+            currentInTheatresFilter = !currentInTheatresFilter;
+            this.className = `px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border ${currentInTheatresFilter ? theatresActive : theatresInactive}`;
+            filterCards(category);
+        });
+    }
 
     container.querySelectorAll('.genre-btn').forEach(btn => {
         btn.addEventListener('click', function () {
@@ -876,11 +903,16 @@ async function filterCards(category) {
         });
     }
 
-    // 'All' tab always shows only reviewed items, regardless of search/genre state
+    // 'All' tab shows only reviewed items when not actively searching
     const isDefaultHome = !category || category === 'all';
-    if (isDefaultHome) {
+    if (isDefaultHome && !searchTerm) {
         await fetchLatestReviewTimesForItems(items);
         items = items.filter(item => item.latestReviewTime > 0);
+    }
+
+    // Filter by in-theatres (movies only)
+    if (currentInTheatresFilter) {
+        items = items.filter(item => item.inTheatres === true);
     }
 
     // Filter by genre
@@ -942,8 +974,8 @@ async function filterCards(category) {
         // can resolve all items from cache instead of making N individual requests.
         await fetchLatestReviewTimesForItems(items);
         await fetchRatingsForItems(items);
-        // Secondary guard: in 'all' tab, drop any item that has no actual rating
-        if (isDefaultHome) {
+        // Secondary guard: in 'all' tab (no active search), drop items with no actual rating
+        if (isDefaultHome && !searchTerm) {
             items = items.filter(item => item.liveAvgRating !== -1);
         }
     } else if (sortOption === 'recent-desc') {
