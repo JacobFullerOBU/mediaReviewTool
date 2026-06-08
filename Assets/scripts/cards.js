@@ -568,19 +568,31 @@ function renderGenreFilters(category) {
     const container = document.getElementById('genreFilterContainer');
     if (!container) return;
 
+    const theatresCheckboxRow = document.getElementById('inTheatresCheckboxRow');
+    const theatresCheckbox = document.getElementById('inTheatresSortCheckbox');
+
     if (!category || category === 'all') {
         container.innerHTML = '';
         container.classList.add('hidden');
         container.classList.remove('flex');
         currentGenreFilter = 'all';
         currentInTheatresFilter = false;
+        if (theatresCheckbox) theatresCheckbox.checked = false;
+        if (theatresCheckboxRow) theatresCheckboxRow.classList.add('hidden');
         return;
     }
 
     const isMovies = category.toLowerCase() === 'movies';
 
     // Reset in-theatres toggle when switching away from movies
-    if (!isMovies) currentInTheatresFilter = false;
+    if (!isMovies) {
+        currentInTheatresFilter = false;
+        if (theatresCheckbox) theatresCheckbox.checked = false;
+        if (theatresCheckboxRow) theatresCheckboxRow.classList.add('hidden');
+    } else {
+        if (theatresCheckboxRow) theatresCheckboxRow.classList.remove('hidden');
+        if (theatresCheckbox) theatresCheckbox.checked = currentInTheatresFilter;
+    }
 
     const categoryItems = allItems.filter(item => {
         if (typeof item.category === 'string') return item.category.toLowerCase() === category.toLowerCase();
@@ -650,6 +662,8 @@ function renderGenreFilters(category) {
         inTheatresBtn.addEventListener('click', function () {
             currentInTheatresFilter = !currentInTheatresFilter;
             this.className = `px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border ${currentInTheatresFilter ? theatresActive : theatresInactive}`;
+            const cb = document.getElementById('inTheatresSortCheckbox');
+            if (cb) cb.checked = currentInTheatresFilter;
             filterCards(category);
         });
     }
@@ -1895,6 +1909,19 @@ if (applySortBtn) {
         const btn = this;
         btn.classList.remove('bg-indigo-600');
         btn.classList.add('bg-indigo-800');
+
+        const theatresRow = document.getElementById('inTheatresCheckboxRow');
+        const theatresCb = document.getElementById('inTheatresSortCheckbox');
+        if (theatresCb && theatresRow && !theatresRow.classList.contains('hidden')) {
+            currentInTheatresFilter = theatresCb.checked;
+            // Keep genre pill in sync
+            const pill = document.getElementById('inTheatresMainBtn');
+            if (pill) {
+                const theatresActive = 'bg-emerald-600 text-white border-emerald-600 shadow-sm';
+                const theatresInactive = 'bg-slate-800 text-emerald-400 border-emerald-700 hover:bg-slate-700';
+                pill.className = `px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border ${currentInTheatresFilter ? theatresActive : theatresInactive}`;
+            }
+        }
 
         try {
             await filterCards(currentFilter);
