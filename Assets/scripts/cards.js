@@ -3,6 +3,8 @@ import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
 const OMDB_KEY = '2669280';
 
+const RT_ICON = `<svg xmlns="http://www.w3.org/2000/svg" class="inline w-3 h-3 -mt-0.5 mr-0.5" viewBox="0 0 16 16"><circle cx="8" cy="9.5" r="5.5" fill="currentColor"/><path d="M6 4.5 C6 4.5 6 2 8 2 C10 2 10 4.5 10 4.5 C10 4.5 9 3.5 8 4 C7 3.5 6 4.5 6 4.5Z" fill="#16a34a"/><path d="M8 2 C8 2 8 0.5 9.5 1" stroke="#16a34a" stroke-width="1" stroke-linecap="round" fill="none"/></svg>`;
+
 function updateTrueRated(item, cardId) {
     const el = document.getElementById(`tr-${cardId}`);
     if (!el) return;
@@ -1810,7 +1812,7 @@ async function renderCards(container, items) {
                     <p class="text-slate-400 text-sm mb-3 flex-1 line-clamp-2">${reviewSnippet}</p>
                     <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
                         ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : '<span></span>'}
-                        ${cat === 'movies' ? `<div class="flex items-center gap-2"><span id="tr-${cardId}" class="text-xs font-mono text-slate-500">TR —</span><span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">🍅 —</span></div>` : ''}
+                        ${cat === 'movies' ? `<div class="flex items-center gap-2"><span id="tr-${cardId}" class="text-xs font-mono text-slate-500">TR —</span><span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">${RT_ICON} —</span></div>` : ''}
                     </div>
             `;
 
@@ -1866,10 +1868,10 @@ async function renderCards(container, items) {
                 if (score) {
                     const pct = parseInt(score);
                     el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
-                    el.textContent = `🍅 ${score}`;
+                    el.innerHTML = `${RT_ICON} ${score}`;
                 } else {
                     el.className = 'text-xs text-slate-600 font-mono';
-                    el.textContent = '🍅 N/A';
+                    el.innerHTML = `${RT_ICON} N/A`;
                 }
             }
             updateTrueRated(item, cId);
