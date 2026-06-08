@@ -3,6 +3,21 @@ import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
 const OMDB_KEY = '2669280';
 
+function updateTrueRated(item, cardId) {
+    const el = document.getElementById(`tr-${cardId}`);
+    if (!el) return;
+    const rating = item.liveAvgRating;
+    const rt = item.rtScore;
+    if (rating == null || rating === -1 || rt == null) {
+        el.textContent = 'TR —';
+        el.className = 'text-xs font-mono text-slate-500';
+        return;
+    }
+    const trueRated = ((rating + parseInt(rt) / 10) / 2).toFixed(1);
+    el.textContent = `TR ${trueRated}`;
+    el.className = 'text-xs font-mono font-semibold text-indigo-400';
+}
+
 async function fetchRTScore(item) {
     const cacheKey = `rt_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
     const cached = localStorage.getItem(cacheKey);
@@ -1795,7 +1810,7 @@ async function renderCards(container, items) {
                     <p class="text-slate-400 text-sm mb-3 flex-1 line-clamp-2">${reviewSnippet}</p>
                     <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
                         ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : '<span></span>'}
-                        ${cat === 'movies' ? `<span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">🍅 —</span>` : ''}
+                        ${cat === 'movies' ? `<div class="flex items-center gap-2"><span id="tr-${cardId}" class="text-xs font-mono text-slate-500">TR —</span><span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">🍅 —</span></div>` : ''}
                     </div>
             `;
 
@@ -1834,6 +1849,7 @@ async function renderCards(container, items) {
                         el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
                         el.innerHTML = `<span class="text-slate-400 text-xs">No reviews yet</span>`;
                     }
+                    updateTrueRated(item, cId);
                 });
             });
         }
@@ -1844,16 +1860,19 @@ async function renderCards(container, items) {
             if (iCat !== 'movies') return;
             const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
             const score = await fetchRTScore(item);
+            item.rtScore = score;
             const el = document.getElementById(`rt-${cId}`);
-            if (!el) return;
-            if (score) {
-                const pct = parseInt(score);
-                el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
-                el.textContent = `🍅 ${score}`;
-            } else {
-                el.className = 'text-xs text-slate-600 font-mono';
-                el.textContent = '🍅 N/A';
+            if (el) {
+                if (score) {
+                    const pct = parseInt(score);
+                    el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
+                    el.textContent = `🍅 ${score}`;
+                } else {
+                    el.className = 'text-xs text-slate-600 font-mono';
+                    el.textContent = '🍅 N/A';
+                }
             }
+            updateTrueRated(item, cId);
         });
 
         // Infinite scroll: add sentinel if more cards remain
