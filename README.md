@@ -33,8 +33,11 @@ Right now movies support anonymous reviews so you can jump straight in without m
 
 ## Built with
 Frontend: HTML5, CSS3, JavaScript 
+
 Auth & Database: Google Firebase
+
 Hosting: GitHub Pages
+
 Data : 
     TheMovieDB.org (Movies):
     Spotify API(Music):
