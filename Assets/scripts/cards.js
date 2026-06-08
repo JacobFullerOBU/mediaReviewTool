@@ -571,27 +571,23 @@ function renderGenreFilters(category) {
     const theatresCheckboxRow = document.getElementById('inTheatresCheckboxRow');
     const theatresCheckbox = document.getElementById('inTheatresSortCheckbox');
 
+    const isMovies = category && category.toLowerCase() === 'movies';
+    const showTheatresFilter = !category || category === 'all' || isMovies;
+
+    if (theatresCheckboxRow) theatresCheckboxRow.classList.toggle('hidden', !showTheatresFilter);
+    if (!showTheatresFilter) {
+        currentInTheatresFilter = false;
+        if (theatresCheckbox) theatresCheckbox.checked = false;
+    } else if (theatresCheckbox) {
+        theatresCheckbox.checked = currentInTheatresFilter;
+    }
+
     if (!category || category === 'all') {
         container.innerHTML = '';
         container.classList.add('hidden');
         container.classList.remove('flex');
         currentGenreFilter = 'all';
-        currentInTheatresFilter = false;
-        if (theatresCheckbox) theatresCheckbox.checked = false;
-        if (theatresCheckboxRow) theatresCheckboxRow.classList.add('hidden');
         return;
-    }
-
-    const isMovies = category.toLowerCase() === 'movies';
-
-    // Reset in-theatres toggle when switching away from movies
-    if (!isMovies) {
-        currentInTheatresFilter = false;
-        if (theatresCheckbox) theatresCheckbox.checked = false;
-        if (theatresCheckboxRow) theatresCheckboxRow.classList.add('hidden');
-    } else {
-        if (theatresCheckboxRow) theatresCheckboxRow.classList.remove('hidden');
-        if (theatresCheckbox) theatresCheckbox.checked = currentInTheatresFilter;
     }
 
     const categoryItems = allItems.filter(item => {
