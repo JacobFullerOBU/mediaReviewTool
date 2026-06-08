@@ -1,6 +1,27 @@
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 
 const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
+const OMDB_KEY = '2669280';
+
+async function fetchRTScore(item) {
+    const cacheKey = `rt_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+        const { score, ts } = JSON.parse(cached);
+        if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000) return score;
+    }
+    try {
+        const params = new URLSearchParams({ t: item.title, apikey: OMDB_KEY });
+        if (item.year) params.set('y', item.year);
+        const data = await fetch(`https://www.omdbapi.com/?${params}`).then(r => r.json());
+        const score = data.Ratings?.find(r => r.Source === 'Rotten Tomatoes')?.Value || null;
+        localStorage.setItem(cacheKey, JSON.stringify({ score, ts: Date.now() }));
+        return score;
+    } catch (e) {
+        console.error('RT score fetch failed:', e);
+        return null;
+    }
+}
 
 // Maps TMDB provider IDs to a function that builds a platform search URL
 const STREAMING_URLS = {
@@ -1772,8 +1793,9 @@ async function renderCards(container, items) {
                         <span class="text-xs text-slate-500 font-mono mt-1">${item.year || ''}</span>
                     </div>
                     <p class="text-slate-400 text-sm mb-3 flex-1 line-clamp-2">${reviewSnippet}</p>
-                    <div class="pt-3 border-t border-slate-700 flex items-center">
-                        ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : ''}
+                    <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
+                        ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : '<span></span>'}
+                        ${cat === 'movies' ? `<span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">🍅 —</span>` : ''}
                     </div>
             `;
 
@@ -1815,6 +1837,24 @@ async function renderCards(container, items) {
                 });
             });
         }
+
+        // Fetch RT scores for movie cards and patch them into the DOM
+        toShow.forEach(async item => {
+            const iCat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
+            if (iCat !== 'movies') return;
+            const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            const score = await fetchRTScore(item);
+            const el = document.getElementById(`rt-${cId}`);
+            if (!el) return;
+            if (score) {
+                const pct = parseInt(score);
+                el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
+                el.textContent = `🍅 ${score}`;
+            } else {
+                el.className = 'text-xs text-slate-600 font-mono';
+                el.textContent = '🍅 N/A';
+            }
+        });
 
         // Infinite scroll: add sentinel if more cards remain
         if (items.length > visibleCount) {
