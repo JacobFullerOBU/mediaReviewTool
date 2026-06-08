@@ -8,16 +8,38 @@ const RT_ICON = `<svg xmlns="http://www.w3.org/2000/svg" class="inline w-3 h-3 -
 function updateTrueRated(item, cardId) {
     const el = document.getElementById(`tr-${cardId}`);
     if (!el) return;
-    const rating = item.liveAvgRating;
-    const rt = item.rtScore;
-    if (rating == null || rating === -1 || rt == null) {
+    const scores = [];
+    if (item.liveAvgRating != null && item.liveAvgRating !== -1) scores.push(item.liveAvgRating);
+    if (item.rtScore != null) scores.push(parseInt(item.rtScore) / 10);
+    if (item.tmdbScore != null) scores.push(item.tmdbScore);
+    if (scores.length < 2) {
         el.textContent = 'TR —';
         el.className = 'text-xs font-mono text-slate-500';
         return;
     }
-    const trueRated = ((rating + parseInt(rt) / 10) / 2).toFixed(1);
+    const trueRated = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
     el.textContent = `TR ${trueRated}`;
     el.className = 'text-xs font-mono font-semibold text-indigo-400';
+}
+
+async function fetchTMDBScore(item) {
+    const cacheKey = `tmdb_score_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+        const { score, ts } = JSON.parse(cached);
+        if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000) return score;
+    }
+    try {
+        const params = new URLSearchParams({ api_key: TMDB_KEY, query: item.title, language: 'en-US' });
+        if (item.year) params.set('year', item.year);
+        const data = await fetch(`https://api.themoviedb.org/3/search/movie?${params}`).then(r => r.json());
+        const score = data.results?.[0]?.vote_average ?? null;
+        localStorage.setItem(cacheKey, JSON.stringify({ score, ts: Date.now() }));
+        return score;
+    } catch (e) {
+        console.error('TMDB score fetch failed:', e);
+        return null;
+    }
 }
 
 async function fetchRTScore(item) {
@@ -1861,8 +1883,9 @@ async function renderCards(container, items) {
             const iCat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
             if (iCat !== 'movies') return;
             const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-            const score = await fetchRTScore(item);
+            const [score, tmdbScore] = await Promise.all([fetchRTScore(item), fetchTMDBScore(item)]);
             item.rtScore = score;
+            item.tmdbScore = tmdbScore;
             const el = document.getElementById(`rt-${cId}`);
             if (el) {
                 if (score) {
