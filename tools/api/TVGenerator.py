@@ -7,7 +7,6 @@ import re
 from datetime import datetime
 
 # --- CONFIGURATION ---
-# 1. PASTE YOUR KEY HERE
 API_KEY = "f50a7cd62fa00a24f29a0e3ebb12c130"
 JS_FILE_PATH = "Assets/TV Shows/tv.js"
 CONFIG_FILE = "API Tools/tv_fetch_config.json" # The memory file

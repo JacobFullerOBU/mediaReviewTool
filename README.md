@@ -25,25 +25,26 @@ Right now movies support anonymous reviews so you can jump straight in without m
 
 ## What's coming
 
-- [ ] Full login and account creation via Firebase
-- [ ] Personal feed based on what you've reviewed
-- [ ] Reviews across all five categories (not just movies)
-- [ ] Top Reviewers leaderboard
-- [ ] Watchlist and backlog tracking
-- [ ] Buy/stream links on every review page
+
+- [ ] Personalized feed based on what you've reviewed
+- [ ] Top Reviewers leaderboard (who gives the most helpful reviews)
 
 ---
 
 ## Built with
-
-| | |
-|---|---|
-| Frontend | HTML5, CSS3, JavaScript |
-| Auth & Database | Google Firebase |
-| Hosting | GitHub Pages |
-| Data | JSON |
+Frontend: HTML5, CSS3, JavaScript 
+Auth & Database: Google Firebase
+Hosting: GitHub Pages
+Data : 
+    TheMovieDB.org (Movies):
+    Spotify API(Music):
+    Wikipedia API (All Categories): 
+    OMDb API (Movies): 
 
 ---
+## True Rating Score:
+
+Calculated by taking the average of all user ratings, rotten tomatoes score, TMDB score. Weights are applied to each source to ensure a balanced and accurate representation of the media's overall quality. Taking into consideration the variance in ratings from different sources.
 
 ## Contributing
 
