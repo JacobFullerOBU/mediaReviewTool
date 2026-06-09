@@ -1976,6 +1976,13 @@ function sortItems(items, sortOption) {
         case 'recent-desc':
             sorted.sort((a, b) => (b.latestReviewTime || 0) - (a.latestReviewTime || 0));
             break;
+        case 'release-desc':
+            sorted.sort((a, b) => {
+                const aDate = a.releaseDate ? new Date(a.releaseDate).getTime() : 0;
+                const bDate = b.releaseDate ? new Date(b.releaseDate).getTime() : 0;
+                return bDate - aDate;
+            });
+            break;
         default:
             break;
     }
