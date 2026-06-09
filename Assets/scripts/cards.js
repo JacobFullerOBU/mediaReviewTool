@@ -1834,7 +1834,7 @@ async function renderCards(container, items) {
                     <p class="text-slate-400 text-sm mb-3 flex-1 line-clamp-2">${reviewSnippet}</p>
                     <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
                         ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : '<span></span>'}
-                        ${cat === 'movies' ? `<div class="flex items-center gap-2"><span id="tr-${cardId}" class="text-xs font-mono text-slate-500">TR —</span><span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">${RT_ICON} —</span></div>` : ''}
+                        ${cat === 'movies' ? `<div class="flex items-center gap-2"><span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span><span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">${RT_ICON} —</span></div>` : ''}
                     </div>
             `;
 
@@ -1845,7 +1845,10 @@ async function renderCards(container, items) {
                     <div class=\"relative ${imageHeight} overflow-hidden\">
                         <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\" onerror=\"handleImageError(this)\">
                         <div class=\"absolute top-2 right-2 px-2 py-1 rounded-md flex items-center gap-1\">
-                            <span class=\"star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow\" id=\"rating-${cardId}\">${avgRating}</span>
+                            ${cat === 'movies'
+                                ? `<span id="tr-${cardId}" class="text-xs font-mono text-slate-500">TR —</span>`
+                                : `<span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span>`
+                            }
                         </div>
                     </div>
                     <div class=\"p-5 flex-1 flex flex-col\">
