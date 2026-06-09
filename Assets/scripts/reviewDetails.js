@@ -41,12 +41,21 @@ async function fetchDetails() {
             const firstReviewKey = Object.keys(reviewsData)[0];
             const review = reviewsData[firstReviewKey];
 
-            // 2. Find the media item across all categories
+            // 2. Find the media item across all categories.
+            // If the review stored a mediaYear, use it for an exact match to avoid picking
+            // the wrong version of a film with the same title (e.g. Superman 1978 vs 2025).
             const allMedia = [...allMovies, ...allTV, ...allBooks, ...allMusicData, ...games];
-            const movieInfo = allMedia.find(m => {
+            const reviewYear = review.mediaYear || null;
+            const movieInfo = allMedia.reduce((best, m) => {
                 const mId = (m.title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                return mId === mediaId || mId === slugOnly || m.id == mediaId;
-            });
+                if (mId !== mediaId && mId !== slugOnly && m.id != mediaId) return best;
+                if (!best) return m;
+                // Exact year match wins immediately
+                if (reviewYear && String(m.year) === String(reviewYear)) return m;
+                if (reviewYear && String(best.year) === String(reviewYear)) return best;
+                // Otherwise prefer most recent year as a fallback
+                return (parseInt(m.year) || 0) > (parseInt(best.year) || 0) ? m : best;
+            }, null);
 
             // 3. Get the Reviewer's Display Name and Avatar
             const allReviewers = reviewersSnapshot.exists() ? reviewersSnapshot.val() : {};

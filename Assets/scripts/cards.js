@@ -1679,6 +1679,7 @@ async function showItemDetails(item) {
             await push(reviewsRef, {
                 userId: user.uid,
                 mediaId: mediaId,
+                mediaYear: displayItem.year || item.year || null,
                 reviewText: reviewHTML, // Store HTML content for formatting
                 text: reviewText, // Also store plain text for backwards compatibility
                 rating: reviewRating,

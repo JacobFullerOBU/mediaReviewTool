@@ -86,8 +86,16 @@ async function fetchData() {
             const normCat = CAT_NORM[rawCat.trim().toLowerCase()] || rawCat.trim().toLowerCase();
             const catSlug = normCat.replace(/[^a-zA-Z0-9]/g, '_');
 
-            // Category-prefixed key matches migrated Firebase paths (e.g. 'movies_the_housemaid')
-            if (catSlug) mediaMap[`${catSlug}_${titleSlug}`] = media;
+            if (catSlug) {
+                const catKey = `${catSlug}_${titleSlug}`;
+                // Year-specific key for exact lookup (e.g. movies_superman_2025)
+                if (media.year) mediaMap[`${catKey}_${media.year}`] = media;
+                // Generic key: prefer most recent year so remakes win over originals
+                const existing = mediaMap[catKey];
+                if (!existing || (parseInt(media.year) || 0) > (parseInt(existing.year) || 0)) {
+                    mediaMap[catKey] = media;
+                }
+            }
 
             // Explicit media.id if present
             if (media.id != null) mediaMap[media.id] = media;
@@ -101,7 +109,10 @@ async function fetchData() {
             for (const [mediaId, reviews] of Object.entries(reviewsData)) {
                 for (const [reviewId, review] of Object.entries(reviews)) {
                     const reviewer = allReviewers[review.userId];
-                    const mediaItem = mediaMap[mediaId];
+                    // Use year-specific key when available (e.g. movies_superman_2025) to avoid
+                    // matching the wrong version of a film with the same title
+                    const mediaItem = (review.mediaYear && mediaMap[`${mediaId}_${review.mediaYear}`])
+                        || mediaMap[mediaId];
                     
                     if (reviewer && mediaItem) {
                         allReviews.push({
