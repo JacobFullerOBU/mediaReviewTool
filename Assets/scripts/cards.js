@@ -12,7 +12,7 @@ function updateTrueRated(item, cardId) {
     if (item.liveAvgRating != null && item.liveAvgRating !== -1) scores.push(item.liveAvgRating);
     if (item.rtScore != null) scores.push(parseInt(item.rtScore) / 10);
     if (item.tmdbScore != null) scores.push(item.tmdbScore);
-    if (scores.length < 2) {
+    if (scores.length === 0) {
         el.textContent = 'TR —';
         el.className = 'text-xs font-mono text-slate-500';
         return;
@@ -1826,6 +1826,7 @@ async function renderCards(container, items) {
                     <div class="flex-1"></div>
                     <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
                         ${topMusicGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${topMusicGenre}</span>` : '<span></span>'}
+                        <span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span>
                     </div>
             ` : `
                     <div class="flex justify-between items-start mb-1">
@@ -1835,7 +1836,7 @@ async function renderCards(container, items) {
                     <p class="text-slate-400 text-sm mb-3 flex-1 line-clamp-2">${reviewSnippet}</p>
                     <div class="pt-3 border-t border-slate-700 flex items-center justify-between">
                         ${primaryGenre ? `<span class="px-2 py-0.5 bg-slate-700 rounded-full text-slate-300 text-xs">${primaryGenre}</span>` : '<span></span>'}
-                        ${cat === 'movies' ? `<div class="flex items-center gap-2"><span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span><span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">${RT_ICON} —</span></div>` : ''}
+                        <div class="flex items-center gap-2"><span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span>${cat === 'movies' ? `<span id="rt-${cardId}" class="text-xs text-slate-500 font-mono">${RT_ICON} —</span>` : ''}</div>
                     </div>
             `;
 
@@ -1846,10 +1847,7 @@ async function renderCards(container, items) {
                     <div class=\"relative ${imageHeight} overflow-hidden\">
                         <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\" onerror=\"handleImageError(this)\">
                         <div class=\"absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1\">
-                            ${cat === 'movies'
-                                ? `<span id="tr-${cardId}" class="text-xs font-mono text-slate-400">TR —</span>`
-                                : `<span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span>`
-                            }
+                            <span id=\"tr-${cardId}\" class=\"text-xs font-mono text-slate-400\">TR —</span>
                         </div>
                     </div>
                     <div class=\"p-5 flex-1 flex flex-col\">
@@ -1862,6 +1860,13 @@ async function renderCards(container, items) {
         container.innerHTML = cardHTML;
         lucide.createIcons();
 
+        // Paint TR immediately for any item that already has a cached community rating
+        toShow.slice(0, visibleCount).forEach(item => {
+            if (item.liveAvgRating === undefined) return;
+            const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+            updateTrueRated(item, cId);
+        });
+
         // Fetch ratings for any uncached cards and patch them into the DOM without re-rendering
         const uncached = toShow.filter(i => i.liveAvgRating === undefined);
         if (uncached.length > 0) {
@@ -1869,36 +1874,39 @@ async function renderCards(container, items) {
                 uncached.forEach(item => {
                     const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
                     const el = document.getElementById(`rating-${cId}`);
-                    if (!el) return;
-                    if (item.liveAvgRating !== undefined && item.liveAvgRating !== -1) {
-                        el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
-                        el.textContent = `★ ${item.liveAvgRating}`;
-                    } else {
-                        el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
-                        el.innerHTML = `<span class="text-slate-400 text-xs">No reviews yet</span>`;
+                    if (el) {
+                        if (item.liveAvgRating !== undefined && item.liveAvgRating !== -1) {
+                            el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
+                            el.textContent = `★ ${item.liveAvgRating}`;
+                        } else {
+                            el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
+                            el.innerHTML = `<span class="text-slate-400 text-xs">No reviews yet</span>`;
+                        }
                     }
                     updateTrueRated(item, cId);
                 });
             });
         }
 
-        // Fetch RT scores for movie cards and patch them into the DOM
+        // Fetch RT/TMDB scores for movie cards and patch them into the DOM;
+        // call updateTrueRated for all categories so the badge stays current.
         toShow.forEach(async item => {
             const iCat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
-            if (iCat !== 'movies') return;
             const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
-            const [score, tmdbScore] = await Promise.all([fetchRTScore(item), fetchTMDBScore(item)]);
-            item.rtScore = score;
-            item.tmdbScore = tmdbScore;
-            const el = document.getElementById(`rt-${cId}`);
-            if (el) {
-                if (score) {
-                    const pct = parseInt(score);
-                    el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
-                    el.innerHTML = `${RT_ICON} ${score}`;
-                } else {
-                    el.className = 'text-xs text-slate-600 font-mono';
-                    el.innerHTML = `${RT_ICON} N/A`;
+            if (iCat === 'movies') {
+                const [score, tmdbScore] = await Promise.all([fetchRTScore(item), fetchTMDBScore(item)]);
+                item.rtScore = score;
+                item.tmdbScore = tmdbScore;
+                const el = document.getElementById(`rt-${cId}`);
+                if (el) {
+                    if (score) {
+                        const pct = parseInt(score);
+                        el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
+                        el.innerHTML = `${RT_ICON} ${score}`;
+                    } else {
+                        el.className = 'text-xs text-slate-600 font-mono';
+                        el.innerHTML = `${RT_ICON} N/A`;
+                    }
                 }
             }
             updateTrueRated(item, cId);
