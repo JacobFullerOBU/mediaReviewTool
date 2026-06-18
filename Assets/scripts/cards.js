@@ -19,7 +19,7 @@ function updateTrueRated(item, cardId) {
     }
     const trueRated = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
     el.textContent = `TR ${trueRated}`;
-    el.className = 'text-xs font-mono font-semibold text-indigo-400';
+    el.className = 'text-xs font-mono font-semibold text-white';
 }
 
 async function fetchTMDBScore(item) {
@@ -1845,9 +1845,9 @@ async function renderCards(container, items) {
                 <div class=\"media-card group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col cursor-pointer\" data-id=\"${cardId}\">
                     <div class=\"relative ${imageHeight} overflow-hidden\">
                         <img class=\"card-image w-full h-full object-cover transform group-hover:scale-110 transition-duration-500 transition-transform\" src=\"${item.poster || item.image || ''}\" alt=\"${item.title || ''}\" onerror=\"handleImageError(this)\">
-                        <div class=\"absolute top-2 right-2 px-2 py-1 rounded-md flex items-center gap-1\">
+                        <div class=\"absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1\">
                             ${cat === 'movies'
-                                ? `<span id="tr-${cardId}" class="text-xs font-mono text-slate-500">TR —</span>`
+                                ? `<span id="tr-${cardId}" class="text-xs font-mono text-slate-400">TR —</span>`
                                 : `<span class="star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow" id="rating-${cardId}">${avgRating}</span>`
                             }
                         </div>
