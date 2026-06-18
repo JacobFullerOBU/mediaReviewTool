@@ -19,7 +19,7 @@ function updateTrueRated(item, cardId) {
     }
     const trueRated = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
     el.textContent = `TR ${trueRated}`;
-    el.className = 'text-xs font-mono font-semibold text-white';
+    el.className = 'text-xs font-mono font-semibold text-blue-400';
 }
 
 async function fetchTMDBScore(item) {
