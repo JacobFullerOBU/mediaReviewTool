@@ -8,6 +8,35 @@ const db = getDatabase(app);
 let allReviews = [];
 let allMedia = [];
 let allReviewers = {};
+let currentCategoryFilter = 'all';
+
+const AVATAR_COLORS = [
+    '#3730a3', '#0f766e', '#6d28d9', '#be185d',
+    '#c2410c', '#065f46', '#0369a1', '#a21caf',
+];
+
+function avatarBg(name) {
+    return AVATAR_COLORS[(name || '?').trim().toUpperCase().charCodeAt(0) % AVATAR_COLORS.length];
+}
+
+window._browseAvatarErr = function(img) {
+    const name = img.dataset.name || '?';
+    const div = document.createElement('div');
+    div.className = 'w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0';
+    div.style.cssText = `background:${avatarBg(name)};color:#fff;font-weight:700;font-size:0.625rem;line-height:1;`;
+    div.textContent = name.trim().charAt(0).toUpperCase();
+    img.replaceWith(div);
+};
+
+function reviewerAvatarHtml(name, photoUrl) {
+    const safeName = escapeHtml(name || '?');
+    const initial = (name || '?').trim().charAt(0).toUpperCase();
+    const bg = avatarBg(name);
+    if (!photoUrl) {
+        return `<div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background:${bg};color:#fff;font-weight:700;font-size:0.625rem;line-height:1;">${initial}</div>`;
+    }
+    return `<img src="${escapeHtml(photoUrl)}" alt="${safeName}" class="w-6 h-6 rounded-full object-cover flex-shrink-0" data-name="${safeName}" onerror="_browseAvatarErr(this)">`;
+}
 
 function escapeHtml(str) {
     if (!str) return '';
@@ -49,12 +78,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const sortSelect = document.getElementById('sort-reviews');
     const searchInput = document.getElementById('search-reviews');
 
-    sortSelect.addEventListener('change', () => {
-        filterSortAndRenderReviews();
-    });
+    sortSelect.addEventListener('change', filterSortAndRenderReviews);
+    searchInput.addEventListener('input', filterSortAndRenderReviews);
 
-    searchInput.addEventListener('input', () => {
-        filterSortAndRenderReviews();
+    const ACTIVE_CAT   = 'cat-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all bg-indigo-600 text-white';
+    const INACTIVE_CAT = 'cat-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentCategoryFilter = btn.dataset.category;
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.className = b === btn ? ACTIVE_CAT : INACTIVE_CAT;
+            });
+            filterSortAndRenderReviews();
+        });
     });
 });
 
@@ -115,12 +151,15 @@ async function fetchData() {
                         || mediaMap[mediaId];
                     
                     if (reviewer && mediaItem) {
+                        const rawCat = Array.isArray(mediaItem.category) ? mediaItem.category[0] : (mediaItem.category || '');
+                        const normCat = CAT_NORM[rawCat.trim().toLowerCase()] || rawCat.trim().toLowerCase();
                         allReviews.push({
                             ...review,
                             id: reviewId,
                             mediaId: mediaId,
                             mediaTitle: mediaItem.title,
                             mediaPoster: mediaItem.poster || mediaItem.image,
+                            mediaCategory: normCat,
                             reviewerName: reviewer.name,
                             reviewerAvatar: reviewer.avatar
                         });
@@ -141,6 +180,10 @@ function filterSortAndRenderReviews() {
     const searchTerm = document.getElementById('search-reviews').value.toLowerCase();
 
     let filteredReviews = [...allReviews];
+
+    if (currentCategoryFilter !== 'all') {
+        filteredReviews = filteredReviews.filter(r => r.mediaCategory === currentCategoryFilter);
+    }
 
     if (searchTerm) {
         filteredReviews = filteredReviews.filter(review => {
@@ -228,7 +271,7 @@ function createReviewCard(review) {
             </div>
             <div class="flex-grow min-w-0">
                 <div class="flex items-center gap-2 mb-2">
-                    <img src="${escapeHtml(review.reviewerAvatar)}" alt="${safeReviewerName}" class="w-6 h-6 rounded-full flex-shrink-0">
+                    ${reviewerAvatarHtml(review.reviewerName, review.reviewerAvatar)}
                     <span class="font-semibold text-white text-sm">${safeReviewerName}</span>
                 </div>
                 <div class="text-xs text-slate-400 mb-2">

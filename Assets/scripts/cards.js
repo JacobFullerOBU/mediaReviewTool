@@ -745,15 +745,13 @@ function initTabFunctionality() {
         const sortSelect = document.getElementById('sortSelect');
         if (sortSelect) {
             sortSelect.addEventListener('change', () => {
-                // Scroll search bar to top of viewport
+                const activeTab = document.querySelector('.tab-btn.active');
+                const category = activeTab ? activeTab.dataset.category : 'all';
+                filterCards(category);
                 const searchContainer = document.querySelector('.search-and-sort-container');
                 if (searchContainer) {
                     const rect = searchContainer.getBoundingClientRect();
-                    window.scrollBy({
-                        top: rect.top - 64,
-                        left: 0,
-                        behavior: 'smooth'
-                    });
+                    window.scrollBy({ top: rect.top - 64, left: 0, behavior: 'smooth' });
                 }
             });
         }
@@ -799,6 +797,20 @@ function initTabFunctionality() {
                     behavior: 'smooth'
                 });
             }
+        });
+    }
+
+    const theatresCb = document.getElementById('inTheatresSortCheckbox');
+    if (theatresCb) {
+        theatresCb.addEventListener('change', () => {
+            currentInTheatresFilter = theatresCb.checked;
+            const pill = document.getElementById('inTheatresMainBtn');
+            if (pill) {
+                const on  = 'bg-emerald-600 text-white border-emerald-600 shadow-sm';
+                const off = 'bg-slate-800 text-emerald-400 border-emerald-700 hover:bg-slate-700';
+                pill.className = `px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all cursor-pointer border ${currentInTheatresFilter ? on : off}`;
+            }
+            filterCards(currentFilter);
         });
     }
 
