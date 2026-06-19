@@ -86,6 +86,38 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // Deterministic avatar color palette — dark backgrounds with white text for legibility on slate cards
+    const AVATAR_COLORS = [
+        '#3730a3', // indigo
+        '#0f766e', // teal
+        '#6d28d9', // violet
+        '#be185d', // rose
+        '#c2410c', // orange
+        '#065f46', // emerald
+        '#0369a1', // sky
+        '#a21caf', // fuchsia
+    ];
+
+    function makeInitialAvatar(name) {
+        const initial = (name || '?').trim().charAt(0).toUpperCase();
+        const bg = AVATAR_COLORS[initial.charCodeAt(0) % AVATAR_COLORS.length];
+        const div = document.createElement('div');
+        div.className = 'w-24 h-24 rounded-full border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4 flex items-center justify-center flex-shrink-0';
+        div.style.cssText = `background-color:${bg};color:#fff;font-size:2rem;font-weight:700;line-height:1;`;
+        div.textContent = initial;
+        return div;
+    }
+
+    function makeAvatarEl(name, photoUrl) {
+        if (!photoUrl) return makeInitialAvatar(name);
+        const img = document.createElement('img');
+        img.className = 'w-24 h-24 rounded-full object-cover border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4';
+        img.alt = name;
+        img.src = photoUrl;
+        img.onerror = () => img.replaceWith(makeInitialAvatar(name));
+        return img;
+    }
+
     // Fetch and Render Logic
     async function fetchAndRenderReviewers() {
         if (!communityContainer) return;
@@ -99,14 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const snapshot = await get(ref(db, 'reviewers'));
-            
+
             if (snapshot.exists()) {
                 const reviewers = snapshot.val();
                 communityContainer.innerHTML = ''; // Clear loading
-                
+
                 const grid = document.createElement('div');
                 grid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
-                
+
                 Object.entries(reviewers).forEach(([userId, reviewer]) => {
                     if (reviewer && reviewer.name) {
                         const card = document.createElement('div');
@@ -114,11 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const inner = document.createElement('div');
                         inner.className = 'p-6 flex flex-col items-center text-center';
-
-                        const img = document.createElement('img');
-                        img.className = 'w-24 h-24 rounded-full object-cover border-4 border-slate-700 group-hover:border-indigo-500 transition-colors mb-4';
-                        img.alt = reviewer.name;
-                        img.src = reviewer.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
                         const nameEl = document.createElement('h3');
                         nameEl.className = 'text-xl font-bold text-white mb-1';
@@ -129,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         link.href = `reviewer-profile.html?id=${encodeURIComponent(userId)}`;
                         link.textContent = 'View Profile';
 
-                        inner.appendChild(img);
+                        inner.appendChild(makeAvatarEl(reviewer.name, reviewer.avatar));
                         inner.appendChild(nameEl);
                         inner.appendChild(link);
                         card.appendChild(inner);
