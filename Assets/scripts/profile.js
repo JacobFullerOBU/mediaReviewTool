@@ -7,6 +7,36 @@ import { games } from "./games.js";
 
 const mediaItemCache = {};
 
+// ── Avatar helpers ────────────────────────────────────────────────────────────
+const AVATAR_COLORS = [
+    '#3730a3','#0f766e','#6d28d9','#be185d',
+    '#c2410c','#065f46','#0369a1','#a21caf',
+];
+function avatarBg(name) {
+    return AVATAR_COLORS[(name || '?').trim().toUpperCase().charCodeAt(0) % AVATAR_COLORS.length];
+}
+function makeInitialEl(name, extraClasses, fontSize) {
+    const div = document.createElement('div');
+    div.className = `${extraClasses} rounded-full flex items-center justify-center flex-shrink-0`;
+    div.style.cssText = `background:${avatarBg(name)};color:#fff;font-weight:700;font-size:${fontSize};line-height:1;`;
+    div.textContent = (name || '?').trim().charAt(0).toUpperCase();
+    return div;
+}
+function makeAvatarEl(name, photoUrl, extraClasses, fontSize) {
+    if (!photoUrl) return makeInitialEl(name, extraClasses, fontSize);
+    const img = document.createElement('img');
+    img.className = `${extraClasses} rounded-full object-cover`;
+    img.alt = name;
+    img.src = photoUrl;
+    img.onerror = () => img.replaceWith(makeInitialEl(name, extraClasses, fontSize));
+    return img;
+}
+// Used by onerror on inline <img> elements inside innerHTML strings
+window._avatarErr = function(img) {
+    const div = makeInitialEl(img.dataset.name, img.dataset.cls, img.dataset.fs);
+    img.replaceWith(div);
+};
+
 window.openMediaDetails = (mediaId) => {
     const mediaItem = mediaItemCache[mediaId];
     if (mediaItem && window.showItemDetails) {
@@ -43,7 +73,10 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
         </a>
         <div class="flex-grow text-center sm:text-left">
             <div class="flex items-center justify-center sm:justify-start gap-3 mb-2 flex-wrap">
-                <img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full">
+                ${reviewer.avatar
+                    ? `<img src="${reviewer.avatar}" alt="${reviewer.username}" class="w-8 h-8 rounded-full object-cover flex-shrink-0" data-name="${reviewer.username}" data-cls="w-8 h-8" data-fs="0.875rem" onerror="_avatarErr(this)">`
+                    : `<div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background:${avatarBg(reviewer.username)};color:#fff;font-weight:700;font-size:0.875rem;line-height:1;">${(reviewer.username||'?').charAt(0).toUpperCase()}</div>`
+                }
                 <span class="font-semibold text-white">${reviewer.username}</span>
                 <span class="text-xs text-slate-400">reviewed</span>
                 <a href="${movieUrl}" class="font-semibold text-indigo-400 hover:text-indigo-300 break-all" onclick="if(window.showItemDetails){event.preventDefault();openMediaDetails('${mediaId}');}">
@@ -300,10 +333,11 @@ async function loadProfile(reviewerId) {
         };
 
         console.log("Populating profile info...");
-        const profileAvatar = document.getElementById('profileAvatar');
-        if (profileAvatar) {
-            profileAvatar.src = reviewerData.avatar || 'https://via.placeholder.com/150';
-            profileAvatar.alt = reviewerData.name;
+        const profileAvatarSlot = document.getElementById('profileAvatar');
+        if (profileAvatarSlot) {
+            const avatarEl = makeAvatarEl(reviewerData.name, reviewerData.avatar, 'w-32 h-32', '2.5rem');
+            avatarEl.classList.add('border-4', 'border-slate-700');
+            profileAvatarSlot.replaceWith(avatarEl);
         }
         
         // For reviewer-profile.html
