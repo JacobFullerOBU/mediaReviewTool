@@ -31,6 +31,10 @@
             <p class="hero-subtitle mt-2 max-w-xl mx-auto text-slate-400 text-sm">
                 Join the community of reviewers sharing their thoughts on movies, shows, music, games, and books.
             </p>
+            <p id="guest-value-prop" class="mt-2 text-xs text-slate-500">
+                <a href="#" id="hero-register-link" class="text-indigo-400 hover:text-indigo-300 transition-colors">Create a free account</a>
+                to rate titles, save watchlists, and share your reviews.
+            </p>
             <div class="mt-3 flex justify-center">
                 <button id="surprise-button" class="px-6 py-2 rounded-full bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold flex items-center justify-center gap-2 transition-all text-sm">
                     <i data-lucide="shuffle" class="w-4 h-4"></i> Surprise Me
@@ -120,6 +124,18 @@
             </div>
         </div>
     </footer>
+    <script type="module">
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { auth } from './Assets/scripts/firebase.js';
+        const prop = document.getElementById('guest-value-prop');
+        onAuthStateChanged(auth, user => {
+            if (prop) prop.style.display = user ? 'none' : '';
+        });
+        document.getElementById('hero-register-link')?.addEventListener('click', e => {
+            e.preventDefault();
+            document.getElementById('registerBtn')?.click();
+        });
+    </script>
     <script type="module" src="./Assets/scripts/main.js"></script>
     <script type="module" src="./Assets/scripts/auth.js"></script>
     <script type="module" src="./Assets/scripts/community.js"></script>
