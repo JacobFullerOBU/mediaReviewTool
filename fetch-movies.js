@@ -48,6 +48,12 @@ async function main() {
         continue;
       }
 
+      const isUS = m.production_countries?.some(c => c.iso_3166_1 === 'US');
+      if (!isUS) {
+        console.log(`Skipping non-US movie: ${m.title}`);
+        continue;
+      }
+
       const director = m.credits.crew.find(p => p.job === 'Director')?.name ?? '';
       const actors = m.credits.cast.slice(0, 5).map(a => a.name).join('\n');
       movies[`tmdb_${id}`] = {
