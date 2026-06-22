@@ -1111,13 +1111,6 @@ async function filterCards(category) {
         await fetchLatestReviewTimesForItems(items);
     }
     items = sortItems(items, sortOption);
-    if (currentInTheatresFilter) {
-        items.sort((a, b) => {
-            const da = a.releaseDate ? new Date(a.releaseDate) : new Date(`${a.year}-01-01`);
-            const db2 = b.releaseDate ? new Date(b.releaseDate) : new Date(`${b.year}-01-01`);
-            return db2 - da;
-        });
-    }
     loadCardsWithItems(items);
 }
 
