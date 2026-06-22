@@ -694,7 +694,7 @@ function renderGenreFilters(category) {
                 const normalized = normalizeMusicGenre(t);
                 if (normalized) genreSet.add(normalized);
             } else {
-                genreSet.add(t);
+                if (!/soundtrack/i.test(t)) genreSet.add(t);
             }
         });
     });
@@ -767,8 +767,13 @@ function escapeHtml(str) {
 function initTabFunctionality() {
         // Scroll search bar to top of viewport when sort changes
         const sortSelect = document.getElementById('sortSelect');
+        const updateApplyBtnLabel = () => {
+            const btn = document.getElementById('applySortBtn');
+            if (btn && sortSelect) btn.textContent = sortSelect.options[sortSelect.selectedIndex]?.text || 'Apply';
+        };
         if (sortSelect) {
             sortSelect.addEventListener('change', () => {
+                updateApplyBtnLabel();
                 const activeTab = document.querySelector('.tab-btn.active');
                 const category = activeTab ? activeTab.dataset.category : 'all';
                 filterCards(category);
@@ -778,6 +783,7 @@ function initTabFunctionality() {
                     window.scrollBy({ top: rect.top - 64, left: 0, behavior: 'smooth' });
                 }
             });
+            updateApplyBtnLabel();
         }
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
@@ -1090,6 +1096,13 @@ async function filterCards(category) {
         // can resolve all items from cache instead of making N individual requests.
         await fetchLatestReviewTimesForItems(items);
         await fetchRatingsForItems(items);
+        // Pre-fetch RT/TMDB scores for movies so getTrueRating has all scores before sorting
+        const movieItems = items.filter(i => (Array.isArray(i.category) ? i.category[0] : i.category || '').toLowerCase() === 'movies');
+        await Promise.all(movieItems.map(async item => {
+            const [rt, tmdb] = await Promise.all([fetchRTScore(item), fetchTMDBScore(item)]);
+            item.rtScore = rt;
+            item.tmdbScore = tmdb;
+        }));
         // Secondary guard: in 'all' tab (no active search), drop items with no actual rating
         if (isDefaultHome && !searchTerm) {
             items = items.filter(item => item.liveAvgRating !== -1);
@@ -2022,6 +2035,23 @@ window.handleImageError = function(img) {
     img.parentElement.appendChild(ph);
 };
 
+function getTrueRating(item) {
+    const TTL = 7 * 24 * 60 * 60 * 1000;
+    const scores = [];
+    if (item.liveAvgRating != null && item.liveAvgRating !== -1) scores.push(item.liveAvgRating);
+    const rtRaw = item.rtScore ?? (() => {
+        const key = `rt_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
+        try { const { score, ts } = JSON.parse(localStorage.getItem(key)); return Date.now() - ts < TTL ? score : null; } catch { return null; }
+    })();
+    if (rtRaw != null) scores.push(parseInt(rtRaw) / 10);
+    const tmdbRaw = item.tmdbScore ?? (() => {
+        const key = `tmdb_score_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
+        try { const { score, ts } = JSON.parse(localStorage.getItem(key)); return Date.now() - ts < TTL ? score : null; } catch { return null; }
+    })();
+    if (tmdbRaw != null) scores.push(tmdbRaw);
+    return scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : -Infinity;
+}
+
 // Sorting functionality
 function sortItems(items, sortOption) {
     if (!items || !Array.isArray(items)) return items;
@@ -2042,13 +2072,12 @@ function sortItems(items, sortOption) {
             sorted.sort((a, b) => (b.title || '').localeCompare(a.title || ''));
             break;
         case 'rating-desc':
-            sorted.sort((a, b) => (b.liveAvgRating ?? -1) - (a.liveAvgRating ?? -1));
+            sorted.sort((a, b) => getTrueRating(b) - getTrueRating(a));
             break;
         case 'rating-asc':
             sorted.sort((a, b) => {
-                const aRating = a.liveAvgRating === -1 ? Infinity : (a.liveAvgRating ?? Infinity);
-                const bRating = b.liveAvgRating === -1 ? Infinity : (b.liveAvgRating ?? Infinity);
-                return aRating - bRating;
+                const aR = getTrueRating(a), bR = getTrueRating(b);
+                return (aR === -Infinity ? Infinity : aR) - (bR === -Infinity ? Infinity : bR);
             });
             break;
         case 'recent-desc':
