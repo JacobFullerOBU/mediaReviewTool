@@ -1005,11 +1005,6 @@ async function filterCards(category) {
             const release = new Date(item.releaseDate);
             return release <= today && release >= eightWeeksAgo;
         });
-        items.sort((a, b) => {
-            const da = a.releaseDate ? new Date(a.releaseDate) : new Date(`${a.year}-01-01`);
-            const db = b.releaseDate ? new Date(b.releaseDate) : new Date(`${b.year}-01-01`);
-            return db - da;
-        });
     }
 
     // Filter by genre
@@ -1079,6 +1074,13 @@ async function filterCards(category) {
         await fetchLatestReviewTimesForItems(items);
     }
     items = sortItems(items, sortOption);
+    if (currentInTheatresFilter) {
+        items.sort((a, b) => {
+            const da = a.releaseDate ? new Date(a.releaseDate) : new Date(`${a.year}-01-01`);
+            const db2 = b.releaseDate ? new Date(b.releaseDate) : new Date(`${b.year}-01-01`);
+            return db2 - da;
+        });
+    }
     loadCardsWithItems(items);
 }
 
