@@ -530,9 +530,26 @@ async function initCards() {
 
     const allRaw = [...movies, ...validTV, ...validGames, ...validBooks].map(normalizeCategory);
 
+    // Deduplicate movies: prefer the entry with a releaseDate (TMDB data) over one without.
+    // Key by tmdb_id when present, otherwise by title+year slug to allow legitimate remakes.
+    const dedupedMovies = (() => {
+        const byTmdbId = {};
+        const bySlug = {};
+        const out = [];
+        for (const item of allRaw.filter(i => i.category === 'movies')) {
+            if (item.tmdb_id) {
+                const key = String(item.tmdb_id);
+                if (!byTmdbId[key]) { byTmdbId[key] = item; out.push(item); }
+            } else {
+                const slug = `${(item.title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
+                if (!bySlug[slug]) { bySlug[slug] = item; out.push(item); }
+            }
+        }
+        return out;
+    })();
+
     // Deduplicate: within each category, keep one card per title slug.
     // For books: multiple editions of the same book → keep one with the best cover + longest description.
-    // For movies/TV: same-slug items may be legitimately different films (remakes) — keep all.
     const dedupedBooks = (() => {
         const seen = {};
         for (const item of allRaw.filter(i => i.category === 'books')) {
@@ -553,7 +570,8 @@ async function initCards() {
     })();
 
     allItems = [
-        ...allRaw.filter(i => i.category !== 'books'),
+        ...dedupedMovies,
+        ...allRaw.filter(i => i.category !== 'movies' && i.category !== 'books'),
         ...dedupedBooks,
     ];
 
