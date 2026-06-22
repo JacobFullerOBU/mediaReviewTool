@@ -1,6 +1,17 @@
 // Main JavaScript functionality for True Rated
 
 export async function fetchMovies() {
+    try {
+        const { db } = await import('./firebase.js');
+        const { ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+        const snapshot = await get(ref(db, 'tmdb_movies'));
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val());
+        }
+    } catch (e) {
+        console.warn('Firebase movie fetch failed, falling back to JSON:', e.message);
+    }
+
     const potentialPaths = [
         "Assets/Data/movieList.json",
         "./Assets/Data/movieList.json",

@@ -42,6 +42,7 @@ async function main() {
         category: 'movies',
         title: m.title,
         year: m.release_date?.slice(0, 4) ?? '',
+        releaseDate: m.release_date ?? '',
         description: m.overview ?? '',
         genre: m.genres.map(g => g.name).join(', '),
         director,

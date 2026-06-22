@@ -109,8 +109,17 @@ function sanitizeHTML(html) {
                         .replace(/'/g, '&#x27;');
 }
 
-// Fetch movies from JSON file
 async function fetchMovies() {
+    try {
+        const { db } = await import('./firebase.js');
+        const { ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+        const snapshot = await get(ref(db, 'tmdb_movies'));
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val());
+        }
+    } catch (e) {
+        console.warn('Firebase movie fetch failed, falling back to JSON:', e.message);
+    }
     const response = await fetch("../Data/movieList.json");
     return await response.json();
 }
@@ -160,6 +169,11 @@ function applyFilters(source = allMovies) {
     let result = source;
     if (currentInTheatres) {
         result = result.filter(m => m.inTheatres === true);
+        result = [...result].sort((a, b) => {
+            const da = a.releaseDate ? new Date(a.releaseDate) : new Date(`${a.year}-01-01`);
+            const db = b.releaseDate ? new Date(b.releaseDate) : new Date(`${b.year}-01-01`);
+            return db - da;
+        });
     }
     if (currentGenre !== 'all') {
         result = result.filter(m => m.genre && m.genre.toLowerCase().includes(currentGenre.toLowerCase()));
