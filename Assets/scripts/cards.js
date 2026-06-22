@@ -432,7 +432,7 @@ import {
 // Import media arrays from separate files
 import { fetchMusic } from "./music.js";
 import { games } from "./games.js";
-import { adminState, deleteReview, editReview, getMediaOverride, updateMediaOverride, getAllMediaOverrides } from "./admin.js";
+import { adminState, deleteReview, editReview, getMediaOverride, updateMediaOverride, getAllMediaOverrides, hideMediaEntry, getHiddenMedia } from "./admin.js";
 
 function getMediaId(item) {
     if (item.id) return item.id;
@@ -493,12 +493,13 @@ async function initCards() {
     let movies = [], validTV = [], validGames = [], validBooks = [];
 
     // Fetch JSON sources, Firebase overrides, and review caches all in parallel
-    const [moviesRes, tvRes, booksRes, overridesRes] = await Promise.allSettled([
+    const [moviesRes, tvRes, booksRes, overridesRes, , hiddenRes] = await Promise.allSettled([
         fetchMovies(),
         fetchTV(),
         fetchBooks(),
         getAllMediaOverrides(),
         fetchLatestReviewTimesForItems([]), // warms reviewTimestampCache + ratingBulkCache early
+        getHiddenMedia(),
     ]);
 
     if (moviesRes.status === 'fulfilled') {
@@ -582,6 +583,11 @@ async function initCards() {
             const id = getMediaId(item);
             return overrides[id] ? { ...item, ...overrides[id] } : item;
         });
+    }
+
+    const hiddenIds = hiddenRes?.status === 'fulfilled' ? hiddenRes.value : {};
+    if (hiddenIds && Object.keys(hiddenIds).length > 0) {
+        allItems = allItems.filter(item => !hiddenIds[getMediaId(item)]);
     }
 
     window.allItems = allItems;
@@ -1257,7 +1263,10 @@ async function showItemDetails(item) {
                         <a href="${buildAmazonUrl(item)}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold py-2 px-4 rounded-lg transition-colors text-sm">
                             <i data-lucide="shopping-cart" class="w-4 h-4"></i> Buy on Amazon
                         </a>
-                        ${adminState.isAdmin ? `<button id="editInfoBtn" class="flex items-center gap-1 border border-purple-600 hover:bg-purple-800 text-purple-300 font-bold py-2 px-4 rounded-lg transition-colors text-sm"><i data-lucide="pencil" class="w-4 h-4"></i> Edit Info</button>` : ''}
+                        ${adminState.isAdmin ? `
+                        <button id="editInfoBtn" class="flex items-center gap-1 border border-purple-600 hover:bg-purple-800 text-purple-300 font-bold py-2 px-4 rounded-lg transition-colors text-sm"><i data-lucide="pencil" class="w-4 h-4"></i> Edit Info</button>
+                        <button id="deleteCardBtn" class="flex items-center gap-1 border border-red-700 hover:bg-red-900 text-red-400 font-bold py-2 px-4 rounded-lg transition-colors text-sm"><i data-lucide="trash-2" class="w-4 h-4"></i> Delete Card</button>
+                        ` : ''}
                     </div>
                     <p class="text-xs text-slate-500 mt-2">As an Amazon Associate I earn from qualifying purchases.</p>
                 </div>
@@ -1556,6 +1565,26 @@ async function showItemDetails(item) {
             editInfoPanel.classList.add('hidden');
             editInfoBtn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i> Edit Info';
             lucide.createIcons();
+        });
+
+        const deleteCardBtn = modal.querySelector('#deleteCardBtn');
+        deleteCardBtn?.addEventListener('click', async () => {
+            if (!confirm(`Remove "${displayItem.title}" from the site? It will no longer appear for any visitors.`)) return;
+            deleteCardBtn.textContent = 'Removing…';
+            deleteCardBtn.disabled = true;
+            try {
+                await hideMediaEntry(mediaId, item.tmdb_id || null);
+                const idx = allItems.findIndex(i => getMediaId(i) === mediaId);
+                if (idx !== -1) allItems.splice(idx, 1);
+                window.allItems = allItems;
+                modal.remove();
+                document.body.style.overflow = 'auto';
+                await filterCards(currentFilter);
+            } catch (e) {
+                deleteCardBtn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4"></i> Delete Card';
+                deleteCardBtn.disabled = false;
+                alert('Failed to remove card: ' + e.message);
+            }
         });
     }
 

@@ -23,6 +23,12 @@ async function main() {
 
   const db = admin.database();
 
+  // Load hidden media IDs so the pipeline never re-adds a card the admin deleted
+  const hiddenSnap = await db.ref('hiddenMedia').get();
+  const hiddenMedia = hiddenSnap.exists() ? hiddenSnap.val() : {};
+  const toMediaId = title =>
+    'movies_' + (title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+
   // Collect movie IDs from popular pages
   const ids = [];
   for (let page = 1; page <= PAGES; page++) {
@@ -36,6 +42,12 @@ async function main() {
     try {
       // Single call gets full details + credits together
       const m = await tmdb(`/movie/${id}`, { append_to_response: 'credits' });
+
+      if (hiddenMedia[toMediaId(m.title)]) {
+        console.log(`Skipping hidden movie: ${m.title}`);
+        continue;
+      }
+
       const director = m.credits.crew.find(p => p.job === 'Director')?.name ?? '';
       const actors = m.credits.cast.slice(0, 5).map(a => a.name).join('\n');
       movies[`tmdb_${id}`] = {

@@ -55042,17 +55042,6 @@
     },
     {
         "category": "movies",
-        "description": "",
-        "director": "Unknown",
-        "genre": "Animation, Action, Adventure",
-        "poster": "https://image.tmdb.org/t/p/w500/95OnjUQ1mlu7JHvIMcjYL6ah9Ah.jpg",
-        "title": "剑来院线剧场版 十三之争",
-        "year": "2026",
-        "inTheatres": true,
-        "releaseDate": "2026-06-06"
-    },
-    {
-        "category": "movies",
         "description": "In a town where pleasure equals being possessed by spiritual beings, Bayu aspires to be the shaman of a trance party so he can fundraise enough money to prevent an impending eviction.",
         "director": "Wregas Bhanuteja",
         "genre": "Drama",
@@ -55987,17 +55976,6 @@
         "poster": "https://image.tmdb.org/t/p/w500/pa97Vu2Vy5oJWWxtxFZIXaQsSEU.jpg",
         "title": "Bull Run",
         "year": "2025"
-    },
-    {
-        "category": "movies",
-        "description": "",
-        "director": "乔岩",
-        "genre": "Documentary",
-        "poster": "https://image.tmdb.org/t/p/w500/p76KuTVKM2BDMFK1Cgggyz3Cuc.jpg",
-        "title": "登月(第一部)",
-        "year": "2026",
-        "inTheatres": true,
-        "releaseDate": "2026-06-06"
     },
     {
         "category": "movies",

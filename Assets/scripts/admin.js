@@ -44,6 +44,20 @@ export async function updateMediaOverride(mediaId, fields) {
     await update(ref(db, `mediaOverrides/${mediaId}`), fields);
 }
 
+export async function hideMediaEntry(mediaId, tmdbId = null) {
+    await update(ref(db, 'hiddenMedia'), { [mediaId]: true });
+    if (tmdbId) {
+        await remove(ref(db, `tmdb_movies/tmdb_${tmdbId}`));
+    }
+}
+
+export async function getHiddenMedia() {
+    try {
+        const snap = await get(ref(db, 'hiddenMedia'));
+        return snap.exists() ? snap.val() : {};
+    } catch { return {}; }
+}
+
 export async function deleteUserAccount(uid) {
     const reviewsSnap = await get(ref(db, 'reviews'));
     if (reviewsSnap.exists()) {
