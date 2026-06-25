@@ -176,7 +176,7 @@ function applyFilters(source = allMovies) {
         });
     }
     if (currentGenre !== 'all') {
-        result = result.filter(m => m.genre && m.genre.toLowerCase().includes(currentGenre.toLowerCase()));
+        result = result.filter(m => m.genre && m.genre.split(/,|\n/).map(g => g.trim().toLowerCase()).includes(currentGenre.toLowerCase()));
     }
     return result;
 }
