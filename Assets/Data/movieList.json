@@ -40,7 +40,7 @@
         "category": "movies",
         "description": "A private detective hired to expose an adulterer in 1930s Los Angeles finds himself caught up in a web of deceit, corruption, and murder.",
         "director": "Roman Polanski",
-        "genre": "Jazz, soundtrack",
+        "genre": "Music, Drama",
         "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/Chinatownposter1.jpg",
         "title": "Chinatown ",
         "year": "1974"
@@ -12899,7 +12899,7 @@
         "category": "Movie",
         "description": "Thirty years after the ring of the first bell, Rocky Balboa comes out of retirement and dons his gloves for his final fight against the reigning heavyweight champ Mason 'The Line' Dixon.",
         "director": "Sylvester Stallone",
-        "genre": "Drama, Sport",
+        "genre": "Drama, Sports",
         "poster": "https://image.tmdb.org/t/p/w500/byBlJvZwCqgtIwrZNv0pyE974jC.jpg",
         "title": "Rocky Balboa",
         "year": "2006"
@@ -13879,7 +13879,7 @@
         "category": "Movie",
         "description": "The toys are mistakenly delivered to a day-care center instead of the attic right before Andy leaves for college, and it's up to Woody to convince the other toys that they weren't abandoned and to return home.",
         "director": "Lee Unkrich",
-        "genre": "Score",
+        "genre": "Animation, Adventure, Comedy, Family, Fantasy",
         "poster": "https://image.tmdb.org/t/p/w500/AbbXspMOwdvwWZgVN0nabZq03Ec.jpg",
         "title": "Toy Story 3",
         "year": "2010"
@@ -14181,7 +14181,7 @@
         "category": "Movie",
         "description": "A screenwriter develops a dangerous relationship with a faded film star determined to make a triumphant return.",
         "director": "Billy Wilder",
-        "genre": "Drama, Film-Noir",
+        "genre": "Drama",
         "poster": "https://image.tmdb.org/t/p/w500/oOZIN0sbRNLKQC4RRCQnmAx1PlV.jpg",
         "title": "Sunset Boulevard",
         "year": "1950"
@@ -41241,7 +41241,7 @@
         "category": "movies",
         "description": "The story of Michael Jackson, one of the most influential artists the world has ever known, and his life beyond the music. His journey from the discovery of his extraordinary talent as the lead of the Jackson Five, to the visionary artist whose creative ambition fueled a relentless pursuit to become the biggest entertainer in the world, highlighting both his life off-stage and some of the most iconic performances from his early solo career.",
         "director": "Antoine Fuqua",
-        "genre": "Music, Drama",
+        "genre": "Music, Drama, Biopic",
         "poster": "https://image.tmdb.org/t/p/w500/3Qud19bBUrrJAzy0Ilm8gRJlJXP.jpg",
         "title": "Michael",
         "year": "2026",
