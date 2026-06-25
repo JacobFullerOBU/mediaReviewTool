@@ -23,7 +23,8 @@ def fetch_large_batch():
         print(f"\n--- Processing Page {page_num} of {PAGES_TO_FETCH} ---")
         
         # Note: We added "&page={page_num}" to the URL
-        url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language=en-US&page={page_num}"
+        # with_release_type=2|3 restricts to theatrical releases (limited + wide)
+        url = f"https://api.themoviedb.org/3/discover/movie?api_key={API_KEY}&language=en-US&page={page_num}&with_release_type=2|3&region=US&sort_by=popularity.desc"
         
         try:
             response = requests.get(url)

@@ -56,7 +56,9 @@ def fetch_new_movies(start_page):
     for page_num in range(start_page, end_page + 1):
         print(f"--- Processing Page {page_num}... ---")
         
-        url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language=en-US&page={page_num}"
+        # with_release_type=3 restricts to US theatrical releases only (type 3)
+        # type 2 = limited theatrical, type 3 = wide theatrical
+        url = f"https://api.themoviedb.org/3/discover/movie?api_key={API_KEY}&language=en-US&page={page_num}&with_release_type=2|3&region=US&sort_by=popularity.desc"
         
         try:
             response = requests.get(url)
