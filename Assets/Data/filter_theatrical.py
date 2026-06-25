@@ -18,9 +18,10 @@ import urllib.request
 import urllib.parse
 
 TMDB_API_KEY = "f50a7cd62fa00a24f29a0e3ebb12c130"
-INPUT_FILE = "movieList.json"
-OUTPUT_FILE = "movieList.json"
-CHECKPOINT_FILE = "tmdb_theatrical_cache.json"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+INPUT_FILE = os.path.join(SCRIPT_DIR, "movieList.json")
+OUTPUT_FILE = os.path.join(SCRIPT_DIR, "movieList.json")
+CHECKPOINT_FILE = os.path.join(SCRIPT_DIR, "tmdb_theatrical_cache.json")
 
 # Movies before this year predate major streaming originals — keep without checking
 STREAMING_ERA_START = 2014
@@ -120,11 +121,14 @@ def main():
     consecutive_errors = 0
 
     for movie in movies:
-        key = f"{movie['title'].strip()}|{movie.get('year', '').strip()}"
-        if key in cache:
+        if "title" not in movie:
+            print(f"  [SKIP] Entry missing 'title' key: {list(movie.keys())}")
             continue
 
-        year = movie.get("year", "")
+        year = str(movie.get("year", ""))
+        key = f"{movie['title'].strip()}|{year.strip()}"
+        if key in cache:
+            continue
         try:
             if int(year.strip()) < STREAMING_ERA_START:
                 cache[key] = "yes"
@@ -159,7 +163,7 @@ def main():
     with open(CHECKPOINT_FILE, "w", encoding="utf-8") as f:
         json.dump(cache, f, indent=2)
 
-    unchecked = [m for m in movies if f"{m['title'].strip()}|{m.get('year','').strip()}" not in cache]
+    unchecked = [m for m in movies if "title" in m and f"{m['title'].strip()}|{str(m.get('year','')).strip()}" not in cache]
     if unchecked:
         print(f"\n{len(unchecked)} movies still unchecked — run the script again to finish.")
         return
@@ -167,7 +171,9 @@ def main():
     theatrical = []
     streaming_only = []
     for movie in movies:
-        key = f"{movie['title'].strip()}|{movie.get('year', '').strip()}"
+        if "title" not in movie:
+            continue
+        key = f"{movie['title'].strip()}|{str(movie.get('year', '')).strip()}"
         result = cache.get(key, "unknown")
         if result in ("yes", "unknown"):
             theatrical.append(movie)
