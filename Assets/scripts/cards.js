@@ -1565,8 +1565,17 @@ async function showItemDetails(item) {
                 // Sync in-memory allItems so the grid reflects changes without reload
                 const idx = allItems.findIndex(i => getMediaId(i) === mediaId);
                 if (idx !== -1) Object.assign(allItems[idx], fields);
+                // cardId matches what the card builder uses (title slug, not category-prefixed)
+                const cardId = displayItem.id || (displayItem.title ? displayItem.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+                // Refresh TR badge immediately
+                updateTrueRated(displayItem, cardId);
+                // Refresh RT badge if score was edited
+                if (rtVal !== '') {
+                    const rtEl = document.getElementById(`rt-${cardId}`);
+                    if (rtEl) rtEl.innerHTML = `${RT_ICON} ${parseFloat(rtVal)}%`;
+                }
                 // Update poster/title/genre on the visible grid card
-                const gridCard = document.querySelector(`.media-card[data-id="${mediaId}"]`);
+                const gridCard = document.querySelector(`.media-card[data-id="${cardId}"]`);
                 if (gridCard) {
                     if (fields.poster) gridCard.querySelector('.card-image')?.setAttribute('src', fields.poster);
                     if (fields.title)  { const t = gridCard.querySelector('.card-title'); if (t) t.textContent = fields.title; }
