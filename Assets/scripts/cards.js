@@ -2021,8 +2021,8 @@ async function renderCards(container, items) {
                     needsRt   ? fetchRTScore(item)   : Promise.resolve(null),
                     needsTmdb ? fetchTMDBScore(item) : Promise.resolve(null),
                 ]);
-                if (needsRt)   item.rtScore   = score;
-                if (needsTmdb) item.tmdbScore = tmdbScore;
+                if (needsRt   && item.rtScore   == null) item.rtScore   = score;
+                if (needsTmdb && item.tmdbScore == null) item.tmdbScore = tmdbScore;
                 const el = document.getElementById(`rt-${cId}`);
                 if (el) {
                     if (item.rtScore) {
