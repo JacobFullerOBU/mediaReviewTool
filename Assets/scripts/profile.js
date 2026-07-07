@@ -315,19 +315,10 @@ function renderStats(reviews, mediaMap) {
         const d = r.timestamp.split('T')[0];
         dateCount[d] = (dateCount[d] || 0) + 1;
     }
-    const activityDates  = Object.keys(dateCount).sort();
-    const activityCounts = activityDates.map(d => dateCount[d]);
+    const activityDates = Object.keys(dateCount).sort();
 
-    // Cumulative films over time
+    // Reviews sorted by timestamp (used for rolling average)
     const sorted = reviews.filter(r => r.timestamp).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-    const cumulLabels = [];
-    const cumulData   = [];
-    let running = 0;
-    for (const r of sorted) {
-        running++;
-        cumulLabels.push(r.timestamp.split('T')[0]);
-        cumulData.push(running);
-    }
 
     // 10/10 club
     const tenClub = reviews
@@ -406,21 +397,6 @@ function renderStats(reviews, mediaMap) {
         const mean = vals.reduce((s, v) => s + v, 0) / vals.length;
         return parseFloat(Math.sqrt(vals.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / vals.length).toFixed(2));
     });
-
-    // Gap analysis: days between consecutive log sessions
-    const gapLabels = ['Same day', '1 day', '2–3 days', '4–7 days', '8–14 days', '15–30 days', '30+ days'];
-    const gapCounts = [0, 0, 0, 0, 0, 0, 0];
-    const logDates  = activityDates.map(d => new Date(d));
-    for (let i = 1; i < logDates.length; i++) {
-        const gap = Math.round((logDates[i] - logDates[i - 1]) / 86400000);
-        if (gap === 0)       gapCounts[0]++;
-        else if (gap === 1)  gapCounts[1]++;
-        else if (gap <= 3)   gapCounts[2]++;
-        else if (gap <= 7)   gapCounts[3]++;
-        else if (gap <= 14)  gapCounts[4]++;
-        else if (gap <= 30)  gapCounts[5]++;
-        else                 gapCounts[6]++;
-    }
 
     // Rolling average (window of N reviews sorted by timestamp)
     const rollWin    = Math.min(10, Math.max(3, Math.floor(total / 8)));
@@ -567,18 +543,6 @@ function renderStats(reviews, mediaMap) {
         </div>` : ''}
 
         ${activityDates.length > 1 ? `
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div>
-                <div class="text-sm font-medium text-slate-400 mb-3">Logging Activity</div>
-                <div style="position:relative;height:160px"><canvas id="statsActivityChart"></canvas></div>
-            </div>
-            <div>
-                <div class="text-sm font-medium text-slate-400 mb-3">Cumulative Films Logged</div>
-                <div style="position:relative;height:160px"><canvas id="statsCumulChart"></canvas></div>
-            </div>
-        </div>` : ''}
-
-        ${activityDates.length > 1 ? `
         <div class="mb-8">
             <div class="text-sm font-medium text-slate-400 mb-3">Activity Calendar <span class="text-slate-500 text-xs">(last 52 weeks)</span></div>
             ${calendarHTML}
@@ -588,12 +552,6 @@ function renderStats(reviews, mediaMap) {
         <div class="mb-8">
             <div class="text-sm font-medium text-slate-400 mb-3">Rolling Average Rating <span class="text-slate-500 text-xs">(per ${rollWin} reviews)</span></div>
             <div style="position:relative;height:160px"><canvas id="statsRollingAvgChart"></canvas></div>
-        </div>` : ''}
-
-        ${activityDates.length > 2 ? `
-        <div class="mb-8">
-            <div class="text-sm font-medium text-slate-400 mb-3">Days Between Logging Sessions</div>
-            <div style="position:relative;height:160px"><canvas id="statsGapChart"></canvas></div>
         </div>` : ''}
 
         ${tenClub.length > 0 ? `
@@ -701,41 +659,6 @@ function renderStats(reviews, mediaMap) {
         }));
     }
 
-    // Logging activity
-    mkBar('statsActivityChart', activityDates, activityCounts, '#10b981');
-
-    // Cumulative — labels would just be running totals on every point, skip
-    const cumEl = document.getElementById('statsCumulChart');
-    if (cumEl) {
-        statsCharts.push(new Chart(cumEl, {
-            type: 'line',
-            data: {
-                labels: cumulLabels,
-                datasets: [{
-                    data: cumulData,
-                    borderColor: '#818cf8',
-                    backgroundColor: 'rgba(129,140,248,0.12)',
-                    fill: true,
-                    tension: 0.3,
-                    pointRadius: 0,
-                    pointHoverRadius: 4,
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    datalabels: { display: false },
-                },
-                scales: {
-                    x: { ...baseScales.x, ticks: { color: tickColor, maxTicksLimit: 6, maxRotation: 45 } },
-                    y: { ...baseScales.y },
-                },
-            },
-        }));
-    }
-
     // Rolling average
     const rollEl = document.getElementById('statsRollingAvgChart');
     if (rollEl) {
@@ -774,8 +697,6 @@ function renderStats(reviews, mediaMap) {
         { min: 0, ticks: { color: tickColor } },
         v => v > 0 ? v.toFixed(1) : '');
 
-    // Days between logging sessions
-    mkBar('statsGapChart', gapLabels, gapCounts, '#a78bfa');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
