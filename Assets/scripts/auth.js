@@ -1,6 +1,6 @@
 // --- Firebase Auth & Database Imports ---
 import { auth, db } from "./firebase.js";
-import { ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { ref, set, push } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { checkAdminStatus, adminState } from "./admin.js";
 import {
     onAuthStateChanged,
@@ -341,6 +341,163 @@ function showNotification(message, type) {
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
+}
+
+// --- 6. Letterboxd Import ---
+async function handleImport(e) {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const fileInput = document.getElementById('importFile');
+    const progressDiv = document.getElementById('importProgress');
+    const resultsDiv = document.getElementById('importResults');
+    const file = fileInput?.files?.[0];
+    if (!file) return;
+
+    const user = auth.currentUser;
+    if (!user) return showNotification('Please log in first', 'error');
+
+    setButtonLoading(submitBtn, true);
+    progressDiv.textContent = 'Reading file...';
+    progressDiv.classList.remove('hidden');
+    resultsDiv.classList.add('hidden');
+
+    try {
+        const text = await file.text();
+        const rows = parseCSV(text);
+        if (rows.length < 2) {
+            showNotification('No data found in file', 'error');
+            return;
+        }
+
+        const headers = rows[0].map(h => h.trim().toLowerCase());
+        const nameIdx = headers.indexOf('name');
+        const yearIdx = headers.indexOf('year');
+        const ratingIdx = headers.indexOf('rating');
+        const dateIdx = headers.indexOf('date');
+        const reviewIdx = headers.indexOf('review');
+
+        if (nameIdx === -1 || ratingIdx === -1) {
+            showNotification('Invalid CSV — expected columns: Name, Rating', 'error');
+            return;
+        }
+
+        progressDiv.textContent = 'Loading movie list...';
+        const root = document.getElementById('navbar-container')?.dataset.root || './';
+        const movieListResp = await fetch(root + 'Assets/Data/movieList.json');
+        const movieList = await movieListResp.json();
+
+        // Build lookup: title (lowercase) → movie, and title+year → movie
+        const byTitle = new Map();
+        const byTitleYear = new Map();
+        for (const movie of movieList) {
+            const key = movie.title.trim().toLowerCase();
+            byTitle.set(key, movie);
+            if (movie.year) byTitleYear.set(`${key}__${movie.year}`, movie);
+        }
+
+        // Parse rows into matched/unmatched buckets
+        const toImport = [];
+        const notFound = [];
+        let skipped = 0;
+
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const name = row[nameIdx]?.trim();
+            const year = yearIdx !== -1 ? row[yearIdx]?.trim() : null;
+            const ratingRaw = parseFloat(row[ratingIdx]);
+            const date = dateIdx !== -1 ? row[dateIdx]?.trim() : null;
+            const reviewText = reviewIdx !== -1 ? row[reviewIdx]?.trim() : '';
+
+            if (!name || isNaN(ratingRaw) || ratingRaw <= 0) { skipped++; continue; }
+
+            const lowerName = name.toLowerCase();
+            const movie = (year && byTitleYear.get(`${lowerName}__${year}`)) || byTitle.get(lowerName);
+
+            if (!movie) { notFound.push(name); continue; }
+
+            const titleSlug = movie.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const catSlug = (Array.isArray(movie.category) ? movie.category[0] : (movie.category || 'movies'))
+                .trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const mediaId = catSlug ? `${catSlug}_${titleSlug}` : titleSlug;
+
+            toImport.push({
+                mediaId,
+                reviewData: {
+                    userId: user.uid,
+                    mediaId,
+                    mediaYear: movie.year || year || null,
+                    reviewText: reviewText || '',
+                    text: reviewText || '',
+                    rating: ratingRaw * 2, // 5-star → 10-point: 3/5 = 6/10
+                    spoilers: false,
+                    timestamp: date ? new Date(date).toISOString() : new Date().toISOString(),
+                    user: user.email || user.displayName || 'Anonymous',
+                    source: 'letterboxd',
+                },
+            });
+        }
+
+        // Push to Firebase in batches of 50
+        const BATCH = 50;
+        for (let b = 0; b < toImport.length; b += BATCH) {
+            const chunk = toImport.slice(b, b + BATCH);
+            await Promise.all(chunk.map(({ mediaId, reviewData }) =>
+                push(ref(db, `reviews/${mediaId}`), reviewData)
+            ));
+            const done = Math.min(b + BATCH, toImport.length);
+            progressDiv.textContent = `Importing... ${done} / ${toImport.length}`;
+        }
+
+        progressDiv.classList.add('hidden');
+        resultsDiv.classList.remove('hidden');
+        resultsDiv.innerHTML = `
+            <p class="text-green-400 font-semibold mb-2">&#10003; Imported ${toImport.length} rating${toImport.length !== 1 ? 's' : ''}</p>
+            ${skipped > 0 ? `<p class="text-slate-400 mb-1">Skipped ${skipped} entries with no rating.</p>` : ''}
+            ${notFound.length > 0 ? `
+                <p class="text-yellow-400 font-medium mt-2 mb-1">Not in movie list (${notFound.length}):</p>
+                <ul class="text-slate-400 space-y-0.5">
+                    ${notFound.slice(0, 25).map(t => `<li>&#8226; ${t}</li>`).join('')}
+                    ${notFound.length > 25 ? `<li class="text-slate-500 italic">...and ${notFound.length - 25} more</li>` : ''}
+                </ul>
+            ` : ''}
+        `;
+
+        if (toImport.length > 0) showNotification(`Imported ${toImport.length} Letterboxd ratings!`, 'success');
+
+    } catch (err) {
+        console.error(err);
+        progressDiv.classList.add('hidden');
+        showNotification('Import failed: ' + err.message, 'error');
+    } finally {
+        setButtonLoading(submitBtn, false);
+    }
+}
+
+function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        if (inQuotes) {
+            if (ch === '"' && text[i + 1] === '"') { field += '"'; i++; }
+            else if (ch === '"') { inQuotes = false; }
+            else { field += ch; }
+        } else {
+            if (ch === '"') { inQuotes = true; }
+            else if (ch === ',') { row.push(field); field = ''; }
+            else if (ch === '\n') {
+                row.push(field); field = '';
+                if (row.some(f => f.trim())) rows.push(row);
+                row = [];
+            } else if (ch !== '\r') { field += ch; }
+        }
+    }
+    row.push(field);
+    if (row.some(f => f.trim())) rows.push(row);
+    return rows;
 }
 
 // Module scripts run after HTML is parsed, so the DOM is ready — no need to wait for DOMContentLoaded

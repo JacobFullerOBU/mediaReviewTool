@@ -22,6 +22,7 @@
                     <button id="registerBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Register</button>
                     
                     <button id="profileBtn" style="display: none;" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Profile</button>
+                    <button id="importBtn" style="display: none;" class="bg-teal-700 hover:bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Import</button>
                     <button id="adminBtn" style="display: none;" class="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">Admin</button>
                     <button id="logoutBtn" style="display: none;" class="text-slate-400 hover:text-red-400 px-3 py-2 text-sm font-medium transition-colors">Logout</button>
                 </div>
@@ -45,6 +46,9 @@
             <button id="mobile-loginBtn" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-indigo-400 hover:bg-slate-700">Login</button>
             <button id="mobile-registerBtn" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700">Register</button>
             <button id="mobile-profileBtn" style="display: none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700">Profile</button>
+            <div id="mobile-import-nav" style="display: none;">
+                <button id="mobile-importBtn" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-teal-400 hover:bg-slate-700">Import</button>
+            </div>
             <button id="mobile-adminBtn" style="display: none;" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-400 hover:bg-slate-700">Admin</button>
         </div>
     </div>
@@ -93,6 +97,35 @@
         </div>
 
         <p class="auth-switch mt-6 text-center text-sm text-slate-400">Don't have an account? <a href="#" id="switchToRegister" class="text-indigo-400 hover:text-indigo-300 font-medium hover:underline">Register here</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Import Modal -->
+<div id="importModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal">
+  <div class="bg-slate-800 rounded-2xl p-8 w-full max-w-lg border border-slate-700 shadow-2xl relative modal-content">
+    <div class="modal-header flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-white">Import from Letterboxd</h2>
+        <span class="close text-slate-400 hover:text-white cursor-pointer" data-modal="importModal"><i data-lucide="x" class="w-5 h-5"></i></span>
+    </div>
+    <div class="modal-body">
+        <p class="text-slate-400 text-sm mb-4">
+            Export your data from Letterboxd (Settings &rarr; Import &amp; Export &rarr; Export Your Data),
+            then upload your <code class="bg-slate-700 px-1 rounded text-xs">ratings.csv</code> or
+            <code class="bg-slate-700 px-1 rounded text-xs">reviews.csv</code> file below.
+            Ratings are converted from Letterboxd's 5-star scale to a 10-point scale (e.g. 3&#9733; &rarr; 6/10).
+        </p>
+        <form id="importForm" class="space-y-4">
+            <div class="form-group">
+                <label for="importFile" class="block text-xs font-medium text-slate-400 mb-1">CSV File:</label>
+                <input type="file" id="importFile" accept=".csv" required
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer
+                           file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-medium file:bg-indigo-600 file:text-white hover:file:bg-indigo-700">
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-colors">Import Ratings</button>
+        </form>
+        <div id="importProgress" class="hidden mt-3 text-sm text-slate-400"></div>
+        <div id="importResults" class="hidden mt-4 p-4 bg-slate-900 rounded-lg border border-slate-700 text-sm max-h-64 overflow-y-auto"></div>
     </div>
   </div>
 </div>
