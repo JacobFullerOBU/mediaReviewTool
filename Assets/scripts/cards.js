@@ -1572,7 +1572,11 @@ async function showItemDetails(item) {
                 // Refresh RT badge if score was edited
                 if (rtVal !== '') {
                     const rtEl = document.getElementById(`rt-${cardId}`);
-                    if (rtEl) rtEl.innerHTML = `${RT_ICON} ${parseFloat(rtVal)}%`;
+                    if (rtEl) {
+                        const pct = Math.round(parseFloat(rtVal));
+                        rtEl.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
+                        rtEl.innerHTML = `${RT_ICON} ${pct}%`;
+                    }
                 }
                 // Update poster/title/genre on the visible grid card
                 const gridCard = document.querySelector(`.media-card[data-id="${cardId}"]`);
@@ -2002,19 +2006,25 @@ async function renderCards(container, items) {
 
         // Fetch RT/TMDB scores for movie cards and patch them into the DOM;
         // call updateTrueRated for all categories so the badge stays current.
+        // Skip API fetch if the item already has a score set via admin override.
         toShow.forEach(async item => {
             const iCat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
             const cId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
             if (iCat === 'movies') {
-                const [score, tmdbScore] = await Promise.all([fetchRTScore(item), fetchTMDBScore(item)]);
-                item.rtScore = score;
-                item.tmdbScore = tmdbScore;
+                const needsRt   = item.rtScore   == null;
+                const needsTmdb = item.tmdbScore == null;
+                const [score, tmdbScore] = await Promise.all([
+                    needsRt   ? fetchRTScore(item)   : Promise.resolve(null),
+                    needsTmdb ? fetchTMDBScore(item) : Promise.resolve(null),
+                ]);
+                if (needsRt)   item.rtScore   = score;
+                if (needsTmdb) item.tmdbScore = tmdbScore;
                 const el = document.getElementById(`rt-${cId}`);
                 if (el) {
-                    if (score) {
-                        const pct = parseInt(score);
+                    if (item.rtScore) {
+                        const pct = parseInt(item.rtScore);
                         el.className = `text-xs font-mono ${pct >= 60 ? 'text-red-400' : 'text-yellow-500'}`;
-                        el.innerHTML = `${RT_ICON} ${score}`;
+                        el.innerHTML = `${RT_ICON} ${pct}%`;
                     } else {
                         el.className = 'text-xs text-slate-600 font-mono';
                         el.innerHTML = `${RT_ICON} N/A`;
