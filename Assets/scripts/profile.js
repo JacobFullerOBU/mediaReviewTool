@@ -365,6 +365,114 @@ function renderStats(reviews, mediaMap) {
                 </div>`;
         }).join('');
 
+    // ── Additional analytics ───────────────────────────────────────────────────
+
+    // Half-star usage (odd ratings = half stars on 5-star scale)
+    const halfStarCount = reviews.filter(r => r.rating % 2 !== 0).length;
+    const halfStarPct   = total > 0 ? Math.round((halfStarCount / total) * 100) : 0;
+
+    // Recency bias: avg for recent releases (last 5 yrs) vs older
+    const thisYear     = new Date().getFullYear();
+    const recentRels   = reviews.filter(r => { const y = parseInt(r.mediaYear); return !isNaN(y) && y >= thisYear - 4; });
+    const olderRels    = reviews.filter(r => { const y = parseInt(r.mediaYear); return !isNaN(y) && y  < thisYear - 4; });
+    const recentRelAvg = recentRels.length ? recentRels.reduce((s, r) => s + (r.rating || 0), 0) / recentRels.length : null;
+    const olderRelAvg  = olderRels.length  ? olderRels.reduce((s, r)  => s + (r.rating || 0), 0) / olderRels.length  : null;
+    const recencyDiff  = recentRelAvg !== null && olderRelAvg !== null
+        ? parseFloat((recentRelAvg - olderRelAvg).toFixed(1)) : null;
+
+    // Community benchmark (Letterboxd avg ≈ 3.3/5 = 6.6/10)
+    const userVsCommunity  = parseFloat((avgRating - 6.6).toFixed(1));
+    const userVsCommSign   = userVsCommunity >= 0 ? '+' : '';
+    const userVsCommColor  = userVsCommunity >= 0 ? 'text-green-400' : 'text-red-400';
+    const avgStarScale     = (avgRating / 2).toFixed(2);
+    const recencyDiffStr   = recencyDiff !== null ? (recencyDiff > 0 ? '+' : '') + recencyDiff : 'N/A';
+    const recencyDiffColor = recencyDiff !== null
+        ? (recencyDiff > 0 ? 'text-orange-400' : recencyDiff < 0 ? 'text-blue-400' : 'text-slate-400')
+        : 'text-slate-600';
+
+    // Rating volatility (std dev) per decade
+    const decadeStdDevs = decades.map(d => {
+        const vals = reviews
+            .filter(r => { const y = parseInt(r.mediaYear); return !isNaN(y) && Math.floor(y / 10) * 10 === d; })
+            .map(r => r.rating || 0);
+        if (vals.length < 2) return 0;
+        const mean = vals.reduce((s, v) => s + v, 0) / vals.length;
+        return parseFloat(Math.sqrt(vals.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / vals.length).toFixed(2));
+    });
+
+    // Gap analysis: days between consecutive log sessions
+    const gapLabels = ['Same day', '1 day', '2–3 days', '4–7 days', '8–14 days', '15–30 days', '30+ days'];
+    const gapCounts = [0, 0, 0, 0, 0, 0, 0];
+    const logDates  = activityDates.map(d => new Date(d));
+    for (let i = 1; i < logDates.length; i++) {
+        const gap = Math.round((logDates[i] - logDates[i - 1]) / 86400000);
+        if (gap === 0)       gapCounts[0]++;
+        else if (gap === 1)  gapCounts[1]++;
+        else if (gap <= 3)   gapCounts[2]++;
+        else if (gap <= 7)   gapCounts[3]++;
+        else if (gap <= 14)  gapCounts[4]++;
+        else if (gap <= 30)  gapCounts[5]++;
+        else                 gapCounts[6]++;
+    }
+
+    // Rolling average (window of N reviews sorted by timestamp)
+    const rollWin    = Math.min(10, Math.max(3, Math.floor(total / 8)));
+    const rollLabels = [];
+    const rollData   = [];
+    if (sorted.length >= rollWin) {
+        for (let i = rollWin - 1; i < sorted.length; i++) {
+            const slice = sorted.slice(i - rollWin + 1, i + 1);
+            rollLabels.push(sorted[i].timestamp.split('T')[0]);
+            rollData.push(parseFloat((slice.reduce((s, r) => s + (r.rating || 0), 0) / rollWin).toFixed(2)));
+        }
+    }
+
+    // Activity calendar heatmap HTML (last 52 weeks)
+    const calendarHTML = (() => {
+        const MONTHS  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const today   = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+        const start   = new Date(today);
+        start.setDate(today.getDate() - 363);
+        start.setDate(start.getDate() - start.getDay()); // snap to Sunday
+        const colorFn = n => n === 0 ? '#1e293b' : n === 1 ? '#166534' : n <= 3 ? '#16a34a' : n <= 5 ? '#22c55e' : '#4ade80';
+        const weeks = [];
+        const cur   = new Date(start);
+        while (cur <= today) {
+            const wk = [];
+            for (let d = 0; d < 7; d++) {
+                const ds = cur.toISOString().split('T')[0];
+                wk.push({ ds, n: dateCount[ds] || 0 });
+                cur.setDate(cur.getDate() + 1);
+            }
+            weeks.push(wk);
+        }
+        let mRow = '<div style="display:flex;gap:2px;margin-bottom:2px;height:14px;">';
+        let lastMo = -1;
+        weeks.forEach(wk => {
+            const mo = new Date(wk[0].ds).getMonth();
+            mRow += '<div style="min-width:13px;font-size:9px;color:#64748b;">' + (mo !== lastMo ? MONTHS[mo] : '') + '</div>';
+            lastMo = mo;
+        });
+        mRow += '</div>';
+        let wCols = '<div style="display:flex;gap:2px;">';
+        weeks.forEach(wk => {
+            wCols += '<div style="display:flex;flex-direction:column;gap:2px;">';
+            wk.forEach(({ ds, n }) => {
+                const isFuture = ds > todayStr;
+                const tip = !isFuture && n > 0 ? ' title="' + ds + ': ' + n + ' film' + (n !== 1 ? 's' : '') + '"' : '';
+                const ring = ds === todayStr ? ';outline:1px solid #6366f1;outline-offset:-1px' : '';
+                wCols += '<div' + tip + ' style="width:11px;height:11px;border-radius:2px;background:' + (isFuture ? 'transparent' : colorFn(n)) + ring + ';"></div>';
+            });
+            wCols += '</div>';
+        });
+        wCols += '</div>';
+        const dayLbls = '<div style="display:flex;flex-direction:column;gap:2px;margin-right:4px;padding-top:16px;">' +
+            ['','M','','W','','F',''].map(l => '<div style="width:11px;height:11px;font-size:9px;color:#64748b;display:flex;align-items:center;">' + l + '</div>').join('') +
+            '</div>';
+        return '<div style="overflow-x:auto;"><div style="display:inline-flex;gap:0;align-items:flex-start;">' + dayLbls + '<div>' + mRow + wCols + '</div></div></div>';
+    })();
+
     // 10/10 club HTML (poster grid)
     const tenClubHTML = tenClub.map(r => {
         const media = mediaMap?.[r.mediaId] || null;
@@ -403,6 +511,25 @@ function renderStats(reviews, mediaMap) {
             </div>
         </div>
 
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center">
+                <div class="text-2xl font-bold ${userVsCommColor}">${userVsCommSign}${userVsCommunity}</div>
+                <div class="text-slate-400 text-xs mt-1">vs community avg <span class="text-slate-500 block">(Letterboxd ≈ 6.6)</span></div>
+            </div>
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center">
+                <div class="text-2xl font-bold text-purple-400">${halfStarPct}%</div>
+                <div class="text-slate-400 text-xs mt-1">half-star usage</div>
+            </div>
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center">
+                <div class="text-2xl font-bold text-teal-400">${avgStarScale}</div>
+                <div class="text-slate-400 text-xs mt-1">avg in ★ scale</div>
+            </div>
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center">
+                <div class="text-2xl font-bold ${recencyDiffColor}">${recencyDiffStr}</div>
+                <div class="text-slate-400 text-xs mt-1">recency bias <span class="text-slate-500 block">(new vs classic)</span></div>
+            </div>
+        </div>
+
         <div class="mb-8">
             <div class="text-sm font-medium text-slate-400 mb-3">Rating Distribution</div>
             <div style="position:relative;height:140px"><canvas id="statsDistChart"></canvas></div>
@@ -418,6 +545,12 @@ function renderStats(reviews, mediaMap) {
                 <div class="text-sm font-medium text-slate-400 mb-3">Average Rating by Decade</div>
                 <div style="position:relative;height:180px"><canvas id="statsDecadeRatingChart"></canvas></div>
             </div>
+        </div>` : ''}
+
+        ${decades.length > 1 ? `
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">Rating Volatility by Decade <span class="text-slate-500 text-xs">(std. dev. — higher = wider spread of scores)</span></div>
+            <div style="position:relative;height:160px"><canvas id="statsVolatilityChart"></canvas></div>
         </div>` : ''}
 
         ${scatterPts.length > 0 ? `
@@ -436,6 +569,24 @@ function renderStats(reviews, mediaMap) {
                 <div class="text-sm font-medium text-slate-400 mb-3">Cumulative Films Logged</div>
                 <div style="position:relative;height:160px"><canvas id="statsCumulChart"></canvas></div>
             </div>
+        </div>` : ''}
+
+        ${activityDates.length > 1 ? `
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">Activity Calendar <span class="text-slate-500 text-xs">(last 52 weeks)</span></div>
+            ${calendarHTML}
+        </div>` : ''}
+
+        ${rollData.length > 0 ? `
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">Rolling Average Rating <span class="text-slate-500 text-xs">(per ${rollWin} reviews)</span></div>
+            <div style="position:relative;height:160px"><canvas id="statsRollingAvgChart"></canvas></div>
+        </div>` : ''}
+
+        ${activityDates.length > 2 ? `
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">Days Between Logging Sessions</div>
+            <div style="position:relative;height:160px"><canvas id="statsGapChart"></canvas></div>
         </div>` : ''}
 
         ${tenClub.length > 0 ? `
@@ -577,6 +728,47 @@ function renderStats(reviews, mediaMap) {
             },
         }));
     }
+
+    // Rolling average
+    const rollEl = document.getElementById('statsRollingAvgChart');
+    if (rollEl) {
+        statsCharts.push(new Chart(rollEl, {
+            type: 'line',
+            data: {
+                labels: rollLabels,
+                datasets: [{
+                    data: rollData,
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245,158,11,0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 4,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: { display: false },
+                    tooltip: { callbacks: { label: ctx => `Avg: ${ctx.raw}/10` } },
+                },
+                scales: {
+                    x: { ...baseScales.x, ticks: { color: tickColor, maxTicksLimit: 6, maxRotation: 45 } },
+                    y: { ...baseScales.y, min: 1, max: 10 },
+                },
+            },
+        }));
+    }
+
+    // Rating volatility by decade
+    mkBar('statsVolatilityChart', decadeLabels, decadeStdDevs, '#f43f5e',
+        { min: 0, ticks: { color: tickColor } },
+        v => v > 0 ? v.toFixed(1) : '');
+
+    // Days between logging sessions
+    mkBar('statsGapChart', gapLabels, gapCounts, '#a78bfa');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
