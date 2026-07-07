@@ -8,6 +8,11 @@ const RT_ICON = `<svg xmlns="http://www.w3.org/2000/svg" class="inline w-3 h-3 -
 function updateTrueRated(item, cardId) {
     const el = document.getElementById(`tr-${cardId}`);
     if (!el) return;
+    if (item.trScoreOverride != null) {
+        el.textContent = `TR ${parseFloat(item.trScoreOverride).toFixed(1)}`;
+        el.className = 'text-xs font-mono font-semibold text-blue-400';
+        return;
+    }
     const scores = [];
     if (item.liveAvgRating != null && item.liveAvgRating !== -1) scores.push(item.liveAvgRating);
     if (item.rtScore != null) scores.push(parseInt(item.rtScore) / 10);
@@ -1315,6 +1320,23 @@ async function showItemDetails(item) {
                             <input id="editActors" type="text" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
                         </div>
                     </div>
+                    <div class="border-t border-slate-700/60 pt-3 mt-1">
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Scores</div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">RT Score <span class="text-slate-600">(0–100)</span></label>
+                                <input id="editRtScore" type="number" min="0" max="100" step="1" placeholder="—" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">TMDB Score <span class="text-slate-600">(0–10)</span></label>
+                                <input id="editTmdbScore" type="number" min="0" max="10" step="0.1" placeholder="—" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">TR Override <span class="text-slate-600">(0–10)</span></label>
+                                <input id="editTrScore" type="number" min="0" max="10" step="0.1" placeholder="computed" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex gap-2 pt-2">
                         <button id="saveInfoBtn" class="text-sm bg-purple-700 hover:bg-purple-600 text-white px-4 py-1.5 rounded font-semibold transition-colors">Save Changes</button>
                         <button id="cancelInfoBtn" class="text-sm bg-slate-700 hover:bg-slate-600 text-white px-4 py-1.5 rounded transition-colors">Cancel</button>
@@ -1493,6 +1515,9 @@ async function showItemDetails(item) {
                 modal.querySelector('#editDescription').value = displayItem.description || '';
                 modal.querySelector('#editCredit').value      = displayItem[creditKey] || '';
                 modal.querySelector('#editActors').value      = displayItem.actors || '';
+                modal.querySelector('#editRtScore').value     = displayItem.rtScore   != null ? displayItem.rtScore   : '';
+                modal.querySelector('#editTmdbScore').value   = displayItem.tmdbScore != null ? displayItem.tmdbScore : '';
+                modal.querySelector('#editTrScore').value     = displayItem.trScoreOverride != null ? displayItem.trScoreOverride : '';
                 editInfoBtn.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i> Close Editor';
             } else {
                 editInfoBtn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i> Edit Info';
@@ -1512,6 +1537,12 @@ async function showItemDetails(item) {
             if (creditVal) fields[creditKey] = creditVal;
             const actorsVal = modal.querySelector('#editActors').value.trim();
             if (actorsVal) fields.actors = actorsVal;
+            const rtVal   = modal.querySelector('#editRtScore').value.trim();
+            const tmdbVal = modal.querySelector('#editTmdbScore').value.trim();
+            const trVal   = modal.querySelector('#editTrScore').value.trim();
+            if (rtVal   !== '') fields.rtScore          = parseFloat(rtVal);
+            if (tmdbVal !== '') fields.tmdbScore        = parseFloat(tmdbVal);
+            if (trVal   !== '') fields.trScoreOverride  = parseFloat(trVal);
 
             const errEl = modal.querySelector('#editInfoError');
             errEl.classList.add('hidden');
@@ -2029,6 +2060,7 @@ window.handleImageError = function(img) {
 };
 
 function getTrueRating(item) {
+    if (item.trScoreOverride != null) return parseFloat(item.trScoreOverride);
     const TTL = 7 * 24 * 60 * 60 * 1000;
     const scores = [];
     if (item.liveAvgRating != null && item.liveAvgRating !== -1) scores.push(item.liveAvgRating);
