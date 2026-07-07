@@ -260,6 +260,96 @@ function openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, m
     });
 }
 
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+function renderStats(reviews) {
+    const container = document.getElementById('profileStats');
+    if (!container) return;
+    if (reviews.length === 0) { container.classList.add('hidden'); return; }
+
+    const total = reviews.length;
+    const avgRating = reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / total;
+
+    // Rating distribution (1–10)
+    const dist = {};
+    for (let i = 1; i <= 10; i++) dist[i] = 0;
+    for (const r of reviews) {
+        const rounded = Math.round(r.rating || 0);
+        if (rounded >= 1 && rounded <= 10) dist[rounded]++;
+    }
+    const maxCount = Math.max(...Object.values(dist), 1);
+
+    const distHTML = Object.entries(dist).map(([rating, count]) => {
+        const heightPct = Math.round((count / maxCount) * 100);
+        return `
+            <div class="flex flex-col items-center gap-1 flex-1">
+                <span class="text-xs text-slate-500 leading-none">${count > 0 ? count : ''}</span>
+                <div class="w-full flex items-end" style="height:48px">
+                    <div class="w-full rounded-t transition-all" style="height:${heightPct}%;background:${heightPct > 60 ? '#6366f1' : '#334155'}"></div>
+                </div>
+                <span class="text-xs text-slate-500">${rating}</span>
+            </div>`;
+    }).join('');
+
+    // Per-category breakdown
+    const catMap = {};
+    for (const r of reviews) {
+        const cat = r.mediaCategory || 'unknown';
+        if (cat === 'unknown') continue;
+        if (!catMap[cat]) catMap[cat] = { count: 0, sum: 0 };
+        catMap[cat].count++;
+        catMap[cat].sum += r.rating || 0;
+    }
+
+    const catMeta = {
+        movies: { label: 'Movies', icon: 'film' },
+        tv:     { label: 'TV Shows', icon: 'monitor' },
+        music:  { label: 'Music', icon: 'music' },
+        games:  { label: 'Games', icon: 'gamepad-2' },
+        books:  { label: 'Books', icon: 'book-open' },
+    };
+
+    const catHTML = Object.entries(catMap)
+        .sort((a, b) => b[1].count - a[1].count)
+        .map(([cat, { count, sum }]) => {
+            const meta = catMeta[cat] || { label: cat, icon: 'layers' };
+            const avg = (sum / count).toFixed(1);
+            return `
+                <div class="flex items-center gap-3 bg-slate-700/40 rounded-lg px-4 py-3">
+                    <i data-lucide="${meta.icon}" class="w-5 h-5 text-indigo-400 flex-shrink-0"></i>
+                    <div>
+                        <div class="text-white font-semibold text-sm">${meta.label}</div>
+                        <div class="text-slate-400 text-xs">${count} review${count !== 1 ? 's' : ''} &middot; avg <span class="text-yellow-400">${avg}</span></div>
+                    </div>
+                </div>`;
+        }).join('');
+
+    container.innerHTML = `
+        <h3 class="text-xl font-bold text-white mb-5">Stats</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center">
+                <div class="text-3xl font-bold text-white">${total}</div>
+                <div class="text-slate-400 text-sm mt-1">Total Reviews</div>
+            </div>
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center">
+                <div class="text-3xl font-bold text-yellow-400">${avgRating.toFixed(1)}</div>
+                <div class="text-slate-400 text-sm mt-1">Average Rating</div>
+            </div>
+            <div class="bg-slate-700/40 rounded-lg p-4 text-center col-span-2 sm:col-span-1">
+                <div class="text-3xl font-bold text-indigo-400">${Object.keys(catMap).length}</div>
+                <div class="text-slate-400 text-sm mt-1">Categories</div>
+            </div>
+        </div>
+        <div class="mb-6">
+            <div class="text-sm text-slate-400 font-medium mb-2">Rating Distribution</div>
+            <div class="flex items-end gap-1">${distHTML}</div>
+        </div>
+        ${catHTML ? `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">${catHTML}</div>` : ''}
+    `;
+    container.classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -411,6 +501,8 @@ async function loadProfile(reviewerId) {
             });
         }
         console.log("Found reviews for this user:", allReviews.length);
+
+        renderStats(allReviews);
 
         const isOwner = auth.currentUser && auth.currentUser.uid === reviewerId;
 
