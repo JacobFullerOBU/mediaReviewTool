@@ -456,17 +456,20 @@ function renderStats(reviews, mediaMap) {
 
     // ── Init Chart.js ──────────────────────────────────────────────
     if (typeof Chart === 'undefined') return;
+    if (typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels);
 
     const gridColor  = '#1e293b';
     const tickColor  = '#64748b';
+    const labelColor = '#94a3b8';
     const baseScales = {
         x: { grid: { color: gridColor }, ticks: { color: tickColor } },
         y: { grid: { color: gridColor }, ticks: { color: tickColor } },
     };
 
-    function mkBar(id, labels, data, color, yOverride) {
+    function mkBar(id, labels, data, color, yOverride, fmtFn) {
         const el = document.getElementById(id);
         if (!el) return;
+        const fmt = fmtFn || (v => v > 0 ? v : '');
         statsCharts.push(new Chart(el, {
             type: 'bar',
             data: {
@@ -476,7 +479,16 @@ function renderStats(reviews, mediaMap) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: labelColor,
+                        font: { size: 10 },
+                        formatter: fmt,
+                    },
+                },
                 scales: {
                     x: baseScales.x,
                     y: { ...baseScales.y, ...(yOverride || {}) },
@@ -493,11 +505,12 @@ function renderStats(reviews, mediaMap) {
     // Films by decade
     mkBar('statsDecadeCountChart', decadeLabels, decadeCounts, '#0ea5e9');
 
-    // Avg rating by decade
+    // Avg rating by decade (show one decimal)
     mkBar('statsDecadeRatingChart', decadeLabels, decadeAvgs, '#f59e0b',
-        { min: 0, max: 10, ticks: { color: tickColor, stepSize: 2 } });
+        { min: 0, max: 10, ticks: { color: tickColor, stepSize: 2 } },
+        v => v > 0 ? v.toFixed(1) : '');
 
-    // Scatter: rating vs year
+    // Scatter: rating vs year — labels too cluttered, use tooltip only
     const scEl = document.getElementById('statsScatterChart');
     if (scEl) {
         statsCharts.push(new Chart(scEl, {
@@ -515,6 +528,7 @@ function renderStats(reviews, mediaMap) {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { display: false },
+                    datalabels: { display: false },
                     tooltip: {
                         callbacks: {
                             label: ctx => `${ctx.raw.title} (${ctx.raw.x}) — ${ctx.raw.y}/10`,
@@ -530,10 +544,9 @@ function renderStats(reviews, mediaMap) {
     }
 
     // Logging activity
-    mkBar('statsActivityChart', activityDates, activityCounts, '#10b981',
-        undefined);
+    mkBar('statsActivityChart', activityDates, activityCounts, '#10b981');
 
-    // Cumulative
+    // Cumulative — labels would just be running totals on every point, skip
     const cumEl = document.getElementById('statsCumulChart');
     if (cumEl) {
         statsCharts.push(new Chart(cumEl, {
@@ -553,7 +566,10 @@ function renderStats(reviews, mediaMap) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: { display: false },
+                },
                 scales: {
                     x: { ...baseScales.x, ticks: { color: tickColor, maxTicksLimit: 6, maxRotation: 45 } },
                     y: { ...baseScales.y },
