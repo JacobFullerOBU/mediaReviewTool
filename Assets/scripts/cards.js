@@ -584,10 +584,12 @@ async function initCards() {
     // Apply admin field overrides (e.g. genre, title) stored in Firebase
     const overrides = overridesRes?.status === 'fulfilled' ? overridesRes.value : {};
     if (overrides && Object.keys(overrides).length > 0) {
+        console.log('[Overrides] keys in Firebase:', Object.keys(overrides));
         allItems = allItems.map(item => {
             const id = getMediaId(item);
             const legacy = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
             const ov = overrides[id] || overrides[legacy] || null;
+            if (ov) console.log('[Overrides] applied to', id, '→', JSON.stringify(ov));
             return ov ? { ...item, ...ov } : item;
         });
     }
@@ -1556,7 +1558,9 @@ async function showItemDetails(item) {
             saveInfoBtn.textContent = 'Saving…';
             saveInfoBtn.disabled = true;
             try {
+                console.log('[AdminSave] itemMediaId:', itemMediaId, '| fields:', JSON.stringify(fields));
                 await updateMediaOverride(itemMediaId, fields);
+                console.log('[AdminSave] Firebase write complete');
                 // Merge into displayItem so re-opens reflect changes
                 Object.assign(displayItem, fields);
                 // Update visible modal elements
@@ -1571,6 +1575,7 @@ async function showItemDetails(item) {
                 if (actorsEl) actorsEl.innerHTML = fields.actors ? `<strong>Cast:</strong> ${fields.actors}` : '';
                 // Sync in-memory allItems so the grid reflects changes without reload
                 const idx = allItems.findIndex(i => getMediaId(i) === itemMediaId);
+                console.log('[AdminSave] allItems idx:', idx, '| allItems.length:', allItems.length);
                 if (idx !== -1) Object.assign(allItems[idx], fields);
                 // cardId matches what the card builder uses (title slug, not category-prefixed)
                 const cardId = displayItem.id || (displayItem.title ? displayItem.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
@@ -2020,12 +2025,13 @@ async function renderCards(container, items) {
             if (iCat === 'movies') {
                 const needsRt   = item.rtScore   == null;
                 const needsTmdb = item.tmdbScore == null;
+                if (!needsRt || !needsTmdb) console.log('[Render]', cId, 'rt:', item.rtScore, 'tmdb:', item.tmdbScore, '(skipping API)');
                 const [score, tmdbScore] = await Promise.all([
                     needsRt   ? fetchRTScore(item)   : Promise.resolve(null),
                     needsTmdb ? fetchTMDBScore(item) : Promise.resolve(null),
                 ]);
-                if (needsRt   && item.rtScore   == null) item.rtScore   = score;
-                if (needsTmdb && item.tmdbScore == null) item.tmdbScore = tmdbScore;
+                if (needsRt   && item.rtScore   == null) { console.log('[Render] writing rt for', cId, '=', score); item.rtScore   = score; }
+                if (needsTmdb && item.tmdbScore == null) { console.log('[Render] writing tmdb for', cId, '=', tmdbScore); item.tmdbScore = tmdbScore; }
                 const el = document.getElementById(`rt-${cId}`);
                 if (el) {
                     if (item.rtScore) {
