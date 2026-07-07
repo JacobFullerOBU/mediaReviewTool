@@ -6,6 +6,7 @@ import { music } from "./music.js";
 import { games } from "./games.js";
 
 const mediaItemCache = {};
+let statsCharts = [];
 
 // ── Avatar helpers ────────────────────────────────────────────────────────────
 const AVATAR_COLORS = [
@@ -262,34 +263,76 @@ function openFavoriteSearch(wrapper, index, isOwner, allMedia, db, reviewerId, m
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
 
-function renderStats(reviews) {
+function renderStats(reviews, mediaMap) {
     const container = document.getElementById('profileStats');
     if (!container) return;
     if (reviews.length === 0) { container.classList.add('hidden'); return; }
 
+    statsCharts.forEach(c => c.destroy());
+    statsCharts = [];
+
     const total = reviews.length;
     const avgRating = reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / total;
 
-    // Rating distribution (1–10)
-    const dist = {};
-    for (let i = 1; i <= 10; i++) dist[i] = 0;
-    for (const r of reviews) {
-        const rounded = Math.round(r.rating || 0);
-        if (rounded >= 1 && rounded <= 10) dist[rounded]++;
-    }
-    const maxCount = Math.max(...Object.values(dist), 1);
+    // ── Data prep ──────────────────────────────────────────────────
 
-    const distHTML = Object.entries(dist).map(([rating, count]) => {
-        const heightPct = Math.round((count / maxCount) * 100);
-        return `
-            <div class="flex flex-col items-center gap-1 flex-1">
-                <span class="text-xs text-slate-500 leading-none">${count > 0 ? count : ''}</span>
-                <div class="w-full flex items-end" style="height:48px">
-                    <div class="w-full rounded-t transition-all" style="height:${heightPct}%;background:${heightPct > 60 ? '#6366f1' : '#334155'}"></div>
-                </div>
-                <span class="text-xs text-slate-500">${rating}</span>
-            </div>`;
-    }).join('');
+    // Rating distribution (1–10, displayed as ★0.5–★5)
+    const dist = Array(10).fill(0);
+    for (const r of reviews) {
+        const idx = Math.round(r.rating || 0) - 1;
+        if (idx >= 0 && idx < 10) dist[idx]++;
+    }
+
+    // Films by decade + avg rating by decade
+    const decadeCount = {};
+    const decadeRatingAcc = {};
+    for (const r of reviews) {
+        const yr = parseInt(r.mediaYear);
+        if (isNaN(yr) || yr < 1888) continue;
+        const decade = Math.floor(yr / 10) * 10;
+        decadeCount[decade] = (decadeCount[decade] || 0) + 1;
+        if (!decadeRatingAcc[decade]) decadeRatingAcc[decade] = { sum: 0, count: 0 };
+        decadeRatingAcc[decade].sum += r.rating || 0;
+        decadeRatingAcc[decade].count++;
+    }
+    const decades = Object.keys(decadeCount).map(Number).sort((a, b) => a - b);
+    const decadeLabels   = decades.map(d => `${d}s`);
+    const decadeCounts   = decades.map(d => decadeCount[d]);
+    const decadeAvgs     = decades.map(d => {
+        const acc = decadeRatingAcc[d];
+        return acc ? parseFloat((acc.sum / acc.count).toFixed(2)) : 0;
+    });
+
+    // Scatter: release year vs rating
+    const scatterPts = reviews
+        .filter(r => r.mediaYear && !isNaN(parseInt(r.mediaYear)))
+        .map(r => ({ x: parseInt(r.mediaYear), y: r.rating || 0, title: r.mediaTitle || '' }));
+
+    // Logging activity by date
+    const dateCount = {};
+    for (const r of reviews) {
+        if (!r.timestamp) continue;
+        const d = r.timestamp.split('T')[0];
+        dateCount[d] = (dateCount[d] || 0) + 1;
+    }
+    const activityDates  = Object.keys(dateCount).sort();
+    const activityCounts = activityDates.map(d => dateCount[d]);
+
+    // Cumulative films over time
+    const sorted = reviews.filter(r => r.timestamp).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    const cumulLabels = [];
+    const cumulData   = [];
+    let running = 0;
+    for (const r of sorted) {
+        running++;
+        cumulLabels.push(r.timestamp.split('T')[0]);
+        cumulData.push(running);
+    }
+
+    // 10/10 club
+    const tenClub = reviews
+        .filter(r => r.rating === 10)
+        .sort((a, b) => (a.mediaTitle || '').localeCompare(b.mediaTitle || ''));
 
     // Per-category breakdown
     const catMap = {};
@@ -300,7 +343,6 @@ function renderStats(reviews) {
         catMap[cat].count++;
         catMap[cat].sum += r.rating || 0;
     }
-
     const catMeta = {
         movies: { label: 'Movies', icon: 'film' },
         tv:     { label: 'TV Shows', icon: 'monitor' },
@@ -308,7 +350,6 @@ function renderStats(reviews) {
         games:  { label: 'Games', icon: 'gamepad-2' },
         books:  { label: 'Books', icon: 'book-open' },
     };
-
     const catHTML = Object.entries(catMap)
         .sort((a, b) => b[1].count - a[1].count)
         .map(([cat, { count, sum }]) => {
@@ -324,9 +365,30 @@ function renderStats(reviews) {
                 </div>`;
         }).join('');
 
+    // 10/10 club HTML (poster grid)
+    const tenClubHTML = tenClub.map(r => {
+        const media = mediaMap?.[r.mediaId] || null;
+        const poster = media?.poster || media?.image || '';
+        const yr = r.mediaYear || '';
+        if (poster) {
+            return `<div class="relative group cursor-default">
+                <img src="${poster}" alt="${r.mediaTitle}" class="w-full aspect-[2/3] object-cover rounded-lg border border-slate-600">
+                <div class="absolute inset-0 rounded-lg bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span class="text-white text-xs font-semibold leading-tight">${r.mediaTitle}${yr ? ` (${yr})` : ''}</span>
+                </div>
+            </div>`;
+        }
+        return `<div class="bg-slate-700/50 rounded-lg p-3 flex flex-col justify-center items-center text-center border border-slate-600 aspect-[2/3]">
+            <span class="text-white text-xs font-semibold leading-snug">${r.mediaTitle}</span>
+            ${yr ? `<span class="text-slate-400 text-xs mt-1">${yr}</span>` : ''}
+        </div>`;
+    }).join('');
+
+    // ── Render HTML ────────────────────────────────────────────────
     container.innerHTML = `
         <h3 class="text-xl font-bold text-white mb-5">Stats</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-3xl font-bold text-white">${total}</div>
                 <div class="text-slate-400 text-sm mt-1">Total Reviews</div>
@@ -336,18 +398,169 @@ function renderStats(reviews) {
                 <div class="text-slate-400 text-sm mt-1">Average Rating</div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center col-span-2 sm:col-span-1">
-                <div class="text-3xl font-bold text-indigo-400">${Object.keys(catMap).length}</div>
-                <div class="text-slate-400 text-sm mt-1">Categories</div>
+                <div class="text-3xl font-bold text-indigo-400">${tenClub.length}</div>
+                <div class="text-slate-400 text-sm mt-1">Perfect 10s</div>
             </div>
         </div>
-        <div class="mb-6">
-            <div class="text-sm text-slate-400 font-medium mb-2">Rating Distribution</div>
-            <div class="flex items-end gap-1">${distHTML}</div>
+
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">Rating Distribution</div>
+            <div style="position:relative;height:140px"><canvas id="statsDistChart"></canvas></div>
         </div>
-        ${catHTML ? `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">${catHTML}</div>` : ''}
+
+        ${decades.length > 0 ? `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div>
+                <div class="text-sm font-medium text-slate-400 mb-3">Films by Decade</div>
+                <div style="position:relative;height:180px"><canvas id="statsDecadeCountChart"></canvas></div>
+            </div>
+            <div>
+                <div class="text-sm font-medium text-slate-400 mb-3">Average Rating by Decade</div>
+                <div style="position:relative;height:180px"><canvas id="statsDecadeRatingChart"></canvas></div>
+            </div>
+        </div>` : ''}
+
+        ${scatterPts.length > 0 ? `
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">Rating vs. Release Year</div>
+            <div style="position:relative;height:220px"><canvas id="statsScatterChart"></canvas></div>
+        </div>` : ''}
+
+        ${activityDates.length > 1 ? `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div>
+                <div class="text-sm font-medium text-slate-400 mb-3">Logging Activity</div>
+                <div style="position:relative;height:160px"><canvas id="statsActivityChart"></canvas></div>
+            </div>
+            <div>
+                <div class="text-sm font-medium text-slate-400 mb-3">Cumulative Films Logged</div>
+                <div style="position:relative;height:160px"><canvas id="statsCumulChart"></canvas></div>
+            </div>
+        </div>` : ''}
+
+        ${tenClub.length > 0 ? `
+        <div class="mb-8">
+            <div class="text-sm font-medium text-slate-400 mb-3">10/10 Club <span class="text-slate-500">(${tenClub.length})</span></div>
+            <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-2">${tenClubHTML}</div>
+        </div>` : ''}
+
+        ${catHTML ? `
+        <div>
+            <div class="text-sm font-medium text-slate-400 mb-3">By Category</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">${catHTML}</div>
+        </div>` : ''}
     `;
+
     container.classList.remove('hidden');
     if (window.lucide) lucide.createIcons();
+
+    // ── Init Chart.js ──────────────────────────────────────────────
+    if (typeof Chart === 'undefined') return;
+
+    const gridColor  = '#1e293b';
+    const tickColor  = '#64748b';
+    const baseScales = {
+        x: { grid: { color: gridColor }, ticks: { color: tickColor } },
+        y: { grid: { color: gridColor }, ticks: { color: tickColor } },
+    };
+
+    function mkBar(id, labels, data, color, yOverride) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        statsCharts.push(new Chart(el, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{ data, backgroundColor: color, borderRadius: 3, borderSkipped: false }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: baseScales.x,
+                    y: { ...baseScales.y, ...(yOverride || {}) },
+                },
+            },
+        }));
+    }
+
+    // Rating distribution (Letterboxd star labels)
+    mkBar('statsDistChart',
+        ['★½','★1','★1½','★2','★2½','★3','★3½','★4','★4½','★5'],
+        dist, '#6366f1');
+
+    // Films by decade
+    mkBar('statsDecadeCountChart', decadeLabels, decadeCounts, '#0ea5e9');
+
+    // Avg rating by decade
+    mkBar('statsDecadeRatingChart', decadeLabels, decadeAvgs, '#f59e0b',
+        { min: 0, max: 10, ticks: { color: tickColor, stepSize: 2 } });
+
+    // Scatter: rating vs year
+    const scEl = document.getElementById('statsScatterChart');
+    if (scEl) {
+        statsCharts.push(new Chart(scEl, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    data: scatterPts,
+                    backgroundColor: 'rgba(99,102,241,0.55)',
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `${ctx.raw.title} (${ctx.raw.x}) — ${ctx.raw.y}/10`,
+                        },
+                    },
+                },
+                scales: {
+                    x: { ...baseScales.x, title: { display: true, text: 'Release Year', color: tickColor } },
+                    y: { ...baseScales.y, min: 1, max: 10, title: { display: true, text: 'Rating', color: tickColor } },
+                },
+            },
+        }));
+    }
+
+    // Logging activity
+    mkBar('statsActivityChart', activityDates, activityCounts, '#10b981',
+        undefined);
+
+    // Cumulative
+    const cumEl = document.getElementById('statsCumulChart');
+    if (cumEl) {
+        statsCharts.push(new Chart(cumEl, {
+            type: 'line',
+            data: {
+                labels: cumulLabels,
+                datasets: [{
+                    data: cumulData,
+                    borderColor: '#818cf8',
+                    backgroundColor: 'rgba(129,140,248,0.12)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 0,
+                    pointHoverRadius: 4,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ...baseScales.x, ticks: { color: tickColor, maxTicksLimit: 6, maxRotation: 45 } },
+                    y: { ...baseScales.y },
+                },
+            },
+        }));
+    }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -502,7 +715,7 @@ async function loadProfile(reviewerId) {
         }
         console.log("Found reviews for this user:", allReviews.length);
 
-        renderStats(allReviews);
+        renderStats(allReviews, mediaMap);
 
         const isOwner = auth.currentUser && auth.currentUser.uid === reviewerId;
 
