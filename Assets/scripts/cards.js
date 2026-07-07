@@ -586,7 +586,9 @@ async function initCards() {
     if (overrides && Object.keys(overrides).length > 0) {
         allItems = allItems.map(item => {
             const id = getMediaId(item);
-            return overrides[id] ? { ...item, ...overrides[id] } : item;
+            const legacy = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
+            const ov = overrides[id] || overrides[legacy] || null;
+            return ov ? { ...item, ...ov } : item;
         });
     }
 
@@ -1193,6 +1195,7 @@ function buildReviewsHtml(reviewsData, mediaId) {
 // Modal logic moved to a dedicated async function
 async function showItemDetails(item) {
     let mediaId = getMediaId(item);
+    const itemMediaId = mediaId; // always the category-prefixed ID; never mutated by legacy fallback
     const legacyId = item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '';
     const override = await getMediaOverride(mediaId);
     const displayItem = override ? { ...item, ...override } : item;
@@ -1553,7 +1556,7 @@ async function showItemDetails(item) {
             saveInfoBtn.textContent = 'Saving…';
             saveInfoBtn.disabled = true;
             try {
-                await updateMediaOverride(mediaId, fields);
+                await updateMediaOverride(itemMediaId, fields);
                 // Merge into displayItem so re-opens reflect changes
                 Object.assign(displayItem, fields);
                 // Update visible modal elements
@@ -1567,7 +1570,7 @@ async function showItemDetails(item) {
                 const actorsEl = modal.querySelector('#modalActors');
                 if (actorsEl) actorsEl.innerHTML = fields.actors ? `<strong>Cast:</strong> ${fields.actors}` : '';
                 // Sync in-memory allItems so the grid reflects changes without reload
-                const idx = allItems.findIndex(i => getMediaId(i) === mediaId);
+                const idx = allItems.findIndex(i => getMediaId(i) === itemMediaId);
                 if (idx !== -1) Object.assign(allItems[idx], fields);
                 // cardId matches what the card builder uses (title slug, not category-prefixed)
                 const cardId = displayItem.id || (displayItem.title ? displayItem.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
