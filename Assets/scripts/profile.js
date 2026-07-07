@@ -380,11 +380,18 @@ function renderStats(reviews, mediaMap) {
     const recencyDiff  = recentRelAvg !== null && olderRelAvg !== null
         ? parseFloat((recentRelAvg - olderRelAvg).toFixed(1)) : null;
 
-    // Community benchmark (Letterboxd avg ≈ 3.3/5 = 6.6/10)
+    // Community benchmark (avg True Rated score across users ≈ 6.6/10)
     const userVsCommunity  = parseFloat((avgRating - 6.6).toFixed(1));
     const userVsCommSign   = userVsCommunity >= 0 ? '+' : '';
     const userVsCommColor  = userVsCommunity >= 0 ? 'text-green-400' : 'text-red-400';
-    const avgStarScale     = (avgRating / 2).toFixed(2);
+
+    // Median rating (10-point scale)
+    const sortedRatings = reviews.map(r => r.rating || 0).sort((a, b) => a - b);
+    const midIdx = Math.floor(sortedRatings.length / 2);
+    const medianRating = sortedRatings.length % 2 !== 0
+        ? sortedRatings[midIdx]
+        : ((sortedRatings[midIdx - 1] + sortedRatings[midIdx]) / 2);
+
     const recencyDiffStr   = recencyDiff !== null ? (recencyDiff > 0 ? '+' : '') + recencyDiff : 'N/A';
     const recencyDiffColor = recencyDiff !== null
         ? (recencyDiff > 0 ? 'text-orange-400' : recencyDiff < 0 ? 'text-blue-400' : 'text-slate-400')
@@ -514,15 +521,15 @@ function renderStats(reviews, mediaMap) {
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold ${userVsCommColor}">${userVsCommSign}${userVsCommunity}</div>
-                <div class="text-slate-400 text-xs mt-1">vs community avg <span class="text-slate-500 block">(Letterboxd ≈ 6.6)</span></div>
+                <div class="text-slate-400 text-xs mt-1">vs community avg <span class="text-slate-500 block">(avg ≈ 6.6 / 10)</span></div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold text-purple-400">${halfStarPct}%</div>
-                <div class="text-slate-400 text-xs mt-1">half-star usage</div>
+                <div class="text-slate-400 text-xs mt-1">odd rating usage</div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
-                <div class="text-2xl font-bold text-teal-400">${avgStarScale}</div>
-                <div class="text-slate-400 text-xs mt-1">avg in ★ scale</div>
+                <div class="text-2xl font-bold text-teal-400">${medianRating}</div>
+                <div class="text-slate-400 text-xs mt-1">median rating <span class="text-slate-500 block">/ 10</span></div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold ${recencyDiffColor}">${recencyDiffStr}</div>
@@ -648,9 +655,9 @@ function renderStats(reviews, mediaMap) {
         }));
     }
 
-    // Rating distribution (Letterboxd star labels)
+    // Rating distribution (1–10 scale)
     mkBar('statsDistChart',
-        ['★½','★1','★1½','★2','★2½','★3','★3½','★4','★4½','★5'],
+        ['1','2','3','4','5','6','7','8','9','10'],
         dist, '#6366f1');
 
     // Films by decade
