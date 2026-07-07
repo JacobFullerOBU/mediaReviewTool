@@ -1101,12 +1101,16 @@ async function filterCards(category) {
         // can resolve all items from cache instead of making N individual requests.
         await fetchLatestReviewTimesForItems(items);
         await fetchRatingsForItems(items);
-        // Pre-fetch RT/TMDB scores for movies so getTrueRating has all scores before sorting
+        // Pre-fetch RT/TMDB scores for movies so getTrueRating has all scores before sorting.
+        // Skip the API call if a score is already set (e.g. via admin override) to avoid clobbering it.
         const movieItems = items.filter(i => (Array.isArray(i.category) ? i.category[0] : i.category || '').toLowerCase() === 'movies');
         await Promise.all(movieItems.map(async item => {
-            const [rt, tmdb] = await Promise.all([fetchRTScore(item), fetchTMDBScore(item)]);
-            item.rtScore = rt;
-            item.tmdbScore = tmdb;
+            const [rt, tmdb] = await Promise.all([
+                item.rtScore   == null ? fetchRTScore(item)   : Promise.resolve(null),
+                item.tmdbScore == null ? fetchTMDBScore(item) : Promise.resolve(null),
+            ]);
+            if (item.rtScore   == null) item.rtScore   = rt;
+            if (item.tmdbScore == null) item.tmdbScore = tmdb;
         }));
         // Secondary guard: in 'all' tab (no active search), drop items with no actual rating
         if (isDefaultHome && !searchTerm) {
