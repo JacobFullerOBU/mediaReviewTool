@@ -103,14 +103,22 @@ function createWatchlistItem(item) {
     listItem.dataset.category = item.category || 'unknown';
 
     const poster = item.poster || item.image || 'https://via.placeholder.com/100x150.png?text=No+Image';
-    
+
+    const CAT_BADGE = { movies: { label: 'Movie', color: 'bg-blue-900/60 text-blue-300' }, tv: { label: 'TV', color: 'bg-purple-900/60 text-purple-300' }, music: { label: 'Music', color: 'bg-pink-900/60 text-pink-300' }, games: { label: 'Game', color: 'bg-green-900/60 text-green-300' }, books: { label: 'Book', color: 'bg-amber-900/60 text-amber-300' } };
+    const rawCat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase().trim();
+    const badge = CAT_BADGE[rawCat] || CAT_BADGE[rawCat.replace(/s$/, '')] || null;
+    const badgeHTML = badge ? `<span class="text-xs px-1.5 py-0.5 rounded ${badge.color} font-medium">${badge.label}</span>` : '';
+
     listItem.innerHTML = `
         <div class="w-12 flex-shrink-0">
             <img src="${poster}" alt="${item.title}" class="w-full h-auto rounded-md">
         </div>
-        <div class="flex-grow">
-            <h4 class="text-white font-semibold break-all">${item.title}</h4>
-            <p class="text-slate-400 text-sm">${item.year || 'N/A'}</p>
+        <div class="flex-grow min-w-0">
+            <h4 class="text-white font-semibold truncate">${item.title}</h4>
+            <div class="flex items-center gap-1.5 mt-0.5">
+                <span class="text-slate-400 text-sm">${item.year || 'N/A'}</span>
+                ${badgeHTML}
+            </div>
         </div>
     `;
 
