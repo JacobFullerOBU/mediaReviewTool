@@ -1402,20 +1402,25 @@ async function showItemDetails(item) {
                 alert('You must be logged in to use the watchlist.');
                 return;
             }
-            const userId = auth.currentUser.uid || auth.currentUser.email || auth.currentUser.displayName;
+            const userId = auth.currentUser.uid;
             const watchRef = ref(db, `watchlist/${userId}/${mediaKey}`);
-            if (!isWatchlisted) {
-                await set(watchRef, true);
-                addToWatchlistBtn.textContent = 'Remove from Watchlist';
-                isWatchlisted = true;
-                addToWatchlistBtn.classList.add('bg-amber-900', 'border-amber-600');
-                addToWatchlistBtn.classList.remove('bg-amber-600');
-            } else {
-                await remove(watchRef);
-                addToWatchlistBtn.textContent = 'Add to Watchlist';
-                isWatchlisted = false;
-                addToWatchlistBtn.classList.remove('bg-amber-900', 'border-amber-600');
-                addToWatchlistBtn.classList.add('bg-amber-600');
+            try {
+                if (!isWatchlisted) {
+                    await set(watchRef, Date.now());
+                    addToWatchlistBtn.textContent = 'Remove from Watchlist';
+                    isWatchlisted = true;
+                    addToWatchlistBtn.classList.add('bg-amber-900', 'border-amber-600');
+                    addToWatchlistBtn.classList.remove('bg-amber-600');
+                } else {
+                    await remove(watchRef);
+                    addToWatchlistBtn.textContent = 'Add to Watchlist';
+                    isWatchlisted = false;
+                    addToWatchlistBtn.classList.remove('bg-amber-900', 'border-amber-600');
+                    addToWatchlistBtn.classList.add('bg-amber-600');
+                }
+            } catch (err) {
+                console.error('[Watchlist] Write failed:', err.code, err.message);
+                alert('Could not update watchlist: ' + err.message);
             }
         });
     document.body.appendChild(modal);
@@ -1935,14 +1940,22 @@ async function toggleCardWatchlist(btn) {
         btn.title = 'Remove from watchlist';
         if (notWl) notWl.style.display = 'none';
         if (wl) wl.style.display = '';
-        set(watchRef, Date.now());
+        set(watchRef, Date.now()).catch(err => {
+            console.error('[Watchlist] Write failed:', err.code, err.message);
+            btn.classList.remove('text-amber-400', 'watchlist-active');
+            btn.classList.add('text-slate-400');
+            btn.title = 'Add to watchlist';
+            if (notWl) notWl.style.display = '';
+            if (wl) wl.style.display = 'none';
+            alert('Could not save to watchlist: ' + err.message);
+        });
     } else {
         btn.classList.remove('text-amber-400', 'watchlist-active');
         btn.classList.add('text-slate-400');
         btn.title = 'Add to watchlist';
         if (notWl) notWl.style.display = '';
         if (wl) wl.style.display = 'none';
-        remove(watchRef);
+        remove(watchRef).catch(err => console.error('[Watchlist] Remove failed:', err.code, err.message));
     }
 }
 
