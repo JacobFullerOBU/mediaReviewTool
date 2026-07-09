@@ -427,6 +427,8 @@ import {
     ref,
     push,
     get,
+    set,
+    remove,
     child,
     onValue
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
@@ -1403,13 +1405,13 @@ async function showItemDetails(item) {
             const userId = auth.currentUser.uid || auth.currentUser.email || auth.currentUser.displayName;
             const watchRef = ref(db, `watchlist/${userId}/${mediaKey}`);
             if (!isWatchlisted) {
-                await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ set }) => set(watchRef, true));
+                await set(watchRef, true);
                 addToWatchlistBtn.textContent = 'Remove from Watchlist';
                 isWatchlisted = true;
                 addToWatchlistBtn.classList.add('bg-amber-900', 'border-amber-600');
                 addToWatchlistBtn.classList.remove('bg-amber-600');
             } else {
-                await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js').then(({ remove }) => remove(watchRef));
+                await remove(watchRef);
                 addToWatchlistBtn.textContent = 'Add to Watchlist';
                 isWatchlisted = false;
                 addToWatchlistBtn.classList.remove('bg-amber-900', 'border-amber-600');
@@ -1848,6 +1850,102 @@ async function showItemDetails(item) {
 }
 window.showItemDetails = showItemDetails;
 
+async function updateCardIconStates(items) {
+    if (!auth.currentUser) return;
+    const userId = auth.currentUser.uid || auth.currentUser.email;
+    const [watchedSnap, watchlistSnap] = await Promise.all([
+        get(ref(db, `watched/${userId}`)),
+        get(ref(db, `watchlist/${userId}`))
+    ]);
+    const watchedMap = watchedSnap.exists() ? watchedSnap.val() : {};
+    const watchlistMap = watchlistSnap.exists() ? watchlistSnap.val() : {};
+
+    items.forEach(item => {
+        const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+        const mediaKey = getMediaId(item);
+
+        const watchedBtn = document.querySelector(`.card-watched-btn[data-card-id="${cardId}"]`);
+        if (watchedBtn && watchedMap[mediaKey]) {
+            watchedBtn.classList.add('text-green-400');
+            watchedBtn.classList.remove('text-slate-400');
+            watchedBtn.title = 'Mark as unwatched';
+        }
+
+        const watchlistBtn = document.querySelector(`.card-watchlist-btn[data-card-id="${cardId}"]`);
+        if (watchlistBtn && watchlistMap[mediaKey]) {
+            watchlistBtn.classList.add('text-amber-400', 'watchlist-active');
+            watchlistBtn.classList.remove('text-slate-400');
+            watchlistBtn.title = 'Remove from watchlist';
+            const notWl = watchlistBtn.querySelector('.icon-not-watchlisted');
+            const wl = watchlistBtn.querySelector('.icon-watchlisted');
+            if (notWl) notWl.style.display = 'none';
+            if (wl) wl.style.display = '';
+        }
+    });
+}
+
+async function toggleWatched(btn) {
+    if (!auth.currentUser) {
+        alert('You must be logged in to mark items as watched.');
+        return;
+    }
+    const cardId = btn.dataset.cardId;
+    const item = allItems.find(i => {
+        const id = i.id || (i.title ? i.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+        return id === cardId;
+    });
+    if (!item) return;
+    const userId = auth.currentUser.uid || auth.currentUser.email;
+    const mediaKey = getMediaId(item);
+    const watchedRef = ref(db, `watched/${userId}/${mediaKey}`);
+    const isWatched = btn.classList.contains('text-green-400');
+    if (!isWatched) {
+        await set(watchedRef, true);
+        btn.classList.add('text-green-400');
+        btn.classList.remove('text-slate-400');
+        btn.title = 'Mark as unwatched';
+    } else {
+        await remove(watchedRef);
+        btn.classList.remove('text-green-400');
+        btn.classList.add('text-slate-400');
+        btn.title = 'Mark as watched';
+    }
+}
+
+async function toggleCardWatchlist(btn) {
+    if (!auth.currentUser) {
+        alert('You must be logged in to use the watchlist.');
+        return;
+    }
+    const cardId = btn.dataset.cardId;
+    const item = allItems.find(i => {
+        const id = i.id || (i.title ? i.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
+        return id === cardId;
+    });
+    if (!item) return;
+    const userId = auth.currentUser.uid || auth.currentUser.email;
+    const mediaKey = getMediaId(item);
+    const watchRef = ref(db, `watchlist/${userId}/${mediaKey}`);
+    const isOnList = btn.classList.contains('watchlist-active');
+    const notWl = btn.querySelector('.icon-not-watchlisted');
+    const wl = btn.querySelector('.icon-watchlisted');
+    if (!isOnList) {
+        await set(watchRef, true);
+        btn.classList.add('text-amber-400', 'watchlist-active');
+        btn.classList.remove('text-slate-400');
+        btn.title = 'Remove from watchlist';
+        if (notWl) notWl.style.display = 'none';
+        if (wl) wl.style.display = '';
+    } else {
+        await remove(watchRef);
+        btn.classList.remove('text-amber-400', 'watchlist-active');
+        btn.classList.add('text-slate-400');
+        btn.title = 'Add to watchlist';
+        if (notWl) notWl.style.display = '';
+        if (wl) wl.style.display = 'none';
+    }
+}
+
 // Attach card listeners outside of showItemDetails
 function addCardListeners() {
     const container = document.getElementById('cardsContainer');
@@ -1855,6 +1953,16 @@ function addCardListeners() {
     // Remove any previous click handler
     container.onclick = null;
     container.onclick = function (e) {
+        const watchedBtn = e.target.closest('.card-watched-btn');
+        if (watchedBtn && container.contains(watchedBtn)) {
+            toggleWatched(watchedBtn);
+            return;
+        }
+        const watchlistBtn = e.target.closest('.card-watchlist-btn');
+        if (watchlistBtn && container.contains(watchlistBtn)) {
+            toggleCardWatchlist(watchlistBtn);
+            return;
+        }
         // Find the closest .media-card ancestor
         const card = e.target.closest('.media-card');
         if (!card || !container.contains(card)) return;
@@ -1979,6 +2087,15 @@ async function renderCards(container, items) {
                         <div class=\"absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1\">
                             <span id=\"tr-${cardId}\" class=\"text-xs font-mono text-slate-400\">TR —</span>
                         </div>
+                        <div class=\"absolute bottom-2 left-2 flex gap-1.5\">
+                            <button class=\"card-watched-btn bg-black/70 backdrop-blur-sm p-1.5 rounded-md text-slate-400 hover:text-green-400 transition-colors\" data-card-id=\"${cardId}\" title=\"Mark as watched\">
+                                <i data-lucide=\"eye\" class=\"w-4 h-4\"></i>
+                            </button>
+                            <button class=\"card-watchlist-btn bg-black/70 backdrop-blur-sm p-1.5 rounded-md text-slate-400 hover:text-amber-400 transition-colors\" data-card-id=\"${cardId}\" title=\"Add to watchlist\">
+                                <i data-lucide=\"bookmark-plus\" class=\"w-4 h-4 icon-not-watchlisted\"></i>
+                                <i data-lucide=\"bookmark-check\" class=\"w-4 h-4 icon-watchlisted\" style=\"display:none\"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class=\"p-5 flex-1 flex flex-col\">
                         ${cardBody}
@@ -1989,6 +2106,7 @@ async function renderCards(container, items) {
 
         container.innerHTML = cardHTML;
         lucide.createIcons();
+        updateCardIconStates(toShow);
 
         // Paint TR immediately for any item that already has a cached community rating
         toShow.slice(0, visibleCount).forEach(item => {
