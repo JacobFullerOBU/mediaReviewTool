@@ -1935,7 +1935,7 @@ async function toggleCardWatchlist(btn) {
         btn.title = 'Remove from watchlist';
         if (notWl) notWl.style.display = 'none';
         if (wl) wl.style.display = '';
-        set(watchRef, true);
+        set(watchRef, Date.now());
     } else {
         btn.classList.remove('text-amber-400', 'watchlist-active');
         btn.classList.add('text-slate-400');

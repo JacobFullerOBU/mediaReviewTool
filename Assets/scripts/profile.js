@@ -742,11 +742,12 @@ function initWatchlistControls(allItems, container) {
         });
 
         filtered.sort((a, b) => {
+            if (sort === 'added') return (b.addedAt || 0) - (a.addedAt || 0);
             if (sort === 'title-az') return (a.title || '').localeCompare(b.title || '');
             if (sort === 'title-za') return (b.title || '').localeCompare(a.title || '');
             if (sort === 'year-new') return parseInt(b.year || 0) - parseInt(a.year || 0);
             if (sort === 'year-old') return parseInt(a.year || 0) - parseInt(b.year || 0);
-            return 0; // 'added' keeps original order
+            return 0;
         });
 
         container.innerHTML = '';
@@ -770,8 +771,8 @@ function initWatchlistControls(allItems, container) {
         applyFilters();
     });
 
-    searchEl.addEventListener('input', applyFilters);
-    sortEl.addEventListener('change', applyFilters);
+    const applyBtn = document.getElementById('watchlistApplyBtn');
+    if (applyBtn) applyBtn.addEventListener('click', applyFilters);
 
     controls.style.display = '';
     applyFilters();
@@ -966,9 +967,12 @@ async function loadProfile(reviewerId) {
             let watchlistItems = [];
 
             if (watchlistSnapshot.exists()) {
-                Object.keys(watchlistSnapshot.val()).forEach(mediaKey => {
+                const watchlistData = watchlistSnapshot.val();
+                Object.entries(watchlistData).forEach(([mediaKey, val]) => {
                     const mediaItem = mediaMap[mediaKey];
-                    if (mediaItem) watchlistItems.push(mediaItem);
+                    if (mediaItem) {
+                        watchlistItems.push({ ...mediaItem, addedAt: typeof val === 'number' ? val : 0 });
+                    }
                 });
             }
 
