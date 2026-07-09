@@ -497,14 +497,16 @@ async function initCards() {
 
     let movies = [], validTV = [], validGames = [], validBooks = [];
 
-    // Fetch JSON sources, Firebase overrides, and review caches all in parallel
+    // Fetch JSON sources, Firebase overrides, and review caches all in parallel.
+    // Auth must be ready before reading Firebase-protected paths (overrides, hidden media).
+    const authReady = auth.authStateReady ? auth.authStateReady() : Promise.resolve();
     const [moviesRes, tvRes, booksRes, overridesRes, , hiddenRes] = await Promise.allSettled([
         fetchMovies(),
         fetchTV(),
         fetchBooks(),
-        getAllMediaOverrides(),
+        authReady.then(() => getAllMediaOverrides()),
         fetchLatestReviewTimesForItems([]), // warms reviewTimestampCache + ratingBulkCache early
-        getHiddenMedia(),
+        authReady.then(() => getHiddenMedia()),
     ]);
 
     if (moviesRes.status === 'fulfilled') {

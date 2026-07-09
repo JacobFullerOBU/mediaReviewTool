@@ -36,8 +36,13 @@ export async function getMediaOverride(mediaId) {
 export async function getAllMediaOverrides() {
     try {
         const snap = await get(ref(db, 'mediaOverrides'));
-        return snap.exists() ? snap.val() : {};
-    } catch { return {}; }
+        const result = snap.exists() ? snap.val() : {};
+        console.log('[Overrides] getAllMediaOverrides loaded', Object.keys(result).length, 'overrides');
+        return result;
+    } catch (e) {
+        console.error('[Overrides] getAllMediaOverrides FAILED:', e.code, e.message);
+        return {};
+    }
 }
 
 export async function updateMediaOverride(mediaId, fields) {
