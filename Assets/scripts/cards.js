@@ -1900,15 +1900,15 @@ async function toggleWatched(btn) {
     const watchedRef = ref(db, `watched/${userId}/${mediaKey}`);
     const isWatched = btn.classList.contains('text-green-400');
     if (!isWatched) {
-        await set(watchedRef, true);
         btn.classList.add('text-green-400');
         btn.classList.remove('text-slate-400');
         btn.title = 'Mark as unwatched';
+        set(watchedRef, true);
     } else {
-        await remove(watchedRef);
         btn.classList.remove('text-green-400');
         btn.classList.add('text-slate-400');
         btn.title = 'Mark as watched';
+        remove(watchedRef);
     }
 }
 
@@ -1930,19 +1930,19 @@ async function toggleCardWatchlist(btn) {
     const notWl = btn.querySelector('.icon-not-watchlisted');
     const wl = btn.querySelector('.icon-watchlisted');
     if (!isOnList) {
-        await set(watchRef, true);
         btn.classList.add('text-amber-400', 'watchlist-active');
         btn.classList.remove('text-slate-400');
         btn.title = 'Remove from watchlist';
         if (notWl) notWl.style.display = 'none';
         if (wl) wl.style.display = '';
+        set(watchRef, true);
     } else {
-        await remove(watchRef);
         btn.classList.remove('text-amber-400', 'watchlist-active');
         btn.classList.add('text-slate-400');
         btn.title = 'Add to watchlist';
         if (notWl) notWl.style.display = '';
         if (wl) wl.style.display = 'none';
+        remove(watchRef);
     }
 }
 
@@ -2087,13 +2087,13 @@ async function renderCards(container, items) {
                         <div class=\"absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1\">
                             <span id=\"tr-${cardId}\" class=\"text-xs font-mono text-slate-400\">TR —</span>
                         </div>
-                        <div class=\"absolute bottom-2 left-2 flex gap-1.5\">
+                        <div class=\"absolute bottom-2 left-2 flex gap-1.5 z-10\">
                             <button class=\"card-watched-btn bg-black/70 backdrop-blur-sm p-1.5 rounded-md text-slate-400 hover:text-green-400 transition-colors\" data-card-id=\"${cardId}\" title=\"Mark as watched\">
-                                <i data-lucide=\"eye\" class=\"w-4 h-4\"></i>
+                                <i data-lucide=\"eye\" class=\"w-4 h-4 pointer-events-none\"></i>
                             </button>
                             <button class=\"card-watchlist-btn bg-black/70 backdrop-blur-sm p-1.5 rounded-md text-slate-400 hover:text-amber-400 transition-colors\" data-card-id=\"${cardId}\" title=\"Add to watchlist\">
-                                <i data-lucide=\"bookmark-plus\" class=\"w-4 h-4 icon-not-watchlisted\"></i>
-                                <i data-lucide=\"bookmark-check\" class=\"w-4 h-4 icon-watchlisted\" style=\"display:none\"></i>
+                                <i data-lucide=\"bookmark-plus\" class=\"w-4 h-4 pointer-events-none icon-not-watchlisted\"></i>
+                                <i data-lucide=\"bookmark-check\" class=\"w-4 h-4 pointer-events-none icon-watchlisted\" style=\"display:none\"></i>
                             </button>
                         </div>
                     </div>
