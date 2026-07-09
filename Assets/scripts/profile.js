@@ -707,12 +707,15 @@ function initWatchlistControls(allItems, container) {
     if (!controls || !searchEl || !sortEl || !filtersEl) return;
 
     const CATEGORY_LABELS = { movies: 'Movies', tv: 'TV', music: 'Music', games: 'Games', books: 'Books' };
+    const CATEGORY_NORMALIZE = { movie: 'movies', book: 'books', game: 'games', 'tv show': 'tv', show: 'tv' };
+
+    function normalizeCategory(raw) {
+        const lower = (Array.isArray(raw) ? raw[0] : raw || '').toLowerCase().trim();
+        return CATEGORY_NORMALIZE[lower] || lower;
+    }
 
     // Build category pills from what's actually in the list
-    const categories = [...new Set(allItems.map(item => {
-        const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
-        return cat.toLowerCase();
-    }).filter(Boolean))].sort();
+    const categories = [...new Set(allItems.map(item => normalizeCategory(item.category)).filter(Boolean))].sort();
 
     let activeCategory = 'all';
 
@@ -735,7 +738,7 @@ function initWatchlistControls(allItems, container) {
         const sort = sortEl.value;
 
         let filtered = allItems.filter(item => {
-            const cat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
+            const cat = normalizeCategory(item.category);
             const matchesCat = activeCategory === 'all' || cat === activeCategory;
             const matchesSearch = !term || (item.title || '').toLowerCase().includes(term);
             return matchesCat && matchesSearch;
