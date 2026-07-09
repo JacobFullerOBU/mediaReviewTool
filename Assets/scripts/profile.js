@@ -699,6 +699,84 @@ function renderStats(reviews, mediaMap) {
 
 }
 
+function initWatchlistControls(allItems, container) {
+    const controls = document.getElementById('watchlistControls');
+    const searchEl = document.getElementById('watchlistSearch');
+    const sortEl = document.getElementById('watchlistSort');
+    const filtersEl = document.getElementById('watchlistCategoryFilters');
+    if (!controls || !searchEl || !sortEl || !filtersEl) return;
+
+    const CATEGORY_LABELS = { movies: 'Movies', tv: 'TV', music: 'Music', games: 'Games', books: 'Books' };
+
+    // Build category pills from what's actually in the list
+    const categories = [...new Set(allItems.map(item => {
+        const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
+        return cat.toLowerCase();
+    }).filter(Boolean))].sort();
+
+    let activeCategory = 'all';
+
+    const allPill = document.createElement('button');
+    allPill.textContent = 'All';
+    allPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-600 text-white transition-colors';
+    allPill.dataset.cat = 'all';
+    filtersEl.appendChild(allPill);
+
+    categories.forEach(cat => {
+        const pill = document.createElement('button');
+        pill.textContent = CATEGORY_LABELS[cat] || cat;
+        pill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors';
+        pill.dataset.cat = cat;
+        filtersEl.appendChild(pill);
+    });
+
+    function applyFilters() {
+        const term = searchEl.value.trim().toLowerCase();
+        const sort = sortEl.value;
+
+        let filtered = allItems.filter(item => {
+            const cat = (Array.isArray(item.category) ? item.category[0] : (item.category || '')).toLowerCase();
+            const matchesCat = activeCategory === 'all' || cat === activeCategory;
+            const matchesSearch = !term || (item.title || '').toLowerCase().includes(term);
+            return matchesCat && matchesSearch;
+        });
+
+        filtered.sort((a, b) => {
+            if (sort === 'title-az') return (a.title || '').localeCompare(b.title || '');
+            if (sort === 'title-za') return (b.title || '').localeCompare(a.title || '');
+            if (sort === 'year-new') return parseInt(b.year || 0) - parseInt(a.year || 0);
+            if (sort === 'year-old') return parseInt(a.year || 0) - parseInt(b.year || 0);
+            return 0; // 'added' keeps original order
+        });
+
+        container.innerHTML = '';
+        if (filtered.length === 0) {
+            container.innerHTML = '<p class="text-slate-500 text-center py-4">No items match your search.</p>';
+        } else {
+            filtered.forEach(item => container.appendChild(createWatchlistItem(item)));
+        }
+    }
+
+    filtersEl.addEventListener('click', e => {
+        const pill = e.target.closest('[data-cat]');
+        if (!pill) return;
+        activeCategory = pill.dataset.cat;
+        filtersEl.querySelectorAll('[data-cat]').forEach(p => {
+            const isActive = p.dataset.cat === activeCategory;
+            p.className = isActive
+                ? 'px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-600 text-white transition-colors'
+                : 'px-2.5 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors';
+        });
+        applyFilters();
+    });
+
+    searchEl.addEventListener('input', applyFilters);
+    sortEl.addEventListener('change', applyFilters);
+
+    controls.style.display = '';
+    applyFilters();
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -884,29 +962,20 @@ async function loadProfile(reviewerId) {
         if (watchlistContainer) {
             const watchlistRef = ref(db, `watchlist/${reviewerId}`);
             const watchlistSnapshot = await get(watchlistRef);
-            
-            if (watchlistSnapshot.exists()) {
-                const watchlistData = watchlistSnapshot.val();
-                const watchlistItems = [];
-                
-                Object.keys(watchlistData).forEach(mediaKey => {
-                    const mediaItem = mediaMap[mediaKey];
-                    if (mediaItem) {
-                        watchlistItems.push(mediaItem);
-                    }
-                });
 
-                watchlistContainer.innerHTML = '';
-                if (watchlistItems.length > 0) {
-                    watchlistContainer.className = 'space-y-2';
-                    watchlistItems.forEach(item => {
-                        watchlistContainer.appendChild(createWatchlistItem(item));
-                    });
-                } else {
-                    watchlistContainer.innerHTML = '<p class="text-slate-500 text-center col-span-full">Watchlist is empty.</p>';
-                }
+            let watchlistItems = [];
+
+            if (watchlistSnapshot.exists()) {
+                Object.keys(watchlistSnapshot.val()).forEach(mediaKey => {
+                    const mediaItem = mediaMap[mediaKey];
+                    if (mediaItem) watchlistItems.push(mediaItem);
+                });
+            }
+
+            if (watchlistItems.length === 0) {
+                watchlistContainer.innerHTML = '<p class="text-slate-500 text-center">Watchlist is empty.</p>';
             } else {
-                watchlistContainer.innerHTML = '<p class="text-slate-500 text-center col-span-full">Watchlist is empty.</p>';
+                initWatchlistControls(watchlistItems, watchlistContainer);
             }
         }
 
