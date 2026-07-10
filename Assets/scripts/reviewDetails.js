@@ -78,7 +78,14 @@ async function fetchDetails() {
 function renderDetails(review, movie, reviewer) {
     const rawId = review.mediaId || '';
     const title = movie ? movie.title : stripCategoryPrefix(rawId).replace(/_/g, ' ');
-    document.title  = `${title} - Review Details | True Rated`;
+    document.title = `${title} — Review | True Rated`;
+    const snippet = movie?.description ? movie.description.slice(0, 155) : `Read the community review for ${title} on True Rated.`;
+    document.getElementById('meta-description')?.setAttribute('content', snippet);
+    document.getElementById('og-title')?.setAttribute('content', `${title} — Review | True Rated`);
+    document.getElementById('og-description')?.setAttribute('content', snippet);
+    document.getElementById('tw-title')?.setAttribute('content', `${title} — Review | True Rated`);
+    document.getElementById('tw-description')?.setAttribute('content', snippet);
+    document.getElementById('canonical')?.setAttribute('href', `https://truerated.co/movie.html${window.location.search}`);
     const poster = movie ? (movie.poster || movie.image) : '';
     const reviewerName = reviewer.name || "Anonymous Critic";
     const reviewerAvatar = reviewer.avatar || "";

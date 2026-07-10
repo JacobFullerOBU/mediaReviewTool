@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /migrate-reviews.html
+Disallow: /tools/
+Disallow: /Assets/profile/
+
+Sitemap: https://truerated.co/sitemap.xml
