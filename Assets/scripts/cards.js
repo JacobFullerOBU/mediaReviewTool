@@ -780,13 +780,8 @@ function escapeHtml(str) {
 function initTabFunctionality() {
         // Scroll search bar to top of viewport when sort changes
         const sortSelect = document.getElementById('sortSelect');
-        const updateApplyBtnLabel = () => {
-            const btn = document.getElementById('applySortBtn');
-            if (btn && sortSelect) btn.textContent = sortSelect.options[sortSelect.selectedIndex]?.text || 'Apply';
-        };
         if (sortSelect) {
             sortSelect.addEventListener('change', () => {
-                updateApplyBtnLabel();
                 const activeTab = document.querySelector('.tab-btn.active');
                 const category = activeTab ? activeTab.dataset.category : 'all';
                 filterCards(category);
@@ -796,7 +791,6 @@ function initTabFunctionality() {
                     window.scrollBy({ top: rect.top - 64, left: 0, behavior: 'smooth' });
                 }
             });
-            updateApplyBtnLabel();
         }
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {

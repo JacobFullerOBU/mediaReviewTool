@@ -34,7 +34,7 @@
                         </div>
                         <h3 class="font-semibold text-white">Rotten Tomatoes</h3>
                     </div>
-                    <p class="text-sm text-slate-400">The Tomatometer critic score, sourced via the OMDB API. Represents the percentage of professional critics who gave the title a positive review, rescaled to a 0–10 score.</p>
+                    <p class="text-sm text-slate-400">The RT score is taken from averaging the audience and critic scores, sourced via the OMDB API. This is scored on a scale of 0 to 100, with 100 being the highest possible score. </p>
                 </div>
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-6">
                     <div class="flex items-center gap-3 mb-3">
@@ -43,7 +43,7 @@
                         </div>
                         <h3 class="font-semibold text-white">TMDB</h3>
                     </div>
-                    <p class="text-sm text-slate-400">The audience score from The Movie Database, reflecting ratings submitted by a broad global audience. Already on a 0–10 scale, so no conversion is needed.</p>
+                    <p class="text-sm text-slate-400">The audience score from The Movie Database, reflecting ratings submitted by a broad global audience.</p>
                 </div>
 
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-6">
@@ -58,11 +58,8 @@
 
             </div>
         </section>
-
-
-
         <!-- Why it matters -->
-        <section>
+        <section class="mb-14">
             <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                 <i data-lucide="info" class="w-6 h-6 text-indigo-400"></i>
                 Why True Rating Is Needed:
@@ -86,7 +83,7 @@
                 <div class="space-y-3">
                     <div class="flex items-start gap-3">
                         <span class="mt-0.5 w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
-                        <p class="text-sm text-slate-300">Each available score is collected: Rotten Tomatoes (÷ 10), TMDB (already 0–10), and the community average (already 0–10).</p>
+                        <p class="text-sm text-slate-300">Each available score is collected: Rotten Tomatoes , TMDB , and the community average from the true rated audience.</p>
                     </div>
                     <div class="flex items-start gap-3">
                         <span class="mt-0.5 w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
@@ -97,8 +94,7 @@
                         <p class="text-sm text-slate-300">The result is rounded to one decimal place and displayed as <span class="font-mono text-indigo-400">TR X.X</span>. If fewer than two sources are available, the True Rating is not shown.</p>
                     </div>
                 </div>
-
-                <!-- Formula callout -->
+                <!-- Shows Formula of Calculation -->
                 <div class="bg-slate-900 border border-slate-700 rounded-lg px-6 py-4">
                     <p class="text-xs text-slate-500 mb-2 uppercase tracking-widest font-medium">Formula</p>
                     <p class="font-mono text-slate-200 text-sm">TR = ( RT/10 + TMDB + Community ) / number of available sources</p>

@@ -200,7 +200,7 @@ main#browse-page {
 .review-body u,
 .review-body li,
 .review-body h3 {
-    color: white !important;
+    color: #C9C3E3 !important;
     background-color: transparent !important;
 }
 
@@ -216,8 +216,205 @@ main#browse-page {
     gap: 2px; /* Small space between stars */
 }
 
-.stars-row svg, 
+.stars-row svg,
 .stars-row i {
     flex-shrink: 0 !important;
     display: inline-block !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THEME  ·  #453C67 · #6D67E4 · #46C2CB · #F2F7A1
+   Page: #262040  Filter/panel: #3A3260  Card interior: #453C67
+   Teal CTA: #46C2CB  Yellow score: #F2F7A1  Purple minimal: #6D67E4
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+    /* Backgrounds — each layer steps up in brightness */
+    --tr-bg-1:      #262040;   /* page — darkest */
+    --tr-bg-2:      #3A3260;   /* filter bars, panels, card shells */
+    --tr-bg-3:      #453C67;   /* card text area, inputs, inner elements */
+
+    /* Teal — primary CTA, links, active states */
+    --tr-teal:      #46C2CB;
+    --tr-teal-h:    #33a8b0;
+    --tr-teal-l:    #7bd5db;
+
+    /* Yellow — score badges, highlights (always use dark text on top) */
+    --tr-yellow:    #F2F7A1;
+
+    /* Purple — minimized; subtle hover/active only */
+    --tr-purple:    #6D67E4;
+    --tr-purple-h:  #5551c8;
+    --tr-purple-l:  #9490ea;
+
+    /* Text — bright enough to feel light, not gray */
+    --tr-text-1:    #FFFFFF;   /* titles — full white */
+    --tr-text-2:    #C9C3E3;   /* body text — light lavender */
+    --tr-text-3:    #A8A0CC;   /* secondary body */
+    --tr-text-4:    #8F87B8;   /* muted (years, placeholders) — minimum */
+
+    /* Borders */
+    --tr-border:    #5A5080;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+body { background-color: var(--tr-bg-1) !important; color: var(--tr-text-1) !important; }
+
+/* ── Backgrounds ───────────────────────────────────────────────────────────── */
+.bg-slate-900   { background-color: var(--tr-bg-1) !important; }
+.bg-slate-800   { background-color: var(--tr-bg-2) !important; }
+.bg-slate-700   { background-color: var(--tr-bg-3) !important; }
+.bg-slate-600   { background-color: var(--tr-border) !important; }
+
+.bg-slate-900\/50  { background-color: rgba(38,32,64,0.5)    !important; }
+.bg-slate-900\/95  { background-color: rgba(38,32,64,0.95)   !important; }
+.bg-slate-800\/50  { background-color: rgba(58,50,96,0.6)    !important; }
+.bg-slate-800\/95  { background-color: rgba(58,50,96,0.95)   !important; }
+.bg-slate-700\/40  { background-color: rgba(69,60,103,0.45)  !important; }
+.bg-slate-700\/50  { background-color: rgba(69,60,103,0.6)   !important; }
+.bg-slate-700\/60  { background-color: rgba(69,60,103,0.7)   !important; }
+
+.hover\:bg-slate-800:hover  { background-color: var(--tr-bg-2)   !important; }
+.hover\:bg-slate-700:hover  { background-color: var(--tr-bg-3)   !important; }
+.hover\:bg-slate-600:hover  { background-color: var(--tr-border) !important; }
+
+/* ── Primary actions → Teal ────────────────────────────────────────────────── */
+.bg-indigo-600                  { background-color: var(--tr-teal)   !important; }
+.bg-indigo-700                  { background-color: var(--tr-teal-h) !important; }
+.bg-indigo-500                  { background-color: var(--tr-teal)   !important; }
+.bg-indigo-500\/10              { background-color: rgba(70,194,203,0.15) !important; }
+.hover\:bg-indigo-700:hover     { background-color: var(--tr-teal-h) !important; }
+.hover\:bg-indigo-600:hover     { background-color: var(--tr-teal)   !important; }
+.hover\:bg-indigo-500:hover     { background-color: var(--tr-teal-l) !important; }
+
+/* ── Text ───────────────────────────────────────────────────────────────────── */
+.text-white     { color: var(--tr-text-1) !important; }
+.text-slate-100 { color: var(--tr-text-1) !important; }
+.text-slate-200 { color: var(--tr-text-1) !important; }
+.text-slate-300 { color: var(--tr-text-2) !important; }
+.text-slate-400 { color: var(--tr-text-3) !important; }
+.text-slate-500 { color: var(--tr-text-4) !important; }
+.text-slate-600 { color: #6e6888 !important; }
+
+.hover\:text-white:hover     { color: var(--tr-text-1) !important; }
+.hover\:text-slate-200:hover { color: var(--tr-text-1) !important; }
+
+/* indigo text → teal for links and active labels */
+.text-indigo-400              { color: var(--tr-teal-l) !important; }
+.text-indigo-300              { color: var(--tr-teal)   !important; }
+.text-indigo-600              { color: var(--tr-teal)   !important; }
+.hover\:text-indigo-400:hover { color: var(--tr-teal)   !important; }
+.hover\:text-indigo-300:hover { color: var(--tr-teal-l) !important; }
+
+/* ── Borders ────────────────────────────────────────────────────────────────── */
+.border-slate-700        { border-color: var(--tr-border) !important; }
+.border-slate-700\/50    { border-color: rgba(90,80,128,0.5) !important; }
+.border-slate-600        { border-color: var(--tr-border) !important; }
+.border-slate-800        { border-color: var(--tr-bg-2)   !important; }
+.border-indigo-500       { border-color: var(--tr-teal)   !important; }
+.hover\:border-indigo-500:hover { border-color: var(--tr-teal) !important; }
+.border-indigo-600       { border-color: var(--tr-teal)   !important; }
+
+/* ── Dividers ───────────────────────────────────────────────────────────────── */
+.divide-slate-700 > * + *      { border-color: var(--tr-border) !important; }
+.divide-slate-700\/50 > * + *  { border-color: rgba(90,80,128,0.5) !important; }
+
+/* ── Forms & inputs ─────────────────────────────────────────────────────────── */
+input.bg-slate-900, select.bg-slate-900, textarea.bg-slate-900,
+input.bg-slate-900\/50 {
+    background-color: var(--tr-bg-3)  !important;
+    color: var(--tr-text-1)           !important;
+    border-color: var(--tr-border)    !important;
+}
+.placeholder-slate-500::placeholder  { color: var(--tr-text-4) !important; }
+.focus\:border-indigo-500:focus { border-color: var(--tr-teal) !important; }
+.focus\:ring-indigo-500:focus   { --tw-ring-color: var(--tr-teal) !important; }
+
+/* ── Tab / filter buttons ────────────────────────────────────────────────────── */
+.tab-btn {
+    background-color: var(--tr-bg-3)  !important;
+    color: var(--tr-text-2)           !important;
+    border-color: var(--tr-border)    !important;
+}
+.tab-btn:hover {
+    background-color: var(--tr-bg-2)  !important;
+    color: var(--tr-text-1)           !important;
+}
+
+/* ── Rings ─────────────────────────────────────────────────────────────────── */
+.ring-indigo-500 { --tw-ring-color: var(--tr-teal)   !important; }
+.ring-slate-700  { --tw-ring-color: var(--tr-border) !important; }
+
+/* ── Gradient colors ─────────────────────────────────────────────────────────── */
+.from-slate-900 { --tw-gradient-from: var(--tr-bg-1) !important; }
+.to-slate-800   { --tw-gradient-to:   var(--tr-bg-2) !important; }
+.via-slate-900  { --tw-gradient-via:  var(--tr-bg-1) !important; }
+
+/* ── Keep modal overlays dark ────────────────────────────────────────────────── */
+.bg-black\/80 { background-color: rgba(0,0,0,0.82) !important; }
+.bg-black\/70 { background-color: rgba(0,0,0,0.72) !important; }
+
+/* ── Quill editor ────────────────────────────────────────────────────────────── */
+.ql-toolbar {
+    border-color: var(--tr-border) !important;
+    background-color: var(--tr-bg-3) !important;
+}
+.ql-container  { border-color: var(--tr-border) !important; }
+.ql-editor     { background-color: var(--tr-bg-1) !important; color: var(--tr-text-1) !important; }
+.ql-editor.ql-blank::before            { color: var(--tr-text-4)   !important; }
+.ql-toolbar button                     { color: var(--tr-text-2)   !important; }
+.ql-toolbar button:hover               { color: var(--tr-text-1)   !important; }
+.ql-toolbar button.ql-active           { color: var(--tr-teal)     !important; }
+.ql-toolbar .ql-picker-label           { color: var(--tr-text-2)   !important; }
+.ql-toolbar .ql-picker-options         { background-color: var(--tr-bg-3) !important; border-color: var(--tr-border) !important; }
+.ql-toolbar .ql-picker-item            { color: var(--tr-text-2)   !important; }
+.ql-toolbar .ql-picker-item:hover      { background-color: var(--tr-border) !important; color: var(--tr-text-1) !important; }
+.ql-editor, .ql-editor *              { color: var(--tr-text-1)   !important; }
+
+/* ── Review body text ──────────────────────────────────────────────────────── */
+.review-body p, .review-body span, .review-body strong,
+.review-body em, .review-body u, .review-body li, .review-body h3 {
+    color: var(--tr-text-1) !important;
+}
+
+/* ── Media cards — shell is panel color, text area steps up ───────────────── */
+.media-card {
+    background: var(--tr-bg-2)  !important;
+    border: 1px solid var(--tr-border) !important;
+    box-shadow: 0 4px 12px rgba(38,32,64,0.6) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.media-card:hover {
+    border-color: rgba(70,194,203,0.6) !important;
+    box-shadow: 0 0 0 1px rgba(70,194,203,0.2), 0 8px 24px rgba(70,194,203,0.15) !important;
+}
+
+/* ── Review score badge → yellow with dark text ───────────────────────────── */
+.review-score-glow {
+    background: var(--tr-yellow)  !important;
+    color: #2E2847                !important;
+    text-shadow: none             !important;
+}
+
+/* ── Profile page hardcoded colors ────────────────────────────────────────── */
+#userReviews li {
+    background-color: rgba(69,60,103,0.6) !important;
+    border-color: var(--tr-border) !important;
+}
+
+/* ── Utility buttons ──────────────────────────────────────────────────────── */
+.back-to-top            { background-color: var(--tr-teal)   !important; }
+.back-to-top:hover      { background-color: var(--tr-teal-h) !important; }
+.btn-theatres-filter.active,
+.btn-theatres-filter:hover { background: var(--tr-teal) !important; color: var(--tr-bg-1) !important; border-color: var(--tr-teal) !important; }
+.btn-theatres-filter    { border-color: var(--tr-teal) !important; color: var(--tr-teal) !important; }
+
+/* ── Hero zone — lighter at top, fades to page bg ──────────────────────────── */
+.hero-section {
+    background: linear-gradient(to bottom, var(--tr-bg-3) 0%, var(--tr-bg-1) 100%) !important;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--tr-bg-1); }
+::-webkit-scrollbar-thumb { background: var(--tr-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--tr-teal); }

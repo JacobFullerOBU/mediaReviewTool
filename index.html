@@ -29,7 +29,7 @@
                 Discover & Review <span class="text-indigo-400">Media</span>
             </h1>
             <p class="hero-subtitle mt-2 max-w-xl mx-auto text-slate-400 text-sm">
-                Join the community of reviewers sharing their thoughts on movies, shows, music, games, and books.
+                Honest scores from people who actually watched, as well as audience reviews. What the people think, rather than just critic scores. 
             </p>
             <p id="guest-value-pro p" class="mt-2 text-xs text-slate-500">
                 <a href="#" id="hero-register-link" class="text-indigo-400 hover:text-indigo-300 transition-colors">Create a free account</a>
@@ -50,48 +50,44 @@
     <!-- Main Content Area -->
     <main id="browse-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Controls Toolbar -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 backdrop-blur-sm mt-[-2.5rem] md:mt-[-3rem] controls-toolbar">
-            <div class="flex flex-col gap-2">
-                <div class="filter-buttons-container">
-                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="all"><i data-lucide="grid" class="w-4 h-4"></i> All</button>
-                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="movies"><i data-lucide="film" class="w-4 h-4"></i> Movies</button>
-                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="tv"><i data-lucide="tv" class="w-4 h-4"></i> TV</button>
-                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="music"><i data-lucide="music" class="w-4 h-4"></i> Music</button>
-                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="games"><i data-lucide="gamepad-2" class="w-4 h-4"></i> Games</button>
-                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="books"><i data-lucide="book-open" class="w-4 h-4"></i> Books</button>
+        <div class="flex flex-col gap-3 mb-4 bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 backdrop-blur-sm mt-[-2.5rem] md:mt-[-3rem] controls-toolbar">
+            <!-- Row 1: Search left, Sort + Apply right -->
+            <div class="search-and-sort-container flex flex-col sm:flex-row items-center gap-2">
+                <div class="relative flex-1 w-full">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
+                    <input type="text" id="mediaSearchInput" placeholder="Search by title, director, actors, etc..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full text-slate-200 placeholder-slate-500"/>
                 </div>
-                <!-- Genre Filters -->
-                <div id="genreFilterContainer" class="hidden flex-wrap gap-2 pt-1 border-t border-slate-700/50">
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <select id="sortSelect" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none text-slate-200 cursor-pointer">
+                        <option value="rating-desc" selected>Highest Rated</option>
+                        <option value="rating-asc">Lowest Rated</option>
+                        <option value="recent-desc">Most Recently Reviewed</option>
+                        <option value="release-desc">Most Recent Release</option>
+                        <option value="year-desc">Newest First</option>
+                        <option value="year-asc">Oldest First</option>
+                        <option value="title-asc">Alphabetical (A-Z)</option>
+                        <option value="title-desc">Alphabetical (Z-A)</option>
+                    </select>
+                    <button id="applySortBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer whitespace-nowrap">Apply</button>
+                    <div id="inTheatresCheckboxRow" class="hidden">
+                        <label class="flex items-center gap-2 cursor-pointer select-none text-sm text-emerald-400">
+                            <input type="checkbox" id="inTheatresSortCheckbox" class="accent-emerald-500 w-4 h-4 cursor-pointer">
+                            In Theatres
+                        </label>
+                    </div>
                 </div>
             </div>
-            <div class="search-and-sort-container">
-                <div class="search-container">
-                    <div class="relative">
-                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4"></i>
-                        <input type="text" id="mediaSearchInput" placeholder="Search by title, director, actors, etc..." class="bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-[28rem] text-slate-200 placeholder-slate-500"/>
-                    </div>
-                </div>
-                <div class="sort-container mt-4">
-                    <div class="flex flex-col items-center gap-2 w-full">
-                        <select id="sortSelect" class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none text-slate-200 cursor-pointer w-full max-w-xs mx-auto">
-                            <option value="rating-desc" selected>Highest Rated</option>
-                            <option value="rating-asc">Lowest Rated</option>
-                            <option value="recent-desc">Most Recently Reviewed</option>
-                            <option value="release-desc">Most Recent Release</option>
-                            <option value="year-desc">Newest First</option>
-                            <option value="year-asc">Oldest First</option>
-                            <option value="title-asc">Alphabetical (A-Z)</option>
-                            <option value="title-desc">Alphabetical (Z-A)</option>
-                        </select>
-                        <button id="applySortBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg w-full max-w-xs mx-auto transition-colors cursor-pointer">Apply</button>
-                        <div id="inTheatresCheckboxRow" class="hidden w-full max-w-xs mx-auto">
-                            <label class="flex items-center gap-2 cursor-pointer select-none text-sm text-emerald-400">
-                                <input type="checkbox" id="inTheatresSortCheckbox" class="accent-emerald-500 w-4 h-4 cursor-pointer">
-                                In Theatres
-                            </label>
-                        </div>
-                    </div>
-                </div>
+            <!-- Row 2: Category pills full-width -->
+            <div class="filter-buttons-container">
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="all"><i data-lucide="grid" class="w-4 h-4"></i> All</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="movies"><i data-lucide="film" class="w-4 h-4"></i> Movies</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="tv"><i data-lucide="tv" class="w-4 h-4"></i> TV</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="music"><i data-lucide="music" class="w-4 h-4"></i> Music</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="games"><i data-lucide="gamepad-2" class="w-4 h-4"></i> Games</button>
+                <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white" data-category="books"><i data-lucide="book-open" class="w-4 h-4"></i> Books</button>
+            </div>
+            <!-- Row 3: Genre sub-filters (shown when a category is active) -->
+            <div id="genreFilterContainer" class="hidden flex-wrap gap-2 pt-1 border-t border-slate-700/50">
             </div>
         </div>
         <!-- Card Container -->
