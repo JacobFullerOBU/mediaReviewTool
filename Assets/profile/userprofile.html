@@ -62,7 +62,15 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="md:col-span-2">
                 <div class="profile-reviews bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm">
-                    <h3 class="text-xl font-bold text-white mb-4">Your Reviews</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">Your Reviews</h3>
+                        <div class="flex gap-2">
+                            <button id="removeDuplicatesBtn" class="hidden bg-slate-700 hover:bg-slate-600 text-white text-xs px-3 py-1.5 rounded-lg transition-colors">Remove Duplicates</button>
+                            <button id="lbImportBtn" class="hidden bg-orange-600 hover:bg-orange-700 text-white text-xs px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5">
+                                <i data-lucide="film" class="w-3.5 h-3.5 pointer-events-none"></i> Letterboxd Import
+                            </button>
+                        </div>
+                    </div>
                     <ul id="userReviews" class="space-y-4"></ul>
                 </div>
             </div>
@@ -127,6 +135,40 @@
             </div>
         </div>
     </footer>
+
+    <!-- Letterboxd Import Modal -->
+    <div id="lbImportModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-800 rounded-2xl p-6 w-full max-w-lg border border-slate-700 shadow-2xl">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-xl font-bold text-white">Import from Letterboxd</h2>
+                <button id="closeLbModal" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <!-- Step 1: File select -->
+            <div id="lbStep1">
+                <p class="text-slate-400 text-sm mb-1">Export your data from Letterboxd:</p>
+                <p class="text-slate-500 text-xs mb-4">Settings → Import &amp; Export → Export Your Data, then upload <strong class="text-slate-300">ratings.csv</strong> or <strong class="text-slate-300">diary.csv</strong> below.</p>
+                <label class="block w-full border-2 border-dashed border-slate-600 hover:border-indigo-500 rounded-xl p-10 text-center cursor-pointer transition-colors group">
+                    <i data-lucide="upload-cloud" class="w-10 h-10 text-slate-500 group-hover:text-indigo-400 mx-auto mb-3 transition-colors"></i>
+                    <p class="text-slate-300 text-sm font-medium">Click to select CSV file</p>
+                    <p class="text-slate-600 text-xs mt-1">ratings.csv or diary.csv</p>
+                    <input type="file" id="lbCsvFile" accept=".csv" class="hidden">
+                </label>
+            </div>
+            <!-- Step 2: Preview -->
+            <div id="lbStep2" class="hidden">
+                <div id="lbPreviewStats" class="grid grid-cols-3 gap-3 mb-4"></div>
+                <div id="lbPreviewList" class="max-h-52 overflow-y-auto space-y-1 mb-4 text-sm pr-1"></div>
+                <div class="flex gap-3">
+                    <button id="lbConfirmImport" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-lg transition-colors">Import</button>
+                    <button id="lbBackBtn" class="px-5 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 rounded-lg transition-colors">Back</button>
+                </div>
+            </div>
+            <!-- Step 3: Result -->
+            <div id="lbStep3" class="hidden text-center py-6">
+                <div id="lbResultContent"></div>
+            </div>
+        </div>
+    </div>
 
     <script type="module" src="../scripts/cards.js"></script>
     <script type="module" src="../scripts/profile.js"></script>

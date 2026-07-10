@@ -707,6 +707,199 @@ function renderStats(reviews, mediaMap) {
 
 }
 
+function getMediaIdForProfile(item) {
+    if (item.id != null) return String(item.id);
+    const titleSlug = (item.title || '').trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const cat = Array.isArray(item.category) ? item.category[0] : (item.category || '');
+    const catSlug = cat.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    return catSlug ? `${catSlug}_${titleSlug}` : titleSlug;
+}
+
+async function deduplicateUserReviews(db, userId) {
+    const snap = await get(ref(db, 'reviews'));
+    if (!snap.exists()) return 0;
+    const data = snap.val();
+    const deletes = [];
+    for (const [mediaId, reviews] of Object.entries(data)) {
+        const mine = Object.entries(reviews)
+            .filter(([, r]) => r.userId === userId)
+            .sort((a, b) => new Date(b[1].timestamp || 0) - new Date(a[1].timestamp || 0));
+        mine.slice(1).forEach(([reviewId]) => {
+            deletes.push(remove(ref(db, `reviews/${mediaId}/${reviewId}`)));
+        });
+    }
+    await Promise.all(deletes);
+    return deletes.length;
+}
+
+function parseLetterboxdCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const headers = [];
+    let inQ = false, cur = '';
+    for (const ch of lines[0]) {
+        if (ch === '"') { inQ = !inQ; }
+        else if (ch === ',' && !inQ) { headers.push(cur.trim()); cur = ''; }
+        else { cur += ch; }
+    }
+    headers.push(cur.trim());
+
+    function parseLine(line) {
+        const fields = [];
+        let inQ = false, cur = '';
+        for (const ch of line) {
+            if (ch === '"') { inQ = !inQ; }
+            else if (ch === ',' && !inQ) { fields.push(cur.trim()); cur = ''; }
+            else { cur += ch; }
+        }
+        fields.push(cur.trim());
+        const row = {};
+        headers.forEach((h, i) => { row[h] = (fields[i] || '').replace(/^"|"$/g, ''); });
+        return row;
+    }
+
+    return lines.slice(1).map(parseLine).filter(r => r.Name && r.Rating && parseFloat(r.Rating) > 0);
+}
+
+function findMediaForImport(name, year, allMedia) {
+    const norm = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const passes = [
+        item => { const cat = (Array.isArray(item.category) ? item.category[0] : item.category || '').toLowerCase(); return (cat === 'movies' || cat === 'movie') && String(item.year) === String(year); },
+        item => { const cat = (Array.isArray(item.category) ? item.category[0] : item.category || '').toLowerCase(); return cat === 'movies' || cat === 'movie'; },
+        item => true,
+    ];
+    for (const pass of passes) {
+        const match = allMedia.find(item => {
+            if (!item.title) return false;
+            return pass(item) && item.title.toLowerCase().replace(/[^a-z0-9]/g, '') === norm;
+        });
+        if (match) return match;
+    }
+    return null;
+}
+
+function initLetterboxdImport(db, userId, allMedia) {
+    const importBtn = document.getElementById('lbImportBtn');
+    const dedupBtn = document.getElementById('removeDuplicatesBtn');
+    const modal = document.getElementById('lbImportModal');
+    const closeBtn = document.getElementById('closeLbModal');
+    const fileInput = document.getElementById('lbCsvFile');
+    const step1 = document.getElementById('lbStep1');
+    const step2 = document.getElementById('lbStep2');
+    const step3 = document.getElementById('lbStep3');
+    if (!importBtn || !modal) return;
+
+    importBtn.classList.remove('hidden');
+    if (dedupBtn) dedupBtn.classList.remove('hidden');
+
+    let matchedItems = [];
+
+    function openModal() {
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+        step1.classList.remove('hidden'); step2.classList.add('hidden'); step3.classList.add('hidden');
+        if (fileInput) fileInput.value = '';
+        if (window.lucide) lucide.createIcons();
+    }
+    function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+    importBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+    if (dedupBtn) {
+        dedupBtn.addEventListener('click', async () => {
+            dedupBtn.disabled = true;
+            dedupBtn.textContent = 'Cleaning…';
+            const count = await deduplicateUserReviews(db, userId);
+            dedupBtn.disabled = false;
+            dedupBtn.textContent = 'Remove Duplicates';
+            alert(count > 0 ? `Removed ${count} duplicate review${count !== 1 ? 's' : ''}.` : 'No duplicates found.');
+            if (count > 0) window.location.reload();
+        });
+    }
+
+    if (fileInput) {
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const rows = parseLetterboxdCSV(e.target.result);
+                matchedItems = rows.map(row => ({ row, item: findMediaForImport(row.Name, row.Year, allMedia) }));
+                const matched = matchedItems.filter(m => m.item);
+                const unmatched = matchedItems.filter(m => !m.item);
+
+                document.getElementById('lbPreviewStats').innerHTML = `
+                    <div class="bg-slate-700/50 rounded-lg p-3 text-center"><div class="text-2xl font-bold text-white">${rows.length}</div><div class="text-slate-400 text-xs mt-1">Total in CSV</div></div>
+                    <div class="bg-green-900/40 rounded-lg p-3 text-center"><div class="text-2xl font-bold text-green-400">${matched.length}</div><div class="text-slate-400 text-xs mt-1">Matched</div></div>
+                    <div class="bg-slate-700/30 rounded-lg p-3 text-center"><div class="text-2xl font-bold text-slate-400">${unmatched.length}</div><div class="text-slate-400 text-xs mt-1">Not in TrueRated</div></div>
+                `;
+                document.getElementById('lbPreviewList').innerHTML = matched.map(m => {
+                    const rating = Math.round(parseFloat(m.row.Rating) * 2);
+                    return `<div class="flex items-center justify-between px-2 py-1 rounded bg-slate-700/40">
+                        <span class="text-slate-200 truncate">${m.row.Name} <span class="text-slate-500 text-xs">(${m.row.Year || '?'})</span></span>
+                        <span class="text-yellow-400 text-xs flex-shrink-0 ml-2 font-medium">${rating}/10</span>
+                    </div>`;
+                }).join('');
+
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+            };
+            reader.readAsText(file);
+        });
+    }
+
+    document.getElementById('lbBackBtn')?.addEventListener('click', () => {
+        step2.classList.add('hidden'); step1.classList.remove('hidden');
+    });
+
+    document.getElementById('lbConfirmImport')?.addEventListener('click', async () => {
+        const confirmBtn = document.getElementById('lbConfirmImport');
+        confirmBtn.disabled = true; confirmBtn.textContent = 'Importing…';
+
+        const reviewKey = `lb_${userId}`;
+        let imported = 0, skipped = 0;
+
+        for (const { row, item } of matchedItems) {
+            if (!item) continue;
+            const rating = Math.round(parseFloat(row.Rating) * 2);
+            if (!rating || rating < 1 || rating > 10) { skipped++; continue; }
+            const mediaId = getMediaIdForProfile(item);
+            const timestamp = row.Date ? new Date(row.Date + 'T12:00:00').toISOString() : new Date().toISOString();
+            try {
+                await set(ref(db, `reviews/${mediaId}/${reviewKey}`), {
+                    userId,
+                    rating,
+                    reviewText: '',
+                    timestamp,
+                    mediaTitle: item.title,
+                    mediaCategory: Array.isArray(item.category) ? item.category[0] : (item.category || ''),
+                    mediaYear: item.year || row.Year || '',
+                    source: 'letterboxd',
+                });
+                imported++;
+            } catch (err) {
+                console.error('[LB Import] Write failed:', err);
+                skipped++;
+            }
+        }
+
+        step2.classList.add('hidden'); step3.classList.remove('hidden');
+        document.getElementById('lbResultContent').innerHTML = `
+            <div class="text-green-400 font-bold text-4xl mb-2">${imported}</div>
+            <div class="text-white font-semibold mb-1">reviews imported</div>
+            ${skipped > 0 ? `<p class="text-slate-500 text-sm mb-4">${skipped} skipped (invalid rating)</p>` : '<br>'}
+            <p class="text-slate-500 text-xs mb-5">Re-importing the same CSV will update existing entries, not duplicate them.</p>
+            <button id="lbDoneBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors">Done</button>
+        `;
+        document.getElementById('lbDoneBtn')?.addEventListener('click', () => {
+            closeModal();
+            if (imported > 0) window.location.reload();
+        });
+        confirmBtn.disabled = false; confirmBtn.textContent = 'Import';
+    });
+}
+
 function initWatchlistControls(allItems, container) {
     const controls = document.getElementById('watchlistControls');
     const searchEl = document.getElementById('watchlistSearch');
@@ -944,6 +1137,8 @@ async function loadProfile(reviewerId) {
         renderStats(allReviews, mediaMap);
 
         const isOwner = auth.currentUser && auth.currentUser.uid === reviewerId;
+
+        if (isOwner) initLetterboxdImport(db, reviewerId, allMedia);
 
         // Render favorites section (non-fatal if rules block read)
         let favData = {};
