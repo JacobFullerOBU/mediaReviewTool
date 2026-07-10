@@ -1810,17 +1810,33 @@ async function showItemDetails(item) {
 
         try {
             const reviewsRef = ref(db, `reviews/${mediaId}`);
-            await push(reviewsRef, {
+
+            // Find any existing review by this user so we overwrite rather than duplicate
+            const existingSnap = await get(reviewsRef);
+            let existingKey = null;
+            if (existingSnap.exists()) {
+                for (const [key, rev] of Object.entries(existingSnap.val())) {
+                    if (rev.userId === user.uid) { existingKey = key; break; }
+                }
+            }
+
+            const reviewPayload = {
                 userId: user.uid,
                 mediaId: mediaId,
                 mediaYear: displayItem.year || item.year || null,
-                reviewText: reviewHTML, // Store HTML content for formatting
-                text: reviewText, // Also store plain text for backwards compatibility
+                reviewText: reviewHTML,
+                text: reviewText,
                 rating: reviewRating,
                 spoilers: containsSpoilers,
                 timestamp: new Date().toISOString(),
-                user: user.email || user.displayName || 'Anonymous'
-            });
+                user: user.email || user.displayName || 'Anonymous',
+            };
+
+            if (existingKey) {
+                await set(ref(db, `reviews/${mediaId}/${existingKey}`), reviewPayload);
+            } else {
+                await push(reviewsRef, reviewPayload);
+            }
 
             // Invalidate caches so ratings and timestamps reflect the new review
             reviewTimestampCache = null;

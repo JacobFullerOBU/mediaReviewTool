@@ -437,12 +437,14 @@ async function handleImport(e) {
             });
         }
 
-        // Push to Firebase in batches of 50
+        // Write to Firebase in batches of 50.
+        // Use set() with a stable per-user key so re-importing the same CSV
+        // overwrites existing entries instead of creating duplicates.
         const BATCH = 50;
         for (let b = 0; b < toImport.length; b += BATCH) {
             const chunk = toImport.slice(b, b + BATCH);
             await Promise.all(chunk.map(({ mediaId, reviewData }) =>
-                push(ref(db, `reviews/${mediaId}`), reviewData)
+                set(ref(db, `reviews/${mediaId}/lb_${user.uid}`), reviewData)
             ));
             const done = Math.min(b + BATCH, toImport.length);
             progressDiv.textContent = `Importing... ${done} / ${toImport.length}`;
