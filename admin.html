@@ -63,6 +63,9 @@
                 <button class="admin-tab px-5 py-2.5 text-sm font-medium rounded-t-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-tab="media">
                     Media
                 </button>
+                <button class="admin-tab px-5 py-2.5 text-sm font-medium rounded-t-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-tab="import">
+                    Import
+                </button>
             </div>
 
             <!-- Reviews Tab -->
@@ -181,6 +184,34 @@
             <div id="tab-users" class="admin-tab-content hidden">
                 <div id="users-list" class="space-y-3">
                     <p class="text-slate-500 text-sm">Loading users...</p>
+                </div>
+            </div>
+
+            <!-- Import Tab -->
+            <div id="tab-import" class="admin-tab-content hidden">
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 mb-6">
+                    <h3 class="text-white font-semibold mb-1 flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4 text-indigo-400"></i>
+                        Import Movies from TMDB
+                    </h3>
+                    <p class="text-slate-400 text-xs mb-4">Paste one movie title per line. The top TMDB result for each will be shown for review — uncheck any you don't want before adding.</p>
+                    <textarea id="import-titles" rows="8"
+                        placeholder="The Godfather&#10;Blade Runner 2049&#10;Parasite&#10;..."
+                        class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none resize-vertical mb-4 font-mono"></textarea>
+                    <button id="import-search-btn"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors">
+                        Search TMDB
+                    </button>
+                </div>
+
+                <div id="import-results" class="space-y-3 mb-4"></div>
+
+                <div class="flex items-center gap-3 mt-2">
+                    <button id="import-add-btn"
+                        class="hidden bg-green-700 hover:bg-green-600 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors">
+                        Add Selected to Firebase
+                    </button>
+                    <span id="import-status" class="text-sm"></span>
                 </div>
             </div>
         </div>
@@ -593,6 +624,144 @@
         // Load custom media list when tab is opened
         document.querySelector('[data-tab="media"]')?.addEventListener('click', () => {
             loadCustomMediaList();
+        });
+
+        // ── TMDB Import ──────────────────────────────────────────────────────────
+        const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
+        let _tmdbImportResults = [];
+
+        async function tmdbSearch(title) {
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(title)}&language=en-US`;
+            const data = await fetch(url).then(r => r.json());
+            return data.results?.[0] || null;
+        }
+
+        async function tmdbDetails(id) {
+            const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_KEY}&append_to_response=credits&language=en-US`;
+            return fetch(url).then(r => r.json());
+        }
+
+        document.getElementById('import-search-btn')?.addEventListener('click', async () => {
+            const textarea  = document.getElementById('import-titles');
+            const resultEl  = document.getElementById('import-results');
+            const searchBtn = document.getElementById('import-search-btn');
+            const addBtn    = document.getElementById('import-add-btn');
+            const statusEl  = document.getElementById('import-status');
+
+            const titles = textarea.value.split('\n').map(t => t.trim()).filter(Boolean);
+            if (!titles.length) return;
+
+            _tmdbImportResults = [];
+            resultEl.innerHTML = '';
+            addBtn.classList.add('hidden');
+            statusEl.textContent = '';
+            searchBtn.disabled = true;
+            searchBtn.textContent = 'Searching…';
+
+            for (const [i, title] of titles.entries()) {
+                const row = document.createElement('div');
+                row.className = 'import-result-row bg-slate-800 rounded-lg p-4 border border-slate-700 flex items-start gap-4';
+                row.innerHTML = `<span class="text-slate-400 text-sm">Searching "${escHtml(title)}"…</span>`;
+                resultEl.appendChild(row);
+
+                try {
+                    const hit = await tmdbSearch(title);
+                    if (!hit) {
+                        row.innerHTML = `<span class="text-red-400 text-sm flex items-center gap-2"><i data-lucide="x-circle" class="w-4 h-4"></i> No result for "${escHtml(title)}"</span>`;
+                        if (window.lucide) lucide.createIcons();
+                        continue;
+                    }
+
+                    const det     = await tmdbDetails(hit.id);
+                    const director = det.credits?.crew?.find(c => c.job === 'Director')?.name || '';
+                    const actors   = det.credits?.cast?.slice(0, 5).map(a => a.name).join('\n') || '';
+                    const genres   = det.genres?.map(g => g.name).join(', ') || '';
+                    const year     = (hit.release_date || '').split('-')[0];
+                    const poster   = hit.poster_path ? `https://image.tmdb.org/t/p/w500${hit.poster_path}` : '';
+                    const score    = hit.vote_average ? parseFloat(hit.vote_average.toFixed(1)) : null;
+
+                    const movieData = {
+                        tmdb_id: hit.id,
+                        title: hit.title || hit.original_title,
+                        year,
+                        description: hit.overview || '',
+                        poster,
+                        genre: genres,
+                        director,
+                        actors,
+                        tmdbScore: score,
+                        category: 'movies',
+                        releaseDate: hit.release_date || '',
+                    };
+
+                    const idx = _tmdbImportResults.length;
+                    _tmdbImportResults.push({ firebaseId: `tmdb_${hit.id}`, data: movieData });
+
+                    row.innerHTML = `
+                        <input type="checkbox" class="import-check mt-1 w-4 h-4 accent-indigo-500 flex-shrink-0 cursor-pointer" data-idx="${idx}" checked>
+                        ${poster
+                            ? `<img src="${escHtml(poster)}" alt="" class="w-12 h-16 object-cover rounded flex-shrink-0">`
+                            : `<div class="w-12 h-16 bg-slate-700 rounded flex-shrink-0"></div>`
+                        }
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 flex-wrap mb-0.5">
+                                <span class="font-semibold text-white text-sm">${escHtml(movieData.title)}</span>
+                                ${year ? `<span class="text-xs text-slate-500">${escHtml(year)}</span>` : ''}
+                                ${score ? `<span class="text-xs text-yellow-400">★ ${score}</span>` : ''}
+                            </div>
+                            ${genres   ? `<p class="text-xs text-slate-500 mb-0.5">${escHtml(genres)}</p>` : ''}
+                            ${director ? `<p class="text-xs text-slate-400 mb-0.5">Dir. ${escHtml(director)}</p>` : ''}
+                            ${movieData.description ? `<p class="text-xs text-slate-400 line-clamp-2">${escHtml(movieData.description)}</p>` : ''}
+                            <p class="text-xs text-slate-600 mt-1 font-mono">id: tmdb_${hit.id}</p>
+                        </div>
+                    `;
+                } catch (err) {
+                    row.innerHTML = `<span class="text-red-400 text-sm">Error for "${escHtml(title)}": ${escHtml(err.message)}</span>`;
+                }
+                if (window.lucide) lucide.createIcons();
+            }
+
+            searchBtn.disabled = false;
+            searchBtn.textContent = 'Search TMDB';
+            if (_tmdbImportResults.length) addBtn.classList.remove('hidden');
+        });
+
+        document.getElementById('import-add-btn')?.addEventListener('click', async () => {
+            const addBtn   = document.getElementById('import-add-btn');
+            const statusEl = document.getElementById('import-status');
+            const checked  = [...document.querySelectorAll('.import-check:checked')];
+
+            if (!checked.length) {
+                statusEl.textContent = 'No movies selected.';
+                statusEl.className = 'text-sm text-yellow-400';
+                return;
+            }
+
+            addBtn.disabled = true;
+            addBtn.textContent = 'Adding…';
+            statusEl.textContent = '';
+
+            const { db: firebaseDb } = await import('./Assets/scripts/firebase.js');
+            const { ref: fbRef, set: fbSet } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+
+            let added = 0, failed = 0;
+            for (const chk of checked) {
+                const { firebaseId, data } = _tmdbImportResults[parseInt(chk.dataset.idx)];
+                try {
+                    await fbSet(fbRef(firebaseDb, `tmdb_movies/${firebaseId}`), data);
+                    added++;
+                    chk.closest('.import-result-row').style.opacity = '0.4';
+                    chk.checked = false;
+                } catch (err) {
+                    failed++;
+                    console.error('Import failed for', firebaseId, err);
+                }
+            }
+
+            statusEl.textContent = `✓ Added ${added} movie${added !== 1 ? 's' : ''}${failed ? ` — ${failed} failed` : ''}.`;
+            statusEl.className = `text-sm ${failed ? 'text-yellow-400' : 'text-green-400'}`;
+            addBtn.disabled = false;
+            addBtn.textContent = 'Add Selected to Firebase';
         });
 
         // Tab switching
