@@ -1087,8 +1087,26 @@ async function loadProfile(reviewerId) {
 
         console.log("Fetching media...");
         const [movies, tvData, booksData] = await Promise.all([fetchMovies(), fetchTV(), fetchBooks()]);
-        const allMedia = [...movies, ...tvData, ...music, ...games, ...booksData].filter(item => item && item.title);
-        console.log("Total media items:", allMedia.length);
+
+        // Deduplicate movies the same way cards.js does: prefer entries with
+        // releaseDate (TMDB-sourced), key by tmdb_id when present, else cat_title slug.
+        const movieSeen = new Map();
+        for (const item of movies) {
+            if (!item?.title) continue;
+            if (item.tmdb_id) {
+                const key = String(item.tmdb_id);
+                if (!movieSeen.has(key) || (!movieSeen.get(key).releaseDate && item.releaseDate)) {
+                    movieSeen.set(key, item);
+                }
+            } else {
+                const slug = `${(item.category || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '_')}_${(item.title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
+                if (!movieSeen.has(slug)) movieSeen.set(slug, item);
+            }
+        }
+        const dedupedMovies = [...movieSeen.values()];
+
+        const allMedia = [...dedupedMovies, ...tvData, ...music, ...games, ...booksData].filter(item => item && item.title);
+        console.log("Total media items:", allMedia.length, `(${movies.length - dedupedMovies.length} movie dupes removed)`);
         
         let allReviews = [];
         console.log("Fetching all reviews...");
