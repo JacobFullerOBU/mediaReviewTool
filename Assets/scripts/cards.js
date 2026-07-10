@@ -1,4 +1,4 @@
-import { fetchMovies, fetchTV, fetchBooks } from './main.js';
+import { fetchMovies, fetchTV, fetchBooks, fetchCustomMedia } from './main.js';
 
 const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
 const OMDB_KEY = '2669280';
@@ -505,13 +505,14 @@ async function initCards() {
     // Fetch JSON sources, Firebase overrides, and review caches all in parallel.
     // Auth must be ready before reading Firebase-protected paths (overrides, hidden media).
     const authReady = auth.authStateReady ? auth.authStateReady() : Promise.resolve();
-    const [moviesRes, tvRes, booksRes, overridesRes, , hiddenRes] = await Promise.allSettled([
+    const [moviesRes, tvRes, booksRes, overridesRes, , hiddenRes, customRes] = await Promise.allSettled([
         fetchMovies(),
         fetchTV(),
         fetchBooks(),
         authReady.then(() => getAllMediaOverrides()),
         fetchLatestReviewTimesForItems([]), // warms reviewTimestampCache + ratingBulkCache early
         authReady.then(() => getHiddenMedia()),
+        fetchCustomMedia(),
     ]);
 
     if (moviesRes.status === 'fulfilled') {
@@ -582,10 +583,15 @@ async function initCards() {
         return Object.values(seen);
     })();
 
+    const customItems = customRes?.status === 'fulfilled'
+        ? customRes.value.filter(m => typeof m.title === 'string' && m.title).map(normalizeCategory)
+        : [];
+
     allItems = [
         ...dedupedMovies,
         ...allRaw.filter(i => i.category !== 'movies' && i.category !== 'books'),
         ...dedupedBooks,
+        ...customItems,
     ];
 
     // Apply admin field overrides (e.g. genre, title) stored in Firebase

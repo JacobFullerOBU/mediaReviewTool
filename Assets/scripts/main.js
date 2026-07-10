@@ -83,6 +83,19 @@ export async function fetchBooks() {
     return [];
 }
 
+export async function fetchCustomMedia() {
+    try {
+        const { db } = await import('./firebase.js');
+        const { ref, get } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+        const snap = await get(ref(db, 'customMedia'));
+        if (!snap.exists()) return [];
+        return Object.entries(snap.val()).map(([id, data]) => ({ id, ...data }));
+    } catch (e) {
+        console.warn('fetchCustomMedia failed:', e.message);
+        return [];
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     initAppUI();
 

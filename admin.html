@@ -60,6 +60,9 @@
                 <button class="admin-tab px-5 py-2.5 text-sm font-medium rounded-t-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-tab="users">
                     Users
                 </button>
+                <button class="admin-tab px-5 py-2.5 text-sm font-medium rounded-t-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" data-tab="media">
+                    Media
+                </button>
             </div>
 
             <!-- Reviews Tab -->
@@ -71,6 +74,106 @@
                 </div>
                 <div id="reviews-list" class="space-y-3">
                     <p class="text-slate-500 text-sm">Loading reviews...</p>
+                </div>
+            </div>
+
+            <!-- Media Tab -->
+            <div id="tab-media" class="admin-tab-content hidden">
+                <!-- Create form -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 mb-6">
+                    <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                        <i data-lucide="plus-circle" class="w-4 h-4 text-indigo-400"></i>
+                        Add New Card
+                    </h3>
+                    <form id="custom-media-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Title <span class="text-red-400">*</span></label>
+                                <input type="text" id="cm-title" required placeholder="e.g. The Dark Knight"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Category <span class="text-red-400">*</span></label>
+                                <select id="cm-category" required
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                                    <option value="movies">Movies</option>
+                                    <option value="tv">TV</option>
+                                    <option value="games">Games</option>
+                                    <option value="books">Books</option>
+                                    <option value="music">Music</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Year</label>
+                                <input type="number" id="cm-year" min="1880" max="2035" placeholder="e.g. 2008"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Genre</label>
+                                <input type="text" id="cm-genre" placeholder="e.g. Action, Drama"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Description</label>
+                            <textarea id="cm-description" rows="3" placeholder="Short synopsis..."
+                                class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none resize-vertical"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Poster URL</label>
+                            <div class="flex gap-3 items-start">
+                                <input type="url" id="cm-poster" placeholder="https://..."
+                                    class="flex-1 bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <img id="cm-poster-preview" class="hidden w-12 h-16 object-cover rounded border border-slate-600 flex-shrink-0" alt="Poster preview">
+                            </div>
+                        </div>
+                        <div id="cm-credits-row" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Director</label>
+                                <input type="text" id="cm-director"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Actors</label>
+                                <input type="text" id="cm-actors" placeholder="Comma or newline separated"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">RT Score (0–100)</label>
+                                <input type="number" id="cm-rt" min="0" max="100" step="1" placeholder="—"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">TMDB Score (0–10)</label>
+                                <input type="number" id="cm-tmdb" min="0" max="10" step="0.1" placeholder="—"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">TR Override (0–10)</label>
+                                <input type="number" id="cm-tr" min="0" max="10" step="0.1" placeholder="—"
+                                    class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 pt-1">
+                            <button type="submit"
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors">
+                                Save Card
+                            </button>
+                            <span id="cm-status" class="text-sm"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Existing custom cards list -->
+                <div>
+                    <h3 class="text-white font-semibold mb-3">Custom Cards</h3>
+                    <div id="custom-media-list" class="space-y-3">
+                        <p class="text-slate-500 text-sm">Loading...</p>
+                    </div>
                 </div>
             </div>
 
@@ -90,7 +193,7 @@
         import { auth, db } from './Assets/scripts/firebase.js';
         import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
         import { ref, get } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js';
-        import { checkAdminStatus, deleteReview, editReview, deleteUserAccount } from './Assets/scripts/admin.js';
+        import { checkAdminStatus, deleteReview, editReview, deleteUserAccount, saveCustomMedia, getCustomMedia, deleteCustomMedia } from './Assets/scripts/admin.js';
 
         const loadingEl  = document.getElementById('admin-loading');
         const contentEl  = document.getElementById('admin-content');
@@ -364,6 +467,133 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;');
         }
+
+        // ── Custom Media (Media tab) ──────────────────────────────────────────────
+        function slugify(str) {
+            return str.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        }
+
+        async function loadCustomMediaList() {
+            const listEl = document.getElementById('custom-media-list');
+            const data = await getCustomMedia();
+            const entries = Object.entries(data);
+            if (!entries.length) {
+                listEl.innerHTML = '<p class="text-slate-500 text-sm">No custom cards yet.</p>';
+                return;
+            }
+            listEl.innerHTML = entries.map(([id, item]) => `
+                <div class="custom-media-row bg-slate-800 rounded-lg p-4 border border-slate-700 flex items-start gap-4"
+                     data-id="${escHtml(id)}">
+                    ${item.poster
+                        ? `<img src="${escHtml(item.poster)}" alt="${escHtml(item.title)}" class="w-12 h-16 object-cover rounded flex-shrink-0">`
+                        : `<div class="w-12 h-16 bg-slate-700 rounded flex items-center justify-center flex-shrink-0"><i data-lucide="image" class="w-5 h-5 text-slate-500"></i></div>`
+                    }
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap mb-0.5">
+                            <span class="font-semibold text-white text-sm">${escHtml(item.title)}</span>
+                            <span class="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded">${escHtml(item.category || '')}</span>
+                            ${item.year ? `<span class="text-xs text-slate-500">${escHtml(String(item.year))}</span>` : ''}
+                        </div>
+                        ${item.genre ? `<p class="text-xs text-slate-500 mb-0.5">${escHtml(item.genre)}</p>` : ''}
+                        ${item.description ? `<p class="text-xs text-slate-400 line-clamp-2">${escHtml(item.description)}</p>` : ''}
+                        <p class="text-xs text-slate-600 mt-1 font-mono">id: ${escHtml(id)}</p>
+                    </div>
+                    <button class="delete-custom-btn text-xs bg-red-900/60 hover:bg-red-700 text-red-300 px-3 py-1.5 rounded flex items-center gap-1 transition-colors flex-shrink-0">
+                        <i data-lucide="trash-2" class="w-3 h-3"></i> Delete
+                    </button>
+                </div>
+            `).join('');
+            if (window.lucide) lucide.createIcons();
+
+            listEl.querySelectorAll('.delete-custom-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const row = btn.closest('.custom-media-row');
+                    const id = row.dataset.id;
+                    if (!confirm(`Delete the card "${id}"? This won't delete reviews tied to it.`)) return;
+                    btn.disabled = true; btn.textContent = 'Deleting…';
+                    await deleteCustomMedia(id);
+                    row.remove();
+                    if (!document.querySelector('.custom-media-row')) {
+                        document.getElementById('custom-media-list').innerHTML =
+                            '<p class="text-slate-500 text-sm">No custom cards yet.</p>';
+                    }
+                });
+            });
+        }
+
+        // Poster preview
+        document.getElementById('cm-poster')?.addEventListener('input', (e) => {
+            const img = document.getElementById('cm-poster-preview');
+            const url = e.target.value.trim();
+            if (url) {
+                img.src = url;
+                img.classList.remove('hidden');
+                img.onerror = () => img.classList.add('hidden');
+            } else {
+                img.classList.add('hidden');
+            }
+        });
+
+        // Hide director/actors for non-film categories
+        document.getElementById('cm-category')?.addEventListener('change', (e) => {
+            const creditsRow = document.getElementById('cm-credits-row');
+            const filmCats = ['movies', 'tv'];
+            creditsRow.classList.toggle('hidden', !filmCats.includes(e.target.value));
+        });
+
+        // Form submit
+        document.getElementById('custom-media-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusEl = document.getElementById('cm-status');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            statusEl.textContent = '';
+            statusEl.className = 'text-sm';
+
+            const title    = document.getElementById('cm-title').value.trim();
+            const category = document.getElementById('cm-category').value;
+            const year     = document.getElementById('cm-year').value.trim();
+            const genre    = document.getElementById('cm-genre').value.trim();
+            const desc     = document.getElementById('cm-description').value.trim();
+            const poster   = document.getElementById('cm-poster').value.trim();
+            const director = document.getElementById('cm-director').value.trim();
+            const actors   = document.getElementById('cm-actors').value.trim();
+            const rt       = document.getElementById('cm-rt').value.trim();
+            const tmdb     = document.getElementById('cm-tmdb').value.trim();
+            const tr       = document.getElementById('cm-tr').value.trim();
+
+            const id = `${slugify(category)}_${slugify(title)}`;
+
+            const data = { title, category, source: 'custom' };
+            if (year)     data.year        = parseInt(year);
+            if (genre)    data.genre       = genre;
+            if (desc)     data.description = desc;
+            if (poster)   data.poster      = poster;
+            if (director) data.director    = director;
+            if (actors)   data.actors      = actors;
+            if (rt)       data.rtScore     = parseInt(rt);
+            if (tmdb)     data.tmdbScore   = parseFloat(tmdb);
+            if (tr)       data.trScoreOverride = parseFloat(tr);
+
+            submitBtn.disabled = true; submitBtn.textContent = 'Saving…';
+            try {
+                await saveCustomMedia(id, data);
+                statusEl.textContent = `✓ Saved as "${id}"`;
+                statusEl.className = 'text-sm text-green-400';
+                e.target.reset();
+                document.getElementById('cm-poster-preview').classList.add('hidden');
+                document.getElementById('cm-credits-row').classList.remove('hidden');
+                await loadCustomMediaList();
+            } catch (err) {
+                statusEl.textContent = 'Error: ' + (err.message || err);
+                statusEl.className = 'text-sm text-red-400';
+            }
+            submitBtn.disabled = false; submitBtn.textContent = 'Save Card';
+        });
+
+        // Load custom media list when tab is opened
+        document.querySelector('[data-tab="media"]')?.addEventListener('click', () => {
+            loadCustomMediaList();
+        });
 
         // Tab switching
         document.querySelectorAll('.admin-tab').forEach(tab => {

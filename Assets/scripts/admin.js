@@ -1,4 +1,4 @@
-import { ref, get, remove, update } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { ref, get, set, remove, update } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { db } from "./firebase.js";
 
 export const adminState = { isAdmin: false };
@@ -61,6 +61,22 @@ export async function getHiddenMedia() {
         const snap = await get(ref(db, 'hiddenMedia'));
         return snap.exists() ? snap.val() : {};
     } catch { return {}; }
+}
+
+export async function saveCustomMedia(id, data) {
+    await set(ref(db, `customMedia/${id}`), data);
+}
+
+export async function getCustomMedia() {
+    try {
+        const snap = await get(ref(db, 'customMedia'));
+        if (!snap.exists()) return {};
+        return snap.val();
+    } catch { return {}; }
+}
+
+export async function deleteCustomMedia(id) {
+    await remove(ref(db, `customMedia/${id}`));
 }
 
 export async function deleteUserAccount(uid) {
