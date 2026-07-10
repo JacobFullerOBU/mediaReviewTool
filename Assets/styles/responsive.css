@@ -161,94 +161,80 @@
     }
 }
 
-/* Mobile-specific layout adjustments for condensed UI */
+/* Mobile — compact layout so posters reach the screen faster */
 @media (max-width: 768px) {
-    /* Make the main content area a flex column for mobile */
-    main#browse-page {
-        display: flex;
-        flex-direction: column;
-        min-height: calc(100vh - 64px); /* Subtract nav height */
+    /* Hero: tighter padding */
+    .hero-section {
+        padding: 1.25rem 1rem 0.5rem;
+        margin-bottom: 0;
+    }
+    .hero-title    { font-size: 1.5rem; margin-bottom: 0.4rem; }
+    .hero-subtitle { font-size: 0.8rem; margin-bottom: 0.5rem; }
+
+    /* Filter card: halve the padding */
+    .controls-toolbar {
+        padding: 0.5rem;
+        margin-top: -1rem;
     }
 
-    /* Center the search bar in the middle of the screen */
+    /* Search + sort: keep in one row, no extra card treatment */
     .search-and-sort-container {
-        flex: 1;
-        display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
-        padding: 2rem 1rem;
-        background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
-        border-radius: 1rem;
-        margin: 1rem 0;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(71, 85, 105, 0.3);
-    }
-
-    .search-container {
-        width: 100%;
-        max-width: 400px;
+        gap: 0.5rem;
+        padding: 0;
+        background: none;
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        backdrop-filter: none;
     }
 
     #mediaSearchInput {
-        font-size: 1rem;
-        padding: 1rem 1rem 1rem 3rem;
-        border-radius: 2rem;
-        background: rgba(15, 23, 42, 0.9);
-        border: 2px solid rgba(99, 102, 241, 0.3);
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+        border-radius: 0.5rem;
     }
 
-    #mediaSearchInput:focus {
-        border-color: rgba(99, 102, 241, 0.8);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    /* Sort controls remain visible on mobile */
-    .sort-container {
-        display: block;
-        width: 100%;
-    }
-
-    /* Filter buttons: scrollable row, no negative margins that could hide buttons */
+    /* Category pills: single scrollable row, cut-off signals swipe */
     .filter-buttons-container {
-        position: sticky;
-        top: 64px;
-        z-index: 40;
-        background: rgba(30, 41, 59, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(71, 85, 105, 0.3);
-        padding: 0.5rem 1rem;
-        margin: 0 0 1rem 0;
-    }
-
-    /* Cards container takes remaining space at bottom */
-    #cardsContainer {
-        flex: 2;
-        padding-bottom: 2rem;
-    }
-
-    /* Adjust hero section for mobile */
-    .hero-section {
-        padding: 1.5rem 1rem 0.5rem 1rem;
-        margin-bottom: 0;
-    }
-
-    .hero-title {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 0.8rem;
-        margin-bottom: 1rem;
-    }
-
-    /* Hide the controls toolbar background on mobile since search is repositioned */
-    .controls-toolbar {
+        position: static;
         background: transparent;
         border: none;
+        padding: 0 0 0.25rem;
+        margin: 0;
         backdrop-filter: none;
-        margin-top: 0;
-        padding: 0;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto;
+    }
+
+    /* Compact card image height on mobile */
+    .media-card .aspect-\[2\/3\],
+    .media-card .aspect-video,
+    .card-poster-area {
+        max-height: 9rem;
+        overflow: hidden;
+    }
+
+    /* Tighter card text area — less gap between description and score row */
+    .media-card .p-5 {
+        padding: 0.625rem 0.75rem;
+    }
+    .media-card .p-5 .space-y-2 > * + *,
+    .media-card .p-5 .space-y-3 > * + * {
+        margin-top: 0.375rem;
+    }
+
+    /* Larger tap targets for watched + watchlist buttons */
+    .card-watched-btn,
+    .card-watchlist-btn {
+        padding: 0.5rem;
+    }
+    .card-watched-btn svg,
+    .card-watchlist-btn svg {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }
 .stars-row {

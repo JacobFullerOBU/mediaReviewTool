@@ -20,7 +20,7 @@ export const games = [
     },
     {
         title: "Red Dead Redemption 2",
-        description: "An epic tale of life in America's unforgiving heartland featuring a desperado and the gang he rides with.",
+        description: "America, 1899. Outlaw Arthur Morgan and the Van der Linde gang are hunted across a fading frontier after a heist gone wrong — a sweeping story of loyalty, survival, and the slow death of the Wild West.",
         category: "games",
         rating: 9.1,
         year: 2018,

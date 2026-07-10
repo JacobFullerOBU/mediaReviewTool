@@ -10,7 +10,8 @@ function updateTrueRated(item, cardId) {
     if (!el) return;
     if (item.trScoreOverride != null) {
         el.textContent = `TR ${parseFloat(item.trScoreOverride).toFixed(1)}`;
-        el.className = 'text-xs font-mono font-semibold text-blue-400';
+        el.className = 'text-xs font-mono font-semibold';
+        el.style.color = 'var(--tr-yellow)';
         return;
     }
     const scores = [];
@@ -20,11 +21,13 @@ function updateTrueRated(item, cardId) {
     if (scores.length === 0) {
         el.textContent = 'TR —';
         el.className = 'text-xs font-mono text-slate-500';
+        el.style.color = '';
         return;
     }
     const trueRated = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
     el.textContent = `TR ${trueRated}`;
-    el.className = 'text-xs font-mono font-semibold text-blue-400';
+    el.className = 'text-xs font-mono font-semibold';
+    el.style.color = 'var(--tr-yellow)';
 }
 
 async function fetchTMDBScore(item) {
