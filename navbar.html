@@ -124,6 +124,12 @@
             </div>
             <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-colors">Import Ratings</button>
         </form>
+        <div class="mt-4 pt-4 border-t border-slate-700">
+            <p class="text-xs text-slate-500 mb-2">Already imported? Remove duplicate entries from previous imports:</p>
+            <button id="cleanupDuplicatesBtn" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-300 font-medium py-2 rounded-lg transition-colors text-sm">
+                Clean Up Old Duplicates
+            </button>
+        </div>
         <div id="importProgress" class="hidden mt-3 text-sm text-slate-400"></div>
         <div id="importResults" class="hidden mt-4 p-4 bg-slate-900 rounded-lg border border-slate-700 text-sm max-h-64 overflow-y-auto"></div>
     </div>

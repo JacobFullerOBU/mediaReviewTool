@@ -165,6 +165,7 @@ function initAuthForms() {
     document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
     document.getElementById('registerForm')?.addEventListener('submit', handleRegister);
     document.getElementById('importForm')?.addEventListener('submit', handleImport);
+    document.getElementById('cleanupDuplicatesBtn')?.addEventListener('click', handleCleanupDuplicates);
     document.getElementById('googleLoginBtn')?.addEventListener('click', handleGoogleSignIn);
     document.getElementById('googleRegisterBtn')?.addEventListener('click', handleGoogleSignIn);
     initForgotPassword();
@@ -498,6 +499,78 @@ async function handleImport(e) {
         showNotification('Import failed: ' + err.message, 'error');
     } finally {
         setButtonLoading(submitBtn, false);
+    }
+}
+
+async function handleCleanupDuplicates() {
+    const user = auth.currentUser;
+    if (!user) return showNotification('Please log in first', 'error');
+
+    const btn = document.getElementById('cleanupDuplicatesBtn');
+    const progressDiv = document.getElementById('importProgress');
+    const resultsDiv = document.getElementById('importResults');
+
+    btn.disabled = true;
+    btn.textContent = 'Scanning...';
+    progressDiv.textContent = 'Scanning all reviews for duplicates...';
+    progressDiv.classList.remove('hidden');
+    resultsDiv.classList.add('hidden');
+
+    try {
+        const allReviewsSnap = await get(ref(db, 'reviews'));
+        if (!allReviewsSnap.exists()) {
+            progressDiv.classList.add('hidden');
+            showNotification('No reviews found.', 'info');
+            return;
+        }
+
+        const stableKey = `lb_${user.uid}`;
+        const keysToDelete = [];
+
+        allReviewsSnap.forEach(mediaSnap => {
+            const mediaId = mediaSnap.key;
+            const userEntries = [];
+            mediaSnap.forEach(reviewSnap => {
+                if (reviewSnap.val().userId === user.uid) {
+                    userEntries.push({ key: reviewSnap.key, data: reviewSnap.val() });
+                }
+            });
+
+            if (userEntries.length <= 1) return;
+
+            // Keep lb_ key if present, otherwise keep the most recent entry
+            const hasStable = userEntries.some(e => e.key === stableKey);
+            const keepKey = hasStable
+                ? stableKey
+                : userEntries.sort((a, b) => new Date(b.data.timestamp) - new Date(a.data.timestamp))[0].key;
+
+            userEntries.forEach(e => {
+                if (e.key !== keepKey) keysToDelete.push(`reviews/${mediaId}/${e.key}`);
+            });
+        });
+
+        if (keysToDelete.length === 0) {
+            progressDiv.classList.add('hidden');
+            resultsDiv.classList.remove('hidden');
+            resultsDiv.innerHTML = '<p class="text-green-400 font-semibold">No duplicates found — your reviews are clean!</p>';
+            return;
+        }
+
+        progressDiv.textContent = `Removing ${keysToDelete.length} duplicate entr${keysToDelete.length !== 1 ? 'ies' : 'y'}...`;
+        await Promise.all(keysToDelete.map(path => remove(ref(db, path))));
+
+        progressDiv.classList.add('hidden');
+        resultsDiv.classList.remove('hidden');
+        resultsDiv.innerHTML = `<p class="text-green-400 font-semibold">&#10003; Removed ${keysToDelete.length} duplicate entr${keysToDelete.length !== 1 ? 'ies' : 'y'}.</p>`;
+        showNotification(`Cleaned up ${keysToDelete.length} duplicate${keysToDelete.length !== 1 ? 's' : ''}!`, 'success');
+
+    } catch (err) {
+        console.error(err);
+        progressDiv.classList.add('hidden');
+        showNotification('Cleanup failed: ' + err.message, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Clean Up Old Duplicates';
     }
 }
 
