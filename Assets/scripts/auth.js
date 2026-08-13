@@ -1,6 +1,6 @@
 // --- Firebase Auth & Database Imports ---
 import { auth, db } from "./firebase.js";
-import { ref, set, push } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { ref, set, push, get, remove } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 import { checkAdminStatus, adminState } from "./admin.js";
 import {
     onAuthStateChanged,
@@ -437,6 +437,32 @@ async function handleImport(e) {
             });
         }
 
+        // Before writing, scan for and remove any old random-keyed entries from
+        // previous push()-based imports. The new stable key is lb_${user.uid}.
+        const stableKey = `lb_${user.uid}`;
+        const uniqueMediaIds = [...new Set(toImport.map(i => i.mediaId))];
+        const FETCH_BATCH = 25;
+        const keysToDelete = [];
+
+        progressDiv.textContent = 'Checking for existing reviews...';
+        for (let b = 0; b < uniqueMediaIds.length; b += FETCH_BATCH) {
+            const chunk = uniqueMediaIds.slice(b, b + FETCH_BATCH);
+            const snaps = await Promise.all(chunk.map(mid => get(ref(db, `reviews/${mid}`))));
+            snaps.forEach((snap, idx) => {
+                if (!snap.exists()) return;
+                Object.entries(snap.val()).forEach(([key, rev]) => {
+                    if (rev.userId === user.uid && key !== stableKey) {
+                        keysToDelete.push(`reviews/${chunk[idx]}/${key}`);
+                    }
+                });
+            });
+        }
+
+        if (keysToDelete.length > 0) {
+            progressDiv.textContent = `Removing ${keysToDelete.length} duplicate entr${keysToDelete.length !== 1 ? 'ies' : 'y'}...`;
+            await Promise.all(keysToDelete.map(path => remove(ref(db, path))));
+        }
+
         // Write to Firebase in batches of 50.
         // Use set() with a stable per-user key so re-importing the same CSV
         // overwrites existing entries instead of creating duplicates.
@@ -444,7 +470,7 @@ async function handleImport(e) {
         for (let b = 0; b < toImport.length; b += BATCH) {
             const chunk = toImport.slice(b, b + BATCH);
             await Promise.all(chunk.map(({ mediaId, reviewData }) =>
-                set(ref(db, `reviews/${mediaId}/lb_${user.uid}`), reviewData)
+                set(ref(db, `reviews/${mediaId}/${stableKey}`), reviewData)
             ));
             const done = Math.min(b + BATCH, toImport.length);
             progressDiv.textContent = `Importing... ${done} / ${toImport.length}`;
