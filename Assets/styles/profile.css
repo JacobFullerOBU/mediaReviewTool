@@ -52,17 +52,17 @@
     overflow: hidden;
 }
 #review-body {
-    color: #C9C3E3;
+    color: #ffffff;
 }
 #review-body p {
     margin-bottom: 1rem;
-    color: #C9C3E3;
+    color: #ffffff;
 }
 p.review-text {
-    color: #C9C3E3;
+    color: #ffffff;
 }
 p.review-body {
-    color: #C9C3E3;
+    color: #ffffff;
 }
 
 .review-body p,
@@ -72,7 +72,7 @@ p.review-body {
 .review-body u,
 .review-body li,
 .review-body h3 {
-    color: #C9C3E3 !important;
+    color: #ffffff !important;
     background-color: transparent !important;
 }
 /* Navigation Styles */
