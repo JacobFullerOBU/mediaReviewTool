@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | True Rated</title>
+    <meta name="robots" content="noindex">
+    <script>
+        // Review pages are generated at deploy time. A review written since the last deploy
+        // has no /review/<id>/ page yet, so send it to the dynamic page instead.
+        (function () {
+            var match = location.pathname.match(/^\/review\/([^/]+)\/?$/);
+            if (match) location.replace('/movie.html?id=' + match[1]);
+        })();
+    </script>
+    <style>
+        body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+               background: #0f172a; color: #e2e8f0; font-family: system-ui, sans-serif; text-align: center; }
+        a { color: #818cf8; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Page not found</h1>
+        <p><a href="/">Back to True Rated</a></p>
+    </main>
+</body>
+</html>

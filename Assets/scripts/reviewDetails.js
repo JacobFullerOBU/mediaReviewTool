@@ -15,7 +15,8 @@ function stripCategoryPrefix(mediaId) {
 
 async function fetchDetails() {
     const params = new URLSearchParams(window.location.search);
-    const mediaId = params.get('id');
+    // Static pages at /review/<id>/ carry the id on <body>; movie.html uses ?id=
+    const mediaId = params.get('id') || document.body.dataset.mediaId;
 
     if (!mediaId) {
         window.location.href = './browse.html';
@@ -62,7 +63,7 @@ async function fetchDetails() {
             const reviewerProfile = allReviewers[review.userId] || { name: "Anonymous Critic", avatar: "" };
 
             // 4. Merge them and render
-            renderDetails(review, movieInfo, reviewerProfile);
+            renderDetails(review, movieInfo, reviewerProfile, mediaId);
         } else {
             container.innerHTML = `<div class="text-center py-20 text-slate-400">Review not found.</div>`;
         }
@@ -75,7 +76,7 @@ async function fetchDetails() {
     }
 }
 
-function renderDetails(review, movie, reviewer) {
+function renderDetails(review, movie, reviewer, mediaId) {
     const rawId = review.mediaId || '';
     const title = movie ? movie.title : stripCategoryPrefix(rawId).replace(/_/g, ' ');
     document.title = `${title} — Review | True Rated`;
@@ -85,7 +86,14 @@ function renderDetails(review, movie, reviewer) {
     document.getElementById('og-description')?.setAttribute('content', snippet);
     document.getElementById('tw-title')?.setAttribute('content', `${title} — Review | True Rated`);
     document.getElementById('tw-description')?.setAttribute('content', snippet);
-    document.getElementById('canonical')?.setAttribute('href', `https://truerated.co/movie.html${window.location.search}`);
+    const shareUrl = `https://truerated.co/review/${encodeURIComponent(mediaId)}/`;
+    document.getElementById('canonical')?.setAttribute('href', shareUrl);
+    document.getElementById('og-url')?.setAttribute('content', shareUrl);
+    // Show the shareable URL so copied links get a real preview. Pages not built yet fall
+    // back to movie.html through 404.html.
+    if (window.location.hostname === 'truerated.co' && window.location.pathname.endsWith('/movie.html')) {
+        history.replaceState(null, '', shareUrl);
+    }
     const poster = movie ? (movie.poster || movie.image) : '';
     const reviewerName = reviewer.name || "Anonymous Critic";
     const reviewerAvatar = reviewer.avatar || "";
