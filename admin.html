@@ -191,6 +191,44 @@
             <div id="tab-import" class="admin-tab-content hidden">
                 <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 mb-6">
                     <h3 class="text-white font-semibold mb-1 flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 text-indigo-400"></i>
+                        Discover New Movies
+                    </h3>
+                    <p class="text-slate-400 text-xs mb-4">Pull a TMDB list and see only movies not already in the database (hidden ones are skipped). Review the results below, then add the ones you want.</p>
+                    <div class="flex flex-wrap items-end gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">List</label>
+                            <select id="discover-list"
+                                class="bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="now_playing">Now Playing</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="popular">Popular</option>
+                                <option value="top_rated">Top Rated</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Pages (20 each)</label>
+                            <select id="discover-pages"
+                                class="bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <label class="flex items-center gap-2 text-sm text-slate-300 pb-2 cursor-pointer">
+                            <input type="checkbox" id="discover-us-only" checked class="w-4 h-4 accent-indigo-500">
+                            US productions only
+                        </label>
+                        <button id="discover-btn"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors">
+                            Find New Movies
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 mb-6">
+                    <h3 class="text-white font-semibold mb-1 flex items-center gap-2">
                         <i data-lucide="download" class="w-4 h-4 text-indigo-400"></i>
                         Import Movies from TMDB
                     </h3>
@@ -224,7 +262,7 @@
         import { auth, db } from './Assets/scripts/firebase.js';
         import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
         import { ref, get } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js';
-        import { checkAdminStatus, deleteReview, editReview, deleteUserAccount, saveCustomMedia, getCustomMedia, deleteCustomMedia } from './Assets/scripts/admin.js';
+        import { checkAdminStatus, deleteReview, editReview, deleteUserAccount, saveCustomMedia, getCustomMedia, deleteCustomMedia, getHiddenMedia } from './Assets/scripts/admin.js';
 
         const loadingEl  = document.getElementById('admin-loading');
         const contentEl  = document.getElementById('admin-content');
@@ -642,6 +680,107 @@
             return fetch(url).then(r => r.json());
         }
 
+        function renderImportRow(row, idx, movieData, alreadyExists) {
+            const { title, year, tmdbScore: score, poster, genre, director, description, tmdb_id } = movieData;
+            row.innerHTML = `
+                <input type="checkbox" class="import-check mt-1 w-4 h-4 accent-indigo-500 flex-shrink-0 cursor-pointer" data-idx="${idx}" ${alreadyExists ? 'disabled title="Already in database"' : 'checked'}>
+                ${poster
+                    ? `<img src="${escHtml(poster)}" alt="" class="w-12 h-16 object-cover rounded flex-shrink-0 ${alreadyExists ? 'opacity-50' : ''}">`
+                    : `<div class="w-12 h-16 bg-slate-700 rounded flex-shrink-0"></div>`
+                }
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap mb-0.5">
+                        <span class="font-semibold text-white text-sm">${escHtml(title)}</span>
+                        ${year ? `<span class="text-xs text-slate-500">${escHtml(year)}</span>` : ''}
+                        ${score ? `<span class="text-xs text-yellow-400">★ ${score}</span>` : ''}
+                        ${alreadyExists ? `<span class="text-xs bg-green-900/60 text-green-400 px-2 py-0.5 rounded font-medium">✓ Already in DB</span>` : ''}
+                    </div>
+                    ${genre    ? `<p class="text-xs text-slate-500 mb-0.5">${escHtml(genre)}</p>` : ''}
+                    ${director ? `<p class="text-xs text-slate-400 mb-0.5">Dir. ${escHtml(director)}</p>` : ''}
+                    ${description ? `<p class="text-xs text-slate-400 line-clamp-2">${escHtml(description)}</p>` : ''}
+                    <p class="text-xs text-slate-600 mt-1 font-mono">id: tmdb_${tmdb_id}</p>
+                </div>
+            `;
+        }
+
+        // Pull a TMDB list and surface only movies that aren't already in the database or hidden
+        document.getElementById('discover-btn')?.addEventListener('click', async () => {
+            const btn      = document.getElementById('discover-btn');
+            const resultEl = document.getElementById('import-results');
+            const addBtn   = document.getElementById('import-add-btn');
+            const statusEl = document.getElementById('import-status');
+            const list     = document.getElementById('discover-list').value;
+            const pages    = parseInt(document.getElementById('discover-pages').value);
+            const usOnly   = document.getElementById('discover-us-only').checked;
+
+            _tmdbImportResults = [];
+            resultEl.innerHTML = '';
+            addBtn.classList.add('hidden');
+            statusEl.className = 'text-sm text-slate-400';
+            btn.disabled = true;
+            btn.textContent = 'Searching…';
+
+            try {
+                const { db: fbDb } = await import('./Assets/scripts/firebase.js');
+                const { ref: fbRef, get: fbGet } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js');
+                const [existingSnap, hidden] = await Promise.all([fbGet(fbRef(fbDb, 'tmdb_movies')), getHiddenMedia()]);
+                _existingTmdbIds = existingSnap.exists() ? new Set(Object.keys(existingSnap.val())) : new Set();
+
+                statusEl.textContent = 'Fetching TMDB list…';
+                const candidates = new Map();
+                for (let page = 1; page <= pages; page++) {
+                    const data = await fetch(`https://api.themoviedb.org/3/movie/${list}?api_key=${TMDB_KEY}&language=en-US&region=US&page=${page}`).then(r => r.json());
+                    (data.results || []).forEach(m => candidates.set(m.id, m));
+                }
+
+                const fresh = [...candidates.values()].filter(m => !_existingTmdbIds.has(`tmdb_${m.id}`));
+                let hiddenCount = 0, nonUs = 0;
+
+                for (const [i, hit] of fresh.entries()) {
+                    statusEl.textContent = `Checking ${i + 1} of ${fresh.length}…`;
+                    const det = await tmdbDetails(hit.id);
+                    const title = det.title || hit.title;
+                    if (hidden[slugify('movies_' + title)]) { hiddenCount++; continue; }
+                    if (usOnly && !det.production_countries?.some(c => c.iso_3166_1 === 'US')) { nonUs++; continue; }
+
+                    const movieData = {
+                        tmdb_id: hit.id,
+                        title,
+                        year: (det.release_date || '').slice(0, 4),
+                        description: det.overview || '',
+                        poster: det.poster_path ? `https://image.tmdb.org/t/p/w500${det.poster_path}` : '',
+                        genre: det.genres?.map(g => g.name).join(', ') || '',
+                        director: det.credits?.crew?.find(c => c.job === 'Director')?.name || '',
+                        actors: det.credits?.cast?.slice(0, 5).map(a => a.name).join('\n') || '',
+                        tmdbScore: det.vote_average ? parseFloat(det.vote_average.toFixed(1)) : null,
+                        category: 'movies',
+                        releaseDate: det.release_date || '',
+                    };
+                    const idx = _tmdbImportResults.length;
+                    _tmdbImportResults.push({ firebaseId: `tmdb_${hit.id}`, data: movieData });
+                    const row = document.createElement('div');
+                    row.className = 'import-result-row bg-slate-800 rounded-lg p-4 border border-slate-700 flex items-start gap-4';
+                    renderImportRow(row, idx, movieData, false);
+                    resultEl.appendChild(row);
+                }
+
+                const skipped = [];
+                if (candidates.size - fresh.length) skipped.push(`${candidates.size - fresh.length} already in DB`);
+                if (hiddenCount) skipped.push(`${hiddenCount} hidden`);
+                if (nonUs) skipped.push(`${nonUs} non-US`);
+                statusEl.textContent = `Found ${_tmdbImportResults.length} new movie${_tmdbImportResults.length !== 1 ? 's' : ''}` +
+                    (skipped.length ? ` (skipped: ${skipped.join(', ')})` : '') + '.';
+                statusEl.className = 'text-sm text-slate-300';
+                if (_tmdbImportResults.length) addBtn.classList.remove('hidden');
+            } catch (err) {
+                statusEl.textContent = 'Error: ' + (err.message || err);
+                statusEl.className = 'text-sm text-red-400';
+            }
+            if (window.lucide) lucide.createIcons();
+            btn.disabled = false;
+            btn.textContent = 'Find New Movies';
+        });
+
         document.getElementById('import-search-btn')?.addEventListener('click', async () => {
             const textarea  = document.getElementById('import-titles');
             const resultEl  = document.getElementById('import-results');
@@ -706,25 +845,7 @@
                     const alreadyExists = _existingTmdbIds.has(`tmdb_${hit.id}`);
                     _tmdbImportResults.push({ firebaseId: `tmdb_${hit.id}`, data: movieData });
 
-                    row.innerHTML = `
-                        <input type="checkbox" class="import-check mt-1 w-4 h-4 accent-indigo-500 flex-shrink-0 cursor-pointer" data-idx="${idx}" ${alreadyExists ? 'disabled title="Already in database"' : 'checked'}>
-                        ${poster
-                            ? `<img src="${escHtml(poster)}" alt="" class="w-12 h-16 object-cover rounded flex-shrink-0 ${alreadyExists ? 'opacity-50' : ''}">`
-                            : `<div class="w-12 h-16 bg-slate-700 rounded flex-shrink-0"></div>`
-                        }
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-2 flex-wrap mb-0.5">
-                                <span class="font-semibold text-white text-sm">${escHtml(movieData.title)}</span>
-                                ${year ? `<span class="text-xs text-slate-500">${escHtml(year)}</span>` : ''}
-                                ${score ? `<span class="text-xs text-yellow-400">★ ${score}</span>` : ''}
-                                ${alreadyExists ? `<span class="text-xs bg-green-900/60 text-green-400 px-2 py-0.5 rounded font-medium">✓ Already in DB</span>` : ''}
-                            </div>
-                            ${genres   ? `<p class="text-xs text-slate-500 mb-0.5">${escHtml(genres)}</p>` : ''}
-                            ${director ? `<p class="text-xs text-slate-400 mb-0.5">Dir. ${escHtml(director)}</p>` : ''}
-                            ${movieData.description ? `<p class="text-xs text-slate-400 line-clamp-2">${escHtml(movieData.description)}</p>` : ''}
-                            <p class="text-xs text-slate-600 mt-1 font-mono">id: tmdb_${hit.id}</p>
-                        </div>
-                    `;
+                    renderImportRow(row, idx, movieData, alreadyExists);
                 } catch (err) {
                     row.innerHTML = `<span class="text-red-400 text-sm">Error for "${escHtml(title)}": ${escHtml(err.message)}</span>`;
                 }
