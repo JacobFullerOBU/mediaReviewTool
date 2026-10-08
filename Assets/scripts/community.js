@@ -130,7 +130,25 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         try {
-            const snapshot = await get(ref(db, 'reviewers'));
+            const [snapshot, reviewsSnap] = await Promise.all([
+                get(ref(db, 'reviewers')),
+                // Stats are a nice-to-have; don't block the page if reviews can't be read
+                get(ref(db, 'reviews')).catch(() => null)
+            ]);
+
+            // Tally review count and rating sum per user
+            const stats = {};
+            if (reviewsSnap && reviewsSnap.exists()) {
+                Object.values(reviewsSnap.val()).forEach(mediaReviews => {
+                    Object.values(mediaReviews || {}).forEach(review => {
+                        const rating = parseFloat(review?.rating);
+                        if (!review?.userId || isNaN(rating)) return;
+                        const s = stats[review.userId] || (stats[review.userId] = { count: 0, sum: 0 });
+                        s.count++;
+                        s.sum += rating;
+                    });
+                });
+            }
 
             if (snapshot.exists()) {
                 const reviewers = snapshot.val();
@@ -151,6 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         nameEl.className = 'text-xl font-bold text-white mb-1';
                         nameEl.textContent = reviewer.name;
 
+                        const { count = 0, sum = 0 } = stats[userId] || {};
+                        const statsEl = document.createElement('p');
+                        statsEl.className = 'text-sm text-slate-400 mb-4';
+                        statsEl.textContent = count
+                            ? `${count} review${count !== 1 ? 's' : ''} · ★ ${(sum / count).toFixed(1)} avg`
+                            : 'No reviews yet';
+
                         const link = document.createElement('a');
                         link.className = 'w-full py-2 px-4 bg-slate-700 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium';
                         link.href = `reviewer-profile.html?id=${encodeURIComponent(userId)}`;
@@ -158,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         inner.appendChild(makeAvatarEl(reviewer.name, reviewer.avatar));
                         inner.appendChild(nameEl);
+                        inner.appendChild(statsEl);
                         inner.appendChild(link);
                         card.appendChild(inner);
                         grid.appendChild(card);
