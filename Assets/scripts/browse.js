@@ -2,6 +2,7 @@ import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.0.0
 import { app } from "./firebase.js";
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
 import { fetchMusic } from "./music.js";
+import { MAX_RATING } from "./rating.js";
 import { games } from "./games.js";
 
 const db = getDatabase(app);
@@ -231,12 +232,17 @@ function renderReviews(reviews) {
 function generateStarRating(rating) {
     let stars = '<div class="inline-flex flex-row justify-center gap-0.5">'; 
     const numRating = Math.floor(rating);
+    const hasHalf = rating - numRating >= 0.5;
 
     for (let i = 0; i < numRating; i++) {
         stars += '<i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400 flex-shrink-0"></i>';
     }
 
-    for (let i = numRating; i < 10; i++) {
+    if (hasHalf) {
+        stars += '<i data-lucide="star-half" class="w-4 h-4 fill-yellow-400 text-yellow-400 flex-shrink-0"></i>';
+    }
+
+    for (let i = numRating + (hasHalf ? 1 : 0); i < MAX_RATING; i++) {
         stars += '<i data-lucide="star" class="w-4 h-4 text-slate-600 flex-shrink-0"></i>';
     }
 
@@ -284,7 +290,7 @@ function createReviewCard(review) {
                 </div>
                 <div class="flex items-center gap-2 mb-3 overflow-x-auto pb-1">
                     ${generateStarRating(review.rating)}
-                    <span class="text-xs text-slate-400 ml-2 whitespace-nowrap">${safeRating}/10</span>
+                    <span class="text-xs text-slate-400 ml-2 whitespace-nowrap">${safeRating}/5</span>
                 </div>
                 <div class="review-body text-slate-300 text-sm leading-relaxed mb-3" id="${reviewId}">
                     ${truncatedHtml}

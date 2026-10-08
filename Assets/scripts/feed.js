@@ -76,7 +76,7 @@ function createFeedCard(review, reviewer, mediaItem) {
             <div class="relative h-48 overflow-hidden">
                 <img class="w-full h-full object-cover" src="${mediaPoster}" alt="${mediaTitle}">
                 <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1 text-yellow-400 text-xs">
-                    <i data-lucide="star" class="w-3 h-3 fill-current"></i> ${rating}/10
+                    <i data-lucide="star" class="w-3 h-3 fill-current"></i> ${rating}/5
                 </div>
             </div>
             <div class="p-4 flex-1 flex flex-col">

@@ -131,7 +131,7 @@ function renderDetails(review, movie, reviewer) {
                         <div class="flex items-center gap-6">
                             <div class="flex items-center gap-3 bg-indigo-500/10 px-4 py-2 rounded-full border border-indigo-500/30">
                                 <i data-lucide="star" class="w-6 h-6 fill-indigo-500 text-indigo-500"></i>
-                                <span class="text-2xl font-black text-white">${rating}<span class="text-indigo-400/60 text-lg">/10</span></span>
+                                <span class="text-2xl font-black text-white">${rating}<span class="text-indigo-400/60 text-lg">/5</span></span>
                             </div>
                             
                             <div class="flex flex-col">

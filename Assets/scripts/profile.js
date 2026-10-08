@@ -2,6 +2,7 @@ import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/fire
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { app, auth } from './firebase.js';
 import { fetchMovies, fetchTV, fetchBooks } from './main.js';
+import { isValidRating } from './rating.js';
 import { music } from "./music.js";
 import { games } from "./games.js";
 
@@ -87,7 +88,7 @@ function createFeedItem(review, reviewer, mediaItem, isOwner) {
             <div class="flex items-center justify-center sm:justify-start gap-1 mb-3 text-yellow-400">
                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                 <span class="font-bold">${review.rating}</span>
-                <span class="text-xs text-slate-400 ml-1">/ 10</span>
+                <span class="text-xs text-slate-400 ml-1">/ 5</span>
             </div>
             <div class="review-body break-words">${review.reviewText}</div>
             <p class="text-xs text-slate-500 mt-4">${new Date(review.timestamp).toLocaleString()}</p>
@@ -284,10 +285,10 @@ function renderStats(reviews, mediaMap) {
 
     // ── Data prep ──────────────────────────────────────────────────
 
-    // Rating distribution (1–10, displayed as ★0.5–★5)
+    // Rating distribution (10 half-star bins, ★0.5–★5)
     const dist = Array(10).fill(0);
     for (const r of reviews) {
-        const idx = Math.round(r.rating || 0) - 1;
+        const idx = Math.round((r.rating || 0) * 2) - 1;
         if (idx >= 0 && idx < 10) dist[idx]++;
     }
 
@@ -328,9 +329,9 @@ function renderStats(reviews, mediaMap) {
     // Reviews sorted by timestamp (used for rolling average)
     const sorted = reviews.filter(r => r.timestamp).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
-    // 10/10 club
+    // 5-star club
     const tenClub = reviews
-        .filter(r => r.rating === 10)
+        .filter(r => r.rating === 5)
         .sort((a, b) => (a.mediaTitle || '').localeCompare(b.mediaTitle || ''));
 
     // Per-category breakdown
@@ -353,7 +354,7 @@ function renderStats(reviews, mediaMap) {
         .sort((a, b) => b[1].count - a[1].count)
         .map(([cat, { count, sum }]) => {
             const meta = catMeta[cat] || { label: cat, icon: 'layers' };
-            const avg = (sum / count).toFixed(1);
+            const avg = (sum / count).toFixed(2);
             return `
                 <div class="flex items-center gap-3 bg-slate-700/40 rounded-lg px-4 py-3">
                     <i data-lucide="${meta.icon}" class="w-5 h-5 text-indigo-400 flex-shrink-0"></i>
@@ -366,8 +367,8 @@ function renderStats(reviews, mediaMap) {
 
     // ── Additional analytics ───────────────────────────────────────────────────
 
-    // Half-star usage (odd ratings = half stars on 5-star scale)
-    const halfStarCount = reviews.filter(r => r.rating % 2 !== 0).length;
+    // Half-star usage (e.g. 3.5, 4.5)
+    const halfStarCount = reviews.filter(r => r.rating % 1 !== 0).length;
     const halfStarPct   = total > 0 ? Math.round((halfStarCount / total) * 100) : 0;
 
     // Recency bias: avg for recent releases (last 5 yrs) vs older
@@ -377,14 +378,14 @@ function renderStats(reviews, mediaMap) {
     const recentRelAvg = recentRels.length ? recentRels.reduce((s, r) => s + (r.rating || 0), 0) / recentRels.length : null;
     const olderRelAvg  = olderRels.length  ? olderRels.reduce((s, r)  => s + (r.rating || 0), 0) / olderRels.length  : null;
     const recencyDiff  = recentRelAvg !== null && olderRelAvg !== null
-        ? parseFloat((recentRelAvg - olderRelAvg).toFixed(1)) : null;
+        ? parseFloat((recentRelAvg - olderRelAvg).toFixed(2)) : null;
 
-    // Community benchmark (avg True Rated score across users ≈ 6.6/10)
-    const userVsCommunity  = parseFloat((avgRating - 6.6).toFixed(1));
+    // Community benchmark (avg True Rated score across users ≈ 3.3/5)
+    const userVsCommunity  = parseFloat((avgRating - 3.3).toFixed(2));
     const userVsCommSign   = userVsCommunity >= 0 ? '+' : '';
     const userVsCommColor  = userVsCommunity >= 0 ? 'text-green-400' : 'text-red-400';
 
-    // Median rating (10-point scale)
+    // Median rating (5-star scale)
     const sortedRatings = reviews.map(r => r.rating || 0).sort((a, b) => a - b);
     const midIdx = Math.floor(sortedRatings.length / 2);
     const medianRating = sortedRatings.length % 2 !== 0
@@ -493,27 +494,27 @@ function renderStats(reviews, mediaMap) {
                 <div class="text-slate-400 text-sm mt-1">Total Reviews</div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
-                <div class="text-3xl font-bold text-yellow-400">${avgRating.toFixed(1)}</div>
+                <div class="text-3xl font-bold text-yellow-400">${avgRating.toFixed(2)}</div>
                 <div class="text-slate-400 text-sm mt-1">Average Rating</div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center col-span-2 sm:col-span-1">
                 <div class="text-3xl font-bold text-indigo-400">${tenClub.length}</div>
-                <div class="text-slate-400 text-sm mt-1">Perfect 10s</div>
+                <div class="text-slate-400 text-sm mt-1">5-Star Ratings</div>
             </div>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold ${userVsCommColor}">${userVsCommSign}${userVsCommunity}</div>
-                <div class="text-slate-400 text-xs mt-1">vs community avg <span class="text-slate-500 block">(avg ≈ 6.6 / 10)</span></div>
+                <div class="text-slate-400 text-xs mt-1">vs community avg <span class="text-slate-500 block">(avg ≈ 3.3 / 5)</span></div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold text-purple-400">${halfStarPct}%</div>
-                <div class="text-slate-400 text-xs mt-1">odd rating usage</div>
+                <div class="text-slate-400 text-xs mt-1">half-star usage</div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold text-teal-400">${medianRating}</div>
-                <div class="text-slate-400 text-xs mt-1">median rating <span class="text-slate-500 block">/ 10</span></div>
+                <div class="text-slate-400 text-xs mt-1">median rating <span class="text-slate-500 block">/ 5</span></div>
             </div>
             <div class="bg-slate-700/40 rounded-lg p-4 text-center">
                 <div class="text-2xl font-bold ${recencyDiffColor}">${recencyDiffStr}</div>
@@ -564,7 +565,7 @@ function renderStats(reviews, mediaMap) {
 
         ${tenClub.length > 0 ? `
         <div class="mb-8">
-            <div class="text-sm font-medium text-slate-400 mb-3">10/10 Club <span class="text-slate-500">(${tenClub.length})</span></div>
+            <div class="text-sm font-medium text-slate-400 mb-3">5-Star Club <span class="text-slate-500">(${tenClub.length})</span></div>
             <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-2">${tenClubHTML}</div>
         </div>` : ''}
 
@@ -621,9 +622,9 @@ function renderStats(reviews, mediaMap) {
         }));
     }
 
-    // Rating distribution (1–10 scale)
+    // Rating distribution (half-star bins)
     mkBar('statsDistChart',
-        ['1','2','3','4','5','6','7','8','9','10'],
+        ['0.5','1','1.5','2','2.5','3','3.5','4','4.5','5'],
         dist, '#6366f1');
 
     // Films by decade
@@ -631,8 +632,8 @@ function renderStats(reviews, mediaMap) {
 
     // Avg rating by decade (show one decimal)
     mkBar('statsDecadeRatingChart', decadeLabels, decadeAvgs, '#f59e0b',
-        { min: 0, max: 10, ticks: { color: tickColor, stepSize: 2 } },
-        v => v > 0 ? v.toFixed(1) : '');
+        { min: 0, max: 5, ticks: { color: tickColor, stepSize: 1 } },
+        v => v > 0 ? v.toFixed(2) : '');
 
     // Scatter: rating vs year — labels too cluttered, use tooltip only
     const scEl = document.getElementById('statsScatterChart');
@@ -655,13 +656,13 @@ function renderStats(reviews, mediaMap) {
                     datalabels: { display: false },
                     tooltip: {
                         callbacks: {
-                            label: ctx => `${ctx.raw.title} (${ctx.raw.x}) — ${ctx.raw.y}/10`,
+                            label: ctx => `${ctx.raw.title} (${ctx.raw.x}) — ${ctx.raw.y}/5`,
                         },
                     },
                 },
                 scales: {
                     x: { ...baseScales.x, title: { display: true, text: 'Release Year', color: tickColor } },
-                    y: { ...baseScales.y, min: 1, max: 10, title: { display: true, text: 'Rating', color: tickColor } },
+                    y: { ...baseScales.y, min: 0.5, max: 5, title: { display: true, text: 'Rating', color: tickColor } },
                 },
             },
         }));
@@ -690,11 +691,11 @@ function renderStats(reviews, mediaMap) {
                 plugins: {
                     legend: { display: false },
                     datalabels: { display: false },
-                    tooltip: { callbacks: { label: ctx => `Avg: ${ctx.raw}/10` } },
+                    tooltip: { callbacks: { label: ctx => `Avg: ${ctx.raw}/5` } },
                 },
                 scales: {
                     x: { ...baseScales.x, ticks: { color: tickColor, maxTicksLimit: 6, maxRotation: 45 } },
-                    y: { ...baseScales.y, min: 1, max: 10 },
+                    y: { ...baseScales.y, min: 0.5, max: 5 },
                 },
             },
         }));
@@ -835,10 +836,10 @@ function initLetterboxdImport(db, userId, allMedia) {
                     <div class="bg-slate-700/30 rounded-lg p-3 text-center"><div class="text-2xl font-bold text-slate-400">${unmatched.length}</div><div class="text-slate-400 text-xs mt-1">Not in TrueRated</div></div>
                 `;
                 document.getElementById('lbPreviewList').innerHTML = matched.map(m => {
-                    const rating = Math.round(parseFloat(m.row.Rating) * 2);
+                    const rating = parseFloat(m.row.Rating);
                     return `<div class="flex items-center justify-between px-2 py-1 rounded bg-slate-700/40">
                         <span class="text-slate-200 truncate">${m.row.Name} <span class="text-slate-500 text-xs">(${m.row.Year || '?'})</span></span>
-                        <span class="text-yellow-400 text-xs flex-shrink-0 ml-2 font-medium">${rating}/10</span>
+                        <span class="text-yellow-400 text-xs flex-shrink-0 ml-2 font-medium">${rating}/5</span>
                     </div>`;
                 }).join('');
 
@@ -862,8 +863,8 @@ function initLetterboxdImport(db, userId, allMedia) {
 
         for (const { row, item } of matchedItems) {
             if (!item) continue;
-            const rating = Math.round(parseFloat(row.Rating) * 2);
-            if (!rating || rating < 1 || rating > 10) { skipped++; continue; }
+            const rating = Math.round(parseFloat(row.Rating) * 2) / 2; // snap to half-stars
+            if (!isValidRating(rating)) { skipped++; continue; }
             const mediaId = getMediaIdForProfile(item);
             const timestamp = row.Date ? new Date(row.Date + 'T12:00:00').toISOString() : new Date().toISOString();
             try {

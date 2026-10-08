@@ -429,7 +429,7 @@ async function handleImport(e) {
                     mediaYear: movie.year || year || null,
                     reviewText: reviewText || '',
                     text: reviewText || '',
-                    rating: ratingRaw * 2, // 5-star → 10-point: 3/5 = 6/10
+                    rating: ratingRaw, // Letterboxd is already 0.5–5 stars
                     spoilers: false,
                     timestamp: date ? new Date(date).toISOString() : new Date().toISOString(),
                     user: user.email || user.displayName || 'Anonymous',

@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const statsEl = document.createElement('p');
         statsEl.className = 'text-sm text-slate-400 mb-4';
         statsEl.textContent = count
-            ? `${count} review${count !== 1 ? 's' : ''} · ★ ${avg.toFixed(1)} avg`
+            ? `${count} review${count !== 1 ? 's' : ''} · ★ ${avg.toFixed(2)} avg`
             : 'No reviews yet';
 
         const link = document.createElement('a');

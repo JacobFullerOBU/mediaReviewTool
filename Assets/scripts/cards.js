@@ -1,4 +1,5 @@
 import { fetchMovies, fetchTV, fetchBooks, fetchCustomMedia } from './main.js';
+import { MIN_RATING, MAX_RATING, RATING_STEP, RATING_HINT, isValidRating, formatAvg, fromRT, fromTMDB } from './rating.js';
 
 const TMDB_KEY = 'f50a7cd62fa00a24f29a0e3ebb12c130';
 const OMDB_KEY = '2669280';
@@ -9,22 +10,22 @@ function updateTrueRated(item, cardId) {
     const el = document.getElementById(`tr-${cardId}`);
     if (!el) return;
     if (item.trScoreOverride != null) {
-        el.textContent = `TR ${parseFloat(item.trScoreOverride).toFixed(1)}`;
+        el.textContent = `TR ${formatAvg(item.trScoreOverride)}`;
         el.className = 'text-xs font-mono font-semibold';
         el.style.color = 'var(--tr-yellow)';
         return;
     }
     const scores = [];
     if (item.liveAvgRating != null && item.liveAvgRating !== -1) scores.push(item.liveAvgRating);
-    if (item.rtScore != null) scores.push(parseInt(item.rtScore) / 10);
-    if (item.tmdbScore != null) scores.push(item.tmdbScore);
+    if (item.rtScore != null) scores.push(fromRT(item.rtScore));
+    if (item.tmdbScore != null) scores.push(fromTMDB(item.tmdbScore));
     if (scores.length === 0) {
         el.textContent = 'TR —';
         el.className = 'text-xs font-mono text-slate-500';
         el.style.color = '';
         return;
     }
-    const trueRated = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
+    const trueRated = formatAvg(scores.reduce((a, b) => a + b, 0) / scores.length);
     el.textContent = `TR ${trueRated}`;
     el.className = 'text-xs font-mono font-semibold';
     el.style.color = 'var(--tr-yellow)';
@@ -476,7 +477,7 @@ async function getAverageRating(mediaId) {
             }
         });
     }
-    return count > 0 ? (total / count).toFixed(1) : "N/A";
+    return count > 0 ? formatAvg(total / count) : "N/A";
 }
 const SKELETON_CARD_HTML = `
     <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 animate-pulse">
@@ -893,7 +894,7 @@ async function fetchRatingsForItems(items) {
     // Pull from sessionStorage cache (5-min TTL) before hitting Firebase
     let ssCache = {};
     try {
-        const stored = sessionStorage.getItem('ratingCache');
+        const stored = sessionStorage.getItem('ratingCache5');
         if (stored) {
             const { data, ts } = JSON.parse(stored);
             if (Date.now() - ts < 5 * 60 * 1000) ssCache = data;
@@ -935,7 +936,7 @@ async function fetchRatingsForItems(items) {
         });
         await Promise.all(ratingPromises);
         try {
-            sessionStorage.setItem('ratingCache', JSON.stringify({ data: ssCache, ts: Date.now() }));
+            sessionStorage.setItem('ratingCache5', JSON.stringify({ data: ssCache, ts: Date.now() }));
         } catch {}
     }
 }
@@ -958,7 +959,7 @@ async function fetchLatestReviewTimesForItems(items) {
     // Restore rating bulk cache from sessionStorage on page reload
     if (!ratingBulkCache) {
         try {
-            const stored = sessionStorage.getItem('reviewRatingCache');
+            const stored = sessionStorage.getItem('reviewRatingCache5');
             if (stored) {
                 const { data, ts } = JSON.parse(stored);
                 if (Date.now() - ts < 5 * 60 * 1000) ratingBulkCache = data;
@@ -989,7 +990,7 @@ async function fetchLatestReviewTimesForItems(items) {
                     });
                     reviewTimestampCache[mediaSnap.key] = latest;
                     if (count > 0) {
-                        ratingBulkCache[mediaSnap.key] = parseFloat((total / count).toFixed(1));
+                        ratingBulkCache[mediaSnap.key] = parseFloat(formatAvg(total / count));
                     }
                 });
             }
@@ -999,7 +1000,7 @@ async function fetchLatestReviewTimesForItems(items) {
         }
         try {
             sessionStorage.setItem('reviewTsCache', JSON.stringify({ data: reviewTimestampCache, ts: Date.now() }));
-            sessionStorage.setItem('reviewRatingCache', JSON.stringify({ data: ratingBulkCache, ts: Date.now() }));
+            sessionStorage.setItem('reviewRatingCache5', JSON.stringify({ data: ratingBulkCache, ts: Date.now() }));
         } catch {}
     }
 
@@ -1348,8 +1349,8 @@ async function showItemDetails(item) {
                                 <input id="editTmdbScore" type="number" min="0" max="10" step="0.1" placeholder="—" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
                             </div>
                             <div>
-                                <label class="block text-xs text-slate-400 mb-1">TR Override <span class="text-slate-600">(0–10)</span></label>
-                                <input id="editTrScore" type="number" min="0" max="10" step="0.1" placeholder="computed" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
+                                <label class="block text-xs text-slate-400 mb-1">TR Override <span class="text-slate-600">(0–5)</span></label>
+                                <input id="editTrScore" type="number" min="0" max="5" step="0.01" placeholder="computed" class="w-full bg-slate-900 border border-slate-600 rounded px-2 py-1.5 text-white text-sm focus:ring-1 focus:ring-purple-500 outline-none">
                             </div>
                         </div>
                     </div>
@@ -1365,8 +1366,8 @@ async function showItemDetails(item) {
                 <h4 class="text-lg font-bold text-white mb-4">Write Your Review</h4>
                 <form id="reviewForm" class="space-y-4">
                     <div>
-                        <label for="reviewRating" class="block text-sm font-medium text-slate-300 mb-2">Rating (1-10, half-points allowed):</label>
-                        <input type="number" id="reviewRating" min="1" max="10" step="0.5" required class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <label for="reviewRating" class="block text-sm font-medium text-slate-300 mb-2">${RATING_HINT}</label>
+                        <input type="number" id="reviewRating" min="${MIN_RATING}" max="${MAX_RATING}" step="${RATING_STEP}" required class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
                     <div>
                         <label for="reviewTextEditor" class="block text-sm font-medium text-slate-300 mb-2">Your Review:</label>
@@ -1454,7 +1455,7 @@ async function showItemDetails(item) {
                     : '<div class="mt-8 text-slate-500">No reviews yet.</div>';
                 const count  = snap.exists() ? Object.keys(snap.val()).length : 0;
                 const newAvg = snap.exists()
-                    ? (Object.values(snap.val()).reduce((s, r) => s + (r.rating || 0), 0) / count).toFixed(1)
+                    ? formatAvg(Object.values(snap.val()).reduce((s, r) => s + (r.rating || 0), 0) / count)
                     : 'N/A';
                 modal.querySelector('#modalReviewCount').textContent = count;
                 modal.querySelector('#modalRating').textContent = `★ ${newAvg}`;
@@ -1480,7 +1481,7 @@ async function showItemDetails(item) {
                         <p class="text-xs text-slate-400 uppercase tracking-wide font-medium">Editing Review</p>
                         <div class="flex items-center gap-2">
                             <label class="text-xs text-slate-400">Rating:</label>
-                            <input type="number" class="edit-rating w-24 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white text-sm" min="1" max="10" step="0.5">
+                            <input type="number" class="edit-rating w-24 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-white text-sm" min="${MIN_RATING}" max="${MAX_RATING}" step="${RATING_STEP}">
                         </div>
                         <textarea class="edit-text w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white text-sm resize-vertical" rows="5"></textarea>
                         <div class="flex gap-2">
@@ -1499,8 +1500,8 @@ async function showItemDetails(item) {
                 const form      = saveBtn.closest('.admin-edit-form');
                 const newText   = form.querySelector('.edit-text').value.trim();
                 const newRating = parseFloat(form.querySelector('.edit-rating').value);
-                if (!newText || isNaN(newRating) || newRating < 1 || newRating > 10) {
-                    alert('Valid review text and rating (1–10) required.');
+                if (!newText || !isValidRating(newRating)) {
+                    alert('Valid review text and a rating from 0.5 to 5 stars (half-stars allowed) are required.');
                     return;
                 }
                 saveBtn.textContent = 'Saving…';
@@ -1803,8 +1804,8 @@ async function showItemDetails(item) {
 
         console.log('Review text:', reviewText, 'Rating:', reviewRating);
 
-        if (!reviewText || isNaN(reviewRating) || reviewRating < 1 || reviewRating > 10 || (reviewRating * 10) % 1 !== 0) {
-            reviewError.textContent = 'Please enter a review and a rating between 1 and 10, with at most one decimal place.';
+        if (!reviewText || !isValidRating(reviewRating)) {
+            reviewError.textContent = 'Please enter a review and a rating from 0.5 to 5 stars, in half-star steps.';
             return;
         }
 
@@ -1847,7 +1848,7 @@ async function showItemDetails(item) {
             // Invalidate caches so ratings and timestamps reflect the new review
             reviewTimestampCache = null;
             ratingBulkCache = null;
-            sessionStorage.removeItem('reviewRatingCache');
+            sessionStorage.removeItem('reviewRatingCache5');
             delete item.latestReviewTime;
 
             // Refresh reviews, rating, and count
@@ -2059,7 +2060,7 @@ async function renderCards(container, items) {
             const cardId = item.id || (item.title ? item.title.trim().replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : '');
             // Use cached rating immediately; uncached items show placeholder until async fetch completes
             const avgRating = (item.liveAvgRating !== undefined && item.liveAvgRating !== -1)
-                ? `★ ${item.liveAvgRating}`
+                ? `★ ${formatAvg(item.liveAvgRating)}`
                 : item.liveAvgRating === -1
                     ? `<span class=\"text-slate-400 text-xs\">No reviews yet</span>`
                     : `<span class=\"text-slate-400 text-xs opacity-40\">★ —</span>`;
@@ -2157,7 +2158,7 @@ async function renderCards(container, items) {
                     if (el) {
                         if (item.liveAvgRating !== undefined && item.liveAvgRating !== -1) {
                             el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
-                            el.textContent = `★ ${item.liveAvgRating}`;
+                            el.textContent = `★ ${formatAvg(item.liveAvgRating)}`;
                         } else {
                             el.className = 'star-rating text-yellow-400 text-xs flex items-center gap-1 review-score-glow';
                             el.innerHTML = `<span class="text-slate-400 text-xs">No reviews yet</span>`;
@@ -2252,12 +2253,12 @@ function getTrueRating(item) {
         const key = `rt_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
         try { const { score, ts } = JSON.parse(localStorage.getItem(key)); return Date.now() - ts < TTL ? score : null; } catch { return null; }
     })();
-    if (rtRaw != null) scores.push(parseInt(rtRaw) / 10);
+    if (rtRaw != null) scores.push(fromRT(rtRaw));
     const tmdbRaw = item.tmdbScore ?? (() => {
         const key = `tmdb_score_${(item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${item.year || ''}`;
         try { const { score, ts } = JSON.parse(localStorage.getItem(key)); return Date.now() - ts < TTL ? score : null; } catch { return null; }
     })();
-    if (tmdbRaw != null) scores.push(tmdbRaw);
+    if (tmdbRaw != null) scores.push(fromTMDB(tmdbRaw));
     return scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : -Infinity;
 }
 
